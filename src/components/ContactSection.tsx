@@ -1,0 +1,61 @@
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { Mail, MapPin } from "lucide-react";
+
+const ContactSection = () => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  return (
+    <section id="contact" className="py-32 section-padding">
+      <div ref={ref} className="max-w-3xl mx-auto text-center">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-4"
+        >
+          Get in Touch
+        </motion.p>
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="font-display text-4xl md:text-6xl font-bold mb-6"
+        >
+          Let's build the <span className="text-gradient-gold">future</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.2 }}
+          className="text-muted-foreground font-body mb-12 text-lg"
+        >
+          Ready to transform your studio's pipeline with generative AI? Reach out for a consultation.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.4 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-6"
+        >
+          <a
+            href="mailto:youki@tuliptechnology.studio"
+            className="flex items-center gap-3 bg-card border border-border rounded-2xl px-6 py-4 hover:border-primary/30 transition-all group"
+          >
+            <Mail className="w-5 h-5 text-primary" />
+            <span className="font-body text-sm group-hover:text-foreground text-muted-foreground transition-colors">
+              youki@tuliptechnology.studio
+            </span>
+          </a>
+          <div className="flex items-center gap-3 bg-card border border-border rounded-2xl px-6 py-4">
+            <MapPin className="w-5 h-5 text-primary" />
+            <span className="font-body text-sm text-muted-foreground">Amsterdam, Netherlands</span>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default ContactSection;
