@@ -13,8 +13,8 @@ interface Particle {
   section: "stem" | "bulb" | "torus";
 }
 
-const PARTICLE_COUNT = 180;
-const PETAL_PARTICLE_COUNT = 120;
+const PARTICLE_COUNT = 200;
+const PETAL_PARTICLE_COUNT = 140;
 
 const TulipParticles = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -42,7 +42,7 @@ const TulipParticles = () => {
         angle: tubeAngle,
         radius: tubeRadius,
         torusAngle,
-        speed: 0.003 + Math.random() * 0.004,
+        speed: 0.0015 + Math.random() * 0.002,
         size: Math.random() * 2 + 0.8,
         opacity: Math.random() * 0.6 + 0.15,
         hue: 20 + Math.random() * 30, // orange range 20-50
@@ -60,7 +60,7 @@ const TulipParticles = () => {
         angle: petalAngle,
         radius: petalR,
         torusAngle: petalAngle,
-        speed: 0.002 + Math.random() * 0.003,
+        speed: 0.001 + Math.random() * 0.0015,
         size: Math.random() * 3 + 1,
         opacity: Math.random() * 0.5 + 0.2,
         hue: 15 + Math.random() * 35,
@@ -77,7 +77,7 @@ const TulipParticles = () => {
         angle: 0,
         radius: 3 + Math.random() * 4,
         torusAngle: 0,
-        speed: 0.001 + Math.random() * 0.002,
+        speed: 0.0005 + Math.random() * 0.001,
         size: Math.random() * 2 + 0.5,
         opacity: Math.random() * 0.35 + 0.1,
         hue: 90 + Math.random() * 40, // greenish for stem
@@ -108,7 +108,7 @@ const TulipParticles = () => {
       const h = canvas.height;
       const cx = w / 2;
       const cy = h * 0.45;
-      timeRef.current += 0.008;
+      timeRef.current += 0.004;
       const t = timeRef.current;
 
       ctx.clearRect(0, 0, w, h);

@@ -79,6 +79,37 @@
     background-image: linear-gradient(135deg, hsl(200 40% 82%), hsl(260 30% 78%), hsl(320 25% 75%), hsl(200 35% 70%));
   }
 
+  .text-gradient-chrome-animated {
+    @apply bg-clip-text text-transparent;
+    background-size: 300% 300%;
+    background-image: linear-gradient(
+      135deg,
+      hsl(200 90% 75%),
+      hsl(260 85% 75%),
+      hsl(320 80% 72%),
+      hsl(40 95% 70%),
+      hsl(160 80% 65%),
+      hsl(200 90% 75%)
+    );
+    animation: chrome-shimmer 4s ease-in-out infinite;
+  }
+
+  .btn-chrome-outline {
+    border: 2px solid transparent;
+    background-image: linear-gradient(hsl(var(--background)), hsl(var(--background))),
+      linear-gradient(135deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    color: hsl(var(--foreground));
+    background-size: 100% 100%, 300% 300%;
+    animation: chrome-border-shimmer 4s ease-in-out infinite;
+  }
+  .btn-chrome-outline:hover {
+    background-image: linear-gradient(hsl(var(--background) / 0.8), hsl(var(--background) / 0.8)),
+      linear-gradient(135deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%));
+    box-shadow: 0 0 24px -4px hsl(260 85% 75% / 0.4), 0 0 48px -8px hsl(200 90% 75% / 0.2);
+  }
+
   .bg-glass {
     background: hsl(var(--surface-glass) / 0.6);
     backdrop-filter: blur(24px);
@@ -92,6 +123,16 @@
   .section-padding {
     @apply px-6 md:px-12 lg:px-24;
   }
+}
+
+@keyframes chrome-shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes chrome-border-shimmer {
+  0%, 100% { background-position: 100% 100%, 0% 50%; }
+  50% { background-position: 100% 100%, 100% 50%; }
 }
 
 /* Smooth scrolling */

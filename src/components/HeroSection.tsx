@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import heroBg from "@/assets/hero-bg.jpg";
 import TulipParticles from "./TulipParticles";
+
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -31,12 +32,11 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-6"
+          className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-4"
         >
-          Bridging{" "}
-          <span className="text-gradient-gold">Creativity</span>
+          <span className="text-gradient-chrome-animated">Tulip Technology</span>
           <br />
-          into Innovation
+          <span className="text-gradient-chrome-animated">R&D™</span>
         </motion.h1>
 
         <motion.p
@@ -45,7 +45,7 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 font-body"
         >
-          We integrate generative AI into games, 3D animation & VFX pipelines—scaling your content production without compromising quality.
+          AI Research & Development for 3D Artwork, Games, 3D Animation and VFX's Production Pipelines, and Creative Dev-Tools
         </motion.p>
 
         <motion.div
@@ -55,18 +55,27 @@ const HeroSection = () => {
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <a
+            href="#services"
+            className="btn-chrome-outline px-8 py-4 rounded-full font-display font-semibold text-lg transition-all"
+          >
+            Explore Services
+          </a>
+          <a
             href="#estimator"
             className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-display font-semibold text-lg hover:opacity-90 transition-opacity"
           >
             Get Your Estimate
           </a>
-          <a
-            href="#services"
-            className="border border-foreground/20 text-foreground px-8 py-4 rounded-full font-display font-semibold text-lg hover:bg-foreground/5 transition-colors"
-          >
-            Explore Services
-          </a>
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mt-6 font-body"
+        >
+          Support creative tech leaders with cutting-edge AI research and production-ready tools.
+        </motion.p>
       </div>
 
       {/* Scroll indicator */}
