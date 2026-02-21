@@ -11,6 +11,8 @@ interface ServiceOption {
   maxUSD: number;
   minCAD: number;
   maxCAD: number;
+  minEUR: number;
+  maxEUR: number;
 }
 
 const serviceOptions: ServiceOption[] = [
@@ -20,6 +22,7 @@ const serviceOptions: ServiceOption[] = [
     description: "Identify pipeline pain points & align AI tools",
     minUSD: 5000, maxUSD: 110000,
     minCAD: 7000, maxCAD: 120000,
+    minEUR: 4600, maxEUR: 101000,
   },
   {
     id: "benchmarking",
@@ -27,6 +30,7 @@ const serviceOptions: ServiceOption[] = [
     description: "Test & validate AI tools in sandbox environments",
     minUSD: 5000, maxUSD: 130000,
     minCAD: 7000, maxCAD: 160000,
+    minEUR: 4600, maxEUR: 120000,
   },
   {
     id: "demos",
@@ -34,6 +38,7 @@ const serviceOptions: ServiceOption[] = [
     description: "Hands-on prototypes tailored to your pipeline",
     minUSD: 3000, maxUSD: 120000,
     minCAD: 4000, maxCAD: 150000,
+    minEUR: 2800, maxEUR: 110000,
   },
   {
     id: "architecture",
@@ -41,6 +46,7 @@ const serviceOptions: ServiceOption[] = [
     description: "Full GenAI architecture including LLM training",
     minUSD: 12000, maxUSD: 350000,
     minCAD: 16000, maxCAD: 450000,
+    minEUR: 11000, maxEUR: 322000,
   },
   {
     id: "integration",
@@ -48,6 +54,7 @@ const serviceOptions: ServiceOption[] = [
     description: "End-to-end AI integration into your workflows",
     minUSD: 20000, maxUSD: 600000,
     minCAD: 30000, maxCAD: 800000,
+    minEUR: 18500, maxEUR: 552000,
   },
   {
     id: "workshops",
@@ -55,6 +62,7 @@ const serviceOptions: ServiceOption[] = [
     description: "Certified training to empower your team",
     minUSD: 3000, maxUSD: 85000,
     minCAD: 4000, maxCAD: 110000,
+    minEUR: 2800, maxEUR: 78000,
   },
 ];
 
@@ -79,7 +87,7 @@ const CostEstimator = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [scale, setScale] = useState<ScaleLevel>("medium");
-  const [currency, setCurrency] = useState<"USD" | "CAD">("USD");
+  const [currency, setCurrency] = useState<"USD" | "CAD" | "EUR">("USD");
   const [showBreakdown, setShowBreakdown] = useState(false);
 
   const toggleService = (id: string) => {
@@ -95,8 +103,8 @@ const CostEstimator = () => {
 
     const breakdown = selectedServices.map((id) => {
       const svc = serviceOptions.find((s) => s.id === id)!;
-      const min = currency === "USD" ? svc.minUSD : svc.minCAD;
-      const max = currency === "USD" ? svc.maxUSD : svc.maxCAD;
+      const min = currency === "USD" ? svc.minUSD : currency === "CAD" ? svc.minCAD : svc.minEUR;
+      const max = currency === "USD" ? svc.maxUSD : currency === "CAD" ? svc.maxCAD : svc.maxEUR;
       const scaledMin = Math.round(min + (max - min) * mult.min);
       const scaledMax = Math.round(min + (max - min) * mult.max);
       totalMin += scaledMin;
@@ -136,7 +144,7 @@ const CostEstimator = () => {
           {/* Currency toggle */}
           <div className="flex justify-end mb-8">
             <div className="bg-secondary rounded-full p-1 flex gap-1">
-              {(["USD", "CAD"] as const).map((c) => (
+              {(["USD", "CAD", "EUR"] as const).map((c) => (
                 <button
                   key={c}
                   onClick={() => setCurrency(c)}
