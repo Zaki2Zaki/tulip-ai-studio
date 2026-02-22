@@ -99,7 +99,7 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-up": "fade-up 0.8s ease-out forwards",
         "glow-pulse": "glow-pulse 3s ease-in-out infinite",
-        "logo-scroll": "logo-scroll 30s linear infinite",
+        "logo-scroll": "logo-scroll 15s linear infinite",
       },
     },
   },
