@@ -74,7 +74,7 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-sm md:text-base text-muted-foreground max-w-xl mx-auto mt-6 font-body"
         >
-          Support creative tech leaders with cutting-edge AI research and production-ready tools.
+          Collaborate on defining the product vision, strategy, and roadmap for intelligent toolsets, or vendor partnership aligning with client's objectives and project KPI's and OKRs
         </motion.p>
       </div>
 
