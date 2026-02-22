@@ -25,7 +25,7 @@ const HeroSection = () => {
           transition={{ duration: 0.6 }}
           className="text-sm md:text-base font-body tracking-[0.3em] uppercase text-muted-foreground mb-6">
 
-          GenAI R&D Consultancy
+
         </motion.p>
 
         <motion.h1
@@ -43,7 +43,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 font-body">
+          className="text-lg max-w-2xl mx-auto mb-10 font-body text-white md:text-3xl">
 
           AI Research & Development for 3D Artwork, Games, 3D Animation and VFX's Production Pipelines, and Creative Dev-Tools
         </motion.p>
@@ -62,9 +62,9 @@ const HeroSection = () => {
           </a>
           <a
             href="#estimator"
-            className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-display font-semibold text-lg hover:opacity-90 transition-opacity">
+            className="px-8 py-4 rounded-full font-display font-semibold text-lg hover:opacity-90 transition-opacity text-primary-foreground bg-white">
 
-            Get Your Estimate
+            ​Estimate Quotes  
           </a>
         </motion.div>
 
@@ -72,18 +72,18 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-sm md:text-base max-w-xl mx-auto mt-6 text-[#f4fbfa] font-sans font-light">Let's collaborate on your product vision, strategy, and roadmap for intelligent tool-sets, aligning on objectives, OKRs and KPIs 
+          className="text-sm md:text-base max-w-xl mx-auto mt-6 text-[#f4fbfa] font-sans font-light">
 
 
-        </motion.p>
+
+Let's collaborate on your product vision, strategy, and roadmap for intelligent tool-sets, aligning on objectives, OKRs and KPIs </motion.p>
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2">
+      <motion.div initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.2 }}
+      className="absolute bottom-8 left-1/2 -translate-x-1/2">
 
         <motion.div
           animate={{ y: [0, 8, 0] }}
