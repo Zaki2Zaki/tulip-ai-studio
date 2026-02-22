@@ -8,14 +8,14 @@ import unityLogo from "@/assets/logos/unity.svg";
 import godotLogo from "@/assets/logos/godot.svg";
 
 const logos = [
-  { src: unrealLogo, name: "Unreal Engine" },
+  { src: unrealLogo, name: "Unreal Engine", invert: true },
   { src: blenderLogo, name: "Blender" },
   { src: unityLogo, name: "Unity" },
-  { name: "AUTODESK Maya", text: true },
-  { name: "Cinema 4D", text: true },
+  { name: "AUTODESK Maya", text: true, color: "#00C8C8" },
+  { name: "Cinema 4D", text: true, color: "#011A6A" },
   { src: godotLogo, name: "Godot" },
-  { name: "Houdini", text: true },
-  { name: "Substance 3D", text: true },
+  { name: "Houdini", text: true, color: "#FF4713" },
+  { name: "Substance 3D", text: true, color: "#6CC24A" },
 ];
 
 const WhyTulipSection = () => {
@@ -73,14 +73,17 @@ const WhyTulipSection = () => {
                   className="flex-shrink-0 flex items-center justify-center px-8 md:px-12 h-16"
                 >
                   {logo.text ? (
-                    <span className="font-display text-lg md:text-xl font-bold text-muted-foreground whitespace-nowrap opacity-70 hover:opacity-100 transition-opacity">
+                    <span
+                      className="font-display text-lg md:text-xl font-bold whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity"
+                      style={{ color: logo.color }}
+                    >
                       {logo.name}
                     </span>
                   ) : (
                     <img
                       src={logo.src}
                       alt={logo.name}
-                      className="h-8 md:h-10 w-auto brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+                      className={`h-8 md:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity ${logo.invert ? 'brightness-0 invert' : ''}`}
                     />
                   )}
                 </div>
