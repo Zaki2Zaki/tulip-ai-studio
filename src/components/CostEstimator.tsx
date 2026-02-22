@@ -19,7 +19,7 @@ const serviceOptions: ServiceOption[] = [
   {
     id: "research",
     label: "GenAI Research",
-    description: "Identify pipeline pain points & align AI tools",
+    description: "Identify pipeline pain points & opportunities\nAnalysis and Align AI tools seamlessly into your artist's workflows\nAnalysis of your vendor's & research tools friction points to find impactful solutions",
     minUSD: 5000, maxUSD: 110000,
     minCAD: 7000, maxCAD: 120000,
     minEUR: 4600, maxEUR: 101000,
@@ -214,7 +214,7 @@ const CostEstimator = () => {
                       </div>
                       <div>
                         <div className="font-display font-semibold text-sm">{svc.label}</div>
-                        <div className="text-xs text-muted-foreground font-body">{svc.description}</div>
+                        <div className="text-xs text-muted-foreground font-body whitespace-pre-line">{svc.description}</div>
                       </div>
                     </div>
                   </button>
