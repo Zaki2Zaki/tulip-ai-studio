@@ -6,13 +6,15 @@ import unrealLogo from "@/assets/logos/unreal-engine.svg";
 import blenderLogo from "@/assets/logos/blender.svg";
 import unityLogo from "@/assets/logos/unity.svg";
 import godotLogo from "@/assets/logos/godot.svg";
+import mayaLogo from "@/assets/logos/maya.svg";
+import cinema4dLogo from "@/assets/logos/cinema4d.svg";
 
 const logos = [
   { src: unrealLogo, name: "Unreal Engine", invert: true },
   { src: blenderLogo, name: "Blender" },
   { src: unityLogo, name: "Unity" },
-  { name: "AUTODESK Maya", text: true, color: "#00C8C8" },
-  { name: "Cinema 4D", text: true, color: "#011A6A" },
+  { src: mayaLogo, name: "Maya" },
+  { src: cinema4dLogo, name: "Cinema4D", showLabel: true },
   { src: godotLogo, name: "Godot" },
   { name: "Houdini", text: true, color: "#FF4713" },
   { name: "Substance 3D", text: true, color: "#6CC24A" },
@@ -80,11 +82,18 @@ const WhyTulipSection = () => {
                       {logo.name}
                     </span>
                   ) : (
-                    <img
-                      src={logo.src}
-                      alt={logo.name}
-                      className={`h-8 md:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity ${logo.invert ? 'brightness-0 invert' : ''}`}
-                    />
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={logo.src}
+                        alt={logo.name}
+                        className={`h-8 md:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity ${logo.invert ? 'brightness-0 invert' : ''}`}
+                      />
+                      {logo.showLabel && (
+                        <span className="font-display text-sm md:text-base font-bold whitespace-nowrap opacity-80" style={{ color: '#4B6EF5' }}>
+                          {logo.name}
+                        </span>
+                      )}
+                    </div>
                   )}
                 </div>
               ))}
