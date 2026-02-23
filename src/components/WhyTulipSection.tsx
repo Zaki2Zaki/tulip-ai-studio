@@ -9,6 +9,13 @@ import godotLogo from "@/assets/logos/godot.svg";
 import mayaLogo from "@/assets/logos/maya.png";
 import cinema4dLogo from "@/assets/logos/cinema4d.png";
 import houdiniLogo from "@/assets/logos/houdini.svg";
+import openaiLogo from "@/assets/logos/openai.svg";
+import anthropicLogo from "@/assets/logos/anthropic.svg";
+import geminiLogo from "@/assets/logos/google-gemini.svg";
+import metaLogo from "@/assets/logos/meta.svg";
+import huggingfaceLogo from "@/assets/logos/huggingface.svg";
+import lovableLogo from "@/assets/logos/lovable.svg";
+import grokLogo from "@/assets/logos/xai-grok.svg";
 
 const logos = [
   { src: unrealLogo, name: "Unreal Engine", invert: true },
@@ -22,13 +29,13 @@ const logos = [
 ];
 
 const aiLogos = [
-  { name: "GPT-5 / o1", text: true, color: "#10A37F", label: "OpenAI" },
-  { name: "Claude 4 Opus", text: true, color: "#D4A574", label: "Anthropic" },
-  { name: "Gemini 3.0", text: true, color: "#4285F4", label: "Google" },
-  { name: "Llama 4 405B", text: true, color: "#0668E1", label: "Meta" },
-  { name: "🤗 Hugging Face", text: true, color: "#FFD21E" },
-  { name: "Lovable", text: true, color: "#E779C1" },
-  { name: "Grok", text: true, color: "#FFFFFF" },
+  { src: openaiLogo, name: "GPT-5 / o1", color: "#10A37F" },
+  { src: anthropicLogo, name: "Claude 4 Opus", color: "#D4A574" },
+  { src: geminiLogo, name: "Gemini 3.0", color: "#4285F4" },
+  { src: metaLogo, name: "Llama 4 405B", color: "#0080FB" },
+  { src: huggingfaceLogo, name: "Hugging Face", color: "#FFD21E" },
+  { src: lovableLogo, name: "Lovable", color: "#E779C1" },
+  { src: grokLogo, name: "Grok", color: "#FFFFFF" },
 ];
 
 const WhyTulipSection = () => {
@@ -121,18 +128,18 @@ const WhyTulipSection = () => {
                   key={`${logo.name}-${i}`}
                   className="flex-shrink-0 flex items-center justify-center px-8 md:px-12 h-16"
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2.5">
+                    <img
+                      src={logo.src}
+                      alt={logo.name}
+                      className="h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                    />
                     <span
-                      className="font-display text-base md:text-lg font-bold whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity"
+                      className="font-display text-sm md:text-base font-bold whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity"
                       style={{ color: logo.color }}
                     >
                       {logo.name}
                     </span>
-                    {logo.label && (
-                      <span className="text-xs font-body text-muted-foreground whitespace-nowrap">
-                        {logo.label}
-                      </span>
-                    )}
                   </div>
                 </div>
               ))}
