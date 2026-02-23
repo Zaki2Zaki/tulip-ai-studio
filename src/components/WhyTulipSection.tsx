@@ -17,7 +17,7 @@ const logos = [
   { src: mayaLogo, name: "Maya" },
   { src: cinema4dLogo, name: "Cinema4D", showLabel: true },
   { src: godotLogo, name: "Godot" },
-  { src: houdiniLogo, name: "Houdini", invert: true },
+  { src: houdiniLogo, name: "Houdini" },
   { name: "Substance 3D", text: true, color: "#6CC24A" },
 ];
 
