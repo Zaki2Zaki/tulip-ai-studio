@@ -93,6 +93,10 @@ export default {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        "logo-scroll-reverse": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -100,6 +104,7 @@ export default {
         "fade-up": "fade-up 0.8s ease-out forwards",
         "glow-pulse": "glow-pulse 3s ease-in-out infinite",
         "logo-scroll": "logo-scroll 15s linear infinite",
+        "logo-scroll-reverse": "logo-scroll-reverse 18s linear infinite",
       },
     },
   },
