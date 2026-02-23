@@ -21,13 +21,23 @@ const logos = [
   { name: "Substance 3D", text: true, color: "#6CC24A" },
 ];
 
+const aiLogos = [
+  { name: "GPT-5 / o1", text: true, color: "#10A37F", label: "OpenAI" },
+  { name: "Claude 4 Opus", text: true, color: "#D4A574", label: "Anthropic" },
+  { name: "Gemini 3.0", text: true, color: "#4285F4", label: "Google" },
+  { name: "Llama 4 405B", text: true, color: "#0668E1", label: "Meta" },
+  { name: "🤗 Hugging Face", text: true, color: "#FFD21E" },
+  { name: "Lovable", text: true, color: "#E779C1" },
+  { name: "Grok", text: true, color: "#FFFFFF" },
+];
+
 const WhyTulipSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   // Double the logos for seamless infinite scroll
   const doubled = [...logos, ...logos];
-
+  const doubledAi = [...aiLogos, ...aiLogos];
   return (
     <section className="py-32 section-padding">
       <div ref={ref} className="max-w-5xl mx-auto text-center">
@@ -96,6 +106,34 @@ const WhyTulipSection = () => {
                       )}
                     </div>
                   )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* AI Models carousel - scrolls in reverse */}
+          <div className="overflow-hidden relative mt-6">
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-background to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-background to-transparent z-10" />
+            <div className="flex animate-logo-scroll-reverse">
+              {doubledAi.map((logo, i) => (
+                <div
+                  key={`${logo.name}-${i}`}
+                  className="flex-shrink-0 flex items-center justify-center px-8 md:px-12 h-16"
+                >
+                  <div className="flex items-center gap-2">
+                    <span
+                      className="font-display text-base md:text-lg font-bold whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity"
+                      style={{ color: logo.color }}
+                    >
+                      {logo.name}
+                    </span>
+                    {logo.label && (
+                      <span className="text-xs font-body text-muted-foreground whitespace-nowrap">
+                        {logo.label}
+                      </span>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
