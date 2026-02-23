@@ -6,8 +6,9 @@ import unrealLogo from "@/assets/logos/unreal-engine.svg";
 import blenderLogo from "@/assets/logos/blender.svg";
 import unityLogo from "@/assets/logos/unity.svg";
 import godotLogo from "@/assets/logos/godot.svg";
-import mayaLogo from "@/assets/logos/maya.svg";
-import cinema4dLogo from "@/assets/logos/cinema4d.svg";
+import mayaLogo from "@/assets/logos/maya.png";
+import cinema4dLogo from "@/assets/logos/cinema4d.png";
+import houdiniLogo from "@/assets/logos/houdini.svg";
 
 const logos = [
   { src: unrealLogo, name: "Unreal Engine", invert: true },
@@ -16,7 +17,7 @@ const logos = [
   { src: mayaLogo, name: "Maya" },
   { src: cinema4dLogo, name: "Cinema4D", showLabel: true },
   { src: godotLogo, name: "Godot" },
-  { name: "Houdini", text: true, color: "#FF4713" },
+  { src: houdiniLogo, name: "Houdini", invert: true },
   { name: "Substance 3D", text: true, color: "#6CC24A" },
 ];
 
