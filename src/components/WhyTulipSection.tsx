@@ -10,9 +10,7 @@ import mayaLogo from "@/assets/logos/maya.png";
 import cinema4dLogo from "@/assets/logos/cinema4d.png";
 import houdiniLogo from "@/assets/logos/houdini.svg";
 import openaiLogo from "@/assets/logos/openai.svg";
-import anthropicLogo from "@/assets/logos/claude.png";
 import geminiLogo from "@/assets/logos/google-gemini.svg";
-import metaLogo from "@/assets/logos/meta.svg";
 import huggingfaceLogo from "@/assets/logos/huggingface.svg";
 import lovableLogo from "@/assets/logos/lovable.svg";
 import grokLogo from "@/assets/logos/xai-grok.svg";
@@ -30,9 +28,7 @@ const logos = [
 
 const aiLogos = [
   { src: openaiLogo, name: "GPT-5 / o1", color: "#10A37F" },
-  { src: anthropicLogo, name: "Claude 4 Opus", color: "#D4A574", whiteBg: true },
   { src: geminiLogo, name: "Gemini 3.0", color: "#4285F4" },
-  { src: metaLogo, name: "Llama 4 405B", color: "#0080FB" },
   { src: huggingfaceLogo, name: "Hugging Face", color: "#FFD21E" },
   { src: lovableLogo, name: "Lovable", color: "#E779C1" },
   { src: grokLogo, name: "Grok", color: "#FFFFFF" },
