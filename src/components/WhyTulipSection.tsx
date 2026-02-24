@@ -10,7 +10,7 @@ import mayaLogo from "@/assets/logos/maya.png";
 import cinema4dLogo from "@/assets/logos/cinema4d.png";
 import houdiniLogo from "@/assets/logos/houdini.svg";
 import openaiLogo from "@/assets/logos/openai.svg";
-import anthropicLogo from "@/assets/logos/anthropic.svg";
+import anthropicLogo from "@/assets/logos/claude.png";
 import geminiLogo from "@/assets/logos/google-gemini.svg";
 import metaLogo from "@/assets/logos/meta.svg";
 import huggingfaceLogo from "@/assets/logos/huggingface.svg";
@@ -30,7 +30,7 @@ const logos = [
 
 const aiLogos = [
   { src: openaiLogo, name: "GPT-5 / o1", color: "#10A37F" },
-  { src: anthropicLogo, name: "Claude 4 Opus", color: "#D4A574" },
+  { src: anthropicLogo, name: "Claude 4 Opus", color: "#D4A574", whiteBg: true },
   { src: geminiLogo, name: "Gemini 3.0", color: "#4285F4" },
   { src: metaLogo, name: "Llama 4 405B", color: "#0080FB" },
   { src: huggingfaceLogo, name: "Hugging Face", color: "#FFD21E" },
@@ -132,7 +132,7 @@ const WhyTulipSection = () => {
                     <img
                       src={logo.src}
                       alt={logo.name}
-                      className="h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity"
+                      className={`h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity ${(logo as any).whiteBg ? 'bg-white rounded px-1 py-0.5' : ''}`}
                     />
                     <span
                       className="font-display text-sm md:text-base font-bold whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity"
