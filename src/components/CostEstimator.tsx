@@ -17,69 +17,69 @@ interface ServiceOption {
 }
 
 const serviceOptions: ServiceOption[] = [
-  {
-    id: "research",
-    label: "GenAI Research",
-    description: "Identify pipeline pain points & opportunities\nAnalysis and Align AI tools seamlessly into your artist's workflows\nAnalysis of your vendor's & research tools friction points to find impactful solutions",
-    minUSD: 5000, maxUSD: 110000,
-    minCAD: 7000, maxCAD: 120000,
-    minEUR: 4600, maxEUR: 101000,
-  },
-  {
-    id: "benchmarking",
-    label: "Tool Benchmarking",
-    description: "Test & validate AI tools in sandbox environments",
-    minUSD: 5000, maxUSD: 130000,
-    minCAD: 7000, maxCAD: 160000,
-    minEUR: 4600, maxEUR: 120000,
-  },
-  {
-    id: "demos",
-    label: "Demos & Sandboxes",
-    description: "Hands-on prototypes tailored to your pipeline",
-    minUSD: 3000, maxUSD: 120000,
-    minCAD: 4000, maxCAD: 150000,
-    minEUR: 2800, maxEUR: 110000,
-  },
-  {
-    id: "architecture",
-    label: "Architecture Blueprint",
-    description: "Full GenAI architecture including LLM training",
-    minUSD: 12000, maxUSD: 350000,
-    minCAD: 16000, maxCAD: 450000,
-    minEUR: 11000, maxEUR: 322000,
-  },
-  {
-    id: "integration",
-    label: "Integration",
-    description: "End-to-end AI integration into your workflows",
-    minUSD: 20000, maxUSD: 600000,
-    minCAD: 30000, maxCAD: 800000,
-    minEUR: 18500, maxEUR: 552000,
-  },
-  {
-    id: "workshops",
-    label: "Workshops & Education",
-    description: "Certified training to empower your team",
-    minUSD: 3000, maxUSD: 85000,
-    minCAD: 4000, maxCAD: 110000,
-    minEUR: 2800, maxEUR: 78000,
-  },
-];
+{
+  id: "research",
+  label: "GenAI Research",
+  description: "Identify pipeline pain points & opportunities\nAnalysis and Align AI tools seamlessly into your artist's workflows\nAnalysis of your vendor's & research tools friction points to find impactful solutions",
+  minUSD: 5000, maxUSD: 110000,
+  minCAD: 7000, maxCAD: 120000,
+  minEUR: 4600, maxEUR: 101000
+},
+{
+  id: "benchmarking",
+  label: "Tool Benchmarking",
+  description: "Test & validate AI tools in sandbox environments",
+  minUSD: 5000, maxUSD: 130000,
+  minCAD: 7000, maxCAD: 160000,
+  minEUR: 4600, maxEUR: 120000
+},
+{
+  id: "demos",
+  label: "Demos & Sandboxes",
+  description: "Hands-on prototypes tailored to your pipeline",
+  minUSD: 3000, maxUSD: 120000,
+  minCAD: 4000, maxCAD: 150000,
+  minEUR: 2800, maxEUR: 110000
+},
+{
+  id: "architecture",
+  label: "Architecture Blueprint",
+  description: "Full GenAI architecture including LLM training",
+  minUSD: 12000, maxUSD: 350000,
+  minCAD: 16000, maxCAD: 450000,
+  minEUR: 11000, maxEUR: 322000
+},
+{
+  id: "integration",
+  label: "Integration",
+  description: "End-to-end AI integration into your workflows",
+  minUSD: 20000, maxUSD: 600000,
+  minCAD: 30000, maxCAD: 800000,
+  minEUR: 18500, maxEUR: 552000
+},
+{
+  id: "workshops",
+  label: "Workshops & Education",
+  description: "Certified training to empower your team",
+  minUSD: 3000, maxUSD: 85000,
+  minCAD: 4000, maxCAD: 110000,
+  minEUR: 2800, maxEUR: 78000
+}];
+
 
 type ScaleLevel = "small" | "medium" | "large";
 
-const scaleMultipliers: Record<ScaleLevel, { min: number; max: number; label: string; desc: string }> = {
+const scaleMultipliers: Record<ScaleLevel, {min: number;max: number;label: string;desc: string;}> = {
   small: { min: 0.0, max: 0.25, label: "Indie / Small Studio", desc: "1–20 people, focused scope" },
   medium: { min: 0.25, max: 0.6, label: "Mid-Size Studio", desc: "20–100 people, multi-department" },
-  large: { min: 0.6, max: 1.0, label: "AAA / Enterprise", desc: "100+ people, full pipeline" },
+  large: { min: 0.6, max: 1.0, label: "AAA / Enterprise", desc: "100+ people, full pipeline" }
 };
 
 const formatCurrency = (amount: number, currency: string) => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
     currency,
-    maximumFractionDigits: 0,
+    maximumFractionDigits: 0
   }).format(amount);
 };
 
@@ -93,7 +93,7 @@ const CostEstimator = () => {
 
   const toggleService = (id: string) => {
     setSelectedServices((prev) =>
-      prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
+    prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
     );
   };
 
@@ -123,8 +123,8 @@ const CostEstimator = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
+          className="text-center mb-16">
+
           <p className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-4">
             Cost Estimator
           </p>
@@ -140,26 +140,26 @@ const CostEstimator = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-card border border-border rounded-3xl p-8 md:p-12 relative"
-        >
+          className="bg-card border border-border rounded-3xl p-8 md:p-12 relative">
+
           {/* Tulip Logo */}
-          <img src={tulipLogo} alt="Tulip Technology logo" className="absolute top-6 left-6 w-12 h-12 rounded-full" />
+          <img src={tulipLogo} alt="Tulip Technology logo" className="absolute top-6 left-6 w-12 h-12 rounded-full object-cover opacity-100" />
           {/* Currency toggle */}
           <div className="flex justify-end mb-8">
             <div className="bg-secondary rounded-full p-1 flex gap-1">
-              {(["USD", "CAD", "EUR"] as const).map((c) => (
-                <button
-                  key={c}
-                  onClick={() => setCurrency(c)}
-                  className={`px-4 py-1.5 rounded-full text-sm font-body font-medium transition-all ${
-                    currency === c
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
+              {(["USD", "CAD", "EUR"] as const).map((c) =>
+              <button
+                key={c}
+                onClick={() => setCurrency(c)}
+                className={`px-4 py-1.5 rounded-full text-sm font-body font-medium transition-all ${
+                currency === c ?
+                "bg-primary text-primary-foreground" :
+                "text-muted-foreground hover:text-foreground"}`
+                }>
+
                   {c}
                 </button>
-              ))}
+              )}
             </div>
           </div>
 
@@ -174,15 +174,15 @@ const CostEstimator = () => {
                     key={key}
                     onClick={() => setScale(key)}
                     className={`text-left p-5 rounded-xl border transition-all duration-300 ${
-                      scale === key
-                        ? "border-primary bg-primary/5 glow-gold"
-                        : "border-border hover:border-muted-foreground/30"
-                    }`}
-                  >
+                    scale === key ?
+                    "border-primary bg-primary/5 glow-gold" :
+                    "border-border hover:border-muted-foreground/30"}`
+                    }>
+
                     <div className="font-display font-semibold text-sm mb-1">{s.label}</div>
                     <div className="text-xs text-muted-foreground font-body">{s.desc}</div>
-                  </button>
-                );
+                  </button>);
+
               })}
             </div>
           </div>
@@ -198,43 +198,43 @@ const CostEstimator = () => {
                     key={svc.id}
                     onClick={() => toggleService(svc.id)}
                     className={`text-left p-5 rounded-xl border transition-all duration-300 ${
-                      selected
-                        ? "border-primary bg-primary/5"
-                        : "border-border hover:border-muted-foreground/30"
-                    }`}
-                  >
+                    selected ?
+                    "border-primary bg-primary/5" :
+                    "border-border hover:border-muted-foreground/30"}`
+                    }>
+
                     <div className="flex items-center gap-3">
                       <div
                         className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
-                          selected ? "border-primary bg-primary" : "border-muted-foreground/40"
-                        }`}
-                      >
-                        {selected && (
-                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        selected ? "border-primary bg-primary" : "border-muted-foreground/40"}`
+                        }>
+
+                        {selected &&
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                             <path d="M2 6L5 9L10 3" stroke="hsl(0 0% 3%)" strokeWidth="2" strokeLinecap="round" />
                           </svg>
-                        )}
+                        }
                       </div>
                       <div>
                         <div className="font-display font-semibold text-sm">{svc.label}</div>
                         <div className="text-xs text-muted-foreground font-body whitespace-pre-line">{svc.description}</div>
                       </div>
                     </div>
-                  </button>
-                );
+                  </button>);
+
               })}
             </div>
           </div>
 
           {/* Result */}
           <div className="border-t border-border pt-8">
-            {selectedServices.length === 0 ? (
-              <div className="text-center text-muted-foreground font-body py-8">
+            {selectedServices.length === 0 ?
+            <div className="text-center text-muted-foreground font-body py-8">
                 <Calculator className="w-10 h-10 mx-auto mb-3 opacity-40" />
                 Select services above to see your estimated budget range
-              </div>
-            ) : (
-              <div>
+              </div> :
+
+            <div>
                 <div className="text-center mb-6">
                   <p className="text-sm text-muted-foreground font-body mb-2">Estimated Budget Range</p>
                   <div className="font-display text-4xl md:text-5xl font-bold">
@@ -251,46 +251,46 @@ const CostEstimator = () => {
 
                 {/* Breakdown toggle */}
                 <button
-                  onClick={() => setShowBreakdown(!showBreakdown)}
-                  className="flex items-center gap-2 mx-auto text-sm text-muted-foreground hover:text-foreground transition-colors font-body"
-                >
+                onClick={() => setShowBreakdown(!showBreakdown)}
+                className="flex items-center gap-2 mx-auto text-sm text-muted-foreground hover:text-foreground transition-colors font-body">
+
                   {showBreakdown ? "Hide" : "Show"} breakdown
                   {showBreakdown ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </button>
 
-                {showBreakdown && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    className="mt-6 space-y-3"
-                  >
-                    {estimate.breakdown.map((item) => (
-                      <div key={item.label} className="flex justify-between items-center py-2 border-b border-border/50">
+                {showBreakdown &&
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                className="mt-6 space-y-3">
+
+                    {estimate.breakdown.map((item) =>
+                <div key={item.label} className="flex justify-between items-center py-2 border-b border-border/50">
                         <span className="text-sm font-body">{item.label}</span>
                         <span className="text-sm font-body text-muted-foreground">
                           {formatCurrency(item.min, currency)} – {formatCurrency(item.max, currency)}
                         </span>
                       </div>
-                    ))}
-                  </motion.div>
                 )}
+                  </motion.div>
+              }
 
                 <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                   <a
-                    href="#contact"
-                    className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-full font-display font-semibold hover:opacity-90 transition-opacity"
-                  >
+                  href="#contact"
+                  className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-full font-display font-semibold hover:opacity-90 transition-opacity">
+
                     Request Detailed Quote
                   </a>
                   <a
-                    href="#"
-                    className="btn-chrome-outline px-8 py-4 rounded-full font-display font-semibold transition-all"
-                  >
+                  href="#"
+                  className="btn-chrome-outline px-8 py-4 rounded-full font-display font-semibold transition-all">
+
                     Book a 30-minute Discovery Meeting
                   </a>
                 </div>
               </div>
-            )}
+            }
           </div>
         </motion.div>
 
@@ -299,26 +299,26 @@ const CostEstimator = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.5 }}
-          className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4"
-        >
+          className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+
           {[
-            { pct: "15%", label: "Contracts & Deposit" },
-            { pct: "25%", label: "Demo Start & Review" },
-            { pct: "30%", label: "Polish & 75% Completion" },
-            { pct: "25%", label: "Final Delivery" },
-          ].map((step) => (
-            <div key={step.label} className="bg-card border border-border rounded-xl p-4 text-center">
+          { pct: "15%", label: "Contracts & Deposit" },
+          { pct: "25%", label: "Demo Start & Review" },
+          { pct: "30%", label: "Polish & 75% Completion" },
+          { pct: "25%", label: "Final Delivery" }].
+          map((step) =>
+          <div key={step.label} className="bg-card border border-border rounded-xl p-4 text-center">
               <div className="font-display text-2xl font-bold text-primary mb-1">{step.pct}</div>
               <div className="text-xs text-muted-foreground font-body">{step.label}</div>
             </div>
-          ))}
+          )}
         </motion.div>
         <p className="text-center text-xs text-muted-foreground font-body mt-4">
           Payment milestone structure. Final quotation varies depending on custom prototype requirements.
         </p>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default CostEstimator;
