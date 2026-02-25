@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Mail, MapPin } from "lucide-react";
+
 
 const ContactSection = () => {
   const ref = useRef(null);
@@ -30,28 +30,28 @@ const ContactSection = () => {
           transition={{ delay: 0.2 }}
           className="text-muted-foreground font-body mb-12 text-lg"
         >
-          Ready to transform your studio's pipeline with generative AI? Reach out for a consultation.
+          Ready to build systems that help you grow without the chaos. Let's collaborate on your product vision, strategy, and roadmap for intelligent tool-sets, aligning on objectives, OKRs and KPIs.
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6"
+          className="flex flex-col items-center gap-6"
         >
           <a
-            href="mailto:youki@tuliptechnology.studio"
-            className="flex items-center gap-3 bg-card border border-border rounded-2xl px-6 py-4 hover:border-primary/30 transition-all group"
+            href="#"
+            className="btn-chrome-outline px-8 py-4 rounded-full font-display font-semibold text-lg transition-all"
           >
-            <Mail className="w-5 h-5 text-primary" />
-            <span className="font-body text-sm group-hover:text-foreground text-muted-foreground transition-colors">
-              youki@tuliptechnology.studio
-            </span>
+            Book a 30-minute Discovery Meeting
           </a>
-          <div className="flex items-center gap-3 bg-card border border-border rounded-2xl px-6 py-4">
-            <MapPin className="w-5 h-5 text-primary" />
-            <span className="font-body text-sm text-muted-foreground">Amsterdam, Netherlands</span>
-          </div>
+          <p className="text-muted-foreground font-body text-sm">
+            Or email us at{" "}
+            <a href="mailto:youki@tuliptechnology.studio" className="text-primary hover:underline">
+              youki@tuliptechnology.studio
+            </a>{" "}
+            with a client intake form
+          </p>
         </motion.div>
       </div>
     </section>
