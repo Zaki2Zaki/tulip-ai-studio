@@ -45,13 +45,6 @@ const ContactSection = () => {
           >
             Book a 30-minute Discovery Meeting
           </a>
-          <p className="text-muted-foreground font-body text-sm">
-            Or email us at{" "}
-            <a href="mailto:youki@tuliptechnology.studio" className="text-primary hover:underline">
-              youki@tuliptechnology.studio
-            </a>{" "}
-            with a client intake form
-          </p>
         </motion.div>
       </div>
     </section>
