@@ -1,18 +1,9 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { ArrowRight } from "lucide-react";
 import pipelineBg from "@/assets/pipeline-bg.jpg";
-
-const stages = [
-  "Layout",
-  "Modeling",
-  "Texturing",
-  "Rigging",
-  "Animation",
-  "VFX",
-  "Lighting",
-  "Compositing",
-  "Rendering",
-];
+import workflowTraditional from "@/assets/workflow-traditional.jpg";
+import workflowAi from "@/assets/workflow-ai.jpg";
 
 const PipelineSection = () => {
   const ref = useRef(null);
@@ -45,42 +36,69 @@ const PipelineSection = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3 }}
-          className="text-muted-foreground text-center max-w-2xl mx-auto mb-16 font-body"
+          className="text-muted-foreground text-center max-w-2xl mx-auto mb-20 font-body"
         >
           We identify where generative AI creates the most impact in your content production pipeline—from pre-production through final output.
         </motion.p>
 
-        {/* Pipeline visualization */}
-        <div className="flex flex-wrap justify-center gap-3 md:gap-0 md:flex-nowrap">
-          {stages.map((stage, i) => (
-            <motion.div
-              key={stage}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="relative group"
-            >
-              <div className="bg-card border border-border group-hover:border-primary/50 rounded-xl px-4 py-6 md:px-5 md:py-8 text-center transition-all duration-300 group-hover:glow-gold min-w-[100px]">
-                <div className="w-3 h-3 rounded-full bg-primary/40 group-hover:bg-primary mx-auto mb-3 transition-colors animate-glow-pulse" />
-                <span className="font-body text-xs md:text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                  {stage}
-                </span>
-              </div>
-              {i < stages.length - 1 && (
-                <div className="hidden md:block absolute top-1/2 -right-[1px] w-[2px] h-4 bg-primary/20" />
-              )}
-            </motion.div>
-          ))}
-        </div>
+        {/* Traditional Workflow */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mb-8"
+        >
+          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground font-body mb-6 text-center">
+            The traditional 3D production workflow
+          </p>
+          <div className="relative rounded-2xl overflow-hidden border border-border/50 group">
+            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/40 z-10 pointer-events-none" />
+            <img
+              src={workflowTraditional}
+              alt="Traditional 3D production pipeline showing Pre-Production, Production, and Post-Production stages"
+              className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+            />
+          </div>
+        </motion.div>
 
-        {/* Phase labels */}
-        <div className="flex justify-between mt-8 max-w-4xl mx-auto">
-          {["Pre-Production", "Production", "Post-Production"].map((phase) => (
-            <span key={phase} className="text-xs tracking-widest uppercase text-muted-foreground font-body">
-              {phase}
+        {/* Transition Arrow */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={inView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="flex flex-col items-center gap-3 my-12"
+        >
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary/60 to-primary" />
+          <div className="flex items-center gap-3 bg-card/80 backdrop-blur-sm border border-primary/30 rounded-full px-6 py-3">
+            <span className="text-sm font-body text-primary font-semibold tracking-wide">
+              Evolving with AI
             </span>
-          ))}
-        </div>
+            <ArrowRight className="w-4 h-4 text-primary" />
+          </div>
+          <div className="w-px h-12 bg-gradient-to-b from-primary via-primary/60 to-transparent" />
+        </motion.div>
+
+        {/* AI-Powered Workflow */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 1 }}
+        >
+          <p className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-6 text-center">
+            The future — with generative AI tools
+          </p>
+          <div className="relative rounded-2xl overflow-hidden border border-primary/30 group glow-gold">
+            <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-background/30 z-10 pointer-events-none" />
+            <img
+              src={workflowAi}
+              alt="AI-powered studio workflow pipeline with tools like Runway, Sora, Stability AI, Llama, and Claude"
+              className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+            />
+          </div>
+          <p className="text-muted-foreground text-center max-w-2xl mx-auto mt-8 font-body text-sm md:text-base">
+            Startup AI tools are reshaping every stage of the pipeline. We help studios adopt and integrate these tools seamlessly—so your team stays ahead.
+          </p>
+        </motion.div>
       </div>
     </section>
   );
