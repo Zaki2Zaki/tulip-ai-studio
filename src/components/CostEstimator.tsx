@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import tulipLogo from "@/assets/tulip-logo.png";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Calculator, ChevronDown, ChevronUp } from "lucide-react";
@@ -139,8 +140,10 @@ const CostEstimator = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-card border border-border rounded-3xl p-8 md:p-12"
+          className="bg-card border border-border rounded-3xl p-8 md:p-12 relative"
         >
+          {/* Tulip Logo */}
+          <img src={tulipLogo} alt="Tulip Technology logo" className="absolute top-6 left-6 w-12 h-12 rounded-full" />
           {/* Currency toggle */}
           <div className="flex justify-end mb-8">
             <div className="bg-secondary rounded-full p-1 flex gap-1">
@@ -272,12 +275,18 @@ const CostEstimator = () => {
                   </motion.div>
                 )}
 
-                <div className="mt-8 text-center">
+                <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
                   <a
                     href="#contact"
                     className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-full font-display font-semibold hover:opacity-90 transition-opacity"
                   >
                     Request Detailed Quote
+                  </a>
+                  <a
+                    href="#"
+                    className="btn-chrome-outline px-8 py-4 rounded-full font-display font-semibold transition-all"
+                  >
+                    Book a 30-minute Discovery Meeting
                   </a>
                 </div>
               </div>
