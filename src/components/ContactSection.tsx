@@ -45,6 +45,9 @@ const ContactSection = () => {
           >
             Book a 30-minute Discovery Meeting
           </a>
+          <p className="text-muted-foreground font-body text-sm">
+            We will automatically email a client-intake form and service package to review
+          </p>
         </motion.div>
       </div>
     </section>
