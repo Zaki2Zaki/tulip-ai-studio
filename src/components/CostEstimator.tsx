@@ -142,10 +142,9 @@ const CostEstimator = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="bg-card border border-border rounded-3xl p-8 md:p-12 relative">
 
-          {/* Tulip Logo */}
-          <img src={tulipLogo} alt="Tulip Technology logo" className="absolute top-6 centre-6 w-13 h-13 rounded-full object-cover opacity-100 border-solid border border-secondary-foreground" />
-          {/* Currency toggle */}
-          <div className="mb-8 border-solid border-0 flex-col flex items-center justify-end">
+          {/* Tulip Logo + Currency toggle */}
+          <div className="mb-8 flex flex-col items-center gap-4">
+            <img src={tulipLogo} alt="Tulip Technology logo" className="w-10 h-10 rounded-full object-cover border border-border" />
             <div className="bg-secondary rounded-full p-1 flex gap-1">
               {(["USD", "CAD", "EUR"] as const).map((c) =>
               <button
