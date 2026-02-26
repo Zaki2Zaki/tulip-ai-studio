@@ -146,7 +146,7 @@ const CostEstimator = () => {
           {/* Tulip Logo + Currency toggle */}
           <div className="mb-8 flex flex-col items-center gap-4">
             <img src={tulipLogo} alt="Tulip Technology logo" className="w-10 h-10 rounded-full object-cover border border-border" />
-            <div className="bg-secondary rounded-full p-1 flex gap-1">
+            <div className="bg-secondary rounded-full p-1 flex gap-1 text-purple-200">
               {(["USD", "CAD", "EUR"] as const).map((c) =>
               <button
                 key={c}

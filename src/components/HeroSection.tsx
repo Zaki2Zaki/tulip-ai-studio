@@ -76,7 +76,7 @@ const HeroSection = () => {
 
 
 
-Let's collaborate on your product vision, strategy, and roadmap for intelligent tool-sets, aligning on objectives, OKRs and KPIs </motion.p>
+        </motion.p>
       </div>
 
       {/* Scroll indicator */}

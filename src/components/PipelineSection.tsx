@@ -20,24 +20,24 @@ const PipelineSection = () => {
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-4 text-center"
-        >
+          className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-4 text-center">
+
           3D Production Pipeline
         </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="font-display text-4xl md:text-6xl font-bold text-center mb-6"
-        >
+          className="font-display text-4xl md:text-6xl font-bold text-center mb-6">
+
           AI across <span className="text-gradient-gold">every stage</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3 }}
-          className="text-muted-foreground text-center max-w-2xl mx-auto mb-20 font-body"
-        >
+          className="text-muted-foreground text-center max-w-2xl mx-auto mb-20 font-body">
+
           We identify where generative AI creates the most impact in your content production pipeline—from pre-production through final output.
         </motion.p>
 
@@ -46,8 +46,8 @@ const PipelineSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-8"
-        >
+          className="mb-8">
+
           <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground font-body mb-6 text-center">
             The traditional 3D production workflow
           </p>
@@ -56,8 +56,8 @@ const PipelineSection = () => {
             <img
               src={workflowTraditional}
               alt="Traditional 3D production pipeline showing Pre-Production, Production, and Post-Production stages"
-              className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500"
-            />
+              className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+
           </div>
         </motion.div>
 
@@ -66,8 +66,8 @@ const PipelineSection = () => {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex flex-col items-center gap-3 my-12"
-        >
+          className="flex flex-col items-center gap-3 my-12">
+
           <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary/60 to-primary" />
           <div className="flex items-center gap-3 bg-card/80 backdrop-blur-sm border border-primary/30 rounded-full px-6 py-3">
             <span className="text-sm font-body text-primary font-semibold tracking-wide">
@@ -82,26 +82,26 @@ const PipelineSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1 }}
-        >
-          <p className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-6 text-center">
-            The future — with generative AI tools
+          transition={{ duration: 0.8, delay: 1 }}>
+
+          <p className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-6 text-center">THE FUTURE WITH GENERATIVE AI TOOLS
+
           </p>
           <div className="relative rounded-2xl overflow-hidden border border-primary/30 group glow-gold">
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-background/30 z-10 pointer-events-none" />
             <img
               src={workflowAi}
               alt="AI-powered studio workflow pipeline with tools like Runway, Sora, Stability AI, Llama, and Claude"
-              className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500"
-            />
+              className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+
           </div>
-          <p className="text-muted-foreground text-center max-w-2xl mx-auto mt-8 font-body text-sm md:text-base">
+          <p className="text-center max-w-2xl mx-auto mt-8 text-sm text-white font-sans md:text-lg">
             Startup AI tools are reshaping every stage of the pipeline. We help studios adopt and integrate these tools seamlessly—so your team stays ahead.
           </p>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default PipelineSection;
