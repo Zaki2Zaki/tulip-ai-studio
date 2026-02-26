@@ -117,7 +117,7 @@ const CostEstimator = () => {
   }, [selectedServices, scale, currency]);
 
   return (
-    <section id="estimator" className="py-32 section-padding">
+    <section id="estimator" className="py-32 section-padding border-none border-0">
       <div ref={ref} className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -143,9 +143,9 @@ const CostEstimator = () => {
           className="bg-card border border-border rounded-3xl p-8 md:p-12 relative">
 
           {/* Tulip Logo */}
-          <img src={tulipLogo} alt="Tulip Technology logo" className="absolute top-6 left-6 w-12 h-12 rounded-full object-cover opacity-100" />
+          <img src={tulipLogo} alt="Tulip Technology logo" className="absolute top-6 centre-6 w-13 h-13 rounded-full object-cover opacity-100 border-solid border border-secondary-foreground" />
           {/* Currency toggle */}
-          <div className="flex justify-end mb-8">
+          <div className="mb-8 border-solid border-0 flex-col flex items-center justify-end">
             <div className="bg-secondary rounded-full p-1 flex gap-1">
               {(["USD", "CAD", "EUR"] as const).map((c) =>
               <button
