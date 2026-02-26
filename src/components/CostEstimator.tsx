@@ -144,19 +144,19 @@ const CostEstimator = () => {
           className="bg-card border border-border rounded-3xl p-8 md:p-12 relative">
 
           {/* Tulip Logo + Currency toggle */}
-          <div className="mb-8 flex flex-col items-center gap-4">
-            <img src={tulipLogo} alt="Tulip Technology logo" className="w-10 h-10 rounded-full object-cover border border-border" />
-            <div className="bg-secondary rounded-full p-1 flex gap-1 text-purple-200">
+          <div className="mb-10 flex flex-col items-center gap-6">
+            <img src={tulipLogo} alt="Tulip Technology logo" className="w-16 h-16 rounded-full object-cover border border-border" />
+            <h3 className="font-display text-lg font-semibold">Choose Your Currency</h3>
+            <div className="bg-secondary rounded-full p-1 flex gap-1">
               {(["USD", "CAD", "EUR"] as const).map((c) =>
               <button
                 key={c}
                 onClick={() => setCurrency(c)}
-                className={`px-4 py-1.5 rounded-full text-sm font-body font-medium transition-all ${
+                className={`px-5 py-2 rounded-full text-sm font-body font-medium transition-all ${
                 currency === c ?
                 "bg-primary text-primary-foreground" :
                 "text-muted-foreground hover:text-foreground"}`
                 }>
-
                   {c}
                 </button>
               )}
