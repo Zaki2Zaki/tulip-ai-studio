@@ -16,54 +16,55 @@ interface ServiceOption {
   maxEUR: number;
 }
 
+// Rates from OANDA (Feb 25, 2026): USD/CAD = 1.3686, USD/EUR = 0.8475
 const serviceOptions: ServiceOption[] = [
 {
   id: "research",
   label: "GenAI Research",
   description: "Identify pipeline pain points & opportunities\nAnalysis and Align AI tools seamlessly into your artist's workflows\nAnalysis of your vendor's & research tools friction points to find impactful solutions",
   minUSD: 5000, maxUSD: 110000,
-  minCAD: 7000, maxCAD: 120000,
-  minEUR: 4600, maxEUR: 101000
+  minCAD: 6843, maxCAD: 150546,
+  minEUR: 4238, maxEUR: 93225
 },
 {
   id: "benchmarking",
   label: "Tool Benchmarking",
   description: "Test & validate AI tools in sandbox environments",
   minUSD: 5000, maxUSD: 130000,
-  minCAD: 7000, maxCAD: 160000,
-  minEUR: 4600, maxEUR: 120000
+  minCAD: 6843, maxCAD: 177918,
+  minEUR: 4238, maxEUR: 110175
 },
 {
   id: "demos",
   label: "Demos & Sandboxes",
   description: "Hands-on prototypes tailored to your pipeline",
   minUSD: 3000, maxUSD: 120000,
-  minCAD: 4000, maxCAD: 150000,
-  minEUR: 2800, maxEUR: 110000
+  minCAD: 4106, maxCAD: 164232,
+  minEUR: 2543, maxEUR: 101700
 },
 {
   id: "architecture",
   label: "Architecture Blueprint",
   description: "Full GenAI architecture including LLM training",
   minUSD: 12000, maxUSD: 350000,
-  minCAD: 16000, maxCAD: 450000,
-  minEUR: 11000, maxEUR: 322000
+  minCAD: 16423, maxCAD: 479010,
+  minEUR: 10170, maxEUR: 296625
 },
 {
   id: "integration",
   label: "Integration",
   description: "End-to-end AI integration into your workflows",
   minUSD: 20000, maxUSD: 600000,
-  minCAD: 30000, maxCAD: 800000,
-  minEUR: 18500, maxEUR: 552000
+  minCAD: 27372, maxCAD: 821160,
+  minEUR: 16950, maxEUR: 508500
 },
 {
   id: "workshops",
   label: "Workshops & Education",
   description: "Certified training to empower your team",
   minUSD: 3000, maxUSD: 85000,
-  minCAD: 4000, maxCAD: 110000,
-  minEUR: 2800, maxEUR: 78000
+  minCAD: 4106, maxCAD: 116331,
+  minEUR: 2543, maxEUR: 72038
 }];
 
 
