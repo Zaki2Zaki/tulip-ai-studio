@@ -20,9 +20,9 @@ const ContactSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="font-display text-4xl md:text-6xl font-bold mb-6">
+          className="font-display text-4xl md:text-6xl font-bold mb-6">Let's build your future
 
-          Let's build the <span className="text-gradient-gold">future</span>
+          <span className="text-gradient-gold">future</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
