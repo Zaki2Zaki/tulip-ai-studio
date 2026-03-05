@@ -95,8 +95,8 @@ const PipelineSection = () => {
               className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
 
           </div>
-          <p className="text-center max-w-2xl mx-auto mt-8 text-sm text-white font-sans md:text-lg">
-            Startup AI tools are reshaping every stage of the pipeline. We help studios adopt and integrate these tools seamlessly—so your team stays ahead.
+          <p className="text-center max-w-2xl mx-auto mt-8 text-sm text-white font-sans md:text-lg">Startup AI tools are reshaping every stage of the pipeline. We help studios adopt and integrate these tools seamlessly. So, your team stays focused more on what they love to do. 
+
           </p>
         </motion.div>
       </div>
