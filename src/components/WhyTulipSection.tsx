@@ -57,8 +57,7 @@ const WhyTulipSection = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.1 }}
           className="font-display text-4xl md:text-6xl font-bold mb-8">
-          Innovation, both{" "}
-          <span className="text-gradient-gold">functional</span> and poetic
+          <span className="text-gradient-gold">Functional</span> and Explorative
         </motion.h2>
 
         <motion.p
