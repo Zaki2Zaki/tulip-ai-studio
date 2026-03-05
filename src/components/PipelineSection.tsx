@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import pipelineBg from "@/assets/pipeline-bg.jpg";
 import workflowTraditional from "@/assets/workflow-traditional.jpg";
-import workflowAi from "@/assets/workflow-ai.jpg";
+import workflowAi from "@/assets/workflow-ai.svg";
 
 const PipelineSection = () => {
   const ref = useRef(null);
