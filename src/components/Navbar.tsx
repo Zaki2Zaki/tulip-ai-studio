@@ -67,22 +67,29 @@ const Navbar = () => {
               onMouseLeave={closeDropdown}
               className="relative"
             >
-              <button className="flex items-center gap-1.5 text-base font-body text-muted-foreground hover:text-foreground transition-colors duration-300">
+              <button className="flex items-center gap-1.5 text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
                 Use Cases
                 <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${
+                  className={`w-4 h-4 text-[hsl(280_30%_75%)] transition-transform duration-200 ${
                     activeDropdown === "usecases" ? "rotate-180" : ""
                   }`}
                 />
               </button>
             </div>
 
+            <Link
+              to="/library"
+              className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300"
+            >
+              Library R&D
+            </Link>
+
             {navLinks.map((link) =>
               isHome ? (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-base font-body text-muted-foreground hover:text-foreground transition-colors duration-300"
+                  className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300"
                 >
                   {link.label}
                 </a>
@@ -90,7 +97,7 @@ const Navbar = () => {
                 <Link
                   key={link.href}
                   to={`/${link.href}`}
-                  className="text-base font-body text-muted-foreground hover:text-foreground transition-colors duration-300"
+                  className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300"
                 >
                   {link.label}
                 </Link>
@@ -202,6 +209,14 @@ const Navbar = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
+
+                <Link
+                  to="/library"
+                  onClick={() => setMobileOpen(false)}
+                  className="text-foreground font-body text-lg py-1"
+                >
+                  Library R&D
+                </Link>
 
                 {navLinks.map((link) => (
                   <a
