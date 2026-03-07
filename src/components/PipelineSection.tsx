@@ -98,6 +98,41 @@ const PipelineSection = () => {
           <p className="text-center max-w-2xl mx-auto mt-8 text-sm text-white font-sans md:text-lg">Startup AI tools are reshaping every stage of the pipeline. We help studios adopt and integrate these tools seamlessly. So, your team stays focused more on what they love to do. 
 
           </p>
+
+          {/* Industry Statistics */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 1.3 }}
+            className="mt-16 max-w-4xl mx-auto space-y-10"
+          >
+            <div className="flex flex-col md:flex-row items-start gap-4 md:gap-8">
+              <span className="font-display text-5xl md:text-7xl font-bold text-gradient-gold shrink-0">78%</span>
+              <p className="text-sm md:text-base text-foreground/90 font-body leading-relaxed text-left">
+                Of Game Dev &amp; 3D + VFX animation studios face control versions &amp; <strong className="text-foreground font-semibold">pipelines issues weekly</strong>. Driving delays from tool mismatched and integration failures
+              </p>
+            </div>
+
+            <div className="flex flex-col md:flex-row items-start gap-4 md:gap-8">
+              <span className="font-display text-5xl md:text-7xl font-bold text-gradient-gold shrink-0">45%</span>
+              <p className="text-sm md:text-base text-foreground/90 font-body leading-relaxed text-left">
+                <strong className="text-foreground font-semibold">Lost 1-hour per week</strong> troubleshooting, wasting integration time &amp; asset creation in unoptimized, silo pipelines or teams
+              </p>
+            </div>
+
+            <div className="flex flex-col md:flex-row items-start gap-4 md:gap-8">
+              <span className="font-display text-5xl md:text-7xl font-bold text-gradient-gold shrink-0">$350K</span>
+              <div className="text-left">
+                <p className="text-sm md:text-base text-foreground/90 font-body leading-relaxed">
+                  <strong className="text-foreground font-semibold">Per major rework/iteration cycle</strong> (e.g., asset pipeline fix or build overhaul affecting 10–30 devs for 3–7 days)
+                </p>
+                <p className="text-xs md:text-sm text-muted-foreground font-body mt-3 leading-relaxed">
+                  AA Studios $100K–$400K per major rework/iteration cycle<br />
+                  AAA Studios $500K–$3M+ per major rework/iteration cycle
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>);
