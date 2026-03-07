@@ -210,6 +210,14 @@ const Navbar = () => {
                   )}
                 </AnimatePresence>
 
+                <Link
+                  to="/library"
+                  onClick={() => setMobileOpen(false)}
+                  className="text-foreground font-body text-lg py-1"
+                >
+                  Library R&D
+                </Link>
+
                 {navLinks.map((link) => (
                   <a
                     key={link.href}
