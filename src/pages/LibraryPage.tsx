@@ -238,9 +238,18 @@ const LibraryPage = () => {
             <h1 className="font-display text-3xl md:text-5xl font-bold mb-3">
               <span className="text-gradient-lavender">Library</span> R&D
             </h1>
-            <p className="text-base text-muted-foreground font-body max-w-2xl mx-auto">
+            <p className="text-base text-muted-foreground font-body max-w-2xl mx-auto mb-5">
               Discover and organize university thesis papers across 3D, animation, rigging, lighting, and world-building.
             </p>
+            {!isSubscribed && (
+              <button
+                onClick={() => setShowPricing(true)}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-body font-semibold hover:opacity-90 transition-opacity shadow-[0_0_24px_-4px_hsl(var(--primary)/0.4)]"
+              >
+                <CreditCard className="w-4 h-4" />
+                Subscribe
+              </button>
+            )}
           </motion.div>
         </div>
       </section>
