@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Lock, BookOpen, FolderPlus, ChevronDown } from "lucide-react";
+import { Search, Lock, BookOpen, FolderPlus, ChevronDown, ArrowLeft, Folder } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PricingModal from "@/components/PricingModal";
@@ -64,6 +64,7 @@ const LibraryPage = () => {
   const [viewMode, setViewMode] = useState<ViewMode>("table");
   const [enabledSources, setEnabledSources] = useState<Set<string>>(new Set(DEFAULT_ENABLED_KEYS));
   const [searchCache, setSearchCache] = useState<Map<string, { papers: Paper[]; counts: Record<string, number> }>>(new Map());
+  const [activeCollectionId, setActiveCollectionId] = useState<string | null>(null);
 
   const FREE_SEARCH_LIMIT = 3;
   const needsPaywall = !isSubscribed && searchCount >= FREE_SEARCH_LIMIT;
@@ -121,15 +122,21 @@ const LibraryPage = () => {
     }
   };
 
-  // Sort upvoted papers to the top
+  // Active collection info
+  const activeCollection = activeCollectionId ? collections.find(c => c.id === activeCollectionId) : null;
+
+  // Sort upvoted papers to the top, optionally filter by collection
   const visiblePapers = useMemo(() => {
-    const filtered = papers.filter((p) => !trashedPapers.has(p.paperId));
+    let filtered = papers.filter((p) => !trashedPapers.has(p.paperId));
+    if (activeCollection) {
+      filtered = filtered.filter((p) => activeCollection.paperIds.includes(p.paperId));
+    }
     return filtered.sort((a, b) => {
       const aUp = votes[a.paperId] === "up" ? 1 : 0;
       const bUp = votes[b.paperId] === "up" ? 1 : 0;
       return bUp - aUp;
     });
-  }, [papers, trashedPapers, votes]);
+  }, [papers, trashedPapers, votes, activeCollection]);
 
   useEffect(() => {
     const cat = CATEGORIES.find((c) => c.id === activeCategory);
@@ -255,14 +262,14 @@ const LibraryPage = () => {
           <div className="flex gap-0 border border-border rounded-xl overflow-hidden bg-card/20 items-stretch min-h-[720px]">
             <LibrarySidebar
               activeCategory={activeCategory}
-              onCategoryChange={setActiveCategory}
+              onCategoryChange={(id) => { setActiveCollectionId(null); setActiveCategory(id); }}
               categories={CATEGORIES}
               onUploadClick={() => toast.info("Upload feature coming soon.")}
               onAILabelClick={() => toast.info("AI Labeling feature coming soon.")}
               onBulkProcessClick={() => toast.info("Bulk Processing feature coming soon.")}
               collections={collections}
               onCreateCollection={handleCreateCollection}
-              onDeleteCollection={handleDeleteCollection}
+              onDeleteCollection={(id) => { if (activeCollectionId === id) setActiveCollectionId(null); handleDeleteCollection(id); }}
               onDropToCollection={handleAddToCollection}
               enabledSources={enabledSources}
               onToggleSource={(key) => {
@@ -273,6 +280,8 @@ const LibraryPage = () => {
                   return next;
                 });
               }}
+              activeCollectionId={activeCollectionId}
+              onCollectionClick={setActiveCollectionId}
             />
 
             <div className="flex-1 p-5 space-y-4 overflow-hidden flex flex-col min-w-0">
@@ -306,11 +315,26 @@ const LibraryPage = () => {
 
               <div className="flex items-center gap-3">
                 <div className="flex-1">
-                  <SearchResultsCount
-                    totalResults={visiblePapers.length}
-                    searchQuery={lastSearchQuery}
-                    sources={sourcesList.length > 0 ? sourcesList : [{ name: "CrossRef", count: 0 }, { name: "arXiv", count: 0 }, { name: "OpenAlex", count: 0 }]}
-                  />
+                  {activeCollection ? (
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/20">
+                      <Folder className="w-4 h-4 text-primary" />
+                      <span className="text-sm font-body text-foreground font-semibold">{activeCollection.name}</span>
+                      <span className="text-xs font-body text-muted-foreground">{visiblePapers.length} paper(s)</span>
+                      <button
+                        onClick={() => setActiveCollectionId(null)}
+                        className="ml-auto flex items-center gap-1 text-xs font-body text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        <ArrowLeft className="w-3 h-3" />
+                        Back to results
+                      </button>
+                    </div>
+                  ) : (
+                    <SearchResultsCount
+                      totalResults={visiblePapers.length}
+                      searchQuery={lastSearchQuery}
+                      sources={sourcesList.length > 0 ? sourcesList : [{ name: "CrossRef", count: 0 }, { name: "arXiv", count: 0 }, { name: "OpenAlex", count: 0 }]}
+                    />
+                  )}
                 </div>
                 <ViewToggle mode={viewMode} onChange={setViewMode} />
               </div>
