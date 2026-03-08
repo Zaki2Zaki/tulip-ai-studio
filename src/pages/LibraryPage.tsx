@@ -126,6 +126,13 @@ const LibraryPage = () => {
     if (cat) fetchPapers(cat.query);
   }, [activeCategory, enabledSources]);
 
+  // Auto-select first paper so Deep Dive always shows
+  useEffect(() => {
+    if (visiblePapers.length > 0 && !previewPaper) {
+      setPreviewPaper(visiblePapers[0]);
+    }
+  }, [visiblePapers]);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) fetchPapers(searchQuery.trim());
