@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import {
   ThumbsUp, ThumbsDown, Trash2, X, Bot, Send, MessageSquare, Loader2,
   ExternalLink, Download, FolderPlus, CheckCircle, XCircle, AlertTriangle,
-  ChevronLeft, ChevronRight, FileText, Sparkles, List,
+  ChevronLeft, ChevronRight, FileText, Sparkles, List, Link2,
 } from "lucide-react";
 import { streamPaperChat } from "@/lib/api/papers";
 import { toast } from "sonner";
