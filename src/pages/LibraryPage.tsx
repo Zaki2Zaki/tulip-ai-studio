@@ -225,6 +225,15 @@ const LibraryPage = () => {
               onCreateCollection={handleCreateCollection}
               onDeleteCollection={handleDeleteCollection}
               onDropToCollection={handleAddToCollection}
+              enabledSources={enabledSources}
+              onToggleSource={(key) => {
+                setEnabledSources((prev) => {
+                  const next = new Set(prev);
+                  if (next.has(key)) next.delete(key);
+                  else next.add(key);
+                  return next;
+                });
+              }}
             />
 
             <div className="flex-1 p-5 space-y-4 overflow-hidden flex flex-col min-w-0">
