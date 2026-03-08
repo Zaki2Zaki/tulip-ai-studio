@@ -289,25 +289,27 @@ const LibraryPage = () => {
                   votes={votes}
                 />
               </div>
-
-              {/* Article Deep Dive Panel */}
-              <AnimatePresence>
-                {previewPaper && (
-                  <ArticlePreview
-                    paper={previewPaper}
-                    onClose={() => setPreviewPaper(null)}
-                    onVote={handleVote}
-                    onTrash={handleTrash}
-                    vote={votes[previewPaper.paperId]}
-                    collections={collections}
-                    onAddToCollection={handleAddToCollection}
-                    allPapers={visiblePapers}
-                    onNavigate={(p) => setPreviewPaper(p)}
-                  />
-                )}
-              </AnimatePresence>
             </div>
           </div>
+
+          {/* Article Deep Dive Panel — outside overflow-hidden container */}
+          <AnimatePresence>
+            {previewPaper && (
+              <div className="mt-4">
+                <ArticlePreview
+                  paper={previewPaper}
+                  onClose={() => setPreviewPaper(null)}
+                  onVote={handleVote}
+                  onTrash={handleTrash}
+                  vote={votes[previewPaper.paperId]}
+                  collections={collections}
+                  onAddToCollection={handleAddToCollection}
+                  allPapers={visiblePapers}
+                  onNavigate={(p) => setPreviewPaper(p)}
+                />
+              </div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
