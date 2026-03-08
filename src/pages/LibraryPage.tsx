@@ -14,6 +14,7 @@ import ViewToggle from "@/components/library/ViewToggle";
 import type { ViewMode } from "@/components/library/ViewToggle";
 import { searchPapers } from "@/lib/api/papers";
 import type { Paper } from "@/lib/api/papers";
+import { DEFAULT_ENABLED_KEYS } from "@/components/library/DataSources";
 import { toast } from "sonner";
 
 const CATEGORIES = [
