@@ -223,7 +223,7 @@ const LibraryPage = () => {
               onDropToCollection={handleAddToCollection}
             />
 
-            <div className="flex-1 p-5 space-y-4 overflow-hidden flex flex-col">
+            <div className="flex-1 p-5 space-y-4 overflow-hidden flex flex-col min-w-0">
               <form onSubmit={handleSearch} className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
