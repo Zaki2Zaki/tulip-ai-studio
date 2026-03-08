@@ -316,9 +316,44 @@ const LibraryPage = () => {
               </div>
 
               {selectedPapers.size > 0 && (
-                <div className="flex items-center gap-3 text-xs font-body text-muted-foreground">
-                  <span className="text-foreground font-semibold">{selectedPapers.size}</span> paper(s) selected
-                  <button onClick={() => setSelectedPapers(new Set())} className="text-primary hover:underline">
+                <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/20">
+                  <FolderPlus className="w-4 h-4 text-primary shrink-0" />
+                  <span className="text-xs font-body text-foreground font-semibold">{selectedPapers.size}</span>
+                  <span className="text-xs font-body text-muted-foreground">paper(s) selected</span>
+
+                  {collections.length > 0 ? (
+                    <div className="relative ml-auto group">
+                      <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent/10 border border-accent/30 text-accent text-xs font-body font-semibold hover:bg-accent/20 transition-all">
+                        <FolderPlus className="w-3.5 h-3.5" />
+                        Add to Collection
+                        <ChevronDown className="w-3 h-3" />
+                      </button>
+                      <div className="absolute right-0 top-full mt-1 bg-card border border-border rounded-lg shadow-xl z-20 p-1 min-w-[200px] hidden group-hover:block">
+                        {collections.map((col) => (
+                          <button
+                            key={col.id}
+                            onClick={() => {
+                              selectedPapers.forEach((paperId) => {
+                                const p = visiblePapers.find((vp) => vp.paperId === paperId);
+                                if (p) handleAddToCollection(paperId, p.title, col.id);
+                              });
+                              setSelectedPapers(new Set());
+                              toast.success(`Added ${selectedPapers.size} paper(s) to "${col.name}"`);
+                            }}
+                            className="w-full text-left px-3 py-2 text-xs font-body text-foreground hover:bg-muted/30 rounded-md flex items-center gap-2"
+                          >
+                            <FolderPlus className="w-3 h-3 text-accent/60" />
+                            {col.name}
+                            <span className="ml-auto text-muted-foreground">{col.paperIds.length}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <span className="ml-auto text-[10px] font-body text-muted-foreground italic">Create a collection in the sidebar first</span>
+                  )}
+
+                  <button onClick={() => setSelectedPapers(new Set())} className="text-xs font-body text-muted-foreground hover:text-foreground transition-colors">
                     Clear
                   </button>
                 </div>
