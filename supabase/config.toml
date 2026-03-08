@@ -1,1 +1,7 @@
 project_id = "bqvkblovudhilyzngljc"
+
+[functions.search-papers]
+verify_jwt = false
+
+[functions.paper-chat]
+verify_jwt = false
