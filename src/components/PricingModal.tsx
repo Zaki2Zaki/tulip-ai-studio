@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, Zap, Users, GraduationCap, CreditCard, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { PLANS } from "@/lib/stripe-plans";
+import { PLANS, PAY_PER_USE } from "@/lib/stripe-plans";
 import { toast } from "sonner";
 
 interface PricingModalProps {
@@ -94,6 +94,32 @@ const PricingModal = ({ open, onClose }: PricingModalProps) => {
     } catch (err: any) {
       console.error("Checkout error:", err);
       toast.error("Failed to start checkout. Please try again.");
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
+
+  const handlePayPerUse = async (priceId: string, label: string) => {
+    setLoadingPlan(label);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast.error("Please sign in first to purchase.");
+        setLoadingPlan(null);
+        return;
+      }
+
+      const { data, error } = await supabase.functions.invoke("create-payment", {
+        body: { priceId },
+      });
+
+      if (error) throw error;
+      if (data?.url) {
+        window.open(data.url, "_blank");
+      }
+    } catch (err: any) {
+      console.error("Payment error:", err);
+      toast.error("Failed to start payment. Please try again.");
     } finally {
       setLoadingPlan(null);
     }
@@ -195,15 +221,28 @@ const PricingModal = ({ open, onClose }: PricingModalProps) => {
                   Not ready for a subscription? Use our flexible pay-as-you-go option.
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <div className="px-4 py-2 rounded-lg border border-border text-sm font-body text-foreground">
-                    $0.99 per advanced search
-                  </div>
-                  <div className="px-4 py-2 rounded-lg border border-border text-sm font-body text-foreground">
-                    $2.99 per paper bundle
-                  </div>
-                  <div className="px-4 py-2 rounded-lg border border-primary/20 bg-primary/5 text-sm font-body text-foreground">
-                    10 premium searches for $5
-                  </div>
+                  {[
+                    { key: "advanced_search", label: "$0.99 per advanced search", ...PAY_PER_USE.advanced_search },
+                    { key: "paper_bundle", label: "$2.99 per paper bundle", ...PAY_PER_USE.paper_bundle },
+                    { key: "premium_10", label: "10 premium searches for $5", ...PAY_PER_USE.premium_searches_10 },
+                  ].map((item) => (
+                    <button
+                      key={item.key}
+                      onClick={() => handlePayPerUse(item.price_id, item.key)}
+                      disabled={loadingPlan === item.key}
+                      className={`px-4 py-2 rounded-lg border text-sm font-body text-foreground transition-all hover:border-primary/40 hover:bg-primary/5 disabled:opacity-60 ${
+                        item.key === "premium_10"
+                          ? "border-primary/20 bg-primary/5"
+                          : "border-border"
+                      }`}
+                    >
+                      {loadingPlan === item.key ? (
+                        <Loader2 className="w-4 h-4 animate-spin inline" />
+                      ) : (
+                        item.label
+                      )}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
