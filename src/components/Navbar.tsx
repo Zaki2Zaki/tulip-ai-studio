@@ -4,8 +4,8 @@ import { Menu, X, ChevronDown, Accessibility } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useCases } from "@/data/useCases";
 
-const FONT_SCALES = [1, 1.5, 2, 3] as const;
-const FONT_LABELS = ["1×", "1.5×", "2×", "3×"];
+const FONT_SCALES = [1, 1.1, 1.2, 1.3] as const;
+const FONT_LABELS = ["1×", "1.1×", "1.2×", "1.3×"];
 
 const navLinks = [
   { label: "Services", href: "#services" },
