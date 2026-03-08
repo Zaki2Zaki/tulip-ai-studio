@@ -209,12 +209,12 @@ const PapersTable = ({
                 } ${activePaperId === paper.paperId ? "bg-primary/8" : ""}`}
               >
                 <span className="font-display text-sm text-foreground line-clamp-1 flex-1">{paper.title}</span>
-                <span className="text-[11px] text-muted-foreground font-body shrink-0">{paper.year || "—"}</span>
+                <span className="text-xs text-muted-foreground font-body shrink-0">{paper.year || "—"}</span>
                 <div className="flex items-center gap-1 shrink-0">
                   <div className="w-10 h-1.5 rounded-full bg-muted overflow-hidden">
                     <div className="h-full rounded-full" style={{ width: `${paper.matchRate}%`, background: `linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)))` }} />
                   </div>
-                  <span className="text-[10px] text-muted-foreground tabular-nums">{paper.matchRate}%</span>
+                  <span className="text-[11px] text-muted-foreground tabular-nums">{paper.matchRate}%</span>
                 </div>
               </div>
             );
@@ -346,7 +346,7 @@ const PapersTable = ({
                               {paper.title}
                             </span>
                           )}
-                          <p className="text-xs text-muted-foreground mt-0.5">
+                          <p className="text-sm text-muted-foreground mt-0.5">
                             {paper.authors?.slice(0, 2).map((a) => a.name).join(", ")}
                             {(paper.authors?.length || 0) > 2 && " et al."}
                           </p>
@@ -366,7 +366,7 @@ const PapersTable = ({
                           {aiLabel}
                         </span>
                       </td>
-                      <td className="px-3 py-3 text-center text-xs font-body text-muted-foreground">
+                      <td className="px-3 py-3 text-center text-sm font-body text-muted-foreground">
                         {paper.year || "—"}
                       </td>
                       <td className="px-3 py-3 text-center">
@@ -380,7 +380,7 @@ const PapersTable = ({
                               }}
                             />
                           </div>
-                          <span className="text-xs font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
+                          <span className="text-sm font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
                         </div>
                       </td>
                     </motion.tr>

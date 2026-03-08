@@ -164,9 +164,9 @@ const LibrarySidebar = ({
       {/* Collections - drop targets */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
-          <h3 className="text-xs font-body font-semibold uppercase tracking-widest text-muted-foreground">
-            <FolderPlus className="w-3 h-3 inline mr-1.5" />
-            My Collections
+          <h3 className="text-sm font-display font-bold uppercase tracking-widest">
+            <FolderPlus className="w-4 h-4 inline mr-1.5" />
+            <span className="text-foreground">MY </span><span className="text-gradient-gold">COLLECTIONS</span>
           </h3>
           <button
             onClick={() => setShowNewInput(true)}

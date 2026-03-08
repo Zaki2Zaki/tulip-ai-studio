@@ -72,7 +72,7 @@ const PaperCard = ({ paper, isSelected, isActive, isLocked, onToggleSelect, onCl
     >
       {/* Top row: badge + grip */}
       <div className="flex items-start justify-between mb-2">
-        <span className="inline-block px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-[10px] font-body text-accent">
+        <span className="inline-block px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-[11px] font-body text-accent">
           {aiLabel}
         </span>
         {!isLocked && (
@@ -86,7 +86,7 @@ const PaperCard = ({ paper, isSelected, isActive, isLocked, onToggleSelect, onCl
       </h4>
 
       {/* Authors */}
-      <p className="text-[11px] text-muted-foreground font-body mb-2">
+      <p className="text-xs text-muted-foreground font-body mb-2">
         {paper.authors?.slice(0, 2).map((a) => a.name).join(", ")}
         {(paper.authors?.length || 0) > 2 && " et al."}
       </p>
@@ -99,8 +99,8 @@ const PaperCard = ({ paper, isSelected, isActive, isLocked, onToggleSelect, onCl
       {/* Bottom row */}
       <div className="flex items-center justify-between pt-2 border-t border-border/50">
         <div className="flex items-center gap-2">
-          {paper.year && <span className="text-[11px] font-body text-muted-foreground">{paper.year}</span>}
-          <span className={`inline-flex items-center gap-1 text-[10px] font-body ${aiFlag.color}`}>
+          {paper.year && <span className="text-xs font-body text-muted-foreground">{paper.year}</span>}
+          <span className={`inline-flex items-center gap-1 text-[11px] font-body ${aiFlag.color}`}>
             {aiFlag.icon} {aiFlag.label}
           </span>
         </div>
@@ -114,7 +114,7 @@ const PaperCard = ({ paper, isSelected, isActive, isLocked, onToggleSelect, onCl
               }}
             />
           </div>
-          <span className="text-[10px] font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
+          <span className="text-[11px] font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
         </div>
       </div>
 
