@@ -26,7 +26,7 @@ const LibraryPage = () => {
   const [activeCategory, setActiveCategory] = useState(CATEGORIES[0].id);
   const [papers, setPapers] = useState<Paper[]>([]);
   const [loading, setLoading] = useState(false);
-  const [isSubscribed] = useState(false);
+  const [isSubscribed] = useState(true);
   const [showPricing, setShowPricing] = useState(false);
   const [searchCount, setSearchCount] = useState(0);
   const [selectedPapers, setSelectedPapers] = useState<Set<string>>(new Set());
