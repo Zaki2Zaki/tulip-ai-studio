@@ -24,11 +24,19 @@ const Navbar = () => {
   const [showFontMenu, setShowFontMenu] = useState(false);
   const [user, setUser] = useState<any>(null);
   const navRef = useRef<HTMLElement>(null);
-  const navRef = useRef<HTMLElement>(null);
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const fontMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome = location.pathname === "/";
+
+  // Track auth state
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    supabase.auth.getSession().then(({ data }) => setUser(data.session?.user ?? null));
+  }, []);
 
   // Apply font scale to <html>
   useEffect(() => {
