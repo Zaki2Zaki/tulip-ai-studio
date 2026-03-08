@@ -494,6 +494,40 @@ const ArticlePreview = ({
               <p className="text-xs font-body text-muted-foreground/60 italic">Click "Generate with AI" for a structured summary of key findings.</p>
             ) : null}
           </div>
+          {/* Related Papers */}
+          {relatedPapers.length > 0 && (
+            <div className="p-5 border-t border-border">
+              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-1.5">
+                <Link2 className="w-3.5 h-3.5 text-primary" />
+                Related Papers
+              </h5>
+              <div className="space-y-2">
+                {relatedPapers.map((rp) => (
+                  <button
+                    key={rp.paperId}
+                    onClick={() => onNavigate?.(rp)}
+                    className="w-full text-left p-3 rounded-lg border border-border bg-muted/10 hover:bg-muted/25 hover:border-primary/20 transition-all group"
+                  >
+                    <p className="text-sm font-body font-medium text-foreground leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+                      {rp.title}
+                    </p>
+                    <div className="flex items-center gap-3 mt-1.5">
+                      {rp.year && <span className="text-[10px] text-accent font-body">{rp.year}</span>}
+                      {rp.authors?.length > 0 && (
+                        <span className="text-[10px] text-muted-foreground font-body truncate">
+                          {rp.authors.slice(0, 2).map(a => a.name).join(", ")}
+                          {rp.authors.length > 2 && " et al."}
+                        </span>
+                      )}
+                      {rp.citationCount != null && rp.citationCount > 0 && (
+                        <span className="text-[10px] text-muted-foreground font-body">{rp.citationCount} cit.</span>
+                      )}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Right: AI Chat */}
