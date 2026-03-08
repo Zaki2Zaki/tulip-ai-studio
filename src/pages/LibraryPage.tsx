@@ -1,6 +1,6 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Lock, BookOpen, FolderPlus, ChevronDown, ArrowLeft, Folder } from "lucide-react";
+import { Search, Lock, BookOpen, FolderPlus, ChevronDown, ArrowLeft, Folder, CreditCard } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PricingModal from "@/components/PricingModal";
@@ -51,7 +51,8 @@ const LibraryPage = () => {
   const [activeCategory, setActiveCategory] = useState(CATEGORIES[0].id);
   const [papers, setPapers] = useState<Paper[]>([]);
   const [loading, setLoading] = useState(false);
-  const [isSubscribed] = useState(true);
+  const [isSubscribed] = useState(false);
+  const [viewedPapers, setViewedPapers] = useState<Set<string>>(new Set());
   const [showPricing, setShowPricing] = useState(false);
   const [searchCount, setSearchCount] = useState(0);
   const [selectedPapers, setSelectedPapers] = useState<Set<string>>(new Set());
@@ -66,8 +67,8 @@ const LibraryPage = () => {
   const [searchCache, setSearchCache] = useState<Map<string, { papers: Paper[]; counts: Record<string, number> }>>(new Map());
   const [activeCollectionId, setActiveCollectionId] = useState<string | null>(null);
 
-  const FREE_SEARCH_LIMIT = 3;
-  const needsPaywall = !isSubscribed && searchCount >= FREE_SEARCH_LIMIT;
+  const FREE_PAPER_LIMIT = 3;
+  const needsPaywall = !isSubscribed && viewedPapers.size >= FREE_PAPER_LIMIT;
 
   const fetchPapers = async (query: string) => {
     // Check cache first
@@ -237,9 +238,18 @@ const LibraryPage = () => {
             <h1 className="font-display text-3xl md:text-5xl font-bold mb-3">
               <span className="text-gradient-lavender">Library</span> R&D
             </h1>
-            <p className="text-base text-muted-foreground font-body max-w-2xl mx-auto">
+            <p className="text-base text-muted-foreground font-body max-w-2xl mx-auto mb-5">
               Discover and organize university thesis papers across 3D, animation, rigging, lighting, and world-building.
             </p>
+            {!isSubscribed && (
+              <button
+                onClick={() => setShowPricing(true)}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-body font-semibold hover:opacity-90 transition-opacity shadow-[0_0_24px_-4px_hsl(var(--primary)/0.4)]"
+              >
+                <CreditCard className="w-4 h-4" />
+                Subscribe
+              </button>
+            )}
           </motion.div>
         </div>
       </section>
@@ -301,7 +311,7 @@ const LibraryPage = () => {
                   <div className="flex items-center gap-2">
                     <Lock className="w-4 h-4 text-primary" />
                     <p className="text-xs font-body text-muted-foreground">
-                      <span className="text-foreground font-semibold">{Math.max(0, FREE_SEARCH_LIMIT - searchCount)}</span> free searches remaining.
+                      <span className="text-foreground font-semibold">{Math.max(0, FREE_PAPER_LIMIT - viewedPapers.size)}</span> free papers remaining.
                     </p>
                   </div>
                   <button
@@ -394,7 +404,15 @@ const LibraryPage = () => {
                   onSelectAll={handleSelectAll}
                   onUnlockClick={() => setShowPricing(true)}
                   searchQuery={searchQuery}
-                  onPaperClick={(p) => setPreviewPaper(p)}
+                  onPaperClick={(p) => {
+                    if (!isSubscribed && !viewedPapers.has(p.paperId) && viewedPapers.size >= FREE_PAPER_LIMIT) {
+                      setShowPricing(true);
+                      toast.info("You've used your 3 free papers. Subscribe to continue.");
+                      return;
+                    }
+                    setViewedPapers((prev) => new Set(prev).add(p.paperId));
+                    setPreviewPaper(p);
+                  }}
                   activePaperId={previewPaper?.paperId}
                   viewMode={viewMode}
                   votes={votes}
