@@ -210,7 +210,7 @@ const ArticleSearch = ({ collections, onAddToCollection }: ArticleSearchProps) =
               {/* PDF Preview */}
               <div className="flex-1 bg-muted/10 min-h-[400px]">
                 <iframe
-                  src={selectedPaper.pdfUrl}
+                  src={`https://docs.google.com/viewer?url=${encodeURIComponent(selectedPaper.pdfUrl)}&embedded=true`}
                   className="w-full h-[400px] lg:h-[500px]"
                   title={selectedPaper.title}
                 />
