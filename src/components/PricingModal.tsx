@@ -103,8 +103,7 @@ const PricingModal = ({ open, onClose }: PricingModalProps) => {
     try {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
-        toast.error("Please sign in first to purchase.");
-        setLoadingPlan(null);
+        window.location.href = "/auth?redirect=/library";
         return;
       }
 
