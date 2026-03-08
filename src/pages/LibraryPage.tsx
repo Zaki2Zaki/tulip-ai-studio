@@ -9,6 +9,9 @@ import type { Collection } from "@/components/library/LibrarySidebar";
 import PapersTable from "@/components/library/PapersTable";
 import SearchResultsCount from "@/components/library/SearchResultsCount";
 import ArticlePreview from "@/components/library/ArticlePreview";
+import StatsRow from "@/components/library/StatsRow";
+import ViewToggle from "@/components/library/ViewToggle";
+import type { ViewMode } from "@/components/library/ViewToggle";
 import { searchPapers } from "@/lib/api/papers";
 import type { Paper } from "@/lib/api/papers";
 import { toast } from "sonner";
@@ -36,6 +39,7 @@ const LibraryPage = () => {
   const [previewPaper, setPreviewPaper] = useState<Paper | null>(null);
   const [votes, setVotes] = useState<Record<string, "up" | "down">>({});
   const [trashedPapers, setTrashedPapers] = useState<Set<string>>(new Set());
+  const [viewMode, setViewMode] = useState<ViewMode>("table");
 
   const FREE_SEARCH_LIMIT = 3;
   const needsPaywall = !isSubscribed && searchCount >= FREE_SEARCH_LIMIT;
@@ -177,6 +181,18 @@ const LibraryPage = () => {
         </div>
       </section>
 
+      {/* Stats Row */}
+      <section className="pb-4">
+        <div className="max-w-7xl mx-auto px-6">
+          <StatsRow
+            papersCount={papers.length}
+            processedCount={Math.round(papers.length * 0.83)}
+            lastScrapeMinutes={45}
+            audioCount={Math.round(papers.length * 0.15)}
+          />
+        </div>
+      </section>
+
       {/* Main layout */}
       <section className="pb-20">
         <div className="max-w-7xl mx-auto px-6">
@@ -223,11 +239,16 @@ const LibraryPage = () => {
                 </div>
               )}
 
-              <SearchResultsCount
-                totalResults={visiblePapers.length}
-                searchQuery={lastSearchQuery}
-                sources={sourcesList.length > 0 ? sourcesList : [{ name: "CrossRef", count: 0 }, { name: "arXiv", count: 0 }, { name: "OpenAlex", count: 0 }]}
-              />
+              <div className="flex items-center gap-3">
+                <div className="flex-1">
+                  <SearchResultsCount
+                    totalResults={visiblePapers.length}
+                    searchQuery={lastSearchQuery}
+                    sources={sourcesList.length > 0 ? sourcesList : [{ name: "CrossRef", count: 0 }, { name: "arXiv", count: 0 }, { name: "OpenAlex", count: 0 }]}
+                  />
+                </div>
+                <ViewToggle mode={viewMode} onChange={setViewMode} />
+              </div>
 
               {selectedPapers.size > 0 && (
                 <div className="flex items-center gap-3 text-xs font-body text-muted-foreground">
@@ -251,6 +272,7 @@ const LibraryPage = () => {
                   searchQuery={searchQuery}
                   onPaperClick={(p) => setPreviewPaper(p)}
                   activePaperId={previewPaper?.paperId}
+                  viewMode={viewMode}
                 />
               </div>
 
