@@ -108,6 +108,15 @@ const ArticlePreview = ({
     setChatMessages([]);
     setChatInput("");
     setExecutiveSummary("");
+    setPdfStatus("loading");
+    if (pdfTimeoutRef.current) clearTimeout(pdfTimeoutRef.current);
+    // Set a timeout — if iframe hasn't signaled load after 12s, show fallback
+    pdfTimeoutRef.current = setTimeout(() => {
+      setPdfStatus((prev) => (prev === "loading" ? "error" : prev));
+    }, 12000);
+    return () => {
+      if (pdfTimeoutRef.current) clearTimeout(pdfTimeoutRef.current);
+    };
   }, [paper.paperId]);
 
   // Carousel index
