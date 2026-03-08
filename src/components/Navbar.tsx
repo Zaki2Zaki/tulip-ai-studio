@@ -73,12 +73,12 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
-          <Link to="/" className="font-display text-2xl font-bold tracking-tight text-foreground">
+          <Link to="/" className="font-display text-2xl font-bold tracking-tight text-foreground md:ml-[15%]">
             TULIP<span className="text-gradient-gold"> TECH</span>
           </Link>
 
           {/* Desktop — Tesla-style centered nav */}
-          <div className="hidden md:flex items-center gap-10 ml-auto">
+          <div className="hidden md:flex items-center gap-10">
             {/* Use Cases with hover dropdown */}
             <div
               onMouseEnter={() => openDropdown("usecases")}
