@@ -30,6 +30,7 @@ interface PapersTableProps {
   activePaperId?: string;
   onDragStart?: (paper: Paper) => void;
   viewMode?: ViewMode;
+  votes?: Record<string, "up" | "down">;
 }
 
 const generateTLDR = (title: string, abstract: string | null): string => {
@@ -88,6 +89,7 @@ const PapersTable = ({
   activePaperId,
   onDragStart,
   viewMode = "table",
+  votes = {},
 }: PapersTableProps) => {
   const [sortField, setSortField] = useState<SortField>(null);
   const [sortDir, setSortDir] = useState<SortDir>("desc");
