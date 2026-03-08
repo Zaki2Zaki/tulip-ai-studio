@@ -29,6 +29,7 @@ interface PapersTableProps {
   onPaperClick: (paper: Paper) => void;
   activePaperId?: string;
   onDragStart?: (paper: Paper) => void;
+  viewMode?: ViewMode;
 }
 
 const generateTLDR = (title: string, abstract: string | null): string => {
