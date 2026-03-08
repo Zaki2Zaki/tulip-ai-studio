@@ -96,6 +96,8 @@ const ArticlePreview = ({
   const [showCollectionMenu, setShowCollectionMenu] = useState(false);
   const [summaryLoading, setSummaryLoading] = useState(false);
   const [executiveSummary, setExecutiveSummary] = useState("");
+  const [pdfStatus, setPdfStatus] = useState<"loading" | "loaded" | "error">("loading");
+  const pdfTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
