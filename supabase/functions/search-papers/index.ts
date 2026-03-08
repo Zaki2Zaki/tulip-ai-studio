@@ -8,17 +8,24 @@ async function searchCrossRef(query: string, rows = 20) {
     `https://api.crossref.org/works?query=${encodeURIComponent(query)}&rows=${rows}&sort=relevance&order=desc`
   );
   const data = await res.json();
-  return (data.message?.items || []).map((item: any) => ({
-    paperId: item.DOI || crypto.randomUUID(),
-    title: Array.isArray(item.title) ? item.title[0] : item.title || "Untitled",
-    abstract: item.abstract?.replace(/<[^>]*>/g, "") || null,
-    year: item.published?.["date-parts"]?.[0]?.[0] || null,
-    citationCount: item["is-referenced-by-count"] || null,
-    url: item.URL || `https://doi.org/${item.DOI}`,
-    authors: (item.author || []).map((a: any) => ({ name: `${a.given || ""} ${a.family || ""}`.trim() })),
-    venue: item["container-title"]?.[0] || null,
-    source: "crossref",
-  }));
+  return (data.message?.items || []).map((item: any) => {
+    // Try to find an open-access PDF link from CrossRef
+    const pdfLink = (item.link || []).find((l: any) =>
+      l["content-type"] === "application/pdf" || l["content-type"]?.includes("pdf")
+    );
+    return {
+      paperId: item.DOI || crypto.randomUUID(),
+      title: Array.isArray(item.title) ? item.title[0] : item.title || "Untitled",
+      abstract: item.abstract?.replace(/<[^>]*>/g, "") || null,
+      year: item.published?.["date-parts"]?.[0]?.[0] || null,
+      citationCount: item["is-referenced-by-count"] || null,
+      url: item.URL || `https://doi.org/${item.DOI}`,
+      authors: (item.author || []).map((a: any) => ({ name: `${a.given || ""} ${a.family || ""}`.trim() })),
+      venue: item["container-title"]?.[0] || null,
+      source: "crossref",
+      pdfUrl: pdfLink?.URL || null,
+    };
+  });
 }
 
 async function searchArxiv(query: string, maxResults = 10) {
