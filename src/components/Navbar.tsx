@@ -45,12 +45,30 @@ const Navbar = () => {
 
   return (
     <>
+      {/* Top promo bar */}
+      <div className="fixed top-0 left-0 right-0 z-[60] bg-primary/10 border-b border-border/50 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto flex items-center justify-center gap-3 px-4 py-2 text-center">
+          <span className="text-xs sm:text-sm font-body text-muted-foreground">
+            📄 Free Download:
+          </span>
+          <a
+            href="https://substack.com/@tuliptechrnd"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs sm:text-sm font-body font-semibold text-gradient-chrome-animated hover:opacity-80 transition-opacity"
+          >
+            2026 Guide to GenAI for Game Content Developers, 3D Artists &amp; Creative Techs
+          </a>
+          <span className="text-xs font-body text-muted-foreground hidden sm:inline">→ Substack</span>
+        </div>
+      </div>
+
       <motion.nav
         ref={navRef}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-[36px] left-0 right-0 z-50 transition-all duration-500 ${
           scrolled ? "bg-glass" : "bg-transparent"
         }`}
       >
