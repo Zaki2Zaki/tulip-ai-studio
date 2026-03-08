@@ -99,6 +99,32 @@ const PricingModal = ({ open, onClose }: PricingModalProps) => {
     }
   };
 
+  const handlePayPerUse = async (priceId: string, label: string) => {
+    setLoadingPlan(label);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast.error("Please sign in first to purchase.");
+        setLoadingPlan(null);
+        return;
+      }
+
+      const { data, error } = await supabase.functions.invoke("create-payment", {
+        body: { priceId },
+      });
+
+      if (error) throw error;
+      if (data?.url) {
+        window.open(data.url, "_blank");
+      }
+    } catch (err: any) {
+      console.error("Payment error:", err);
+      toast.error("Failed to start payment. Please try again.");
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
+
   return (
     <AnimatePresence>
       {open && (
