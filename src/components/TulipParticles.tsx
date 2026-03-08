@@ -1,27 +1,26 @@
 import { useEffect, useRef } from "react";
 
-interface Spark {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
+interface Particle {
+  torusAngle: number;   // position along the major ring
+  tubeAngle: number;    // position along the tube cross-section
+  speed: number;        // angular speed along major ring
+  tubeSpeed: number;    // angular speed along tube
+  tubeRadius: number;   // distance from tube center
   size: number;
-  opacity: number;
   maxOpacity: number;
   hue: number;
-  life: number;
-  maxLife: number;
   twinkleSpeed: number;
   twinklePhase: number;
-  drift: number;
 }
 
-const SPARK_COUNT = 120;
+const PARTICLE_COUNT = 260;
 
 const TulipParticles = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animRef = useRef<number>(0);
-  const sparksRef = useRef<Spark[]>([]);
+  const particlesRef = useRef<Particle[]>([]);
+  const timeRef = useRef(0);
+  const initialized = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -29,111 +28,120 @@ const TulipParticles = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    const initParticles = () => {
+      const particles: Particle[] = [];
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push({
+          torusAngle: Math.random() * Math.PI * 2,
+          tubeAngle: Math.random() * Math.PI * 2,
+          speed: 0.001 + Math.random() * 0.003,
+          tubeSpeed: 0.003 + Math.random() * 0.006,
+          tubeRadius: 15 + Math.random() * 65,
+          size: 0.6 + Math.random() * 2.2,
+          maxOpacity: 0.2 + Math.random() * 0.6,
+          hue: Math.random() < 0.7
+            ? 25 + Math.random() * 30    // gold/amber
+            : 10 + Math.random() * 15,   // warm orange
+          twinkleSpeed: 0.015 + Math.random() * 0.035,
+          twinklePhase: Math.random() * Math.PI * 2,
+        });
+      }
+      particlesRef.current = particles;
+      initialized.current = true;
+    };
+
     const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
+      if (!initialized.current) initParticles();
     };
     resize();
     window.addEventListener("resize", resize);
 
-    const createSpark = (w: number, h: number): Spark => {
-      // Spawn from lower-center area where the tulip image is
-      const spawnX = w * 0.3 + Math.random() * w * 0.4;
-      const spawnY = h * 0.3 + Math.random() * h * 0.5;
-      const angle = Math.random() * Math.PI * 2;
-      const speed = 0.15 + Math.random() * 0.4;
-      const maxLife = 300 + Math.random() * 500;
-
-      return {
-        x: spawnX,
-        y: spawnY,
-        vx: Math.cos(angle) * speed,
-        vy: Math.sin(angle) * speed - 0.1, // slight upward bias
-        size: 0.8 + Math.random() * 2.5,
-        opacity: 0,
-        maxOpacity: 0.3 + Math.random() * 0.6,
-        hue: Math.random() < 0.6
-          ? 25 + Math.random() * 30   // gold/amber
-          : 15 + Math.random() * 15,  // warm orange
-        life: 0,
-        maxLife,
-        twinkleSpeed: 0.02 + Math.random() * 0.04,
-        twinklePhase: Math.random() * Math.PI * 2,
-        drift: (Math.random() - 0.5) * 0.002,
-      };
-    };
-
-    // Initialize sparks
-    for (let i = 0; i < SPARK_COUNT; i++) {
-      const spark = createSpark(canvas.width, canvas.height);
-      spark.life = Math.random() * spark.maxLife; // stagger
-      sparksRef.current.push(spark);
-    }
-
     const loop = () => {
       const w = canvas.width;
       const h = canvas.height;
+      timeRef.current += 1;
+      const t = timeRef.current;
+
       ctx.clearRect(0, 0, w, h);
 
-      for (let i = 0; i < sparksRef.current.length; i++) {
-        const s = sparksRef.current[i];
-        s.life++;
+      // Torus centered on the title area
+      const cx = w / 2;
+      const cy = h * 0.42;
+      // Major radius scales with viewport — wraps around the title
+      const majorRx = Math.min(w * 0.38, 340);
+      const majorRy = majorRx * 1.4; // vertical stretch for upright torus
 
-        // Respawn when life ends
-        if (s.life > s.maxLife) {
-          sparksRef.current[i] = createSpark(w, h);
-          continue;
-        }
+      for (const p of particlesRef.current) {
+        // Advance along torus
+        p.torusAngle += p.speed;
+        p.tubeAngle += p.tubeSpeed;
 
-        // Slow-motion drift
-        s.vx += s.drift;
-        s.x += s.vx;
-        s.y += s.vy;
+        // Major ring position (vertical torus — particles rise up center, cascade down sides)
+        const cosT = Math.cos(p.torusAngle);
+        const sinT = Math.sin(p.torusAngle);
 
-        // Fade in/out lifecycle
-        const lifeRatio = s.life / s.maxLife;
-        let fadeEnvelope: number;
-        if (lifeRatio < 0.15) {
-          fadeEnvelope = lifeRatio / 0.15;
-        } else if (lifeRatio > 0.7) {
-          fadeEnvelope = (1 - lifeRatio) / 0.3;
-        } else {
-          fadeEnvelope = 1;
-        }
+        // Tube cross-section offset — perpendicular to the ring surface
+        const cosU = Math.cos(p.tubeAngle);
+        const sinU = Math.sin(p.tubeAngle);
 
-        // Twinkle/sparkle effect
-        const twinkle = 0.5 + 0.5 * Math.sin(s.life * s.twinkleSpeed + s.twinklePhase);
-        s.opacity = s.maxOpacity * fadeEnvelope * twinkle;
+        // 3D torus → 2D projection
+        // Ring lies in vertical plane; tube expands radially
+        const ringX = cosT * majorRx;
+        const ringY = sinT * majorRy;
+        const tubeOffX = cosU * p.tubeRadius * cosT;
+        const tubeOffY = cosU * p.tubeRadius * sinT * 1.4;
+        const tubeOffZ = sinU * p.tubeRadius; // depth axis
 
-        if (s.opacity < 0.01) continue;
+        const x = cx + ringX + tubeOffX + tubeOffZ * 0.25;
+        const y = cy + ringY + tubeOffY;
 
-        // Draw sparkle core
+        // Depth-based scaling (particles in front are bigger/brighter)
+        const depth = 0.55 + (sinU * 0.45);
+        const drawSize = p.size * depth;
+
+        // Twinkle sparkle
+        const twinkle = 0.4 + 0.6 * Math.sin(t * p.twinkleSpeed + p.twinklePhase);
+        const opacity = p.maxOpacity * depth * twinkle;
+
+        if (opacity < 0.01) continue;
+
+        // Core dot
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-        ctx.fillStyle = `hsla(${s.hue}, 80%, 65%, ${s.opacity})`;
+        ctx.arc(x, y, drawSize, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${p.hue}, 82%, 62%, ${opacity})`;
         ctx.fill();
 
-        // Draw soft glow
-        if (s.size > 1) {
+        // Soft glow halo
+        if (drawSize > 1) {
           ctx.beginPath();
-          ctx.arc(s.x, s.y, s.size * 4, 0, Math.PI * 2);
-          ctx.fillStyle = `hsla(${s.hue}, 85%, 55%, ${s.opacity * 0.1})`;
+          ctx.arc(x, y, drawSize * 3.5, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${p.hue}, 88%, 55%, ${opacity * 0.08})`;
           ctx.fill();
         }
 
-        // Cross sparkle for brighter particles
-        if (s.opacity > 0.4 && s.size > 1.5) {
-          const sparkLen = s.size * 3 * twinkle;
-          ctx.strokeStyle = `hsla(${s.hue}, 90%, 75%, ${s.opacity * 0.4})`;
+        // Cross sparkle on bright particles
+        if (opacity > 0.35 && drawSize > 1.3) {
+          const sparkLen = drawSize * 3.5 * twinkle;
+          ctx.strokeStyle = `hsla(${p.hue}, 90%, 75%, ${opacity * 0.35})`;
           ctx.lineWidth = 0.5;
           ctx.beginPath();
-          ctx.moveTo(s.x - sparkLen, s.y);
-          ctx.lineTo(s.x + sparkLen, s.y);
-          ctx.moveTo(s.x, s.y - sparkLen);
-          ctx.lineTo(s.x, s.y + sparkLen);
+          ctx.moveTo(x - sparkLen, y);
+          ctx.lineTo(x + sparkLen, y);
+          ctx.moveTo(x, y - sparkLen);
+          ctx.lineTo(x, y + sparkLen);
           ctx.stroke();
         }
       }
+
+      // Warm central glow behind title
+      const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, majorRx * 1.3);
+      grad.addColorStop(0, "hsla(32, 90%, 52%, 0.05)");
+      grad.addColorStop(0.4, "hsla(28, 85%, 48%, 0.02)");
+      grad.addColorStop(1, "hsla(25, 80%, 45%, 0)");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
 
       animRef.current = requestAnimationFrame(loop);
     };
@@ -142,7 +150,8 @@ const TulipParticles = () => {
     return () => {
       cancelAnimationFrame(animRef.current);
       window.removeEventListener("resize", resize);
-      sparksRef.current = [];
+      particlesRef.current = [];
+      initialized.current = false;
     };
   }, []);
 
