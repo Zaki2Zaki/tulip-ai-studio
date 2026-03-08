@@ -190,7 +190,7 @@ const LibrarySidebar = ({
       </div>
 
       {/* Data Sources */}
-      <DataSources />
+      <DataSources enabledSources={enabledSources} onToggleSource={onToggleSource} />
     </aside>
   );
 };
