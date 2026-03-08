@@ -181,6 +181,18 @@ const LibraryPage = () => {
         </div>
       </section>
 
+      {/* Stats Row */}
+      <section className="pb-4">
+        <div className="max-w-7xl mx-auto px-6">
+          <StatsRow
+            papersCount={papers.length}
+            processedCount={Math.round(papers.length * 0.83)}
+            lastScrapeMinutes={45}
+            audioCount={Math.round(papers.length * 0.15)}
+          />
+        </div>
+      </section>
+
       {/* Main layout */}
       <section className="pb-20">
         <div className="max-w-7xl mx-auto px-6">
