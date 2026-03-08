@@ -1,19 +1,22 @@
 import { useEffect, useRef } from "react";
 
 interface Particle {
-  torusAngle: number;   // position along the major ring
-  tubeAngle: number;    // position along the tube cross-section
-  speed: number;        // angular speed along major ring
-  tubeSpeed: number;    // angular speed along tube
-  tubeRadius: number;   // distance from tube center
+  torusAngle: number;
+  tubeAngle: number;
+  speed: number;
+  tubeSpeed: number;
+  tubeRadius: number;
   size: number;
   maxOpacity: number;
   hue: number;
   twinkleSpeed: number;
   twinklePhase: number;
+  // Trail history
+  trail: { x: number; y: number; opacity: number }[];
 }
 
-const PARTICLE_COUNT = 260;
+const PARTICLE_COUNT = 450;
+const TRAIL_LENGTH = 6;
 
 const TulipParticles = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -37,14 +40,15 @@ const TulipParticles = () => {
           tubeAngle: Math.random() * Math.PI * 2,
           speed: 0.001 + Math.random() * 0.003,
           tubeSpeed: 0.003 + Math.random() * 0.006,
-          tubeRadius: 15 + Math.random() * 65,
-          size: 0.6 + Math.random() * 2.2,
-          maxOpacity: 0.2 + Math.random() * 0.6,
+          tubeRadius: 10 + Math.random() * 70,
+          size: 0.5 + Math.random() * 2.2,
+          maxOpacity: 0.2 + Math.random() * 0.65,
           hue: Math.random() < 0.7
-            ? 25 + Math.random() * 30    // gold/amber
-            : 10 + Math.random() * 15,   // warm orange
+            ? 25 + Math.random() * 30
+            : 10 + Math.random() * 15,
           twinkleSpeed: 0.015 + Math.random() * 0.035,
           twinklePhase: Math.random() * Math.PI * 2,
+          trail: [],
         });
       }
       particlesRef.current = particles;
@@ -70,50 +74,60 @@ const TulipParticles = () => {
 
       ctx.clearRect(0, 0, w, h);
 
-      // Parallax offset based on scroll
       const parallaxY = scrollY.current * 0.15;
       const parallaxX = Math.sin(scrollY.current * 0.003) * 12;
 
-      // Torus centered on the title area
       const cx = w / 2 + parallaxX;
       const cy = h * 0.42 - parallaxY;
-      // Major radius scales with viewport — wraps around the title
       const majorRx = Math.min(w * 0.38, 340);
-      const majorRy = majorRx * 1.4; // vertical stretch for upright torus
+      const majorRy = majorRx * 1.4;
 
       for (const p of particlesRef.current) {
-        // Advance along torus
         p.torusAngle += p.speed;
         p.tubeAngle += p.tubeSpeed;
 
-        // Major ring position (vertical torus — particles rise up center, cascade down sides)
         const cosT = Math.cos(p.torusAngle);
         const sinT = Math.sin(p.torusAngle);
-
-        // Tube cross-section offset — perpendicular to the ring surface
         const cosU = Math.cos(p.tubeAngle);
         const sinU = Math.sin(p.tubeAngle);
 
-        // 3D torus → 2D projection
-        // Ring lies in vertical plane; tube expands radially
         const ringX = cosT * majorRx;
         const ringY = sinT * majorRy;
         const tubeOffX = cosU * p.tubeRadius * cosT;
         const tubeOffY = cosU * p.tubeRadius * sinT * 1.4;
-        const tubeOffZ = sinU * p.tubeRadius; // depth axis
+        const tubeOffZ = sinU * p.tubeRadius;
 
         const x = cx + ringX + tubeOffX + tubeOffZ * 0.25;
         const y = cy + ringY + tubeOffY;
 
-        // Depth-based scaling (particles in front are bigger/brighter)
         const depth = 0.55 + (sinU * 0.45);
         const drawSize = p.size * depth;
-
-        // Twinkle sparkle
         const twinkle = 0.4 + 0.6 * Math.sin(t * p.twinkleSpeed + p.twinklePhase);
         const opacity = p.maxOpacity * depth * twinkle;
 
+        // Update trail — store every 2nd frame for smoother spacing
+        if (t % 2 === 0) {
+          p.trail.push({ x, y, opacity });
+          if (p.trail.length > TRAIL_LENGTH) p.trail.shift();
+        }
+
         if (opacity < 0.01) continue;
+
+        // Draw comet trail
+        if (p.trail.length > 1 && drawSize > 0.8) {
+          for (let i = 0; i < p.trail.length - 1; i++) {
+            const trailPoint = p.trail[i];
+            const progress = i / p.trail.length;
+            const trailOpacity = opacity * progress * 0.3;
+            const trailSize = drawSize * progress * 0.6;
+            if (trailOpacity < 0.005) continue;
+
+            ctx.beginPath();
+            ctx.arc(trailPoint.x, trailPoint.y, trailSize, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${p.hue}, 75%, 58%, ${trailOpacity})`;
+            ctx.fill();
+          }
+        }
 
         // Core dot
         ctx.beginPath();
@@ -129,7 +143,7 @@ const TulipParticles = () => {
           ctx.fill();
         }
 
-        // Cross sparkle on bright particles
+        // Cross sparkle
         if (opacity > 0.35 && drawSize > 1.3) {
           const sparkLen = drawSize * 3.5 * twinkle;
           ctx.strokeStyle = `hsla(${p.hue}, 90%, 75%, ${opacity * 0.35})`;
@@ -143,7 +157,7 @@ const TulipParticles = () => {
         }
       }
 
-      // Warm central glow behind title
+      // Warm central glow
       const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, majorRx * 1.3);
       grad.addColorStop(0, "hsla(32, 90%, 52%, 0.05)");
       grad.addColorStop(0.4, "hsla(28, 85%, 48%, 0.02)");
