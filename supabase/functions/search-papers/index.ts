@@ -273,7 +273,7 @@ Deno.serve(async (req) => {
         Deno.env.get("SUPABASE_URL")!,
         Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
       );
-      await sb.from("search_logs").insert({
+      const { error: logError } = await sb.from("search_logs").insert({
         query,
         sources: enabledSources,
         result_counts: counts,
@@ -281,6 +281,8 @@ Deno.serve(async (req) => {
         pdf_count: pdfCount,
         is_scheduled: isScheduled || false,
       });
+      if (logError) console.error("Search log insert error:", JSON.stringify(logError));
+      else console.log("Search logged successfully");
     } catch (logErr) {
       console.error("Failed to log search:", logErr);
     }
