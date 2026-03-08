@@ -59,6 +59,9 @@ const TulipParticles = () => {
     resize();
     window.addEventListener("resize", resize);
 
+    const onScroll = () => { scrollY.current = window.scrollY; };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
     const loop = () => {
       const w = canvas.width;
       const h = canvas.height;
@@ -67,9 +70,13 @@ const TulipParticles = () => {
 
       ctx.clearRect(0, 0, w, h);
 
+      // Parallax offset based on scroll
+      const parallaxY = scrollY.current * 0.15;
+      const parallaxX = Math.sin(scrollY.current * 0.003) * 12;
+
       // Torus centered on the title area
-      const cx = w / 2;
-      const cy = h * 0.42;
+      const cx = w / 2 + parallaxX;
+      const cy = h * 0.42 - parallaxY;
       // Major radius scales with viewport — wraps around the title
       const majorRx = Math.min(w * 0.38, 340);
       const majorRy = majorRx * 1.4; // vertical stretch for upright torus
