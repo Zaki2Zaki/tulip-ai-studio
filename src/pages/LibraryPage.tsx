@@ -244,7 +244,7 @@ const LibraryPage = () => {
       {/* Main layout */}
       <section className="pb-20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex gap-0 border border-border rounded-xl overflow-hidden bg-card/20 min-h-[600px]">
+          <div className="flex gap-0 border border-border rounded-xl overflow-hidden bg-card/20 items-stretch">
             <LibrarySidebar
               activeCategory={activeCategory}
               onCategoryChange={setActiveCategory}
