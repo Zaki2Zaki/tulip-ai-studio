@@ -244,6 +244,12 @@ const PricingModal = ({ open, onClose }: PricingModalProps) => {
                     </button>
                   ))}
                 </div>
+              </div>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 };
 
