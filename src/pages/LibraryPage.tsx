@@ -44,10 +44,20 @@ const LibraryPage = () => {
     setLoading(true);
     try {
       const res = await fetch(
-        `https://api.semanticscholar.org/graph/v1/paper/search?query=${encodeURIComponent(query)}&limit=20&fields=title,abstract,year,citationCount,url,authors,venue`
+        `https://api.crossref.org/works?query=${encodeURIComponent(query)}&rows=20&sort=relevance&order=desc`
       );
       const data = await res.json();
-      setPapers(data.data || []);
+      const items = (data.message?.items || []).map((item: any) => ({
+        paperId: item.DOI || Math.random().toString(),
+        title: Array.isArray(item.title) ? item.title[0] : item.title || "Untitled",
+        abstract: item.abstract?.replace(/<[^>]*>/g, '') || null,
+        year: item.published?.["date-parts"]?.[0]?.[0] || null,
+        citationCount: item["is-referenced-by-count"] || null,
+        url: item.URL || `https://doi.org/${item.DOI}`,
+        authors: (item.author || []).map((a: any) => ({ name: `${a.given || ''} ${a.family || ''}`.trim() })),
+        venue: item["container-title"]?.[0] || null,
+      }));
+      setPapers(items);
       setSearchCount((c) => c + 1);
     } catch (err) {
       console.error("Search failed:", err);
