@@ -259,27 +259,31 @@ const ArticlePreview = ({
               {/* Carousel nav — rainbow chrome */}
               {allPapers.length > 1 && (
                 <div className="flex items-center gap-1">
+                  {/* Shared SVG gradient def */}
+                  <svg width="0" height="0" className="absolute">
+                    <defs>
+                      <linearGradient id="chrome-arrow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="hsl(200, 100%, 70%)" />
+                        <stop offset="25%" stopColor="hsl(280, 100%, 75%)" />
+                        <stop offset="50%" stopColor="hsl(320, 100%, 72%)" />
+                        <stop offset="75%" stopColor="hsl(40, 100%, 68%)" />
+                        <stop offset="100%" stopColor="hsl(160, 100%, 65%)" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
                   <button
                     onClick={() => handleNavigate("prev")}
                     disabled={!hasPrev}
-                    className="p-2 rounded-lg border border-border transition-all disabled:opacity-20 hover:border-transparent hover:shadow-[0_0_12px_-2px_hsl(260_85%_75%_/_0.4)]"
+                    className="p-2 rounded-lg border border-border transition-all disabled:opacity-20 hover:border-transparent hover:shadow-[0_0_16px_-2px_hsl(280_100%_75%_/_0.5)]"
                   >
-                    <ChevronLeft className="w-4 h-4" style={{
-                      background: "linear-gradient(135deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%))",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                    }} />
+                    <ChevronLeft className="w-5 h-5" style={{ stroke: "url(#chrome-arrow-grad)" }} />
                   </button>
                   <button
                     onClick={() => handleNavigate("next")}
                     disabled={!hasNext}
-                    className="p-2 rounded-lg border border-border transition-all disabled:opacity-20 hover:border-transparent hover:shadow-[0_0_12px_-2px_hsl(260_85%_75%_/_0.4)]"
+                    className="p-2 rounded-lg border border-border transition-all disabled:opacity-20 hover:border-transparent hover:shadow-[0_0_16px_-2px_hsl(280_100%_75%_/_0.5)]"
                   >
-                    <ChevronRight className="w-4 h-4" style={{
-                      background: "linear-gradient(135deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%))",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                    }} />
+                    <ChevronRight className="w-5 h-5" style={{ stroke: "url(#chrome-arrow-grad)" }} />
                   </button>
                 </div>
               )}
