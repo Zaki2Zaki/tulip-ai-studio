@@ -404,10 +404,15 @@ const LibraryPage = () => {
                   onSelectAll={handleSelectAll}
                   onUnlockClick={() => setShowPricing(true)}
                   searchQuery={searchQuery}
-                  onPaperClick={(p) => setPreviewPaper(p)}
-                  activePaperId={previewPaper?.paperId}
-                  viewMode={viewMode}
-                  votes={votes}
+                  onPaperClick={(p) => {
+                    if (!isSubscribed && !viewedPapers.has(p.paperId) && viewedPapers.size >= FREE_PAPER_LIMIT) {
+                      setShowPricing(true);
+                      toast.info("You've used your 3 free papers. Subscribe to continue.");
+                      return;
+                    }
+                    setViewedPapers((prev) => new Set(prev).add(p.paperId));
+                    setPreviewPaper(p);
+                  }}
                 />
               </div>
             </div>
