@@ -50,6 +50,9 @@ const TulipParticles = () => {
             : 10 + Math.random() * 15,
           twinkleSpeed: 0.015 + Math.random() * 0.035,
           twinklePhase: Math.random() * Math.PI * 2,
+          driftOffsetX: 0,
+          driftOffsetY: 0,
+          driftSpeed: 0.08 + Math.random() * 0.15,
           trail: [],
         });
       }
