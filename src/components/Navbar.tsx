@@ -207,6 +207,24 @@ const Navbar = () => {
             >
               Get a Quote
             </a>
+
+            {user ? (
+              <button
+                onClick={async () => { await supabase.auth.signOut(); navigate("/"); }}
+                className="flex items-center gap-1.5 text-sm font-body text-muted-foreground hover:text-primary transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+                Sign Out
+              </button>
+            ) : (
+              <Link
+                to="/auth"
+                className="flex items-center gap-1.5 text-sm font-body text-muted-foreground hover:text-primary transition-colors"
+              >
+                <LogIn className="w-4 h-4" />
+                Sign In
+              </Link>
+            )}
           </div>
 
           {/* Mobile toggle */}
