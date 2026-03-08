@@ -76,9 +76,9 @@ const TulipParticles = () => {
       const parallaxY = scrollY.current * 0.15;
       const parallaxX = Math.sin(scrollY.current * 0.003) * 12;
 
-      const cx = w / 2 + parallaxX;
-      const cy = h * 0.42 - parallaxY;
-      const majorRx = Math.min(w * 0.38, 340);
+      const cx = w * 0.3 + parallaxX;
+      const cy = h * 0.45 - parallaxY;
+      const majorRx = Math.min(w * 0.3, 280);
       const majorRy = majorRx * 1.4;
 
       for (const p of particlesRef.current) {
