@@ -209,7 +209,7 @@ const PapersTable = ({
                 } ${activePaperId === paper.paperId ? "bg-primary/8" : ""}`}
               >
                 <span className="font-display text-sm text-foreground line-clamp-1 flex-1">{paper.title}</span>
-                <span className="text-[11px] text-muted-foreground font-body shrink-0">{paper.year || "—"}</span>
+                <span className="text-xs text-muted-foreground font-body shrink-0">{paper.year || "—"}</span>
                 <div className="flex items-center gap-1 shrink-0">
                   <div className="w-10 h-1.5 rounded-full bg-muted overflow-hidden">
                     <div className="h-full rounded-full" style={{ width: `${paper.matchRate}%`, background: `linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)))` }} />
