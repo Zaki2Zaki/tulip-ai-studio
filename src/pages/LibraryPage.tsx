@@ -42,11 +42,21 @@ const LibraryPage = () => {
   const [trashedPapers, setTrashedPapers] = useState<Set<string>>(new Set());
   const [viewMode, setViewMode] = useState<ViewMode>("table");
   const [enabledSources, setEnabledSources] = useState<Set<string>>(new Set(DEFAULT_ENABLED_KEYS));
+  const [searchCache, setSearchCache] = useState<Map<string, { papers: Paper[]; counts: Record<string, number> }>>(new Map());
 
   const FREE_SEARCH_LIMIT = 3;
   const needsPaywall = !isSubscribed && searchCount >= FREE_SEARCH_LIMIT;
 
   const fetchPapers = async (query: string) => {
+    // Check cache first
+    const cacheKey = `${query}__${Array.from(enabledSources).sort().join(",")}`;
+    const cached = searchCache.get(cacheKey);
+    if (cached) {
+      setPapers(cached.papers);
+      setSourceCounts(cached.counts);
+      setLastSearchQuery(query);
+      return;
+    }
     if (needsPaywall) {
       setShowPricing(true);
       return;
