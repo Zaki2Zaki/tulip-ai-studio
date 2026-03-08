@@ -18,7 +18,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto section-padding">
+      <div className="relative z-10 text-right max-w-4xl ml-auto mr-6 md:mr-12 lg:mr-24 section-padding">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 justify-end">
+          className="flex-col gap-4 items-center justify-center flex sm:flex-row">
 
           <a
             href="#services"
