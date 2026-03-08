@@ -170,9 +170,9 @@ const LibrarySidebar = ({
           </h3>
           <button
             onClick={() => setShowNewInput(true)}
-            className="p-1 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors"
+            className="p-1 rounded-md hover:bg-muted/30 text-gradient-gold hover:text-foreground transition-colors"
           >
-            <Plus className="w-3.5 h-3.5" />
+            <Plus className="w-3.5 h-3.5" style={{ color: 'hsl(200 40% 82%)' }} />
           </button>
         </div>
 
