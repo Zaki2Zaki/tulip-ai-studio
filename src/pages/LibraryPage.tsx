@@ -122,15 +122,21 @@ const LibraryPage = () => {
     }
   };
 
-  // Sort upvoted papers to the top
+  // Active collection info
+  const activeCollection = activeCollectionId ? collections.find(c => c.id === activeCollectionId) : null;
+
+  // Sort upvoted papers to the top, optionally filter by collection
   const visiblePapers = useMemo(() => {
-    const filtered = papers.filter((p) => !trashedPapers.has(p.paperId));
+    let filtered = papers.filter((p) => !trashedPapers.has(p.paperId));
+    if (activeCollection) {
+      filtered = filtered.filter((p) => activeCollection.paperIds.includes(p.paperId));
+    }
     return filtered.sort((a, b) => {
       const aUp = votes[a.paperId] === "up" ? 1 : 0;
       const bUp = votes[b.paperId] === "up" ? 1 : 0;
       return bUp - aUp;
     });
-  }, [papers, trashedPapers, votes]);
+  }, [papers, trashedPapers, votes, activeCollection]);
 
   useEffect(() => {
     const cat = CATEGORIES.find((c) => c.id === activeCategory);
