@@ -46,6 +46,41 @@ const CATEGORIES = [
   { id: "world-simulation", label: "World Simulation", query: "world simulation physics engine digital twin" },
 ];
 
+const ManageSubscriptionButton = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleManage = async () => {
+    setLoading(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast.error("Please sign in first.");
+        return;
+      }
+      const { data, error } = await supabase.functions.invoke("customer-portal");
+      if (error) throw error;
+      if (data?.url) window.open(data.url, "_blank");
+    } catch (err: any) {
+      toast.error(err?.message?.includes("No Stripe customer")
+        ? "No subscription found. Subscribe first!"
+        : "Failed to open subscription manager.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleManage}
+      disabled={loading}
+      className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-border bg-card/50 text-sm font-body text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all disabled:opacity-60"
+    >
+      {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Settings className="w-4 h-4" />}
+      Manage Subscription
+    </button>
+  );
+};
+
 const LibraryPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(CATEGORIES[0].id);
