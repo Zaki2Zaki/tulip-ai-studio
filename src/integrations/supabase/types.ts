@@ -103,6 +103,42 @@ export type Database = {
           },
         ]
       }
+      search_logs: {
+        Row: {
+          created_at: string
+          error: string | null
+          id: string
+          is_scheduled: boolean
+          pdf_count: number
+          query: string
+          result_counts: Json
+          sources: string[]
+          total_results: number
+        }
+        Insert: {
+          created_at?: string
+          error?: string | null
+          id?: string
+          is_scheduled?: boolean
+          pdf_count?: number
+          query: string
+          result_counts?: Json
+          sources?: string[]
+          total_results?: number
+        }
+        Update: {
+          created_at?: string
+          error?: string | null
+          id?: string
+          is_scheduled?: boolean
+          pdf_count?: number
+          query?: string
+          result_counts?: Json
+          sources?: string[]
+          total_results?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

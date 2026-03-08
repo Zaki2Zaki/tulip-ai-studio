@@ -1,3 +1,5 @@
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
@@ -210,7 +212,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { query, sources, maxResults } = await req.json();
+    const { query, sources, maxResults, isScheduled } = await req.json();
     if (!query) {
       return new Response(
         JSON.stringify({ error: "Query is required" }),
@@ -263,12 +265,49 @@ Deno.serve(async (req) => {
       console.error("Unpaywall enrichment failed:", e);
     }
 
+    const pdfCount = papers.filter((p: any) => !!p.pdfUrl).length;
+
+    // Log search to search_logs table
+    try {
+      const sb = createClient(
+        Deno.env.get("SUPABASE_URL")!,
+        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+      );
+      const { error: logError } = await sb.from("search_logs").insert({
+        query,
+        sources: enabledSources,
+        result_counts: counts,
+        total_results: papers.length,
+        pdf_count: pdfCount,
+        is_scheduled: isScheduled || false,
+      });
+      if (logError) console.error("Search log insert error:", JSON.stringify(logError));
+      else console.log("Search logged successfully");
+    } catch (logErr) {
+      console.error("Failed to log search:", logErr);
+    }
+
     return new Response(
       JSON.stringify({ papers, counts, total: papers.length }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
     console.error("Search error:", error);
+
+    // Log error
+    try {
+      const sb = createClient(
+        Deno.env.get("SUPABASE_URL")!,
+        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+      );
+      await sb.from("search_logs").insert({
+        query: "unknown",
+        sources: [],
+        error: error instanceof Error ? error.message : "Search failed",
+        is_scheduled: false,
+      });
+    } catch (_) { /* ignore logging failure */ }
+
     return new Response(
       JSON.stringify({ error: error instanceof Error ? error.message : "Search failed" }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
