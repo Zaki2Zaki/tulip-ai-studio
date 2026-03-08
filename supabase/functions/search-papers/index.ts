@@ -26,7 +26,7 @@ async function searchCrossRef(query: string, rows = 20) {
       authors: (item.author || []).map((a: any) => ({ name: `${a.given || ""} ${a.family || ""}`.trim() })),
       venue: item["container-title"]?.[0] || null,
       source: "crossref",
-      pdfUrl: pdfLink?.URL || null,
+      pdfUrl: pdfUrl,
     };
   });
 }
