@@ -14,6 +14,7 @@ import ViewToggle from "@/components/library/ViewToggle";
 import type { ViewMode } from "@/components/library/ViewToggle";
 import { searchPapers } from "@/lib/api/papers";
 import type { Paper } from "@/lib/api/papers";
+import { DEFAULT_ENABLED_KEYS } from "@/components/library/DataSources";
 import { toast } from "sonner";
 
 const CATEGORIES = [
@@ -40,6 +41,7 @@ const LibraryPage = () => {
   const [votes, setVotes] = useState<Record<string, "up" | "down">>({});
   const [trashedPapers, setTrashedPapers] = useState<Set<string>>(new Set());
   const [viewMode, setViewMode] = useState<ViewMode>("table");
+  const [enabledSources, setEnabledSources] = useState<Set<string>>(new Set(DEFAULT_ENABLED_KEYS));
 
   const FREE_SEARCH_LIMIT = 3;
   const needsPaywall = !isSubscribed && searchCount >= FREE_SEARCH_LIMIT;
@@ -52,7 +54,8 @@ const LibraryPage = () => {
     setLoading(true);
     setLastSearchQuery(query);
     try {
-      const result = await searchPapers(query);
+      const activeSrcKeys = Array.from(enabledSources).filter(k => ["crossref", "arxiv", "openalex", "nvidia"].includes(k));
+      const result = await searchPapers(query, activeSrcKeys.length > 0 ? activeSrcKeys : undefined);
       setPapers(result.papers);
       setSourceCounts(result.counts);
       setSearchCount((c) => c + 1);
@@ -89,7 +92,7 @@ const LibraryPage = () => {
   useEffect(() => {
     const cat = CATEGORIES.find((c) => c.id === activeCategory);
     if (cat) fetchPapers(cat.query);
-  }, [activeCategory]);
+  }, [activeCategory, enabledSources]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -221,6 +224,15 @@ const LibraryPage = () => {
               onCreateCollection={handleCreateCollection}
               onDeleteCollection={handleDeleteCollection}
               onDropToCollection={handleAddToCollection}
+              enabledSources={enabledSources}
+              onToggleSource={(key) => {
+                setEnabledSources((prev) => {
+                  const next = new Set(prev);
+                  if (next.has(key)) next.delete(key);
+                  else next.add(key);
+                  return next;
+                });
+              }}
             />
 
             <div className="flex-1 p-5 space-y-4 overflow-hidden flex flex-col min-w-0">

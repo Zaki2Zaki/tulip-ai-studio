@@ -19,6 +19,8 @@ interface LibrarySidebarProps {
   onCreateCollection: (name: string) => void;
   onDeleteCollection: (id: string) => void;
   onDropToCollection?: (collectionId: string, paperId: string, paperTitle: string) => void;
+  enabledSources: Set<string>;
+  onToggleSource: (key: string) => void;
 }
 
 const LibrarySidebar = ({
@@ -32,6 +34,8 @@ const LibrarySidebar = ({
   onCreateCollection,
   onDeleteCollection,
   onDropToCollection,
+  enabledSources,
+  onToggleSource,
 }: LibrarySidebarProps) => {
   const [newCollectionName, setNewCollectionName] = useState("");
   const [showNewInput, setShowNewInput] = useState(false);
@@ -186,7 +190,7 @@ const LibrarySidebar = ({
       </div>
 
       {/* Data Sources */}
-      <DataSources />
+      <DataSources enabledSources={enabledSources} onToggleSource={onToggleSource} />
     </aside>
   );
 };

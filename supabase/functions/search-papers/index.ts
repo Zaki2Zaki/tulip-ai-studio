@@ -30,7 +30,6 @@ async function searchArxiv(query: string, maxResults = 10) {
   const res = await fetch(url);
   const xml = await res.text();
 
-  // Simple XML parsing for arXiv
   const entries: any[] = [];
   const entryRegex = /<entry>([\s\S]*?)<\/entry>/g;
   let match;
@@ -88,6 +87,33 @@ async function searchOpenAlex(query: string, perPage = 20) {
   }));
 }
 
+async function searchNvidia(query: string, maxResults = 15) {
+  // Search OpenAlex filtered to Nvidia Research affiliation for relevant papers
+  const res = await fetch(
+    `https://api.openalex.org/works?search=${encodeURIComponent(query)}&filter=authorships.institutions.ror:https://ror.org/01f5ytq51&per_page=${maxResults}&sort=relevance_score:desc&mailto=tuliptech@research.dev`
+  );
+  const data = await res.json();
+  return (data.results || []).map((w: any) => ({
+    paperId: w.id || crypto.randomUUID(),
+    title: w.title || "Untitled",
+    abstract: w.abstract_inverted_index
+      ? Object.entries(w.abstract_inverted_index as Record<string, number[]>)
+          .flatMap(([word, positions]) => positions.map((pos) => ({ word, pos })))
+          .sort((a, b) => a.pos - b.pos)
+          .map((x) => x.word)
+          .join(" ")
+      : null,
+    year: w.publication_year || null,
+    citationCount: w.cited_by_count || null,
+    url: w.doi ? `https://doi.org/${w.doi.replace("https://doi.org/", "")}` : w.id,
+    authors: (w.authorships || []).slice(0, 5).map((a: any) => ({
+      name: a.author?.display_name || "Unknown",
+    })),
+    venue: w.primary_location?.source?.display_name || null,
+    source: "nvidia",
+  }));
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -119,6 +145,10 @@ Deno.serve(async (req) => {
     if (enabledSources.includes("openalex")) {
       promises.push(searchOpenAlex(query, limit));
       sourceNames.push("openalex");
+    }
+    if (enabledSources.includes("nvidia")) {
+      promises.push(searchNvidia(query, limit));
+      sourceNames.push("nvidia");
     }
 
     const results = await Promise.allSettled(promises);
