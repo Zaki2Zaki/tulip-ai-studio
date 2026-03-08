@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Accessibility } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowUp } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useCases } from "@/data/useCases";
 
-const FONT_SCALES = [1, 1.5, 2, 3] as const;
-const FONT_LABELS = ["1×", "1.5×", "2×", "3×"];
+const FONT_SCALES = [1, 1.1, 1.2, 1.3] as const;
+const FONT_LABELS = ["1×", "1.1×", "1.2×", "1.3×"];
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -104,9 +104,10 @@ const Navbar = () => {
                 onClick={() => setShowFontMenu(!showFontMenu)}
                 aria-label="Adjust text size"
                 title="Adjust text size"
-                className="flex items-center justify-center w-9 h-9 rounded-full border border-border bg-card/50 hover:bg-card hover:border-primary/30 transition-all text-muted-foreground hover:text-primary"
+                className="flex items-center gap-0.5 px-2 h-9 rounded-full border border-border bg-card/50 hover:bg-card hover:border-primary/30 transition-all text-muted-foreground hover:text-primary text-xs font-body font-semibold"
               >
-                <Accessibility className="w-4 h-4" />
+                <span className="text-[10px]">a</span><span className="text-xs">A</span><span className="text-sm leading-none">A</span>
+                <ArrowUp className="w-3 h-3 ml-0.5" />
               </button>
               <AnimatePresence>
                 {showFontMenu && (
