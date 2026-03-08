@@ -330,6 +330,12 @@ const CostEstimator = () => {
           Payment milestone structure. Final quotation varies depending on custom prototype requirements.
         </p>
       </div>
+
+      <PipelineAssessmentQuiz
+        open={quizOpen}
+        onClose={() => setQuizOpen(false)}
+        onComplete={handleQuizComplete}
+      />
     </section>);
 
 };
