@@ -125,13 +125,13 @@ const PricingModal = ({ open, onClose }: PricingModalProps) => {
                         ))}
                       </ul>
                       <button
-                        className={`w-full py-2.5 rounded-full text-sm font-body font-semibold transition-opacity ${
+                        className={`w-full py-3 rounded-full text-sm font-body font-bold tracking-wide transition-all ${
                           plan.highlight
-                            ? "bg-primary text-primary-foreground hover:opacity-90"
-                            : "border border-border text-foreground hover:border-primary/30"
+                            ? "text-gradient-chrome-animated bg-primary text-primary-foreground hover:opacity-90 shadow-[0_0_24px_-4px_hsl(260_85%_75%/0.5)] hover:shadow-[0_0_32px_-2px_hsl(260_85%_75%/0.6)]"
+                            : "btn-chrome-outline hover:shadow-[0_0_20px_-4px_hsl(260_85%_75%/0.3)]"
                         }`}
                       >
-                        {plan.cta}
+                        <span className={plan.highlight ? "" : "text-gradient-chrome-animated"}>{plan.cta}</span>
                       </button>
                     </div>
                   );
