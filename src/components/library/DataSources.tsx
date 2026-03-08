@@ -3,6 +3,8 @@ import { Globe, Lock, CheckCircle } from "lucide-react";
 const SOURCES = [
   { name: "CrossRef", status: "connected" as const, url: "https://www.crossref.org/" },
   { name: "arXiv", status: "connected" as const, url: "https://arxiv.org/" },
+  { name: "OpenAlex", status: "connected" as const, url: "https://openalex.org/" },
+  { name: "Google Scholar Labs", status: "connected" as const, url: "https://labs.google/fx/tools/whisk/project/3947eb33-9450-4dde-bbef-5563952c0293" },
   { name: "Scholar Inbox", status: "locked" as const, url: "https://www.scholar-inbox.com/" },
   { name: "ACM Digital Library", status: "locked" as const, url: "https://dl.acm.org/" },
   { name: "Substack", status: "locked" as const, url: "https://substack.com/" },
