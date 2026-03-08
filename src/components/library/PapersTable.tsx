@@ -152,6 +152,79 @@ const PapersTable = ({
     );
   }
 
+  // Card grid view
+  if (viewMode === "cards") {
+    return (
+      <div className="space-y-3">
+        <MatchRateSlider range={matchRange} onChange={setMatchRange} />
+        <div className="library-scroll overflow-y-auto max-h-[520px] pr-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3">
+            {processedPapers.map((paper, i) => {
+              const isLocked = !isSubscribed && i >= 5;
+              return (
+                <PaperCard
+                  key={paper.paperId}
+                  paper={paper}
+                  isSelected={selectedPapers.has(paper.paperId)}
+                  isActive={activePaperId === paper.paperId}
+                  isLocked={isLocked}
+                  onToggleSelect={onToggleSelect}
+                  onClick={onPaperClick}
+                  onUnlockClick={onUnlockClick}
+                  onDragStart={onDragStart}
+                />
+              );
+            })}
+          </div>
+        </div>
+        <p className="text-xs text-muted-foreground font-body text-right">
+          Showing {processedPapers.length} of {papers.length} papers
+        </p>
+      </div>
+    );
+  }
+
+  // Compact list view
+  if (viewMode === "compact") {
+    return (
+      <div className="space-y-3">
+        <MatchRateSlider range={matchRange} onChange={setMatchRange} />
+        <div className="library-scroll overflow-y-auto max-h-[520px] border border-border rounded-xl divide-y divide-border/50">
+          {processedPapers.map((paper, i) => {
+            const isLocked = !isSubscribed && i >= 5;
+            return (
+              <div
+                key={paper.paperId}
+                draggable={!isLocked}
+                onDragStart={(e) => {
+                  if (isLocked) return;
+                  onDragStart?.(paper);
+                  e.dataTransfer.setData("application/json", JSON.stringify({ paperId: paper.paperId, title: paper.title }));
+                }}
+                onClick={() => !isLocked && onPaperClick(paper)}
+                className={`flex items-center gap-3 px-4 py-2.5 cursor-pointer transition-all ${
+                  isLocked ? "opacity-40 blur-[1px]" : "hover:bg-muted/20"
+                } ${activePaperId === paper.paperId ? "bg-primary/8" : ""}`}
+              >
+                <span className="font-display text-sm text-foreground line-clamp-1 flex-1">{paper.title}</span>
+                <span className="text-[11px] text-muted-foreground font-body shrink-0">{paper.year || "—"}</span>
+                <div className="flex items-center gap-1 shrink-0">
+                  <div className="w-10 h-1.5 rounded-full bg-muted overflow-hidden">
+                    <div className="h-full rounded-full" style={{ width: `${paper.matchRate}%`, background: `linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)))` }} />
+                  </div>
+                  <span className="text-[10px] text-muted-foreground tabular-nums">{paper.matchRate}%</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        <p className="text-xs text-muted-foreground font-body text-right">
+          Showing {processedPapers.length} of {papers.length} papers
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-3">
       {/* Match Rate Slider */}
