@@ -92,6 +92,11 @@ const CostEstimator = () => {
   const [scale, setScale] = useState<ScaleLevel>("medium");
   const [currency, setCurrency] = useState<"USD" | "CAD" | "EUR">("USD");
   const [showBreakdown, setShowBreakdown] = useState(false);
+  const [quizOpen, setQuizOpen] = useState(false);
+
+  const handleQuizComplete = (recommendedServices: string[]) => {
+    setSelectedServices(recommendedServices);
+  };
 
   const toggleService = (id: string) => {
     setSelectedServices((prev) =>
