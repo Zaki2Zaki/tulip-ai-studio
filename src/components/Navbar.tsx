@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, ArrowUp } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Menu, X, ChevronDown, ArrowUp, LogIn, LogOut } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useCases } from "@/data/useCases";
+import { supabase } from "@/integrations/supabase/client";
 
 const FONT_SCALES = [1, 1.1, 1.2, 1.3] as const;
 const FONT_LABELS = ["1×", "1.1×", "1.2×", "1.3×"];
