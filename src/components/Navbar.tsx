@@ -133,7 +133,7 @@ const Navbar = () => {
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-foreground order-last"
+            className="md:hidden text-foreground"
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
