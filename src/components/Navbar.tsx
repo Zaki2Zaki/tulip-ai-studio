@@ -22,6 +22,8 @@ const Navbar = () => {
   const [mobileUseCasesOpen, setMobileUseCasesOpen] = useState(false);
   const [fontScaleIndex, setFontScaleIndex] = useState(0);
   const [showFontMenu, setShowFontMenu] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const navRef = useRef<HTMLElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const fontMenuRef = useRef<HTMLDivElement>(null);
