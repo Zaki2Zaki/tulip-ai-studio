@@ -41,6 +41,7 @@ const LibraryPage = () => {
   const [votes, setVotes] = useState<Record<string, "up" | "down">>({});
   const [trashedPapers, setTrashedPapers] = useState<Set<string>>(new Set());
   const [viewMode, setViewMode] = useState<ViewMode>("table");
+  const [enabledSources, setEnabledSources] = useState<Set<string>>(new Set(DEFAULT_ENABLED_KEYS));
 
   const FREE_SEARCH_LIMIT = 3;
   const needsPaywall = !isSubscribed && searchCount >= FREE_SEARCH_LIMIT;
