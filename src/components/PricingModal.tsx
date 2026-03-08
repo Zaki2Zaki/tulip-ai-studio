@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, Zap, Users, GraduationCap, CreditCard, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { PLANS } from "@/lib/stripe-plans";
+import { PLANS, PAY_PER_USE } from "@/lib/stripe-plans";
 import { toast } from "sonner";
 
 interface PricingModalProps {
