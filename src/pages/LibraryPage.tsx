@@ -412,7 +412,9 @@ const LibraryPage = () => {
                     }
                     setViewedPapers((prev) => new Set(prev).add(p.paperId));
                     setPreviewPaper(p);
-                  }}
+                  activePaperId={previewPaper?.paperId}
+                  viewMode={viewMode}
+                  votes={votes}
                 />
               </div>
             </div>
