@@ -2,7 +2,8 @@ import { useState, useMemo } from "react";
 import tulipLogo from "@/assets/new-logo.png";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Calculator, ChevronDown, ChevronUp } from "lucide-react";
+import { Calculator, ChevronDown, ChevronUp, ClipboardCheck } from "lucide-react";
+import PipelineAssessmentQuiz from "./PipelineAssessmentQuiz";
 
 interface ServiceOption {
   id: string;
