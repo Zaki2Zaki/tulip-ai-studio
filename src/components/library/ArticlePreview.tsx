@@ -262,31 +262,30 @@ const ArticlePreview = ({
                   <button
                     onClick={() => handleNavigate("prev")}
                     disabled={!hasPrev}
-                    className="p-2 rounded-lg border border-border transition-all disabled:opacity-20 hover:border-transparent hover:shadow-[0_0_12px_-2px_hsl(260_85%_75%_/_0.4)] group"
+                    className="p-2 rounded-lg border border-border transition-all disabled:opacity-20 hover:border-transparent hover:shadow-[0_0_12px_-2px_hsl(260_85%_75%_/_0.4)]"
                   >
-                    <ChevronLeft className="w-4 h-4 text-gradient-chrome-animated group-hover:animate-none" style={{
+                    <ChevronLeft className="w-4 h-4" style={{
                       background: "linear-gradient(135deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%))",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
                     }} />
                   </button>
                   <button
                     onClick={() => handleNavigate("next")}
                     disabled={!hasNext}
-                    className="p-2 rounded-lg border border-border transition-all disabled:opacity-20 hover:border-transparent hover:shadow-[0_0_12px_-2px_hsl(260_85%_75%_/_0.4)] group"
+                    className="p-2 rounded-lg border border-border transition-all disabled:opacity-20 hover:border-transparent hover:shadow-[0_0_12px_-2px_hsl(260_85%_75%_/_0.4)]"
                   >
                     <ChevronRight className="w-4 h-4" style={{
                       background: "linear-gradient(135deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%))",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
                     }} />
                   </button>
                 </div>
               )}
-                {/* Download */}
-                <div className="ml-auto flex items-center gap-2">
+
+              <div className="ml-auto flex items-center gap-2">
+                {pdfUrl && (
                   <a
                     href={pdfUrl}
                     target="_blank"
@@ -308,8 +307,6 @@ const ArticlePreview = ({
                     Source
                   </a>
                 )}
-
-                {/* Save to collection */}
                 <div className="relative">
                   <button
                     onClick={() => setShowCollectionMenu(!showCollectionMenu)}
