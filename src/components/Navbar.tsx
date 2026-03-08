@@ -78,7 +78,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop — Tesla-style centered nav */}
-          <div className="hidden md:flex items-center gap-10 ml-auto">
+          <div className="hidden md:flex items-center gap-10">
             {/* Use Cases with hover dropdown */}
             <div
               onMouseEnter={() => openDropdown("usecases")}
