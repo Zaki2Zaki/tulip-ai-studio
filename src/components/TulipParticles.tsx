@@ -91,6 +91,24 @@ const TulipParticles = () => {
         p.torusAngle += p.speed;
         p.tubeAngle += p.tubeSpeed;
 
+        // Slowly drift toward upper-right
+        p.driftOffsetX += p.driftSpeed;
+        p.driftOffsetY -= p.driftSpeed * 0.6;
+
+        // Reset drift when particle goes too far off-screen
+        const maxDrift = Math.max(w, h) * 0.6;
+        if (p.driftOffsetX > maxDrift || p.driftOffsetY < -maxDrift) {
+          p.driftOffsetX = 0;
+          p.driftOffsetY = 0;
+          p.torusAngle = Math.random() * Math.PI * 2;
+          p.tubeAngle = Math.random() * Math.PI * 2;
+          p.trail = [];
+        }
+
+        // Fade out as particle drifts further
+        const driftDist = Math.sqrt(p.driftOffsetX * p.driftOffsetX + p.driftOffsetY * p.driftOffsetY);
+        const driftFade = Math.max(0, 1 - driftDist / maxDrift);
+
         const cosT = Math.cos(p.torusAngle);
         const sinT = Math.sin(p.torusAngle);
         const cosU = Math.cos(p.tubeAngle);
@@ -102,13 +120,13 @@ const TulipParticles = () => {
         const tubeOffY = cosU * p.tubeRadius * sinT * 1.4;
         const tubeOffZ = sinU * p.tubeRadius;
 
-        const x = cx + ringX + tubeOffX + tubeOffZ * 0.25;
-        const y = cy + ringY + tubeOffY;
+        const x = cx + ringX + tubeOffX + tubeOffZ * 0.25 + p.driftOffsetX;
+        const y = cy + ringY + tubeOffY + p.driftOffsetY;
 
         const depth = 0.55 + (sinU * 0.45);
         const drawSize = p.size * depth;
         const twinkle = 0.4 + 0.6 * Math.sin(t * p.twinkleSpeed + p.twinklePhase);
-        const opacity = p.maxOpacity * depth * twinkle;
+        const opacity = p.maxOpacity * depth * twinkle * driftFade;
 
         // Update trail — store every 2nd frame for smoother spacing
         if (t % 2 === 0) {
