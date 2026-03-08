@@ -72,13 +72,13 @@ const Navbar = () => {
           scrolled ? "bg-glass" : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
+        <div className="max-w-7xl mx-auto flex items-center px-6 py-5 gap-6">
           <Link to="/" className="font-display text-2xl font-bold tracking-tight text-foreground">
             TULIP<span className="text-gradient-gold"> TECH</span>
           </Link>
 
           {/* Desktop — Tesla-style centered nav */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-10 ml-auto">
             {/* Use Cases with hover dropdown */}
             <div
               onMouseEnter={() => openDropdown("usecases")}
