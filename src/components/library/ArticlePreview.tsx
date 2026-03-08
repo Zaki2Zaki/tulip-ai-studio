@@ -119,6 +119,11 @@ const ArticlePreview = ({
     if (allPapers[idx]) onNavigate(allPapers[idx]);
   };
 
+  const relatedPapers = useMemo(
+    () => findRelatedPapers(paper, allPapers),
+    [paper.paperId, allPapers]
+  );
+
   const abstractTakeaways = useMemo(
     () => (paper.abstract ? extractKeyTakeaways(paper.abstract) : []),
     [paper.abstract]
