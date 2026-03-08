@@ -5,7 +5,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PricingModal from "@/components/PricingModal";
 import LibrarySidebar from "@/components/library/LibrarySidebar";
+import type { Collection } from "@/components/library/LibrarySidebar";
 import PapersTable from "@/components/library/PapersTable";
+import SearchResultsCount from "@/components/library/SearchResultsCount";
+import ArticleSearch from "@/components/library/ArticleSearch";
 import { toast } from "sonner";
 
 const CATEGORIES = [
@@ -36,6 +39,8 @@ const LibraryPage = () => {
   const [showPricing, setShowPricing] = useState(false);
   const [searchCount, setSearchCount] = useState(0);
   const [selectedPapers, setSelectedPapers] = useState<Set<string>>(new Set());
+  const [lastSearchQuery, setLastSearchQuery] = useState("");
+  const [collections, setCollections] = useState<Collection[]>([]);
 
   const FREE_SEARCH_LIMIT = 3;
   const needsPaywall = !isSubscribed && searchCount >= FREE_SEARCH_LIMIT;
@@ -46,6 +51,7 @@ const LibraryPage = () => {
       return;
     }
     setLoading(true);
+    setLastSearchQuery(query);
     try {
       const res = await fetch(
         `https://api.crossref.org/works?query=${encodeURIComponent(query)}&rows=20&sort=relevance&order=desc`
@@ -98,6 +104,28 @@ const LibraryPage = () => {
     }
   };
 
+  const handleCreateCollection = (name: string) => {
+    setCollections((prev) => [...prev, { id: crypto.randomUUID(), name, paperIds: [] }]);
+    toast.success(`Collection "${name}" created`);
+  };
+
+  const handleDeleteCollection = (id: string) => {
+    setCollections((prev) => prev.filter((c) => c.id !== id));
+    toast.info("Collection removed");
+  };
+
+  const handleAddToCollection = (paperId: string, paperTitle: string, collectionId: string) => {
+    setCollections((prev) =>
+      prev.map((c) =>
+        c.id === collectionId && !c.paperIds.includes(paperId)
+          ? { ...c, paperIds: [...c.paperIds, paperId] }
+          : c
+      )
+    );
+    const col = collections.find((c) => c.id === collectionId);
+    toast.success(`Added to "${col?.name}"`);
+  };
+
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
@@ -121,7 +149,7 @@ const LibraryPage = () => {
         </div>
       </section>
 
-      {/* Main layout: sidebar + content */}
+      {/* Main layout */}
       <section className="pb-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex gap-0 border border-border rounded-xl overflow-hidden bg-card/20 min-h-[600px]">
@@ -133,11 +161,14 @@ const LibraryPage = () => {
               onUploadClick={() => toast.info("Upload feature coming soon — requires subscription.")}
               onAILabelClick={() => toast.info("AI Labeling feature coming soon — requires subscription.")}
               onBulkProcessClick={() => toast.info("Bulk Processing feature coming soon — requires subscription.")}
+              collections={collections}
+              onCreateCollection={handleCreateCollection}
+              onDeleteCollection={handleDeleteCollection}
             />
 
             {/* Right Content */}
             <div className="flex-1 p-5 space-y-4 overflow-hidden">
-              {/* Search bar */}
+              {/* Keyword search bar */}
               <form onSubmit={handleSearch} className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
@@ -167,14 +198,21 @@ const LibraryPage = () => {
                 </div>
               )}
 
+              {/* Search results count */}
+              <SearchResultsCount
+                totalResults={papers.length}
+                searchQuery={lastSearchQuery}
+                sources={[
+                  { name: "CrossRef", count: papers.length },
+                  { name: "arXiv", count: 0 },
+                ]}
+              />
+
               {/* Selected count */}
               {selectedPapers.size > 0 && (
                 <div className="flex items-center gap-3 text-xs font-body text-muted-foreground">
                   <span className="text-foreground font-semibold">{selectedPapers.size}</span> paper(s) selected
-                  <button
-                    onClick={() => setSelectedPapers(new Set())}
-                    className="text-primary hover:underline"
-                  >
+                  <button onClick={() => setSelectedPapers(new Set())} className="text-primary hover:underline">
                     Clear
                   </button>
                 </div>
@@ -190,6 +228,12 @@ const LibraryPage = () => {
                 onSelectAll={handleSelectAll}
                 onUnlockClick={() => setShowPricing(true)}
                 searchQuery={searchQuery}
+              />
+
+              {/* Article Search & Preview */}
+              <ArticleSearch
+                collections={collections}
+                onAddToCollection={handleAddToCollection}
               />
             </div>
           </div>
