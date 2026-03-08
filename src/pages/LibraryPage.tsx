@@ -239,11 +239,16 @@ const LibraryPage = () => {
                 </div>
               )}
 
-              <SearchResultsCount
-                totalResults={visiblePapers.length}
-                searchQuery={lastSearchQuery}
-                sources={sourcesList.length > 0 ? sourcesList : [{ name: "CrossRef", count: 0 }, { name: "arXiv", count: 0 }, { name: "OpenAlex", count: 0 }]}
-              />
+              <div className="flex items-center gap-3">
+                <div className="flex-1">
+                  <SearchResultsCount
+                    totalResults={visiblePapers.length}
+                    searchQuery={lastSearchQuery}
+                    sources={sourcesList.length > 0 ? sourcesList : [{ name: "CrossRef", count: 0 }, { name: "arXiv", count: 0 }, { name: "OpenAlex", count: 0 }]}
+                  />
+                </div>
+                <ViewToggle mode={viewMode} onChange={setViewMode} />
+              </div>
 
               {selectedPapers.size > 0 && (
                 <div className="flex items-center gap-3 text-xs font-body text-muted-foreground">
