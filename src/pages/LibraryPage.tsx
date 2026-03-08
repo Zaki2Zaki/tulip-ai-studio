@@ -16,6 +16,7 @@ import { searchPapers } from "@/lib/api/papers";
 import type { Paper } from "@/lib/api/papers";
 import { DEFAULT_ENABLED_KEYS } from "@/components/library/DataSources";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const CATEGORIES = [
   { id: "3d-modeling", label: "3D Assets Modeling", query: "3D modeling computer graphics mesh" },
