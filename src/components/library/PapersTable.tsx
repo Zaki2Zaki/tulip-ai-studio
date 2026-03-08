@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Lock, AlertTriangle, CheckCircle, MinusCircle, ArrowUp, ArrowDown, ArrowUpDown, GripVertical } from "lucide-react";
 import YearFilter from "./YearFilter";
 import MatchRateSlider from "./MatchRateSlider";
+import PaperCard from "./PaperCard";
+import type { ViewMode } from "./ViewToggle";
 
 interface Paper {
   paperId: string;
