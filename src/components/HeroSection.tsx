@@ -18,7 +18,7 @@ const HeroSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 text-right max-w-4xl ml-auto mr-6 md:mr-12 lg:mr-24 section-padding">
+      <div className="relative z-10 text-center max-w-4xl mx-auto section-padding">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
