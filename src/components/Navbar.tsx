@@ -73,7 +73,7 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
-          <Link to="/" className="font-display text-2xl font-bold tracking-tight text-foreground md:ml-[15%]">
+          <Link to="/" className="font-display text-2xl font-bold tracking-tight text-foreground md:ml-[18%]">
             TULIP<span className="text-gradient-gold"> TECH</span>
           </Link>
 
