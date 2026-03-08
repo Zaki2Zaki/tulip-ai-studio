@@ -158,6 +158,7 @@ const TulipParticles = () => {
     return () => {
       cancelAnimationFrame(animRef.current);
       window.removeEventListener("resize", resize);
+      window.removeEventListener("scroll", onScroll);
       particlesRef.current = [];
       initialized.current = false;
     };
