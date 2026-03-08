@@ -256,7 +256,35 @@ const ArticlePreview = ({
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
 
-              <div className="ml-auto flex items-center gap-2">
+              {/* Carousel nav — rainbow chrome */}
+              {allPapers.length > 1 && (
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => handleNavigate("prev")}
+                    disabled={!hasPrev}
+                    className="p-2 rounded-lg border border-border transition-all disabled:opacity-20 hover:border-transparent hover:shadow-[0_0_12px_-2px_hsl(260_85%_75%_/_0.4)] group"
+                  >
+                    <ChevronLeft className="w-4 h-4 text-gradient-chrome-animated group-hover:animate-none" style={{
+                      background: "linear-gradient(135deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%))",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    }} />
+                  </button>
+                  <button
+                    onClick={() => handleNavigate("next")}
+                    disabled={!hasNext}
+                    className="p-2 rounded-lg border border-border transition-all disabled:opacity-20 hover:border-transparent hover:shadow-[0_0_12px_-2px_hsl(260_85%_75%_/_0.4)] group"
+                  >
+                    <ChevronRight className="w-4 h-4" style={{
+                      background: "linear-gradient(135deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%))",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    }} />
+                  </button>
+                </div>
+              )}
                 {/* Download */}
                 {pdfUrl && (
                   <a
