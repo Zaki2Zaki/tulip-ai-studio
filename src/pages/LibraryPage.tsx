@@ -92,6 +92,7 @@ const LibraryPage = () => {
   useEffect(() => {
     const cat = CATEGORIES.find((c) => c.id === activeCategory);
     if (cat) fetchPapers(cat.query);
+  }, [activeCategory, enabledSources]);
   }, [activeCategory]);
 
   const handleSearch = (e: React.FormEvent) => {
