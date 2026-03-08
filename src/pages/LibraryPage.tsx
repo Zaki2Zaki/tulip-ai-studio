@@ -302,7 +302,7 @@ const LibraryPage = () => {
                   <div className="flex items-center gap-2">
                     <Lock className="w-4 h-4 text-primary" />
                     <p className="text-xs font-body text-muted-foreground">
-                      <span className="text-foreground font-semibold">{Math.max(0, FREE_SEARCH_LIMIT - searchCount)}</span> free searches remaining.
+                      <span className="text-foreground font-semibold">{Math.max(0, FREE_PAPER_LIMIT - viewedPapers.size)}</span> free papers remaining.
                     </p>
                   </div>
                   <button
