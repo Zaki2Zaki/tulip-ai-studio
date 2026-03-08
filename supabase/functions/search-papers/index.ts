@@ -212,7 +212,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { query, sources, maxResults } = await req.json();
+    const { query, sources, maxResults, isScheduled } = await req.json();
     if (!query) {
       return new Response(
         JSON.stringify({ error: "Query is required" }),
