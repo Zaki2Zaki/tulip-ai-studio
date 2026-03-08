@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, Accessibility } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowUp } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useCases } from "@/data/useCases";
 
