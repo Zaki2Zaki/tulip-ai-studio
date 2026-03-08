@@ -202,30 +202,9 @@ const ArticlePreview = ({
             </span>
           )}
         </div>
-        <div className="flex items-center gap-1">
-          {/* Carousel prev/next */}
-          {allPapers.length > 1 && (
-            <>
-              <button
-                onClick={() => handleNavigate("prev")}
-                disabled={!hasPrev}
-                className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors disabled:opacity-30"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => handleNavigate("next")}
-                disabled={!hasNext}
-                className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors disabled:opacity-30"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </>
-          )}
-          <button onClick={onClose} className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors ml-1">
-            <X className="w-4 h-4" />
-          </button>
-        </div>
+        <button onClick={onClose} className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors">
+          <X className="w-4 h-4" />
+        </button>
       </div>
 
       <div className="flex flex-col lg:flex-row">
@@ -277,8 +256,35 @@ const ArticlePreview = ({
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
 
+              {/* Carousel nav — rainbow chrome */}
+              {allPapers.length > 1 && (
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => handleNavigate("prev")}
+                    disabled={!hasPrev}
+                    className="p-2 rounded-lg border border-border transition-all disabled:opacity-20 hover:border-transparent hover:shadow-[0_0_12px_-2px_hsl(260_85%_75%_/_0.4)]"
+                  >
+                    <ChevronLeft className="w-4 h-4" style={{
+                      background: "linear-gradient(135deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%))",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }} />
+                  </button>
+                  <button
+                    onClick={() => handleNavigate("next")}
+                    disabled={!hasNext}
+                    className="p-2 rounded-lg border border-border transition-all disabled:opacity-20 hover:border-transparent hover:shadow-[0_0_12px_-2px_hsl(260_85%_75%_/_0.4)]"
+                  >
+                    <ChevronRight className="w-4 h-4" style={{
+                      background: "linear-gradient(135deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%))",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }} />
+                  </button>
+                </div>
+              )}
+
               <div className="ml-auto flex items-center gap-2">
-                {/* Download */}
                 {pdfUrl && (
                   <a
                     href={pdfUrl}
@@ -301,8 +307,6 @@ const ArticlePreview = ({
                     Source
                   </a>
                 )}
-
-                {/* Save to collection */}
                 <div className="relative">
                   <button
                     onClick={() => setShowCollectionMenu(!showCollectionMenu)}
@@ -335,6 +339,17 @@ const ArticlePreview = ({
               </div>
             </div>
           </div>
+
+          {/* Abstract preview */}
+          {paper.abstract && (
+            <div className="p-5 border-b border-border">
+              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-2 flex items-center gap-1.5">
+                <FileText className="w-3.5 h-3.5 text-primary" />
+                Abstract
+              </h5>
+              <p className="text-sm font-body text-foreground/70 leading-relaxed">{paper.abstract}</p>
+            </div>
+          )}
 
           {/* PDF Preview area */}
           <div className="p-5 border-b border-border">
