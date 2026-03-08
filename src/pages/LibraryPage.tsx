@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Lock, BookOpen } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -135,9 +135,13 @@ const LibraryPage = () => {
     toast.success(`Added to "${col?.name}"`);
   };
 
-  const handleVote = (paperId: string, vote: "up" | "down") => {
-    setVotes((prev) => ({ ...prev, [paperId]: vote }));
-    toast.success(vote === "up" ? "Marked as relevant" : "Marked as not useful");
+  const handleVote = (paperId: string, voteType: "up" | "down") => {
+    setVotes((prev) => ({ ...prev, [paperId]: voteType }));
+    if (voteType === "up") {
+      toast.success("Marked as relevant — floated to top");
+    } else {
+      toast.info("Noted as not useful — preferences updated");
+    }
   };
 
   const handleTrash = (paperId: string) => {
@@ -155,7 +159,16 @@ const LibraryPage = () => {
     });
   };
 
-  const visiblePapers = papers.filter((p) => !trashedPapers.has(p.paperId));
+  // Sort upvoted papers to the top
+  const visiblePapers = useMemo(() => {
+    const filtered = papers.filter((p) => !trashedPapers.has(p.paperId));
+    return filtered.sort((a, b) => {
+      const aUp = votes[a.paperId] === "up" ? 1 : 0;
+      const bUp = votes[b.paperId] === "up" ? 1 : 0;
+      return bUp - aUp;
+    });
+  }, [papers, trashedPapers, votes]);
+
   const sourcesList = Object.entries(sourceCounts).map(([name, count]) => ({ name, count }));
 
   return (
@@ -273,10 +286,11 @@ const LibraryPage = () => {
                   onPaperClick={(p) => setPreviewPaper(p)}
                   activePaperId={previewPaper?.paperId}
                   viewMode={viewMode}
+                  votes={votes}
                 />
               </div>
 
-              {/* Article Preview Panel */}
+              {/* Article Deep Dive Panel */}
               <AnimatePresence>
                 {previewPaper && (
                   <ArticlePreview
@@ -287,6 +301,8 @@ const LibraryPage = () => {
                     vote={votes[previewPaper.paperId]}
                     collections={collections}
                     onAddToCollection={handleAddToCollection}
+                    allPapers={visiblePapers}
+                    onNavigate={(p) => setPreviewPaper(p)}
                   />
                 )}
               </AnimatePresence>

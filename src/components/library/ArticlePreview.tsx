@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import {
   ThumbsUp, ThumbsDown, Trash2, X, Bot, Send, MessageSquare, Loader2,
   ExternalLink, Download, FolderPlus, CheckCircle, XCircle, AlertTriangle,
+  ChevronLeft, ChevronRight, FileText, Sparkles,
 } from "lucide-react";
 import { streamPaperChat } from "@/lib/api/papers";
 import { toast } from "sonner";
@@ -29,6 +30,9 @@ interface ArticlePreviewProps {
   vote?: "up" | "down" | null;
   collections: { id: string; name: string }[];
   onAddToCollection: (paperId: string, paperTitle: string, collectionId: string) => void;
+  /** All selectable papers for carousel navigation */
+  allPapers?: Paper[];
+  onNavigate?: (paper: Paper) => void;
 }
 
 const QUICK_QUESTIONS = [
@@ -41,11 +45,14 @@ const QUICK_QUESTIONS = [
 
 const ArticlePreview = ({
   paper, onClose, onVote, onTrash, vote, collections, onAddToCollection,
+  allPapers = [], onNavigate,
 }: ArticlePreviewProps) => {
   const [chatMessages, setChatMessages] = useState<ChatMsg[]>([]);
   const [chatInput, setChatInput] = useState("");
   const [chatLoading, setChatLoading] = useState(false);
   const [showCollectionMenu, setShowCollectionMenu] = useState(false);
+  const [summaryLoading, setSummaryLoading] = useState(false);
+  const [executiveSummary, setExecutiveSummary] = useState("");
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,7 +62,45 @@ const ArticlePreview = ({
   useEffect(() => {
     setChatMessages([]);
     setChatInput("");
+    setExecutiveSummary("");
   }, [paper.paperId]);
+
+  // Carousel index
+  const currentIndex = allPapers.findIndex((p) => p.paperId === paper.paperId);
+  const hasPrev = currentIndex > 0;
+  const hasNext = currentIndex < allPapers.length - 1 && currentIndex >= 0;
+
+  const handleNavigate = (dir: "prev" | "next") => {
+    if (!onNavigate) return;
+    const idx = dir === "prev" ? currentIndex - 1 : currentIndex + 1;
+    if (allPapers[idx]) onNavigate(allPapers[idx]);
+  };
+
+  const generateSummary = async () => {
+    if (summaryLoading || executiveSummary) return;
+    setSummaryLoading(true);
+    let summary = "";
+    try {
+      await streamPaperChat({
+        messages: [{ role: "user", content: "Write a concise executive summary of this paper in 3-4 sentences. Focus on the problem, approach, and key results." }],
+        paperContext: {
+          title: paper.title,
+          authors: paper.authors?.map((a) => a.name),
+          year: paper.year || undefined,
+          abstract: paper.abstract || undefined,
+          source: "search",
+        },
+        onDelta: (chunk) => {
+          summary += chunk;
+          setExecutiveSummary(summary);
+        },
+        onDone: () => setSummaryLoading(false),
+      });
+    } catch {
+      toast.error("Failed to generate summary");
+      setSummaryLoading(false);
+    }
+  };
 
   const handleSendChat = async (overrideInput?: string) => {
     const input = overrideInput || chatInput.trim();
@@ -98,7 +143,6 @@ const ArticlePreview = ({
   };
 
   const renderResponse = (content: string) => {
-    // Check for quick validation patterns
     const lower = content.trim().toLowerCase();
     if (lower.startsWith("yes") && content.length < 200) {
       return (
@@ -136,6 +180,9 @@ const ArticlePreview = ({
     return <p className="text-xs font-body leading-relaxed whitespace-pre-wrap">{content}</p>;
   };
 
+  // Build arXiv PDF URL if possible
+  const pdfUrl = paper.pdfUrl || (paper.url?.includes("arxiv.org") ? paper.url.replace("/abs/", "/pdf/") + ".pdf" : null);
+
   return (
     <motion.div
       initial={{ opacity: 0, height: 0 }}
@@ -144,150 +191,209 @@ const ArticlePreview = ({
       transition={{ duration: 0.3 }}
       className="border border-border rounded-xl bg-card/30 overflow-hidden"
     >
-      {/* Header */}
+      {/* Header with carousel nav */}
       <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-muted/10">
-        <h3 className="text-sm font-display font-semibold text-foreground">Article Preview</h3>
-        <button onClick={onClose} className="p-1 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors">
-          <X className="w-4 h-4" />
-        </button>
+        <div className="flex items-center gap-3">
+          <FileText className="w-4 h-4 text-primary" />
+          <h3 className="text-sm font-display font-semibold text-foreground">Deep Dive</h3>
+          {allPapers.length > 1 && (
+            <span className="text-xs font-body text-muted-foreground">
+              {currentIndex + 1} / {allPapers.length}
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-1">
+          {/* Carousel prev/next */}
+          {allPapers.length > 1 && (
+            <>
+              <button
+                onClick={() => handleNavigate("prev")}
+                disabled={!hasPrev}
+                className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors disabled:opacity-30"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => handleNavigate("next")}
+                disabled={!hasNext}
+                className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors disabled:opacity-30"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </>
+          )}
+          <button onClick={onClose} className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors ml-1">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
       </div>
 
       <div className="flex flex-col lg:flex-row">
-        {/* Left: Paper details */}
-        <div className="flex-1 p-5 space-y-4 border-r border-border min-w-0">
-          <div>
-            <h4 className="font-display text-base font-bold text-foreground leading-tight mb-2">{paper.title}</h4>
+        {/* Left: Paper preview + Deep Dive */}
+        <div className="flex-1 min-w-0 flex flex-col">
+          {/* Paper header + actions */}
+          <div className="p-5 space-y-3 border-b border-border">
+            <h4 className="font-display text-base font-bold text-foreground leading-tight">{paper.title}</h4>
             <p className="text-xs text-muted-foreground font-body">
               {paper.authors?.slice(0, 5).map((a) => a.name).join(", ")}
               {(paper.authors?.length || 0) > 5 && " et al."}
             </p>
-            <div className="flex items-center gap-3 mt-2">
+            <div className="flex items-center gap-3">
               {paper.year && <span className="text-xs text-accent font-body">{paper.year}</span>}
               {paper.venue && <span className="text-xs text-muted-foreground font-body">{paper.venue}</span>}
               {paper.citationCount != null && (
                 <span className="text-xs text-muted-foreground font-body">{paper.citationCount} citations</span>
               )}
             </div>
-          </div>
 
-          {/* Abstract */}
-          {paper.abstract && (
-            <div>
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Abstract</h5>
-              <p className="text-sm font-body text-foreground/80 leading-relaxed">{paper.abstract}</p>
-            </div>
-          )}
+            {/* Action buttons row */}
+            <div className="flex items-center gap-2 pt-2 flex-wrap">
+              <button
+                onClick={() => onVote(paper.paperId, "up")}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg border text-xs font-body font-semibold transition-all ${
+                  vote === "up"
+                    ? "bg-green-500/10 border-green-500/30 text-green-400"
+                    : "border-border text-muted-foreground hover:text-foreground hover:border-green-500/20"
+                }`}
+              >
+                <ThumbsUp className="w-3.5 h-3.5" />
+                Relevant
+              </button>
+              <button
+                onClick={() => onVote(paper.paperId, "down")}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg border text-xs font-body font-semibold transition-all ${
+                  vote === "down"
+                    ? "bg-destructive/10 border-destructive/30 text-destructive"
+                    : "border-border text-muted-foreground hover:text-foreground hover:border-destructive/20"
+                }`}
+              >
+                <ThumbsDown className="w-3.5 h-3.5" />
+                Not Useful
+              </button>
+              <button
+                onClick={() => onTrash(paper.paperId)}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-body text-muted-foreground hover:text-destructive hover:border-destructive/20 transition-all"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+              </button>
 
-          {/* Key highlights placeholder */}
-          <div>
-            <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Metadata</h5>
-            <div className="flex flex-wrap gap-2">
-              {paper.venue && (
-                <span className="px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-xs font-body text-accent">
-                  {paper.venue}
-                </span>
-              )}
-              <span className="px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-xs font-body text-primary">
-                {paper.citationCount || 0} cited
-              </span>
-            </div>
-          </div>
-
-          {/* Evaluation controls */}
-          <div className="flex items-center gap-2 pt-2 border-t border-border">
-            <button
-              onClick={() => onVote(paper.paperId, "up")}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg border text-xs font-body font-semibold transition-all ${
-                vote === "up"
-                  ? "bg-green-500/10 border-green-500/30 text-green-400"
-                  : "border-border text-muted-foreground hover:text-foreground hover:border-green-500/20"
-              }`}
-            >
-              <ThumbsUp className="w-3.5 h-3.5" />
-              Relevant
-            </button>
-            <button
-              onClick={() => onVote(paper.paperId, "down")}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-lg border text-xs font-body font-semibold transition-all ${
-                vote === "down"
-                  ? "bg-destructive/10 border-destructive/30 text-destructive"
-                  : "border-border text-muted-foreground hover:text-foreground hover:border-destructive/20"
-              }`}
-            >
-              <ThumbsDown className="w-3.5 h-3.5" />
-              Not Useful
-            </button>
-            <button
-              onClick={() => onTrash(paper.paperId)}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-body text-muted-foreground hover:text-destructive hover:border-destructive/20 transition-all"
-            >
-              <Trash2 className="w-3.5 h-3.5" />
-              Remove
-            </button>
-
-            <div className="ml-auto flex items-center gap-2">
-              {paper.url && (
-                <a
-                  href={paper.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1 px-3 py-2 rounded-lg border border-border text-xs font-body text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  Source
-                </a>
-              )}
-              {paper.pdfUrl && (
-                <a
-                  href={paper.pdfUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-body font-semibold hover:opacity-90 transition-opacity"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  PDF
-                </a>
-              )}
-
-              {/* Save to collection */}
-              <div className="relative">
-                <button
-                  onClick={() => setShowCollectionMenu(!showCollectionMenu)}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-accent/30 bg-accent/5 text-accent text-xs font-body font-semibold hover:bg-accent/10 transition-all"
-                >
-                  <FolderPlus className="w-3.5 h-3.5" />
-                  Save
-                </button>
-                {showCollectionMenu && (
-                  <div className="absolute bottom-full right-0 mb-1 bg-card border border-border rounded-lg shadow-xl z-20 p-1 min-w-[160px]">
-                    {collections.length === 0 ? (
-                      <p className="text-xs text-muted-foreground p-2 font-body">No collections yet.</p>
-                    ) : (
-                      collections.map((col) => (
-                        <button
-                          key={col.id}
-                          onClick={() => {
-                            onAddToCollection(paper.paperId, paper.title, col.id);
-                            setShowCollectionMenu(false);
-                          }}
-                          className="w-full text-left px-3 py-2 text-xs font-body text-foreground hover:bg-muted/30 rounded-md"
-                        >
-                          {col.name}
-                        </button>
-                      ))
-                    )}
-                  </div>
+              <div className="ml-auto flex items-center gap-2">
+                {/* Download */}
+                {pdfUrl && (
+                  <a
+                    href={pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-xs font-body font-semibold hover:opacity-90 transition-opacity"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    Download PDF
+                  </a>
                 )}
+                {paper.url && (
+                  <a
+                    href={paper.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 px-3 py-2 rounded-lg border border-border text-xs font-body text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    Source
+                  </a>
+                )}
+
+                {/* Save to collection */}
+                <div className="relative">
+                  <button
+                    onClick={() => setShowCollectionMenu(!showCollectionMenu)}
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-accent/30 bg-accent/5 text-accent text-xs font-body font-semibold hover:bg-accent/10 transition-all"
+                  >
+                    <FolderPlus className="w-3.5 h-3.5" />
+                    Save
+                  </button>
+                  {showCollectionMenu && (
+                    <div className="absolute bottom-full right-0 mb-1 bg-card border border-border rounded-lg shadow-xl z-20 p-1 min-w-[160px]">
+                      {collections.length === 0 ? (
+                        <p className="text-xs text-muted-foreground p-2 font-body">No collections yet.</p>
+                      ) : (
+                        collections.map((col) => (
+                          <button
+                            key={col.id}
+                            onClick={() => {
+                              onAddToCollection(paper.paperId, paper.title, col.id);
+                              setShowCollectionMenu(false);
+                            }}
+                            className="w-full text-left px-3 py-2 text-xs font-body text-foreground hover:bg-muted/30 rounded-md"
+                          >
+                            {col.name}
+                          </button>
+                        ))
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
+
+          {/* PDF Preview area */}
+          <div className="p-5 border-b border-border">
+            {pdfUrl ? (
+              <div className="rounded-lg overflow-hidden border border-border bg-background">
+                <iframe
+                  src={pdfUrl}
+                  className="w-full h-[400px]"
+                  title={`PDF preview: ${paper.title}`}
+                />
+              </div>
+            ) : (
+              <div className="rounded-lg border border-border bg-muted/10 p-8 text-center">
+                <FileText className="w-10 h-10 text-muted-foreground/30 mx-auto mb-3" />
+                <p className="text-sm text-muted-foreground font-body">No PDF preview available</p>
+                {paper.url && (
+                  <a href={paper.url} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline font-body mt-1 inline-block">
+                    View on source →
+                  </a>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Executive Summary */}
+          <div className="p-5">
+            <div className="flex items-center justify-between mb-3">
+              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-accent" />
+                Executive Summary
+              </h5>
+              {!executiveSummary && !summaryLoading && (
+                <button
+                  onClick={generateSummary}
+                  className="text-xs font-body text-primary hover:underline"
+                >
+                  Generate with AI
+                </button>
+              )}
+            </div>
+            {summaryLoading && !executiveSummary && (
+              <div className="flex items-center gap-2 text-xs text-muted-foreground font-body">
+                <Loader2 className="w-3.5 h-3.5 animate-spin text-accent" />
+                Generating summary…
+              </div>
+            )}
+            {executiveSummary ? (
+              <p className="text-sm font-body text-foreground/80 leading-relaxed">{executiveSummary}</p>
+            ) : !summaryLoading && paper.abstract ? (
+              <p className="text-sm font-body text-foreground/60 leading-relaxed italic">{paper.abstract}</p>
+            ) : null}
+          </div>
         </div>
 
-        {/* Right: AI Assistant */}
-        <div className="w-full lg:w-[380px] flex flex-col min-h-[350px] max-h-[500px]">
+        {/* Right: AI Chat — "Chat about this paper" */}
+        <div className="w-full lg:w-[380px] flex flex-col min-h-[350px] max-h-[700px] border-l border-border">
           <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/10">
             <Bot className="w-4 h-4 text-accent" />
-            <span className="text-xs font-display font-semibold text-foreground">Ask About This Paper</span>
+            <span className="text-xs font-display font-semibold text-foreground">Chat about this paper</span>
           </div>
 
           {/* Messages */}
@@ -296,7 +402,7 @@ const ArticlePreview = ({
               <div className="text-center py-8">
                 <MessageSquare className="w-8 h-8 text-muted-foreground/20 mx-auto mb-3" />
                 <p className="text-xs text-muted-foreground font-body mb-4">
-                  What would you like to know about this article?
+                  What would you like to know?
                 </p>
                 <div className="flex flex-wrap gap-1.5 justify-center">
                   {QUICK_QUESTIONS.map((q) => (
@@ -346,7 +452,7 @@ const ArticlePreview = ({
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSendChat()}
-                placeholder="What would you like to know about this article?"
+                placeholder="What would you like to know?"
                 className="flex-1 bg-muted/20 border border-border rounded-lg px-3 py-2.5 text-xs text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-accent/30 transition-all"
                 disabled={chatLoading}
               />
