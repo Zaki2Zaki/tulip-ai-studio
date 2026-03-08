@@ -114,7 +114,7 @@ const PaperCard = ({ paper, isSelected, isActive, isLocked, onToggleSelect, onCl
               }}
             />
           </div>
-          <span className="text-[10px] font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
+          <span className="text-[11px] font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
         </div>
       </div>
 
