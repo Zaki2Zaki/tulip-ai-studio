@@ -54,7 +54,8 @@ const LibraryPage = () => {
     setLoading(true);
     setLastSearchQuery(query);
     try {
-      const result = await searchPapers(query);
+      const activeSrcKeys = Array.from(enabledSources).filter(k => ["crossref", "arxiv", "openalex", "nvidia"].includes(k));
+      const result = await searchPapers(query, activeSrcKeys.length > 0 ? activeSrcKeys : undefined);
       setPapers(result.papers);
       setSourceCounts(result.counts);
       setSearchCount((c) => c + 1);
