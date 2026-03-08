@@ -262,14 +262,14 @@ const LibraryPage = () => {
           <div className="flex gap-0 border border-border rounded-xl overflow-hidden bg-card/20 items-stretch min-h-[720px]">
             <LibrarySidebar
               activeCategory={activeCategory}
-              onCategoryChange={setActiveCategory}
+              onCategoryChange={(id) => { setActiveCollectionId(null); setActiveCategory(id); }}
               categories={CATEGORIES}
               onUploadClick={() => toast.info("Upload feature coming soon.")}
               onAILabelClick={() => toast.info("AI Labeling feature coming soon.")}
               onBulkProcessClick={() => toast.info("Bulk Processing feature coming soon.")}
               collections={collections}
               onCreateCollection={handleCreateCollection}
-              onDeleteCollection={handleDeleteCollection}
+              onDeleteCollection={(id) => { if (activeCollectionId === id) setActiveCollectionId(null); handleDeleteCollection(id); }}
               onDropToCollection={handleAddToCollection}
               enabledSources={enabledSources}
               onToggleSource={(key) => {
@@ -280,6 +280,8 @@ const LibraryPage = () => {
                   return next;
                 });
               }}
+              activeCollectionId={activeCollectionId}
+              onCollectionClick={setActiveCollectionId}
             />
 
             <div className="flex-1 p-5 space-y-4 overflow-hidden flex flex-col min-w-0">
