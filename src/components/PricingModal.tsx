@@ -1,5 +1,9 @@
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Check, Zap, Users, GraduationCap, CreditCard } from "lucide-react";
+import { X, Check, Zap, Users, GraduationCap, CreditCard, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { PLANS } from "@/lib/stripe-plans";
+import { toast } from "sonner";
 
 interface PricingModalProps {
   open: boolean;
@@ -21,6 +25,7 @@ const plans = [
     ],
     cta: "Start Student Plan",
     highlight: false,
+    priceId: PLANS.student.price_id,
   },
   {
     name: "Individual",
@@ -38,6 +43,7 @@ const plans = [
     ],
     cta: "Start Individual Plan",
     highlight: true,
+    priceId: PLANS.individual.price_id,
   },
   {
     name: "Team / Institution",
@@ -55,10 +61,44 @@ const plans = [
     ],
     cta: "Contact Sales",
     highlight: false,
+    priceId: null, // No Stripe product yet
   },
 ];
 
 const PricingModal = ({ open, onClose }: PricingModalProps) => {
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+
+  const handleCheckout = async (priceId: string | null, planName: string) => {
+    if (!priceId) {
+      toast.info("Contact us at team@tuliprd.com for Team/Institution plans.");
+      return;
+    }
+
+    setLoadingPlan(planName);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast.error("Please sign in first to subscribe.");
+        setLoadingPlan(null);
+        return;
+      }
+
+      const { data, error } = await supabase.functions.invoke("create-checkout", {
+        body: { priceId },
+      });
+
+      if (error) throw error;
+      if (data?.url) {
+        window.open(data.url, "_blank");
+      }
+    } catch (err: any) {
+      console.error("Checkout error:", err);
+      toast.error("Failed to start checkout. Please try again.");
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
+
   return (
     <AnimatePresence>
       {open && (
@@ -95,6 +135,7 @@ const PricingModal = ({ open, onClose }: PricingModalProps) => {
               <div className="grid md:grid-cols-3 gap-4 md:gap-6 mb-8">
                 {plans.map((plan) => {
                   const Icon = plan.icon;
+                  const isLoading = loadingPlan === plan.name;
                   return (
                     <div
                       key={plan.name}
@@ -125,13 +166,19 @@ const PricingModal = ({ open, onClose }: PricingModalProps) => {
                         ))}
                       </ul>
                       <button
-                        className={`w-full py-3 rounded-full text-sm font-body font-bold tracking-wide transition-all ${
+                        onClick={() => handleCheckout(plan.priceId, plan.name)}
+                        disabled={isLoading}
+                        className={`w-full py-3 rounded-full text-sm font-body font-bold tracking-wide transition-all disabled:opacity-60 ${
                           plan.highlight
                             ? "text-gradient-chrome-animated bg-primary text-primary-foreground hover:opacity-90 shadow-[0_0_24px_-4px_hsl(260_85%_75%/0.5)] hover:shadow-[0_0_32px_-2px_hsl(260_85%_75%/0.6)]"
                             : "btn-chrome-outline hover:shadow-[0_0_20px_-4px_hsl(260_85%_75%/0.3)]"
                         }`}
                       >
-                        <span className={plan.highlight ? "" : "text-gradient-chrome-animated"}>{plan.cta}</span>
+                        {isLoading ? (
+                          <Loader2 className="w-4 h-4 animate-spin mx-auto" />
+                        ) : (
+                          <span className={plan.highlight ? "" : "text-gradient-chrome-animated"}>{plan.cta}</span>
+                        )}
                       </button>
                     </div>
                   );
