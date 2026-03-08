@@ -203,22 +203,25 @@ const LibrarySidebar = ({
         {collections.map((col) => (
           <div
             key={col.id}
+            onClick={() => onCollectionClick?.(activeCollectionId === col.id ? null : col.id)}
             onDragOver={(e) => handleDragOver(e, col.id)}
             onDragLeave={handleDragLeave}
             onDrop={(e) => handleDrop(e, col.id)}
-            className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all group ${
-              dragOverId === col.id
+            className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all group cursor-pointer ${
+              activeCollectionId === col.id
+                ? "bg-primary/15 border border-primary/40 ring-1 ring-primary/20"
+                : dragOverId === col.id
                 ? "bg-accent/15 border border-accent/40 ring-1 ring-accent/20 scale-[1.02]"
                 : "hover:bg-muted/20 border border-transparent"
             }`}
           >
             <div className="flex items-center gap-2 min-w-0">
-              <Folder className={`w-3.5 h-3.5 shrink-0 transition-colors ${dragOverId === col.id ? "text-accent" : "text-accent/60"}`} />
-              <span className="text-sm font-body text-foreground truncate">{col.name}</span>
+              <Folder className={`w-3.5 h-3.5 shrink-0 transition-colors ${activeCollectionId === col.id ? "text-primary" : dragOverId === col.id ? "text-accent" : "text-accent/60"}`} />
+              <span className={`text-sm font-body truncate ${activeCollectionId === col.id ? "text-foreground font-semibold" : "text-foreground"}`}>{col.name}</span>
               <span className="text-xs text-muted-foreground">{col.paperIds.length}</span>
             </div>
             <button
-              onClick={() => onDeleteCollection(col.id)}
+              onClick={(e) => { e.stopPropagation(); onDeleteCollection(col.id); }}
               className="p-1 rounded-md text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition-all"
             >
               <X className="w-3 h-3" />
