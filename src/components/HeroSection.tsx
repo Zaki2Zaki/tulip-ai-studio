@@ -43,7 +43,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-lg max-w-2xl mx-auto mb-10 font-body text-white md:text-3xl">
+          className="text-lg max-w-2xl mx-auto mb-10 font-display text-white md:text-3xl">
 
           AI Research & Development for 3D Artwork, Games, 3D Animation and VFX's Production Pipelines, and Creative Dev-Tools
         </motion.p>
