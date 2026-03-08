@@ -30,6 +30,7 @@ interface PapersTableProps {
   activePaperId?: string;
   onDragStart?: (paper: Paper) => void;
   viewMode?: ViewMode;
+  votes?: Record<string, "up" | "down">;
 }
 
 const generateTLDR = (title: string, abstract: string | null): string => {
