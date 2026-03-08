@@ -13,6 +13,9 @@ async function searchCrossRef(query: string, rows = 20) {
     const pdfLink = (item.link || []).find((l: any) =>
       l["content-type"] === "application/pdf" || l["content-type"]?.includes("pdf")
     );
+    // Filter out Wiley TDM URLs (require authentication, won't work in viewers)
+    const rawPdfUrl = pdfLink?.URL || null;
+    const pdfUrl = rawPdfUrl && !rawPdfUrl.includes("api.wiley.com/onlinelibrary/tdm") ? rawPdfUrl : null;
     return {
       paperId: item.DOI || crypto.randomUUID(),
       title: Array.isArray(item.title) ? item.title[0] : item.title || "Untitled",
