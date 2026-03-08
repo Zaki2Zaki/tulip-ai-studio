@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Search, Lock, BookOpen } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,7 +8,7 @@ import LibrarySidebar from "@/components/library/LibrarySidebar";
 import type { Collection } from "@/components/library/LibrarySidebar";
 import PapersTable from "@/components/library/PapersTable";
 import SearchResultsCount from "@/components/library/SearchResultsCount";
-import ArticleSearch from "@/components/library/ArticleSearch";
+import ArticlePreview from "@/components/library/ArticlePreview";
 import { searchPapers } from "@/lib/api/papers";
 import type { Paper } from "@/lib/api/papers";
 import { toast } from "sonner";
@@ -33,6 +33,9 @@ const LibraryPage = () => {
   const [lastSearchQuery, setLastSearchQuery] = useState("");
   const [collections, setCollections] = useState<Collection[]>([]);
   const [sourceCounts, setSourceCounts] = useState<Record<string, number>>({});
+  const [previewPaper, setPreviewPaper] = useState<Paper | null>(null);
+  const [votes, setVotes] = useState<Record<string, "up" | "down">>({});
+  const [trashedPapers, setTrashedPapers] = useState<Set<string>>(new Set());
 
   const FREE_SEARCH_LIMIT = 3;
   const needsPaywall = !isSubscribed && searchCount >= FREE_SEARCH_LIMIT;
@@ -51,7 +54,6 @@ const LibraryPage = () => {
       setSearchCount((c) => c + 1);
     } catch (err) {
       console.error("Search failed:", err);
-      // Fallback to direct CrossRef if edge function fails
       try {
         const res = await fetch(
           `https://api.crossref.org/works?query=${encodeURIComponent(query)}&rows=20&sort=relevance&order=desc`
@@ -129,6 +131,27 @@ const LibraryPage = () => {
     toast.success(`Added to "${col?.name}"`);
   };
 
+  const handleVote = (paperId: string, vote: "up" | "down") => {
+    setVotes((prev) => ({ ...prev, [paperId]: vote }));
+    toast.success(vote === "up" ? "Marked as relevant" : "Marked as not useful");
+  };
+
+  const handleTrash = (paperId: string) => {
+    setTrashedPapers((prev) => new Set(prev).add(paperId));
+    setPreviewPaper(null);
+    toast("Paper removed from results", {
+      action: {
+        label: "Undo",
+        onClick: () => setTrashedPapers((prev) => {
+          const next = new Set(prev);
+          next.delete(paperId);
+          return next;
+        }),
+      },
+    });
+  };
+
+  const visiblePapers = papers.filter((p) => !trashedPapers.has(p.paperId));
   const sourcesList = Object.entries(sourceCounts).map(([name, count]) => ({ name, count }));
 
   return (
@@ -136,7 +159,7 @@ const LibraryPage = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-28 pb-8 relative overflow-hidden">
+      <section className="pt-28 pb-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-transparent" />
         <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
@@ -162,15 +185,16 @@ const LibraryPage = () => {
               activeCategory={activeCategory}
               onCategoryChange={setActiveCategory}
               categories={CATEGORIES}
-              onUploadClick={() => toast.info("Upload feature coming soon — requires subscription.")}
-              onAILabelClick={() => toast.info("AI Labeling feature coming soon — requires subscription.")}
-              onBulkProcessClick={() => toast.info("Bulk Processing feature coming soon — requires subscription.")}
+              onUploadClick={() => toast.info("Upload feature coming soon.")}
+              onAILabelClick={() => toast.info("AI Labeling feature coming soon.")}
+              onBulkProcessClick={() => toast.info("Bulk Processing feature coming soon.")}
               collections={collections}
               onCreateCollection={handleCreateCollection}
               onDeleteCollection={handleDeleteCollection}
+              onDropToCollection={handleAddToCollection}
             />
 
-            <div className="flex-1 p-5 space-y-4 overflow-hidden">
+            <div className="flex-1 p-5 space-y-4 overflow-hidden flex flex-col">
               <form onSubmit={handleSearch} className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
@@ -200,7 +224,7 @@ const LibraryPage = () => {
               )}
 
               <SearchResultsCount
-                totalResults={papers.length}
+                totalResults={visiblePapers.length}
                 searchQuery={lastSearchQuery}
                 sources={sourcesList.length > 0 ? sourcesList : [{ name: "CrossRef", count: 0 }, { name: "arXiv", count: 0 }, { name: "OpenAlex", count: 0 }]}
               />
@@ -214,21 +238,36 @@ const LibraryPage = () => {
                 </div>
               )}
 
-              <PapersTable
-                papers={papers}
-                loading={loading}
-                isSubscribed={isSubscribed}
-                selectedPapers={selectedPapers}
-                onToggleSelect={handleToggleSelect}
-                onSelectAll={handleSelectAll}
-                onUnlockClick={() => setShowPricing(true)}
-                searchQuery={searchQuery}
-              />
+              {/* Scrollable results */}
+              <div className="flex-1 min-h-0">
+                <PapersTable
+                  papers={visiblePapers}
+                  loading={loading}
+                  isSubscribed={isSubscribed}
+                  selectedPapers={selectedPapers}
+                  onToggleSelect={handleToggleSelect}
+                  onSelectAll={handleSelectAll}
+                  onUnlockClick={() => setShowPricing(true)}
+                  searchQuery={searchQuery}
+                  onPaperClick={(p) => setPreviewPaper(p)}
+                  activePaperId={previewPaper?.paperId}
+                />
+              </div>
 
-              <ArticleSearch
-                collections={collections}
-                onAddToCollection={handleAddToCollection}
-              />
+              {/* Article Preview Panel */}
+              <AnimatePresence>
+                {previewPaper && (
+                  <ArticlePreview
+                    paper={previewPaper}
+                    onClose={() => setPreviewPaper(null)}
+                    onVote={handleVote}
+                    onTrash={handleTrash}
+                    vote={votes[previewPaper.paperId]}
+                    collections={collections}
+                    onAddToCollection={handleAddToCollection}
+                  />
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>

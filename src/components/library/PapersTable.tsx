@@ -1,5 +1,8 @@
+import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Lock, AlertTriangle, CheckCircle, MinusCircle, Star } from "lucide-react";
+import { ExternalLink, Lock, AlertTriangle, CheckCircle, MinusCircle, ArrowUp, ArrowDown, ArrowUpDown, GripVertical } from "lucide-react";
+import YearFilter from "./YearFilter";
+import MatchRateSlider from "./MatchRateSlider";
 
 interface Paper {
   paperId: string;
@@ -21,6 +24,9 @@ interface PapersTableProps {
   onSelectAll: () => void;
   onUnlockClick: () => void;
   searchQuery: string;
+  onPaperClick: (paper: Paper) => void;
+  activePaperId?: string;
+  onDragStart?: (paper: Paper) => void;
 }
 
 const generateTLDR = (title: string, abstract: string | null): string => {
@@ -58,6 +64,14 @@ const getSuccessRate = (paper: Paper, searchQuery: string): number => {
   return Math.min(99, Math.round((hits / Math.max(terms.length, 1)) * 80 + 15));
 };
 
+type SortField = "year" | "matchRate" | null;
+type SortDir = "asc" | "desc";
+
+const SortIcon = ({ field, activeField, dir }: { field: SortField; activeField: SortField; dir: SortDir }) => {
+  if (activeField !== field) return <ArrowUpDown className="w-3 h-3 opacity-40" />;
+  return dir === "asc" ? <ArrowUp className="w-3 h-3 text-primary" /> : <ArrowDown className="w-3 h-3 text-primary" />;
+};
+
 const PapersTable = ({
   papers,
   loading,
@@ -67,7 +81,55 @@ const PapersTable = ({
   onSelectAll,
   onUnlockClick,
   searchQuery,
+  onPaperClick,
+  activePaperId,
+  onDragStart,
 }: PapersTableProps) => {
+  const [sortField, setSortField] = useState<SortField>(null);
+  const [sortDir, setSortDir] = useState<SortDir>("desc");
+  const [yearRange, setYearRange] = useState<[number, number]>([0, 9999]);
+  const [matchRange, setMatchRange] = useState<[number, number]>([0, 100]);
+
+  const handleSort = (field: SortField) => {
+    if (sortField === field) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortField(field);
+      setSortDir("desc");
+    }
+  };
+
+  const processedPapers = useMemo(() => {
+    let result = papers.map((p) => ({
+      ...p,
+      matchRate: getSuccessRate(p, searchQuery),
+    }));
+
+    // Year filter
+    if (yearRange[0] !== 0 || yearRange[1] !== 9999) {
+      result = result.filter((p) => {
+        if (!p.year) return false;
+        return p.year >= yearRange[0] && p.year <= yearRange[1];
+      });
+    }
+
+    // Match rate filter
+    result = result.filter((p) => p.matchRate >= matchRange[0] && p.matchRate <= matchRange[1]);
+
+    // Sort
+    if (sortField === "year") {
+      result.sort((a, b) => {
+        const av = a.year || 0;
+        const bv = b.year || 0;
+        return sortDir === "asc" ? av - bv : bv - av;
+      });
+    } else if (sortField === "matchRate") {
+      result.sort((a, b) => (sortDir === "asc" ? a.matchRate - b.matchRate : b.matchRate - a.matchRate));
+    }
+
+    return result;
+  }, [papers, searchQuery, sortField, sortDir, yearRange, matchRange]);
+
   if (loading) {
     return (
       <div className="space-y-2">
@@ -87,86 +149,119 @@ const PapersTable = ({
   }
 
   return (
-    <div className="border border-border rounded-xl overflow-hidden">
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="bg-muted/30 border-b border-border">
-              <th className="w-10 px-3 py-3 text-left">
-                <input
-                  type="checkbox"
-                  checked={selectedPapers.size === papers.length && papers.length > 0}
-                  onChange={onSelectAll}
-                  className="rounded border-border accent-primary"
-                />
-              </th>
-              <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider">
-                Title
-              </th>
-              <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider min-w-[200px]">
-                TLDR
-              </th>
-              <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider w-24">
-                AI Flag
-              </th>
-              <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider w-28">
-                AI Label
-              </th>
-              <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider w-16">
-                Year
-              </th>
-              <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider w-28">
-                Match Rate
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <AnimatePresence mode="popLayout">
-              {papers.map((paper, i) => {
-                const isLocked = !isSubscribed && i >= 5;
-                const aiFlag = getAIFlag(paper);
-                const aiLabel = getAILabel(paper.title);
-                const successRate = getSuccessRate(paper, searchQuery);
-                const tldr = generateTLDR(paper.title, paper.abstract);
+    <div className="space-y-3">
+      {/* Match Rate Slider */}
+      <MatchRateSlider range={matchRange} onChange={setMatchRange} />
 
-                return (
-                  <motion.tr
-                    key={paper.paperId}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2, delay: i * 0.02 }}
-                    className={`border-b border-border/50 transition-colors ${
-                      isLocked ? "opacity-40 blur-[1px]" : "hover:bg-muted/20"
-                    } ${selectedPapers.has(paper.paperId) ? "bg-primary/5" : ""}`}
+      {/* Table */}
+      <div className="border border-border rounded-xl overflow-hidden">
+        <div className="library-scroll overflow-y-auto max-h-[520px]">
+          <table className="w-full text-sm">
+            <thead className="sticky top-0 z-10">
+              <tr className="bg-card border-b border-border">
+                <th className="w-10 px-3 py-3 text-left">
+                  <input
+                    type="checkbox"
+                    checked={selectedPapers.size === processedPapers.length && processedPapers.length > 0}
+                    onChange={onSelectAll}
+                    className="rounded border-border accent-primary"
+                  />
+                </th>
+                <th className="w-8 px-1 py-3" />
+                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider">
+                  Title
+                </th>
+                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider min-w-[180px]">
+                  TLDR
+                </th>
+                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider w-24">
+                  AI Flag
+                </th>
+                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider w-28">
+                  AI Label
+                </th>
+                <th className="px-3 py-3 text-center w-32">
+                  <button
+                    onClick={() => handleSort("year")}
+                    className="inline-flex items-center gap-1.5 font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider hover:text-foreground transition-colors"
                   >
-                    <td className="px-3 py-3">
-                      {isLocked ? (
-                        <button onClick={onUnlockClick}>
-                          <Lock className="w-4 h-4 text-muted-foreground" />
-                        </button>
-                      ) : (
-                        <input
-                          type="checkbox"
-                          checked={selectedPapers.has(paper.paperId)}
-                          onChange={() => onToggleSelect(paper.paperId)}
-                          className="rounded border-border accent-primary"
-                        />
-                      )}
-                    </td>
-                    <td className="px-3 py-3">
-                      <div className="flex items-start gap-2">
+                    Year
+                    <SortIcon field="year" activeField={sortField} dir={sortDir} />
+                  </button>
+                  <div className="mt-1">
+                    <YearFilter yearRange={yearRange} onChange={setYearRange} />
+                  </div>
+                </th>
+                <th className="px-3 py-3 text-center w-32">
+                  <button
+                    onClick={() => handleSort("matchRate")}
+                    className="inline-flex items-center gap-1.5 font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider hover:text-foreground transition-colors"
+                  >
+                    Match Rate
+                    <SortIcon field="matchRate" activeField={sortField} dir={sortDir} />
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <AnimatePresence mode="popLayout">
+                {processedPapers.map((paper, i) => {
+                  const isLocked = !isSubscribed && i >= 5;
+                  const aiFlag = getAIFlag(paper);
+                  const aiLabel = getAILabel(paper.title);
+                  const tldr = generateTLDR(paper.title, paper.abstract);
+                  const isActive = activePaperId === paper.paperId;
+
+                  return (
+                    <motion.tr
+                      key={paper.paperId}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.15, delay: i * 0.015 }}
+                      draggable={!isLocked}
+                      onDragStart={(e) => {
+                        if (isLocked) return;
+                        onDragStart?.(paper);
+                        // Set drag data for HTML5 DnD
+                        const dragEvent = e as unknown as React.DragEvent;
+                        if (dragEvent.dataTransfer) {
+                          dragEvent.dataTransfer.setData("application/json", JSON.stringify({ paperId: paper.paperId, title: paper.title }));
+                          dragEvent.dataTransfer.effectAllowed = "copy";
+                        }
+                      }}
+                      onClick={() => !isLocked && onPaperClick(paper)}
+                      className={`border-b border-border/50 transition-all cursor-pointer ${
+                        isLocked ? "opacity-40 blur-[1px]" : "hover:bg-muted/20"
+                      } ${isActive ? "bg-primary/8 border-l-2 border-l-primary" : ""} ${
+                        selectedPapers.has(paper.paperId) ? "bg-primary/5" : ""
+                      }`}
+                    >
+                      <td className="px-3 py-3" onClick={(e) => e.stopPropagation()}>
+                        {isLocked ? (
+                          <button onClick={onUnlockClick}>
+                            <Lock className="w-4 h-4 text-muted-foreground" />
+                          </button>
+                        ) : (
+                          <input
+                            type="checkbox"
+                            checked={selectedPapers.has(paper.paperId)}
+                            onChange={() => onToggleSelect(paper.paperId)}
+                            className="rounded border-border accent-primary"
+                          />
+                        )}
+                      </td>
+                      <td className="px-1 py-3">
+                        {!isLocked && (
+                          <GripVertical className="w-3.5 h-3.5 text-muted-foreground/40 cursor-grab active:cursor-grabbing" />
+                        )}
+                      </td>
+                      <td className="px-3 py-3">
                         <div className="min-w-0">
                           {!isLocked && paper.url ? (
-                            <a
-                              href={paper.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="font-display text-sm font-semibold text-foreground hover:text-primary transition-colors line-clamp-2"
-                            >
+                            <span className="font-display text-sm font-semibold text-foreground line-clamp-2">
                               {paper.title}
-                              <ExternalLink className="w-3 h-3 inline ml-1 opacity-50" />
-                            </a>
+                            </span>
                           ) : (
                             <span className="font-display text-sm font-semibold text-foreground line-clamp-2">
                               {paper.title}
@@ -177,45 +272,50 @@ const PapersTable = ({
                             {(paper.authors?.length || 0) > 2 && " et al."}
                           </p>
                         </div>
-                      </div>
-                    </td>
-                    <td className="px-3 py-3">
-                      <p className="text-xs text-muted-foreground font-body leading-relaxed line-clamp-2">
-                        {tldr}
-                      </p>
-                    </td>
-                    <td className="px-3 py-3 text-center">
-                      <span className={`inline-flex items-center gap-1 text-xs font-body ${aiFlag.color}`}>
-                        {aiFlag.icon}
-                        {aiFlag.label}
-                      </span>
-                    </td>
-                    <td className="px-3 py-3 text-center">
-                      <span className="inline-block px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-xs font-body text-accent">
-                        {aiLabel}
-                      </span>
-                    </td>
-                    <td className="px-3 py-3 text-center text-xs font-body text-muted-foreground">
-                      {paper.year || "—"}
-                    </td>
-                    <td className="px-3 py-3 text-center">
-                      <div className="flex items-center justify-center gap-2">
-                        <div className="w-16 h-1.5 rounded-full bg-muted overflow-hidden">
-                          <div
-                            className="h-full rounded-full bg-primary transition-all"
-                            style={{ width: `${successRate}%` }}
-                          />
+                      </td>
+                      <td className="px-3 py-3">
+                        <p className="text-xs text-muted-foreground font-body leading-relaxed line-clamp-2">{tldr}</p>
+                      </td>
+                      <td className="px-3 py-3 text-center">
+                        <span className={`inline-flex items-center gap-1 text-xs font-body ${aiFlag.color}`}>
+                          {aiFlag.icon}
+                          {aiFlag.label}
+                        </span>
+                      </td>
+                      <td className="px-3 py-3 text-center">
+                        <span className="inline-block px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-xs font-body text-accent">
+                          {aiLabel}
+                        </span>
+                      </td>
+                      <td className="px-3 py-3 text-center text-xs font-body text-muted-foreground">
+                        {paper.year || "—"}
+                      </td>
+                      <td className="px-3 py-3 text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <div className="w-16 h-2 rounded-full bg-muted overflow-hidden">
+                            <div
+                              className="h-full rounded-full transition-all"
+                              style={{
+                                width: `${paper.matchRate}%`,
+                                background: `linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)))`,
+                              }}
+                            />
+                          </div>
+                          <span className="text-xs font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
                         </div>
-                        <span className="text-xs font-body text-muted-foreground">{successRate}%</span>
-                      </div>
-                    </td>
-                  </motion.tr>
-                );
-              })}
-            </AnimatePresence>
-          </tbody>
-        </table>
+                      </td>
+                    </motion.tr>
+                  );
+                })}
+              </AnimatePresence>
+            </tbody>
+          </table>
+        </div>
       </div>
+
+      <p className="text-xs text-muted-foreground font-body text-right">
+        Showing {processedPapers.length} of {papers.length} papers
+      </p>
     </div>
   );
 };

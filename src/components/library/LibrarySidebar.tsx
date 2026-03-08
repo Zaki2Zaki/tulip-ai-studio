@@ -18,6 +18,7 @@ interface LibrarySidebarProps {
   collections: Collection[];
   onCreateCollection: (name: string) => void;
   onDeleteCollection: (id: string) => void;
+  onDropToCollection?: (collectionId: string, paperId: string, paperTitle: string) => void;
 }
 
 const LibrarySidebar = ({
@@ -30,9 +31,11 @@ const LibrarySidebar = ({
   collections,
   onCreateCollection,
   onDeleteCollection,
+  onDropToCollection,
 }: LibrarySidebarProps) => {
   const [newCollectionName, setNewCollectionName] = useState("");
   const [showNewInput, setShowNewInput] = useState(false);
+  const [dragOverId, setDragOverId] = useState<string | null>(null);
 
   const handleCreate = () => {
     if (newCollectionName.trim()) {
@@ -42,8 +45,31 @@ const LibrarySidebar = ({
     }
   };
 
+  const handleDragOver = (e: React.DragEvent, collectionId: string) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "copy";
+    setDragOverId(collectionId);
+  };
+
+  const handleDragLeave = () => {
+    setDragOverId(null);
+  };
+
+  const handleDrop = (e: React.DragEvent, collectionId: string) => {
+    e.preventDefault();
+    setDragOverId(null);
+    try {
+      const data = JSON.parse(e.dataTransfer.getData("application/json"));
+      if (data.paperId && onDropToCollection) {
+        onDropToCollection(collectionId, data.paperId, data.title);
+      }
+    } catch {
+      // ignore
+    }
+  };
+
   return (
-    <aside className="w-72 shrink-0 border-r border-border bg-card/30 p-5 space-y-6 overflow-y-auto">
+    <aside className="w-72 shrink-0 border-r border-border bg-card/30 p-5 space-y-6 overflow-y-auto library-scroll">
       {/* Actions */}
       <div className="space-y-2">
         <h3 className="text-xs font-body font-semibold uppercase tracking-widest text-muted-foreground mb-3">
@@ -93,7 +119,7 @@ const LibrarySidebar = ({
         ))}
       </div>
 
-      {/* Collections */}
+      {/* Collections - drop targets */}
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <h3 className="text-xs font-body font-semibold uppercase tracking-widest text-muted-foreground">
@@ -135,10 +161,17 @@ const LibrarySidebar = ({
         {collections.map((col) => (
           <div
             key={col.id}
-            className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-muted/20 transition-colors group"
+            onDragOver={(e) => handleDragOver(e, col.id)}
+            onDragLeave={handleDragLeave}
+            onDrop={(e) => handleDrop(e, col.id)}
+            className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all group ${
+              dragOverId === col.id
+                ? "bg-accent/15 border border-accent/40 ring-1 ring-accent/20 scale-[1.02]"
+                : "hover:bg-muted/20 border border-transparent"
+            }`}
           >
             <div className="flex items-center gap-2 min-w-0">
-              <Folder className="w-3.5 h-3.5 text-accent shrink-0" />
+              <Folder className={`w-3.5 h-3.5 shrink-0 transition-colors ${dragOverId === col.id ? "text-accent" : "text-accent/60"}`} />
               <span className="text-sm font-body text-foreground truncate">{col.name}</span>
               <span className="text-xs text-muted-foreground">{col.paperIds.length}</span>
             </div>
