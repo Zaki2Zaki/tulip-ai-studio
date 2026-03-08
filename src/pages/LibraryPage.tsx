@@ -121,6 +121,16 @@ const LibraryPage = () => {
     }
   };
 
+  // Sort upvoted papers to the top
+  const visiblePapers = useMemo(() => {
+    const filtered = papers.filter((p) => !trashedPapers.has(p.paperId));
+    return filtered.sort((a, b) => {
+      const aUp = votes[a.paperId] === "up" ? 1 : 0;
+      const bUp = votes[b.paperId] === "up" ? 1 : 0;
+      return bUp - aUp;
+    });
+  }, [papers, trashedPapers, votes]);
+
   useEffect(() => {
     const cat = CATEGORIES.find((c) => c.id === activeCategory);
     if (cat) fetchPapers(cat.query);
