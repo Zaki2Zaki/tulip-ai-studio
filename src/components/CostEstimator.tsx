@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import tulipLogo from "@/assets/tulip-logo.png";
+import tulipLogo from "@/assets/new-logo.png";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Calculator, ChevronDown, ChevronUp } from "lucide-react";
