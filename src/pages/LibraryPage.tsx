@@ -67,8 +67,8 @@ const LibraryPage = () => {
   const [searchCache, setSearchCache] = useState<Map<string, { papers: Paper[]; counts: Record<string, number> }>>(new Map());
   const [activeCollectionId, setActiveCollectionId] = useState<string | null>(null);
 
-  const FREE_SEARCH_LIMIT = 3;
-  const needsPaywall = !isSubscribed && searchCount >= FREE_SEARCH_LIMIT;
+  const FREE_PAPER_LIMIT = 3;
+  const needsPaywall = !isSubscribed && viewedPapers.size >= FREE_PAPER_LIMIT;
 
   const fetchPapers = async (query: string) => {
     // Check cache first
