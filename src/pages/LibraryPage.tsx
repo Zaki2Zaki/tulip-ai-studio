@@ -315,11 +315,26 @@ const LibraryPage = () => {
 
               <div className="flex items-center gap-3">
                 <div className="flex-1">
-                  <SearchResultsCount
-                    totalResults={visiblePapers.length}
-                    searchQuery={lastSearchQuery}
-                    sources={sourcesList.length > 0 ? sourcesList : [{ name: "CrossRef", count: 0 }, { name: "arXiv", count: 0 }, { name: "OpenAlex", count: 0 }]}
-                  />
+                  {activeCollection ? (
+                    <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/20">
+                      <Folder className="w-4 h-4 text-primary" />
+                      <span className="text-sm font-body text-foreground font-semibold">{activeCollection.name}</span>
+                      <span className="text-xs font-body text-muted-foreground">{visiblePapers.length} paper(s)</span>
+                      <button
+                        onClick={() => setActiveCollectionId(null)}
+                        className="ml-auto flex items-center gap-1 text-xs font-body text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        <ArrowLeft className="w-3 h-3" />
+                        Back to results
+                      </button>
+                    </div>
+                  ) : (
+                    <SearchResultsCount
+                      totalResults={visiblePapers.length}
+                      searchQuery={lastSearchQuery}
+                      sources={sourcesList.length > 0 ? sourcesList : [{ name: "CrossRef", count: 0 }, { name: "arXiv", count: 0 }, { name: "OpenAlex", count: 0 }]}
+                    />
+                  )}
                 </div>
                 <ViewToggle mode={viewMode} onChange={setViewMode} />
               </div>
