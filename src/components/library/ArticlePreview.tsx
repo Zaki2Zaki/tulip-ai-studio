@@ -238,8 +238,9 @@ const ArticlePreview = ({
     );
   };
 
-  // Build arXiv PDF URL if possible
-  const pdfUrl = paper.pdfUrl || (paper.url?.includes("arxiv.org") ? paper.url.replace("/abs/", "/pdf/") + ".pdf" : null);
+  // Build PDF URL: prefer explicit pdfUrl, then try arXiv pattern, then Unpaywall via DOI
+  const pdfUrl = paper.pdfUrl
+    || (paper.url?.includes("arxiv.org") ? paper.url.replace("/abs/", "/pdf/") + ".pdf" : null);
 
   // Google Docs viewer for better PDF rendering
   const pdfViewerUrl = pdfUrl

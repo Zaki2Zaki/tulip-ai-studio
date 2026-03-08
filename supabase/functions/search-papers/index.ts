@@ -8,17 +8,24 @@ async function searchCrossRef(query: string, rows = 20) {
     `https://api.crossref.org/works?query=${encodeURIComponent(query)}&rows=${rows}&sort=relevance&order=desc`
   );
   const data = await res.json();
-  return (data.message?.items || []).map((item: any) => ({
-    paperId: item.DOI || crypto.randomUUID(),
-    title: Array.isArray(item.title) ? item.title[0] : item.title || "Untitled",
-    abstract: item.abstract?.replace(/<[^>]*>/g, "") || null,
-    year: item.published?.["date-parts"]?.[0]?.[0] || null,
-    citationCount: item["is-referenced-by-count"] || null,
-    url: item.URL || `https://doi.org/${item.DOI}`,
-    authors: (item.author || []).map((a: any) => ({ name: `${a.given || ""} ${a.family || ""}`.trim() })),
-    venue: item["container-title"]?.[0] || null,
-    source: "crossref",
-  }));
+  return (data.message?.items || []).map((item: any) => {
+    // Try to find an open-access PDF link from CrossRef
+    const pdfLink = (item.link || []).find((l: any) =>
+      l["content-type"] === "application/pdf" || l["content-type"]?.includes("pdf")
+    );
+    return {
+      paperId: item.DOI || crypto.randomUUID(),
+      title: Array.isArray(item.title) ? item.title[0] : item.title || "Untitled",
+      abstract: item.abstract?.replace(/<[^>]*>/g, "") || null,
+      year: item.published?.["date-parts"]?.[0]?.[0] || null,
+      citationCount: item["is-referenced-by-count"] || null,
+      url: item.URL || `https://doi.org/${item.DOI}`,
+      authors: (item.author || []).map((a: any) => ({ name: `${a.given || ""} ${a.family || ""}`.trim() })),
+      venue: item["container-title"]?.[0] || null,
+      source: "crossref",
+      pdfUrl: pdfLink?.URL || null,
+    };
+  });
 }
 
 async function searchArxiv(query: string, maxResults = 10) {
@@ -66,25 +73,32 @@ async function searchOpenAlex(query: string, perPage = 20) {
     `https://api.openalex.org/works?search=${encodeURIComponent(query)}&per_page=${perPage}&sort=relevance_score:desc&mailto=tuliptech@research.dev`
   );
   const data = await res.json();
-  return (data.results || []).map((w: any) => ({
-    paperId: w.id || crypto.randomUUID(),
-    title: w.title || "Untitled",
-    abstract: w.abstract_inverted_index
-      ? Object.entries(w.abstract_inverted_index as Record<string, number[]>)
-          .flatMap(([word, positions]) => positions.map((pos) => ({ word, pos })))
-          .sort((a, b) => a.pos - b.pos)
-          .map((x) => x.word)
-          .join(" ")
-      : null,
-    year: w.publication_year || null,
-    citationCount: w.cited_by_count || null,
-    url: w.doi ? `https://doi.org/${w.doi.replace("https://doi.org/", "")}` : w.id,
-    authors: (w.authorships || []).slice(0, 5).map((a: any) => ({
-      name: a.author?.display_name || "Unknown",
-    })),
-    venue: w.primary_location?.source?.display_name || null,
-    source: "openalex",
-  }));
+  return (data.results || []).map((w: any) => {
+    // Extract open access PDF URL from OpenAlex
+    const oaPdfUrl = w.primary_location?.pdf_url
+      || w.best_oa_location?.pdf_url
+      || (w.open_access?.oa_url || null);
+    return {
+      paperId: w.id || crypto.randomUUID(),
+      title: w.title || "Untitled",
+      abstract: w.abstract_inverted_index
+        ? Object.entries(w.abstract_inverted_index as Record<string, number[]>)
+            .flatMap(([word, positions]) => positions.map((pos) => ({ word, pos })))
+            .sort((a, b) => a.pos - b.pos)
+            .map((x) => x.word)
+            .join(" ")
+        : null,
+      year: w.publication_year || null,
+      citationCount: w.cited_by_count || null,
+      url: w.doi ? `https://doi.org/${w.doi.replace("https://doi.org/", "")}` : w.id,
+      authors: (w.authorships || []).slice(0, 5).map((a: any) => ({
+        name: a.author?.display_name || "Unknown",
+      })),
+      venue: w.primary_location?.source?.display_name || null,
+      source: "openalex",
+      pdfUrl: oaPdfUrl,
+    };
+  });
 }
 
 async function searchNvidia(query: string, maxResults = 15) {
@@ -93,25 +107,31 @@ async function searchNvidia(query: string, maxResults = 15) {
     `https://api.openalex.org/works?search=${encodeURIComponent(query)}&filter=authorships.institutions.ror:https://ror.org/01f5ytq51&per_page=${maxResults}&sort=relevance_score:desc&mailto=tuliptech@research.dev`
   );
   const data = await res.json();
-  return (data.results || []).map((w: any) => ({
-    paperId: w.id || crypto.randomUUID(),
-    title: w.title || "Untitled",
-    abstract: w.abstract_inverted_index
-      ? Object.entries(w.abstract_inverted_index as Record<string, number[]>)
-          .flatMap(([word, positions]) => positions.map((pos) => ({ word, pos })))
-          .sort((a, b) => a.pos - b.pos)
-          .map((x) => x.word)
-          .join(" ")
-      : null,
-    year: w.publication_year || null,
-    citationCount: w.cited_by_count || null,
-    url: w.doi ? `https://doi.org/${w.doi.replace("https://doi.org/", "")}` : w.id,
-    authors: (w.authorships || []).slice(0, 5).map((a: any) => ({
-      name: a.author?.display_name || "Unknown",
-    })),
-    venue: w.primary_location?.source?.display_name || null,
-    source: "nvidia",
-  }));
+  return (data.results || []).map((w: any) => {
+    const oaPdfUrl = w.primary_location?.pdf_url
+      || w.best_oa_location?.pdf_url
+      || (w.open_access?.oa_url || null);
+    return {
+      paperId: w.id || crypto.randomUUID(),
+      title: w.title || "Untitled",
+      abstract: w.abstract_inverted_index
+        ? Object.entries(w.abstract_inverted_index as Record<string, number[]>)
+            .flatMap(([word, positions]) => positions.map((pos) => ({ word, pos })))
+            .sort((a, b) => a.pos - b.pos)
+            .map((x) => x.word)
+            .join(" ")
+        : null,
+      year: w.publication_year || null,
+      citationCount: w.cited_by_count || null,
+      url: w.doi ? `https://doi.org/${w.doi.replace("https://doi.org/", "")}` : w.id,
+      authors: (w.authorships || []).slice(0, 5).map((a: any) => ({
+        name: a.author?.display_name || "Unknown",
+      })),
+      venue: w.primary_location?.source?.display_name || null,
+      source: "nvidia",
+      pdfUrl: oaPdfUrl,
+    };
+  });
 }
 
 Deno.serve(async (req) => {
