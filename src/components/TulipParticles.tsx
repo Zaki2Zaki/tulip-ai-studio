@@ -21,6 +21,7 @@ const TulipParticles = () => {
   const particlesRef = useRef<Particle[]>([]);
   const timeRef = useRef(0);
   const initialized = useRef(false);
+  const scrollY = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
