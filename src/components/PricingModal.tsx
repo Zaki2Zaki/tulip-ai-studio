@@ -75,7 +75,7 @@ const PricingModal = ({ open, onClose }: PricingModalProps) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.97 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-5xl md:w-full z-50 bg-card border border-border rounded-2xl overflow-auto max-h-[90vh]"
+            className="fixed z-50 inset-4 md:inset-0 md:m-auto md:max-w-5xl md:w-[calc(100%-3rem)] md:max-h-[90vh] md:h-fit bg-card border border-border rounded-2xl overflow-auto"
           >
             <div className="p-6 md:p-10">
               <div className="flex items-center justify-between mb-8">
@@ -125,13 +125,13 @@ const PricingModal = ({ open, onClose }: PricingModalProps) => {
                         ))}
                       </ul>
                       <button
-                        className={`w-full py-2.5 rounded-full text-sm font-body font-semibold transition-opacity ${
+                        className={`w-full py-3 rounded-full text-sm font-body font-bold tracking-wide transition-all ${
                           plan.highlight
-                            ? "bg-primary text-primary-foreground hover:opacity-90"
-                            : "border border-border text-foreground hover:border-primary/30"
+                            ? "text-gradient-chrome-animated bg-primary text-primary-foreground hover:opacity-90 shadow-[0_0_24px_-4px_hsl(260_85%_75%/0.5)] hover:shadow-[0_0_32px_-2px_hsl(260_85%_75%/0.6)]"
+                            : "btn-chrome-outline hover:shadow-[0_0_20px_-4px_hsl(260_85%_75%/0.3)]"
                         }`}
                       >
-                        {plan.cta}
+                        <span className={plan.highlight ? "" : "text-gradient-chrome-animated"}>{plan.cta}</span>
                       </button>
                     </div>
                   );
