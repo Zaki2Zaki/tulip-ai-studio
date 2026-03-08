@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, ArrowUp } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Menu, X, ChevronDown, ArrowUp, LogIn, LogOut } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useCases } from "@/data/useCases";
+import { supabase } from "@/integrations/supabase/client";
 
 const FONT_SCALES = [1, 1.1, 1.2, 1.3] as const;
 const FONT_LABELS = ["1×", "1.1×", "1.2×", "1.3×"];
@@ -21,11 +22,21 @@ const Navbar = () => {
   const [mobileUseCasesOpen, setMobileUseCasesOpen] = useState(false);
   const [fontScaleIndex, setFontScaleIndex] = useState(0);
   const [showFontMenu, setShowFontMenu] = useState(false);
+  const [user, setUser] = useState<any>(null);
   const navRef = useRef<HTMLElement>(null);
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const fontMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome = location.pathname === "/";
+
+  // Track auth state
+  useEffect(() => {
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+    supabase.auth.getSession().then(({ data }) => setUser(data.session?.user ?? null));
+  }, []);
 
   // Apply font scale to <html>
   useEffect(() => {
@@ -196,6 +207,24 @@ const Navbar = () => {
             >
               Get a Quote
             </a>
+
+            {user ? (
+              <button
+                onClick={async () => { await supabase.auth.signOut(); navigate("/"); }}
+                className="flex items-center gap-1.5 text-sm font-body text-muted-foreground hover:text-primary transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+                Sign Out
+              </button>
+            ) : (
+              <Link
+                to="/auth"
+                className="flex items-center gap-1.5 text-sm font-body text-muted-foreground hover:text-primary transition-colors"
+              >
+                <LogIn className="w-4 h-4" />
+                Sign In
+              </Link>
+            )}
           </div>
 
           {/* Mobile toggle */}
@@ -321,6 +350,22 @@ const Navbar = () => {
                 >
                   Get a Quote
                 </a>
+                {user ? (
+                  <button
+                    onClick={async () => { await supabase.auth.signOut(); setMobileOpen(false); navigate("/"); }}
+                    className="flex items-center justify-center gap-2 text-muted-foreground font-body text-base py-2 hover:text-primary transition-colors"
+                  >
+                    <LogOut className="w-4 h-4" /> Sign Out
+                  </button>
+                ) : (
+                  <Link
+                    to="/auth"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-center gap-2 text-muted-foreground font-body text-base py-2 hover:text-primary transition-colors"
+                  >
+                    <LogIn className="w-4 h-4" /> Sign In
+                  </Link>
+                )}
               </div>
             </motion.div>
           )}
