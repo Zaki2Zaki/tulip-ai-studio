@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import {
   ThumbsUp, ThumbsDown, Trash2, X, Bot, Send, MessageSquare, Loader2,
   ExternalLink, Download, FolderPlus, CheckCircle, XCircle, AlertTriangle,
-  ChevronLeft, ChevronRight, FileText, Sparkles, List,
+  ChevronLeft, ChevronRight, FileText, Sparkles, List, Link2,
 } from "lucide-react";
 import { streamPaperChat } from "@/lib/api/papers";
 import { toast } from "sonner";
@@ -45,7 +45,6 @@ const QUICK_QUESTIONS = [
 
 /** Extract key takeaway bullets from abstract text */
 function extractKeyTakeaways(text: string): string[] {
-  // Split on sentence boundaries
   const sentences = text
     .replace(/\s+/g, " ")
     .split(/(?<=[.!?])\s+/)
@@ -54,7 +53,6 @@ function extractKeyTakeaways(text: string): string[] {
 
   if (sentences.length <= 3) return sentences;
 
-  // Group into ~3-5 key points
   const points: string[] = [];
   const chunkSize = Math.ceil(sentences.length / Math.min(5, Math.max(3, Math.ceil(sentences.length / 2))));
   for (let i = 0; i < sentences.length; i += chunkSize) {
@@ -62,6 +60,30 @@ function extractKeyTakeaways(text: string): string[] {
     if (chunk) points.push(chunk);
   }
   return points.slice(0, 5);
+}
+
+/** Find related papers by keyword overlap in title + abstract */
+function findRelatedPapers(current: Paper, all: Paper[], max = 5): Paper[] {
+  const stopWords = new Set(["the","a","an","of","in","for","and","to","with","on","is","by","from","at","this","that","we","our","its","are","as","be","or","it","was","has","have","not","but","can","using","based","via"]);
+  const extractWords = (text: string) =>
+    text.toLowerCase().replace(/[^a-z0-9\s]/g, "").split(/\s+/).filter(w => w.length > 2 && !stopWords.has(w));
+
+  const currentWords = new Set([
+    ...extractWords(current.title),
+    ...(current.abstract ? extractWords(current.abstract) : []),
+  ]);
+
+  const scored = all
+    .filter(p => p.paperId !== current.paperId)
+    .map(p => {
+      const pWords = [...extractWords(p.title), ...(p.abstract ? extractWords(p.abstract) : [])];
+      const overlap = pWords.filter(w => currentWords.has(w)).length;
+      return { paper: p, score: overlap };
+    })
+    .filter(s => s.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  return scored.slice(0, max).map(s => s.paper);
 }
 
 const ArticlePreview = ({
@@ -96,6 +118,11 @@ const ArticlePreview = ({
     const idx = dir === "prev" ? currentIndex - 1 : currentIndex + 1;
     if (allPapers[idx]) onNavigate(allPapers[idx]);
   };
+
+  const relatedPapers = useMemo(
+    () => findRelatedPapers(paper, allPapers),
+    [paper.paperId, allPapers]
+  );
 
   const abstractTakeaways = useMemo(
     () => (paper.abstract ? extractKeyTakeaways(paper.abstract) : []),
@@ -467,6 +494,40 @@ const ArticlePreview = ({
               <p className="text-xs font-body text-muted-foreground/60 italic">Click "Generate with AI" for a structured summary of key findings.</p>
             ) : null}
           </div>
+          {/* Related Papers */}
+          {relatedPapers.length > 0 && (
+            <div className="p-5 border-t border-border">
+              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-1.5">
+                <Link2 className="w-3.5 h-3.5 text-primary" />
+                Related Papers
+              </h5>
+              <div className="space-y-2">
+                {relatedPapers.map((rp) => (
+                  <button
+                    key={rp.paperId}
+                    onClick={() => onNavigate?.(rp)}
+                    className="w-full text-left p-3 rounded-lg border border-border bg-muted/10 hover:bg-muted/25 hover:border-primary/20 transition-all group"
+                  >
+                    <p className="text-sm font-body font-medium text-foreground leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+                      {rp.title}
+                    </p>
+                    <div className="flex items-center gap-3 mt-1.5">
+                      {rp.year && <span className="text-[10px] text-accent font-body">{rp.year}</span>}
+                      {rp.authors?.length > 0 && (
+                        <span className="text-[10px] text-muted-foreground font-body truncate">
+                          {rp.authors.slice(0, 2).map(a => a.name).join(", ")}
+                          {rp.authors.length > 2 && " et al."}
+                        </span>
+                      )}
+                      {rp.citationCount != null && rp.citationCount > 0 && (
+                        <span className="text-[10px] text-muted-foreground font-body">{rp.citationCount} cit.</span>
+                      )}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Right: AI Chat */}
