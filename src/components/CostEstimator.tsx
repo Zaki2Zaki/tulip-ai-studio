@@ -2,7 +2,8 @@ import { useState, useMemo } from "react";
 import tulipLogo from "@/assets/new-logo.png";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Calculator, ChevronDown, ChevronUp } from "lucide-react";
+import { Calculator, ChevronDown, ChevronUp, ClipboardCheck } from "lucide-react";
+import PipelineAssessmentQuiz from "./PipelineAssessmentQuiz";
 
 interface ServiceOption {
   id: string;
@@ -91,6 +92,11 @@ const CostEstimator = () => {
   const [scale, setScale] = useState<ScaleLevel>("medium");
   const [currency, setCurrency] = useState<"USD" | "CAD" | "EUR">("USD");
   const [showBreakdown, setShowBreakdown] = useState(false);
+  const [quizOpen, setQuizOpen] = useState(false);
+
+  const handleQuizComplete = (recommendedServices: string[]) => {
+    setSelectedServices(recommendedServices);
+  };
 
   const toggleService = (id: string) => {
     setSelectedServices((prev) =>
@@ -132,9 +138,16 @@ const CostEstimator = () => {
           <h2 className="font-display text-4xl md:text-6xl font-bold mb-4">
             Build your <span className="text-gradient-gold">quote</span>
           </h2>
-          <p className="text-muted-foreground font-body max-w-xl mx-auto">
+          <p className="text-muted-foreground font-body max-w-xl mx-auto mb-6">
             Select your services and studio scale for an instant budget range based on our consultancy rates.
           </p>
+          <button
+            onClick={() => setQuizOpen(true)}
+            className="inline-flex items-center gap-2 btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-sm transition-all"
+          >
+            <ClipboardCheck size={18} />
+            Not sure what you need? Take the 2-min Assessment
+          </button>
         </motion.div>
 
         <motion.div
@@ -317,6 +330,12 @@ const CostEstimator = () => {
           Payment milestone structure. Final quotation varies depending on custom prototype requirements.
         </p>
       </div>
+
+      <PipelineAssessmentQuiz
+        open={quizOpen}
+        onClose={() => setQuizOpen(false)}
+        onComplete={handleQuizComplete}
+      />
     </section>);
 
 };
