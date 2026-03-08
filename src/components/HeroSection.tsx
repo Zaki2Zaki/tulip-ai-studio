@@ -10,7 +10,7 @@ const HeroSection = () => {
         <img
           src={heroBg}
           alt="Tulip Technology hero"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-left"
           loading="eager" />
 
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background" />
