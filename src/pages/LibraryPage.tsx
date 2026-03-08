@@ -68,6 +68,7 @@ const LibraryPage = () => {
       const result = await searchPapers(query, activeSrcKeys.length > 0 ? activeSrcKeys : undefined);
       setPapers(result.papers);
       setSourceCounts(result.counts);
+      setSearchCache((prev) => new Map(prev).set(cacheKey, { papers: result.papers, counts: result.counts }));
       setSearchCount((c) => c + 1);
     } catch (err) {
       console.error("Search failed:", err);
