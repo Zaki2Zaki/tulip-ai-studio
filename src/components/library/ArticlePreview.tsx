@@ -286,7 +286,7 @@ const ArticlePreview = ({
                 </div>
               )}
                 {/* Download */}
-                {pdfUrl && (
+                <div className="ml-auto flex items-center gap-2">
                   <a
                     href={pdfUrl}
                     target="_blank"
