@@ -350,6 +350,22 @@ const Navbar = () => {
                 >
                   Get a Quote
                 </a>
+                {user ? (
+                  <button
+                    onClick={async () => { await supabase.auth.signOut(); setMobileOpen(false); navigate("/"); }}
+                    className="flex items-center justify-center gap-2 text-muted-foreground font-body text-base py-2 hover:text-primary transition-colors"
+                  >
+                    <LogOut className="w-4 h-4" /> Sign Out
+                  </button>
+                ) : (
+                  <Link
+                    to="/auth"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-center gap-2 text-muted-foreground font-body text-base py-2 hover:text-primary transition-colors"
+                  >
+                    <LogIn className="w-4 h-4" /> Sign In
+                  </Link>
+                )}
               </div>
             </motion.div>
           )}
