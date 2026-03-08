@@ -288,15 +288,15 @@ const ArticlePreview = ({
           {/* Paper header + actions */}
           <div className="p-5 space-y-3 border-b border-border">
             <h4 className="font-display text-base font-bold text-foreground leading-tight">{paper.title}</h4>
-            <p className="text-xs text-muted-foreground font-body">
+            <p className="text-sm text-foreground/70 font-body">
               {paper.authors?.slice(0, 5).map((a) => a.name).join(", ")}
               {(paper.authors?.length || 0) > 5 && " et al."}
             </p>
             <div className="flex items-center gap-3">
-              {paper.year && <span className="text-xs text-accent font-body">{paper.year}</span>}
-              {paper.venue && <span className="text-xs text-muted-foreground font-body">{paper.venue}</span>}
+              {paper.year && <span className="text-sm text-accent font-body">{paper.year}</span>}
+              {paper.venue && <span className="text-sm text-foreground/60 font-body">{paper.venue}</span>}
               {paper.citationCount != null && (
-                <span className="text-xs text-muted-foreground font-body">{paper.citationCount} citations</span>
+                <span className="text-sm text-foreground/60 font-body">{paper.citationCount} citations</span>
               )}
             </div>
 
@@ -579,15 +579,15 @@ const ArticlePreview = ({
                       {rp.title}
                     </p>
                     <div className="flex items-center gap-3 mt-1.5">
-                      {rp.year && <span className="text-[10px] text-accent font-body">{rp.year}</span>}
+                      {rp.year && <span className="text-[11px] text-accent font-body">{rp.year}</span>}
                       {rp.authors?.length > 0 && (
-                        <span className="text-[10px] text-muted-foreground font-body truncate">
+                        <span className="text-[11px] text-foreground/60 font-body truncate">
                           {rp.authors.slice(0, 2).map(a => a.name).join(", ")}
                           {rp.authors.length > 2 && " et al."}
                         </span>
                       )}
                       {rp.citationCount != null && rp.citationCount > 0 && (
-                        <span className="text-[10px] text-muted-foreground font-body">{rp.citationCount} cit.</span>
+                        <span className="text-[11px] text-foreground/60 font-body">{rp.citationCount} cit.</span>
                       )}
                     </div>
                   </button>
