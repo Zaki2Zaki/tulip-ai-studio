@@ -38,6 +38,8 @@ const LibrarySidebar = ({
   onDropToCollection,
   enabledSources,
   onToggleSource,
+  activeCollectionId,
+  onCollectionClick,
 }: LibrarySidebarProps) => {
   const [newCollectionName, setNewCollectionName] = useState("");
   const [showNewInput, setShowNewInput] = useState(false);
