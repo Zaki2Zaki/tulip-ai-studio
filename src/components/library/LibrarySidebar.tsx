@@ -34,6 +34,8 @@ const LibrarySidebar = ({
   onCreateCollection,
   onDeleteCollection,
   onDropToCollection,
+  enabledSources,
+  onToggleSource,
 }: LibrarySidebarProps) => {
   const [newCollectionName, setNewCollectionName] = useState("");
   const [showNewInput, setShowNewInput] = useState(false);
