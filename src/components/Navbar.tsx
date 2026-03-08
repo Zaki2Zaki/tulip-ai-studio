@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Accessibility } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { useCases } from "@/data/useCases";
+
+const FONT_SCALES = [1, 1.5, 2, 3] as const;
+const FONT_LABELS = ["1×", "1.5×", "2×", "3×"];
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -16,16 +19,37 @@ const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileUseCasesOpen, setMobileUseCasesOpen] = useState(false);
+  const [fontScaleIndex, setFontScaleIndex] = useState(0);
+  const [showFontMenu, setShowFontMenu] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const fontMenuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const isHome = location.pathname === "/";
+
+  // Apply font scale to <html>
+  useEffect(() => {
+    const scale = FONT_SCALES[fontScaleIndex];
+    document.documentElement.style.fontSize = `${scale * 100}%`;
+    return () => { document.documentElement.style.fontSize = ""; };
+  }, [fontScaleIndex]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Close font menu on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (fontMenuRef.current && !fontMenuRef.current.contains(e.target as Node)) {
+        setShowFontMenu(false);
+      }
+    };
+    if (showFontMenu) document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [showFontMenu]);
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
@@ -73,9 +97,52 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
-          <Link to="/" className="font-display text-2xl font-bold tracking-tight text-foreground md:ml-[18%]">
-            TULIP<span className="text-gradient-gold"> TECH</span>
-          </Link>
+          <div className="flex items-center gap-3 md:ml-[18%]">
+            {/* Accessibility font-size toggle */}
+            <div ref={fontMenuRef} className="relative">
+              <button
+                onClick={() => setShowFontMenu(!showFontMenu)}
+                aria-label="Adjust text size"
+                title="Adjust text size"
+                className="flex items-center justify-center w-9 h-9 rounded-full border border-border bg-card/50 hover:bg-card hover:border-primary/30 transition-all text-muted-foreground hover:text-primary"
+              >
+                <Accessibility className="w-4 h-4" />
+              </button>
+              <AnimatePresence>
+                {showFontMenu && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -4, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -4, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute left-0 top-full mt-2 bg-card border border-border rounded-xl shadow-xl p-2 min-w-[140px] z-50"
+                  >
+                    <p className="text-[10px] font-body text-muted-foreground uppercase tracking-widest px-2 pb-1.5">
+                      Text Size
+                    </p>
+                    {FONT_SCALES.map((scale, i) => (
+                      <button
+                        key={scale}
+                        onClick={() => { setFontScaleIndex(i); setShowFontMenu(false); }}
+                        className={`w-full text-left px-3 py-1.5 rounded-lg text-sm font-body transition-colors flex items-center justify-between ${
+                          fontScaleIndex === i
+                            ? "bg-primary/10 text-primary font-semibold"
+                            : "text-foreground hover:bg-muted/30"
+                        }`}
+                      >
+                        <span>{FONT_LABELS[i]}</span>
+                        {fontScaleIndex === i && <span className="text-[10px] text-primary">✓</span>}
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <Link to="/" className="font-display text-2xl font-bold tracking-tight text-foreground">
+              TULIP<span className="text-gradient-gold"> TECH</span>
+            </Link>
+          </div>
 
           {/* Desktop — Tesla-style centered nav */}
           <div className="hidden md:flex items-center gap-10">
