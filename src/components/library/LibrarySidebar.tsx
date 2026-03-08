@@ -21,6 +21,8 @@ interface LibrarySidebarProps {
   onDropToCollection?: (collectionId: string, paperId: string, paperTitle: string) => void;
   enabledSources: Set<string>;
   onToggleSource: (key: string) => void;
+  activeCollectionId?: string | null;
+  onCollectionClick?: (collectionId: string | null) => void;
 }
 
 const LibrarySidebar = ({

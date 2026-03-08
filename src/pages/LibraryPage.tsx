@@ -64,6 +64,7 @@ const LibraryPage = () => {
   const [viewMode, setViewMode] = useState<ViewMode>("table");
   const [enabledSources, setEnabledSources] = useState<Set<string>>(new Set(DEFAULT_ENABLED_KEYS));
   const [searchCache, setSearchCache] = useState<Map<string, { papers: Paper[]; counts: Record<string, number> }>>(new Map());
+  const [activeCollectionId, setActiveCollectionId] = useState<string | null>(null);
 
   const FREE_SEARCH_LIMIT = 3;
   const needsPaywall = !isSubscribed && searchCount >= FREE_SEARCH_LIMIT;
