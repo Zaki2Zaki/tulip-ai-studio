@@ -346,7 +346,7 @@ const PapersTable = ({
                               {paper.title}
                             </span>
                           )}
-                          <p className="text-xs text-muted-foreground mt-0.5">
+                          <p className="text-sm text-muted-foreground mt-0.5">
                             {paper.authors?.slice(0, 2).map((a) => a.name).join(", ")}
                             {(paper.authors?.length || 0) > 2 && " et al."}
                           </p>
