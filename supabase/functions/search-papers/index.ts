@@ -134,6 +134,73 @@ async function searchNvidia(query: string, maxResults = 15) {
   });
 }
 
+/** Extract DOI from a paper's URL or paperId */
+function extractDoi(paper: any): string | null {
+  // paperId might be a DOI directly (CrossRef)
+  if (paper.paperId && /^10\.\d{4,}/.test(paper.paperId)) return paper.paperId;
+  // URL might contain DOI
+  const doiMatch = paper.url?.match(/doi\.org\/(.+)/);
+  if (doiMatch) return decodeURIComponent(doiMatch[1]);
+  return null;
+}
+
+/** Batch-enrich papers with open-access PDF URLs via Unpaywall */
+async function enrichWithUnpaywall(papers: any[]): Promise<any[]> {
+  const papersNeedingPdf = papers.filter((p) => !p.pdfUrl);
+  if (papersNeedingPdf.length === 0) return papers;
+
+  // Build DOI-to-paper index
+  const doiMap = new Map<string, any[]>();
+  for (const p of papersNeedingPdf) {
+    const doi = extractDoi(p);
+    if (doi) {
+      if (!doiMap.has(doi)) doiMap.set(doi, []);
+      doiMap.get(doi)!.push(p);
+    }
+  }
+
+  if (doiMap.size === 0) return papers;
+
+  // Fetch Unpaywall in parallel (batches of 10 to be polite)
+  const dois = [...doiMap.keys()];
+  const batchSize = 10;
+
+  for (let i = 0; i < dois.length; i += batchSize) {
+    const batch = dois.slice(i, i + batchSize);
+    const results = await Promise.allSettled(
+      batch.map(async (doi) => {
+        const res = await fetch(
+          `https://api.unpaywall.org/v2/${encodeURIComponent(doi)}?email=tuliptech@research.dev`
+        );
+        if (!res.ok) return null;
+        const data = await res.json();
+        return { doi, data };
+      })
+    );
+
+    for (const result of results) {
+      if (result.status !== "fulfilled" || !result.value) continue;
+      const { doi, data } = result.value;
+
+      // Find best open-access PDF URL
+      const oaPdf =
+        data.best_oa_location?.url_for_pdf ||
+        data.best_oa_location?.url ||
+        data.first_oa_location?.url_for_pdf ||
+        data.first_oa_location?.url ||
+        null;
+
+      if (oaPdf && doiMap.has(doi)) {
+        for (const p of doiMap.get(doi)!) {
+          p.pdfUrl = oaPdf;
+        }
+      }
+    }
+  }
+
+  return papers;
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -172,7 +239,7 @@ Deno.serve(async (req) => {
     }
 
     const results = await Promise.allSettled(promises);
-    const papers: any[] = [];
+    let papers: any[] = [];
     const counts: Record<string, number> = {};
 
     results.forEach((result, i) => {
@@ -185,6 +252,13 @@ Deno.serve(async (req) => {
         counts[name] = 0;
       }
     });
+
+    // Enrich papers missing PDF URLs via Unpaywall (uses DOI)
+    try {
+      papers = await enrichWithUnpaywall(papers);
+    } catch (e) {
+      console.error("Unpaywall enrichment failed:", e);
+    }
 
     return new Response(
       JSON.stringify({ papers, counts, total: papers.length }),
