@@ -45,7 +45,6 @@ const QUICK_QUESTIONS = [
 
 /** Extract key takeaway bullets from abstract text */
 function extractKeyTakeaways(text: string): string[] {
-  // Split on sentence boundaries
   const sentences = text
     .replace(/\s+/g, " ")
     .split(/(?<=[.!?])\s+/)
@@ -54,7 +53,6 @@ function extractKeyTakeaways(text: string): string[] {
 
   if (sentences.length <= 3) return sentences;
 
-  // Group into ~3-5 key points
   const points: string[] = [];
   const chunkSize = Math.ceil(sentences.length / Math.min(5, Math.max(3, Math.ceil(sentences.length / 2))));
   for (let i = 0; i < sentences.length; i += chunkSize) {
@@ -62,6 +60,30 @@ function extractKeyTakeaways(text: string): string[] {
     if (chunk) points.push(chunk);
   }
   return points.slice(0, 5);
+}
+
+/** Find related papers by keyword overlap in title + abstract */
+function findRelatedPapers(current: Paper, all: Paper[], max = 5): Paper[] {
+  const stopWords = new Set(["the","a","an","of","in","for","and","to","with","on","is","by","from","at","this","that","we","our","its","are","as","be","or","it","was","has","have","not","but","can","using","based","via"]);
+  const extractWords = (text: string) =>
+    text.toLowerCase().replace(/[^a-z0-9\s]/g, "").split(/\s+/).filter(w => w.length > 2 && !stopWords.has(w));
+
+  const currentWords = new Set([
+    ...extractWords(current.title),
+    ...(current.abstract ? extractWords(current.abstract) : []),
+  ]);
+
+  const scored = all
+    .filter(p => p.paperId !== current.paperId)
+    .map(p => {
+      const pWords = [...extractWords(p.title), ...(p.abstract ? extractWords(p.abstract) : [])];
+      const overlap = pWords.filter(w => currentWords.has(w)).length;
+      return { paper: p, score: overlap };
+    })
+    .filter(s => s.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  return scored.slice(0, max).map(s => s.paper);
 }
 
 const ArticlePreview = ({
