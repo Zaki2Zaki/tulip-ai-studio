@@ -1,9 +1,10 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
+import ReactMarkdown from "react-markdown";
 import {
   ThumbsUp, ThumbsDown, Trash2, X, Bot, Send, MessageSquare, Loader2,
   ExternalLink, Download, FolderPlus, CheckCircle, XCircle, AlertTriangle,
-  ChevronLeft, ChevronRight, FileText, Sparkles,
+  ChevronLeft, ChevronRight, FileText, Sparkles, List,
 } from "lucide-react";
 import { streamPaperChat } from "@/lib/api/papers";
 import { toast } from "sonner";
@@ -30,7 +31,6 @@ interface ArticlePreviewProps {
   vote?: "up" | "down" | null;
   collections: { id: string; name: string }[];
   onAddToCollection: (paperId: string, paperTitle: string, collectionId: string) => void;
-  /** All selectable papers for carousel navigation */
   allPapers?: Paper[];
   onNavigate?: (paper: Paper) => void;
 }
@@ -42,6 +42,27 @@ const QUICK_QUESTIONS = [
   "Training datasets used?",
   "Does it use neural rendering?",
 ];
+
+/** Extract key takeaway bullets from abstract text */
+function extractKeyTakeaways(text: string): string[] {
+  // Split on sentence boundaries
+  const sentences = text
+    .replace(/\s+/g, " ")
+    .split(/(?<=[.!?])\s+/)
+    .map(s => s.trim())
+    .filter(s => s.length > 15);
+
+  if (sentences.length <= 3) return sentences;
+
+  // Group into ~3-5 key points
+  const points: string[] = [];
+  const chunkSize = Math.ceil(sentences.length / Math.min(5, Math.max(3, Math.ceil(sentences.length / 2))));
+  for (let i = 0; i < sentences.length; i += chunkSize) {
+    const chunk = sentences.slice(i, i + chunkSize).join(" ");
+    if (chunk) points.push(chunk);
+  }
+  return points.slice(0, 5);
+}
 
 const ArticlePreview = ({
   paper, onClose, onVote, onTrash, vote, collections, onAddToCollection,
@@ -76,13 +97,18 @@ const ArticlePreview = ({
     if (allPapers[idx]) onNavigate(allPapers[idx]);
   };
 
+  const abstractTakeaways = useMemo(
+    () => (paper.abstract ? extractKeyTakeaways(paper.abstract) : []),
+    [paper.abstract]
+  );
+
   const generateSummary = async () => {
     if (summaryLoading || executiveSummary) return;
     setSummaryLoading(true);
     let summary = "";
     try {
       await streamPaperChat({
-        messages: [{ role: "user", content: "Write a concise executive summary of this paper in 3-4 sentences. Focus on the problem, approach, and key results." }],
+        messages: [{ role: "user", content: "Write a concise executive summary of this paper as 3-5 bullet points using markdown bullet list format (- ). Each bullet should cover one key aspect: problem, approach, key results, implications. Be specific and concise." }],
         paperContext: {
           title: paper.title,
           authors: paper.authors?.map((a) => a.name),
@@ -177,11 +203,21 @@ const ArticlePreview = ({
         </div>
       );
     }
-    return <p className="text-xs font-body leading-relaxed whitespace-pre-wrap">{content}</p>;
+    // Render markdown for longer/complex responses
+    return (
+      <div className="text-xs font-body leading-relaxed prose prose-invert prose-xs max-w-none [&_ul]:list-disc [&_ul]:pl-4 [&_ol]:list-decimal [&_ol]:pl-4 [&_li]:my-0.5 [&_p]:my-1 [&_code]:bg-muted/50 [&_code]:px-1 [&_code]:rounded [&_h1]:text-sm [&_h2]:text-sm [&_h3]:text-xs">
+        <ReactMarkdown>{content}</ReactMarkdown>
+      </div>
+    );
   };
 
   // Build arXiv PDF URL if possible
   const pdfUrl = paper.pdfUrl || (paper.url?.includes("arxiv.org") ? paper.url.replace("/abs/", "/pdf/") + ".pdf" : null);
+
+  // Google Docs viewer for better PDF rendering
+  const pdfViewerUrl = pdfUrl
+    ? `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true`
+    : null;
 
   return (
     <motion.div
@@ -259,7 +295,6 @@ const ArticlePreview = ({
               {/* Carousel nav — rainbow chrome */}
               {allPapers.length > 1 && (
                 <div className="flex items-center gap-1">
-                  {/* Shared SVG gradient def */}
                   <svg width="0" height="0" className="absolute">
                     <defs>
                       <linearGradient id="chrome-arrow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -344,26 +379,50 @@ const ArticlePreview = ({
             </div>
           </div>
 
-          {/* Abstract preview */}
+          {/* Abstract — Key Takeaways */}
           {paper.abstract && (
             <div className="p-5 border-b border-border">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-2 flex items-center gap-1.5">
-                <FileText className="w-3.5 h-3.5 text-primary" />
-                Abstract
+              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-1.5">
+                <List className="w-3.5 h-3.5 text-primary" />
+                Key Takeaways
               </h5>
-              <p className="text-sm font-body text-foreground/70 leading-relaxed">{paper.abstract}</p>
+              <ul className="space-y-2">
+                {abstractTakeaways.map((point, i) => (
+                  <li key={i} className="flex gap-2.5 text-sm font-body text-foreground/70 leading-relaxed">
+                    <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary/60" />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
 
-          {/* PDF Preview area */}
+          {/* PDF Preview — embedded viewer */}
           <div className="p-5 border-b border-border">
-            {pdfUrl ? (
-              <div className="rounded-lg overflow-hidden border border-border bg-background">
+            <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-1.5">
+              <FileText className="w-3.5 h-3.5 text-primary" />
+              Paper Preview
+            </h5>
+            {pdfViewerUrl ? (
+              <div className="rounded-lg overflow-hidden border border-border bg-background shadow-inner">
                 <iframe
-                  src={pdfUrl}
-                  className="w-full h-[400px]"
+                  src={pdfViewerUrl}
+                  className="w-full h-[500px]"
                   title={`PDF preview: ${paper.title}`}
+                  style={{ border: "none" }}
+                  allow="autoplay"
                 />
+                <div className="flex items-center justify-between px-3 py-2 bg-muted/20 border-t border-border">
+                  <span className="text-[10px] text-muted-foreground font-body">Powered by Google Docs Viewer</span>
+                  <a
+                    href={pdfUrl!}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[10px] text-primary hover:underline font-body flex items-center gap-1"
+                  >
+                    <ExternalLink className="w-3 h-3" /> Open PDF directly
+                  </a>
+                </div>
               </div>
             ) : (
               <div className="rounded-lg border border-border bg-muted/10 p-8 text-center">
@@ -378,7 +437,7 @@ const ArticlePreview = ({
             )}
           </div>
 
-          {/* Executive Summary */}
+          {/* Executive Summary — bullet points */}
           <div className="p-5">
             <div className="flex items-center justify-between mb-3">
               <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
@@ -401,18 +460,28 @@ const ArticlePreview = ({
               </div>
             )}
             {executiveSummary ? (
-              <p className="text-sm font-body text-foreground/80 leading-relaxed">{executiveSummary}</p>
+              <div className="text-sm font-body text-foreground/80 leading-relaxed prose prose-invert prose-sm max-w-none [&_ul]:list-disc [&_ul]:pl-4 [&_li]:my-1 [&_p]:my-1">
+                <ReactMarkdown>{executiveSummary}</ReactMarkdown>
+              </div>
             ) : !summaryLoading && paper.abstract ? (
-              <p className="text-sm font-body text-foreground/60 leading-relaxed italic">{paper.abstract}</p>
+              <p className="text-xs font-body text-muted-foreground/60 italic">Click "Generate with AI" for a structured summary of key findings.</p>
             ) : null}
           </div>
         </div>
 
-        {/* Right: AI Chat — "Chat about this paper" */}
+        {/* Right: AI Chat */}
         <div className="w-full lg:w-[380px] flex flex-col min-h-[350px] max-h-[700px] border-l border-border">
           <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/10">
             <Bot className="w-4 h-4 text-accent" />
             <span className="text-xs font-display font-semibold text-foreground">Chat about this paper</span>
+            {chatMessages.length > 0 && (
+              <button
+                onClick={() => setChatMessages([])}
+                className="ml-auto text-[10px] font-body text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Clear
+              </button>
+            )}
           </div>
 
           {/* Messages */}
