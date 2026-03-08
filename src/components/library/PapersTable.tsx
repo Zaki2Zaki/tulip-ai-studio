@@ -366,7 +366,7 @@ const PapersTable = ({
                           {aiLabel}
                         </span>
                       </td>
-                      <td className="px-3 py-3 text-center text-xs font-body text-muted-foreground">
+                      <td className="px-3 py-3 text-center text-sm font-body text-muted-foreground">
                         {paper.year || "—"}
                       </td>
                       <td className="px-3 py-3 text-center">
