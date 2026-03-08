@@ -75,7 +75,7 @@ const PricingModal = ({ open, onClose }: PricingModalProps) => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 40, scale: 0.97 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed inset-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:max-w-5xl md:w-[calc(100%-2rem)] z-50 bg-card border border-border rounded-2xl overflow-auto max-h-[90vh]"
+            className="fixed z-50 inset-4 md:inset-0 md:m-auto md:max-w-5xl md:w-[calc(100%-3rem)] md:max-h-[90vh] md:h-fit bg-card border border-border rounded-2xl overflow-auto"
           >
             <div className="p-6 md:p-10">
               <div className="flex items-center justify-between mb-8">
