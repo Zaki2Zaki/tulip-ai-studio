@@ -340,6 +340,17 @@ const ArticlePreview = ({
             </div>
           </div>
 
+          {/* Abstract preview */}
+          {paper.abstract && (
+            <div className="p-5 border-b border-border">
+              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-2 flex items-center gap-1.5">
+                <FileText className="w-3.5 h-3.5 text-primary" />
+                Abstract
+              </h5>
+              <p className="text-sm font-body text-foreground/70 leading-relaxed">{paper.abstract}</p>
+            </div>
+          )}
+
           {/* PDF Preview area */}
           <div className="p-5 border-b border-border">
             {pdfUrl ? (
