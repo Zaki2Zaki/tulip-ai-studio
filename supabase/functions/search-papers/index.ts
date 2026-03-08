@@ -107,25 +107,31 @@ async function searchNvidia(query: string, maxResults = 15) {
     `https://api.openalex.org/works?search=${encodeURIComponent(query)}&filter=authorships.institutions.ror:https://ror.org/01f5ytq51&per_page=${maxResults}&sort=relevance_score:desc&mailto=tuliptech@research.dev`
   );
   const data = await res.json();
-  return (data.results || []).map((w: any) => ({
-    paperId: w.id || crypto.randomUUID(),
-    title: w.title || "Untitled",
-    abstract: w.abstract_inverted_index
-      ? Object.entries(w.abstract_inverted_index as Record<string, number[]>)
-          .flatMap(([word, positions]) => positions.map((pos) => ({ word, pos })))
-          .sort((a, b) => a.pos - b.pos)
-          .map((x) => x.word)
-          .join(" ")
-      : null,
-    year: w.publication_year || null,
-    citationCount: w.cited_by_count || null,
-    url: w.doi ? `https://doi.org/${w.doi.replace("https://doi.org/", "")}` : w.id,
-    authors: (w.authorships || []).slice(0, 5).map((a: any) => ({
-      name: a.author?.display_name || "Unknown",
-    })),
-    venue: w.primary_location?.source?.display_name || null,
-    source: "nvidia",
-  }));
+  return (data.results || []).map((w: any) => {
+    const oaPdfUrl = w.primary_location?.pdf_url
+      || w.best_oa_location?.pdf_url
+      || (w.open_access?.oa_url || null);
+    return {
+      paperId: w.id || crypto.randomUUID(),
+      title: w.title || "Untitled",
+      abstract: w.abstract_inverted_index
+        ? Object.entries(w.abstract_inverted_index as Record<string, number[]>)
+            .flatMap(([word, positions]) => positions.map((pos) => ({ word, pos })))
+            .sort((a, b) => a.pos - b.pos)
+            .map((x) => x.word)
+            .join(" ")
+        : null,
+      year: w.publication_year || null,
+      citationCount: w.cited_by_count || null,
+      url: w.doi ? `https://doi.org/${w.doi.replace("https://doi.org/", "")}` : w.id,
+      authors: (w.authorships || []).slice(0, 5).map((a: any) => ({
+        name: a.author?.display_name || "Unknown",
+      })),
+      venue: w.primary_location?.source?.display_name || null,
+      source: "nvidia",
+      pdfUrl: oaPdfUrl,
+    };
+  });
 }
 
 Deno.serve(async (req) => {
