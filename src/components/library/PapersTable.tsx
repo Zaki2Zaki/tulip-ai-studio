@@ -214,7 +214,7 @@ const PapersTable = ({
                   <div className="w-10 h-1.5 rounded-full bg-muted overflow-hidden">
                     <div className="h-full rounded-full" style={{ width: `${paper.matchRate}%`, background: `linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)))` }} />
                   </div>
-                  <span className="text-[10px] text-muted-foreground tabular-nums">{paper.matchRate}%</span>
+                  <span className="text-[11px] text-muted-foreground tabular-nums">{paper.matchRate}%</span>
                 </div>
               </div>
             );

@@ -72,7 +72,7 @@ const PaperCard = ({ paper, isSelected, isActive, isLocked, onToggleSelect, onCl
     >
       {/* Top row: badge + grip */}
       <div className="flex items-start justify-between mb-2">
-        <span className="inline-block px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-[10px] font-body text-accent">
+        <span className="inline-block px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-[11px] font-body text-accent">
           {aiLabel}
         </span>
         {!isLocked && (
