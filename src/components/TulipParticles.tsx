@@ -11,7 +11,9 @@ interface Particle {
   hue: number;
   twinkleSpeed: number;
   twinklePhase: number;
-  // Trail history
+  driftOffsetX: number;
+  driftOffsetY: number;
+  driftSpeed: number;
   trail: { x: number; y: number; opacity: number }[];
 }
 
