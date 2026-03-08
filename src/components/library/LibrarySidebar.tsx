@@ -118,29 +118,24 @@ const LibrarySidebar = ({
       </div>
 
       {/* Subject Filter — Dropdown */}
-      <div className="space-y-2" ref={subjectRef}>
+      <div className="relative" ref={subjectRef}>
         <h3 className="text-xs font-body font-semibold uppercase tracking-widest text-muted-foreground mb-2">
           <Filter className="w-3 h-3 inline mr-1.5" />
           Subject
         </h3>
 
-        {/* Selected subject pill */}
-        <div className="px-3 py-2 rounded-lg bg-primary/10 border border-primary/20 text-sm font-body text-foreground font-medium truncate">
-          {activeLabel}
-        </div>
-
-        {/* Dropdown trigger */}
+        {/* Selected subject pill — acts as trigger */}
         <button
           onClick={() => setSubjectOpen(!subjectOpen)}
-          className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg border border-border bg-muted/20 text-sm font-body text-muted-foreground hover:text-foreground hover:border-primary/20 transition-all"
+          className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-primary/10 border border-primary/20 text-sm font-body text-foreground font-medium text-left transition-all hover:bg-primary/15"
         >
-          <span>Change subject…</span>
-          <ChevronDown className={`w-4 h-4 transition-transform ${subjectOpen ? "rotate-180" : ""}`} />
+          <span className="truncate">{activeLabel}</span>
+          <ChevronDown className={`w-4 h-4 shrink-0 ml-2 text-muted-foreground transition-transform ${subjectOpen ? "rotate-180" : ""}`} />
         </button>
 
-        {/* Dropdown list */}
+        {/* Dropdown list — absolutely positioned, aligned to pill bottom */}
         {subjectOpen && (
-          <div className="rounded-lg border border-border bg-card shadow-xl max-h-64 overflow-y-auto library-scroll">
+          <div className="absolute left-0 right-0 top-full mt-1 z-30 rounded-lg border border-border bg-card shadow-xl max-h-64 overflow-y-auto library-scroll">
             {categories.map((cat) => (
               <button
                 key={cat.id}
