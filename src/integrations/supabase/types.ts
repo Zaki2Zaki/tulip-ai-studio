@@ -14,7 +14,95 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      collections: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      saved_papers: {
+        Row: {
+          abstract: string | null
+          ai_flag: string | null
+          ai_label: string | null
+          authors: string[] | null
+          citation_count: number | null
+          collection_id: string
+          created_at: string
+          id: string
+          paper_id: string
+          source: string | null
+          title: string
+          url: string | null
+          user_id: string
+          venue: string | null
+          vote: string | null
+          year: number | null
+        }
+        Insert: {
+          abstract?: string | null
+          ai_flag?: string | null
+          ai_label?: string | null
+          authors?: string[] | null
+          citation_count?: number | null
+          collection_id: string
+          created_at?: string
+          id?: string
+          paper_id: string
+          source?: string | null
+          title: string
+          url?: string | null
+          user_id: string
+          venue?: string | null
+          vote?: string | null
+          year?: number | null
+        }
+        Update: {
+          abstract?: string | null
+          ai_flag?: string | null
+          ai_label?: string | null
+          authors?: string[] | null
+          citation_count?: number | null
+          collection_id?: string
+          created_at?: string
+          id?: string
+          paper_id?: string
+          source?: string | null
+          title?: string
+          url?: string | null
+          user_id?: string
+          venue?: string | null
+          vote?: string | null
+          year?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "saved_papers_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "collections"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

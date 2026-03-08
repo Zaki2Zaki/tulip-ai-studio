@@ -9,6 +9,8 @@ import type { Collection } from "@/components/library/LibrarySidebar";
 import PapersTable from "@/components/library/PapersTable";
 import SearchResultsCount from "@/components/library/SearchResultsCount";
 import ArticleSearch from "@/components/library/ArticleSearch";
+import { searchPapers } from "@/lib/api/papers";
+import type { Paper } from "@/lib/api/papers";
 import { toast } from "sonner";
 
 const CATEGORIES = [
@@ -18,17 +20,6 @@ const CATEGORIES = [
   { id: "lighting", label: "Light", query: "physically based rendering lighting global illumination" },
   { id: "world-building", label: "World Scale Building", query: "procedural world generation large scale environment" },
 ];
-
-interface Paper {
-  paperId: string;
-  title: string;
-  abstract: string | null;
-  year: number | null;
-  citationCount: number | null;
-  url: string;
-  authors: { name: string }[];
-  venue: string | null;
-}
 
 const LibraryPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -41,6 +32,7 @@ const LibraryPage = () => {
   const [selectedPapers, setSelectedPapers] = useState<Set<string>>(new Set());
   const [lastSearchQuery, setLastSearchQuery] = useState("");
   const [collections, setCollections] = useState<Collection[]>([]);
+  const [sourceCounts, setSourceCounts] = useState<Record<string, number>>({});
 
   const FREE_SEARCH_LIMIT = 3;
   const needsPaywall = !isSubscribed && searchCount >= FREE_SEARCH_LIMIT;
@@ -53,25 +45,36 @@ const LibraryPage = () => {
     setLoading(true);
     setLastSearchQuery(query);
     try {
-      const res = await fetch(
-        `https://api.crossref.org/works?query=${encodeURIComponent(query)}&rows=20&sort=relevance&order=desc`
-      );
-      const data = await res.json();
-      const items = (data.message?.items || []).map((item: any) => ({
-        paperId: item.DOI || Math.random().toString(),
-        title: Array.isArray(item.title) ? item.title[0] : item.title || "Untitled",
-        abstract: item.abstract?.replace(/<[^>]*>/g, "") || null,
-        year: item.published?.["date-parts"]?.[0]?.[0] || null,
-        citationCount: item["is-referenced-by-count"] || null,
-        url: item.URL || `https://doi.org/${item.DOI}`,
-        authors: (item.author || []).map((a: any) => ({ name: `${a.given || ""} ${a.family || ""}`.trim() })),
-        venue: item["container-title"]?.[0] || null,
-      }));
-      setPapers(items);
+      const result = await searchPapers(query);
+      setPapers(result.papers);
+      setSourceCounts(result.counts);
       setSearchCount((c) => c + 1);
     } catch (err) {
       console.error("Search failed:", err);
-      setPapers([]);
+      // Fallback to direct CrossRef if edge function fails
+      try {
+        const res = await fetch(
+          `https://api.crossref.org/works?query=${encodeURIComponent(query)}&rows=20&sort=relevance&order=desc`
+        );
+        const data = await res.json();
+        const items = (data.message?.items || []).map((item: any) => ({
+          paperId: item.DOI || Math.random().toString(),
+          title: Array.isArray(item.title) ? item.title[0] : item.title || "Untitled",
+          abstract: item.abstract?.replace(/<[^>]*>/g, "") || null,
+          year: item.published?.["date-parts"]?.[0]?.[0] || null,
+          citationCount: item["is-referenced-by-count"] || null,
+          url: item.URL || `https://doi.org/${item.DOI}`,
+          authors: (item.author || []).map((a: any) => ({ name: `${a.given || ""} ${a.family || ""}`.trim() })),
+          venue: item["container-title"]?.[0] || null,
+          source: "crossref",
+        }));
+        setPapers(items);
+        setSourceCounts({ crossref: items.length });
+        setSearchCount((c) => c + 1);
+      } catch {
+        setPapers([]);
+        setSourceCounts({});
+      }
     } finally {
       setLoading(false);
     }
@@ -126,6 +129,8 @@ const LibraryPage = () => {
     toast.success(`Added to "${col?.name}"`);
   };
 
+  const sourcesList = Object.entries(sourceCounts).map(([name, count]) => ({ name, count }));
+
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
@@ -153,7 +158,6 @@ const LibraryPage = () => {
       <section className="pb-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex gap-0 border border-border rounded-xl overflow-hidden bg-card/20 min-h-[600px]">
-            {/* Left Sidebar */}
             <LibrarySidebar
               activeCategory={activeCategory}
               onCategoryChange={setActiveCategory}
@@ -166,9 +170,7 @@ const LibraryPage = () => {
               onDeleteCollection={handleDeleteCollection}
             />
 
-            {/* Right Content */}
             <div className="flex-1 p-5 space-y-4 overflow-hidden">
-              {/* Keyword search bar */}
               <form onSubmit={handleSearch} className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <input
@@ -180,7 +182,6 @@ const LibraryPage = () => {
                 />
               </form>
 
-              {/* Free tier banner */}
               {!isSubscribed && (
                 <div className="flex items-center justify-between p-3 rounded-lg bg-card border border-primary/20">
                   <div className="flex items-center gap-2">
@@ -198,17 +199,12 @@ const LibraryPage = () => {
                 </div>
               )}
 
-              {/* Search results count */}
               <SearchResultsCount
                 totalResults={papers.length}
                 searchQuery={lastSearchQuery}
-                sources={[
-                  { name: "CrossRef", count: papers.length },
-                  { name: "arXiv", count: 0 },
-                ]}
+                sources={sourcesList.length > 0 ? sourcesList : [{ name: "CrossRef", count: 0 }, { name: "arXiv", count: 0 }, { name: "OpenAlex", count: 0 }]}
               />
 
-              {/* Selected count */}
               {selectedPapers.size > 0 && (
                 <div className="flex items-center gap-3 text-xs font-body text-muted-foreground">
                   <span className="text-foreground font-semibold">{selectedPapers.size}</span> paper(s) selected
@@ -218,7 +214,6 @@ const LibraryPage = () => {
                 </div>
               )}
 
-              {/* Papers Table */}
               <PapersTable
                 papers={papers}
                 loading={loading}
@@ -230,7 +225,6 @@ const LibraryPage = () => {
                 searchQuery={searchQuery}
               />
 
-              {/* Article Search & Preview */}
               <ArticleSearch
                 collections={collections}
                 onAddToCollection={handleAddToCollection}
