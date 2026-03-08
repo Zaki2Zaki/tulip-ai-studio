@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Lock, BookOpen, FolderPlus, ChevronDown, ArrowLeft, Folder, CreditCard } from "lucide-react";
+import { Search, Lock, BookOpen, FolderPlus, ChevronDown, ArrowLeft, Folder, CreditCard, Settings, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PricingModal from "@/components/PricingModal";
@@ -16,6 +16,7 @@ import { searchPapers } from "@/lib/api/papers";
 import type { Paper } from "@/lib/api/papers";
 import { DEFAULT_ENABLED_KEYS } from "@/components/library/DataSources";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const CATEGORIES = [
   { id: "3d-modeling", label: "3D Assets Modeling", query: "3D modeling computer graphics mesh" },
@@ -45,6 +46,41 @@ const CATEGORIES = [
   { id: "world-building", label: "World Scale Building", query: "procedural world generation large scale environment" },
   { id: "world-simulation", label: "World Simulation", query: "world simulation physics engine digital twin" },
 ];
+
+const ManageSubscriptionButton = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleManage = async () => {
+    setLoading(true);
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        toast.error("Please sign in first.");
+        return;
+      }
+      const { data, error } = await supabase.functions.invoke("customer-portal");
+      if (error) throw error;
+      if (data?.url) window.open(data.url, "_blank");
+    } catch (err: any) {
+      toast.error(err?.message?.includes("No Stripe customer")
+        ? "No subscription found. Subscribe first!"
+        : "Failed to open subscription manager.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleManage}
+      disabled={loading}
+      className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-border bg-card/50 text-sm font-body text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all disabled:opacity-60"
+    >
+      {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Settings className="w-4 h-4" />}
+      Manage Subscription
+    </button>
+  );
+};
 
 const LibraryPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -241,7 +277,7 @@ const LibraryPage = () => {
             <p className="text-base text-muted-foreground font-body max-w-2xl mx-auto mb-5">
               Discover and organize university thesis papers across 3D, animation, rigging, lighting, and world-building.
             </p>
-            {!isSubscribed && (
+            {!isSubscribed ? (
               <button
                 onClick={() => setShowPricing(true)}
                 className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-body font-semibold hover:opacity-90 transition-opacity shadow-[0_0_24px_-4px_hsl(var(--primary)/0.4)]"
@@ -249,6 +285,8 @@ const LibraryPage = () => {
                 <CreditCard className="w-4 h-4" />
                 Subscribe
               </button>
+            ) : (
+              <ManageSubscriptionButton />
             )}
           </motion.div>
         </div>
