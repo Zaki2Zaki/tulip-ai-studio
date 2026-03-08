@@ -19,10 +19,31 @@ import { toast } from "sonner";
 
 const CATEGORIES = [
   { id: "3d-modeling", label: "3D Assets Modeling", query: "3D modeling computer graphics mesh" },
+  { id: "ai-ml", label: "Artificial Intelligence and Machine Learning", query: "artificial intelligence machine learning deep learning" },
+  { id: "algorithms", label: "Algorithms and Numerical Methods", query: "algorithms numerical methods optimization computational" },
   { id: "animation", label: "Animation", query: "computer animation motion synthesis" },
-  { id: "rigging", label: "Rigging", query: "character rigging skeletal animation" },
+  { id: "applied-perception", label: "Applied Perception", query: "applied perception visual cognition psychophysics" },
+  { id: "comp-arch", label: "Computer Architecture", query: "computer architecture GPU hardware accelerator" },
+  { id: "comp-graphics", label: "Computer Graphics", query: "computer graphics rendering shading geometry" },
+  { id: "comp-photo", label: "Computational Photography and Imaging", query: "computational photography imaging reconstruction" },
+  { id: "comp-vision", label: "Computer Vision", query: "computer vision object detection segmentation recognition" },
+  { id: "esports", label: "Esports", query: "esports competitive gaming performance analytics" },
+  { id: "generative-ai", label: "Generative AI", query: "generative AI diffusion models image synthesis" },
+  { id: "hci", label: "Human Computer Interaction", query: "human computer interaction user interface UX" },
+  { id: "hpc", label: "High Performance Computing", query: "high performance computing parallel processing GPU computing" },
+  { id: "hyperscale", label: "Hyperscale Graphics", query: "hyperscale graphics large scale rendering cloud graphics" },
   { id: "lighting", label: "Light", query: "physically based rendering lighting global illumination" },
+  { id: "networking", label: "Networking", query: "network protocols latency streaming distributed systems" },
+  { id: "physical-ai", label: "Physical AI", query: "physical AI embodied intelligence physics simulation" },
+  { id: "prog-lang", label: "Programming Languages, Systems and Tools", query: "programming languages compilers systems tools" },
+  { id: "realtime-rendering", label: "Real-Time Rendering", query: "real-time rendering rasterization ray tracing GPU" },
+  { id: "rigging", label: "Rigging", query: "character rigging skeletal animation" },
+  { id: "robotics", label: "Robotics", query: "robotics manipulation locomotion autonomous systems" },
+  { id: "sfx", label: "SFX", query: "sound effects audio design spatial audio synthesis" },
+  { id: "vfx", label: "VFX", query: "visual effects compositing simulation particle systems" },
+  { id: "vr-ar", label: "VR, AR and Display Technology", query: "virtual reality augmented reality mixed reality display" },
   { id: "world-building", label: "World Scale Building", query: "procedural world generation large scale environment" },
+  { id: "world-simulation", label: "World Simulation", query: "world simulation physics engine digital twin" },
 ];
 
 const LibraryPage = () => {
