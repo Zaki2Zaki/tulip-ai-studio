@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Lock, BookOpen, FolderPlus, ChevronDown } from "lucide-react";
+import { Search, Lock, BookOpen, FolderPlus, ChevronDown, ArrowLeft, Folder } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PricingModal from "@/components/PricingModal";
