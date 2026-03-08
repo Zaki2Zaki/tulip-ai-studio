@@ -89,6 +89,7 @@ const PapersTable = ({
   activePaperId,
   onDragStart,
   viewMode = "table",
+  votes = {},
 }: PapersTableProps) => {
   const [sortField, setSortField] = useState<SortField>(null);
   const [sortDir, setSortDir] = useState<SortDir>("desc");
