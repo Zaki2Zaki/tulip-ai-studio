@@ -76,10 +76,10 @@ const TulipParticles = () => {
       const parallaxY = scrollY.current * 0.15;
       const parallaxX = Math.sin(scrollY.current * 0.003) * 12;
 
-      const cx = w * 0.3 + parallaxX;
-      const cy = h * 0.45 - parallaxY;
-      const majorRx = Math.min(w * 0.3, 280);
-      const majorRy = majorRx * 1.4;
+      const cx = w * 0.35 + parallaxX;
+      const cy = h * 0.5 - parallaxY;
+      const majorRx = Math.min(w * 0.25, 240);
+      const majorRy = majorRx * 1.5;
 
       for (const p of particlesRef.current) {
         p.torusAngle += p.speed;

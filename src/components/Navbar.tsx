@@ -72,8 +72,8 @@ const Navbar = () => {
           scrolled ? "bg-glass" : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
-          <Link to="/" className="font-display text-2xl font-bold tracking-tight text-foreground">
+        <div className="max-w-7xl mx-auto flex items-center justify-end gap-10 px-6 py-5">
+          <Link to="/" className="font-display text-2xl font-bold tracking-tight text-foreground mr-auto md:mr-0 md:order-last">
             TULIP<span className="text-gradient-gold"> TECH</span>
           </Link>
 
@@ -133,7 +133,7 @@ const Navbar = () => {
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-foreground"
+            className="md:hidden text-foreground order-last"
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
