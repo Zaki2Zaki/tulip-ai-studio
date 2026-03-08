@@ -272,6 +272,7 @@ const LibraryPage = () => {
                   searchQuery={searchQuery}
                   onPaperClick={(p) => setPreviewPaper(p)}
                   activePaperId={previewPaper?.paperId}
+                  viewMode={viewMode}
                 />
               </div>
 
