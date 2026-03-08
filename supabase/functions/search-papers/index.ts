@@ -265,12 +265,47 @@ Deno.serve(async (req) => {
       console.error("Unpaywall enrichment failed:", e);
     }
 
+    const pdfCount = papers.filter((p: any) => !!p.pdfUrl).length;
+
+    // Log search to search_logs table
+    try {
+      const sb = createClient(
+        Deno.env.get("SUPABASE_URL")!,
+        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+      );
+      await sb.from("search_logs").insert({
+        query,
+        sources: enabledSources,
+        result_counts: counts,
+        total_results: papers.length,
+        pdf_count: pdfCount,
+        is_scheduled: isScheduled || false,
+      });
+    } catch (logErr) {
+      console.error("Failed to log search:", logErr);
+    }
+
     return new Response(
       JSON.stringify({ papers, counts, total: papers.length }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   } catch (error) {
     console.error("Search error:", error);
+
+    // Log error
+    try {
+      const sb = createClient(
+        Deno.env.get("SUPABASE_URL")!,
+        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+      );
+      await sb.from("search_logs").insert({
+        query: "unknown",
+        sources: [],
+        error: error instanceof Error ? error.message : "Search failed",
+        is_scheduled: false,
+      });
+    } catch (_) { /* ignore logging failure */ }
+
     return new Response(
       JSON.stringify({ error: error instanceof Error ? error.message : "Search failed" }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
