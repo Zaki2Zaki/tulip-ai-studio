@@ -202,30 +202,9 @@ const ArticlePreview = ({
             </span>
           )}
         </div>
-        <div className="flex items-center gap-1">
-          {/* Carousel prev/next */}
-          {allPapers.length > 1 && (
-            <>
-              <button
-                onClick={() => handleNavigate("prev")}
-                disabled={!hasPrev}
-                className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors disabled:opacity-30"
-              >
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button
-                onClick={() => handleNavigate("next")}
-                disabled={!hasNext}
-                className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors disabled:opacity-30"
-              >
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </>
-          )}
-          <button onClick={onClose} className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors ml-1">
-            <X className="w-4 h-4" />
-          </button>
-        </div>
+        <button onClick={onClose} className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors">
+          <X className="w-4 h-4" />
+        </button>
       </div>
 
       <div className="flex flex-col lg:flex-row">
