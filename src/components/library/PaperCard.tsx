@@ -99,8 +99,8 @@ const PaperCard = ({ paper, isSelected, isActive, isLocked, onToggleSelect, onCl
       {/* Bottom row */}
       <div className="flex items-center justify-between pt-2 border-t border-border/50">
         <div className="flex items-center gap-2">
-          {paper.year && <span className="text-[11px] font-body text-muted-foreground">{paper.year}</span>}
-          <span className={`inline-flex items-center gap-1 text-[10px] font-body ${aiFlag.color}`}>
+          {paper.year && <span className="text-xs font-body text-muted-foreground">{paper.year}</span>}
+          <span className={`inline-flex items-center gap-1 text-[11px] font-body ${aiFlag.color}`}>
             {aiFlag.icon} {aiFlag.label}
           </span>
         </div>
