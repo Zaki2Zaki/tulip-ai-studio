@@ -173,7 +173,7 @@ const BulkReviewPanel = ({
 
               {/* Abstract snippet / expandable */}
               <div className="mt-2">
-                <p className="text-xs font-body text-muted-foreground/80 leading-relaxed">
+                <p className="text-xs font-body text-foreground/90 leading-relaxed">
                   {isExpanded ? paper.abstract || snippet : snippet}
                 </p>
                 {paper.abstract && paper.abstract.length > 180 && (
