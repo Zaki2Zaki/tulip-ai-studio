@@ -228,8 +228,8 @@ const BulkReviewPanel = ({
               {/* Reviewed state */}
               {isReviewed && (
                 <div className="flex items-center gap-2 mt-2 pt-2 border-t border-border/30">
-                  <FileText className="w-3 h-3 text-muted-foreground/50" />
-                  <span className="text-[11px] font-body text-muted-foreground/60 italic">Reviewed</span>
+                  <FileText className="w-3 h-3 text-foreground/50" />
+                  <span className="text-[11px] font-body text-foreground/60 italic">Reviewed</span>
                 </div>
               )}
             </motion.div>
