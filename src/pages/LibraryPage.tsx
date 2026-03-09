@@ -333,9 +333,6 @@ const LibraryPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex gap-0 border border-border rounded-xl overflow-hidden bg-card/20 items-stretch min-h-[720px]">
             <LibrarySidebar
-              activeCategory={activeCategory}
-              onCategoryChange={(id) => { setActiveCollectionId(null); setActiveCategory(id); }}
-              categories={CATEGORIES}
               onUploadClick={() => toast.info("Upload feature coming soon.")}
               onAILabelClick={() => toast.info("AI Labeling feature coming soon.")}
               onBulkProcessClick={() => toast.info("Bulk Processing feature coming soon.")}
