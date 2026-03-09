@@ -335,7 +335,7 @@ const LibraryPage = () => {
             <LibrarySidebar
               onUploadClick={() => toast.info("Upload feature coming soon.")}
               onAILabelClick={() => toast.info("AI Labeling feature coming soon.")}
-              onBulkProcessClick={() => toast.info("Bulk Processing feature coming soon.")}
+              onBulkProcessClick={() => toast.info("Bulk Process — Coming Soon", { description: "Batch-process multiple papers at once: AI labeling, categorization, and metadata extraction across your entire collection in one click.", duration: 6000 })}
               collections={collections}
               onCreateCollection={handleCreateCollection}
               onDeleteCollection={(id) => { if (activeCollectionId === id) setActiveCollectionId(null); handleDeleteCollection(id); }}
