@@ -504,7 +504,7 @@ const LibraryPage = () => {
         </div>
       </section>
 
-      <PricingModal open={showPricing} onClose={() => setShowPricing(false)} />
+      <PricingModal open={showPricing} onClose={() => setShowPricing(false)} defaultPeriod={billingPeriod} />
       <Footer />
     </main>
   );
