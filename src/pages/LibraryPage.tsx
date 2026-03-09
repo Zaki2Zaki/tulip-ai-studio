@@ -357,15 +357,38 @@ const LibraryPage = () => {
             />
 
             <div className="flex-1 p-5 space-y-4 overflow-hidden flex flex-col min-w-0">
-              <form onSubmit={handleSearch} className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search papers, authors, or topics…"
-                  className="w-full bg-muted/30 border border-border rounded-lg pl-10 pr-4 py-3 text-sm text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
-                />
+              {/* Unified Search + Subject bar */}
+              <form onSubmit={handleSearch} className="flex items-stretch gap-0 rounded-xl border-2 border-primary/20 bg-card/40 overflow-hidden focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/10 transition-all shadow-sm">
+                {/* Subject selector */}
+                <div className="relative shrink-0 border-r border-primary/15">
+                  <select
+                    value={activeCategory}
+                    onChange={(e) => { setActiveCollectionId(null); setActiveCategory(e.target.value); }}
+                    className="h-full appearance-none bg-primary/5 hover:bg-primary/10 pl-4 pr-10 py-3 text-sm font-body font-semibold text-foreground cursor-pointer focus:outline-none transition-colors min-w-[180px]"
+                  >
+                    {CATEGORIES.map((cat) => (
+                      <option key={cat.id} value={cat.id}>{cat.label}</option>
+                    ))}
+                  </select>
+                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                </div>
+                {/* Search input */}
+                <div className="flex-1 relative">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search papers, authors, or topics…"
+                    className="w-full h-full bg-transparent pl-11 pr-4 py-3 text-sm text-foreground font-body placeholder:text-muted-foreground focus:outline-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="shrink-0 px-6 bg-primary text-primary-foreground font-body font-semibold text-sm hover:bg-primary/90 transition-colors"
+                >
+                  Search
+                </button>
               </form>
 
               {!isSubscribed && (
