@@ -288,15 +288,15 @@ const ArticlePreview = ({
           {/* Paper header + actions */}
           <div className="p-5 space-y-3 border-b border-border">
             <h4 className="font-display text-base font-bold text-foreground leading-tight">{paper.title}</h4>
-            <p className="text-sm text-foreground/70 font-body">
+            <p className="text-sm text-foreground font-body">
               {paper.authors?.slice(0, 5).map((a) => a.name).join(", ")}
               {(paper.authors?.length || 0) > 5 && " et al."}
             </p>
             <div className="flex items-center gap-3">
               {paper.year && <span className="text-sm text-accent font-body">{paper.year}</span>}
-              {paper.venue && <span className="text-sm text-foreground/60 font-body">{paper.venue}</span>}
+              {paper.venue && <span className="text-sm text-foreground font-body">{paper.venue}</span>}
               {paper.citationCount != null && (
-                <span className="text-sm text-foreground/60 font-body">{paper.citationCount} citations</span>
+                <span className="text-sm text-foreground font-body">{paper.citationCount} citations</span>
               )}
             </div>
 
