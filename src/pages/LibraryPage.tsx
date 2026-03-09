@@ -334,7 +334,7 @@ const LibraryPage = () => {
           <div className="flex gap-0 border border-border rounded-xl overflow-hidden bg-card/20 items-stretch min-h-[720px]">
             <LibrarySidebar
               onUploadClick={() => toast.info("Upload feature coming soon.")}
-              onAILabelClick={() => toast.info("AI Labeling feature coming soon.")}
+              onAILabelClick={() => toast.info("Manual AI Label — Coming Soon", { description: "Manually tag and categorize individual papers with AI-generated labels, keywords, and metadata for better organization and searchability.", duration: 6000 })}
               onBulkProcessClick={() => toast.info("Bulk Process — Coming Soon", { description: "Batch-process multiple papers at once: AI labeling, categorization, and metadata extraction across your entire collection in one click.", duration: 6000 })}
               collections={collections}
               onCreateCollection={handleCreateCollection}
