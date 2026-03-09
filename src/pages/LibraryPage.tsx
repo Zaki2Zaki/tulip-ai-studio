@@ -103,6 +103,7 @@ const LibraryPage = () => {
   const [enabledSources, setEnabledSources] = useState<Set<string>>(new Set(DEFAULT_ENABLED_KEYS));
   const [searchCache, setSearchCache] = useState<Map<string, { papers: Paper[]; counts: Record<string, number> }>>(new Map());
   const [activeCollectionId, setActiveCollectionId] = useState<string | null>(null);
+  const [targetCollectionId, setTargetCollectionId] = useState<string>("");
 
   const FREE_PAPER_LIMIT = 3;
   const needsPaywall = !isSubscribed && viewedPapers.size >= FREE_PAPER_LIMIT;
@@ -438,32 +439,39 @@ const LibraryPage = () => {
                   <span className="text-xs font-body text-muted-foreground">paper(s) selected</span>
 
                   {collections.length > 0 ? (
-                    <div className="relative ml-auto group">
-                      <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-accent/10 border border-accent/30 text-accent text-xs font-body font-semibold hover:bg-accent/20 transition-all">
-                        <FolderPlus className="w-3.5 h-3.5" />
-                        Add to Collection
-                        <ChevronDown className="w-3 h-3" />
-                      </button>
-                      <div className="absolute right-0 top-full mt-1 bg-card border border-border rounded-lg shadow-xl z-20 p-1 min-w-[200px] hidden group-hover:block">
+                    <div className="ml-auto flex items-center gap-2">
+                      <select
+                        value={targetCollectionId}
+                        onChange={(e) => setTargetCollectionId(e.target.value)}
+                        className="appearance-none bg-card border border-accent/30 rounded-lg px-3 py-1.5 pr-8 text-xs font-body font-semibold text-foreground cursor-pointer hover:bg-accent/5 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+                      >
+                        <option value="">Select collection…</option>
                         {collections.map((col) => (
-                          <button
-                            key={col.id}
-                            onClick={() => {
-                              selectedPapers.forEach((paperId) => {
-                                const p = visiblePapers.find((vp) => vp.paperId === paperId);
-                                if (p) handleAddToCollection(paperId, p.title, col.id);
-                              });
-                              setSelectedPapers(new Set());
-                              toast.success(`Added ${selectedPapers.size} paper(s) to "${col.name}"`);
-                            }}
-                            className="w-full text-left px-3 py-2 text-xs font-body text-foreground hover:bg-muted/30 rounded-md flex items-center gap-2"
-                          >
-                            <FolderPlus className="w-3 h-3 text-accent/60" />
-                            {col.name}
-                            <span className="ml-auto text-muted-foreground">{col.paperIds.length}</span>
-                          </button>
+                          <option key={col.id} value={col.id}>
+                            {col.name} ({col.paperIds.length})
+                          </option>
                         ))}
-                      </div>
+                      </select>
+                      <button
+                        onClick={() => {
+                          if (!targetCollectionId) {
+                            toast.error("Please select a collection first");
+                            return;
+                          }
+                          selectedPapers.forEach((paperId) => {
+                            const p = visiblePapers.find((vp) => vp.paperId === paperId);
+                            if (p) handleAddToCollection(paperId, p.title, targetCollectionId);
+                          });
+                          const col = collections.find((c) => c.id === targetCollectionId);
+                          toast.success(`Added ${selectedPapers.size} paper(s) to "${col?.name}"`);
+                          setSelectedPapers(new Set());
+                          setTargetCollectionId("");
+                        }}
+                        className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-body font-semibold hover:bg-primary/90 transition-all"
+                      >
+                        <FolderPlus className="w-3.5 h-3.5" />
+                        Add
+                      </button>
                     </div>
                   ) : (
                     <span className="ml-auto text-[10px] font-body text-muted-foreground italic">Create a collection in the sidebar first</span>
