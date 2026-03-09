@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Upload, Tag, Layers, Filter, FolderPlus, Folder, X, Plus, ChevronDown, Check } from "lucide-react";
+import { Upload, Tag, Layers, FolderPlus, Folder, X, Plus } from "lucide-react";
 import DataSources from "./DataSources";
 
 export interface Collection {
