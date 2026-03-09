@@ -217,7 +217,7 @@ const BulkReviewPanel = ({
                       href={paper.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 px-2 py-2 rounded-lg border border-border text-xs font-body text-muted-foreground hover:text-foreground transition-colors"
+                      className="flex items-center gap-1 px-2 py-2 rounded-lg border border-border text-xs font-body text-foreground hover:text-primary transition-colors"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
