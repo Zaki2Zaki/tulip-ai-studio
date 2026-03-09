@@ -9,10 +9,9 @@ export interface Collection {
 }
 
 interface LibrarySidebarProps {
-  activeCategory: string;
-  onCategoryChange: (id: string) => void;
-  categories: { id: string; label: string }[];
   onUploadClick: () => void;
+  onAILabelClick: () => void;
+  onBulkProcessClick: () => void;
   onAILabelClick: () => void;
   onBulkProcessClick: () => void;
   collections: Collection[];
