@@ -543,7 +543,7 @@ const ArticlePreview = ({
           {/* Executive Summary — bullet points */}
           <div className="p-5">
             <div className="flex items-center justify-between mb-3">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-accent" />
                 Executive Summary
               </h5>
@@ -557,17 +557,17 @@ const ArticlePreview = ({
               )}
             </div>
             {summaryLoading && !executiveSummary && (
-              <div className="flex items-center gap-2 text-xs text-muted-foreground font-body">
+              <div className="flex items-center gap-2 text-xs text-foreground font-body">
                 <Loader2 className="w-3.5 h-3.5 animate-spin text-accent" />
                 Generating summary…
               </div>
             )}
             {executiveSummary ? (
-              <div className="text-sm font-body text-foreground/80 leading-relaxed prose prose-invert prose-sm max-w-none [&_ul]:list-disc [&_ul]:pl-4 [&_li]:my-1 [&_p]:my-1">
+              <div className="text-sm font-body text-foreground leading-relaxed prose prose-invert prose-sm max-w-none [&_ul]:list-disc [&_ul]:pl-4 [&_li]:my-1 [&_p]:my-1">
                 <ReactMarkdown>{executiveSummary}</ReactMarkdown>
               </div>
             ) : !summaryLoading && paper.abstract ? (
-              <p className="text-xs font-body text-muted-foreground/60 italic">Click "Generate with AI" for a structured summary of key findings.</p>
+              <p className="text-xs font-body text-foreground/80 italic">Click "Generate with AI" for a structured summary of key findings.</p>
             ) : null}
           </div>
           {/* Related Papers */}
