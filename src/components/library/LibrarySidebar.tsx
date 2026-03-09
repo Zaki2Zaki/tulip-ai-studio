@@ -12,8 +12,6 @@ interface LibrarySidebarProps {
   onUploadClick: () => void;
   onAILabelClick: () => void;
   onBulkProcessClick: () => void;
-  onAILabelClick: () => void;
-  onBulkProcessClick: () => void;
   collections: Collection[];
   onCreateCollection: (name: string) => void;
   onDeleteCollection: (id: string) => void;
@@ -25,9 +23,6 @@ interface LibrarySidebarProps {
 }
 
 const LibrarySidebar = ({
-  activeCategory,
-  onCategoryChange,
-  categories,
   onUploadClick,
   onAILabelClick,
   onBulkProcessClick,
@@ -43,21 +38,6 @@ const LibrarySidebar = ({
   const [newCollectionName, setNewCollectionName] = useState("");
   const [showNewInput, setShowNewInput] = useState(false);
   const [dragOverId, setDragOverId] = useState<string | null>(null);
-  const [subjectOpen, setSubjectOpen] = useState(false);
-  const subjectRef = useRef<HTMLDivElement>(null);
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (subjectRef.current && !subjectRef.current.contains(e.target as Node)) {
-        setSubjectOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
-
-  const activeLabel = categories.find(c => c.id === activeCategory)?.label || "Select Subject";
 
   const handleCreate = () => {
     if (newCollectionName.trim()) {
