@@ -440,18 +440,18 @@ const LibraryPage = () => {
 
                   {collections.length > 0 ? (
                     <div className="ml-auto flex items-center gap-2">
-                      <select
-                        value={targetCollectionId}
-                        onChange={(e) => setTargetCollectionId(e.target.value)}
-                        className="appearance-none bg-card border border-accent/30 rounded-lg px-3 py-1.5 pr-8 text-xs font-body font-semibold text-foreground cursor-pointer hover:bg-accent/5 focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
-                      >
-                        <option value="">Select collection…</option>
-                        {collections.map((col) => (
-                          <option key={col.id} value={col.id}>
-                            {col.name} ({col.paperIds.length})
-                          </option>
-                        ))}
-                      </select>
+                      <Select value={targetCollectionId} onValueChange={setTargetCollectionId}>
+                        <SelectTrigger className="h-8 w-[200px] bg-card border-accent/30 text-xs font-body font-semibold">
+                          <SelectValue placeholder="Select collection…" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {collections.map((col) => (
+                            <SelectItem key={col.id} value={col.id}>
+                              {col.name} ({col.paperIds.length})
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                       <button
                         onClick={() => {
                           if (!targetCollectionId) {
