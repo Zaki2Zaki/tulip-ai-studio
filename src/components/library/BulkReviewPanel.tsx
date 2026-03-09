@@ -143,7 +143,7 @@ const BulkReviewPanel = ({
                   <h4 className="font-display text-sm font-semibold text-foreground leading-snug line-clamp-2">
                     {paper.title}
                   </h4>
-                  <p className="text-xs text-muted-foreground font-body mt-1">
+                  <p className="text-xs text-foreground font-body mt-1">
                     {paper.authors?.slice(0, 3).map((a) => a.name).join(", ")}
                     {(paper.authors?.length || 0) > 3 && " et al."}
                   </p>
