@@ -421,13 +421,13 @@ const ArticlePreview = ({
           {/* Abstract — Key Takeaways */}
           {paper.abstract && (
             <div className="p-5 border-b border-border">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-1.5">
+              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
                 <List className="w-3.5 h-3.5 text-primary" />
                 Key Takeaways
               </h5>
               <ul className="space-y-2">
                 {abstractTakeaways.map((point, i) => (
-                  <li key={i} className="flex gap-2.5 text-sm font-body text-foreground/70 leading-relaxed">
+                  <li key={i} className="flex gap-2.5 text-sm font-body text-foreground leading-relaxed">
                     <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary/60" />
                     <span>{point}</span>
                   </li>
