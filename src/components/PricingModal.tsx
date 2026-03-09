@@ -161,10 +161,33 @@ const PricingModal = ({ open, onClose, defaultPeriod = "monthly" }: PricingModal
                     Choose the plan that fits your research needs
                   </p>
                 </div>
-                <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
+                <div className="flex items-center gap-3">
+                  <div className="inline-flex items-center rounded-full border border-border bg-muted/30 p-0.5">
+                    <button
+                      onClick={() => setPeriod("monthly")}
+                      className={`px-4 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
+                        period === "monthly"
+                          ? "bg-primary text-primary-foreground"
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      Monthly
+                    </button>
+                    <button
+                      onClick={() => setPeriod("annual")}
+                      className={`px-4 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
+                        period === "annual"
+                          ? "bg-primary text-primary-foreground"
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      Annual
+                    </button>
+                  </div>
+                  <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
 
               <div className="grid md:grid-cols-3 gap-4 md:gap-6 mb-8">
                 {plans.map((plan) => {
