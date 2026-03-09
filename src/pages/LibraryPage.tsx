@@ -278,13 +278,28 @@ const LibraryPage = () => {
               Discover and organize university thesis papers across 3D, animation, rigging, lighting, and world-building.
             </p>
             {!isSubscribed ? (
-              <button
-                onClick={() => setShowPricing(true)}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-primary-foreground text-sm font-body font-semibold hover:opacity-90 transition-opacity shadow-[0_0_24px_-4px_hsl(var(--primary)/0.4)]"
-              >
-                <CreditCard className="w-4 h-4" />
-                Subscribe
-              </button>
+              <div className="inline-flex items-center gap-3">
+                <span
+                  onClick={() => setShowPricing(true)}
+                  className="text-sm font-body font-semibold text-foreground cursor-pointer hover:text-primary transition-colors"
+                >
+                  Subscribe
+                </span>
+                <div className="inline-flex items-center rounded-full border border-border bg-card/60 p-0.5">
+                  <button
+                    onClick={() => setShowPricing(true)}
+                    className="px-4 py-1.5 rounded-full text-xs font-body font-semibold bg-primary text-primary-foreground transition-all"
+                  >
+                    Monthly
+                  </button>
+                  <button
+                    onClick={() => setShowPricing(true)}
+                    className="px-4 py-1.5 rounded-full text-xs font-body font-semibold text-muted-foreground hover:text-foreground transition-all"
+                  >
+                    Annual
+                  </button>
+                </div>
+              </div>
             ) : (
               <ManageSubscriptionButton />
             )}
