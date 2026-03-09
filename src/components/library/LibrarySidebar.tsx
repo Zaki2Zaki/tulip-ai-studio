@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { Upload, Tag, Layers, Filter, FolderPlus, Folder, X, Plus, ChevronDown, Check } from "lucide-react";
+import { useState } from "react";
+import { Upload, Tag, Layers, FolderPlus, Folder, X, Plus } from "lucide-react";
 import DataSources from "./DataSources";
 
 export interface Collection {
@@ -9,9 +9,6 @@ export interface Collection {
 }
 
 interface LibrarySidebarProps {
-  activeCategory: string;
-  onCategoryChange: (id: string) => void;
-  categories: { id: string; label: string }[];
   onUploadClick: () => void;
   onAILabelClick: () => void;
   onBulkProcessClick: () => void;
@@ -26,9 +23,6 @@ interface LibrarySidebarProps {
 }
 
 const LibrarySidebar = ({
-  activeCategory,
-  onCategoryChange,
-  categories,
   onUploadClick,
   onAILabelClick,
   onBulkProcessClick,
@@ -44,21 +38,6 @@ const LibrarySidebar = ({
   const [newCollectionName, setNewCollectionName] = useState("");
   const [showNewInput, setShowNewInput] = useState(false);
   const [dragOverId, setDragOverId] = useState<string | null>(null);
-  const [subjectOpen, setSubjectOpen] = useState(false);
-  const subjectRef = useRef<HTMLDivElement>(null);
-
-  // Close dropdown on outside click
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (subjectRef.current && !subjectRef.current.contains(e.target as Node)) {
-        setSubjectOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
-
-  const activeLabel = categories.find(c => c.id === activeCategory)?.label || "Select Subject";
 
   const handleCreate = () => {
     if (newCollectionName.trim()) {
@@ -119,46 +98,6 @@ const LibrarySidebar = ({
           <Layers className="w-4 h-4 text-primary" />
           Bulk Process
         </button>
-      </div>
-
-      {/* Subject Filter — Dropdown */}
-      <div className="relative" ref={subjectRef}>
-        <h3 className="text-xs font-body font-semibold uppercase tracking-widest text-muted-foreground mb-2">
-          <Filter className="w-3 h-3 inline mr-1.5" />
-          Subject
-        </h3>
-
-        {/* Selected subject pill — acts as trigger */}
-        <button
-          onClick={() => setSubjectOpen(!subjectOpen)}
-          className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-primary/10 border border-primary/20 text-sm font-body text-foreground font-medium text-left transition-all hover:bg-primary/15"
-        >
-          <span className="truncate">{activeLabel}</span>
-          <ChevronDown className={`w-4 h-4 shrink-0 ml-2 text-muted-foreground transition-transform ${subjectOpen ? "rotate-180" : ""}`} />
-        </button>
-
-        {/* Dropdown list — absolutely positioned, aligned to pill bottom */}
-        {subjectOpen && (
-          <div className="absolute left-0 right-0 top-full mt-1 z-30 rounded-lg border border-border bg-card shadow-xl max-h-64 overflow-y-auto library-scroll">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => {
-                  onCategoryChange(cat.id);
-                  setSubjectOpen(false);
-                }}
-                className={`w-full flex items-center gap-2 text-left px-3 py-2 text-sm font-body transition-all ${
-                  activeCategory === cat.id
-                    ? "bg-primary/10 text-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-muted/20"
-                }`}
-              >
-                {activeCategory === cat.id && <Check className="w-3.5 h-3.5 text-primary shrink-0" />}
-                <span className={activeCategory === cat.id ? "" : "pl-5.5"}>{cat.label}</span>
-              </button>
-            ))}
-          </div>
-        )}
       </div>
 
       {/* Collections - drop targets */}
