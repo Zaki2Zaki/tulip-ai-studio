@@ -188,6 +188,7 @@ const PricingModal = ({ open, onClose, defaultPeriod = "monthly" }: PricingModal
                     <X className="w-6 h-6" />
                   </button>
                 </div>
+              </div>
 
               <div className="grid md:grid-cols-3 gap-4 md:gap-6 mb-8">
                 {plans.map((plan) => {
