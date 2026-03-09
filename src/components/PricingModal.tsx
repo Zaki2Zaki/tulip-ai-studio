@@ -1,22 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Check, Zap, Users, GraduationCap, CreditCard, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { PLANS, PAY_PER_USE } from "@/lib/stripe-plans";
 import { toast } from "sonner";
 
+type BillingPeriod = "monthly" | "annual";
+
 interface PricingModalProps {
   open: boolean;
   onClose: () => void;
+  defaultPeriod?: BillingPeriod;
 }
 
-const plans = [
+const plansByPeriod = (period: BillingPeriod) => [
   {
     name: "Student",
     icon: GraduationCap,
-    price: "$5.99",
-    period: "/month",
-    note: "Requires .edu email",
+    price: period === "monthly" ? "$5.99" : "$59.99",
+    period: period === "monthly" ? "/month" : "/year",
+    note: period === "monthly" ? "Requires .edu email" : "Requires .edu email · Save 17%",
     features: [
       "Unlimited searches",
       "Full paper access",
@@ -30,9 +33,9 @@ const plans = [
   {
     name: "Individual",
     icon: Zap,
-    price: "$9.99",
-    period: "/month",
-    note: "or $99/year (save 17%)",
+    price: period === "monthly" ? "$9.99" : "$99",
+    period: period === "monthly" ? "/month" : "/year",
+    note: period === "monthly" ? "or $99/year (save 17%)" : "Save 17% vs monthly",
     features: [
       "Unlimited searches",
       "Full paper access",
@@ -48,9 +51,9 @@ const plans = [
   {
     name: "Team / Institution",
     icon: Users,
-    price: "$19.99",
-    period: "/user/month",
-    note: "Min 5 users · Volume discounts available",
+    price: period === "monthly" ? "$19.99" : "$199",
+    period: period === "monthly" ? "/user/month" : "/user/year",
+    note: period === "monthly" ? "Min 5 users · Volume discounts available" : "Min 5 users · Save 17%",
     features: [
       "Everything in Individual",
       "Shared team library",
@@ -61,12 +64,19 @@ const plans = [
     ],
     cta: "Contact Sales",
     highlight: false,
-    priceId: null, // No Stripe product yet
+    priceId: null,
   },
 ];
 
-const PricingModal = ({ open, onClose }: PricingModalProps) => {
+const PricingModal = ({ open, onClose, defaultPeriod = "monthly" }: PricingModalProps) => {
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const [period, setPeriod] = useState<BillingPeriod>(defaultPeriod);
+
+  useEffect(() => {
+    if (open) setPeriod(defaultPeriod);
+  }, [open, defaultPeriod]);
+
+  const plans = plansByPeriod(period);
 
   const handleCheckout = async (priceId: string | null, planName: string) => {
     if (!priceId) {
@@ -151,9 +161,33 @@ const PricingModal = ({ open, onClose }: PricingModalProps) => {
                     Choose the plan that fits your research needs
                   </p>
                 </div>
-                <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
-                  <X className="w-6 h-6" />
-                </button>
+                <div className="flex items-center gap-3">
+                  <div className="inline-flex items-center rounded-full border border-border bg-muted/30 p-0.5">
+                    <button
+                      onClick={() => setPeriod("monthly")}
+                      className={`px-4 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
+                        period === "monthly"
+                          ? "bg-primary text-primary-foreground"
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      Monthly
+                    </button>
+                    <button
+                      onClick={() => setPeriod("annual")}
+                      className={`px-4 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
+                        period === "annual"
+                          ? "bg-primary text-primary-foreground"
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      Annual
+                    </button>
+                  </div>
+                  <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
               </div>
 
               <div className="grid md:grid-cols-3 gap-4 md:gap-6 mb-8">
