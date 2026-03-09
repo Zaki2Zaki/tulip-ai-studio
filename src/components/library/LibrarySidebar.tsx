@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { Upload, Tag, Layers, FolderPlus, Folder, X, Plus } from "lucide-react";
 import DataSources from "./DataSources";
 
