@@ -207,7 +207,7 @@ const BulkReviewPanel = ({
                   </button>
                   <button
                     onClick={() => onOpenFull(paper)}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-body text-muted-foreground hover:text-foreground hover:border-primary/20 transition-all ml-auto"
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-body text-foreground hover:text-primary hover:border-primary/20 transition-all ml-auto"
                   >
                     <Eye className="w-3.5 h-3.5" />
                     Open Full View
