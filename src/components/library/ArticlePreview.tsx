@@ -438,7 +438,7 @@ const ArticlePreview = ({
 
           {/* PDF Preview — embedded viewer */}
           <div className="p-5 border-b border-border">
-            <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-1.5">
+            <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
               <FileText className="w-3.5 h-3.5 text-primary" />
               Paper Preview
             </h5>
@@ -447,14 +447,14 @@ const ArticlePreview = ({
                 {pdfStatus === "loading" && (
                   <div className="w-full h-[500px] flex flex-col items-center justify-center gap-3 bg-muted/10">
                     <Loader2 className="w-8 h-8 animate-spin text-primary/50" />
-                    <p className="text-xs text-muted-foreground font-body">Loading PDF preview…</p>
+                    <p className="text-xs text-foreground font-body">Loading PDF preview…</p>
                   </div>
                 )}
                 {pdfStatus === "error" && (
                   <div className="w-full h-[300px] flex flex-col items-center justify-center gap-3 bg-muted/10 p-8">
-                    <FileText className="w-10 h-10 text-muted-foreground/30" />
-                    <p className="text-sm text-muted-foreground font-body">PDF preview couldn't load</p>
-                    <p className="text-xs text-muted-foreground/60 font-body max-w-sm text-center">
+                    <FileText className="w-10 h-10 text-foreground/30" />
+                    <p className="text-sm text-foreground font-body">PDF preview couldn't load</p>
+                    <p className="text-xs text-foreground/80 font-body max-w-sm text-center">
                       The document may be behind a paywall or the viewer timed out.
                     </p>
                     <div className="flex items-center gap-3 mt-2">
@@ -472,7 +472,7 @@ const ArticlePreview = ({
                           href={paper.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-body text-muted-foreground hover:text-foreground transition-colors"
+                          className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-body text-foreground hover:text-primary transition-colors"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
                           View source
@@ -506,7 +506,7 @@ const ArticlePreview = ({
                 />
                 {pdfStatus === "loaded" && (
                   <div className="flex items-center justify-between px-3 py-2 bg-muted/20 border-t border-border">
-                    <span className="text-[10px] text-muted-foreground font-body">Powered by Google Docs Viewer</span>
+                    <span className="text-[10px] text-foreground/70 font-body">Powered by Google Docs Viewer</span>
                     <a
                       href={pdfUrl!}
                       target="_blank"
@@ -520,11 +520,20 @@ const ArticlePreview = ({
               </div>
             ) : (
               <div className="rounded-lg border border-border bg-muted/10 p-8 text-center">
-                <FileText className="w-10 h-10 text-muted-foreground/30 mx-auto mb-3" />
-                <p className="text-sm text-muted-foreground font-body">No PDF preview available</p>
+                <FileText className="w-10 h-10 text-foreground/30 mx-auto mb-3" />
+                <p className="text-sm text-foreground font-body">No PDF preview available</p>
+                <p className="text-xs text-foreground/80 font-body mt-2 max-w-sm mx-auto">
+                  This paper may not have a publicly accessible PDF. Use the links below to access it.
+                </p>
                 {paper.url && (
-                  <a href={paper.url} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline font-body mt-1 inline-block">
-                    View on source →
+                  <a 
+                    href={paper.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="inline-flex items-center gap-1.5 px-4 py-2 mt-4 rounded-lg bg-primary text-primary-foreground text-xs font-body font-semibold hover:opacity-90 transition-opacity"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    View on source
                   </a>
                 )}
               </div>
