@@ -90,6 +90,7 @@ const LibraryPage = () => {
   const [isSubscribed] = useState(false);
   const [viewedPapers, setViewedPapers] = useState<Set<string>>(new Set());
   const [showPricing, setShowPricing] = useState(false);
+  const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annual">("monthly");
   const [searchCount, setSearchCount] = useState(0);
   const [selectedPapers, setSelectedPapers] = useState<Set<string>>(new Set());
   const [lastSearchQuery, setLastSearchQuery] = useState("");
