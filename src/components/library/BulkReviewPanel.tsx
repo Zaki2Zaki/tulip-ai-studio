@@ -82,14 +82,14 @@ const BulkReviewPanel = ({
           <h3 className="text-sm font-display font-semibold text-foreground">
             Bulk Review
           </h3>
-          <span className="text-xs font-body text-muted-foreground">
+          <span className="text-xs font-body text-foreground">
             {pendingCount} of {papers.length} pending
           </span>
         </div>
         <div className="flex items-center gap-3">
           {collections.length > 0 && (
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-body text-muted-foreground uppercase tracking-wider">Approve to:</span>
+              <span className="text-[10px] font-body text-foreground uppercase tracking-wider">Approve to:</span>
               <select
                 value={defaultCollection}
                 onChange={(e) => setDefaultCollection(e.target.value)}
@@ -105,7 +105,7 @@ const BulkReviewPanel = ({
           )}
           <button
             onClick={() => { onClearSelection(); onClose(); }}
-            className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors"
+            className="p-1.5 rounded-md hover:bg-muted/30 text-foreground hover:text-primary transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
