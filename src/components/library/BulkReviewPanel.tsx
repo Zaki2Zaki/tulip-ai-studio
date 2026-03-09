@@ -239,7 +239,7 @@ const BulkReviewPanel = ({
 
       {/* Footer summary */}
       <div className="px-5 py-3 border-t border-border bg-muted/10 flex items-center justify-between">
-        <span className="text-xs font-body text-muted-foreground">
+        <span className="text-xs font-body text-foreground">
           {reviewed.size} reviewed · {pendingCount} remaining
         </span>
         {reviewed.size === papers.length && papers.length > 0 && (
