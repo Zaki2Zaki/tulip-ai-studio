@@ -614,7 +614,7 @@ const ArticlePreview = ({
             {chatMessages.length > 0 && (
               <button
                 onClick={() => setChatMessages([])}
-                className="ml-auto text-[10px] font-body text-muted-foreground hover:text-foreground transition-colors"
+                className="ml-auto text-[10px] font-body text-foreground hover:text-primary transition-colors"
               >
                 Clear
               </button>
@@ -625,8 +625,8 @@ const ArticlePreview = ({
           <div className="flex-1 overflow-y-auto p-4 space-y-3 library-scroll">
             {chatMessages.length === 0 && (
               <div className="text-center py-8">
-                <MessageSquare className="w-8 h-8 text-muted-foreground/20 mx-auto mb-3" />
-                <p className="text-xs text-muted-foreground font-body mb-4">
+                <MessageSquare className="w-8 h-8 text-foreground/20 mx-auto mb-3" />
+                <p className="text-xs text-foreground font-body mb-4">
                   What would you like to know?
                 </p>
                 <div className="flex flex-wrap gap-1.5 justify-center">
@@ -634,7 +634,7 @@ const ArticlePreview = ({
                     <button
                       key={q}
                       onClick={() => handleSendChat(q)}
-                      className="px-2.5 py-1.5 text-xs font-body rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-accent/30 hover:bg-accent/5 transition-all"
+                      className="px-2.5 py-1.5 text-xs font-body rounded-lg border border-border text-foreground hover:text-primary hover:border-accent/30 hover:bg-accent/5 transition-all"
                     >
                       {q}
                     </button>
