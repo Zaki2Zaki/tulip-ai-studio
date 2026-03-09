@@ -573,7 +573,7 @@ const ArticlePreview = ({
           {/* Related Papers */}
           {relatedPapers.length > 0 && (
             <div className="p-5 border-t border-border">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-1.5">
+              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
                 <Link2 className="w-3.5 h-3.5 text-primary" />
                 Related Papers
               </h5>
@@ -590,13 +590,13 @@ const ArticlePreview = ({
                     <div className="flex items-center gap-3 mt-1.5">
                       {rp.year && <span className="text-[11px] text-accent font-body">{rp.year}</span>}
                       {rp.authors?.length > 0 && (
-                        <span className="text-[11px] text-foreground/60 font-body truncate">
+                        <span className="text-[11px] text-foreground font-body truncate">
                           {rp.authors.slice(0, 2).map(a => a.name).join(", ")}
                           {rp.authors.length > 2 && " et al."}
                         </span>
                       )}
                       {rp.citationCount != null && rp.citationCount > 0 && (
-                        <span className="text-[11px] text-foreground/60 font-body">{rp.citationCount} cit.</span>
+                        <span className="text-[11px] text-foreground font-body">{rp.citationCount} cit.</span>
                       )}
                     </div>
                   </button>
