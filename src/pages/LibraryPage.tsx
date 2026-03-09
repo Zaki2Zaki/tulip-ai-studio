@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Lock, BookOpen, FolderPlus, ChevronDown, ArrowLeft, Folder, CreditCard, Settings, Loader2 } from "lucide-react";
 import Navbar from "@/components/Navbar";
