@@ -164,10 +164,10 @@ const BulkReviewPanel = ({
                   <span className="text-xs font-body text-accent">{paper.year}</span>
                 )}
                 {paper.venue && (
-                  <span className="text-xs font-body text-muted-foreground truncate max-w-[200px]">{paper.venue}</span>
+                  <span className="text-xs font-body text-foreground truncate max-w-[200px]">{paper.venue}</span>
                 )}
                 {paper.citationCount != null && (
-                  <span className="text-xs font-body text-muted-foreground">{paper.citationCount} citations</span>
+                  <span className="text-xs font-body text-foreground">{paper.citationCount} citations</span>
                 )}
               </div>
 
