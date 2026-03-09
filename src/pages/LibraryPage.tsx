@@ -281,21 +281,29 @@ const LibraryPage = () => {
             {!isSubscribed ? (
               <div className="inline-flex items-center gap-3">
                 <span
-                  onClick={() => setShowPricing(true)}
+                  onClick={() => { setBillingPeriod("monthly"); setShowPricing(true); }}
                   className="text-sm font-body font-semibold text-foreground cursor-pointer hover:text-primary transition-colors"
                 >
                   Subscribe
                 </span>
                 <div className="inline-flex items-center rounded-full border border-border bg-card/60 p-0.5">
                   <button
-                    onClick={() => setShowPricing(true)}
-                    className="px-4 py-1.5 rounded-full text-xs font-body font-semibold bg-primary text-primary-foreground transition-all"
+                    onClick={() => { setBillingPeriod("monthly"); setShowPricing(true); }}
+                    className={`px-4 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
+                      billingPeriod === "monthly"
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
                   >
                     Monthly
                   </button>
                   <button
-                    onClick={() => setShowPricing(true)}
-                    className="px-4 py-1.5 rounded-full text-xs font-body font-semibold text-muted-foreground hover:text-foreground transition-all"
+                    onClick={() => { setBillingPeriod("annual"); setShowPricing(true); }}
+                    className={`px-4 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
+                      billingPeriod === "annual"
+                        ? "bg-primary text-primary-foreground"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
                   >
                     Annual
                   </button>
