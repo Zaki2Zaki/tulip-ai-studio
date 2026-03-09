@@ -513,9 +513,32 @@ const LibraryPage = () => {
             </div>
           </div>
 
-          {/* Article Deep Dive Panel — outside overflow-hidden container */}
+          {/* Bulk Review Panel — shown when 2+ papers selected */}
           <AnimatePresence>
-            {previewPaper && (
+            {selectedPapers.size >= 2 && (
+              <div className="mt-4">
+                <BulkReviewPanel
+                  papers={visiblePapers.filter((p) => selectedPapers.has(p.paperId))}
+                  collections={collections}
+                  onApprove={handleAddToCollection}
+                  onReject={(paperId) => {
+                    handleToggleSelect(paperId);
+                    handleTrash(paperId);
+                  }}
+                  onOpenFull={(p) => {
+                    setPreviewPaper(p);
+                    setSelectedPapers(new Set());
+                  }}
+                  onClose={() => {}}
+                  onClearSelection={() => setSelectedPapers(new Set())}
+                />
+              </div>
+            )}
+          </AnimatePresence>
+
+          {/* Article Deep Dive Panel — single paper view */}
+          <AnimatePresence>
+            {previewPaper && selectedPapers.size < 2 && (
               <div className="mt-4">
                 <ArticlePreview
                   paper={previewPaper}
