@@ -82,14 +82,14 @@ const BulkReviewPanel = ({
           <h3 className="text-sm font-display font-semibold text-foreground">
             Bulk Review
           </h3>
-          <span className="text-xs font-body text-muted-foreground">
+          <span className="text-xs font-body text-foreground">
             {pendingCount} of {papers.length} pending
           </span>
         </div>
         <div className="flex items-center gap-3">
           {collections.length > 0 && (
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-body text-muted-foreground uppercase tracking-wider">Approve to:</span>
+              <span className="text-[10px] font-body text-foreground uppercase tracking-wider">Approve to:</span>
               <select
                 value={defaultCollection}
                 onChange={(e) => setDefaultCollection(e.target.value)}
@@ -105,7 +105,7 @@ const BulkReviewPanel = ({
           )}
           <button
             onClick={() => { onClearSelection(); onClose(); }}
-            className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors"
+            className="p-1.5 rounded-md hover:bg-muted/30 text-foreground hover:text-primary transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -143,7 +143,7 @@ const BulkReviewPanel = ({
                   <h4 className="font-display text-sm font-semibold text-foreground leading-snug line-clamp-2">
                     {paper.title}
                   </h4>
-                  <p className="text-xs text-muted-foreground font-body mt-1">
+                  <p className="text-xs text-foreground font-body mt-1">
                     {paper.authors?.slice(0, 3).map((a) => a.name).join(", ")}
                     {(paper.authors?.length || 0) > 3 && " et al."}
                   </p>
@@ -164,16 +164,16 @@ const BulkReviewPanel = ({
                   <span className="text-xs font-body text-accent">{paper.year}</span>
                 )}
                 {paper.venue && (
-                  <span className="text-xs font-body text-muted-foreground truncate max-w-[200px]">{paper.venue}</span>
+                  <span className="text-xs font-body text-foreground truncate max-w-[200px]">{paper.venue}</span>
                 )}
                 {paper.citationCount != null && (
-                  <span className="text-xs font-body text-muted-foreground">{paper.citationCount} citations</span>
+                  <span className="text-xs font-body text-foreground">{paper.citationCount} citations</span>
                 )}
               </div>
 
               {/* Abstract snippet / expandable */}
               <div className="mt-2">
-                <p className="text-xs font-body text-muted-foreground/80 leading-relaxed">
+                <p className="text-xs font-body text-foreground/90 leading-relaxed">
                   {isExpanded ? paper.abstract || snippet : snippet}
                 </p>
                 {paper.abstract && paper.abstract.length > 180 && (
@@ -207,7 +207,7 @@ const BulkReviewPanel = ({
                   </button>
                   <button
                     onClick={() => onOpenFull(paper)}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-body text-muted-foreground hover:text-foreground hover:border-primary/20 transition-all ml-auto"
+                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-body text-foreground hover:text-primary hover:border-primary/20 transition-all ml-auto"
                   >
                     <Eye className="w-3.5 h-3.5" />
                     Open Full View
@@ -217,7 +217,7 @@ const BulkReviewPanel = ({
                       href={paper.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 px-2 py-2 rounded-lg border border-border text-xs font-body text-muted-foreground hover:text-foreground transition-colors"
+                      className="flex items-center gap-1 px-2 py-2 rounded-lg border border-border text-xs font-body text-foreground hover:text-primary transition-colors"
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
@@ -228,8 +228,8 @@ const BulkReviewPanel = ({
               {/* Reviewed state */}
               {isReviewed && (
                 <div className="flex items-center gap-2 mt-2 pt-2 border-t border-border/30">
-                  <FileText className="w-3 h-3 text-muted-foreground/50" />
-                  <span className="text-[11px] font-body text-muted-foreground/60 italic">Reviewed</span>
+                  <FileText className="w-3 h-3 text-foreground/50" />
+                  <span className="text-[11px] font-body text-foreground/60 italic">Reviewed</span>
                 </div>
               )}
             </motion.div>
@@ -239,7 +239,7 @@ const BulkReviewPanel = ({
 
       {/* Footer summary */}
       <div className="px-5 py-3 border-t border-border bg-muted/10 flex items-center justify-between">
-        <span className="text-xs font-body text-muted-foreground">
+        <span className="text-xs font-body text-foreground">
           {reviewed.size} reviewed · {pendingCount} remaining
         </span>
         {reviewed.size === papers.length && papers.length > 0 && (

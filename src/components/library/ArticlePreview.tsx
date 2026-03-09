@@ -288,15 +288,15 @@ const ArticlePreview = ({
           {/* Paper header + actions */}
           <div className="p-5 space-y-3 border-b border-border">
             <h4 className="font-display text-base font-bold text-foreground leading-tight">{paper.title}</h4>
-            <p className="text-sm text-foreground/70 font-body">
+            <p className="text-sm text-foreground font-body">
               {paper.authors?.slice(0, 5).map((a) => a.name).join(", ")}
               {(paper.authors?.length || 0) > 5 && " et al."}
             </p>
             <div className="flex items-center gap-3">
               {paper.year && <span className="text-sm text-accent font-body">{paper.year}</span>}
-              {paper.venue && <span className="text-sm text-foreground/60 font-body">{paper.venue}</span>}
+              {paper.venue && <span className="text-sm text-foreground font-body">{paper.venue}</span>}
               {paper.citationCount != null && (
-                <span className="text-sm text-foreground/60 font-body">{paper.citationCount} citations</span>
+                <span className="text-sm text-foreground font-body">{paper.citationCount} citations</span>
               )}
             </div>
 
@@ -421,13 +421,13 @@ const ArticlePreview = ({
           {/* Abstract — Key Takeaways */}
           {paper.abstract && (
             <div className="p-5 border-b border-border">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-1.5">
+              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
                 <List className="w-3.5 h-3.5 text-primary" />
                 Key Takeaways
               </h5>
               <ul className="space-y-2">
                 {abstractTakeaways.map((point, i) => (
-                  <li key={i} className="flex gap-2.5 text-sm font-body text-foreground/70 leading-relaxed">
+                  <li key={i} className="flex gap-2.5 text-sm font-body text-foreground leading-relaxed">
                     <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary/60" />
                     <span>{point}</span>
                   </li>
@@ -438,7 +438,7 @@ const ArticlePreview = ({
 
           {/* PDF Preview — embedded viewer */}
           <div className="p-5 border-b border-border">
-            <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-1.5">
+            <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
               <FileText className="w-3.5 h-3.5 text-primary" />
               Paper Preview
             </h5>
@@ -447,14 +447,14 @@ const ArticlePreview = ({
                 {pdfStatus === "loading" && (
                   <div className="w-full h-[500px] flex flex-col items-center justify-center gap-3 bg-muted/10">
                     <Loader2 className="w-8 h-8 animate-spin text-primary/50" />
-                    <p className="text-xs text-muted-foreground font-body">Loading PDF preview…</p>
+                    <p className="text-xs text-foreground font-body">Loading PDF preview…</p>
                   </div>
                 )}
                 {pdfStatus === "error" && (
                   <div className="w-full h-[300px] flex flex-col items-center justify-center gap-3 bg-muted/10 p-8">
-                    <FileText className="w-10 h-10 text-muted-foreground/30" />
-                    <p className="text-sm text-muted-foreground font-body">PDF preview couldn't load</p>
-                    <p className="text-xs text-muted-foreground/60 font-body max-w-sm text-center">
+                    <FileText className="w-10 h-10 text-foreground/30" />
+                    <p className="text-sm text-foreground font-body">PDF preview couldn't load</p>
+                    <p className="text-xs text-foreground/80 font-body max-w-sm text-center">
                       The document may be behind a paywall or the viewer timed out.
                     </p>
                     <div className="flex items-center gap-3 mt-2">
@@ -472,7 +472,7 @@ const ArticlePreview = ({
                           href={paper.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-body text-muted-foreground hover:text-foreground transition-colors"
+                          className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-body text-foreground hover:text-primary transition-colors"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
                           View source
@@ -506,7 +506,7 @@ const ArticlePreview = ({
                 />
                 {pdfStatus === "loaded" && (
                   <div className="flex items-center justify-between px-3 py-2 bg-muted/20 border-t border-border">
-                    <span className="text-[10px] text-muted-foreground font-body">Powered by Google Docs Viewer</span>
+                    <span className="text-[10px] text-foreground/70 font-body">Powered by Google Docs Viewer</span>
                     <a
                       href={pdfUrl!}
                       target="_blank"
@@ -520,11 +520,20 @@ const ArticlePreview = ({
               </div>
             ) : (
               <div className="rounded-lg border border-border bg-muted/10 p-8 text-center">
-                <FileText className="w-10 h-10 text-muted-foreground/30 mx-auto mb-3" />
-                <p className="text-sm text-muted-foreground font-body">No PDF preview available</p>
+                <FileText className="w-10 h-10 text-foreground/30 mx-auto mb-3" />
+                <p className="text-sm text-foreground font-body">No PDF preview available</p>
+                <p className="text-xs text-foreground/80 font-body mt-2 max-w-sm mx-auto">
+                  This paper may not have a publicly accessible PDF. Use the links below to access it.
+                </p>
                 {paper.url && (
-                  <a href={paper.url} target="_blank" rel="noopener noreferrer" className="text-xs text-primary hover:underline font-body mt-1 inline-block">
-                    View on source →
+                  <a 
+                    href={paper.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="inline-flex items-center gap-1.5 px-4 py-2 mt-4 rounded-lg bg-primary text-primary-foreground text-xs font-body font-semibold hover:opacity-90 transition-opacity"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    View on source
                   </a>
                 )}
               </div>
@@ -534,7 +543,7 @@ const ArticlePreview = ({
           {/* Executive Summary — bullet points */}
           <div className="p-5">
             <div className="flex items-center justify-between mb-3">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-accent" />
                 Executive Summary
               </h5>
@@ -548,23 +557,23 @@ const ArticlePreview = ({
               )}
             </div>
             {summaryLoading && !executiveSummary && (
-              <div className="flex items-center gap-2 text-xs text-muted-foreground font-body">
+              <div className="flex items-center gap-2 text-xs text-foreground font-body">
                 <Loader2 className="w-3.5 h-3.5 animate-spin text-accent" />
                 Generating summary…
               </div>
             )}
             {executiveSummary ? (
-              <div className="text-sm font-body text-foreground/80 leading-relaxed prose prose-invert prose-sm max-w-none [&_ul]:list-disc [&_ul]:pl-4 [&_li]:my-1 [&_p]:my-1">
+              <div className="text-sm font-body text-foreground leading-relaxed prose prose-invert prose-sm max-w-none [&_ul]:list-disc [&_ul]:pl-4 [&_li]:my-1 [&_p]:my-1">
                 <ReactMarkdown>{executiveSummary}</ReactMarkdown>
               </div>
             ) : !summaryLoading && paper.abstract ? (
-              <p className="text-xs font-body text-muted-foreground/60 italic">Click "Generate with AI" for a structured summary of key findings.</p>
+              <p className="text-xs font-body text-foreground/80 italic">Click "Generate with AI" for a structured summary of key findings.</p>
             ) : null}
           </div>
           {/* Related Papers */}
           {relatedPapers.length > 0 && (
             <div className="p-5 border-t border-border">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-muted-foreground mb-3 flex items-center gap-1.5">
+              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
                 <Link2 className="w-3.5 h-3.5 text-primary" />
                 Related Papers
               </h5>
@@ -581,13 +590,13 @@ const ArticlePreview = ({
                     <div className="flex items-center gap-3 mt-1.5">
                       {rp.year && <span className="text-[11px] text-accent font-body">{rp.year}</span>}
                       {rp.authors?.length > 0 && (
-                        <span className="text-[11px] text-foreground/60 font-body truncate">
+                        <span className="text-[11px] text-foreground font-body truncate">
                           {rp.authors.slice(0, 2).map(a => a.name).join(", ")}
                           {rp.authors.length > 2 && " et al."}
                         </span>
                       )}
                       {rp.citationCount != null && rp.citationCount > 0 && (
-                        <span className="text-[11px] text-foreground/60 font-body">{rp.citationCount} cit.</span>
+                        <span className="text-[11px] text-foreground font-body">{rp.citationCount} cit.</span>
                       )}
                     </div>
                   </button>
@@ -605,7 +614,7 @@ const ArticlePreview = ({
             {chatMessages.length > 0 && (
               <button
                 onClick={() => setChatMessages([])}
-                className="ml-auto text-[10px] font-body text-muted-foreground hover:text-foreground transition-colors"
+                className="ml-auto text-[10px] font-body text-foreground hover:text-primary transition-colors"
               >
                 Clear
               </button>
@@ -616,8 +625,8 @@ const ArticlePreview = ({
           <div className="flex-1 overflow-y-auto p-4 space-y-3 library-scroll">
             {chatMessages.length === 0 && (
               <div className="text-center py-8">
-                <MessageSquare className="w-8 h-8 text-muted-foreground/20 mx-auto mb-3" />
-                <p className="text-xs text-muted-foreground font-body mb-4">
+                <MessageSquare className="w-8 h-8 text-foreground/20 mx-auto mb-3" />
+                <p className="text-xs text-foreground font-body mb-4">
                   What would you like to know?
                 </p>
                 <div className="flex flex-wrap gap-1.5 justify-center">
@@ -625,7 +634,7 @@ const ArticlePreview = ({
                     <button
                       key={q}
                       onClick={() => handleSendChat(q)}
-                      className="px-2.5 py-1.5 text-xs font-body rounded-lg border border-border text-muted-foreground hover:text-foreground hover:border-accent/30 hover:bg-accent/5 transition-all"
+                      className="px-2.5 py-1.5 text-xs font-body rounded-lg border border-border text-foreground hover:text-primary hover:border-accent/30 hover:bg-accent/5 transition-all"
                     >
                       {q}
                     </button>
