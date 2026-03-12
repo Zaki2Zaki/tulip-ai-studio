@@ -4,6 +4,8 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Calculator, ChevronDown, ChevronUp, ClipboardCheck } from "lucide-react";
 import PipelineAssessmentQuiz from "./PipelineAssessmentQuiz";
+import DiscoveryPackagesModal from "./DiscoveryPackagesModal";
+import { Package } from "lucide-react";
 
 interface ServiceOption {
   id: string;
@@ -93,6 +95,7 @@ const CostEstimator = () => {
   const [currency, setCurrency] = useState<"USD" | "CAD" | "EUR">("USD");
   const [showBreakdown, setShowBreakdown] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
+  const [discoveryOpen, setDiscoveryOpen] = useState(false);
 
   const handleQuizComplete = (recommendedServices: string[]) => {
     setSelectedServices(recommendedServices);
@@ -336,7 +339,18 @@ const CostEstimator = () => {
         open={quizOpen}
         onClose={() => setQuizOpen(false)}
         onComplete={handleQuizComplete} />
-      
+
+      <DiscoveryPackagesModal
+        open={discoveryOpen}
+        onClose={() => setDiscoveryOpen(false)} />
+
+      {/* Floating button */}
+      <button
+        onClick={() => setDiscoveryOpen(true)}
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-full font-display font-semibold text-sm shadow-lg hover:opacity-90 transition-opacity">
+        <Package size={18} />
+        GenAI Workflow Discovery Packages
+      </button>
     </section>);
 
 };
