@@ -25,7 +25,7 @@ const services = [
 {
   icon: LayoutDashboard,
   title: "Architecture Blueprint",
-  description: "Full GenAI architecture design including LLM data model training and quality assurance.",
+  description: "Full GenAI architecture design including LLM data model design & training approach and quality assurance metrics\nDependant on OKRs",
   range: "$12K – $350K"
 },
 {
@@ -37,7 +37,7 @@ const services = [
 {
   icon: GraduationCap,
   title: "Workshops & Education",
-  description: "Certified training by Unreal & Unity educators to empower your team with AI skills.",
+  description: "Certified training by Unreal & Unity educators to empower your team with AI creative skills.",
   range: "$3K – $85K"
 }];
 
