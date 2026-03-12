@@ -66,7 +66,7 @@ content production pipelines - from pre-production through final output.
           initial={{ opacity: 0, scale: 0.5 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex flex-col items-center gap-3 my-0 border-solid border-teal-500 rounded-lg shadow-sm">
+          className="flex flex-col items-center gap-0 my-0">
 
           <div className="w-px h-16 relative overflow-hidden">
             <div 
