@@ -95,7 +95,12 @@ content production pipelines - from pre-production through final output.
             </span>
             <ArrowRight className="w-4 h-4 text-primary" />
           </div>
-          <div className="w-px h-12 bg-gradient-to-b from-primary via-primary/60 to-transparent" />
+          <div className="w-px h-12 relative overflow-hidden">
+            <div 
+              className="absolute inset-0 bg-gradient-to-b from-primary via-primary/60 to-transparent"
+              style={{ animation: 'flowDown 2s ease-in-out infinite' }}
+            />
+          </div>
         </motion.div>
 
         {/* AI-Powered Workflow */}
