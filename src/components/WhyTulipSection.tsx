@@ -29,7 +29,7 @@ const logos = [
 const aiLogos = [
   { src: openaiLogo, name: "GPT-5 / o1", color: "#10A37F" },
   { src: geminiLogo, name: "Gemini", color: "#4285F4" },
-  { src: huggingfaceLogo, name: "Hugging Face", color: "#FFD700" },
+  { src: huggingfaceLogo, name: "Hugging Face", color: "#FFD700", hideLabel: true },
   { src: lovableLogo, name: "Lovable", color: "#E779C1" },
   { src: grokLogo, name: "Grok", color: "#FFFFFF" },
 ];
@@ -120,12 +120,14 @@ const WhyTulipSection = () => {
                       alt={logo.name}
                       className={`h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity ${(logo as any).whiteBg ? 'bg-white rounded px-1 py-0.5' : ''}`}
                     />
-                    <span
-                      className="font-display text-sm md:text-base font-bold whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity"
-                      style={{ color: logo.color }}
-                    >
-                      {logo.name}
-                    </span>
+                    {!(logo as any).hideLabel && (
+                      <span
+                        className="font-display text-sm md:text-base font-bold whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity"
+                        style={{ color: logo.color }}
+                      >
+                        {logo.name}
+                      </span>
+                    )}
                   </div>
                 </div>
               ))}
