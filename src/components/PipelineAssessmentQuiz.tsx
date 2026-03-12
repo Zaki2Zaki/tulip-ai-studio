@@ -335,14 +335,20 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
               <motion.div key={`page-${quizPage}`} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}>
                 <div className="mb-2 flex items-center justify-between">
                   <span className="text-sm text-muted-foreground font-body">Page {quizPage + 1} of {totalPages}</span>
-                  <span className="text-sm text-muted-foreground font-body">{Math.min((quizPage + 1) * QUESTIONS_PER_PAGE, questions.length)} / {questions.length} questions</span>
+                  <span className="text-sm text-muted-foreground font-body">{pageQuestions.length} questions</span>
                 </div>
 
-                <div className="space-y-8 mt-4">
-                  {pageQuestions.map((q) => (
+                {/* Category title */}
+                <h3 className="font-display text-xl font-bold mb-1" style={{ color: catColors[quizPage] }}>
+                  {currentCategory.label}
+                </h3>
+                <div className="w-12 h-0.5 rounded-full mb-6" style={{ backgroundColor: catColors[quizPage] }} />
+
+                <div className="space-y-8">
+                  {pageQuestions.map((q, idx) => (
                     <div key={q.id} className="space-y-3">
                       <div className="flex items-start gap-2">
-                        <span className="text-sm text-muted-foreground font-body mt-0.5 min-w-[24px]">Q{q.id}</span>
+                        <span className="text-sm text-muted-foreground font-body mt-0.5 min-w-[24px]">Q{idx + 1}</span>
                         <p className="font-body text-base leading-relaxed">{q.description}</p>
                       </div>
                       <div className="px-2">
