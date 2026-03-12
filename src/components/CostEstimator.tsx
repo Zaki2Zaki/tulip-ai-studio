@@ -95,6 +95,7 @@ const CostEstimator = () => {
   const [currency, setCurrency] = useState<"USD" | "CAD" | "EUR">("USD");
   const [showBreakdown, setShowBreakdown] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
+  const [discoveryOpen, setDiscoveryOpen] = useState(false);
 
   const handleQuizComplete = (recommendedServices: string[]) => {
     setSelectedServices(recommendedServices);
