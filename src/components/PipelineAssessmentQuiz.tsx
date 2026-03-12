@@ -335,8 +335,8 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
             {step === "quiz" && (
               <motion.div key={`page-${quizPage}`} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}>
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="text-xs text-muted-foreground font-body">Page {quizPage + 1} of {totalPages}</span>
-                  <span className="text-xs text-muted-foreground font-body">{Math.min((quizPage + 1) * QUESTIONS_PER_PAGE, questions.length)} / {questions.length} questions</span>
+                  <span className="text-sm text-muted-foreground font-body">Page {quizPage + 1} of {totalPages}</span>
+                  <span className="text-sm text-muted-foreground font-body">{Math.min((quizPage + 1) * QUESTIONS_PER_PAGE, questions.length)} / {questions.length} questions</span>
                 </div>
 
                 <div className="space-y-8 mt-4">
