@@ -194,6 +194,11 @@
   50% { background-position: 100% 50%; }
 }
 
+@keyframes illuminating {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 @keyframes chrome-border-shimmer {
   0%, 100% { background-position: 100% 100%, 0% 50%; }
   50% { background-position: 100% 100%, 100% 50%; }
