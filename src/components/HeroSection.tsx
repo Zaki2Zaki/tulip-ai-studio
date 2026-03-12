@@ -55,6 +55,15 @@ const HeroSection = () => {
       {/* Content — left-aligned at golden ratio */}
       <div className="relative z-10 w-full section-padding">
         <div className="max-w-[50vw] md:ml-[8%] lg:ml-[12%] ml-0 max-md:max-w-full max-md:text-center" style={{ marginTop: "-5vh" }}>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+            className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-4"
+          >
+            Use Case
+          </motion.p>
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
