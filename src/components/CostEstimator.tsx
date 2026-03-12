@@ -24,9 +24,9 @@ const serviceOptions: ServiceOption[] = [
   id: "research",
   label: "GenAI Research",
   description: "Identify pipeline pain points & opportunities\nAnalysis and Align AI tools seamlessly into your artist's workflows\nAnalysis of your vendor's & research tools friction points to find impactful solutions",
-  minUSD: 5000, maxUSD: 110000,
-  minCAD: 6843, maxCAD: 150546,
-  minEUR: 4238, maxEUR: 93225
+  minUSD: 15000, maxUSD: 110000,
+  minCAD: 20529, maxCAD: 150546,
+  minEUR: 12713, maxEUR: 93225
 },
 {
   id: "benchmarking",
