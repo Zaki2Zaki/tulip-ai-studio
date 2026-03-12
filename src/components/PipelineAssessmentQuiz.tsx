@@ -55,7 +55,7 @@ const studioScales = [
 ];
 
 const categoryDefs = [
-  { key: "systemization", label: "Systemization", qs: [1, 2, 3, 4, 20, 21, 22], max: 35 },
+  { key: "systemization", label: "Systemization", qs: [1, 2, 3, 4], max: 20 },
   { key: "optimisation", label: "Optimisation & Efficiency", qs: [5, 6, 7, 8], max: 20 },
   { key: "knowledge", label: "Centralised Knowledge", qs: [9, 10, 11, 12], max: 20 },
   { key: "personnel", label: "Hiring & Personnel Dependency", qs: [13, 14, 15, 16], max: 20 },
@@ -65,19 +65,17 @@ const categoryDefs = [
 
 const sliderLabels = ["", "Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"];
 
-const QUESTIONS_PER_PAGE = 5;
-
 /* ──────────────────────────────────────────
    Donut chart (SVG)
    ────────────────────────────────────────── */
 
-const DonutChart = ({ categories, overall }: { categories: { label: string; pct: number; color: string }[]; overall: number }) => {
+const DonutChart = ({ categories, overall, worstIndices }: { categories: { label: string; pct: number; color: string }[]; overall: number; worstIndices: number[] }) => {
   const size = 220;
   const cx = size / 2;
   const cy = size / 2;
   const outerR = 95;
   const innerR = 60;
-  const gap = 2; // degrees gap between slices
+  const gap = 2;
   const total = categories.length;
   const sliceAngle = (360 - gap * total) / total;
 
@@ -99,25 +97,39 @@ const DonutChart = ({ categories, overall }: { categories: { label: string; pct:
 
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="mx-auto">
+      <defs>
+        <linearGradient id="chrome-ring" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="hsl(200 90% 75%)" />
+          <stop offset="25%" stopColor="hsl(260 85% 75%)" />
+          <stop offset="50%" stopColor="hsl(320 80% 72%)" />
+          <stop offset="75%" stopColor="hsl(40 95% 70%)" />
+          <stop offset="100%" stopColor="hsl(160 80% 65%)" />
+        </linearGradient>
+      </defs>
       {categories.map((cat, i) => {
         const startAngle = angleOffset;
-        // Scale the arc fill by the category percentage
         const fillAngle = sliceAngle * (cat.pct / 100);
         const fullEndAngle = angleOffset + sliceAngle;
         angleOffset = fullEndAngle + gap;
+        const isWorst = worstIndices.includes(i);
 
         return (
           <g key={i}>
-            {/* Background arc (muted) */}
             <path d={describeArc(startAngle, fullEndAngle, outerR, innerR)} fill="hsl(var(--muted))" opacity={0.3} />
-            {/* Filled arc */}
             {fillAngle > 0.5 && (
-              <path d={describeArc(startAngle, startAngle + fillAngle, outerR, innerR)} fill={cat.color} opacity={0.85} />
+              <path d={describeArc(startAngle, startAngle + fillAngle, outerR, innerR)} fill={cat.color} opacity={0.9} />
+            )}
+            {/* Chrome rainbow outline on worst areas */}
+            {isWorst && (
+              <path
+                d={describeArc(startAngle, fullEndAngle, outerR + 4, outerR)}
+                fill="url(#chrome-ring)"
+                opacity={0.9}
+              />
             )}
           </g>
         );
       })}
-      {/* Center text */}
       <text x={cx} y={cy - 8} textAnchor="middle" fill="hsl(var(--foreground))" fontSize="28" fontWeight="bold" fontFamily="Outfit">
         {Math.round(overall)}%
       </text>
@@ -150,8 +162,9 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const totalPages = Math.ceil(questions.length / QUESTIONS_PER_PAGE);
-  const pageQuestions = questions.slice(quizPage * QUESTIONS_PER_PAGE, (quizPage + 1) * QUESTIONS_PER_PAGE);
+  const totalPages = categoryDefs.length;
+  const currentCategory = categoryDefs[quizPage];
+  const pageQuestions = currentCategory ? currentCategory.qs.map(qId => questions.find(q => q.id === qId)!).filter(Boolean) : [];
 
   const resetQuiz = () => {
     setStep("intake");
@@ -336,14 +349,20 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
               <motion.div key={`page-${quizPage}`} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}>
                 <div className="mb-2 flex items-center justify-between">
                   <span className="text-sm text-muted-foreground font-body">Page {quizPage + 1} of {totalPages}</span>
-                  <span className="text-sm text-muted-foreground font-body">{Math.min((quizPage + 1) * QUESTIONS_PER_PAGE, questions.length)} / {questions.length} questions</span>
+                  <span className="text-sm text-muted-foreground font-body">{pageQuestions.length} questions</span>
                 </div>
 
-                <div className="space-y-8 mt-4">
-                  {pageQuestions.map((q) => (
+                {/* Category title */}
+                <h3 className="font-display text-xl font-bold mb-1" style={{ color: catColors[quizPage] }}>
+                  {currentCategory.label}
+                </h3>
+                <div className="w-12 h-0.5 rounded-full mb-6" style={{ backgroundColor: catColors[quizPage] }} />
+
+                <div className="space-y-8">
+                  {pageQuestions.map((q, idx) => (
                     <div key={q.id} className="space-y-3">
                       <div className="flex items-start gap-2">
-                        <span className="text-sm text-muted-foreground font-body mt-0.5 min-w-[24px]">Q{q.id}</span>
+                        <span className="text-sm text-muted-foreground font-body mt-0.5 min-w-[24px]">Q{idx + 1}</span>
                         <p className="font-body text-base leading-relaxed">{q.description}</p>
                       </div>
                       <div className="px-2">
@@ -393,10 +412,18 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
 
                 {/* Donut + Legend */}
                 <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
-                  <DonutChart
-                    categories={scores.cats.map((c, i) => ({ label: c.label, pct: c.pct, color: catColors[i] }))}
-                    overall={scores.overall}
-                  />
+                  {(() => {
+                    // Find top 3 worst-scoring category indices
+                    const sorted = scores.cats.map((c, i) => ({ pct: c.pct, i })).sort((a, b) => a.pct - b.pct);
+                    const worstIndices = sorted.slice(0, 3).map(s => s.i);
+                    return (
+                      <DonutChart
+                        categories={scores.cats.map((c, i) => ({ label: c.label, pct: c.pct, color: catColors[i] }))}
+                        overall={scores.overall}
+                        worstIndices={worstIndices}
+                      />
+                    );
+                  })()}
                   <div className="space-y-2 flex-1 w-full">
                     {scores.cats.map((cat, i) => (
                       <div key={cat.key} className="flex items-center gap-3">
@@ -476,12 +503,12 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                   </div>
                 )}
 
-                {/* Actions */}
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <button onClick={handleApplyRecommendations} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-base hover:opacity-90 transition-opacity">
-                    Apply Recommendations to Quote
-                  </button>
-                  <button onClick={() => { onClose(); resetQuiz(); }} className="btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-base transition-all">
+                {/* Note + Close */}
+                <p className="text-sm text-muted-foreground font-body text-center mb-4">
+                  ✓ Recommendations have been automatically added to the cost estimator below.
+                </p>
+                <div className="flex justify-center">
+                  <button onClick={handleApplyRecommendations} className="btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-base transition-all">
                     Close
                   </button>
                 </div>
