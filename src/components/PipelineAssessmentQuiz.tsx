@@ -457,7 +457,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                         placeholder="your@email.com"
                         value={user.email}
                         onChange={(e) => setUser({ ...user, email: e.target.value })}
-                        className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-sm font-body focus:outline-none focus:border-primary transition-colors mb-3"
+                        className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors mb-3"
                       />
                     )}
                     <button
