@@ -8,7 +8,7 @@ const llmModels = [
 { provider: "Anthropic", model: "Claude", desc: "Summarization, complex reasoning, writing, coding", color: "hsl(260 85% 75%)" },
 { provider: "Cohere", model: "Command + Embed", desc: "Text generation, search, classification", color: "hsl(280 70% 70%)" },
 { provider: "Meta", model: "Llama 2", desc: "Q&A and reading comprehension", color: "hsl(320 60% 70%)" },
-{ provider: "Stability.ai", model: "Stable Diffusion", desc: "High-quality images and art", color: "hsl(80 70% 60%)" }];
+{ provider: "Stability.ai", model: "Stable Diffusion", desc: "High-quality images\nand art", color: "hsl(80 70% 60%)" }];
 
 
 const engagements = [
