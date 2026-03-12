@@ -46,7 +46,7 @@ content production pipelines - from pre-production through final output.
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-8">
+          className="mb-0">
 
           <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground font-body mb-6 text-center">
             The traditional 3D production workflow
@@ -66,7 +66,7 @@ content production pipelines - from pre-production through final output.
           initial={{ opacity: 0, scale: 0.5 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex flex-col items-center gap-3 my-12 border-solid border-teal-500 rounded-lg shadow-sm">
+          className="flex flex-col items-center gap-3 my-0 border-solid border-teal-500 rounded-lg shadow-sm">
 
           <div className="w-px h-16 relative overflow-hidden">
             <div 
