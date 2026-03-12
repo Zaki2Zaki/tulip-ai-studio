@@ -11,7 +11,7 @@ import cinema4dLogo from "@/assets/logos/cinema4d.png";
 import houdiniLogo from "@/assets/logos/houdini.svg";
 import openaiLogo from "@/assets/logos/openai.svg";
 import geminiLogo from "@/assets/logos/google-gemini.svg";
-import huggingfaceLogo from "@/assets/logos/huggingface.svg";
+import huggingfaceLogo from "@/assets/logos/huggingface-full.svg";
 import lovableLogo from "@/assets/logos/lovable.svg";
 import grokLogo from "@/assets/logos/xai-grok.svg";
 
