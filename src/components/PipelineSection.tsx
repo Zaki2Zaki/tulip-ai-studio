@@ -74,7 +74,16 @@ content production pipelines - from pre-production through final output.
               style={{ animation: 'flowDown 2s ease-in-out infinite' }}
             />
           </div>
-          <div className="flex items-center gap-3 bg-card/80 backdrop-blur-sm border border-primary/30 rounded-full px-6 py-3">
+          <div 
+            className="flex items-center gap-3 bg-card/80 backdrop-blur-sm rounded-full px-6 py-3"
+            style={{
+              border: '3px solid transparent',
+              backgroundImage: 'linear-gradient(hsl(0 0% 6% / 0.8), hsl(0 0% 6% / 0.8)), linear-gradient(var(--water-angle, 0deg), #BA55D3, #4169E1, #00CED1, #BA55D3)',
+              backgroundOrigin: 'border-box',
+              backgroundClip: 'padding-box, border-box',
+              animation: 'waterBorder 3s linear infinite',
+            }}
+          >
             <span 
               className="text-sm font-body font-semibold tracking-wide bg-clip-text text-transparent animate-[illuminating_3s_ease-in-out_infinite]"
               style={{ 
