@@ -144,9 +144,9 @@ const CostEstimator = () => {
           <p className="text-muted-foreground font-body text-sm mb-3">Not sure what you need?</p>
           <button
             onClick={() => setQuizOpen(true)}
-            className="inline-flex items-center gap-2 btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-sm transition-all">
+            className="inline-flex items-center gap-2.5 btn-chrome-outline px-8 py-4 rounded-full font-display font-semibold text-base transition-all">
             
-            <ClipboardCheck size={18} />
+            <ClipboardCheck size={20} />
             Take the 2-min Assessment
           </button>
         </motion.div>
