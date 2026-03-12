@@ -210,6 +210,7 @@ const CostEstimator = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {serviceOptions.map((svc) => {
                 const selected = selectedServices.includes(svc.id);
+                const isResearch = svc.id === "research";
                 return (
                   <button
                     key={svc.id}
@@ -222,7 +223,7 @@ const CostEstimator = () => {
 
                     <div className="flex items-center gap-3">
                       <div
-                        className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
+                        className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all shrink-0 ${
                         selected ? "border-primary bg-primary" : "border-muted-foreground/40"}`
                         }>
 
@@ -232,9 +233,25 @@ const CostEstimator = () => {
                           </svg>
                         }
                       </div>
-                      <div>
+                      <div className="flex-1">
                         <div className="font-display font-semibold text-sm">{svc.label}</div>
                         <div className="text-xs text-muted-foreground font-body whitespace-pre-line">{svc.description}</div>
+                        {isResearch && (
+                          <span
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setDiscoveryOpen(true);
+                            }}
+                            className="inline-flex items-center gap-1.5 mt-3 px-3 py-1.5 rounded-full text-[11px] font-display font-semibold bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors cursor-pointer">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="shrink-0">
+                              <path d="M12 2C10 2 8.5 4 8.5 4C8.5 4 7 6 7 9C7 12 9 14 12 14C15 14 17 12 17 9C17 6 15.5 4 15.5 4C15.5 4 14 2 12 2Z" fill="currentColor" opacity="0.3"/>
+                              <path d="M12 3C10.5 3 9.5 4.5 9.5 4.5C9.5 4.5 8 6.5 8 9C8 11.5 9.8 13 12 13C14.2 13 16 11.5 16 9C16 6.5 14.5 4.5 14.5 4.5C14.5 4.5 13.5 3 12 3Z" stroke="currentColor" strokeWidth="1.2" fill="none"/>
+                              <path d="M12 14V22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                              <path d="M9.5 18L12 15.5L14.5 18" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            Discovery Packages
+                          </span>
+                        )}
                       </div>
                     </div>
                   </button>);
