@@ -403,8 +403,8 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                         <div className="w-3 h-3 rounded-full shrink-0" style={{ backgroundColor: catColors[i] }} />
                         <div className="flex-1">
                           <div className="flex justify-between items-center">
-                            <span className="text-xs font-body">{cat.label}</span>
-                            <span className="text-xs font-body font-medium text-muted-foreground">{Math.round(cat.pct)}%</span>
+                            <span className="text-sm font-body">{cat.label}</span>
+                            <span className="text-sm font-body font-medium text-muted-foreground">{Math.round(cat.pct)}%</span>
                           </div>
                           <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden mt-0.5">
                             <motion.div
