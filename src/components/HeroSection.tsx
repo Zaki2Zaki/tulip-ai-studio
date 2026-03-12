@@ -51,11 +51,14 @@ const HeroSection = () => {
             background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.25) 100%)",
           }}
         />
+
+        {/* Iridescent bubbles */}
+        <IridescentBubbles />
       </div>
 
-      {/* Content — left-aligned at golden ratio */}
+      {/* Content — flush left-aligned with consistent 7% margin */}
       <div className="relative z-10 w-full section-padding">
-        <div className="max-w-[50vw] md:ml-[8%] lg:ml-[12%] ml-0 max-md:max-w-full max-md:text-center" style={{ marginTop: "-5vh" }}>
+        <div className="ml-[7%] max-w-[600px] max-md:ml-0 max-md:max-w-full max-md:text-center" style={{ marginTop: "-5vh" }}>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
