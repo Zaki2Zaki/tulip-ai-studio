@@ -258,8 +258,8 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
             <div className="flex items-center gap-3">
               <img src={tulipLogo} alt="Tulip" className="w-10 h-10 rounded-full object-cover" />
               <div>
-                <h3 className="font-display font-bold text-lg">Pipeline Health Benchmark</h3>
-                <p className="text-xs text-muted-foreground font-body">~2 minute assessment</p>
+                <h3 className="font-display font-bold text-xl">Pipeline Health Benchmark</h3>
+                <p className="text-sm text-muted-foreground font-body">~2 minute assessment</p>
               </div>
             </div>
             <button onClick={() => { onClose(); resetQuiz(); }} className="text-muted-foreground hover:text-foreground transition-colors">
