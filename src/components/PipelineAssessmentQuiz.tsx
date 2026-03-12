@@ -343,8 +343,8 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                   {pageQuestions.map((q) => (
                     <div key={q.id} className="space-y-3">
                       <div className="flex items-start gap-2">
-                        <span className="text-xs text-muted-foreground font-body mt-0.5 min-w-[24px]">Q{q.id}</span>
-                        <p className="font-body text-sm leading-relaxed">{q.description}</p>
+                        <span className="text-sm text-muted-foreground font-body mt-0.5 min-w-[24px]">Q{q.id}</span>
+                        <p className="font-body text-base leading-relaxed">{q.description}</p>
                       </div>
                       <div className="px-2">
                         <Slider
