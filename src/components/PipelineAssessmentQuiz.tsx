@@ -435,7 +435,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                     }`}>
                       {recommendation.level} Package Recommended
                     </span>
-                    <span className="text-xs font-body text-muted-foreground">{recommendation.budgetRange}</span>
+                    <span className="text-sm font-body text-muted-foreground">{recommendation.budgetRange}</span>
                   </div>
                   <p className="text-sm font-body text-muted-foreground mb-3">{recommendation.notes}</p>
                   <div className="flex flex-wrap gap-2">
