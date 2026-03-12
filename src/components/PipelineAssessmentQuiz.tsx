@@ -412,10 +412,18 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
 
                 {/* Donut + Legend */}
                 <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
-                  <DonutChart
-                    categories={scores.cats.map((c, i) => ({ label: c.label, pct: c.pct, color: catColors[i] }))}
-                    overall={scores.overall}
-                  />
+                  {(() => {
+                    // Find top 3 worst-scoring category indices
+                    const sorted = scores.cats.map((c, i) => ({ pct: c.pct, i })).sort((a, b) => a.pct - b.pct);
+                    const worstIndices = sorted.slice(0, 3).map(s => s.i);
+                    return (
+                      <DonutChart
+                        categories={scores.cats.map((c, i) => ({ label: c.label, pct: c.pct, color: catColors[i] }))}
+                        overall={scores.overall}
+                        worstIndices={worstIndices}
+                      />
+                    );
+                  })()}
                   <div className="space-y-2 flex-1 w-full">
                     {scores.cats.map((cat, i) => (
                       <div key={cat.key} className="flex items-center gap-3">
