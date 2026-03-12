@@ -82,7 +82,7 @@ const ServicesSection = () => {
             
               <service.icon className="w-8 h-8 text-primary mb-6 group-hover:scale-110 transition-transform" />
               <h3 className="font-display text-xl font-semibold mb-3">{service.title}</h3>
-              <p className="text-muted-foreground font-body text-sm leading-relaxed mb-4">
+              <p className="text-muted-foreground font-body text-sm leading-relaxed mb-4 whitespace-pre-line">
                 {service.description}
               </p>
               
