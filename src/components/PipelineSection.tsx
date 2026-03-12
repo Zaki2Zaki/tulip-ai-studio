@@ -70,7 +70,13 @@ content production pipelines - from pre-production through final output.
 
           <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary/60 to-primary" />
           <div className="flex items-center gap-3 bg-card/80 backdrop-blur-sm border border-primary/30 rounded-full px-6 py-3">
-            <span className="text-sm font-body text-primary font-semibold tracking-wide">
+            <span 
+              className="text-sm font-body font-semibold tracking-wide bg-clip-text text-transparent animate-[illuminating_3s_ease-in-out_infinite]"
+              style={{ 
+                backgroundImage: 'linear-gradient(135deg, #BA55D3, #00CED1, #FF69B4, #FFD700, #BA55D3, #00CED1)', 
+                backgroundSize: '200% 100%' 
+              }}
+            >
               Evolving with AI
             </span>
             <ArrowRight className="w-4 h-4 text-primary" />
