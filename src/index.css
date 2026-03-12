@@ -200,6 +200,17 @@
   100% { transform: translateY(100%); opacity: 0; }
 }
 
+@keyframes waterBorder {
+  0% { --water-angle: 0deg; }
+  100% { --water-angle: 360deg; }
+}
+
+@property --water-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
 @keyframes illuminating {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
