@@ -116,7 +116,7 @@ const MotionDataSection = () => {
                   <p className="font-display text-base font-semibold mb-1" style={{ color: item.color }}>
                     {item.model}
                   </p>
-                  <p className="text-xs text-muted-foreground font-body leading-relaxed">
+                  <p className="text-sm text-foreground font-body leading-relaxed">
                     {item.desc}
                   </p>
                 </motion.div>
