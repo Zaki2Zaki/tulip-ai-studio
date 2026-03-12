@@ -135,13 +135,13 @@ const CostEstimator = () => {
           <p className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-4">
             Cost Estimator
           </p>
-          <h2 className="font-display text-4xl md:text-6xl font-bold mb-4">
+          <h2 className="font-display text-4xl font-bold mb-4 md:text-7xl">
             Build your <span className="text-gradient-gold">quote</span>
           </h2>
-          <p className="text-muted-foreground font-body max-w-xl mx-auto mb-6">
+          <p className="max-w-xl mx-auto mb-6 text-white text-lg font-sans">
             Select your services and studio scale for an instant budget range based on our consultancy rates.
           </p>
-          <p className="text-muted-foreground font-body text-sm mb-3">Not sure what you need?</p>
+          <p className="mb-3 text-white text-xl font-sans">Not sure what you need?</p>
           <button
             onClick={() => setQuizOpen(true)}
             className="inline-flex items-center gap-2.5 btn-chrome-outline px-8 py-4 rounded-full font-display font-semibold text-base transition-all">
