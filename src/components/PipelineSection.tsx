@@ -68,7 +68,12 @@ content production pipelines - from pre-production through final output.
           transition={{ duration: 0.6, delay: 0.8 }}
           className="flex flex-col items-center gap-3 my-12">
 
-          <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary/60 to-primary" />
+          <div className="w-px h-12 relative overflow-hidden">
+            <div 
+              className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/60 to-primary"
+              style={{ animation: 'flowDown 2s ease-in-out infinite' }}
+            />
+          </div>
           <div className="flex items-center gap-3 bg-card/80 backdrop-blur-sm border border-primary/30 rounded-full px-6 py-3">
             <span 
               className="text-sm font-body font-semibold tracking-wide bg-clip-text text-transparent animate-[illuminating_3s_ease-in-out_infinite]"
