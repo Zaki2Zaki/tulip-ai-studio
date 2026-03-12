@@ -47,7 +47,7 @@ const ServicesSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="services" className="relative py-32">
+    <section id="services" className="relative pt-0 pb-32">
       {/* Background image */}
       <div className="absolute inset-0">
         <img src={servicesBg} alt="" className="w-full h-full object-cover opacity-20" />
