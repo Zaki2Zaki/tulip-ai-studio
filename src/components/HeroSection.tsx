@@ -65,9 +65,9 @@ const HeroSection = () => {
               textShadow: "0 0 40px rgba(255,255,255,0.3), 0 2px 8px rgba(0,0,0,0.4)",
             }}
           >
-            <span className="hero-gradient-text">Tulip Technology</span>
+            <span className="text-gradient-chrome-animated">Tulip Technology</span>
             <br />
-            <span className="hero-gradient-text">R&D™</span>
+            <span className="text-gradient-chrome-animated">R&D™</span>
           </motion.h1>
 
           <motion.p
@@ -93,13 +93,13 @@ const HeroSection = () => {
           >
             <a
               href="#services"
-              className="hero-btn-primary px-8 py-4 rounded-full font-display font-semibold text-lg transition-all"
+              className="hero-btn-explore px-8 py-4 rounded-full font-display font-semibold text-lg transition-all"
             >
               Explore Services
             </a>
             <a
               href="#estimator"
-              className="hero-btn-secondary px-8 py-4 rounded-full font-display font-semibold text-lg transition-all text-center"
+              className="hero-btn-quote px-8 py-4 rounded-full font-display font-semibold text-lg transition-all text-center"
             >
               Estimate Quotes
             </a>
