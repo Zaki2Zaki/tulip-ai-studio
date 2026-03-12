@@ -54,7 +54,7 @@ const HeroSection = () => {
 
       {/* Content — left-aligned at golden ratio */}
       <div className="relative z-10 w-full section-padding">
-        <div className="max-w-[50vw] md:ml-[8%] lg:ml-[12%] ml-0 max-md:max-w-full max-md:text-center" style={{ marginTop: "-5vh" }}>
+        <div className="max-w-[50vw] md:ml-[calc(8%+9rem)] lg:ml-[calc(12%+9rem)] ml-0 max-md:max-w-full max-md:text-center max-md:ml-0" style={{ marginTop: "-5vh" }}>
           
 
 
