@@ -25,7 +25,7 @@ const services = [
 {
   icon: LayoutDashboard,
   title: "Architecture Blueprint",
-  description: "Full GenAI architecture design including LLM data model training and quality assurance.",
+  description: "Full GenAI architecture design including LLM data model design & training approach and quality assurance metrics\nDependant on OKRs",
   range: "$12K – $350K"
 },
 {
@@ -37,7 +37,7 @@ const services = [
 {
   icon: GraduationCap,
   title: "Workshops & Education",
-  description: "Certified training by Unreal & Unity educators to empower your team with AI skills.",
+  description: "Certified training by Unreal & Unity educators to empower your team with AI creative skills.",
   range: "$3K – $85K"
 }];
 
@@ -82,7 +82,7 @@ const ServicesSection = () => {
             
               <service.icon className="w-8 h-8 text-primary mb-6 group-hover:scale-110 transition-transform" />
               <h3 className="font-display text-xl font-semibold mb-3">{service.title}</h3>
-              <p className="text-muted-foreground font-body text-sm leading-relaxed mb-4">
+              <p className="text-muted-foreground font-body text-sm leading-relaxed mb-4 whitespace-pre-line">
                 {service.description}
               </p>
               
