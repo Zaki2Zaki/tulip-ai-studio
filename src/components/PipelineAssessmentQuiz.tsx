@@ -324,7 +324,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                 <button
                   onClick={() => setStep("quiz")}
                   disabled={!canProceedIntake}
-                  className="mt-8 bg-primary text-primary-foreground px-8 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity inline-flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="mt-8 bg-primary text-primary-foreground px-8 py-3 rounded-full font-display font-semibold text-base hover:opacity-90 transition-opacity inline-flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   Begin Assessment <ArrowRight size={16} />
                 </button>
