@@ -463,7 +463,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                     <button
                       onClick={handleEmailSubmit}
                       disabled={!user.email || submitting}
-                      className="bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity inline-flex items-center gap-2 disabled:opacity-40"
+                      className="bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-display font-semibold text-base hover:opacity-90 transition-opacity inline-flex items-center gap-2 disabled:opacity-40"
                     >
                       {submitting ? <Loader2 size={14} className="animate-spin" /> : <Send size={14} />}
                       Send Report
