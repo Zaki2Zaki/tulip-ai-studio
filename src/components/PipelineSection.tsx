@@ -69,11 +69,27 @@ content production pipelines - from pre-production through final output.
           className="flex flex-col items-center gap-3 my-12 border-solid border-teal-500 rounded-lg shadow-sm">
 
           <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary/60 to-primary" />
-          <div className="flex items-center gap-3 bg-card/80 backdrop-blur-sm border-primary/30 rounded-full px-6 py-3 border-2">
-            <span className="text-sm font-body text-primary font-semibold tracking-wide">
+          <div 
+            className="flex items-center gap-3 bg-card/80 backdrop-blur-sm rounded-full px-6 py-3"
+            style={{
+              border: '3px solid transparent',
+              backgroundImage: 'linear-gradient(hsl(0 0% 6% / 0.8), hsl(0 0% 6% / 0.8)), linear-gradient(var(--water-angle, 0deg), #BA55D3, #4169E1, #00CED1, #BA55D3)',
+              backgroundOrigin: 'border-box',
+              backgroundClip: 'padding-box, border-box',
+              animation: 'waterBorder 3s linear infinite',
+            }}
+          >
+            <span 
+              className="text-sm font-body font-semibold tracking-wide"
+              style={{
+                background: 'linear-gradient(to right, #BA55D3, #4169E1)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
               Evolving with AI
             </span>
-            <ArrowRight className="w-4 h-4 text-primary" />
+            <ArrowRight className="w-4 h-4" style={{ color: '#4169E1' }} />
           </div>
           <div className="w-px h-12 bg-gradient-to-b from-primary via-primary/60 to-transparent" />
         </motion.div>
