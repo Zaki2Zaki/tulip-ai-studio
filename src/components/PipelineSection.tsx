@@ -36,9 +36,9 @@ const PipelineSection = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3 }}
-          className="text-muted-foreground text-center max-w-2xl mx-auto mb-20 font-body">
+          className="text-center max-w-2xl mx-auto mb-20 text-white font-sans text-lg">We identify where generative AI creates the most impact in your
+content production pipelines - from pre-production through final output.
 
-          We identify where generative AI creates the most impact in your content production pipeline—from pre-production through final output.
         </motion.p>
 
         {/* Traditional Workflow */}
@@ -104,8 +104,8 @@ const PipelineSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 1.3 }}
-            className="mt-16 max-w-4xl mx-auto space-y-10"
-          >
+            className="mt-16 max-w-4xl mx-auto space-y-10">
+            
             <div className="flex flex-col md:flex-row items-start gap-4 md:gap-8">
               <span className="font-display text-5xl md:text-7xl font-bold text-gradient-gold shrink-0">78%</span>
               <p className="text-sm md:text-base text-foreground/90 font-body leading-relaxed text-left">
