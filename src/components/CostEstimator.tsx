@@ -4,6 +4,8 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Calculator, ChevronDown, ChevronUp, ClipboardCheck } from "lucide-react";
 import PipelineAssessmentQuiz from "./PipelineAssessmentQuiz";
+import DiscoveryPackagesModal from "./DiscoveryPackagesModal";
+import { Package } from "lucide-react";
 
 interface ServiceOption {
   id: string;
