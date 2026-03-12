@@ -387,8 +387,8 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
             {step === "results" && (
               <motion.div key="results" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                 <div className="text-center mb-6">
-                  <h2 className="font-display text-2xl font-bold mb-2">Your Pipeline Report</h2>
-                  <p className="text-muted-foreground font-body text-sm">Based on your {questions.length} responses</p>
+                  <h2 className="font-display text-3xl font-bold mb-2">Your Pipeline Report</h2>
+                  <p className="text-muted-foreground font-body text-base">Based on your {questions.length} responses</p>
                 </div>
 
                 {/* Donut + Legend */}
