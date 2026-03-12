@@ -472,7 +472,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                 ) : (
                   <div className="rounded-2xl border border-green-500/30 bg-green-500/5 p-5 mb-6 text-center">
                     <CheckCircle2 className="w-6 h-6 text-green-400 mx-auto mb-2" />
-                    <p className="text-sm font-body text-green-400">Report sent! Check your inbox.</p>
+                    <p className="text-base font-body text-green-400">Report sent! Check your inbox.</p>
                   </div>
                 )}
 
