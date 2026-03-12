@@ -37,7 +37,7 @@ const services = [
 {
   icon: GraduationCap,
   title: "Workshops & Education",
-  description: "Certified training by Unreal & Unity educators to empower your team with AI creative skills.",
+  description: "Certified training led by certified Unreal Educators or VFX/Game-Developers to empower your team with AI creative skills.",
   range: "$3K – $85K"
 }];
 

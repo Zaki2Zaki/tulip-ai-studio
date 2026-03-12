@@ -62,7 +62,7 @@ const serviceOptions: ServiceOption[] = [
 {
   id: "workshops",
   label: "Workshops & Education",
-  description: "Certified training to empower your team",
+  description: "Led by certified Unreal Educators or VFX/Game-Developers",
   minUSD: 3000, maxUSD: 85000,
   minCAD: 4106, maxCAD: 116331,
   minEUR: 2543, maxEUR: 72038
