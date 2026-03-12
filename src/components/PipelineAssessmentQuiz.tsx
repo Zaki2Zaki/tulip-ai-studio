@@ -503,12 +503,12 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                   </div>
                 )}
 
-                {/* Actions */}
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <button onClick={handleApplyRecommendations} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-base hover:opacity-90 transition-opacity">
-                    Apply Recommendations to Quote
-                  </button>
-                  <button onClick={() => { onClose(); resetQuiz(); }} className="btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-base transition-all">
+                {/* Note + Close */}
+                <p className="text-sm text-muted-foreground font-body text-center mb-4">
+                  ✓ Recommendations have been automatically added to the cost estimator below.
+                </p>
+                <div className="flex justify-center">
+                  <button onClick={handleApplyRecommendations} className="btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-base transition-all">
                     Close
                   </button>
                 </div>
