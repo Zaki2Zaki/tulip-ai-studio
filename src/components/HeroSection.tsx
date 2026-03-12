@@ -43,13 +43,6 @@ const HeroSection = () => {
         {/* Bottom fade to background */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
 
-        {/* Vignette */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.25) 100%)",
-          }}
-        />
       </div>
 
       {/* Content — left-aligned at golden ratio */}
