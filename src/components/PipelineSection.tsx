@@ -68,39 +68,14 @@ content production pipelines - from pre-production through final output.
           transition={{ duration: 0.6, delay: 0.8 }}
           className="flex flex-col items-center gap-3 my-12">
 
-          <div className="w-px h-12 relative overflow-hidden">
-            <div 
-              className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/60 to-primary"
-              style={{ animation: 'flowDown 2s ease-in-out infinite' }}
-            />
-          </div>
-          <div 
-            className="flex items-center gap-3 bg-card/80 backdrop-blur-sm rounded-full px-6 py-3"
-            style={{
-              border: '3px solid transparent',
-              backgroundImage: 'linear-gradient(hsl(0 0% 6% / 0.8), hsl(0 0% 6% / 0.8)), linear-gradient(var(--water-angle, 0deg), #BA55D3, #4169E1, #00CED1, #BA55D3)',
-              backgroundOrigin: 'border-box',
-              backgroundClip: 'padding-box, border-box',
-              animation: 'waterBorder 3s linear infinite',
-            }}
-          >
-            <span 
-              className="text-sm font-body font-semibold tracking-wide bg-clip-text text-transparent animate-[illuminating_3s_ease-in-out_infinite]"
-              style={{ 
-                backgroundImage: 'linear-gradient(to right, #BA55D3, #4169E1, #BA55D3, #4169E1)', 
-                backgroundSize: '200% 100%' 
-              }}
-            >
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary/60 to-primary" />
+          <div className="flex items-center gap-3 bg-card/80 backdrop-blur-sm border border-primary/30 rounded-full px-6 py-3">
+            <span className="text-sm font-body text-primary font-semibold tracking-wide">
               Evolving with AI
             </span>
             <ArrowRight className="w-4 h-4 text-primary" />
           </div>
-          <div className="w-px h-12 relative overflow-hidden">
-            <div 
-              className="absolute inset-0 bg-gradient-to-b from-primary via-primary/60 to-transparent"
-              style={{ animation: 'flowDown 2s ease-in-out infinite' }}
-            />
-          </div>
+          <div className="w-px h-12 bg-gradient-to-b from-primary via-primary/60 to-transparent" />
         </motion.div>
 
         {/* AI-Powered Workflow */}
@@ -109,7 +84,7 @@ content production pipelines - from pre-production through final output.
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 1 }}>
 
-          <p className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-6 text-center">THE FUTURE WITH GENERATIVE AI TOOLS
+          <p className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-6 text-center">Evolving with LLMs or custom dev-tools
 
           </p>
           <div className="relative rounded-2xl overflow-hidden border border-primary/30 group glow-gold">
