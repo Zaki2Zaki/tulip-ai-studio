@@ -448,7 +448,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                 {/* Email submit */}
                 {!emailSubmitted ? (
                   <div className="rounded-2xl border border-border bg-secondary/30 p-5 mb-6">
-                    <p className="text-sm font-body text-muted-foreground mb-3">
+                    <p className="text-base font-body text-muted-foreground mb-3">
                       Get a detailed report emailed to <strong className="text-foreground">{user.email || "you"}</strong>
                     </p>
                     {!user.email && (
