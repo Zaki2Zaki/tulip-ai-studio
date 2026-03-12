@@ -478,7 +478,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
 
                 {/* Actions */}
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <button onClick={handleApplyRecommendations} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
+                  <button onClick={handleApplyRecommendations} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-base hover:opacity-90 transition-opacity">
                     Apply Recommendations to Quote
                   </button>
                   <button onClick={() => { onClose(); resetQuiz(); }} className="btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-sm transition-all">
