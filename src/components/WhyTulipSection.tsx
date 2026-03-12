@@ -91,7 +91,7 @@ const WhyTulipSection = () => {
                     <img
                       src={logo.src}
                       alt={logo.name}
-                      className="h-8 md:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity brightness-0 invert"
+                      className={`h-8 md:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity ${logo.invert ? 'brightness-0 invert' : ''}`}
                     />
                     {logo.showLabel && (
                       <span className="font-display text-sm md:text-base font-bold whitespace-nowrap opacity-80" style={{ color: '#4B6EF5' }}>
