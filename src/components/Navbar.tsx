@@ -9,11 +9,11 @@ const FONT_SCALES = [1, 1.1, 1.2, 1.3] as const;
 const FONT_LABELS = ["1×", "1.1×", "1.2×", "1.3×"];
 
 const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Pipeline", href: "#pipeline" },
-  { label: "Estimator", href: "#estimator" },
-  { label: "Contact", href: "#contact" },
-];
+{ label: "Services", href: "#services" },
+{ label: "Pipeline", href: "#pipeline" },
+{ label: "Estimator", href: "#estimator" },
+{ label: "Contact", href: "#contact" }];
+
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -42,7 +42,7 @@ const Navbar = () => {
   useEffect(() => {
     const scale = FONT_SCALES[fontScaleIndex];
     document.documentElement.style.fontSize = `${scale * 100}%`;
-    return () => { document.documentElement.style.fontSize = ""; };
+    return () => {document.documentElement.style.fontSize = "";};
   }, [fontScaleIndex]);
 
   useEffect(() => {
@@ -90,8 +90,8 @@ const Navbar = () => {
             href="https://substack.com/@tuliptechrnd"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs sm:text-sm font-body font-semibold text-gradient-chrome-animated hover:opacity-80 transition-opacity"
-          >
+            className="text-xs sm:text-sm font-body font-semibold text-gradient-chrome-animated hover:opacity-80 transition-opacity">
+            
             2026 Guide to GenAI for Game Content Developers, 3D Artists &amp; Creative Techs
           </a>
           <span className="text-xs font-body text-muted-foreground hidden sm:inline">→ Substack</span>
@@ -104,9 +104,9 @@ const Navbar = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
         className={`fixed top-[36px] left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "bg-glass" : "bg-transparent"
-        }`}
-      >
+        scrolled ? "bg-glass" : "bg-transparent"}`
+        }>
+        
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5">
           <div className="flex items-center gap-3 md:ml-[18%]">
             {/* Accessibility font-size toggle */}
@@ -115,39 +115,39 @@ const Navbar = () => {
                 onClick={() => setShowFontMenu(!showFontMenu)}
                 aria-label="Adjust text size"
                 title="Adjust text size"
-                className="flex items-center gap-0.5 px-2 h-9 rounded-full border border-border bg-card/50 hover:bg-card hover:border-primary/30 transition-all text-muted-foreground hover:text-primary text-xs font-body font-semibold"
-              >
+                className="flex items-center gap-0.5 px-2 h-9 rounded-full border-border bg-card/50 hover:bg-card hover:border-primary/30 transition-all font-body font-semibold text-sm border-2 border-solid text-white">
+                
                 <span className="text-[10px]">a</span><span className="text-xs">A</span><span className="text-sm leading-none">A</span>
                 <ArrowUp className="w-3 h-3 ml-0.5" />
               </button>
               <AnimatePresence>
-                {showFontMenu && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -4, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -4, scale: 0.95 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute left-0 top-full mt-2 bg-card border border-border rounded-xl shadow-xl p-2 min-w-[140px] z-50"
-                  >
+                {showFontMenu &&
+                <motion.div
+                  initial={{ opacity: 0, y: -4, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -4, scale: 0.95 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute left-0 top-full mt-2 bg-card border border-border rounded-xl shadow-xl p-2 min-w-[140px] z-50">
+                  
                     <p className="text-[10px] font-body text-muted-foreground uppercase tracking-widest px-2 pb-1.5">
                       Text Size
                     </p>
-                    {FONT_SCALES.map((scale, i) => (
-                      <button
-                        key={scale}
-                        onClick={() => { setFontScaleIndex(i); setShowFontMenu(false); }}
-                        className={`w-full text-left px-3 py-1.5 rounded-lg text-sm font-body transition-colors flex items-center justify-between ${
-                          fontScaleIndex === i
-                            ? "bg-primary/10 text-primary font-semibold"
-                            : "text-foreground hover:bg-muted/30"
-                        }`}
-                      >
+                    {FONT_SCALES.map((scale, i) =>
+                  <button
+                    key={scale}
+                    onClick={() => {setFontScaleIndex(i);setShowFontMenu(false);}}
+                    className={`w-full text-left px-3 py-1.5 rounded-lg text-sm font-body transition-colors flex items-center justify-between ${
+                    fontScaleIndex === i ?
+                    "bg-primary/10 text-primary font-semibold" :
+                    "text-foreground hover:bg-muted/30"}`
+                    }>
+                    
                         <span>{FONT_LABELS[i]}</span>
                         {fontScaleIndex === i && <span className="text-[10px] text-primary">✓</span>}
                       </button>
-                    ))}
+                  )}
                   </motion.div>
-                )}
+                }
               </AnimatePresence>
             </div>
 
@@ -162,103 +162,103 @@ const Navbar = () => {
             <div
               onMouseEnter={() => openDropdown("usecases")}
               onMouseLeave={closeDropdown}
-              className="relative"
-            >
+              className="relative">
+              
               <button className="flex items-center gap-1.5 text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
                 Use Cases
                 <ChevronDown
                   className={`w-4 h-4 text-[hsl(280_30%_75%)] transition-transform duration-200 ${
-                    activeDropdown === "usecases" ? "rotate-180" : ""
-                  }`}
-                />
+                  activeDropdown === "usecases" ? "rotate-180" : ""}`
+                  } />
+                
               </button>
             </div>
 
             <Link
               to="/library"
-              className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300"
-            >
+              className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
+              
               Library R&D
             </Link>
 
             {navLinks.map((link) =>
-              isHome ? (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300"
-                >
+            isHome ?
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
+              
                   {link.label}
-                </a>
-              ) : (
-                <Link
-                  key={link.href}
-                  to={`/${link.href}`}
-                  className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300"
-                >
+                </a> :
+
+            <Link
+              key={link.href}
+              to={`/${link.href}`}
+              className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
+              
                   {link.label}
                 </Link>
-              )
+
             )}
 
             <a
               href={isHome ? "#estimator" : "/#estimator"}
-              className="text-base font-body font-semibold bg-primary text-primary-foreground px-6 py-2.5 rounded-full hover:opacity-90 transition-opacity"
-            >
+              className="text-base font-body font-semibold bg-primary text-primary-foreground px-6 py-2.5 rounded-full hover:opacity-90 transition-opacity">
+              
               Get a Quote
             </a>
 
-            {user ? (
-              <button
-                onClick={async () => { await supabase.auth.signOut(); navigate("/"); }}
-                className="flex items-center gap-1.5 text-sm font-body text-muted-foreground hover:text-primary transition-colors"
-              >
+            {user ?
+            <button
+              onClick={async () => {await supabase.auth.signOut();navigate("/");}}
+              className="flex items-center gap-1.5 text-sm font-body text-muted-foreground hover:text-primary transition-colors">
+              
                 <LogOut className="w-4 h-4" />
                 Sign Out
-              </button>
-            ) : (
-              <Link
-                to="/auth"
-                className="flex items-center gap-1.5 text-sm font-body text-muted-foreground hover:text-primary transition-colors"
-              >
+              </button> :
+
+            <Link
+              to="/auth"
+              className="flex items-center gap-1.5 text-sm font-body text-muted-foreground hover:text-primary transition-colors">
+              
                 <LogIn className="w-4 h-4" />
                 Sign In
               </Link>
-            )}
+            }
           </div>
 
           {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-foreground"
-          >
+            className="md:hidden text-foreground">
+            
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Tesla-style full-width dropdown panel */}
         <AnimatePresence>
-          {activeDropdown === "usecases" && (
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-              onMouseEnter={() => openDropdown("usecases")}
-              onMouseLeave={closeDropdown}
-              className="absolute left-0 right-0 top-full bg-card/95 backdrop-blur-xl border-b border-border shadow-2xl"
-            >
+          {activeDropdown === "usecases" &&
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            onMouseEnter={() => openDropdown("usecases")}
+            onMouseLeave={closeDropdown}
+            className="absolute left-0 right-0 top-full bg-card/95 backdrop-blur-xl border-b border-border shadow-2xl">
+            
               <div className="max-w-6xl mx-auto py-8 px-6">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                   {useCases.map((uc) => {
-                    const Icon = uc.icon;
-                    return (
-                      <Link
-                        key={uc.slug}
-                        to={`/use-cases/${uc.slug}`}
-                        onClick={() => setActiveDropdown(null)}
-                        className="group flex items-start gap-3 p-4 rounded-xl hover:bg-secondary transition-colors"
-                      >
+                  const Icon = uc.icon;
+                  return (
+                    <Link
+                      key={uc.slug}
+                      to={`/use-cases/${uc.slug}`}
+                      onClick={() => setActiveDropdown(null)}
+                      className="group flex items-start gap-3 p-4 rounded-xl hover:bg-secondary transition-colors">
+                      
                         <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors mt-0.5">
                           <Icon className="w-5 h-5 text-primary" />
                         </div>
@@ -270,123 +270,123 @@ const Navbar = () => {
                             {uc.tagline}
                           </p>
                         </div>
-                      </Link>
-                    );
-                  })}
+                      </Link>);
+
+                })}
                 </div>
               </div>
             </motion.div>
-          )}
+          }
         </AnimatePresence>
 
         {/* Mobile menu */}
         <AnimatePresence>
-          {mobileOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-glass overflow-hidden"
-            >
+          {mobileOpen &&
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-glass overflow-hidden">
+            
               <div className="flex flex-col gap-2 px-6 py-6">
                 {/* Mobile Use Cases */}
                 <button
-                  onClick={() => setMobileUseCasesOpen(!mobileUseCasesOpen)}
-                  className="flex items-center justify-between text-foreground font-body text-lg py-1"
-                >
+                onClick={() => setMobileUseCasesOpen(!mobileUseCasesOpen)}
+                className="flex items-center justify-between text-foreground font-body text-lg py-1">
+                
                   Use Cases
                   <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${
-                      mobileUseCasesOpen ? "rotate-180" : ""
-                    }`}
-                  />
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                  mobileUseCasesOpen ? "rotate-180" : ""}`
+                  } />
+                
                 </button>
                 <AnimatePresence>
-                  {mobileUseCasesOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="overflow-hidden"
-                    >
+                  {mobileUseCasesOpen &&
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="overflow-hidden">
+                  
                       <div className="flex flex-col gap-1 pl-4 pb-2">
-                        {useCases.map((uc) => (
-                          <Link
-                            key={uc.slug}
-                            to={`/use-cases/${uc.slug}`}
-                            onClick={() => setMobileOpen(false)}
-                            className="text-muted-foreground font-body text-base py-1.5 hover:text-primary transition-colors"
-                          >
+                        {useCases.map((uc) =>
+                    <Link
+                      key={uc.slug}
+                      to={`/use-cases/${uc.slug}`}
+                      onClick={() => setMobileOpen(false)}
+                      className="text-muted-foreground font-body text-base py-1.5 hover:text-primary transition-colors">
+                      
                             {uc.shortTitle}
                           </Link>
-                        ))}
+                    )}
                       </div>
                     </motion.div>
-                  )}
+                }
                 </AnimatePresence>
 
                 <Link
-                  to="/library"
-                  onClick={() => setMobileOpen(false)}
-                  className="text-foreground font-body text-lg py-1"
-                >
+                to="/library"
+                onClick={() => setMobileOpen(false)}
+                className="text-foreground font-body text-lg py-1">
+                
                   Library R&D
                 </Link>
 
-                {navLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={isHome ? link.href : `/${link.href}`}
-                    onClick={() => handleNavClick(link.href)}
-                    className="text-foreground font-body text-lg py-1"
-                  >
+                {navLinks.map((link) =>
+              <a
+                key={link.href}
+                href={isHome ? link.href : `/${link.href}`}
+                onClick={() => handleNavClick(link.href)}
+                className="text-foreground font-body text-lg py-1">
+                
                     {link.label}
                   </a>
-                ))}
+              )}
                 <a
-                  href={isHome ? "#estimator" : "/#estimator"}
-                  onClick={() => setMobileOpen(false)}
-                  className="bg-primary text-primary-foreground px-5 py-3 rounded-full text-center font-semibold mt-2"
-                >
+                href={isHome ? "#estimator" : "/#estimator"}
+                onClick={() => setMobileOpen(false)}
+                className="bg-primary text-primary-foreground px-5 py-3 rounded-full text-center font-semibold mt-2">
+                
                   Get a Quote
                 </a>
-                {user ? (
-                  <button
-                    onClick={async () => { await supabase.auth.signOut(); setMobileOpen(false); navigate("/"); }}
-                    className="flex items-center justify-center gap-2 text-muted-foreground font-body text-base py-2 hover:text-primary transition-colors"
-                  >
+                {user ?
+              <button
+                onClick={async () => {await supabase.auth.signOut();setMobileOpen(false);navigate("/");}}
+                className="flex items-center justify-center gap-2 text-muted-foreground font-body text-base py-2 hover:text-primary transition-colors">
+                
                     <LogOut className="w-4 h-4" /> Sign Out
-                  </button>
-                ) : (
-                  <Link
-                    to="/auth"
-                    onClick={() => setMobileOpen(false)}
-                    className="flex items-center justify-center gap-2 text-muted-foreground font-body text-base py-2 hover:text-primary transition-colors"
-                  >
+                  </button> :
+
+              <Link
+                to="/auth"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center gap-2 text-muted-foreground font-body text-base py-2 hover:text-primary transition-colors">
+                
                     <LogIn className="w-4 h-4" /> Sign In
                   </Link>
-                )}
+              }
               </div>
             </motion.div>
-          )}
+          }
         </AnimatePresence>
       </motion.nav>
 
       {/* Backdrop overlay */}
       <AnimatePresence>
-        {activeDropdown && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-background/60 backdrop-blur-sm z-40"
-            onClick={() => setActiveDropdown(null)}
-          />
-        )}
+        {activeDropdown &&
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 bg-background/60 backdrop-blur-sm z-40"
+          onClick={() => setActiveDropdown(null)} />
+
+        }
       </AnimatePresence>
-    </>
-  );
+    </>);
+
 };
 
 export default Navbar;
