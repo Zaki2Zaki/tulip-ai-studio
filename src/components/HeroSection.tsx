@@ -43,18 +43,11 @@ const HeroSection = () => {
         {/* Bottom fade to background */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
 
-        {/* Vignette */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.25) 100%)",
-          }}
-        />
       </div>
 
-      {/* Content — left-aligned at golden ratio */}
+      {/* Content — flush left-aligned to match sections below */}
       <div className="relative z-10 w-full section-padding">
-        <div className="max-w-[50vw] md:ml-[8%] lg:ml-[12%] ml-0 max-md:max-w-full max-md:text-center" style={{ marginTop: "-5vh" }}>
+        <div className="max-w-7xl mx-auto max-md:text-center" style={{ marginTop: "-5vh" }}>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
