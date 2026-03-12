@@ -126,7 +126,7 @@ const CostEstimator = () => {
   }, [selectedServices, scale, currency]);
 
   return (
-    <section id="estimator" className="py-32 section-padding border-none border-0">
+    <section id="estimator" className="pt-32 pb-0 section-padding border-none border-0">
       <div ref={ref} className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
