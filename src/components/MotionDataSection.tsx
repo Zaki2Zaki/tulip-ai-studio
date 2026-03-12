@@ -34,7 +34,7 @@ const MotionDataSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative py-32">
+    <section className="relative pt-32 pb-0">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
 
       <div ref={ref} className="relative z-10 max-w-7xl mx-auto section-padding">
