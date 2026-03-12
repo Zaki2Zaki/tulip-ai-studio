@@ -114,7 +114,7 @@ const DiscoveryPackagesModal = ({ open, onClose }: DiscoveryPackagesModalProps) 
           </Table>
         </div>
 
-        <p className="mt-6 text-[11px] leading-relaxed text-muted-foreground font-body italic">
+        <p className="mt-6 text-sm leading-relaxed text-foreground font-body italic">
           All prices shown are indicative ranges based on typical project scopes and are provided for initial planning purposes only. Final pricing will be confirmed via a tailored quote following detailed scoping discussions, stakeholder inputs, and alignment with your specific workflows, OKRs, and requirements. Prices are in USD (CAD equivalents approximate based on current mid-market rates and subject to final confirmation). It may not represent this table.
         </p>
       </DialogContent>
