@@ -94,7 +94,7 @@ const MotionDataSection = () => {
             }} />
             
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-6 max-w-6xl mx-auto">
               {llmModels.map((item, i) =>
               <motion.div
                 key={item.model}
@@ -103,20 +103,20 @@ const MotionDataSection = () => {
                 transition={{ duration: 0.5, delay: 0.4 + i * 0.08 }}
                 className="flex flex-col items-center text-center">
                 
-                  <p className="text-xs font-body text-muted-foreground mb-3 tracking-wide uppercase">
+                  <p className="text-sm font-body text-foreground mb-3 tracking-wide uppercase">
                     {item.provider}
                   </p>
 
                   {/* Dot */}
                   <div
-                  className="w-3 h-3 rounded-full mb-3 shrink-0"
+                  className="w-4 h-4 rounded-full mb-3 shrink-0"
                   style={{ backgroundColor: item.color, boxShadow: `0 0 12px ${item.color}` }} />
                 
 
-                  <p className="font-display text-sm font-semibold mb-1" style={{ color: item.color }}>
+                  <p className="font-display text-base font-semibold mb-1" style={{ color: item.color }}>
                     {item.model}
                   </p>
-                  <p className="text-xs text-muted-foreground font-body leading-relaxed">
+                  <p className="text-sm text-foreground font-body leading-relaxed">
                     {item.desc}
                   </p>
                 </motion.div>
