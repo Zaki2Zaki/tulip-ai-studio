@@ -94,7 +94,7 @@ const MotionDataSection = () => {
             }} />
             
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-6 max-w-6xl mx-auto">
               {llmModels.map((item, i) =>
               <motion.div
                 key={item.model}
