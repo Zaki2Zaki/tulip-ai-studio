@@ -356,9 +356,9 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                           className="w-full"
                         />
                         <div className="flex justify-between mt-1">
-                          <span className="text-[10px] text-muted-foreground font-body">Strongly Disagree</span>
-                          <span className="text-xs font-body font-medium text-primary">{sliderLabels[answers[q.id]]}</span>
-                          <span className="text-[10px] text-muted-foreground font-body">Strongly Agree</span>
+                          <span className="text-xs text-muted-foreground font-body">Strongly Disagree</span>
+                          <span className="text-sm font-body font-medium text-primary">{sliderLabels[answers[q.id]]}</span>
+                          <span className="text-xs text-muted-foreground font-body">Strongly Agree</span>
                         </div>
                       </div>
                     </div>
