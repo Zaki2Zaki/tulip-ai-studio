@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
+import IridescentBubbles from "./IridescentBubbles";
 
 const HeroSection = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
