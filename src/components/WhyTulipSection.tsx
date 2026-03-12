@@ -29,7 +29,7 @@ const logos = [
 const aiLogos = [
   { src: openaiLogo, name: "GPT-5 / o1", color: "#10A37F" },
   { src: geminiLogo, name: "Gemini 3.0", color: "#4285F4" },
-  { src: huggingfaceLogo, name: "Hugging Face", color: "#FFD21E" },
+  { src: huggingfaceLogo, name: "Hugging Face", color: "#FFD700" },
   { src: lovableLogo, name: "Lovable", color: "#E779C1" },
   { src: grokLogo, name: "Grok", color: "#FFFFFF" },
 ];
