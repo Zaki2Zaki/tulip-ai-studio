@@ -313,8 +313,8 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                     </select>
                   </div>
                   <div>
-                    <label className="text-xs text-muted-foreground font-body mb-1 block">Studio Scale <span className="text-destructive">*</span></label>
-                    <select value={user.studioScale} onChange={(e) => setUser({ ...user, studioScale: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-sm font-body focus:outline-none focus:border-primary transition-colors">
+                    <label className="text-sm text-muted-foreground font-body mb-1 block">Studio Scale <span className="text-destructive">*</span></label>
+                    <select value={user.studioScale} onChange={(e) => setUser({ ...user, studioScale: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors">
                       <option value="">Select studio size</option>
                       {studioScales.map((s) => <option key={s} value={s}>{s}</option>)}
                     </select>
