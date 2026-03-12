@@ -283,10 +283,10 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                 <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">
                   Pipeline Health <span className="text-gradient-gold">Benchmark</span>
                 </h2>
-                <p className="text-muted-foreground font-body text-base mb-3">
+                <p className="text-muted-foreground font-body text-lg mb-3">
                   Unlock your personalized pipeline health benchmark in under <strong className="text-foreground">2 minutes</strong>.
                 </p>
-                <p className="text-muted-foreground font-body text-sm mb-8 max-w-md mx-auto">
+                <p className="text-muted-foreground font-body text-base mb-8 max-w-md mx-auto">
                   With 22 targeted data points, we assess whether your VFX / animation / game production depends on
                   <span className="text-red-400"> irreplaceable talent</span> or
                   <span className="text-green-400"> robust, repeatable systems</span> – plus your true scalability potential.
