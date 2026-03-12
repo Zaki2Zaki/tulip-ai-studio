@@ -66,10 +66,10 @@ content production pipelines - from pre-production through final output.
           initial={{ opacity: 0, scale: 0.5 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex flex-col items-center gap-3 my-12">
+          className="flex flex-col items-center gap-3 my-12 border-solid border-teal-500 rounded-lg shadow-sm">
 
           <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary/60 to-primary" />
-          <div className="flex items-center gap-3 bg-card/80 backdrop-blur-sm border border-primary/30 rounded-full px-6 py-3">
+          <div className="flex items-center gap-3 bg-card/80 backdrop-blur-sm border-primary/30 rounded-full px-6 py-3 border-2">
             <span className="text-sm font-body text-primary font-semibold tracking-wide">
               Evolving with AI
             </span>
