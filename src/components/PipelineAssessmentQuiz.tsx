@@ -148,8 +148,9 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const totalPages = Math.ceil(questions.length / QUESTIONS_PER_PAGE);
-  const pageQuestions = questions.slice(quizPage * QUESTIONS_PER_PAGE, (quizPage + 1) * QUESTIONS_PER_PAGE);
+  const totalPages = categoryDefs.length;
+  const currentCategory = categoryDefs[quizPage];
+  const pageQuestions = currentCategory ? currentCategory.qs.map(qId => questions.find(q => q.id === qId)!).filter(Boolean) : [];
 
   const resetQuiz = () => {
     setStep("intake");
