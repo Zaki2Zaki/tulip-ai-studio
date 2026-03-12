@@ -361,13 +361,6 @@ const CostEstimator = () => {
         open={discoveryOpen}
         onClose={() => setDiscoveryOpen(false)} />
 
-      {/* Floating button */}
-      <button
-        onClick={() => setDiscoveryOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-primary text-primary-foreground px-5 py-3 rounded-full font-display font-semibold text-sm shadow-lg hover:opacity-90 transition-opacity">
-        <Package size={18} />
-        GenAI Workflow Discovery Packages
-      </button>
     </section>);
 
 };
