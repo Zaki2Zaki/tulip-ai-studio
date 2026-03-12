@@ -32,9 +32,9 @@ const serviceOptions: ServiceOption[] = [
   id: "benchmarking",
   label: "Tool Benchmarking",
   description: "Test & validate AI tools in sandbox environments",
-  minUSD: 5000, maxUSD: 130000,
-  minCAD: 6843, maxCAD: 177918,
-  minEUR: 4238, maxEUR: 110175
+  minUSD: 15000, maxUSD: 130000,
+  minCAD: 20529, maxCAD: 177918,
+  minEUR: 12713, maxEUR: 110175
 },
 {
   id: "demos",
