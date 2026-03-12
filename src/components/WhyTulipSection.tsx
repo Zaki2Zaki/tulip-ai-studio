@@ -64,8 +64,8 @@ const WhyTulipSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-white font-semibold font-sans">
-          We're focused on flow, adoption and integration for our tools. Aiming for seamlessly into existing pipelines, delivering production-ready work via API for scalable, automated pipelines.
+          className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed text-white font-semibold font-sans">
+          We're focused on <span className="text-gradient-chrome-animated font-bold">flow, adoption and integration</span> for our tools. Aiming for seamlessly into existing pipelines, delivering production-ready work via API for scalable, automated pipelines.
         </motion.p>
 
         {/* Logo carousel */}
