@@ -55,7 +55,7 @@ const studioScales = [
 ];
 
 const categoryDefs = [
-  { key: "systemization", label: "Systemization", qs: [1, 2, 3, 4, 20, 21, 22], max: 35 },
+  { key: "systemization", label: "Systemization", qs: [1, 2, 3, 4], max: 20 },
   { key: "optimisation", label: "Optimisation & Efficiency", qs: [5, 6, 7, 8], max: 20 },
   { key: "knowledge", label: "Centralised Knowledge", qs: [9, 10, 11, 12], max: 20 },
   { key: "personnel", label: "Hiring & Personnel Dependency", qs: [13, 14, 15, 16], max: 20 },
@@ -64,8 +64,6 @@ const categoryDefs = [
 ] as const;
 
 const sliderLabels = ["", "Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"];
-
-const QUESTIONS_PER_PAGE = 5;
 
 /* ──────────────────────────────────────────
    Donut chart (SVG)
