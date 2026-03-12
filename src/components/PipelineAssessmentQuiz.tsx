@@ -369,7 +369,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                 <div className="flex justify-between mt-8">
                   <button
                     onClick={() => quizPage > 0 ? setQuizPage(quizPage - 1) : setStep("intake")}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body flex items-center gap-1"
+                    className="text-base text-muted-foreground hover:text-foreground transition-colors font-body flex items-center gap-1"
                   >
                     <ArrowLeft size={14} /> Back
                   </button>
