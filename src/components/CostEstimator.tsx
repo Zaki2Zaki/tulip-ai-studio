@@ -141,12 +141,13 @@ const CostEstimator = () => {
           <p className="text-muted-foreground font-body max-w-xl mx-auto mb-6">
             Select your services and studio scale for an instant budget range based on our consultancy rates.
           </p>
+          <p className="text-muted-foreground font-body text-sm mb-3">Not sure what you need?</p>
           <button
             onClick={() => setQuizOpen(true)}
             className="inline-flex items-center gap-2 btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-sm transition-all">
             
             <ClipboardCheck size={18} />
-            Not sure what you need? Take the 2-min Assessment
+            Take the 2-min Assessment
           </button>
         </motion.div>
 
