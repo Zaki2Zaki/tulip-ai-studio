@@ -241,7 +241,7 @@ const CostEstimator = () => {
                               e.stopPropagation();
                               setDiscoveryOpen(true);
                             }}
-                            className="inline-flex items-center gap-1.5 mt-3 px-3 py-1.5 rounded-full text-[11px] font-display font-semibold bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-colors cursor-pointer">
+                            className="inline-flex items-center gap-1.5 mt-3 px-4 py-2 rounded-full text-xs font-display font-semibold text-white border border-primary/40 bg-primary/10 hover:bg-primary/20 transition-colors cursor-pointer btn-chrome-outline">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="shrink-0">
                               <path d="M12 2C10 2 8.5 4 8.5 4C8.5 4 7 6 7 9C7 12 9 14 12 14C15 14 17 12 17 9C17 6 15.5 4 15.5 4C15.5 4 14 2 12 2Z" fill="currentColor" opacity="0.3"/>
                               <path d="M12 3C10.5 3 9.5 4.5 9.5 4.5C9.5 4.5 8 6.5 8 9C8 11.5 9.8 13 12 13C14.2 13 16 11.5 16 9C16 6.5 14.5 4.5 14.5 4.5C14.5 4.5 13.5 3 12 3Z" stroke="currentColor" strokeWidth="1.2" fill="none"/>
