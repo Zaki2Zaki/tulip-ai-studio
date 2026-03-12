@@ -103,7 +103,7 @@ const MotionDataSection = () => {
                 transition={{ duration: 0.5, delay: 0.4 + i * 0.08 }}
                 className="flex flex-col items-center text-center">
                 
-                  <p className="text-xs font-body text-muted-foreground mb-3 tracking-wide uppercase">
+                  <p className="text-sm font-body text-foreground mb-3 tracking-wide uppercase">
                     {item.provider}
                   </p>
 
