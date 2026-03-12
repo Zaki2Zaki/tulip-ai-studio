@@ -120,12 +120,14 @@ const WhyTulipSection = () => {
                       alt={logo.name}
                       className={`h-6 md:h-7 w-auto opacity-80 hover:opacity-100 transition-opacity ${(logo as any).whiteBg ? 'bg-white rounded px-1 py-0.5' : ''}`}
                     />
-                    <span
-                      className="font-display text-sm md:text-base font-bold whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity"
-                      style={{ color: logo.color }}
-                    >
-                      {logo.name}
-                    </span>
+                    {!(logo as any).hideLabel && (
+                      <span
+                        className="font-display text-sm md:text-base font-bold whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity"
+                        style={{ color: logo.color }}
+                      >
+                        {logo.name}
+                      </span>
+                    )}
                   </div>
                 </div>
               ))}
