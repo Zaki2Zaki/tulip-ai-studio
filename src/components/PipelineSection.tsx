@@ -68,9 +68,14 @@ content production pipelines - from pre-production through final output.
           transition={{ duration: 0.6, delay: 0.8 }}
           className="flex flex-col items-center gap-3 my-12 border-solid border-teal-500 rounded-lg shadow-sm">
 
-          <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary/60 to-primary" />
+          <div className="w-px h-16 relative overflow-hidden">
+            <div 
+              className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/60 to-primary"
+              style={{ animation: 'flowDown 2s ease-in-out infinite' }}
+            />
+          </div>
           <div 
-            className="flex items-center gap-3 bg-card/80 backdrop-blur-sm rounded-full px-6 py-3"
+            className="flex items-center gap-4 bg-card/80 backdrop-blur-sm rounded-full px-8 py-4"
             style={{
               border: '3px solid transparent',
               backgroundImage: 'linear-gradient(hsl(0 0% 6% / 0.8), hsl(0 0% 6% / 0.8)), linear-gradient(var(--water-angle, 0deg), #BA55D3, #4169E1, #00CED1, #BA55D3)',
@@ -80,7 +85,7 @@ content production pipelines - from pre-production through final output.
             }}
           >
             <span 
-              className="text-sm font-body font-semibold tracking-wide"
+              className="text-base md:text-lg font-body font-semibold tracking-wide"
               style={{
                 background: 'linear-gradient(to right, #BA55D3, #4169E1)',
                 WebkitBackgroundClip: 'text',
@@ -89,9 +94,14 @@ content production pipelines - from pre-production through final output.
             >
               Evolving with AI
             </span>
-            <ArrowRight className="w-4 h-4" style={{ color: '#4169E1' }} />
+            <ArrowRight className="w-5 h-5" style={{ color: '#4169E1' }} />
           </div>
-          <div className="w-px h-12 bg-gradient-to-b from-primary via-primary/60 to-transparent" />
+          <div className="w-px h-16 relative overflow-hidden">
+            <div 
+              className="absolute inset-0 bg-gradient-to-b from-primary via-primary/60 to-transparent"
+              style={{ animation: 'flowDown 2s ease-in-out infinite' }}
+            />
+          </div>
         </motion.div>
 
         {/* AI-Powered Workflow */}
