@@ -69,13 +69,13 @@ const sliderLabels = ["", "Strongly Disagree", "Disagree", "Neutral", "Agree", "
    Donut chart (SVG)
    ────────────────────────────────────────── */
 
-const DonutChart = ({ categories, overall }: { categories: { label: string; pct: number; color: string }[]; overall: number }) => {
+const DonutChart = ({ categories, overall, worstIndices }: { categories: { label: string; pct: number; color: string }[]; overall: number; worstIndices: number[] }) => {
   const size = 220;
   const cx = size / 2;
   const cy = size / 2;
   const outerR = 95;
   const innerR = 60;
-  const gap = 2; // degrees gap between slices
+  const gap = 2;
   const total = categories.length;
   const sliceAngle = (360 - gap * total) / total;
 
@@ -97,25 +97,39 @@ const DonutChart = ({ categories, overall }: { categories: { label: string; pct:
 
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="mx-auto">
+      <defs>
+        <linearGradient id="chrome-ring" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="hsl(200 90% 75%)" />
+          <stop offset="25%" stopColor="hsl(260 85% 75%)" />
+          <stop offset="50%" stopColor="hsl(320 80% 72%)" />
+          <stop offset="75%" stopColor="hsl(40 95% 70%)" />
+          <stop offset="100%" stopColor="hsl(160 80% 65%)" />
+        </linearGradient>
+      </defs>
       {categories.map((cat, i) => {
         const startAngle = angleOffset;
-        // Scale the arc fill by the category percentage
         const fillAngle = sliceAngle * (cat.pct / 100);
         const fullEndAngle = angleOffset + sliceAngle;
         angleOffset = fullEndAngle + gap;
+        const isWorst = worstIndices.includes(i);
 
         return (
           <g key={i}>
-            {/* Background arc (muted) */}
             <path d={describeArc(startAngle, fullEndAngle, outerR, innerR)} fill="hsl(var(--muted))" opacity={0.3} />
-            {/* Filled arc */}
             {fillAngle > 0.5 && (
-              <path d={describeArc(startAngle, startAngle + fillAngle, outerR, innerR)} fill={cat.color} opacity={0.85} />
+              <path d={describeArc(startAngle, startAngle + fillAngle, outerR, innerR)} fill={cat.color} opacity={0.9} />
+            )}
+            {/* Chrome rainbow outline on worst areas */}
+            {isWorst && (
+              <path
+                d={describeArc(startAngle, fullEndAngle, outerR + 4, outerR)}
+                fill="url(#chrome-ring)"
+                opacity={0.9}
+              />
             )}
           </g>
         );
       })}
-      {/* Center text */}
       <text x={cx} y={cy - 8} textAnchor="middle" fill="hsl(var(--foreground))" fontSize="28" fontWeight="bold" fontFamily="Outfit">
         {Math.round(overall)}%
       </text>
