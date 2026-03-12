@@ -93,13 +93,13 @@ const HeroSection = () => {
           >
             <a
               href="#services"
-              className="hero-btn-primary px-8 py-4 rounded-full font-display font-semibold text-lg transition-all"
+              className="hero-btn-explore px-8 py-4 rounded-full font-display font-semibold text-lg transition-all"
             >
               Explore Services
             </a>
             <a
               href="#estimator"
-              className="hero-btn-secondary px-8 py-4 rounded-full font-display font-semibold text-lg transition-all text-center"
+              className="hero-btn-quote px-8 py-4 rounded-full font-display font-semibold text-lg transition-all text-center"
             >
               Estimate Quotes
             </a>
