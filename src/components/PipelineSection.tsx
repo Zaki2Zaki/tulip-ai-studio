@@ -99,7 +99,7 @@ content production pipelines - from pre-production through final output.
           <div className="w-px h-16 relative overflow-hidden">
             <div 
               className="absolute inset-0 bg-gradient-to-b from-primary via-primary/60 to-transparent"
-              style={{ animation: 'flowDown 2s ease-in-out infinite' }}
+              style={{ animation: 'flowDown 2s ease-in-out infinite 1s' }}
             />
           </div>
         </motion.div>
