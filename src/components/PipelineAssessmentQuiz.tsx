@@ -481,7 +481,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                   <button onClick={handleApplyRecommendations} className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-base hover:opacity-90 transition-opacity">
                     Apply Recommendations to Quote
                   </button>
-                  <button onClick={() => { onClose(); resetQuiz(); }} className="btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-sm transition-all">
+                  <button onClick={() => { onClose(); resetQuiz(); }} className="btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-base transition-all">
                     Close
                   </button>
                 </div>
