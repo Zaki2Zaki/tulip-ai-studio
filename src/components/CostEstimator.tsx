@@ -315,10 +315,10 @@ const CostEstimator = () => {
           className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
 
           {[
-          { pct: "15%", label: "Contracts & Deposit" },
-          { pct: "25%", label: "Demo Start & Review" },
+          { pct: "20%", label: "Initial Experiment, Report Scope, Contracts & Deposit" },
+          { pct: "25%", label: "Demo Start & Prototype Reviews" },
           { pct: "30%", label: "Polish & 75% Completion" },
-          { pct: "25%", label: "Final Delivery" }].
+          { pct: "25%", label: "Final Delivery, code handover, and client sign-off" }].
           map((step) =>
           <div key={step.label} className="bg-card border border-border rounded-xl p-4 text-center">
               <div className="font-display text-2xl font-bold text-primary mb-1">{step.pct}</div>

@@ -30,7 +30,7 @@ const services = [
   },
   {
     icon: Plug,
-    title: "Integration",
+    title: "Adoption & Integration",
     description: "End-to-end integration of AI tools into your studio's workflows and production pipelines.",
     range: "$20K – $600K+",
   },
