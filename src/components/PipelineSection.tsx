@@ -10,7 +10,7 @@ const PipelineSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="pipeline" className="relative py-32 overflow-hidden">
+    <section id="pipeline" className="relative py-16 overflow-hidden">
       <div className="absolute inset-0">
         <img src={pipelineBg} alt="" className="w-full h-full object-cover opacity-15" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
