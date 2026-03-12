@@ -87,27 +87,18 @@ const WhyTulipSection = () => {
                   key={`${logo.name}-${i}`}
                   className="flex-shrink-0 flex items-center justify-center px-8 md:px-12 h-16"
                 >
-                  {logo.text ? (
-                    <span
-                      className="font-display text-lg md:text-xl font-bold whitespace-nowrap opacity-80 hover:opacity-100 transition-opacity"
-                      style={{ color: logo.color }}
-                    >
-                      {logo.name}
-                    </span>
-                  ) : (
-                    <div className="flex items-center gap-2">
-                      <img
-                        src={logo.src}
-                        alt={logo.name}
-                        className={`h-8 md:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity ${logo.invert ? 'brightness-0 invert' : ''}`}
-                      />
-                      {logo.showLabel && (
-                        <span className="font-display text-sm md:text-base font-bold whitespace-nowrap opacity-80" style={{ color: '#4B6EF5' }}>
-                          {logo.name}
-                        </span>
-                      )}
-                    </div>
-                  )}
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={logo.src}
+                      alt={logo.name}
+                      className={`h-8 md:h-10 w-auto opacity-80 hover:opacity-100 transition-opacity ${logo.invert ? 'brightness-0 invert' : ''}`}
+                    />
+                    {logo.showLabel && (
+                      <span className="font-display text-sm md:text-base font-bold whitespace-nowrap opacity-80" style={{ color: '#4B6EF5' }}>
+                        {logo.name}
+                      </span>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
