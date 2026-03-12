@@ -294,8 +294,8 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
 
                 <div className="space-y-3 max-w-sm mx-auto text-left">
                   <div>
-                    <label className="text-xs text-muted-foreground font-body mb-1 block">First name</label>
-                    <input type="text" value={user.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-sm font-body focus:outline-none focus:border-primary transition-colors" placeholder="First name" />
+                    <label className="text-sm text-muted-foreground font-body mb-1 block">First name</label>
+                    <input type="text" value={user.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors" placeholder="First name" />
                   </div>
                   <div>
                     <label className="text-xs text-muted-foreground font-body mb-1 block">Last name</label>
