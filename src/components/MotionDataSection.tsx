@@ -109,7 +109,7 @@ const MotionDataSection = () => {
 
                   {/* Dot */}
                   <div
-                  className="w-3 h-3 rounded-full mb-3 shrink-0"
+                  className="w-4 h-4 rounded-full mb-3 shrink-0"
                   style={{ backgroundColor: item.color, boxShadow: `0 0 12px ${item.color}` }} />
                 
 
