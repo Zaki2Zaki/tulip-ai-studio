@@ -428,7 +428,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                   "border-green-500/30 bg-green-500/5"
                 }`}>
                   <div className="flex items-center gap-3 mb-3">
-                    <span className={`text-xs font-display font-bold px-3 py-1 rounded-full ${
+                    <span className={`text-sm font-display font-bold px-3 py-1 rounded-full ${
                       recommendation.level === "Full" ? "bg-red-500/20 text-red-400" :
                       recommendation.level === "Mid" ? "bg-yellow-500/20 text-yellow-400" :
                       "bg-green-500/20 text-green-400"
