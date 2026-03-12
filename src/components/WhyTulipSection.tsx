@@ -65,7 +65,7 @@ const WhyTulipSection = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed text-white font-semibold font-sans">
-          We're focused on <span className="font-bold bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(to bottom, #C8A2C8, #ADD8E6)' }}>flow, adoption and integration</span> for our tools. Aiming for seamlessly into existing pipelines, delivering production-ready work via API for scalable, automated pipelines.
+          We're focused on <span className="font-bold bg-clip-text text-transparent animate-[illuminating_3s_ease-in-out_infinite]" style={{ backgroundImage: 'linear-gradient(90deg, #C8A2C8, #ADD8E6, #C8A2C8, #ADD8E6)', backgroundSize: '200% 100%' }}>flow, adoption and integration</span> for our tools. Aiming for seamlessly into existing pipelines, delivering production-ready work via API for scalable, automated pipelines.
         </motion.p>
 
         {/* Logo carousel */}
