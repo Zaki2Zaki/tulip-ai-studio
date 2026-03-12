@@ -1,100 +1,129 @@
 import { motion } from "framer-motion";
+import { useRef, useState } from "react";
 import heroBg from "@/assets/hero-bg.jpg";
-import TulipParticles from "./TulipParticles";
 
 const HeroSection = () => {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background Video */}
       <div className="absolute inset-0">
+        {/* Poster / fallback image */}
         <img
           src={heroBg}
           alt="Tulip Technology hero"
-          className="w-full h-full object-cover object-left"
-          loading="eager" />
+          className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
+          loading="eager"
+        />
 
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background" />
-        <TulipParticles />
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onCanPlay={() => setVideoLoaded(true)}
+          poster=""
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
+          style={{ filter: "blur(2px)" }}
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
+
+        {/* Diagonal dark overlay */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.4) 100%)",
+          }}
+        />
+
+        {/* Bottom fade to background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+
+        {/* Vignette */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.25) 100%)",
+          }}
+        />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto section-padding">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-sm md:text-base font-body tracking-[0.3em] uppercase text-muted-foreground mb-6">
+      {/* Content — left-aligned at golden ratio */}
+      <div className="relative z-10 w-full section-padding">
+        <div className="max-w-[50vw] md:ml-[8%] lg:ml-[12%] ml-0 max-md:max-w-full max-md:text-center" style={{ marginTop: "-5vh" }}>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="font-display font-bold leading-[0.95] mb-6 hero-title"
+            style={{
+              letterSpacing: "-0.02em",
+              textShadow: "0 0 40px rgba(255,255,255,0.3), 0 2px 8px rgba(0,0,0,0.4)",
+            }}
+          >
+            <span className="hero-gradient-text">Tulip Technology</span>
+            <br />
+            <span className="hero-gradient-text">R&D™</span>
+          </motion.h1>
 
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="font-display font-normal mb-10 hero-subtitle"
+            style={{
+              maxWidth: "680px",
+              letterSpacing: "0.01em",
+              lineHeight: 1.55,
+              color: "rgba(255,255,255,0.9)",
+            }}
+          >
+            AI Research & Development for 3D Artwork, Games, 3D Animation and VFX's Production Pipelines, and Creative Dev-Tools
+          </motion.p>
 
-        </motion.p>
-
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="font-display text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-4">
-
-          <span className="text-gradient-chrome-animated">Tulip Technology</span>
-          <br />
-          <span className="text-gradient-chrome-animated">R&D™</span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-lg max-w-2xl mx-auto mb-10 font-display text-white md:text-3xl">
-
-          AI Research & Development for 3D Artwork, Games, 3D Animation and VFX's Production Pipelines, and Creative Dev-Tools
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex-col gap-4 items-center justify-center flex sm:flex-row">
-
-          <a
-            href="#services"
-            className="btn-chrome-outline px-8 py-4 rounded-full font-display font-semibold text-lg transition-all">
-
-            Explore Services
-          </a>
-          <a
-            href="#estimator"
-            className="px-8 py-4 rounded-full font-display font-semibold text-lg hover:opacity-90 transition-opacity text-primary-foreground bg-white">
-
-            ​Estimate Quotes  
-          </a>
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-sm md:text-base max-w-xl mx-auto mt-6 text-[#f4fbfa] font-sans font-light">
-
-
-
-        </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+            className="flex gap-4 items-center max-md:flex-col max-md:items-stretch"
+          >
+            <a
+              href="#services"
+              className="hero-btn-primary px-8 py-4 rounded-full font-display font-semibold text-lg transition-all"
+            >
+              Explore Services
+            </a>
+            <a
+              href="#estimator"
+              className="hero-btn-secondary px-8 py-4 rounded-full font-display font-semibold text-lg transition-all text-center"
+            >
+              Estimate Quotes
+            </a>
+          </motion.div>
+        </div>
       </div>
 
       {/* Scroll indicator */}
-      <motion.div initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1.2 }}
-      className="absolute bottom-8 left-1/2 -translate-x-1/2">
-
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="w-5 h-8 border-2 border-foreground/30 rounded-full flex justify-center pt-1">
-
+          className="w-5 h-8 border-2 border-foreground/30 rounded-full flex justify-center pt-1"
+        >
           <div className="w-1 h-2 bg-primary rounded-full" />
         </motion.div>
       </motion.div>
-    </section>);
-
+    </section>
+  );
 };
 
 export default HeroSection;
