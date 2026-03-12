@@ -440,7 +440,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                   <p className="text-base font-body text-muted-foreground mb-3">{recommendation.notes}</p>
                   <div className="flex flex-wrap gap-2">
                     {recommendation.services.map((svc) => (
-                      <span key={svc} className="text-xs font-body bg-secondary px-3 py-1 rounded-full">{svc}</span>
+                      <span key={svc} className="text-sm font-body bg-secondary px-3 py-1 rounded-full">{svc}</span>
                     ))}
                   </div>
                 </div>
