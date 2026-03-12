@@ -201,7 +201,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
     setSubmitting(true);
     try {
       // Send results to edge function
-      await supabase.functions.invoke("paper-chat", {
+      await supabase.functions.invoke("send-assessment", {
         body: {
           type: "pipeline-assessment",
           to: "youki@tuliptchnology.studio",
