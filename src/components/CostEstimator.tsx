@@ -143,8 +143,8 @@ const CostEstimator = () => {
           </p>
           <button
             onClick={() => setQuizOpen(true)}
-            className="inline-flex items-center gap-2 btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-sm transition-all"
-          >
+            className="inline-flex items-center gap-2 btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-sm transition-all">
+            
             <ClipboardCheck size={18} />
             Not sure what you need? Take the 2-min Assessment
           </button>
@@ -326,16 +326,16 @@ const CostEstimator = () => {
             </div>
           )}
         </motion.div>
-        <p className="text-center text-xs text-muted-foreground font-body mt-4">
-          Payment milestone structure. Final quotation varies depending on custom prototype requirements.
+        <p className="text-center text-muted-foreground font-body mt-4 text-lg">*Payment milestone structure. Finalized quotation varies depending on custom prototype requirements.
+
         </p>
       </div>
 
       <PipelineAssessmentQuiz
         open={quizOpen}
         onClose={() => setQuizOpen(false)}
-        onComplete={handleQuizComplete}
-      />
+        onComplete={handleQuizComplete} />
+      
     </section>);
 
 };
