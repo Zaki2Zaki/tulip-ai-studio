@@ -53,7 +53,7 @@ const serviceOptions: ServiceOption[] = [
 },
 {
   id: "integration",
-  label: "Integration",
+  label: "Adoption & Integration",
   description: "End-to-end AI integration into your workflows",
   minUSD: 20000, maxUSD: 600000,
   minCAD: 27372, maxCAD: 821160,
