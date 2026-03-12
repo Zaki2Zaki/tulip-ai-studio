@@ -146,19 +146,20 @@
     font-size: clamp(16px, 2vw, 24px);
   }
 
-  /* Hero Explore Services button — rainbow border + TECH-colored bg */
+  /* Hero Explore Services button — translucent bg + chrome rainbow border */
   .hero-btn-explore {
     border: 2px solid transparent;
-    background-image: linear-gradient(hsl(200 90% 75%), hsl(200 90% 75%)),
+    background-image: linear-gradient(rgba(255,255,255,0.08), rgba(255,255,255,0.08)),
       linear-gradient(135deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%), hsl(200 90% 75%));
     background-origin: border-box;
     background-clip: padding-box, border-box;
-    color: hsl(var(--primary-foreground));
+    color: #ffffff;
+    backdrop-filter: blur(8px);
     background-size: 100% 100%, 300% 300%;
     animation: chrome-border-shimmer 4s ease-in-out infinite;
   }
   .hero-btn-explore:hover {
-    background-image: linear-gradient(hsl(200 90% 80%), hsl(200 90% 80%)),
+    background-image: linear-gradient(rgba(255,255,255,0.15), rgba(255,255,255,0.15)),
       linear-gradient(135deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%), hsl(200 90% 75%));
     transform: scale(1.05);
     box-shadow: 0 0 24px -4px hsl(260 85% 75% / 0.5), 0 0 48px -8px hsl(200 90% 75% / 0.3);
