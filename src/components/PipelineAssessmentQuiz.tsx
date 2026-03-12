@@ -306,8 +306,8 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                     <input type="email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors" placeholder="you@studio.com" />
                   </div>
                   <div>
-                    <label className="text-xs text-muted-foreground font-body mb-1 block">Industry <span className="text-destructive">*</span></label>
-                    <select value={user.industry} onChange={(e) => setUser({ ...user, industry: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-sm font-body focus:outline-none focus:border-primary transition-colors">
+                    <label className="text-sm text-muted-foreground font-body mb-1 block">Industry <span className="text-destructive">*</span></label>
+                    <select value={user.industry} onChange={(e) => setUser({ ...user, industry: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors">
                       <option value="">Select your industry</option>
                       {industries.map((ind) => <option key={ind} value={ind}>{ind}</option>)}
                     </select>
