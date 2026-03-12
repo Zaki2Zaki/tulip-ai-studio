@@ -280,7 +280,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
             {/* ── STEP 1: INTAKE ── */}
             {step === "intake" && (
               <motion.div key="intake" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="text-center">
-                <h2 className="font-display text-2xl md:text-3xl font-bold mb-3">
+                <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">
                   Pipeline Health <span className="text-gradient-gold">Benchmark</span>
                 </h2>
                 <p className="text-muted-foreground font-body text-base mb-3">
