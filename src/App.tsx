@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import UseCasePage from "./pages/UseCasePage";
 import LibraryPage from "./pages/LibraryPage";
 import AuthPage from "./pages/AuthPage";
+import CaseStudiesPage from "./pages/CaseStudiesPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
