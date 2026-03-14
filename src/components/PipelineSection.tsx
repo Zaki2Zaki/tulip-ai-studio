@@ -69,38 +69,38 @@ content production pipelines - from pre-production through final output.
           className="flex flex-col items-center gap-0 my-0">
 
           <div className="w-px h-16 relative overflow-hidden">
-            <div 
+            <div
               className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/60 to-primary"
-              style={{ animation: 'flowDown 2s ease-in-out infinite' }}
-            />
+              style={{ animation: 'flowDown 2s ease-in-out infinite' }} />
+            
           </div>
-          <div 
+          <div
             className="flex items-center gap-4 bg-card/80 backdrop-blur-sm rounded-full px-8 py-4"
             style={{
               border: '3px solid transparent',
               backgroundImage: 'linear-gradient(hsl(0 0% 6% / 0.8), hsl(0 0% 6% / 0.8)), linear-gradient(var(--water-angle, 0deg), #BA55D3, #4169E1, #00CED1, #BA55D3)',
               backgroundOrigin: 'border-box',
               backgroundClip: 'padding-box, border-box',
-              animation: 'waterBorder 3s linear infinite',
-            }}
-          >
-            <span 
+              animation: 'waterBorder 3s linear infinite'
+            }}>
+            
+            <span
               className="text-base md:text-lg font-body font-semibold tracking-wide"
               style={{
                 background: 'linear-gradient(to right, #BA55D3, #4169E1)',
                 WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
+                WebkitTextFillColor: 'transparent'
+              }}>
+              
               Evolving with AI
             </span>
             <ArrowRight className="w-5 h-5" style={{ color: '#4169E1' }} />
           </div>
           <div className="w-px h-16 relative overflow-hidden">
-            <div 
+            <div
               className="absolute inset-0 bg-gradient-to-b from-primary via-primary/60 to-transparent"
-              style={{ animation: 'flowDown 2s ease-in-out infinite 1s' }}
-            />
+              style={{ animation: 'flowDown 2s ease-in-out infinite 1s' }} />
+            
           </div>
         </motion.div>
 
@@ -141,19 +141,24 @@ content production pipelines - from pre-production through final output.
 
             <div className="flex flex-col md:flex-row items-start gap-4 md:gap-8">
               <span className="font-display text-5xl md:text-7xl font-bold text-gradient-gold shrink-0">45%</span>
-              <p className="text-sm md:text-base text-foreground/90 font-body leading-relaxed text-left">
-                <strong className="text-foreground font-semibold">Lost 1-hour per week</strong> troubleshooting, wasting integration time &amp; asset creation in unoptimized, silo pipelines or teams
+              <p className="text-sm md:text-base text-foreground/90 font-body leading-relaxed text-left">Teams lose average 1-hour per week on version control by troubleshooting, wasting integration time & asset creation in unoptimized, silo pipelines or teams
+                <strong className="text-foreground font-semibold">Teams lose average 1-hour per week</strong> troubleshooting, wasting integration time &amp; asset creation in unoptimized, silo pipelines or teams
               </p>
             </div>
 
             <div className="flex flex-col md:flex-row items-start gap-4 md:gap-8">
               <span className="font-display text-5xl md:text-7xl font-bold text-gradient-gold shrink-0">$350K</span>
               <div className="text-left">
-                <p className="text-sm md:text-base text-foreground/90 font-body leading-relaxed">
+                <p className="text-sm md:text-base text-foreground/90 font-body leading-relaxed">Per major rework/iteration cycle (e.g., asset pipeline fix or build overhaul affecting 10–30 devs for 3–7 days)
                   <strong className="text-foreground font-semibold">Per major rework/iteration cycle</strong> (e.g., asset pipeline fix or build overhaul affecting 10–30 devs for 3–7 days)
                 </p>
-                <p className="text-xs md:text-sm text-muted-foreground font-body mt-3 leading-relaxed">
-                  AA Studios $100K–$400K per major rework/iteration cycle<br />
+                <p className="text-xs md:text-sm text-muted-foreground font-body mt-3 leading-relaxed">AA Studios $100K–$400K per major rework/iteration cycle
+AAA Studios $500K–$3M+ per major rework/iteration cycle
+
+"An Empirical Study of Delayed Games on Steam" 2022 arXiv:2204.11191
+"Survey Results 2024: Version Control for Game Dev & Creative Industries" www.diversion.dev/
+
+                  <br />
                   AAA Studios $500K–$3M+ per major rework/iteration cycle
                 </p>
               </div>
@@ -161,8 +166,4 @@ content production pipelines - from pre-production through final output.
           </motion.div>
         </motion.div>
       </div>
-    </section>);
-
-};
-
-export default PipelineSection;
+    </section>);};export default PipelineSection;

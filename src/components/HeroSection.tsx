@@ -83,22 +83,22 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="font-display font-normal mb-10 hero-subtitle"
+            className="font-normal mb-10 hero-subtitle text-2xl font-sans"
             style={{
               maxWidth: "680px",
               letterSpacing: "0.01em",
               lineHeight: 1.55,
               color: "rgba(255,255,255,0.9)"
             }}>
-            
-            AI Research & Development for 3D Artwork, Games, 3D Animation and VFX's Production Pipelines, and Creative Dev-Tools
+
+
+
+
+
+
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
-            className="flex gap-4 items-center max-md:flex-col max-md:items-stretch">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }} className="flex gap-4 items-center max-md:flex-col max-md:items-stretch">
             
             <a
               href="#services"
