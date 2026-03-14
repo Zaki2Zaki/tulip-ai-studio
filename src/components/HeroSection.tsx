@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
+import { ClipboardCheck } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
@@ -99,20 +100,42 @@ const HeroSection = () => {
             →Collab with our experts
           </motion.p>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }} className="flex gap-4 items-center max-md:flex-col max-md:items-stretch">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }} className="flex gap-4 items-start max-md:flex-col max-md:items-stretch">
             
             <a
               href="#services"
-              className="hero-btn-explore px-8 py-4 rounded-full font-display font-semibold text-lg transition-all">
+              className="hero-btn-explore hero-btn-bloom px-8 py-4 rounded-full font-display font-semibold text-lg transition-all">
               
               Explore Services
             </a>
             <a
               href="#estimator"
-              className="hero-btn-quote px-8 py-4 rounded-full font-display font-semibold text-lg transition-all text-center">
+              className="hero-btn-quote hero-btn-bloom px-8 py-4 rounded-full font-display font-semibold text-lg transition-all text-center">
               
               Estimate Quotes
             </a>
+            <div className="flex flex-col items-center gap-1.5">
+              <a
+                href="#estimator"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById("estimator");
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth" });
+                    // Trigger assessment quiz after scroll
+                    setTimeout(() => {
+                      const assessBtn = document.querySelector<HTMLButtonElement>('[data-assessment-trigger]');
+                      assessBtn?.click();
+                    }, 600);
+                  }
+                }}
+                className="hero-btn-assessment hero-btn-bloom px-8 py-4 rounded-full font-display font-semibold text-lg transition-all text-center flex items-center gap-2">
+                
+                <ClipboardCheck className="w-5 h-5" />
+                2-min Assessment
+              </a>
+              <span className="text-xs font-body text-white/60 tracking-wide">Not Sure Where to Start?</span>
+            </div>
           </motion.div>
         </div>
       </div>

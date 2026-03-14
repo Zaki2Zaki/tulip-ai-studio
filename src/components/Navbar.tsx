@@ -9,10 +9,9 @@ const FONT_SCALES = [1, 1.1, 1.2, 1.3] as const;
 const FONT_LABELS = ["1×", "1.1×", "1.2×", "1.3×"];
 
 const navLinks = [
-{ label: "Services", href: "#services" },
-{ label: "Pipeline", href: "#pipeline" },
+{ label: "Services & Pipeline", href: "#services" },
 { label: "Estimator", href: "#estimator" },
-{ label: "Contact", href: "#contact" }];
+{ label: "Book Consultation", href: "#contact" }];
 
 
 const Navbar = () => {
@@ -175,10 +174,17 @@ const Navbar = () => {
             </div>
 
             <Link
+              to="/case-studies"
+              className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
+              
+              Case Studies
+            </Link>
+
+            <Link
               to="/library"
               className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
               
-              Library R&D
+              R&D Library
             </Link>
 
             {navLinks.map((link) =>
@@ -326,11 +332,19 @@ const Navbar = () => {
                 </AnimatePresence>
 
                 <Link
+                to="/case-studies"
+                onClick={() => setMobileOpen(false)}
+                className="text-foreground font-body text-lg py-1">
+                
+                  Case Studies
+                </Link>
+
+                <Link
                 to="/library"
                 onClick={() => setMobileOpen(false)}
                 className="text-foreground font-body text-lg py-1">
                 
-                  Library R&D
+                  R&D Library
                 </Link>
 
                 {navLinks.map((link) =>
