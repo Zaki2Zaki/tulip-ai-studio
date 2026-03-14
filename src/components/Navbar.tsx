@@ -157,28 +157,22 @@ const Navbar = () => {
 
           {/* Desktop — Tesla-style centered nav */}
           <div className="hidden md:flex items-center gap-10">
-            {/* Use Cases with hover dropdown */}
+            {/* Case Studies with Use Cases dropdown nested under it */}
             <div
               onMouseEnter={() => openDropdown("usecases")}
               onMouseLeave={closeDropdown}
               className="relative">
               
-              <button className="flex items-center gap-1.5 text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
-                Use Cases
+              <Link
+                to="/case-studies"
+                className="flex items-center gap-1.5 text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
+                Case Studies
                 <ChevronDown
                   className={`w-4 h-4 text-[hsl(280_30%_75%)] transition-transform duration-200 ${
                   activeDropdown === "usecases" ? "rotate-180" : ""}`
                   } />
-                
-              </button>
+              </Link>
             </div>
-
-            <Link
-              to="/case-studies"
-              className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
-              
-              Case Studies
-            </Link>
 
             <Link
               to="/library"
