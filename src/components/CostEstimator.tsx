@@ -145,6 +145,7 @@ const CostEstimator = () => {
           </p>
           <p className="mb-3 text-white text-xl font-sans">Not sure what you need?</p>
           <button
+            data-assessment-trigger
             onClick={() => setQuizOpen(true)}
             className="inline-flex items-center gap-2.5 btn-chrome-outline px-8 py-4 rounded-full font-display font-semibold text-base transition-all">
             

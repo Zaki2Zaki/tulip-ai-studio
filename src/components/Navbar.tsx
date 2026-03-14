@@ -174,10 +174,17 @@ const Navbar = () => {
             </div>
 
             <Link
+              to="/case-studies"
+              className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
+              
+              Case Studies
+            </Link>
+
+            <Link
               to="/library"
               className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
               
-              Library R&D
+              R&D Library
             </Link>
 
             {navLinks.map((link) =>
