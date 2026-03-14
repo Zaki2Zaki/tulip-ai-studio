@@ -152,14 +152,12 @@ content production pipelines - from pre-production through final output.
                 <p className="text-sm md:text-base text-foreground/90 font-body leading-relaxed">Per major rework/iteration cycle (e.g., asset pipeline fix or build overhaul affecting 10–30 devs for 3–7 days)
                   <strong className="text-foreground font-semibold">Per major rework/iteration cycle</strong> (e.g., asset pipeline fix or build overhaul affecting 10–30 devs for 3–7 days)
                 </p>
-                <p className="text-xs md:text-sm text-muted-foreground font-body mt-3 leading-relaxed">AA Studios $100K–$400K per major rework/iteration cycle
-AAA Studios $500K–$3M+ per major rework/iteration cycle
-
-"An Empirical Study of Delayed Games on Steam" 2022 arXiv:2204.11191
-"Survey Results 2024: Version Control for Game Dev & Creative Industries" www.diversion.dev/
-
-                  <br />
+                <p className="text-xs md:text-sm text-muted-foreground font-body mt-3 leading-relaxed">
+                  AA Studios $100K–$400K per major rework/iteration cycle
+                  <br /><br />
                   AAA Studios $500K–$3M+ per major rework/iteration cycle
+                  <br /><br />
+                  An Empirical Study of Delayed Games on Steam, arXiv:2204.11191
                 </p>
               </div>
             </div>
