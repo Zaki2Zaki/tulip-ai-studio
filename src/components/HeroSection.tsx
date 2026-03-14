@@ -83,7 +83,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="font-normal mb-10 hero-subtitle text-2xl font-sans text-left whitespace-pre-line"
+            className="mb-10 hero-subtitle text-2xl font-sans text-left whitespace-pre-line font-medium"
             style={{
               maxWidth: "680px",
               letterSpacing: "0.01em",
