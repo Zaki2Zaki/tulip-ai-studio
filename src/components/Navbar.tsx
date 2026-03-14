@@ -249,6 +249,7 @@ const Navbar = () => {
             className="absolute left-0 right-0 top-full bg-card/95 backdrop-blur-xl border-b border-border shadow-2xl">
             
               <div className="max-w-6xl mx-auto py-8 px-6">
+                <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground font-body mb-4">Use Cases</p>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                   {useCases.map((uc) => {
                   const Icon = uc.icon;
