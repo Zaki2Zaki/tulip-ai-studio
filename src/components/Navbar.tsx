@@ -157,28 +157,22 @@ const Navbar = () => {
 
           {/* Desktop — Tesla-style centered nav */}
           <div className="hidden md:flex items-center gap-10">
-            {/* Use Cases with hover dropdown */}
+            {/* Case Studies with Use Cases dropdown nested under it */}
             <div
               onMouseEnter={() => openDropdown("usecases")}
               onMouseLeave={closeDropdown}
               className="relative">
               
-              <button className="flex items-center gap-1.5 text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
-                Use Cases
+              <Link
+                to="/case-studies"
+                className="flex items-center gap-1.5 text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
+                Case Studies
                 <ChevronDown
                   className={`w-4 h-4 text-[hsl(280_30%_75%)] transition-transform duration-200 ${
                   activeDropdown === "usecases" ? "rotate-180" : ""}`
                   } />
-                
-              </button>
+              </Link>
             </div>
-
-            <Link
-              to="/case-studies"
-              className="text-base font-body text-gradient-lavender hover:opacity-80 transition-opacity duration-300">
-              
-              Case Studies
-            </Link>
 
             <Link
               to="/library"
@@ -255,6 +249,7 @@ const Navbar = () => {
             className="absolute left-0 right-0 top-full bg-card/95 backdrop-blur-xl border-b border-border shadow-2xl">
             
               <div className="max-w-6xl mx-auto py-8 px-6">
+                <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground font-body mb-4">Use Cases</p>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                   {useCases.map((uc) => {
                   const Icon = uc.icon;
@@ -295,12 +290,12 @@ const Navbar = () => {
             className="md:hidden bg-glass overflow-hidden">
             
               <div className="flex flex-col gap-2 px-6 py-6">
-                {/* Mobile Use Cases */}
+                {/* Mobile Case Studies with Use Cases nested */}
                 <button
                 onClick={() => setMobileUseCasesOpen(!mobileUseCasesOpen)}
                 className="flex items-center justify-between text-foreground font-body text-lg py-1">
                 
-                  Use Cases
+                  Case Studies
                   <ChevronDown
                   className={`w-4 h-4 transition-transform duration-200 ${
                   mobileUseCasesOpen ? "rotate-180" : ""}`
@@ -316,6 +311,13 @@ const Navbar = () => {
                   className="overflow-hidden">
                   
                       <div className="flex flex-col gap-1 pl-4 pb-2">
+                        <Link
+                          to="/case-studies"
+                          onClick={() => setMobileOpen(false)}
+                          className="text-muted-foreground font-body text-base py-1.5 hover:text-primary transition-colors font-semibold">
+                          All Case Studies
+                        </Link>
+                        <p className="text-xs tracking-[0.15em] uppercase text-muted-foreground/60 font-body mt-2 mb-1">Use Cases</p>
                         {useCases.map((uc) =>
                     <Link
                       key={uc.slug}
@@ -330,14 +332,6 @@ const Navbar = () => {
                     </motion.div>
                 }
                 </AnimatePresence>
-
-                <Link
-                to="/case-studies"
-                onClick={() => setMobileOpen(false)}
-                className="text-foreground font-body text-lg py-1">
-                
-                  Case Studies
-                </Link>
 
                 <Link
                 to="/library"

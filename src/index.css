@@ -181,7 +181,7 @@
   .hero-btn-assessment {
     border: 2px solid transparent;
     background-image: linear-gradient(rgba(255,255,255,0.06), rgba(255,255,255,0.06)),
-      linear-gradient(135deg, hsl(260 85% 65%), hsl(320 80% 65%), hsl(340 85% 70%));
+      linear-gradient(135deg, hsl(250 50% 72%), hsl(280 45% 72%), hsl(310 40% 75%));
     background-origin: border-box;
     background-clip: padding-box, border-box;
     color: #ffffff;
@@ -190,10 +190,10 @@
     animation: assessment-border-shimmer 3s ease-in-out infinite;
   }
   .hero-btn-assessment:hover {
-    background-image: linear-gradient(rgba(255,255,255,0.12), rgba(255,255,255,0.12)),
-      linear-gradient(135deg, hsl(260 85% 70%), hsl(320 80% 70%), hsl(340 85% 75%));
+    background-image: linear-gradient(rgba(255,255,255,0.10), rgba(255,255,255,0.10)),
+      linear-gradient(135deg, hsl(250 55% 76%), hsl(280 50% 76%), hsl(310 45% 78%));
     transform: scale(1.05);
-    box-shadow: 0 0 24px -4px hsl(300 70% 60% / 0.5), 0 0 48px -8px hsl(260 85% 65% / 0.3);
+    box-shadow: 0 0 20px -4px hsl(280 45% 65% / 0.4), 0 0 40px -8px hsl(250 50% 65% / 0.2);
   }
 
   /* Particle bloom hover effect for all hero buttons */
