@@ -332,11 +332,19 @@ const Navbar = () => {
                 </AnimatePresence>
 
                 <Link
+                to="/case-studies"
+                onClick={() => setMobileOpen(false)}
+                className="text-foreground font-body text-lg py-1">
+                
+                  Case Studies
+                </Link>
+
+                <Link
                 to="/library"
                 onClick={() => setMobileOpen(false)}
                 className="text-foreground font-body text-lg py-1">
                 
-                  Library R&D
+                  R&D Library
                 </Link>
 
                 {navLinks.map((link) =>
