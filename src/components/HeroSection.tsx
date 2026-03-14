@@ -88,7 +88,8 @@ const HeroSection = () => {
               maxWidth: "680px",
               letterSpacing: "0.01em",
               lineHeight: 1.55,
-              color: "rgba(255,255,255,0.9)"
+              color: "rgba(255,255,255,0.9)",
+              paddingRight: "96px"
             }}>
             Transform imaginative ideas into production-ready pipelines:<br />
             Discover groundbreaking possibilities → Flow rapid prototyping → Adopt proven solutions → Integrate seamlessly → Collab with our experts
