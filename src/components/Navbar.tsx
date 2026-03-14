@@ -290,12 +290,12 @@ const Navbar = () => {
             className="md:hidden bg-glass overflow-hidden">
             
               <div className="flex flex-col gap-2 px-6 py-6">
-                {/* Mobile Use Cases */}
+                {/* Mobile Case Studies with Use Cases nested */}
                 <button
                 onClick={() => setMobileUseCasesOpen(!mobileUseCasesOpen)}
                 className="flex items-center justify-between text-foreground font-body text-lg py-1">
                 
-                  Use Cases
+                  Case Studies
                   <ChevronDown
                   className={`w-4 h-4 transition-transform duration-200 ${
                   mobileUseCasesOpen ? "rotate-180" : ""}`
@@ -311,6 +311,13 @@ const Navbar = () => {
                   className="overflow-hidden">
                   
                       <div className="flex flex-col gap-1 pl-4 pb-2">
+                        <Link
+                          to="/case-studies"
+                          onClick={() => setMobileOpen(false)}
+                          className="text-muted-foreground font-body text-base py-1.5 hover:text-primary transition-colors font-semibold">
+                          All Case Studies
+                        </Link>
+                        <p className="text-xs tracking-[0.15em] uppercase text-muted-foreground/60 font-body mt-2 mb-1">Use Cases</p>
                         {useCases.map((uc) =>
                     <Link
                       key={uc.slug}
@@ -325,14 +332,6 @@ const Navbar = () => {
                     </motion.div>
                 }
                 </AnimatePresence>
-
-                <Link
-                to="/case-studies"
-                onClick={() => setMobileOpen(false)}
-                className="text-foreground font-body text-lg py-1">
-                
-                  Case Studies
-                </Link>
 
                 <Link
                 to="/library"

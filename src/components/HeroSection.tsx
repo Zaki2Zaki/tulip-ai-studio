@@ -80,25 +80,27 @@ const HeroSection = () => {
             <span className="text-gradient-chrome-animated">R&D™</span>
           </motion.h1>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="mb-10 hero-subtitle text-2xl font-sans text-left whitespace-pre-line font-medium"
+            className="mb-10 hero-subtitle text-left whitespace-pre-line"
             style={{
               maxWidth: "680px",
               letterSpacing: "0.01em",
               lineHeight: 1.55,
               color: "rgba(255,255,255,0.9)"
             }}>
-            AI R&D That Ships 0/N →1 Breakthroughs
+            <span className="text-3xl md:text-4xl font-display font-bold" style={{ textShadow: "0 0 30px rgba(255,255,255,0.2)" }}>
+              AI R&amp;D That Ships 0/N →1 Breakthroughs
+            </span>
             <br />
-            Game Studios, 3D Animation &amp; VFX Teams
+            <span className="text-2xl font-sans font-medium">Game Studios, 3D Animation &amp; VFX Teams</span>
             <br /><br />
-            Transform imaginative ideas into production-ready pipelines: Discover groundbreaking possibilities → Flow rapid prototyping → Adopt proven solutions → Integrate seamlessly
+            <span className="text-2xl font-sans font-medium">Transform imaginative ideas into production-ready pipelines: Discover groundbreaking possibilities → Flow rapid prototyping → Adopt proven solutions → Integrate seamlessly</span>
             <br />
-            →Collab with our experts
-          </motion.p>
+            <span className="text-2xl font-sans font-medium">→Collab with our experts</span>
+          </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }} className="flex gap-4 items-start max-md:flex-col max-md:items-stretch">
             
