@@ -9,10 +9,9 @@ const FONT_SCALES = [1, 1.1, 1.2, 1.3] as const;
 const FONT_LABELS = ["1×", "1.1×", "1.2×", "1.3×"];
 
 const navLinks = [
-{ label: "Services", href: "#services" },
-{ label: "Pipeline", href: "#pipeline" },
+{ label: "Services & Pipeline", href: "#services" },
 { label: "Estimator", href: "#estimator" },
-{ label: "Contact", href: "#contact" }];
+{ label: "Book Consultation", href: "#contact" }];
 
 
 const Navbar = () => {
