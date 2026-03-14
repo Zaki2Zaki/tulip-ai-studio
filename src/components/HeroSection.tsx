@@ -94,9 +94,9 @@ const HeroSection = () => {
             <br />
             Game Studios, 3D Animation &amp; VFX Teams
             <br /><br />
-            Transform imaginative ideas into production-ready pipelines: Discover groundbreaking possibilities → Flow rapid prototyping → Adopt proven solutions → Integrate seamlessly →
+            Transform imaginative ideas into production-ready pipelines: Discover groundbreaking possibilities → Flow rapid prototyping → Adopt proven solutions → Integrate seamlessly
             <br />
-            Collab with our experts
+            →Collab with our experts
           </motion.p>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }} className="flex gap-4 items-center max-md:flex-col max-md:items-stretch">
