@@ -91,11 +91,11 @@ const HeroSection = () => {
               color: "rgba(255,255,255,0.9)"
             }}>
             AI R&D That Ships 0/N →1 Breakthroughs
-            {"\n\n\n"}
-            Game Studios, 3D Animation & VFX Teams
-            {"\n\n\n"}
+            <br /><br /><br />
+            Game Studios, 3D Animation &amp; VFX Teams
+            <br /><br /><br />
             Transform imaginative ideas into production-ready pipelines: Discover groundbreaking possibilities → Flow rapid prototyping → Adopt proven solutions → Integrate seamlessly →
-            {"\n"}
+            <br />
             Collab with our experts
           </motion.p>
 
