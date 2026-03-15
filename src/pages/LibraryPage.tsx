@@ -137,7 +137,6 @@ const LibraryPage = () => {
   const enterDeepDive = (paper: Paper) => {
     setViewedPapers((prev) => new Set(prev).add(paper.paperId));
     setPreviewPaper(paper);
-    setDeepDiveMode(true);
   };
 
   // Exit Deep Dive
