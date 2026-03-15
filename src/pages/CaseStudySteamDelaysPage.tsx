@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Download, ExternalLink, BookOpen } from "lucide-react";
+import { ArrowLeft, ArrowRight, Download, ExternalLink, BookOpen, ZoomIn, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingScrollTop from "@/components/FloatingScrollTop";
