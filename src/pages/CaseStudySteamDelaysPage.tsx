@@ -76,19 +76,22 @@ const figures = [
   id: "fig1",
   title: "Figure 1: Data Collection Flow",
   description: "The systematic pipeline for scraping, cleaning, and categorizing 23,485 Steam game entries for delay analysis.",
-  citation: "Grewal et al. (2022) – Figure 1, p.6"
+  citation: "Grewal et al. (2022) – Figure 1, p.6",
+  image: fig1Img
 },
 {
   id: "fig2",
   title: "Figure 2: Delay Distribution",
   description: "Histogram showing the distribution of delay durations — median 14 days with a long tail of multi-month delays for AAA titles.",
-  citation: "Grewal et al. (2022) – Figure 3, p.8"
+  citation: "Grewal et al. (2022) – Figure 3, p.8",
+  image: fig2Img
 },
 {
   id: "fig3",
   title: "Figure 3: Genre vs. Delay Correlation",
   description: "Heatmap revealing which game genres are most prone to delays — simulation and strategy titles lead, while casual games ship closer to schedule.",
-  citation: "Grewal et al. (2022) – Figure 5, p.10"
+  citation: "Grewal et al. (2022) – Figure 5, p.10",
+  image: fig3Img
 }];
 
 
