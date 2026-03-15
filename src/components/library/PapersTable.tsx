@@ -293,6 +293,7 @@ const PapersTable = ({
 
                   return (
                     <motion.tr
+                      {...(i === 0 ? { "data-tour": "paper-row" } : {})}
                       key={paper.paperId}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}

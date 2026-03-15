@@ -102,7 +102,7 @@ const LibrarySidebar = ({
       </div>
 
       {/* Collections - drop targets */}
-      <div className="space-y-2">
+      <div className="space-y-2" data-tour="collections">
         <div className="flex items-center justify-between">
           <h3 className="text-base font-display font-bold uppercase tracking-widest">
             <FolderPlus className="w-4 h-4 inline mr-1.5" />

@@ -17,7 +17,7 @@ import { searchPapers } from "@/lib/api/papers";
 import type { Paper } from "@/lib/api/papers";
 import { DEFAULT_ENABLED_KEYS } from "@/components/library/DataSources";
 import { toast } from "sonner";
-import LibraryGuide from "@/components/library/LibraryGuide";
+import LibraryTour from "@/components/library/LibraryTour";
 
 const CATEGORIES = [
 { id: "3d-animation", label: "3D Animation", query: "3D animation character motion synthesis rigging" },
@@ -59,6 +59,7 @@ const LibraryPage = () => {
   const [searchCache, setSearchCache] = useState<Map<string, {papers: Paper[];counts: Record<string, number>;}>>(new Map());
   const [activeCollectionId, setActiveCollectionId] = useState<string | null>(null);
   const [targetCollectionId, setTargetCollectionId] = useState<string>("");
+  const [tourOpen, setTourOpen] = useState(false);
   
 
   const fetchPapers = async (query: string) => {
@@ -239,8 +240,15 @@ const LibraryPage = () => {
                 <CalendarCheck className="w-5 h-5" />
                 Book Consultation
               </a>
-              <LibraryGuide />
+              <button
+                onClick={() => setTourOpen(true)}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/30 bg-primary/5 text-sm font-body font-semibold text-primary hover:bg-primary/10 hover:border-primary/50 transition-all"
+              >
+                <BookOpen className="w-4 h-4" />
+                How to Use This Tool
+              </button>
             </div>
+            <LibraryTour triggerOpen={tourOpen} onOpenChange={(open) => { if (!open) setTourOpen(false); }} />
             <p className="mt-5 text-white text-sm font-body italic">*Library Research Tool Customized to Client's Requests</p>
           </motion.div>
         </div>
@@ -287,7 +295,7 @@ const LibraryPage = () => {
             <div className="flex-1 p-5 space-y-4 overflow-hidden flex flex-col min-w-0">
               {/* Search bar */}
               <form onSubmit={handleSearch} className="flex items-stretch gap-0 rounded-xl border-2 border-primary/20 bg-card/40 overflow-hidden focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/10 transition-all shadow-sm">
-                <div className="relative shrink-0 border-r border-primary/15">
+                <div className="relative shrink-0 border-r border-primary/15" data-tour="category">
                   <select
                     value={activeCategory}
                     onChange={(e) => {setActiveCollectionId(null);setActiveCategory(e.target.value);}}
@@ -299,7 +307,7 @@ const LibraryPage = () => {
                   </select>
                   <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
                 </div>
-                <div className="flex-1 relative">
+                <div className="flex-1 relative" data-tour="search">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <input
                     type="text"
@@ -395,7 +403,7 @@ const LibraryPage = () => {
               }
 
               {/* Results grid */}
-              <div className="flex-1 min-h-0">
+              <div className="flex-1 min-h-0" data-tour="results">
                 <PapersTable
                   papers={visiblePapers}
                   loading={loading}
