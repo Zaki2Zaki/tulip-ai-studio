@@ -288,7 +288,7 @@ const CaseStudySteamDelaysPage = () => {
           <div className="rounded-2xl bg-card border border-border/50 p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <h3 className="font-display font-semibold text-foreground text-lg mb-3">How Tulip AI Uses This Data</h3>
+                <h3 className="font-display font-semibold text-foreground text-lg mb-3"><h3 className="font-display font-semibold text-foreground text-lg mb-3">How Tulip Tech R&D Uses This Data</h3></h3>
                 <ul className="space-y-3 font-body text-sm text-muted-foreground">
                   <li className="flex items-start gap-2"><span className="text-primary mt-0.5">→</span> Ingest your project milestones & compare against 23k Steam delay patterns</li>
                   <li className="flex items-start gap-2"><span className="text-primary mt-0.5">→</span> Predict delay risk by genre, team size, and early-access status</li>
