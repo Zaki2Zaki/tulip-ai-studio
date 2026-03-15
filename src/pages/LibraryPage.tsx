@@ -243,6 +243,7 @@ const LibraryPage = () => {
               </a>
               <LibraryGuide />
             </div>
+            <LibraryTour triggerOpen={tourOpen} onOpenChange={setTourOpen} />
             <p className="mt-5 text-white text-sm font-body italic">*Library Research Tool Customized to Client's Requests</p>
           </motion.div>
         </div>
