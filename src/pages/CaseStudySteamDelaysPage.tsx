@@ -325,8 +325,8 @@ const CaseStudySteamDelaysPage = () => {
               viewport={{ once: true }}
               className="rounded-xl bg-card border border-border/50 overflow-hidden group">
               
-                <div className="h-40 bg-muted/30 flex items-center justify-center">
-                  <span className="text-xs font-body text-muted-foreground">Visual from paper</span>
+                <div className="h-52 bg-muted/30 overflow-hidden">
+                  <img src={fig.image} alt={fig.title} className="w-full h-full object-contain bg-white/90 p-2" />
                 </div>
                 <div className="p-5">
                   <h3 className="font-display font-bold text-foreground text-sm mb-2">{fig.title}</h3>
