@@ -287,8 +287,8 @@ const ArticlePreview = ({
         <div className="flex-1 min-w-0 flex flex-col">
           {/* Paper header + actions */}
           <div className="p-5 space-y-3 border-b border-border">
-            <h4 className="font-display text-base font-bold text-foreground leading-tight">{paper.title}</h4>
-            <p className="text-sm text-foreground font-body">
+            <h4 className="font-display text-xl font-bold text-foreground leading-tight">{paper.title}</h4>
+            <p className="text-base text-foreground font-body">
               {paper.authors?.slice(0, 5).map((a) => a.name).join(", ")}
               {(paper.authors?.length || 0) > 5 && " et al."}
             </p>
