@@ -236,7 +236,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Tesla-style full-width dropdown panel */}
+        {/* Case Studies dropdown panel */}
         <AnimatePresence>
           {activeDropdown === "usecases" &&
           <motion.div
@@ -248,7 +248,32 @@ const Navbar = () => {
             onMouseLeave={closeDropdown}
             className="absolute left-0 right-0 top-full bg-card/95 backdrop-blur-xl border-b border-border shadow-2xl">
             
-              <div className="max-w-6xl mx-auto py-8 px-6">
+              <div className="max-w-4xl mx-auto py-8 px-6">
+                {/* Case Study sub-pages */}
+                <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground font-body mb-4">Case Studies</p>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
+                  {[
+                    { label: "Pre-Production Breakthroughs", to: "/case-studies/pre-production", desc: "AI storyboard automation & previz innovations" },
+                    { label: "Production Pipeline Transformations", to: "/case-studies/production", desc: "Unity artist tools for stunning zero-G visuals" },
+                    { label: "Post-Production Polish Innovations", to: "/case-studies/post-production", desc: "AI render polish & compositing breakthroughs" },
+                  ].map((item) => (
+                    <Link
+                      key={item.to}
+                      to={item.to}
+                      onClick={() => setActiveDropdown(null)}
+                      className="iridescent-hover group p-4 rounded-xl transition-colors"
+                    >
+                      <p className="text-sm font-body font-semibold text-foreground mb-0.5 group-hover:text-primary transition-colors">
+                        {item.label}
+                      </p>
+                      <p className="text-xs font-body text-muted-foreground leading-snug">
+                        {item.desc}
+                      </p>
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Use Cases grid */}
                 <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground font-body mb-4">Use Cases</p>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                   {useCases.map((uc) => {
@@ -258,7 +283,7 @@ const Navbar = () => {
                       key={uc.slug}
                       to={`/use-cases/${uc.slug}`}
                       onClick={() => setActiveDropdown(null)}
-                      className="group flex items-start gap-3 p-4 rounded-xl hover:bg-secondary transition-colors">
+                      className="iridescent-hover group flex items-start gap-3 p-4 rounded-xl transition-colors">
                       
                         <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors mt-0.5">
                           <Icon className="w-5 h-5 text-primary" />
