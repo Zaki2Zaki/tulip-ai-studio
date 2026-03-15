@@ -270,7 +270,7 @@ const ArticlePreview = ({
       <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-muted/10">
         <div className="flex items-center gap-3">
           <FileText className="w-4 h-4 text-primary" />
-          <h3 className="text-sm font-display font-semibold text-foreground">Deep Dive</h3>
+          <h3 className="text-base font-display font-semibold text-foreground">Deep Dive</h3>
           {allPapers.length > 1 && (
             <span className="text-xs font-body text-muted-foreground">
               {currentIndex + 1} / {allPapers.length}
