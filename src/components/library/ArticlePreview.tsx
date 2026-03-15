@@ -543,8 +543,8 @@ const ArticlePreview = ({
           {/* Executive Summary — bullet points */}
           <div className="p-5">
             <div className="flex items-center justify-between mb-3">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-accent" />
+              <h5 className="text-sm font-body font-semibold uppercase tracking-wider text-foreground flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-accent" />
                 Executive Summary
               </h5>
               {!executiveSummary && !summaryLoading && (
