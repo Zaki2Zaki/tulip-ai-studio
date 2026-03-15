@@ -63,7 +63,7 @@ const buildingBlocks = [
 "SteamDB API",
 "Statistical Modeling",
 "NLP Sentiment",
-"Tulip AI Pipeline Optimizer",
+"Tulip Tech R&D Pipeline Optimizer",
 "Open Telemetry"];
 
 
