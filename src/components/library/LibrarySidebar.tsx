@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Upload, Tag, Layers, FolderPlus, Folder, X, Plus } from "lucide-react";
+import { Upload, Tag, Layers, FolderPlus, Folder, X, Plus, Download, Cloud } from "lucide-react";
+import { toast } from "sonner";
 import DataSources from "./DataSources";
 
 export interface Collection {
