@@ -306,7 +306,7 @@ const LibraryPage = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers..."
-                    className="w-full h-full bg-transparent pl-11 pr-4 py-3 text-sm text-foreground font-body placeholder:text-muted-foreground focus:outline-none" />
+                    className="w-full h-full bg-transparent pl-11 pr-4 py-3 text-base text-foreground font-body placeholder:text-muted-foreground focus:outline-none" />
                   
                 </div>
                 <button
