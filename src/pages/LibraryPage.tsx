@@ -398,7 +398,7 @@ const LibraryPage = () => {
               }
 
               {/* Results grid */}
-              <div className="flex-1 min-h-0">
+              <div className="flex-1 min-h-0" data-tour="results">
                 <PapersTable
                   papers={visiblePapers}
                   loading={loading}
