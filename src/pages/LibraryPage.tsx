@@ -58,7 +58,7 @@ const LibraryPage = () => {
   const [searchCache, setSearchCache] = useState<Map<string, {papers: Paper[];counts: Record<string, number>;}>>(new Map());
   const [activeCollectionId, setActiveCollectionId] = useState<string | null>(null);
   const [targetCollectionId, setTargetCollectionId] = useState<string>("");
-  const [deepDiveMode, setDeepDiveMode] = useState(false);
+  
 
   const fetchPapers = async (query: string) => {
     const cacheKey = `${query}__${Array.from(enabledSources).sort().join(",")}`;
