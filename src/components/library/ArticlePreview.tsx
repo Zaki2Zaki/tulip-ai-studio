@@ -301,7 +301,7 @@ const ArticlePreview = ({
             </div>
 
             {/* Action buttons row */}
-            <div className="flex items-center gap-2 pt-2 flex-wrap">
+            <div className="flex items-center gap-2 pt-2 flex-wrap" data-tour="vote">
               <button
                 onClick={() => onVote(paper.paperId, "up")}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg border text-xs font-body font-semibold transition-all ${
