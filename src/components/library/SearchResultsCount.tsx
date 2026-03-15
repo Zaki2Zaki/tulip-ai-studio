@@ -29,8 +29,8 @@ const SearchResultsCount = ({ totalResults, searchQuery, sources }: SearchResult
             ) : (
               <Globe className="w-3 h-3 text-accent" />
             )}
-            <span className="text-xs font-body text-muted-foreground">{src.name}</span>
-            <span className="text-xs font-body text-foreground font-semibold">{src.count}</span>
+            <span className="text-sm font-body text-muted-foreground">{src.name}</span>
+            <span className="text-sm font-body text-foreground font-semibold">{src.count}</span>
           </div>
         ))}
       </div>

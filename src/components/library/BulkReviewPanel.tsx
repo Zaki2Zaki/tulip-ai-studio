@@ -140,10 +140,10 @@ const BulkReviewPanel = ({
               {/* Title row */}
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-display text-sm font-semibold text-foreground leading-snug line-clamp-2">
+                  <h4 className="font-display text-base font-semibold text-foreground leading-snug line-clamp-2">
                     {paper.title}
                   </h4>
-                  <p className="text-xs text-foreground font-body mt-1">
+                  <p className="text-sm text-foreground font-body mt-1">
                     {paper.authors?.slice(0, 3).map((a) => a.name).join(", ")}
                     {(paper.authors?.length || 0) > 3 && " et al."}
                   </p>

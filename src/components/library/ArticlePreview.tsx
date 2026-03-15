@@ -610,7 +610,7 @@ const ArticlePreview = ({
         <div className="w-full lg:w-[380px] flex flex-col min-h-[350px] max-h-[700px] border-l border-border">
           <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/10">
             <Bot className="w-4 h-4 text-accent" />
-            <span className="text-xs font-display font-semibold text-foreground">Chat about this paper</span>
+            <span className="text-sm font-display font-semibold text-foreground">Chat about this paper</span>
             {chatMessages.length > 0 && (
               <button
                 onClick={() => setChatMessages([])}

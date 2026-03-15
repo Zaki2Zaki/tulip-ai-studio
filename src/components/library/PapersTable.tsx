@@ -392,7 +392,7 @@ const PapersTable = ({
         </div>
       </div>
 
-      <p className="text-xs text-muted-foreground font-body text-right">
+      <p className="text-sm text-muted-foreground font-body text-right">
         Showing {processedPapers.length} of {papers.length} papers
       </p>
     </div>

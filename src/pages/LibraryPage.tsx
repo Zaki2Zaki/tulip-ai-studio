@@ -311,7 +311,7 @@ const LibraryPage = () => {
                 </div>
                 <button
                   type="submit"
-                  className="shrink-0 px-6 bg-primary text-primary-foreground font-body font-semibold text-sm hover:bg-primary/90 transition-colors">
+                  className="shrink-0 px-6 bg-primary text-primary-foreground font-body font-semibold text-base hover:bg-primary/90 transition-colors">
                   
                   Search
                 </button>

@@ -157,8 +157,8 @@ const LibrarySidebar = ({
             >
               <div className="flex items-center gap-2 min-w-0">
                 <Folder className={`w-3.5 h-3.5 shrink-0 transition-colors ${activeCollectionId === col.id ? "text-primary" : dragOverId === col.id ? "text-accent" : "text-accent/60"}`} />
-                <span className={`text-sm font-body truncate ${activeCollectionId === col.id ? "text-foreground font-semibold" : "text-foreground"}`}>{col.name}</span>
-                <span className="text-xs text-muted-foreground">{col.paperIds.length}</span>
+                <span className={`text-base font-body truncate ${activeCollectionId === col.id ? "text-foreground font-semibold" : "text-foreground"}`}>{col.name}</span>
+                <span className="text-sm text-muted-foreground">{col.paperIds.length}</span>
               </div>
               <button
                 onClick={(e) => { e.stopPropagation(); onDeleteCollection(col.id); }}

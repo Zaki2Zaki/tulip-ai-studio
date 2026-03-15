@@ -92,7 +92,7 @@ const PaperCard = ({ paper, isSelected, isActive, isLocked, onToggleSelect, onCl
       </p>
 
       {/* Snippet */}
-      <p className="text-xs text-muted-foreground/70 font-body leading-relaxed line-clamp-3 mb-3 flex-1">
+      <p className="text-sm text-muted-foreground/70 font-body leading-relaxed line-clamp-3 mb-3 flex-1">
         {snippet}
       </p>
 
