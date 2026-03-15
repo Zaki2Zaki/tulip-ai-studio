@@ -58,7 +58,7 @@ const LibraryPage = () => {
   const [searchCache, setSearchCache] = useState<Map<string, {papers: Paper[];counts: Record<string, number>;}>>(new Map());
   const [activeCollectionId, setActiveCollectionId] = useState<string | null>(null);
   const [targetCollectionId, setTargetCollectionId] = useState<string>("");
-  const [deepDiveMode, setDeepDiveMode] = useState(false);
+  
 
   const fetchPapers = async (query: string) => {
     const cacheKey = `${query}__${Array.from(enabledSources).sort().join(",")}`;
@@ -137,22 +137,8 @@ const LibraryPage = () => {
   const enterDeepDive = (paper: Paper) => {
     setViewedPapers((prev) => new Set(prev).add(paper.paperId));
     setPreviewPaper(paper);
-    setDeepDiveMode(true);
   };
 
-  // Exit Deep Dive
-  const exitDeepDive = () => {
-    setDeepDiveMode(false);
-  };
-
-  // Escape key to exit Deep Dive
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && deepDiveMode) exitDeepDive();
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [deepDiveMode]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -201,11 +187,7 @@ const LibraryPage = () => {
   const handleVote = (paperId: string, voteType: "up" | "down") => {
     setVotes((prev) => ({ ...prev, [paperId]: voteType }));
     if (voteType === "up") {
-      // Auto-select for Bulk Review and exit Deep Dive
       setSelectedPapers((prev) => new Set(prev).add(paperId));
-      if (deepDiveMode) {
-        exitDeepDive();
-      }
       toast.success("Marked as relevant — added to Bulk Review");
     } else {
       toast.info("Noted as not useful — preferences updated");
@@ -216,7 +198,6 @@ const LibraryPage = () => {
     setTrashedPapers((prev) => new Set(prev).add(paperId));
     if (previewPaper?.paperId === paperId) {
       setPreviewPaper(null);
-      setDeepDiveMode(false);
     }
     toast("Paper removed from results", {
       action: {
@@ -276,52 +257,6 @@ const LibraryPage = () => {
         </div>
       </section>
 
-      {/* Deep Dive Immersive Mode */}
-      <AnimatePresence>
-        {deepDiveMode && previewPaper &&
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.4 }}
-          className="fixed inset-0 z-50 flex flex-col deep-dive-bg overflow-hidden">
-          
-            {/* Top bar */}
-            <div className="flex items-center justify-between px-6 py-3 border-b border-border/30 bg-background/60 backdrop-blur-xl shrink-0">
-              <button
-              onClick={exitDeepDive}
-              className="flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-foreground transition-colors">
-              
-                <ArrowLeft className="w-4 h-4" />
-                Back to Results
-              </button>
-              <h2 className="font-display text-xl md:text-2xl font-bold text-foreground hidden md:block">
-                <span className="text-gradient-chrome-animated">Deep Dive</span>
-              </h2>
-              <span className="text-xs font-body text-muted-foreground">
-                Press <kbd className="px-1.5 py-0.5 rounded border border-border bg-muted/30 text-[10px]">ESC</kbd> to exit
-              </span>
-            </div>
-
-            {/* Content */}
-            <div className="flex-1 overflow-y-auto library-scroll">
-              <div className="max-w-7xl mx-auto px-4 py-6">
-                <ArticlePreview
-                paper={previewPaper}
-                onClose={exitDeepDive}
-                onVote={handleVote}
-                onTrash={handleTrash}
-                vote={votes[previewPaper.paperId]}
-                collections={collections}
-                onAddToCollection={handleAddToCollection}
-                allPapers={visiblePapers}
-                onNavigate={(p) => setPreviewPaper(p)} />
-              
-              </div>
-            </div>
-          </motion.section>
-        }
-      </AnimatePresence>
 
       {/* Main layout */}
       <section className="pb-20">
@@ -480,7 +415,7 @@ const LibraryPage = () => {
 
           {/* Bulk Review Panel */}
           <AnimatePresence>
-            {selectedPapers.size >= 1 && !deepDiveMode &&
+            {selectedPapers.size >= 1 &&
             <div className="mt-4">
                 <BulkReviewPanel
                 papers={visiblePapers.filter((p) => selectedPapers.has(p.paperId))}
@@ -501,10 +436,15 @@ const LibraryPage = () => {
             }
           </AnimatePresence>
 
-          {/* Inline Deep Dive (non-immersive, below grid) — only when not in full immersive mode */}
+          {/* Inline preview below grid */}
           <AnimatePresence>
-            {previewPaper && selectedPapers.size < 2 && !deepDiveMode &&
-            <div className="mt-4">
+            {previewPaper &&
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.3 }}
+              className="mt-4">
                 <ArticlePreview
                 paper={previewPaper}
                 onClose={() => setPreviewPaper(null)}
@@ -515,8 +455,7 @@ const LibraryPage = () => {
                 onAddToCollection={handleAddToCollection}
                 allPapers={visiblePapers}
                 onNavigate={(p) => setPreviewPaper(p)} />
-              
-              </div>
+              </motion.div>
             }
           </AnimatePresence>
         </div>
