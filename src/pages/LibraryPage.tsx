@@ -290,7 +290,7 @@ const LibraryPage = () => {
             <div className="flex-1 p-5 space-y-4 overflow-hidden flex flex-col min-w-0">
               {/* Search bar */}
               <form onSubmit={handleSearch} className="flex items-stretch gap-0 rounded-xl border-2 border-primary/20 bg-card/40 overflow-hidden focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/10 transition-all shadow-sm">
-                <div className="relative shrink-0 border-r border-primary/15">
+                <div className="relative shrink-0 border-r border-primary/15" data-tour="category">
                   <select
                     value={activeCategory}
                     onChange={(e) => {setActiveCollectionId(null);setActiveCategory(e.target.value);}}
