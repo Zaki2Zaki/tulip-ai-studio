@@ -141,65 +141,64 @@ const LibrarySidebar = ({
         )}
 
         {collections.map((col) => (
-          <div
-            key={col.id}
-            onClick={() => onCollectionClick?.(activeCollectionId === col.id ? null : col.id)}
-            onDragOver={(e) => handleDragOver(e, col.id)}
-            onDragLeave={handleDragLeave}
-            onDrop={(e) => handleDrop(e, col.id)}
-            className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all group cursor-pointer ${
-              activeCollectionId === col.id
-                ? "bg-primary/15 border border-primary/40 ring-1 ring-primary/20"
-                : dragOverId === col.id
-                ? "bg-accent/15 border border-accent/40 ring-1 ring-accent/20 scale-[1.02]"
-                : "hover:bg-muted/20 border border-transparent"
-            }`}
-          >
-            <div className="flex items-center gap-2 min-w-0">
-              <Folder className={`w-3.5 h-3.5 shrink-0 transition-colors ${activeCollectionId === col.id ? "text-primary" : dragOverId === col.id ? "text-accent" : "text-accent/60"}`} />
-              <span className={`text-sm font-body truncate ${activeCollectionId === col.id ? "text-foreground font-semibold" : "text-foreground"}`}>{col.name}</span>
-              <span className="text-xs text-muted-foreground">{col.paperIds.length}</span>
+          <div key={col.id} className="space-y-0 group">
+            <div
+              onClick={() => onCollectionClick?.(activeCollectionId === col.id ? null : col.id)}
+              onDragOver={(e) => handleDragOver(e, col.id)}
+              onDragLeave={handleDragLeave}
+              onDrop={(e) => handleDrop(e, col.id)}
+              className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all cursor-pointer ${
+                activeCollectionId === col.id
+                  ? "bg-primary/15 border border-primary/40 ring-1 ring-primary/20"
+                  : dragOverId === col.id
+                  ? "bg-accent/15 border border-accent/40 ring-1 ring-accent/20 scale-[1.02]"
+                  : "hover:bg-muted/20 border border-transparent"
+              }`}
+            >
+              <div className="flex items-center gap-2 min-w-0">
+                <Folder className={`w-3.5 h-3.5 shrink-0 transition-colors ${activeCollectionId === col.id ? "text-primary" : dragOverId === col.id ? "text-accent" : "text-accent/60"}`} />
+                <span className={`text-sm font-body truncate ${activeCollectionId === col.id ? "text-foreground font-semibold" : "text-foreground"}`}>{col.name}</span>
+                <span className="text-xs text-muted-foreground">{col.paperIds.length}</span>
+              </div>
+              <button
+                onClick={(e) => { e.stopPropagation(); onDeleteCollection(col.id); }}
+                className="p-1 rounded-md text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition-all"
+              >
+                <X className="w-3 h-3" />
+              </button>
             </div>
-            <button
-              onClick={(e) => { e.stopPropagation(); onDeleteCollection(col.id); }}
-              className="p-1 rounded-md text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition-all"
-            >
-              <X className="w-3 h-3" />
-            </button>
-          </div>
-          {/* Collection export actions */}
-          <div className="flex items-center gap-1 pl-9 -mt-1 opacity-0 group-hover:opacity-100 transition-all">
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                if (col.paperIds.length === 0) {
-                  toast.info("No papers in this collection to download");
-                  return;
-                }
-                toast.success(`Preparing ZIP of ${col.paperIds.length} paper(s)…`, { description: "Download will start shortly." });
-                // TODO: implement actual ZIP generation from paper PDF URLs
-              }}
-              className="flex items-center gap-1 px-2 py-1 rounded text-[10px] font-body text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-all"
-              title="Download collection as ZIP"
-            >
-              <Download className="w-3 h-3" />
-              ZIP
-            </button>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                if (col.paperIds.length === 0) {
-                  toast.info("No papers in this collection to save");
-                  return;
-                }
-                toast.info("Google Drive integration coming soon", { description: "Connect your Google account to save collections directly to Drive." });
-              }}
-              className="flex items-center gap-1 px-2 py-1 rounded text-[10px] font-body text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-all"
-              title="Save to Google Drive"
-            >
-              <Cloud className="w-3 h-3" />
-              Drive
-            </button>
+            <div className="flex items-center gap-1 pl-9 opacity-0 group-hover:opacity-100 transition-all">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (col.paperIds.length === 0) {
+                    toast.info("No papers in this collection to download");
+                    return;
+                  }
+                  toast.success(`Preparing ZIP of ${col.paperIds.length} paper(s)…`, { description: "Download will start shortly." });
+                }}
+                className="flex items-center gap-1 px-2 py-1 rounded text-[10px] font-body text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-all"
+                title="Download collection as ZIP"
+              >
+                <Download className="w-3 h-3" />
+                ZIP
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (col.paperIds.length === 0) {
+                    toast.info("No papers in this collection to save");
+                    return;
+                  }
+                  toast.info("Google Drive integration coming soon", { description: "Connect your Google account to save collections directly to Drive." });
+                }}
+                className="flex items-center gap-1 px-2 py-1 rounded text-[10px] font-body text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-all"
+                title="Save to Google Drive"
+              >
+                <Cloud className="w-3 h-3" />
+                Drive
+              </button>
+            </div>
           </div>
         ))}
       </div>
