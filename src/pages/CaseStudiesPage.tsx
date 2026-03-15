@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import FloatingScrollTop from "@/components/FloatingScrollTop";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen, Download } from "lucide-react";
 
 const studies = [
   {
