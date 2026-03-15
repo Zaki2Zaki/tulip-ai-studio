@@ -1,10 +1,9 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Lock, BookOpen, FolderPlus, ChevronDown, ArrowLeft, Folder, CreditCard, Settings, Loader2 } from "lucide-react";
+import { Search, BookOpen, FolderPlus, ChevronDown, ArrowLeft, Folder, Loader2, CalendarCheck } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import PricingModal from "@/components/PricingModal";
 import LibrarySidebar from "@/components/library/LibrarySidebar";
 import type { Collection } from "@/components/library/LibrarySidebar";
 import PapersTable from "@/components/library/PapersTable";
@@ -18,81 +17,31 @@ import { searchPapers } from "@/lib/api/papers";
 import type { Paper } from "@/lib/api/papers";
 import { DEFAULT_ENABLED_KEYS } from "@/components/library/DataSources";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 
 const CATEGORIES = [
-  { id: "3d-modeling", label: "3D Assets Modeling", query: "3D modeling computer graphics mesh" },
-  { id: "ai-ml", label: "Artificial Intelligence and Machine Learning", query: "artificial intelligence machine learning deep learning" },
-  { id: "algorithms", label: "Algorithms and Numerical Methods", query: "algorithms numerical methods optimization computational" },
-  { id: "animation", label: "Animation", query: "computer animation motion synthesis" },
-  { id: "applied-perception", label: "Applied Perception", query: "applied perception visual cognition psychophysics" },
-  { id: "comp-arch", label: "Computer Architecture", query: "computer architecture GPU hardware accelerator" },
-  { id: "comp-graphics", label: "Computer Graphics", query: "computer graphics rendering shading geometry" },
-  { id: "comp-photo", label: "Computational Photography and Imaging", query: "computational photography imaging reconstruction" },
-  { id: "comp-vision", label: "Computer Vision", query: "computer vision object detection segmentation recognition" },
-  { id: "esports", label: "Esports", query: "esports competitive gaming performance analytics" },
-  { id: "generative-ai", label: "Generative AI", query: "generative AI diffusion models image synthesis" },
-  { id: "hci", label: "Human Computer Interaction", query: "human computer interaction user interface UX" },
-  { id: "hpc", label: "High Performance Computing", query: "high performance computing parallel processing GPU computing" },
-  { id: "hyperscale", label: "Hyperscale Graphics", query: "hyperscale graphics large scale rendering cloud graphics" },
-  { id: "lighting", label: "Light", query: "physically based rendering lighting global illumination" },
-  { id: "networking", label: "Networking", query: "network protocols latency streaming distributed systems" },
-  { id: "physical-ai", label: "Physical AI", query: "physical AI embodied intelligence physics simulation" },
-  { id: "prog-lang", label: "Programming Languages, Systems and Tools", query: "programming languages compilers systems tools" },
-  { id: "realtime-rendering", label: "Real-Time Rendering", query: "real-time rendering rasterization ray tracing GPU" },
-  { id: "rigging", label: "Rigging", query: "character rigging skeletal animation" },
-  { id: "robotics", label: "Robotics", query: "robotics manipulation locomotion autonomous systems" },
-  { id: "sfx", label: "SFX", query: "sound effects audio design spatial audio synthesis" },
   { id: "vfx", label: "VFX", query: "visual effects compositing simulation particle systems" },
-  { id: "vr-ar", label: "VR, AR and Display Technology", query: "virtual reality augmented reality mixed reality display" },
-  { id: "world-building", label: "World Scale Building", query: "procedural world generation large scale environment" },
+  { id: "game-dev", label: "Game Dev", query: "game development interactive simulation real-time rendering" },
+  { id: "3d-animation", label: "3D Animation", query: "3D animation character motion synthesis rigging" },
+  { id: "production-mgmt", label: "Production Management", query: "production pipeline management scheduling VFX studio" },
+  { id: "ai-tools", label: "AI Tools", query: "AI tools generative artificial intelligence creative pipeline" },
+  { id: "storyboarding", label: "Storyboarding", query: "storyboarding previsualization visual storytelling shot planning" },
+  { id: "comp-graphics", label: "Computer Graphics", query: "computer graphics rendering shading geometry" },
+  { id: "generative-ai", label: "Generative AI", query: "generative AI diffusion models image synthesis" },
+  { id: "realtime-rendering", label: "Real-Time Rendering", query: "real-time rendering rasterization ray tracing GPU" },
+  { id: "physical-ai", label: "Physical AI", query: "physical AI embodied intelligence physics simulation" },
   { id: "world-simulation", label: "World Simulation", query: "world simulation physics engine digital twin" },
+  { id: "lighting", label: "Lighting", query: "physically based rendering lighting global illumination" },
+  { id: "rigging", label: "Rigging", query: "character rigging skeletal animation" },
+  { id: "sfx", label: "SFX", query: "sound effects audio design spatial audio synthesis" },
+  { id: "vr-ar", label: "VR / AR", query: "virtual reality augmented reality mixed reality display" },
 ];
-
-const ManageSubscriptionButton = () => {
-  const [loading, setLoading] = useState(false);
-
-  const handleManage = async () => {
-    setLoading(true);
-    try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        toast.error("Please sign in first.");
-        return;
-      }
-      const { data, error } = await supabase.functions.invoke("customer-portal");
-      if (error) throw error;
-      if (data?.url) window.open(data.url, "_blank");
-    } catch (err: any) {
-      toast.error(err?.message?.includes("No Stripe customer")
-        ? "No subscription found. Subscribe first!"
-        : "Failed to open subscription manager.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <button
-      onClick={handleManage}
-      disabled={loading}
-      className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-border bg-card/50 text-sm font-body text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all disabled:opacity-60"
-    >
-      {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Settings className="w-4 h-4" />}
-      Manage Subscription
-    </button>
-  );
-};
 
 const LibraryPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState(CATEGORIES[0].id);
   const [papers, setPapers] = useState<Paper[]>([]);
   const [loading, setLoading] = useState(false);
-  const [isSubscribed] = useState(false);
   const [viewedPapers, setViewedPapers] = useState<Set<string>>(new Set());
-  const [showPricing, setShowPricing] = useState(false);
-  const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annual">("monthly");
   const [searchCount, setSearchCount] = useState(0);
   const [selectedPapers, setSelectedPapers] = useState<Set<string>>(new Set());
   const [lastSearchQuery, setLastSearchQuery] = useState("");
@@ -106,22 +55,15 @@ const LibraryPage = () => {
   const [searchCache, setSearchCache] = useState<Map<string, { papers: Paper[]; counts: Record<string, number> }>>(new Map());
   const [activeCollectionId, setActiveCollectionId] = useState<string | null>(null);
   const [targetCollectionId, setTargetCollectionId] = useState<string>("");
-
-  const FREE_PAPER_LIMIT = 3;
-  const needsPaywall = !isSubscribed && viewedPapers.size >= FREE_PAPER_LIMIT;
+  const [deepDiveMode, setDeepDiveMode] = useState(false);
 
   const fetchPapers = async (query: string) => {
-    // Check cache first
     const cacheKey = `${query}__${Array.from(enabledSources).sort().join(",")}`;
     const cached = searchCache.get(cacheKey);
     if (cached) {
       setPapers(cached.papers);
       setSourceCounts(cached.counts);
       setLastSearchQuery(query);
-      return;
-    }
-    if (needsPaywall) {
-      setShowPricing(true);
       return;
     }
     setLoading(true);
@@ -163,10 +105,8 @@ const LibraryPage = () => {
     }
   };
 
-  // Active collection info
   const activeCollection = activeCollectionId ? collections.find(c => c.id === activeCollectionId) : null;
 
-  // Sort upvoted papers to the top, optionally filter by collection
   const visiblePapers = useMemo(() => {
     let filtered = papers.filter((p) => !trashedPapers.has(p.paperId));
     if (activeCollection) {
@@ -184,12 +124,32 @@ const LibraryPage = () => {
     if (cat) fetchPapers(cat.query);
   }, [activeCategory, enabledSources]);
 
-  // Auto-select first paper so Deep Dive always shows
   useEffect(() => {
     if (visiblePapers.length > 0 && !previewPaper) {
       setPreviewPaper(visiblePapers[0]);
     }
   }, [visiblePapers]);
+
+  // Enter Deep Dive when a paper is selected via click
+  const enterDeepDive = (paper: Paper) => {
+    setViewedPapers((prev) => new Set(prev).add(paper.paperId));
+    setPreviewPaper(paper);
+    setDeepDiveMode(true);
+  };
+
+  // Exit Deep Dive
+  const exitDeepDive = () => {
+    setDeepDiveMode(false);
+  };
+
+  // Escape key to exit Deep Dive
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && deepDiveMode) exitDeepDive();
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [deepDiveMode]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -209,7 +169,7 @@ const LibraryPage = () => {
     if (selectedPapers.size === papers.length) {
       setSelectedPapers(new Set());
     } else {
-      setSelectedPapers(new Set(papers.filter((_, i) => isSubscribed || i < 5).map((p) => p.paperId)));
+      setSelectedPapers(new Set(papers.map((p) => p.paperId)));
     }
   };
 
@@ -246,7 +206,10 @@ const LibraryPage = () => {
 
   const handleTrash = (paperId: string) => {
     setTrashedPapers((prev) => new Set(prev).add(paperId));
-    setPreviewPaper(null);
+    if (previewPaper?.paperId === paperId) {
+      setPreviewPaper(null);
+      setDeepDiveMode(false);
+    }
     toast("Paper removed from results", {
       action: {
         label: "Undo",
@@ -258,7 +221,6 @@ const LibraryPage = () => {
       },
     });
   };
-
 
   const sourcesList = Object.entries(sourceCounts).map(([name, count]) => ({ name, count }));
 
@@ -276,45 +238,19 @@ const LibraryPage = () => {
               <span className="text-xs font-body tracking-widest uppercase text-muted-foreground">Research Library</span>
             </div>
             <h1 className="font-display text-3xl md:text-5xl font-bold mb-3">
-              <span className="text-gradient-lavender">Library</span> R&D
+              <span className="text-gradient-lavender">Library</span>{" "}
+              <span className="text-gradient-chrome-animated">R&D</span>
             </h1>
             <p className="text-base text-muted-foreground font-body max-w-2xl mx-auto mb-5">
-              Discover and organize university thesis papers across 3D, animation, rigging, lighting, and world-building.
+              Search papers, VFX workflows, Unity case studies, production tools, and storyboards.
             </p>
-            {!isSubscribed ? (
-              <div className="inline-flex items-center gap-3">
-                <span
-                  onClick={() => { setBillingPeriod("monthly"); setShowPricing(true); }}
-                  className="text-sm font-body font-semibold text-foreground cursor-pointer hover:text-primary transition-colors"
-                >
-                  Subscribe
-                </span>
-                <div className="inline-flex items-center rounded-full border border-border bg-card/60 p-0.5">
-                  <button
-                    onClick={() => { setBillingPeriod("monthly"); setShowPricing(true); }}
-                    className={`px-4 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
-                      billingPeriod === "monthly"
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    Monthly
-                  </button>
-                  <button
-                    onClick={() => { setBillingPeriod("annual"); setShowPricing(true); }}
-                    className={`px-4 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
-                      billingPeriod === "annual"
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    Annual
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <ManageSubscriptionButton />
-            )}
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full hero-btn-explore hero-btn-bloom font-body font-semibold text-sm transition-all"
+            >
+              <CalendarCheck className="w-4 h-4" />
+              Book Consultation
+            </a>
           </motion.div>
         </div>
       </section>
@@ -330,6 +266,53 @@ const LibraryPage = () => {
           />
         </div>
       </section>
+
+      {/* Deep Dive Immersive Mode */}
+      <AnimatePresence>
+        {deepDiveMode && previewPaper && (
+          <motion.section
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-50 flex flex-col deep-dive-bg overflow-hidden"
+          >
+            {/* Top bar */}
+            <div className="flex items-center justify-between px-6 py-3 border-b border-border/30 bg-background/60 backdrop-blur-xl shrink-0">
+              <button
+                onClick={exitDeepDive}
+                className="flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back to Results
+              </button>
+              <h2 className="font-display text-sm font-bold text-foreground hidden md:block">
+                <span className="text-gradient-chrome-animated">Deep Dive</span>
+              </h2>
+              <span className="text-xs font-body text-muted-foreground">
+                Press <kbd className="px-1.5 py-0.5 rounded border border-border bg-muted/30 text-[10px]">ESC</kbd> to exit
+              </span>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto library-scroll">
+              <div className="max-w-7xl mx-auto px-4 py-6">
+                <ArticlePreview
+                  paper={previewPaper}
+                  onClose={exitDeepDive}
+                  onVote={handleVote}
+                  onTrash={handleTrash}
+                  vote={votes[previewPaper.paperId]}
+                  collections={collections}
+                  onAddToCollection={handleAddToCollection}
+                  allPapers={visiblePapers}
+                  onNavigate={(p) => setPreviewPaper(p)}
+                />
+              </div>
+            </div>
+          </motion.section>
+        )}
+      </AnimatePresence>
 
       {/* Main layout */}
       <section className="pb-20">
@@ -357,14 +340,13 @@ const LibraryPage = () => {
             />
 
             <div className="flex-1 p-5 space-y-4 overflow-hidden flex flex-col min-w-0">
-              {/* Unified Search + Subject bar */}
+              {/* Search bar */}
               <form onSubmit={handleSearch} className="flex items-stretch gap-0 rounded-xl border-2 border-primary/20 bg-card/40 overflow-hidden focus-within:border-primary/50 focus-within:ring-2 focus-within:ring-primary/10 transition-all shadow-sm">
-                {/* Subject selector */}
                 <div className="relative shrink-0 border-r border-primary/15">
                   <select
                     value={activeCategory}
                     onChange={(e) => { setActiveCollectionId(null); setActiveCategory(e.target.value); }}
-                    className="h-full appearance-none bg-primary/5 hover:bg-primary/10 pl-4 pr-10 py-3 text-sm font-body font-semibold text-foreground cursor-pointer focus:outline-none transition-colors min-w-[180px]"
+                    className="h-full appearance-none bg-primary/5 hover:bg-primary/10 pl-4 pr-10 py-3 text-sm font-body font-semibold text-foreground cursor-pointer focus:outline-none transition-colors min-w-[160px]"
                   >
                     {CATEGORIES.map((cat) => (
                       <option key={cat.id} value={cat.id}>{cat.label}</option>
@@ -372,14 +354,13 @@ const LibraryPage = () => {
                   </select>
                   <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
                 </div>
-                {/* Search input */}
                 <div className="flex-1 relative">
                   <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search papers, authors, or topics…"
+                    placeholder="Search papers, VFX workflows, Unity case studies, production tools..."
                     className="w-full h-full bg-transparent pl-11 pr-4 py-3 text-sm text-foreground font-body placeholder:text-muted-foreground focus:outline-none"
                   />
                 </div>
@@ -390,23 +371,6 @@ const LibraryPage = () => {
                   Search
                 </button>
               </form>
-
-              {!isSubscribed && (
-                <div className="flex items-center justify-between p-3 rounded-lg bg-card border border-primary/20">
-                  <div className="flex items-center gap-2">
-                    <Lock className="w-4 h-4 text-primary" />
-                    <p className="text-xs font-body text-muted-foreground">
-                      <span className="text-foreground font-semibold">{Math.max(0, FREE_PAPER_LIMIT - viewedPapers.size)}</span> free papers remaining.
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setShowPricing(true)}
-                    className="text-xs font-body font-semibold bg-primary text-primary-foreground px-3 py-1.5 rounded-full hover:opacity-90 transition-opacity"
-                  >
-                    Upgrade
-                  </button>
-                </div>
-              )}
 
               <div className="flex items-center gap-3">
                 <div className="flex-1">
@@ -485,26 +449,18 @@ const LibraryPage = () => {
                 </div>
               )}
 
-              {/* Scrollable results */}
+              {/* Results grid */}
               <div className="flex-1 min-h-0">
                 <PapersTable
                   papers={visiblePapers}
                   loading={loading}
-                  isSubscribed={isSubscribed}
+                  isSubscribed={true}
                   selectedPapers={selectedPapers}
                   onToggleSelect={handleToggleSelect}
                   onSelectAll={handleSelectAll}
-                  onUnlockClick={() => setShowPricing(true)}
+                  onUnlockClick={() => {}}
                   searchQuery={searchQuery}
-                  onPaperClick={(p) => {
-                    if (!isSubscribed && !viewedPapers.has(p.paperId) && viewedPapers.size >= FREE_PAPER_LIMIT) {
-                      setShowPricing(true);
-                      toast.info("You've used your 3 free papers. Subscribe to continue.");
-                      return;
-                    }
-                    setViewedPapers((prev) => new Set(prev).add(p.paperId));
-                    setPreviewPaper(p);
-                  }}
+                  onPaperClick={enterDeepDive}
                   activePaperId={previewPaper?.paperId}
                   viewMode={viewMode}
                   votes={votes}
@@ -513,9 +469,9 @@ const LibraryPage = () => {
             </div>
           </div>
 
-          {/* Bulk Review Panel — shown when 2+ papers selected */}
+          {/* Bulk Review Panel */}
           <AnimatePresence>
-            {selectedPapers.size >= 2 && (
+            {selectedPapers.size >= 2 && !deepDiveMode && (
               <div className="mt-4">
                 <BulkReviewPanel
                   papers={visiblePapers.filter((p) => selectedPapers.has(p.paperId))}
@@ -526,7 +482,7 @@ const LibraryPage = () => {
                     handleTrash(paperId);
                   }}
                   onOpenFull={(p) => {
-                    setPreviewPaper(p);
+                    enterDeepDive(p);
                     setSelectedPapers(new Set());
                   }}
                   onClose={() => {}}
@@ -536,9 +492,9 @@ const LibraryPage = () => {
             )}
           </AnimatePresence>
 
-          {/* Article Deep Dive Panel — single paper view */}
+          {/* Inline Deep Dive (non-immersive, below grid) — only when not in full immersive mode */}
           <AnimatePresence>
-            {previewPaper && selectedPapers.size < 2 && (
+            {previewPaper && selectedPapers.size < 2 && !deepDiveMode && (
               <div className="mt-4">
                 <ArticlePreview
                   paper={previewPaper}
@@ -557,7 +513,6 @@ const LibraryPage = () => {
         </div>
       </section>
 
-      <PricingModal open={showPricing} onClose={() => setShowPricing(false)} defaultPeriod={billingPeriod} />
       <Footer />
     </main>
   );
