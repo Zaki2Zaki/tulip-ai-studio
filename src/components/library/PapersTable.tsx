@@ -353,20 +353,20 @@ const PapersTable = ({
                         </div>
                       </td>
                       <td className="px-3 py-3">
-                        <p className="text-xs text-muted-foreground font-body leading-relaxed line-clamp-2">{tldr}</p>
+                        <p className="text-sm text-muted-foreground font-body leading-relaxed line-clamp-2">{tldr}</p>
                       </td>
                       <td className="px-3 py-3 text-center">
-                        <span className={`inline-flex items-center gap-1 text-xs font-body ${aiFlag.color}`}>
+                        <span className={`inline-flex items-center gap-1 text-sm font-body ${aiFlag.color}`}>
                           {aiFlag.icon}
                           {aiFlag.label}
                         </span>
                       </td>
                       <td className="px-3 py-3 text-center">
-                        <span className="inline-block px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-xs font-body text-accent">
+                        <span className="inline-block px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20 text-sm font-body text-accent">
                           {aiLabel}
                         </span>
                       </td>
-                      <td className="px-3 py-3 text-center text-sm font-body text-muted-foreground">
+                      <td className="px-3 py-3 text-center text-base font-body text-muted-foreground">
                         {paper.year || "—"}
                       </td>
                       <td className="px-3 py-3 text-center">
