@@ -345,7 +345,7 @@ const CaseStudySteamDelaysPage = () => {
             { insight: "Release ranges outperform specific dates", detail: "Games announcing windows instead of exact dates see less community backlash and lower perceived delay." },
             { insight: "Indie & early-access titles delay more", detail: "Smaller teams with iterative development models are statistically more likely to push release dates." },
             { insight: "Ratings are barely affected by delays", detail: "User review scores show < 2% variance between delayed and on-time titles — quality at launch matters more." },
-            { insight: "Tulip AI eliminates the guesswork", detail: "Feed your milestones into our pipeline optimizer and get data-backed release strategy recommendations in minutes." }].
+            { insight: "Tulip Tech R&D eliminates the guesswork", detail: "Feed your milestones into our pipeline optimizer and get data-backed release strategy recommendations in minutes." }].
             map((item, i) =>
             <motion.div
               key={i}
