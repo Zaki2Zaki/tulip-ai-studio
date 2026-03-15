@@ -454,10 +454,15 @@ const LibraryPage = () => {
             }
           </AnimatePresence>
 
-          {/* Inline Deep Dive (non-immersive, below grid) — only when not in full immersive mode */}
+          {/* Inline preview below grid */}
           <AnimatePresence>
-            {previewPaper && selectedPapers.size < 2 && !deepDiveMode &&
-            <div className="mt-4">
+            {previewPaper &&
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.3 }}
+              className="mt-4">
                 <ArticlePreview
                 paper={previewPaper}
                 onClose={() => setPreviewPaper(null)}
@@ -468,8 +473,7 @@ const LibraryPage = () => {
                 onAddToCollection={handleAddToCollection}
                 allPapers={visiblePapers}
                 onNavigate={(p) => setPreviewPaper(p)} />
-              
-              </div>
+              </motion.div>
             }
           </AnimatePresence>
         </div>
