@@ -247,16 +247,16 @@ const PapersTable = ({
                   />
                 </th>
                 <th className="w-8 px-1 py-3" />
-                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider">
+                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider">
                   Title
                 </th>
-                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider min-w-[180px]">
+                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider min-w-[180px]">
                   TLDR
                 </th>
-                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider w-24">
+                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-24">
                   AI Flag
                 </th>
-                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider w-28">
+                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-28">
                   AI Label
                 </th>
                 <th className="px-3 py-3 text-center w-32">
