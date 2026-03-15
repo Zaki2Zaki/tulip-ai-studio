@@ -198,7 +198,6 @@ const LibraryPage = () => {
     setTrashedPapers((prev) => new Set(prev).add(paperId));
     if (previewPaper?.paperId === paperId) {
       setPreviewPaper(null);
-      setDeepDiveMode(false);
     }
     toast("Paper removed from results", {
       action: {
