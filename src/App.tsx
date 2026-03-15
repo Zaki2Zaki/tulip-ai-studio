@@ -27,6 +27,7 @@ const App = () => (
           <Route path="/library" element={<LibraryPage />} />
           <Route path="/case-studies" element={<CaseStudiesPage />} />
           <Route path="/case-studies/production" element={<CaseStudyProductionPage />} />
+          <Route path="/case-studies/steam-delays" element={<CaseStudySteamDelaysPage />} />
           <Route path="/case-studies/:stage" element={<CaseStudyComingSoonPage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="*" element={<NotFound />} />

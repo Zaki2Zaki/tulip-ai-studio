@@ -66,7 +66,7 @@ const CaseStudiesPage = () => {
           </motion.p>
 
           {/* Case study cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {studies.map((study, i) => (
               <motion.div
                 key={study.to}
