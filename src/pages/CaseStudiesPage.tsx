@@ -24,6 +24,13 @@ const studies = [
     to: "/case-studies/post-production",
     status: "Coming Q2 2026",
   },
+  {
+    title: "Steam Game Delays — Empirical Insights",
+    description: "48% of 23,485 titles delayed (median 14 days) — AI prevents it. Release ranges beat specific dates.",
+    to: "/case-studies/steam-delays",
+    status: "Live",
+    citation: "Grewal et al. (2022) arXiv:2204.11191v1",
+  },
 ];
 
 const CaseStudiesPage = () => {
