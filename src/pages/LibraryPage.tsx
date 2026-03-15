@@ -17,6 +17,7 @@ import { searchPapers } from "@/lib/api/papers";
 import type { Paper } from "@/lib/api/papers";
 import { DEFAULT_ENABLED_KEYS } from "@/components/library/DataSources";
 import { toast } from "sonner";
+import LibraryGuide from "@/components/library/LibraryGuide";
 
 const CATEGORIES = [
 { id: "3d-animation", label: "3D Animation", query: "3D animation character motion synthesis rigging" },
@@ -226,21 +227,21 @@ const LibraryPage = () => {
               <BookOpen className="w-4 h-4 text-primary" />
               <span className="text-xs font-body tracking-widest uppercase text-muted-foreground">Research Library</span>
             </div>
-            <h1 className="font-display text-3xl md:text-5xl font-bold mb-3">
+            <h1 className="font-display text-4xl md:text-6xl font-bold mb-4">
               <span className="text-gradient-lavender">Library</span>{" "}
               <span className="text-gradient-chrome-animated">R&D</span>
             </h1>
-            <p className="font-body max-w-3xl mx-auto mb-5 text-white text-center text-lg">Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers.
-
-</p>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full hero-btn-explore hero-btn-bloom font-body font-semibold transition-all text-lg">
-              
-              <CalendarCheck className="w-4 h-4" />
-              Book Consultation
-            </a>
-            <p className="mt-4 text-white text-sm font-body italic">*Library Research Tool Customized to Client's Requests</p>
+            <p className="font-body max-w-3xl mx-auto mb-6 text-white text-center text-xl">Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers.</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full hero-btn-explore hero-btn-bloom font-body font-semibold transition-all text-xl">
+                <CalendarCheck className="w-5 h-5" />
+                Book Consultation
+              </a>
+              <LibraryGuide />
+            </div>
+            <p className="mt-5 text-white text-sm font-body italic">*Library Research Tool Customized to Client's Requests</p>
           </motion.div>
         </div>
       </section>
@@ -290,7 +291,7 @@ const LibraryPage = () => {
                   <select
                     value={activeCategory}
                     onChange={(e) => {setActiveCollectionId(null);setActiveCategory(e.target.value);}}
-                    className="h-full appearance-none bg-primary/5 hover:bg-primary/10 pl-4 pr-10 py-3 text-sm font-body font-semibold text-foreground cursor-pointer focus:outline-none transition-colors min-w-[160px]">
+                    className="h-full appearance-none bg-primary/5 hover:bg-primary/10 pl-4 pr-10 py-3 text-base font-body font-semibold text-foreground cursor-pointer focus:outline-none transition-colors min-w-[180px]">
                     
                     {CATEGORIES.map((cat) =>
                     <option key={cat.id} value={cat.id}>{cat.label}</option>
@@ -305,12 +306,12 @@ const LibraryPage = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers..."
-                    className="w-full h-full bg-transparent pl-11 pr-4 py-3 text-sm text-foreground font-body placeholder:text-muted-foreground focus:outline-none" />
+                    className="w-full h-full bg-transparent pl-11 pr-4 py-3 text-base text-foreground font-body placeholder:text-muted-foreground focus:outline-none" />
                   
                 </div>
                 <button
                   type="submit"
-                  className="shrink-0 px-6 bg-primary text-primary-foreground font-body font-semibold text-sm hover:bg-primary/90 transition-colors">
+                  className="shrink-0 px-6 bg-primary text-primary-foreground font-body font-semibold text-base hover:bg-primary/90 transition-colors">
                   
                   Search
                 </button>

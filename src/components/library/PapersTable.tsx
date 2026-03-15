@@ -247,16 +247,16 @@ const PapersTable = ({
                   />
                 </th>
                 <th className="w-8 px-1 py-3" />
-                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider">
+                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider">
                   Title
                 </th>
-                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider min-w-[180px]">
+                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider min-w-[180px]">
                   TLDR
                 </th>
-                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider w-24">
+                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-24">
                   AI Flag
                 </th>
-                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider w-28">
+                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-28">
                   AI Label
                 </th>
                 <th className="px-3 py-3 text-center w-32">
@@ -338,11 +338,11 @@ const PapersTable = ({
                       <td className="px-3 py-3">
                         <div className="min-w-0">
                           {!isLocked && paper.url ? (
-                            <span className="font-display text-sm font-semibold text-foreground line-clamp-2">
+                            <span className="font-display text-base font-semibold text-foreground line-clamp-2">
                               {paper.title}
                             </span>
                           ) : (
-                            <span className="font-display text-sm font-semibold text-foreground line-clamp-2">
+                            <span className="font-display text-base font-semibold text-foreground line-clamp-2">
                               {paper.title}
                             </span>
                           )}
@@ -353,20 +353,20 @@ const PapersTable = ({
                         </div>
                       </td>
                       <td className="px-3 py-3">
-                        <p className="text-xs text-muted-foreground font-body leading-relaxed line-clamp-2">{tldr}</p>
+                        <p className="text-sm text-muted-foreground font-body leading-relaxed line-clamp-2">{tldr}</p>
                       </td>
                       <td className="px-3 py-3 text-center">
-                        <span className={`inline-flex items-center gap-1 text-xs font-body ${aiFlag.color}`}>
+                        <span className={`inline-flex items-center gap-1 text-sm font-body ${aiFlag.color}`}>
                           {aiFlag.icon}
                           {aiFlag.label}
                         </span>
                       </td>
                       <td className="px-3 py-3 text-center">
-                        <span className="inline-block px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-xs font-body text-accent">
+                        <span className="inline-block px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20 text-sm font-body text-accent">
                           {aiLabel}
                         </span>
                       </td>
-                      <td className="px-3 py-3 text-center text-sm font-body text-muted-foreground">
+                      <td className="px-3 py-3 text-center text-base font-body text-muted-foreground">
                         {paper.year || "—"}
                       </td>
                       <td className="px-3 py-3 text-center">
@@ -380,7 +380,7 @@ const PapersTable = ({
                               }}
                             />
                           </div>
-                          <span className="text-sm font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
+                          <span className="text-base font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
                         </div>
                       </td>
                     </motion.tr>
@@ -392,7 +392,7 @@ const PapersTable = ({
         </div>
       </div>
 
-      <p className="text-xs text-muted-foreground font-body text-right">
+      <p className="text-sm text-muted-foreground font-body text-right">
         Showing {processedPapers.length} of {papers.length} papers
       </p>
     </div>

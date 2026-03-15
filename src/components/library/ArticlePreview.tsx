@@ -270,7 +270,7 @@ const ArticlePreview = ({
       <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-muted/10">
         <div className="flex items-center gap-3">
           <FileText className="w-4 h-4 text-primary" />
-          <h3 className="text-sm font-display font-semibold text-foreground">Deep Dive</h3>
+          <h3 className="text-base font-display font-semibold text-foreground">Deep Dive</h3>
           {allPapers.length > 1 && (
             <span className="text-xs font-body text-muted-foreground">
               {currentIndex + 1} / {allPapers.length}
@@ -287,16 +287,16 @@ const ArticlePreview = ({
         <div className="flex-1 min-w-0 flex flex-col">
           {/* Paper header + actions */}
           <div className="p-5 space-y-3 border-b border-border">
-            <h4 className="font-display text-base font-bold text-foreground leading-tight">{paper.title}</h4>
-            <p className="text-sm text-foreground font-body">
+            <h4 className="font-display text-xl font-bold text-foreground leading-tight">{paper.title}</h4>
+            <p className="text-base text-foreground font-body">
               {paper.authors?.slice(0, 5).map((a) => a.name).join(", ")}
               {(paper.authors?.length || 0) > 5 && " et al."}
             </p>
             <div className="flex items-center gap-3">
-              {paper.year && <span className="text-sm text-accent font-body">{paper.year}</span>}
-              {paper.venue && <span className="text-sm text-foreground font-body">{paper.venue}</span>}
+              {paper.year && <span className="text-base text-accent font-body">{paper.year}</span>}
+              {paper.venue && <span className="text-base text-foreground font-body">{paper.venue}</span>}
               {paper.citationCount != null && (
-                <span className="text-sm text-foreground font-body">{paper.citationCount} citations</span>
+                <span className="text-base text-foreground font-body">{paper.citationCount} citations</span>
               )}
             </div>
 
@@ -421,13 +421,13 @@ const ArticlePreview = ({
           {/* Abstract — Key Takeaways */}
           {paper.abstract && (
             <div className="p-5 border-b border-border">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
-                <List className="w-3.5 h-3.5 text-primary" />
+              <h5 className="text-sm font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
+                <List className="w-4 h-4 text-primary" />
                 Key Takeaways
               </h5>
               <ul className="space-y-2">
                 {abstractTakeaways.map((point, i) => (
-                  <li key={i} className="flex gap-2.5 text-sm font-body text-foreground leading-relaxed">
+                  <li key={i} className="flex gap-2.5 text-base font-body text-foreground leading-relaxed">
                     <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary/60" />
                     <span>{point}</span>
                   </li>
@@ -438,8 +438,8 @@ const ArticlePreview = ({
 
           {/* PDF Preview — embedded viewer */}
           <div className="p-5 border-b border-border">
-            <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
-              <FileText className="w-3.5 h-3.5 text-primary" />
+            <h5 className="text-sm font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
+              <FileText className="w-4 h-4 text-primary" />
               Paper Preview
             </h5>
             {pdfViewerUrl ? (
@@ -543,8 +543,8 @@ const ArticlePreview = ({
           {/* Executive Summary — bullet points */}
           <div className="p-5">
             <div className="flex items-center justify-between mb-3">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-accent" />
+              <h5 className="text-sm font-body font-semibold uppercase tracking-wider text-foreground flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-accent" />
                 Executive Summary
               </h5>
               {!executiveSummary && !summaryLoading && (
@@ -573,8 +573,8 @@ const ArticlePreview = ({
           {/* Related Papers */}
           {relatedPapers.length > 0 && (
             <div className="p-5 border-t border-border">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
-                <Link2 className="w-3.5 h-3.5 text-primary" />
+              <h5 className="text-sm font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
+                <Link2 className="w-4 h-4 text-primary" />
                 Related Papers
               </h5>
               <div className="space-y-2">
@@ -610,7 +610,7 @@ const ArticlePreview = ({
         <div className="w-full lg:w-[380px] flex flex-col min-h-[350px] max-h-[700px] border-l border-border">
           <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/10">
             <Bot className="w-4 h-4 text-accent" />
-            <span className="text-xs font-display font-semibold text-foreground">Chat about this paper</span>
+            <span className="text-sm font-display font-semibold text-foreground">Chat about this paper</span>
             {chatMessages.length > 0 && (
               <button
                 onClick={() => setChatMessages([])}

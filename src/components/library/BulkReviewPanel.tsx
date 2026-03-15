@@ -79,10 +79,10 @@ const BulkReviewPanel = ({
       <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-muted/10">
         <div className="flex items-center gap-3">
           <Sparkles className="w-4 h-4 text-accent" />
-          <h3 className="text-sm font-display font-semibold text-foreground">
+          <h3 className="text-base font-display font-semibold text-foreground">
             Bulk Review
           </h3>
-          <span className="text-xs font-body text-foreground">
+          <span className="text-sm font-body text-foreground">
             {pendingCount} of {papers.length} pending
           </span>
         </div>
@@ -140,10 +140,10 @@ const BulkReviewPanel = ({
               {/* Title row */}
               <div className="flex items-start justify-between gap-3">
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-display text-sm font-semibold text-foreground leading-snug line-clamp-2">
+                  <h4 className="font-display text-base font-semibold text-foreground leading-snug line-clamp-2">
                     {paper.title}
                   </h4>
-                  <p className="text-xs text-foreground font-body mt-1">
+                  <p className="text-sm text-foreground font-body mt-1">
                     {paper.authors?.slice(0, 3).map((a) => a.name).join(", ")}
                     {(paper.authors?.length || 0) > 3 && " et al."}
                   </p>
