@@ -241,9 +241,15 @@ const LibraryPage = () => {
                 <CalendarCheck className="w-5 h-5" />
                 Book Consultation
               </a>
-              <LibraryGuide />
+              <button
+                onClick={() => setTourOpen(true)}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/30 bg-primary/5 text-sm font-body font-semibold text-primary hover:bg-primary/10 hover:border-primary/50 transition-all"
+              >
+                <BookOpen className="w-4 h-4" />
+                How to Use This Tool
+              </button>
             </div>
-            <LibraryTour triggerOpen={tourOpen} onOpenChange={setTourOpen} />
+            <LibraryTour triggerOpen={tourOpen} onOpenChange={(open) => { if (!open) setTourOpen(false); }} />
             <p className="mt-5 text-white text-sm font-body italic">*Library Research Tool Customized to Client's Requests</p>
           </motion.div>
         </div>
