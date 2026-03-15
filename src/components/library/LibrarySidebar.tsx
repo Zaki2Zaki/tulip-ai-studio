@@ -75,7 +75,7 @@ const LibrarySidebar = ({
     <aside className="w-72 shrink-0 border-r border-border bg-card/30 p-5 space-y-6 overflow-y-auto library-scroll">
       {/* Actions */}
       <div className="space-y-2">
-        <h3 className="text-xs font-body font-semibold uppercase tracking-widest text-muted-foreground mb-3">
+        <h3 className="text-sm font-body font-semibold uppercase tracking-widest text-muted-foreground mb-3">
           Actions
         </h3>
         <button
