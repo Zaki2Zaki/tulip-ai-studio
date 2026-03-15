@@ -289,7 +289,7 @@ const LibraryPage = () => {
                 <ArrowLeft className="w-4 h-4" />
                 Back to Results
               </button>
-              <h2 className="font-display text-sm font-bold text-foreground hidden md:block">
+              <h2 className="font-display text-xl md:text-2xl font-bold text-foreground hidden md:block">
                 <span className="text-gradient-chrome-animated">Deep Dive</span>
               </h2>
               <span className="text-xs font-body text-muted-foreground">
