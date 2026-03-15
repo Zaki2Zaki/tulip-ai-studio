@@ -201,7 +201,12 @@ const LibraryPage = () => {
   const handleVote = (paperId: string, voteType: "up" | "down") => {
     setVotes((prev) => ({ ...prev, [paperId]: voteType }));
     if (voteType === "up") {
-      toast.success("Marked as relevant — floated to top");
+      // Auto-select for Bulk Review and exit Deep Dive
+      setSelectedPapers((prev) => new Set(prev).add(paperId));
+      if (deepDiveMode) {
+        exitDeepDive();
+      }
+      toast.success("Marked as relevant — added to Bulk Review");
     } else {
       toast.info("Noted as not useful — preferences updated");
     }
@@ -474,7 +479,7 @@ production tools, and executive management papers.
 
           {/* Bulk Review Panel */}
           <AnimatePresence>
-            {selectedPapers.size >= 2 && !deepDiveMode &&
+            {selectedPapers.size >= 1 && !deepDiveMode &&
             <div className="mt-4">
                 <BulkReviewPanel
                 papers={visiblePapers.filter((p) => selectedPapers.has(p.paperId))}
