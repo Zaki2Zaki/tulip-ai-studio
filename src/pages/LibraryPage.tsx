@@ -139,19 +139,6 @@ const LibraryPage = () => {
     setPreviewPaper(paper);
   };
 
-  // Exit Deep Dive
-  const exitDeepDive = () => {
-    setDeepDiveMode(false);
-  };
-
-  // Escape key to exit Deep Dive
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && deepDiveMode) exitDeepDive();
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [deepDiveMode]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
