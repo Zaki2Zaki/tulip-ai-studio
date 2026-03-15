@@ -10,6 +10,7 @@ import AuthPage from "./pages/AuthPage";
 import CaseStudiesPage from "./pages/CaseStudiesPage";
 import CaseStudyProductionPage from "./pages/CaseStudyProductionPage";
 import CaseStudyComingSoonPage from "./pages/CaseStudyComingSoonPage";
+import CaseStudySteamDelaysPage from "./pages/CaseStudySteamDelaysPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
