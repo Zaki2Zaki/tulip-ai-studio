@@ -342,6 +342,20 @@ const Navbar = () => {
                           className="text-muted-foreground font-body text-base py-1.5 hover:text-primary transition-colors font-semibold">
                           All Case Studies
                         </Link>
+                        {[
+                          { label: "Pre-Production", to: "/case-studies/pre-production" },
+                          { label: "Production", to: "/case-studies/production" },
+                          { label: "Post-Production", to: "/case-studies/post-production" },
+                        ].map((item) => (
+                          <Link
+                            key={item.to}
+                            to={item.to}
+                            onClick={() => setMobileOpen(false)}
+                            className="text-muted-foreground font-body text-base py-1.5 hover:text-primary transition-colors"
+                          >
+                            {item.label}
+                          </Link>
+                        ))}
                         <p className="text-xs tracking-[0.15em] uppercase text-muted-foreground/60 font-body mt-2 mb-1">Use Cases</p>
                         {useCases.map((uc) =>
                     <Link
