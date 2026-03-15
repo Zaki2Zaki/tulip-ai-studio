@@ -63,7 +63,7 @@ const buildingBlocks = [
 "SteamDB API",
 "Statistical Modeling",
 "NLP Sentiment",
-"Tulip AI Pipeline Optimizer",
+"Tulip Tech R&D Pipeline Optimizer",
 "Open Telemetry"];
 
 
@@ -162,7 +162,7 @@ const CaseStudySteamDelaysPage = () => {
             transition={{ delay: 0.3 }}
             className="text-base font-body max-w-3xl mb-6 text-white">
             
-            48% of 23,485 Steam titles delayed (median 14 days) — AI prevents it. First large-scale study shows release ranges beat specific dates, indie/early-access games delay more, ratings barely affected. Tulip AI turns data into on-time pipelines.
+            48% of 23,485 Steam titles delayed (median 14 days) — AI prevents it. First large-scale study shows release ranges beat specific dates, indie/early-access games delay more, ratings barely affected. Tulip Tech R&D turns data into on-time pipelines.
           </motion.p>
 
           {/* Hero image */}
@@ -288,7 +288,7 @@ const CaseStudySteamDelaysPage = () => {
           <div className="rounded-2xl bg-card border border-border/50 p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <h3 className="font-display font-semibold text-foreground text-lg mb-3">How Tulip AI Uses This Data</h3>
+                <h3 className="font-display font-semibold text-foreground text-lg mb-3"><h3 className="font-display font-semibold text-foreground text-lg mb-3">How Tulip Tech R&D Uses This Data</h3></h3>
                 <ul className="space-y-3 font-body text-sm text-muted-foreground">
                   <li className="flex items-start gap-2"><span className="text-primary mt-0.5">→</span> Ingest your project milestones & compare against 23k Steam delay patterns</li>
                   <li className="flex items-start gap-2"><span className="text-primary mt-0.5">→</span> Predict delay risk by genre, team size, and early-access status</li>
@@ -345,7 +345,7 @@ const CaseStudySteamDelaysPage = () => {
             { insight: "Release ranges outperform specific dates", detail: "Games announcing windows instead of exact dates see less community backlash and lower perceived delay." },
             { insight: "Indie & early-access titles delay more", detail: "Smaller teams with iterative development models are statistically more likely to push release dates." },
             { insight: "Ratings are barely affected by delays", detail: "User review scores show < 2% variance between delayed and on-time titles — quality at launch matters more." },
-            { insight: "Tulip AI eliminates the guesswork", detail: "Feed your milestones into our pipeline optimizer and get data-backed release strategy recommendations in minutes." }].
+            { insight: "Tulip Tech R&D eliminates the guesswork", detail: "Feed your milestones into our pipeline optimizer and get data-backed release strategy recommendations in minutes." }].
             map((item, i) =>
             <motion.div
               key={i}
