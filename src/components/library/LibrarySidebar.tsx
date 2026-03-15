@@ -82,21 +82,21 @@ const LibrarySidebar = ({
           onClick={onUploadClick}
           className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border border-dashed border-primary/30 bg-primary/5 text-sm font-body text-foreground hover:border-primary/50 hover:bg-primary/10 transition-all"
         >
-          <Upload className="w-4 h-4 text-primary" />
+          <Upload className="w-5 h-5 text-primary" />
           Upload Thesis Paper
         </button>
         <button
           onClick={onAILabelClick}
-          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border border-border bg-card/50 text-sm font-body text-foreground hover:border-primary/20 transition-all"
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border border-border bg-card/50 text-base font-body text-foreground hover:border-primary/20 transition-all"
         >
-          <Tag className="w-4 h-4 text-accent" />
+          <Tag className="w-5 h-5 text-accent" />
           Manual AI Label
         </button>
         <button
           onClick={onBulkProcessClick}
-          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border border-border bg-card/50 text-sm font-body text-foreground hover:border-primary/20 transition-all"
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl border border-border bg-card/50 text-base font-body text-foreground hover:border-primary/20 transition-all"
         >
-          <Layers className="w-4 h-4 text-primary" />
+          <Layers className="w-5 h-5 text-primary" />
           Bulk Process
         </button>
       </div>
