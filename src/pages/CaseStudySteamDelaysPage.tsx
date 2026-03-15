@@ -126,6 +126,14 @@ const DownloadButton = ({ size = "sm" }: {size?: "sm" | "lg";}) =>
 const CaseStudySteamDelaysPage = () => {
   const [hoveredBlock, setHoveredBlock] = useState<string | null>(null);
   const [showSticky, setShowSticky] = useState(false);
+  const [lightboxFig, setLightboxFig] = useState<typeof figures[0] | null>(null);
+
+  // Close lightbox on ESC
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setLightboxFig(null); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setShowSticky(window.scrollY > 600);
