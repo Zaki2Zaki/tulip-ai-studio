@@ -17,7 +17,6 @@ import { searchPapers } from "@/lib/api/papers";
 import type { Paper } from "@/lib/api/papers";
 import { DEFAULT_ENABLED_KEYS } from "@/components/library/DataSources";
 import { toast } from "sonner";
-import LibraryGuide from "@/components/library/LibraryGuide";
 import LibraryTour from "@/components/library/LibraryTour";
 
 const CATEGORIES = [
