@@ -479,7 +479,7 @@ production tools, and executive management papers.
 
           {/* Bulk Review Panel */}
           <AnimatePresence>
-            {selectedPapers.size >= 2 && !deepDiveMode &&
+            {selectedPapers.size >= 1 && !deepDiveMode &&
             <div className="mt-4">
                 <BulkReviewPanel
                 papers={visiblePapers.filter((p) => selectedPapers.has(p.paperId))}
