@@ -573,8 +573,8 @@ const ArticlePreview = ({
           {/* Related Papers */}
           {relatedPapers.length > 0 && (
             <div className="p-5 border-t border-border">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
-                <Link2 className="w-3.5 h-3.5 text-primary" />
+              <h5 className="text-sm font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
+                <Link2 className="w-4 h-4 text-primary" />
                 Related Papers
               </h5>
               <div className="space-y-2">
