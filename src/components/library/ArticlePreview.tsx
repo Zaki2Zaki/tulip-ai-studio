@@ -293,10 +293,10 @@ const ArticlePreview = ({
               {(paper.authors?.length || 0) > 5 && " et al."}
             </p>
             <div className="flex items-center gap-3">
-              {paper.year && <span className="text-sm text-accent font-body">{paper.year}</span>}
-              {paper.venue && <span className="text-sm text-foreground font-body">{paper.venue}</span>}
+              {paper.year && <span className="text-base text-accent font-body">{paper.year}</span>}
+              {paper.venue && <span className="text-base text-foreground font-body">{paper.venue}</span>}
               {paper.citationCount != null && (
-                <span className="text-sm text-foreground font-body">{paper.citationCount} citations</span>
+                <span className="text-base text-foreground font-body">{paper.citationCount} citations</span>
               )}
             </div>
 
