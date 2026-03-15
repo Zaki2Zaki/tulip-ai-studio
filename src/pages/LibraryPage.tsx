@@ -227,21 +227,21 @@ const LibraryPage = () => {
               <BookOpen className="w-4 h-4 text-primary" />
               <span className="text-xs font-body tracking-widest uppercase text-muted-foreground">Research Library</span>
             </div>
-            <h1 className="font-display text-3xl md:text-5xl font-bold mb-3">
+            <h1 className="font-display text-4xl md:text-6xl font-bold mb-4">
               <span className="text-gradient-lavender">Library</span>{" "}
               <span className="text-gradient-chrome-animated">R&D</span>
             </h1>
-            <p className="font-body max-w-3xl mx-auto mb-5 text-white text-center text-lg">Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers.
-
-</p>
-            <a
-              href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full hero-btn-explore hero-btn-bloom font-body font-semibold transition-all text-lg">
-              
-              <CalendarCheck className="w-4 h-4" />
-              Book Consultation
-            </a>
-            <p className="mt-4 text-white text-sm font-body italic">*Library Research Tool Customized to Client's Requests</p>
+            <p className="font-body max-w-3xl mx-auto mb-6 text-white text-center text-xl">Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers.</p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-full hero-btn-explore hero-btn-bloom font-body font-semibold transition-all text-xl">
+                <CalendarCheck className="w-5 h-5" />
+                Book Consultation
+              </a>
+              <LibraryGuide />
+            </div>
+            <p className="mt-5 text-white text-sm font-body italic">*Library Research Tool Customized to Client's Requests</p>
           </motion.div>
         </div>
       </section>
