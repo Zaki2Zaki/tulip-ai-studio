@@ -380,7 +380,7 @@ const PapersTable = ({
                               }}
                             />
                           </div>
-                          <span className="text-sm font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
+                          <span className="text-base font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
                         </div>
                       </td>
                     </motion.tr>
