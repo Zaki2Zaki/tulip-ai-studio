@@ -259,6 +259,7 @@ const LibraryPage = () => {
               <CalendarCheck className="w-4 h-4" />
               Book Consultation
             </a>
+            <p className="mt-4 text-white text-sm font-body italic">*Library Research Tool Customized to Client's Requests</p>
           </motion.div>
         </div>
       </section>
