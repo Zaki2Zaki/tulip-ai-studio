@@ -12,11 +12,11 @@ const SearchResultsCount = ({ totalResults, searchQuery, sources }: SearchResult
   return (
     <div className="flex flex-wrap items-center gap-4 p-3 rounded-lg bg-muted/20 border border-border">
       <div className="flex items-center gap-2">
-        <Hash className="w-4 h-4 text-primary" />
-        <span className="text-sm font-body text-foreground font-semibold">{totalResults}</span>
-        <span className="text-xs font-body text-muted-foreground">results</span>
+        <Hash className="w-5 h-5 text-primary" />
+        <span className="text-base font-body text-foreground font-semibold">{totalResults}</span>
+        <span className="text-sm font-body text-muted-foreground">results</span>
         {searchQuery && (
-          <span className="text-xs font-body text-muted-foreground">
+          <span className="text-sm font-body text-muted-foreground">
             for "<span className="text-accent">{searchQuery}</span>"
           </span>
         )}
