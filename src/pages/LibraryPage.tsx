@@ -19,21 +19,24 @@ import { DEFAULT_ENABLED_KEYS } from "@/components/library/DataSources";
 import { toast } from "sonner";
 
 const CATEGORIES = [
-  { id: "vfx", label: "VFX", query: "visual effects compositing simulation particle systems" },
-  { id: "game-dev", label: "Game Dev", query: "game development interactive simulation real-time rendering" },
   { id: "3d-animation", label: "3D Animation", query: "3D animation character motion synthesis rigging" },
-  { id: "production-mgmt", label: "Production Management", query: "production pipeline management scheduling VFX studio" },
   { id: "ai-tools", label: "AI Tools", query: "AI tools generative artificial intelligence creative pipeline" },
-  { id: "storyboarding", label: "Storyboarding", query: "storyboarding previsualization visual storytelling shot planning" },
   { id: "comp-graphics", label: "Computer Graphics", query: "computer graphics rendering shading geometry" },
+  { id: "exec-mgmt", label: "Executive Management", query: "executive management leadership strategy organizational decision-making" },
+  { id: "game-dev", label: "Game Dev", query: "game development interactive simulation real-time rendering" },
   { id: "generative-ai", label: "Generative AI", query: "generative AI diffusion models image synthesis" },
-  { id: "realtime-rendering", label: "Real-Time Rendering", query: "real-time rendering rasterization ray tracing GPU" },
-  { id: "physical-ai", label: "Physical AI", query: "physical AI embodied intelligence physics simulation" },
-  { id: "world-simulation", label: "World Simulation", query: "world simulation physics engine digital twin" },
   { id: "lighting", label: "Lighting", query: "physically based rendering lighting global illumination" },
+  { id: "physical-ai", label: "Physical AI", query: "physical AI embodied intelligence physics simulation" },
+  { id: "product", label: "Product", query: "product management development lifecycle user research roadmap" },
+  { id: "production-mgmt", label: "Production Management", query: "production pipeline management scheduling VFX studio" },
+  { id: "realtime-rendering", label: "Real-Time Rendering", query: "real-time rendering rasterization ray tracing GPU" },
+  { id: "research", label: "Research", query: "research methodology academic scientific analysis survey" },
   { id: "rigging", label: "Rigging", query: "character rigging skeletal animation" },
   { id: "sfx", label: "SFX", query: "sound effects audio design spatial audio synthesis" },
+  { id: "storyboarding", label: "Storyboarding", query: "storyboarding previsualization visual storytelling shot planning" },
+  { id: "vfx", label: "VFX", query: "visual effects compositing simulation particle systems" },
   { id: "vr-ar", label: "VR / AR", query: "virtual reality augmented reality mixed reality display" },
+  { id: "world-simulation", label: "World Simulation", query: "world simulation physics engine digital twin" },
 ];
 
 const LibraryPage = () => {
