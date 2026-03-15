@@ -349,3 +349,58 @@ html {
   animation: chrome-shimmer 3s ease-in-out infinite;
   background-size: 300% 300%;
 }
+
+/* Deep Dive immersive background */
+.deep-dive-bg {
+  background: linear-gradient(
+    160deg,
+    hsl(240 40% 8%) 0%,
+    hsl(250 50% 12%) 25%,
+    hsl(220 60% 14%) 50%,
+    hsl(195 70% 14%) 75%,
+    hsl(185 60% 12%) 100%
+  );
+}
+
+/* Deep Dive iridescent bubble accents */
+.deep-dive-bg::before {
+  content: '';
+  position: fixed;
+  top: 10%;
+  right: 5%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(260 80% 60% / 0.06), hsl(200 90% 60% / 0.03), transparent 70%);
+  pointer-events: none;
+  filter: blur(60px);
+  animation: deep-dive-bubble 8s ease-in-out infinite;
+}
+
+.deep-dive-bg::after {
+  content: '';
+  position: fixed;
+  bottom: 15%;
+  left: 10%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, hsl(185 90% 55% / 0.05), hsl(260 70% 60% / 0.03), transparent 70%);
+  pointer-events: none;
+  filter: blur(50px);
+  animation: deep-dive-bubble 10s ease-in-out infinite reverse;
+}
+
+@keyframes deep-dive-bubble {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.6; }
+  50% { transform: translate(-20px, 15px) scale(1.1); opacity: 1; }
+}
+
+/* Library card cyan hover glow */
+.library-card-glow {
+  transition: all 0.3s ease;
+}
+.library-card-glow:hover {
+  box-shadow: 0 0 20px -4px hsl(185 80% 55% / 0.25), 0 0 40px -8px hsl(260 60% 65% / 0.15);
+  border-color: hsl(185 60% 50% / 0.3);
+}
