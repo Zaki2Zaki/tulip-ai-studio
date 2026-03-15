@@ -201,7 +201,12 @@ const LibraryPage = () => {
   const handleVote = (paperId: string, voteType: "up" | "down") => {
     setVotes((prev) => ({ ...prev, [paperId]: voteType }));
     if (voteType === "up") {
-      toast.success("Marked as relevant — floated to top");
+      // Auto-select for Bulk Review and exit Deep Dive
+      setSelectedPapers((prev) => new Set(prev).add(paperId));
+      if (deepDiveMode) {
+        exitDeepDive();
+      }
+      toast.success("Marked as relevant — added to Bulk Review");
     } else {
       toast.info("Noted as not useful — preferences updated");
     }
