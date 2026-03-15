@@ -315,7 +315,7 @@ const CaseStudySteamDelaysPage = () => {
       {/* ── Research Figures ── */}
       <section className="pb-16 section-padding">
         <div className="max-w-5xl mx-auto">
-          <h2 className="font-display font-bold text-2xl text-foreground mb-8">Research Figures</h2>
+          <h2 className="font-display font-bold case-study-hero-title text-foreground mb-10">Research Figures</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {figures.map((fig) =>
             <motion.div
@@ -323,16 +323,36 @@ const CaseStudySteamDelaysPage = () => {
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="rounded-xl bg-card border border-border/50 overflow-hidden group">
+              onClick={() => setLightboxFig(fig)}
+              className="rounded-xl bg-card border border-border/50 overflow-hidden group cursor-pointer transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_0_30px_-4px_hsl(270_80%_60%/0.5)] hover:border-primary/40">
               
-                <div className="h-52 bg-muted/30 overflow-hidden">
-                  <img src={fig.image} alt={fig.title} className="w-full h-full object-contain bg-white/90 p-2" />
+                {/* Image area */}
+                <div className="relative h-[280px] bg-white/90 overflow-hidden">
+                  <img
+                    src={fig.image}
+                    alt={fig.title}
+                    className="w-full h-full object-contain p-3 transition-all duration-300 group-hover:scale-110 group-hover:brightness-110"
+                  />
+                  {/* Zoom icon */}
+                  <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-background/70 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <ZoomIn className="w-4 h-4 text-primary" />
+                  </div>
+                  {/* Hover tooltip */}
+                  <div className="absolute bottom-0 left-0 right-0 py-2 bg-background/80 backdrop-blur-sm text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-xs font-body text-foreground">Click to view full-size diagram</span>
+                  </div>
                 </div>
+
                 <div className="p-5">
                   <h3 className="font-display font-bold text-foreground text-sm mb-2">{fig.title}</h3>
                   <p className="text-xs font-body text-muted-foreground leading-relaxed mb-3">{fig.description}</p>
                   <p className="text-[10px] font-body text-muted-foreground/70 mb-2">{fig.citation}</p>
-                  <a href={PDF_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs font-body text-primary hover:underline">
+                  <a
+                    href={PDF_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-1 text-xs font-body text-primary hover:underline">
                     <Download className="w-3 h-3" /> Download Full Paper
                   </a>
                 </div>
@@ -341,6 +361,57 @@ const CaseStudySteamDelaysPage = () => {
           </div>
         </div>
       </section>
+
+      {/* ── Lightbox ── */}
+      <AnimatePresence>
+        {lightboxFig && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 md:p-8"
+            onClick={() => setLightboxFig(null)}>
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative max-w-5xl w-full max-h-[90vh] flex flex-col rounded-2xl bg-card border border-primary/30 overflow-hidden shadow-[0_0_60px_-10px_hsl(270_80%_60%/0.4)]"
+              onClick={(e) => e.stopPropagation()}>
+              
+              {/* Close button */}
+              <button
+                onClick={() => setLightboxFig(null)}
+                className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 flex items-center justify-center hover:bg-primary/20 transition-colors">
+                <X className="w-4 h-4 text-foreground" />
+              </button>
+
+              {/* Full-res image */}
+              <div className="flex-1 min-h-0 bg-white/95 flex items-center justify-center p-4">
+                <img
+                  src={lightboxFig.image}
+                  alt={lightboxFig.title}
+                  className="max-w-full max-h-[60vh] object-contain"
+                />
+              </div>
+
+              {/* Caption */}
+              <div className="p-6 border-t border-border/50">
+                <h3 className="font-display font-bold text-foreground text-base mb-2">{lightboxFig.title}</h3>
+                <p className="text-sm font-body text-muted-foreground leading-relaxed mb-2">{lightboxFig.description}</p>
+                <p className="text-xs font-body text-muted-foreground/70 mb-4">{lightboxFig.citation}</p>
+                <a
+                  href={PDF_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-full font-body font-semibold text-xs border border-primary/30 text-primary hover:bg-primary/10 transition-colors">
+                  <Download className="w-3.5 h-3.5" /> Download Full Paper
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── Results & Insights ── */}
       <section className="pb-16 section-padding">
