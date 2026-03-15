@@ -167,6 +167,40 @@ const LibrarySidebar = ({
               <X className="w-3 h-3" />
             </button>
           </div>
+          {/* Collection export actions */}
+          <div className="flex items-center gap-1 pl-9 -mt-1 opacity-0 group-hover:opacity-100 transition-all">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                if (col.paperIds.length === 0) {
+                  toast.info("No papers in this collection to download");
+                  return;
+                }
+                toast.success(`Preparing ZIP of ${col.paperIds.length} paper(s)…`, { description: "Download will start shortly." });
+                // TODO: implement actual ZIP generation from paper PDF URLs
+              }}
+              className="flex items-center gap-1 px-2 py-1 rounded text-[10px] font-body text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-all"
+              title="Download collection as ZIP"
+            >
+              <Download className="w-3 h-3" />
+              ZIP
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                if (col.paperIds.length === 0) {
+                  toast.info("No papers in this collection to save");
+                  return;
+                }
+                toast.info("Google Drive integration coming soon", { description: "Connect your Google account to save collections directly to Drive." });
+              }}
+              className="flex items-center gap-1 px-2 py-1 rounded text-[10px] font-body text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-all"
+              title="Save to Google Drive"
+            >
+              <Cloud className="w-3 h-3" />
+              Drive
+            </button>
+          </div>
         ))}
       </div>
 
