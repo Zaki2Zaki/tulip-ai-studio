@@ -338,11 +338,11 @@ const PapersTable = ({
                       <td className="px-3 py-3">
                         <div className="min-w-0">
                           {!isLocked && paper.url ? (
-                            <span className="font-display text-sm font-semibold text-foreground line-clamp-2">
+                            <span className="font-display text-base font-semibold text-foreground line-clamp-2">
                               {paper.title}
                             </span>
                           ) : (
-                            <span className="font-display text-sm font-semibold text-foreground line-clamp-2">
+                            <span className="font-display text-base font-semibold text-foreground line-clamp-2">
                               {paper.title}
                             </span>
                           )}
