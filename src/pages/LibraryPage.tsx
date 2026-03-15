@@ -249,12 +249,12 @@ const LibraryPage = () => {
               <span className="text-gradient-lavender">Library</span>{" "}
               <span className="text-gradient-chrome-animated">R&D</span>
             </h1>
-            <p className="font-body max-w-3xl mx-auto mb-5 text-white text-center text-lg">Search research papers, 3D and VFX workflows, case studies,
-production tools, and executive management papers.
-            </p>
+            <p className="font-body max-w-3xl mx-auto mb-5 text-white text-center text-lg">Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers.
+
+</p>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full hero-btn-explore hero-btn-bloom font-body font-semibold text-sm transition-all">
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full hero-btn-explore hero-btn-bloom font-body font-semibold transition-all text-lg">
               
               <CalendarCheck className="w-4 h-4" />
               Book Consultation
