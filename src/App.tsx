@@ -8,6 +8,8 @@ import UseCasePage from "./pages/UseCasePage";
 import LibraryPage from "./pages/LibraryPage";
 import AuthPage from "./pages/AuthPage";
 import CaseStudiesPage from "./pages/CaseStudiesPage";
+import CaseStudyProductionPage from "./pages/CaseStudyProductionPage";
+import CaseStudyComingSoonPage from "./pages/CaseStudyComingSoonPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
