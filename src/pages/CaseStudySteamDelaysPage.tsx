@@ -162,7 +162,7 @@ const CaseStudySteamDelaysPage = () => {
             transition={{ delay: 0.3 }}
             className="text-base font-body max-w-3xl mb-6 text-white">
             
-            48% of 23,485 Steam titles delayed (median 14 days) — AI prevents it. First large-scale study shows release ranges beat specific dates, indie/early-access games delay more, ratings barely affected. Tulip AI turns data into on-time pipelines.
+            48% of 23,485 Steam titles delayed (median 14 days) — AI prevents it. First large-scale study shows release ranges beat specific dates, indie/early-access games delay more, ratings barely affected. Tulip Tech R&D turns data into on-time pipelines.
           </motion.p>
 
           {/* Hero image */}
