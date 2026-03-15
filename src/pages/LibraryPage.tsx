@@ -275,52 +275,6 @@ const LibraryPage = () => {
         </div>
       </section>
 
-      {/* Deep Dive Immersive Mode */}
-      <AnimatePresence>
-        {deepDiveMode && previewPaper &&
-        <motion.section
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.4 }}
-          className="fixed inset-0 z-50 flex flex-col deep-dive-bg overflow-hidden">
-          
-            {/* Top bar */}
-            <div className="flex items-center justify-between px-6 py-3 border-b border-border/30 bg-background/60 backdrop-blur-xl shrink-0">
-              <button
-              onClick={exitDeepDive}
-              className="flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-foreground transition-colors">
-              
-                <ArrowLeft className="w-4 h-4" />
-                Back to Results
-              </button>
-              <h2 className="font-display text-xl md:text-2xl font-bold text-foreground hidden md:block">
-                <span className="text-gradient-chrome-animated">Deep Dive</span>
-              </h2>
-              <span className="text-xs font-body text-muted-foreground">
-                Press <kbd className="px-1.5 py-0.5 rounded border border-border bg-muted/30 text-[10px]">ESC</kbd> to exit
-              </span>
-            </div>
-
-            {/* Content */}
-            <div className="flex-1 overflow-y-auto library-scroll">
-              <div className="max-w-7xl mx-auto px-4 py-6">
-                <ArticlePreview
-                paper={previewPaper}
-                onClose={exitDeepDive}
-                onVote={handleVote}
-                onTrash={handleTrash}
-                vote={votes[previewPaper.paperId]}
-                collections={collections}
-                onAddToCollection={handleAddToCollection}
-                allPapers={visiblePapers}
-                onNavigate={(p) => setPreviewPaper(p)} />
-              
-              </div>
-            </div>
-          </motion.section>
-        }
-      </AnimatePresence>
 
       {/* Main layout */}
       <section className="pb-20">
