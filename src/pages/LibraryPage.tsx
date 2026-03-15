@@ -415,7 +415,7 @@ const LibraryPage = () => {
 
           {/* Bulk Review Panel */}
           <AnimatePresence>
-            {selectedPapers.size >= 1 && !deepDiveMode &&
+            {selectedPapers.size >= 1 &&
             <div className="mt-4">
                 <BulkReviewPanel
                 papers={visiblePapers.filter((p) => selectedPapers.has(p.paperId))}
