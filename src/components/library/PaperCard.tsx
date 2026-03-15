@@ -81,12 +81,12 @@ const PaperCard = ({ paper, isSelected, isActive, isLocked, onToggleSelect, onCl
       </div>
 
       {/* Title */}
-      <h4 className="font-display text-sm font-semibold text-foreground leading-snug line-clamp-2 mb-1.5">
+      <h4 className="font-display text-base font-semibold text-foreground leading-snug line-clamp-2 mb-1.5">
         {paper.title}
       </h4>
 
       {/* Authors */}
-      <p className="text-xs text-muted-foreground font-body mb-2">
+      <p className="text-sm text-muted-foreground font-body mb-2">
         {paper.authors?.slice(0, 2).map((a) => a.name).join(", ")}
         {(paper.authors?.length || 0) > 2 && " et al."}
       </p>
