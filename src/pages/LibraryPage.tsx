@@ -291,7 +291,7 @@ const LibraryPage = () => {
                   <select
                     value={activeCategory}
                     onChange={(e) => {setActiveCollectionId(null);setActiveCategory(e.target.value);}}
-                    className="h-full appearance-none bg-primary/5 hover:bg-primary/10 pl-4 pr-10 py-3 text-sm font-body font-semibold text-foreground cursor-pointer focus:outline-none transition-colors min-w-[160px]">
+                    className="h-full appearance-none bg-primary/5 hover:bg-primary/10 pl-4 pr-10 py-3 text-base font-body font-semibold text-foreground cursor-pointer focus:outline-none transition-colors min-w-[180px]">
                     
                     {CATEGORIES.map((cat) =>
                     <option key={cat.id} value={cat.id}>{cat.label}</option>
