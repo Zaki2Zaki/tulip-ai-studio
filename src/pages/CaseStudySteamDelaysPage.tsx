@@ -368,33 +368,17 @@ const CaseStudySteamDelaysPage = () => {
         </div>
       </section>
 
-      {/* ── Source & Download Block (always visible) ── */}
-      <section className="pb-8 section-padding">
-        <div className="max-w-5xl mx-auto">
-          <div className="rounded-2xl bg-card border border-primary/20 p-8 text-center glow-gold">
-            <h2 className="font-display font-bold text-xl text-foreground mb-4">Source & Instant Download</h2>
-            <p className="text-sm font-body text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-2">
-              {CITATION}
-            </p>
-            <a href={ARXIV_URL} target="_blank" rel="noopener noreferrer" className="text-xs font-body text-primary hover:underline inline-flex items-center gap-1 mb-6">
-              <ExternalLink className="w-3 h-3" /> {ARXIV_URL}
-            </a>
-            <div className="flex flex-col items-center gap-3">
-              <DownloadButton size="lg" />
-              <p className="text-xs font-body text-muted-foreground">Use this study to benchmark your own pipeline delay risk and let Tulip AI eliminate it.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ── CTA ── */}
       <section className="pb-16 section-padding">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="font-display font-bold text-2xl text-foreground mb-4">Ready to Ship On Time?</h2>
-          <p className="text-sm font-body text-muted-foreground mb-6">Let Tulip AI analyze your pipeline and predict delay risks before they happen.</p>
+          <p className="text-sm font-body text-muted-foreground mb-6 max-w-2xl mx-auto">
+            Let Tulip Tech R&D analyze your pipelines and predict delay risks before they happen with optimization assessments and custom dev tools
+          </p>
           <a
             href="/#contact"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-body font-semibold text-sm bg-primary text-primary-foreground hover:bg-primary/90 transition-all hover:scale-105">
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-body font-semibold text-sm text-white transition-all hover:scale-105 hover:shadow-[0_0_24px_-4px_hsl(260_80%_65%/0.5)]"
+            style={{ background: "linear-gradient(135deg, hsl(250 70% 60%), hsl(300 60% 55%), hsl(220 80% 60%))" }}>
             
             Book Consultation <ArrowRight className="w-4 h-4" />
           </a>
