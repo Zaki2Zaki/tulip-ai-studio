@@ -6,6 +6,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingScrollTop from "@/components/FloatingScrollTop";
 import heroImg from "@/assets/steam-delays-hero.jpg";
+import fig1Img from "@/assets/steam-fig1-data-collection.jpg";
+import fig2Img from "@/assets/steam-fig2-delay-distribution.jpg";
+import fig3Img from "@/assets/steam-fig3-genre-correlation.jpg";
 
 const ARXIV_URL = "https://arxiv.org/abs/2204.11191";
 const PDF_URL = "https://arxiv.org/pdf/2204.11191v1";
@@ -73,19 +76,22 @@ const figures = [
   id: "fig1",
   title: "Figure 1: Data Collection Flow",
   description: "The systematic pipeline for scraping, cleaning, and categorizing 23,485 Steam game entries for delay analysis.",
-  citation: "Grewal et al. (2022) – Figure 1, p.6"
+  citation: "Grewal et al. (2022) – Figure 1, p.6",
+  image: fig1Img
 },
 {
   id: "fig2",
   title: "Figure 2: Delay Distribution",
   description: "Histogram showing the distribution of delay durations — median 14 days with a long tail of multi-month delays for AAA titles.",
-  citation: "Grewal et al. (2022) – Figure 3, p.8"
+  citation: "Grewal et al. (2022) – Figure 3, p.8",
+  image: fig2Img
 },
 {
   id: "fig3",
   title: "Figure 3: Genre vs. Delay Correlation",
   description: "Heatmap revealing which game genres are most prone to delays — simulation and strategy titles lead, while casual games ship closer to schedule.",
-  citation: "Grewal et al. (2022) – Figure 5, p.10"
+  citation: "Grewal et al. (2022) – Figure 5, p.10",
+  image: fig3Img
 }];
 
 
@@ -319,8 +325,8 @@ const CaseStudySteamDelaysPage = () => {
               viewport={{ once: true }}
               className="rounded-xl bg-card border border-border/50 overflow-hidden group">
               
-                <div className="h-40 bg-muted/30 flex items-center justify-center">
-                  <span className="text-xs font-body text-muted-foreground">Visual from paper</span>
+                <div className="h-52 bg-muted/30 overflow-hidden">
+                  <img src={fig.image} alt={fig.title} className="w-full h-full object-contain bg-white/90 p-2" />
                 </div>
                 <div className="p-5">
                   <h3 className="font-display font-bold text-foreground text-sm mb-2">{fig.title}</h3>
