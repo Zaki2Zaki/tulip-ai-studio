@@ -244,8 +244,8 @@ const LibraryPage = () => {
               <span className="text-gradient-lavender">Library</span>{" "}
               <span className="text-gradient-chrome-animated">R&D</span>
             </h1>
-            <p className="text-base text-muted-foreground font-body max-w-2xl mx-auto mb-5">
-              Search papers, VFX workflows, Unity case studies, production tools, and storyboards.
+            <p className="text-base text-muted-foreground font-body max-w-3xl mx-auto mb-5">
+              Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers. Cross-references and extracts from CrossRef, arXiv, OpenAlex, Google Scholar Labs, Nvidia Publications, Scholar Inbox, ACM Digital Library, Substack, Academia.edu, and Elsevier.
             </p>
             <a
               href="#contact"
