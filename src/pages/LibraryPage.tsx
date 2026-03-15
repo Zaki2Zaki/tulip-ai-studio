@@ -19,21 +19,24 @@ import { DEFAULT_ENABLED_KEYS } from "@/components/library/DataSources";
 import { toast } from "sonner";
 
 const CATEGORIES = [
-  { id: "vfx", label: "VFX", query: "visual effects compositing simulation particle systems" },
-  { id: "game-dev", label: "Game Dev", query: "game development interactive simulation real-time rendering" },
   { id: "3d-animation", label: "3D Animation", query: "3D animation character motion synthesis rigging" },
-  { id: "production-mgmt", label: "Production Management", query: "production pipeline management scheduling VFX studio" },
   { id: "ai-tools", label: "AI Tools", query: "AI tools generative artificial intelligence creative pipeline" },
-  { id: "storyboarding", label: "Storyboarding", query: "storyboarding previsualization visual storytelling shot planning" },
   { id: "comp-graphics", label: "Computer Graphics", query: "computer graphics rendering shading geometry" },
+  { id: "exec-mgmt", label: "Executive Management", query: "executive management leadership strategy organizational decision-making" },
+  { id: "game-dev", label: "Game Dev", query: "game development interactive simulation real-time rendering" },
   { id: "generative-ai", label: "Generative AI", query: "generative AI diffusion models image synthesis" },
-  { id: "realtime-rendering", label: "Real-Time Rendering", query: "real-time rendering rasterization ray tracing GPU" },
-  { id: "physical-ai", label: "Physical AI", query: "physical AI embodied intelligence physics simulation" },
-  { id: "world-simulation", label: "World Simulation", query: "world simulation physics engine digital twin" },
   { id: "lighting", label: "Lighting", query: "physically based rendering lighting global illumination" },
+  { id: "physical-ai", label: "Physical AI", query: "physical AI embodied intelligence physics simulation" },
+  { id: "product", label: "Product", query: "product management development lifecycle user research roadmap" },
+  { id: "production-mgmt", label: "Production Management", query: "production pipeline management scheduling VFX studio" },
+  { id: "realtime-rendering", label: "Real-Time Rendering", query: "real-time rendering rasterization ray tracing GPU" },
+  { id: "research", label: "Research", query: "research methodology academic scientific analysis survey" },
   { id: "rigging", label: "Rigging", query: "character rigging skeletal animation" },
   { id: "sfx", label: "SFX", query: "sound effects audio design spatial audio synthesis" },
+  { id: "storyboarding", label: "Storyboarding", query: "storyboarding previsualization visual storytelling shot planning" },
+  { id: "vfx", label: "VFX", query: "visual effects compositing simulation particle systems" },
   { id: "vr-ar", label: "VR / AR", query: "virtual reality augmented reality mixed reality display" },
+  { id: "world-simulation", label: "World Simulation", query: "world simulation physics engine digital twin" },
 ];
 
 const LibraryPage = () => {
@@ -241,8 +244,8 @@ const LibraryPage = () => {
               <span className="text-gradient-lavender">Library</span>{" "}
               <span className="text-gradient-chrome-animated">R&D</span>
             </h1>
-            <p className="text-base text-muted-foreground font-body max-w-2xl mx-auto mb-5">
-              Search papers, VFX workflows, Unity case studies, production tools, and storyboards.
+            <p className="text-base text-muted-foreground font-body max-w-3xl mx-auto mb-5">
+              Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers. Cross-references and extracts from CrossRef, arXiv, OpenAlex, Google Scholar Labs, Nvidia Publications, Scholar Inbox, ACM Digital Library, Substack, Academia.edu, and Elsevier.
             </p>
             <a
               href="#contact"
@@ -286,7 +289,7 @@ const LibraryPage = () => {
                 <ArrowLeft className="w-4 h-4" />
                 Back to Results
               </button>
-              <h2 className="font-display text-sm font-bold text-foreground hidden md:block">
+              <h2 className="font-display text-xl md:text-2xl font-bold text-foreground hidden md:block">
                 <span className="text-gradient-chrome-animated">Deep Dive</span>
               </h2>
               <span className="text-xs font-body text-muted-foreground">
@@ -360,7 +363,7 @@ const LibraryPage = () => {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search papers, VFX workflows, Unity case studies, production tools..."
+                    placeholder="Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers..."
                     className="w-full h-full bg-transparent pl-11 pr-4 py-3 text-sm text-foreground font-body placeholder:text-muted-foreground focus:outline-none"
                   />
                 </div>
