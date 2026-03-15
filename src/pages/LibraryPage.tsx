@@ -19,25 +19,25 @@ import { DEFAULT_ENABLED_KEYS } from "@/components/library/DataSources";
 import { toast } from "sonner";
 
 const CATEGORIES = [
-  { id: "3d-animation", label: "3D Animation", query: "3D animation character motion synthesis rigging" },
-  { id: "ai-tools", label: "AI Tools", query: "AI tools generative artificial intelligence creative pipeline" },
-  { id: "comp-graphics", label: "Computer Graphics", query: "computer graphics rendering shading geometry" },
-  { id: "exec-mgmt", label: "Executive Management", query: "executive management leadership strategy organizational decision-making" },
-  { id: "game-dev", label: "Game Dev", query: "game development interactive simulation real-time rendering" },
-  { id: "generative-ai", label: "Generative AI", query: "generative AI diffusion models image synthesis" },
-  { id: "lighting", label: "Lighting", query: "physically based rendering lighting global illumination" },
-  { id: "physical-ai", label: "Physical AI", query: "physical AI embodied intelligence physics simulation" },
-  { id: "product", label: "Product", query: "product management development lifecycle user research roadmap" },
-  { id: "production-mgmt", label: "Production Management", query: "production pipeline management scheduling VFX studio" },
-  { id: "realtime-rendering", label: "Real-Time Rendering", query: "real-time rendering rasterization ray tracing GPU" },
-  { id: "research", label: "Research", query: "research methodology academic scientific analysis survey" },
-  { id: "rigging", label: "Rigging", query: "character rigging skeletal animation" },
-  { id: "sfx", label: "SFX", query: "sound effects audio design spatial audio synthesis" },
-  { id: "storyboarding", label: "Storyboarding", query: "storyboarding previsualization visual storytelling shot planning" },
-  { id: "vfx", label: "VFX", query: "visual effects compositing simulation particle systems" },
-  { id: "vr-ar", label: "VR / AR", query: "virtual reality augmented reality mixed reality display" },
-  { id: "world-simulation", label: "World Simulation", query: "world simulation physics engine digital twin" },
-];
+{ id: "3d-animation", label: "3D Animation", query: "3D animation character motion synthesis rigging" },
+{ id: "ai-tools", label: "AI Tools", query: "AI tools generative artificial intelligence creative pipeline" },
+{ id: "comp-graphics", label: "Computer Graphics", query: "computer graphics rendering shading geometry" },
+{ id: "exec-mgmt", label: "Executive Management", query: "executive management leadership strategy organizational decision-making" },
+{ id: "game-dev", label: "Game Dev", query: "game development interactive simulation real-time rendering" },
+{ id: "generative-ai", label: "Generative AI", query: "generative AI diffusion models image synthesis" },
+{ id: "lighting", label: "Lighting", query: "physically based rendering lighting global illumination" },
+{ id: "physical-ai", label: "Physical AI", query: "physical AI embodied intelligence physics simulation" },
+{ id: "product", label: "Product", query: "product management development lifecycle user research roadmap" },
+{ id: "production-mgmt", label: "Production Management", query: "production pipeline management scheduling VFX studio" },
+{ id: "realtime-rendering", label: "Real-Time Rendering", query: "real-time rendering rasterization ray tracing GPU" },
+{ id: "research", label: "Research", query: "research methodology academic scientific analysis survey" },
+{ id: "rigging", label: "Rigging", query: "character rigging skeletal animation" },
+{ id: "sfx", label: "SFX", query: "sound effects audio design spatial audio synthesis" },
+{ id: "storyboarding", label: "Storyboarding", query: "storyboarding previsualization visual storytelling shot planning" },
+{ id: "vfx", label: "VFX", query: "visual effects compositing simulation particle systems" },
+{ id: "vr-ar", label: "VR / AR", query: "virtual reality augmented reality mixed reality display" },
+{ id: "world-simulation", label: "World Simulation", query: "world simulation physics engine digital twin" }];
+
 
 const LibraryPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -55,7 +55,7 @@ const LibraryPage = () => {
   const [trashedPapers, setTrashedPapers] = useState<Set<string>>(new Set());
   const [viewMode, setViewMode] = useState<ViewMode>("table");
   const [enabledSources, setEnabledSources] = useState<Set<string>>(new Set(DEFAULT_ENABLED_KEYS));
-  const [searchCache, setSearchCache] = useState<Map<string, { papers: Paper[]; counts: Record<string, number> }>>(new Map());
+  const [searchCache, setSearchCache] = useState<Map<string, {papers: Paper[];counts: Record<string, number>;}>>(new Map());
   const [activeCollectionId, setActiveCollectionId] = useState<string | null>(null);
   const [targetCollectionId, setTargetCollectionId] = useState<string>("");
   const [deepDiveMode, setDeepDiveMode] = useState(false);
@@ -72,7 +72,7 @@ const LibraryPage = () => {
     setLoading(true);
     setLastSearchQuery(query);
     try {
-      const activeSrcKeys = Array.from(enabledSources).filter(k => ["crossref", "arxiv", "openalex", "nvidia"].includes(k));
+      const activeSrcKeys = Array.from(enabledSources).filter((k) => ["crossref", "arxiv", "openalex", "nvidia"].includes(k));
       const result = await searchPapers(query, activeSrcKeys.length > 0 ? activeSrcKeys : undefined);
       setPapers(result.papers);
       setSourceCounts(result.counts);
@@ -94,7 +94,7 @@ const LibraryPage = () => {
           url: item.URL || `https://doi.org/${item.DOI}`,
           authors: (item.author || []).map((a: any) => ({ name: `${a.given || ""} ${a.family || ""}`.trim() })),
           venue: item["container-title"]?.[0] || null,
-          source: "crossref",
+          source: "crossref"
         }));
         setPapers(items);
         setSourceCounts({ crossref: items.length });
@@ -108,7 +108,7 @@ const LibraryPage = () => {
     }
   };
 
-  const activeCollection = activeCollectionId ? collections.find(c => c.id === activeCollectionId) : null;
+  const activeCollection = activeCollectionId ? collections.find((c) => c.id === activeCollectionId) : null;
 
   const visiblePapers = useMemo(() => {
     let filtered = papers.filter((p) => !trashedPapers.has(p.paperId));
@@ -162,8 +162,8 @@ const LibraryPage = () => {
   const handleToggleSelect = (id: string) => {
     setSelectedPapers((prev) => {
       const next = new Set(prev);
-      if (next.has(id)) next.delete(id);
-      else next.add(id);
+      if (next.has(id)) next.delete(id);else
+      next.add(id);
       return next;
     });
   };
@@ -188,11 +188,11 @@ const LibraryPage = () => {
 
   const handleAddToCollection = (paperId: string, paperTitle: string, collectionId: string) => {
     setCollections((prev) =>
-      prev.map((c) =>
-        c.id === collectionId && !c.paperIds.includes(paperId)
-          ? { ...c, paperIds: [...c.paperIds, paperId] }
-          : c
-      )
+    prev.map((c) =>
+    c.id === collectionId && !c.paperIds.includes(paperId) ?
+    { ...c, paperIds: [...c.paperIds, paperId] } :
+    c
+    )
     );
     const col = collections.find((c) => c.id === collectionId);
     toast.success(`Added to "${col?.name}"`);
@@ -220,8 +220,8 @@ const LibraryPage = () => {
           const next = new Set(prev);
           next.delete(paperId);
           return next;
-        }),
-      },
+        })
+      }
     });
   };
 
@@ -244,13 +244,13 @@ const LibraryPage = () => {
               <span className="text-gradient-lavender">Library</span>{" "}
               <span className="text-gradient-chrome-animated">R&D</span>
             </h1>
-            <p className="text-base text-muted-foreground font-body max-w-3xl mx-auto mb-5">
-              Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers. Cross-references and extracts from CrossRef, arXiv, OpenAlex, Google Scholar Labs, Nvidia Publications, Scholar Inbox, ACM Digital Library, Substack, Academia.edu, and Elsevier.
+            <p className="font-body max-w-3xl mx-auto mb-5 text-white text-center text-lg">Search research papers, 3D and VFX workflows, case studies,
+production tools, and executive management papers.
             </p>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full hero-btn-explore hero-btn-bloom font-body font-semibold text-sm transition-all"
-            >
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full hero-btn-explore hero-btn-bloom font-body font-semibold text-sm transition-all">
+              
               <CalendarCheck className="w-4 h-4" />
               Book Consultation
             </a>
@@ -265,27 +265,27 @@ const LibraryPage = () => {
             papersCount={papers.length}
             processedCount={Math.round(papers.length * 0.83)}
             lastScrapeMinutes={45}
-            audioCount={Math.round(papers.length * 0.15)}
-          />
+            audioCount={Math.round(papers.length * 0.15)} />
+          
         </div>
       </section>
 
       {/* Deep Dive Immersive Mode */}
       <AnimatePresence>
-        {deepDiveMode && previewPaper && (
-          <motion.section
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-50 flex flex-col deep-dive-bg overflow-hidden"
-          >
+        {deepDiveMode && previewPaper &&
+        <motion.section
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4 }}
+          className="fixed inset-0 z-50 flex flex-col deep-dive-bg overflow-hidden">
+          
             {/* Top bar */}
             <div className="flex items-center justify-between px-6 py-3 border-b border-border/30 bg-background/60 backdrop-blur-xl shrink-0">
               <button
-                onClick={exitDeepDive}
-                className="flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-foreground transition-colors"
-              >
+              onClick={exitDeepDive}
+              className="flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-foreground transition-colors">
+              
                 <ArrowLeft className="w-4 h-4" />
                 Back to Results
               </button>
@@ -301,20 +301,20 @@ const LibraryPage = () => {
             <div className="flex-1 overflow-y-auto library-scroll">
               <div className="max-w-7xl mx-auto px-4 py-6">
                 <ArticlePreview
-                  paper={previewPaper}
-                  onClose={exitDeepDive}
-                  onVote={handleVote}
-                  onTrash={handleTrash}
-                  vote={votes[previewPaper.paperId]}
-                  collections={collections}
-                  onAddToCollection={handleAddToCollection}
-                  allPapers={visiblePapers}
-                  onNavigate={(p) => setPreviewPaper(p)}
-                />
+                paper={previewPaper}
+                onClose={exitDeepDive}
+                onVote={handleVote}
+                onTrash={handleTrash}
+                vote={votes[previewPaper.paperId]}
+                collections={collections}
+                onAddToCollection={handleAddToCollection}
+                allPapers={visiblePapers}
+                onNavigate={(p) => setPreviewPaper(p)} />
+              
               </div>
             </div>
           </motion.section>
-        )}
+        }
       </AnimatePresence>
 
       {/* Main layout */}
@@ -327,20 +327,20 @@ const LibraryPage = () => {
               onBulkProcessClick={() => toast.info("Bulk Process — Coming Soon", { description: "Batch-process multiple papers at once: AI labeling, categorization, and metadata extraction across your entire collection in one click.", duration: 6000 })}
               collections={collections}
               onCreateCollection={handleCreateCollection}
-              onDeleteCollection={(id) => { if (activeCollectionId === id) setActiveCollectionId(null); handleDeleteCollection(id); }}
+              onDeleteCollection={(id) => {if (activeCollectionId === id) setActiveCollectionId(null);handleDeleteCollection(id);}}
               onDropToCollection={handleAddToCollection}
               enabledSources={enabledSources}
               onToggleSource={(key) => {
                 setEnabledSources((prev) => {
                   const next = new Set(prev);
-                  if (next.has(key)) next.delete(key);
-                  else next.add(key);
+                  if (next.has(key)) next.delete(key);else
+                  next.add(key);
                   return next;
                 });
               }}
               activeCollectionId={activeCollectionId}
-              onCollectionClick={setActiveCollectionId}
-            />
+              onCollectionClick={setActiveCollectionId} />
+            
 
             <div className="flex-1 p-5 space-y-4 overflow-hidden flex flex-col min-w-0">
               {/* Search bar */}
@@ -348,12 +348,12 @@ const LibraryPage = () => {
                 <div className="relative shrink-0 border-r border-primary/15">
                   <select
                     value={activeCategory}
-                    onChange={(e) => { setActiveCollectionId(null); setActiveCategory(e.target.value); }}
-                    className="h-full appearance-none bg-primary/5 hover:bg-primary/10 pl-4 pr-10 py-3 text-sm font-body font-semibold text-foreground cursor-pointer focus:outline-none transition-colors min-w-[160px]"
-                  >
-                    {CATEGORIES.map((cat) => (
-                      <option key={cat.id} value={cat.id}>{cat.label}</option>
-                    ))}
+                    onChange={(e) => {setActiveCollectionId(null);setActiveCategory(e.target.value);}}
+                    className="h-full appearance-none bg-primary/5 hover:bg-primary/10 pl-4 pr-10 py-3 text-sm font-body font-semibold text-foreground cursor-pointer focus:outline-none transition-colors min-w-[160px]">
+                    
+                    {CATEGORIES.map((cat) =>
+                    <option key={cat.id} value={cat.id}>{cat.label}</option>
+                    )}
                   </select>
                   <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
                 </div>
@@ -364,93 +364,93 @@ const LibraryPage = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers..."
-                    className="w-full h-full bg-transparent pl-11 pr-4 py-3 text-sm text-foreground font-body placeholder:text-muted-foreground focus:outline-none"
-                  />
+                    className="w-full h-full bg-transparent pl-11 pr-4 py-3 text-sm text-foreground font-body placeholder:text-muted-foreground focus:outline-none" />
+                  
                 </div>
                 <button
                   type="submit"
-                  className="shrink-0 px-6 bg-primary text-primary-foreground font-body font-semibold text-sm hover:bg-primary/90 transition-colors"
-                >
+                  className="shrink-0 px-6 bg-primary text-primary-foreground font-body font-semibold text-sm hover:bg-primary/90 transition-colors">
+                  
                   Search
                 </button>
               </form>
 
               <div className="flex items-center gap-3">
                 <div className="flex-1">
-                  {activeCollection ? (
-                    <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/20">
+                  {activeCollection ?
+                  <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/20">
                       <Folder className="w-4 h-4 text-primary" />
                       <span className="text-sm font-body text-foreground font-semibold">{activeCollection.name}</span>
                       <span className="text-xs font-body text-muted-foreground">{visiblePapers.length} paper(s)</span>
                       <button
-                        onClick={() => setActiveCollectionId(null)}
-                        className="ml-auto flex items-center gap-1 text-xs font-body text-muted-foreground hover:text-foreground transition-colors"
-                      >
+                      onClick={() => setActiveCollectionId(null)}
+                      className="ml-auto flex items-center gap-1 text-xs font-body text-muted-foreground hover:text-foreground transition-colors">
+                      
                         <ArrowLeft className="w-3 h-3" />
                         Back to results
                       </button>
-                    </div>
-                  ) : (
-                    <SearchResultsCount
-                      totalResults={visiblePapers.length}
-                      searchQuery={lastSearchQuery}
-                      sources={sourcesList.length > 0 ? sourcesList : [{ name: "CrossRef", count: 0 }, { name: "arXiv", count: 0 }, { name: "OpenAlex", count: 0 }]}
-                    />
-                  )}
+                    </div> :
+
+                  <SearchResultsCount
+                    totalResults={visiblePapers.length}
+                    searchQuery={lastSearchQuery}
+                    sources={sourcesList.length > 0 ? sourcesList : [{ name: "CrossRef", count: 0 }, { name: "arXiv", count: 0 }, { name: "OpenAlex", count: 0 }]} />
+
+                  }
                 </div>
                 <ViewToggle mode={viewMode} onChange={setViewMode} />
               </div>
 
-              {selectedPapers.size > 0 && (
-                <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/20">
+              {selectedPapers.size > 0 &&
+              <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/20">
                   <FolderPlus className="w-4 h-4 text-primary shrink-0" />
                   <span className="text-xs font-body text-foreground font-semibold">{selectedPapers.size}</span>
                   <span className="text-xs font-body text-muted-foreground">paper(s) selected</span>
 
-                  {collections.length > 0 ? (
-                    <div className="ml-auto flex items-center gap-2">
+                  {collections.length > 0 ?
+                <div className="ml-auto flex items-center gap-2">
                       <Select value={targetCollectionId} onValueChange={setTargetCollectionId}>
                         <SelectTrigger className="h-8 w-[200px] bg-card border-accent/30 text-xs font-body font-semibold">
                           <SelectValue placeholder="Select collection…" />
                         </SelectTrigger>
                         <SelectContent>
-                          {collections.map((col) => (
-                            <SelectItem key={col.id} value={col.id}>
+                          {collections.map((col) =>
+                      <SelectItem key={col.id} value={col.id}>
                               {col.name} ({col.paperIds.length})
                             </SelectItem>
-                          ))}
+                      )}
                         </SelectContent>
                       </Select>
                       <button
-                        onClick={() => {
-                          if (!targetCollectionId) {
-                            toast.error("Please select a collection first");
-                            return;
-                          }
-                          selectedPapers.forEach((paperId) => {
-                            const p = visiblePapers.find((vp) => vp.paperId === paperId);
-                            if (p) handleAddToCollection(paperId, p.title, targetCollectionId);
-                          });
-                          const col = collections.find((c) => c.id === targetCollectionId);
-                          toast.success(`Added ${selectedPapers.size} paper(s) to "${col?.name}"`);
-                          setSelectedPapers(new Set());
-                          setTargetCollectionId("");
-                        }}
-                        className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-body font-semibold hover:bg-primary/90 transition-all"
-                      >
+                    onClick={() => {
+                      if (!targetCollectionId) {
+                        toast.error("Please select a collection first");
+                        return;
+                      }
+                      selectedPapers.forEach((paperId) => {
+                        const p = visiblePapers.find((vp) => vp.paperId === paperId);
+                        if (p) handleAddToCollection(paperId, p.title, targetCollectionId);
+                      });
+                      const col = collections.find((c) => c.id === targetCollectionId);
+                      toast.success(`Added ${selectedPapers.size} paper(s) to "${col?.name}"`);
+                      setSelectedPapers(new Set());
+                      setTargetCollectionId("");
+                    }}
+                    className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-body font-semibold hover:bg-primary/90 transition-all">
+                    
                         <FolderPlus className="w-3.5 h-3.5" />
                         Add
                       </button>
-                    </div>
-                  ) : (
-                    <span className="ml-auto text-[10px] font-body text-muted-foreground italic">Create a collection in the sidebar first</span>
-                  )}
+                    </div> :
+
+                <span className="ml-auto text-[10px] font-body text-muted-foreground italic">Create a collection in the sidebar first</span>
+                }
 
                   <button onClick={() => setSelectedPapers(new Set())} className="text-xs font-body text-muted-foreground hover:text-foreground transition-colors">
                     Clear
                   </button>
                 </div>
-              )}
+              }
 
               {/* Results grid */}
               <div className="flex-1 min-h-0">
@@ -466,59 +466,59 @@ const LibraryPage = () => {
                   onPaperClick={enterDeepDive}
                   activePaperId={previewPaper?.paperId}
                   viewMode={viewMode}
-                  votes={votes}
-                />
+                  votes={votes} />
+                
               </div>
             </div>
           </div>
 
           {/* Bulk Review Panel */}
           <AnimatePresence>
-            {selectedPapers.size >= 2 && !deepDiveMode && (
-              <div className="mt-4">
+            {selectedPapers.size >= 2 && !deepDiveMode &&
+            <div className="mt-4">
                 <BulkReviewPanel
-                  papers={visiblePapers.filter((p) => selectedPapers.has(p.paperId))}
-                  collections={collections}
-                  onApprove={handleAddToCollection}
-                  onReject={(paperId) => {
-                    handleToggleSelect(paperId);
-                    handleTrash(paperId);
-                  }}
-                  onOpenFull={(p) => {
-                    enterDeepDive(p);
-                    setSelectedPapers(new Set());
-                  }}
-                  onClose={() => {}}
-                  onClearSelection={() => setSelectedPapers(new Set())}
-                />
+                papers={visiblePapers.filter((p) => selectedPapers.has(p.paperId))}
+                collections={collections}
+                onApprove={handleAddToCollection}
+                onReject={(paperId) => {
+                  handleToggleSelect(paperId);
+                  handleTrash(paperId);
+                }}
+                onOpenFull={(p) => {
+                  enterDeepDive(p);
+                  setSelectedPapers(new Set());
+                }}
+                onClose={() => {}}
+                onClearSelection={() => setSelectedPapers(new Set())} />
+              
               </div>
-            )}
+            }
           </AnimatePresence>
 
           {/* Inline Deep Dive (non-immersive, below grid) — only when not in full immersive mode */}
           <AnimatePresence>
-            {previewPaper && selectedPapers.size < 2 && !deepDiveMode && (
-              <div className="mt-4">
+            {previewPaper && selectedPapers.size < 2 && !deepDiveMode &&
+            <div className="mt-4">
                 <ArticlePreview
-                  paper={previewPaper}
-                  onClose={() => setPreviewPaper(null)}
-                  onVote={handleVote}
-                  onTrash={handleTrash}
-                  vote={votes[previewPaper.paperId]}
-                  collections={collections}
-                  onAddToCollection={handleAddToCollection}
-                  allPapers={visiblePapers}
-                  onNavigate={(p) => setPreviewPaper(p)}
-                />
+                paper={previewPaper}
+                onClose={() => setPreviewPaper(null)}
+                onVote={handleVote}
+                onTrash={handleTrash}
+                vote={votes[previewPaper.paperId]}
+                collections={collections}
+                onAddToCollection={handleAddToCollection}
+                allPapers={visiblePapers}
+                onNavigate={(p) => setPreviewPaper(p)} />
+              
               </div>
-            )}
+            }
           </AnimatePresence>
         </div>
       </section>
 
       <Footer />
-    </main>
-  );
+    </main>);
+
 };
 
 export default LibraryPage;
