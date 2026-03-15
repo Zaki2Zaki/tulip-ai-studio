@@ -7,6 +7,7 @@ import CostEstimator from "@/components/CostEstimator";
 import MotionDataSection from "@/components/MotionDataSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import FloatingScrollTop from "@/components/FloatingScrollTop";
 
 const Index = () => {
   return (
@@ -20,6 +21,7 @@ const Index = () => {
       <CostEstimator />
       <ContactSection />
       <Footer />
+      <FloatingScrollTop />
     </main>
   );
 };
