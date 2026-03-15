@@ -79,10 +79,10 @@ const BulkReviewPanel = ({
       <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-muted/10">
         <div className="flex items-center gap-3">
           <Sparkles className="w-4 h-4 text-accent" />
-          <h3 className="text-sm font-display font-semibold text-foreground">
+          <h3 className="text-base font-display font-semibold text-foreground">
             Bulk Review
           </h3>
-          <span className="text-xs font-body text-foreground">
+          <span className="text-sm font-body text-foreground">
             {pendingCount} of {papers.length} pending
           </span>
         </div>
