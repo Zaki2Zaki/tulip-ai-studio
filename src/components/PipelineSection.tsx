@@ -92,7 +92,7 @@ content production pipelines - from pre-production through final output.
                 WebkitTextFillColor: 'transparent'
               }}>
               
-              Evolving with AI
+              Evolving with LLMs 
             </span>
             <ArrowRight className="w-5 h-5" style={{ color: '#4169E1' }} />
           </div>
