@@ -6,6 +6,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingScrollTop from "@/components/FloatingScrollTop";
 import heroImg from "@/assets/steam-delays-hero.jpg";
+import fig1Img from "@/assets/steam-fig1-data-collection.jpg";
+import fig2Img from "@/assets/steam-fig2-delay-distribution.jpg";
+import fig3Img from "@/assets/steam-fig3-genre-correlation.jpg";
 
 const ARXIV_URL = "https://arxiv.org/abs/2204.11191";
 const PDF_URL = "https://arxiv.org/pdf/2204.11191v1";
