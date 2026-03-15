@@ -96,6 +96,22 @@ const CaseStudiesPage = () => {
                   <span className="inline-flex items-center gap-1 text-xs font-body text-primary group-hover:gap-2 transition-all">
                     Explore <ArrowRight className="w-3 h-3" />
                   </span>
+                  {(study as any).citation && (
+                    <div className="mt-3 pt-3 border-t border-border/30 flex flex-col gap-2">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-body text-primary/70">
+                        <BookOpen className="w-3 h-3" /> {(study as any).citation}
+                      </span>
+                      <a
+                        href="https://arxiv.org/pdf/2204.11191v1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 text-[10px] font-body text-primary hover:underline"
+                      >
+                        <Download className="w-2.5 h-2.5" /> Download PDF
+                      </a>
+                    </div>
+                  )}
                 </Link>
               </motion.div>
             ))}

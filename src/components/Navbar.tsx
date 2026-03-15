@@ -347,6 +347,7 @@ const Navbar = () => {
                           { label: "Pre-Production", to: "/case-studies/pre-production" },
                           { label: "Production", to: "/case-studies/production" },
                           { label: "Post-Production", to: "/case-studies/post-production" },
+                          { label: "Steam Game Delays", to: "/case-studies/steam-delays" },
                         ].map((item) => (
                           <Link
                             key={item.to}
