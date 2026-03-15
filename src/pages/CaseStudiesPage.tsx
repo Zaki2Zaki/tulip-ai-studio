@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import FloatingScrollTop from "@/components/FloatingScrollTop";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen, Download } from "lucide-react";
 
 const studies = [
   {
@@ -23,6 +23,13 @@ const studies = [
     description: "AI render polish, smart compositing, and adaptive color grading breakthroughs.",
     to: "/case-studies/post-production",
     status: "Coming Q2 2026",
+  },
+  {
+    title: "Steam Game Delays — Empirical Insights",
+    description: "48% of 23,485 titles delayed (median 14 days) — AI prevents it. Release ranges beat specific dates.",
+    to: "/case-studies/steam-delays",
+    status: "Live",
+    citation: "Grewal et al. (2022) arXiv:2204.11191v1",
   },
 ];
 
@@ -59,7 +66,7 @@ const CaseStudiesPage = () => {
           </motion.p>
 
           {/* Case study cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
             {studies.map((study, i) => (
               <motion.div
                 key={study.to}
@@ -89,6 +96,22 @@ const CaseStudiesPage = () => {
                   <span className="inline-flex items-center gap-1 text-xs font-body text-primary group-hover:gap-2 transition-all">
                     Explore <ArrowRight className="w-3 h-3" />
                   </span>
+                  {(study as any).citation && (
+                    <div className="mt-3 pt-3 border-t border-border/30 flex flex-col gap-2">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-body text-primary/70">
+                        <BookOpen className="w-3 h-3" /> {(study as any).citation}
+                      </span>
+                      <a
+                        href="https://arxiv.org/pdf/2204.11191v1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 text-[10px] font-body text-primary hover:underline"
+                      >
+                        <Download className="w-2.5 h-2.5" /> Download PDF
+                      </a>
+                    </div>
+                  )}
                 </Link>
               </motion.div>
             ))}

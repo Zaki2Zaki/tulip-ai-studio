@@ -251,11 +251,12 @@ const Navbar = () => {
               <div className="max-w-4xl mx-auto py-8 px-6">
                 {/* Case Study sub-pages */}
                 <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground font-body mb-4">Case Studies</p>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
                   {[
                     { label: "Pre-Production Breakthroughs", to: "/case-studies/pre-production", desc: "AI storyboard automation & previz innovations" },
                     { label: "Production Pipeline Transformations", to: "/case-studies/production", desc: "Unity artist tools for stunning zero-G visuals" },
                     { label: "Post-Production Polish Innovations", to: "/case-studies/post-production", desc: "AI render polish & compositing breakthroughs" },
+                    { label: "Steam Game Delays", to: "/case-studies/steam-delays", desc: "48% of 23k titles delayed — empirical insights" },
                   ].map((item) => (
                     <Link
                       key={item.to}
@@ -346,6 +347,7 @@ const Navbar = () => {
                           { label: "Pre-Production", to: "/case-studies/pre-production" },
                           { label: "Production", to: "/case-studies/production" },
                           { label: "Post-Production", to: "/case-studies/post-production" },
+                          { label: "Steam Game Delays", to: "/case-studies/steam-delays" },
                         ].map((item) => (
                           <Link
                             key={item.to}

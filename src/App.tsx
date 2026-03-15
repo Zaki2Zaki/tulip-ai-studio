@@ -10,6 +10,7 @@ import AuthPage from "./pages/AuthPage";
 import CaseStudiesPage from "./pages/CaseStudiesPage";
 import CaseStudyProductionPage from "./pages/CaseStudyProductionPage";
 import CaseStudyComingSoonPage from "./pages/CaseStudyComingSoonPage";
+import CaseStudySteamDelaysPage from "./pages/CaseStudySteamDelaysPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/library" element={<LibraryPage />} />
           <Route path="/case-studies" element={<CaseStudiesPage />} />
           <Route path="/case-studies/production" element={<CaseStudyProductionPage />} />
+          <Route path="/case-studies/steam-delays" element={<CaseStudySteamDelaysPage />} />
           <Route path="/case-studies/:stage" element={<CaseStudyComingSoonPage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="*" element={<NotFound />} />
