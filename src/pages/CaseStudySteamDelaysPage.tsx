@@ -172,7 +172,7 @@ const CaseStudySteamDelaysPage = () => {
             transition={{ delay: 0.5 }}
             className="relative rounded-2xl overflow-hidden border border-border/50 mb-12">
             
-            <img src={heroImg} alt="Steam game delays data flow architecture diagram" className="w-full h-auto" />
+            
             <div className="absolute top-4 right-4">
               <CitationBadge small />
             </div>
