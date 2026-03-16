@@ -3,9 +3,19 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { ClipboardCheck } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
+const rotatingTexts = ["0→1", "N→1"];
+
 const HeroSection = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [textIndex, setTextIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTextIndex((prev) => (prev + 1) % rotatingTexts.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
