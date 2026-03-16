@@ -91,7 +91,7 @@ const HeroSection = () => {
               lineHeight: 1.55,
               color: "rgba(255,255,255,0.9)"
             }}>
-            <span className="text-3xl md:text-4xl font-display font-bold" style={{ textShadow: "0 0 30px rgba(255,255,255,0.2)" }}>
+            <span className="text-3xl md:text-4xl font-display font-bold whitespace-nowrap" style={{ textShadow: "0 0 30px rgba(255,255,255,0.2)" }}>
               AI R&amp;D That Ships 0/N →1 Breakthroughs
             </span>
             <br />
