@@ -34,10 +34,34 @@ interface PapersTableProps {
 }
 
 const generateTLDR = (title: string, abstract: string | null): string => {
-  if (abstract && abstract.length > 20) {
-    return abstract.length > 120 ? abstract.slice(0, 120) + "…" : abstract;
-  }
-  return title.length > 80 ? title.slice(0, 80) + "…" : title;
+  if (!abstract || abstract.length < 20) return "No summary available.";
+
+  // Split abstract into sentences
+  const sentences = abstract
+    .replace(/\s+/g, " ")
+    .split(/(?<=[.!?])\s+/)
+    .filter((s) => s.length > 15);
+
+  if (sentences.length === 0) return abstract.slice(0, 140) + "…";
+
+  // Remove sentences that heavily overlap with the title
+  const titleWords = new Set(title.toLowerCase().replace(/[^a-z0-9\s]/g, "").split(/\s+/).filter((w) => w.length > 3));
+  const scored = sentences.map((s) => {
+    const sWords = s.toLowerCase().replace(/[^a-z0-9\s]/g, "").split(/\s+/).filter((w) => w.length > 3);
+    const overlap = sWords.filter((w) => titleWords.has(w)).length / Math.max(sWords.length, 1);
+    // Prefer mid-abstract sentences (methods/results), penalize high title overlap
+    return { text: s.trim(), overlap };
+  });
+
+  // Filter out sentences too similar to the title (>60% word overlap)
+  const candidates = scored.filter((s) => s.overlap < 0.6);
+  const pool = candidates.length > 0 ? candidates : scored;
+
+  // Pick the 2nd or 3rd sentence if available (usually the "meat"), else first candidate
+  const pick = pool.length >= 3 ? pool[2] : pool.length >= 2 ? pool[1] : pool[0];
+  const result = pick.text;
+
+  return result.length > 180 ? result.slice(0, 177) + "…" : result;
 };
 
 const getAIFlag = (paper: Paper): { label: string; color: string; icon: React.ReactNode } => {
