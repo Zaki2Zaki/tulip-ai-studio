@@ -149,7 +149,7 @@ content production pipelines - from pre-production through final output.
             <div className="flex flex-col md:flex-row items-start gap-4 md:gap-8">
               <span className="font-display text-5xl md:text-7xl font-bold text-gradient-gold shrink-0">$350K</span>
               <div className="text-left">
-                <p className="text-sm md:text-base text-foreground/90 font-body leading-relaxed">Per major rework/iteration cycle (e.g., asset pipeline fix or build overhaul affecting 10–30 devs for 3–7 days)
+                <p className="text-sm md:text-base text-foreground/90 font-body leading-relaxed">Per major rework/iteration cycle (e.g., asset pipeline fix or build overhaul affecting 10–30 devs for 3–7 days)
                   <strong className="text-foreground font-semibold"> Per major rework/iteration cycle</strong> (e.g., asset pipeline fix or build overhaul affecting 10–30 devs for 3–7 days)
                 </p>
                 <p className="text-xs md:text-sm text-muted-foreground font-body mt-3 leading-relaxed">AA Studios $100K–$400K per major rework/iteration cycle
