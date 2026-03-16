@@ -116,13 +116,13 @@ content production pipelines - from pre-production through final output.
           <div className="relative rounded-2xl overflow-hidden border border-primary/30 group glow-gold">
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-background/30 z-10 pointer-events-none" />
             <img
-              src={workflowAi}
+
               alt="AI-powered studio workflow pipeline with tools like Runway, Sora, Stability AI, Llama, and Claude"
-              className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+              className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500" src="/lovable-uploads/e42cc85d-16a1-4960-b514-8ff40e21bc77.png" />
 
           </div>
-          <p className="text-center max-w-2xl mx-auto mt-8 text-sm text-white font-sans md:text-lg">Startup AI tools are reshaping every stage of the pipeline. We help studios adopt and integrate these tools seamlessly. So, your team stays focused more on what they love to do. 
-
+          <p className="max-w-2xl mx-auto mt-8 text-sm text-white font-sans text-left font-normal md:text-2xl">Startup AI tools are reshaping every stage of the pipeline
+We help the explosion of AI tools into integrated production pipelines for creative studios - replacing fragmented workflows with scalable systems.
           </p>
 
           {/* Industry Statistics */}
