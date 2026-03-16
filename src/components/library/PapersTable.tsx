@@ -247,19 +247,19 @@ const PapersTable = ({
                   />
                 </th>
                 <th className="w-8 px-1 py-3" />
-                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider">
+                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-[22%]">
                   Title
                 </th>
-                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider min-w-[180px]">
+                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-[36%]">
                   TLDR
                 </th>
-                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-24">
+                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-20">
                   AI Flag
                 </th>
-                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-28">
+                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-24">
                   AI Label
                 </th>
-                <th className="px-3 py-3 text-center w-32">
+                <th className="px-3 py-3 text-center w-28">
                   <button
                     onClick={() => handleSort("year")}
                     className="inline-flex items-center gap-1.5 font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider hover:text-foreground transition-colors"
@@ -271,7 +271,7 @@ const PapersTable = ({
                     <YearFilter yearRange={yearRange} onChange={setYearRange} />
                   </div>
                 </th>
-                <th className="px-3 py-3 text-center w-32">
+                <th className="px-3 py-3 text-center w-28">
                   <button
                     onClick={() => handleSort("matchRate")}
                     className="inline-flex items-center gap-1.5 font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider hover:text-foreground transition-colors"
