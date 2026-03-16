@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { ClipboardCheck } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
