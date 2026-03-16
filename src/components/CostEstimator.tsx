@@ -163,7 +163,7 @@ const CostEstimator = () => {
           {/* Tulip Logo + Currency toggle */}
           <div className="mb-10 flex flex-col items-center gap-6">
             <img src={tulipLogo} alt="Tulip Technology logo" className="w-16 h-16 rounded-full object-cover border border-border" />
-            <h3 className="font-display text-lg font-semibold">Choose Your Currency</h3>
+            <h3 className="font-display font-semibold text-3xl">Choose Your Currency</h3>
             <div className="bg-secondary rounded-full p-1 flex border-solid shadow-sm border-2 border-blue-50 text-primary gap-[5px]">
               {(["USD", "CAD", "EUR"] as const).map((c) =>
               <button
@@ -182,7 +182,7 @@ const CostEstimator = () => {
 
           {/* Studio Scale */}
           <div className="mb-10">
-            <h3 className="font-display text-lg font-semibold mb-4">Studio Scale</h3>
+            <h3 className="font-display font-semibold mb-4 text-2xl">Studio Scale</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {(Object.keys(scaleMultipliers) as ScaleLevel[]).map((key) => {
                 const s = scaleMultipliers[key];
@@ -206,7 +206,7 @@ const CostEstimator = () => {
 
           {/* Services */}
           <div className="mb-10">
-            <h3 className="font-display text-lg font-semibold mb-4">Select Services</h3>
+            <h3 className="font-display font-semibold mb-4 text-xl">Select Services</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {serviceOptions.map((svc) => {
                 const selected = selectedServices.includes(svc.id);
