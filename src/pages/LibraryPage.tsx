@@ -9,7 +9,7 @@ import type { Collection } from "@/components/library/LibrarySidebar";
 import PapersTable from "@/components/library/PapersTable";
 import SearchResultsCount from "@/components/library/SearchResultsCount";
 import ArticlePreview from "@/components/library/ArticlePreview";
-import BulkReviewPanel from "@/components/library/BulkReviewPanel";
+
 import StatsRow from "@/components/library/StatsRow";
 import ViewToggle from "@/components/library/ViewToggle";
 import type { ViewMode } from "@/components/library/ViewToggle";
@@ -189,8 +189,38 @@ const LibraryPage = () => {
   const handleVote = (paperId: string, voteType: "up" | "down") => {
     setVotes((prev) => ({ ...prev, [paperId]: voteType }));
     if (voteType === "up") {
-      setSelectedPapers((prev) => new Set(prev).add(paperId));
-      toast.success("Marked as relevant — added to Bulk Review");
+      const paper = visiblePapers.find((p) => p.paperId === paperId);
+      if (collections.length === 0) {
+        // Nudge to create a collection
+        toast("Create a collection first to save papers", {
+          description: "Use the sidebar under 'MY COLLECTIONS' to create one.",
+          action: {
+            label: "Create Now",
+            onClick: () => {
+              const name = "My Research";
+              handleCreateCollection(name);
+              // Auto-save after creating
+              setTimeout(() => {
+                setCollections((prev) => {
+                  const col = prev[prev.length - 1];
+                  if (col && paper) {
+                    handleAddToCollection(paperId, paper.title, col.id);
+                  }
+                  return prev;
+                });
+              }, 100);
+            },
+          },
+          duration: 8000,
+        });
+      } else {
+        // Auto-save to first collection
+        const col = collections[0];
+        if (paper) {
+          handleAddToCollection(paperId, paper.title, col.id);
+          toast.success(`Saved to "${col.name}"`);
+        }
+      }
     } else {
       toast.info("Noted as not useful — preferences updated");
     }
@@ -422,28 +452,6 @@ const LibraryPage = () => {
             </div>
           </div>
 
-          {/* Bulk Review Panel */}
-          <AnimatePresence>
-            {selectedPapers.size >= 1 &&
-            <div className="mt-4">
-                <BulkReviewPanel
-                papers={visiblePapers.filter((p) => selectedPapers.has(p.paperId))}
-                collections={collections}
-                onApprove={handleAddToCollection}
-                onReject={(paperId) => {
-                  handleToggleSelect(paperId);
-                  handleTrash(paperId);
-                }}
-                onOpenFull={(p) => {
-                  enterDeepDive(p);
-                  setSelectedPapers(new Set());
-                }}
-                onClose={() => {}}
-                onClearSelection={() => setSelectedPapers(new Set())} />
-              
-              </div>
-            }
-          </AnimatePresence>
 
           {/* Inline preview below grid */}
           <AnimatePresence>
