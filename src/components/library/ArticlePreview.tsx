@@ -387,30 +387,41 @@ const ArticlePreview = ({
                 )}
                 <div className="relative">
                   <button
-                    onClick={() => setShowCollectionMenu(!showCollectionMenu)}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-accent/30 bg-accent/5 text-accent text-xs font-body font-semibold hover:bg-accent/10 transition-all"
+                    onClick={() => {
+                      if (collections.length === 0) {
+                        setShowCollectionMenu(false);
+                        toast("Create a collection first to save papers", {
+                          description: "Use the sidebar under 'MY COLLECTIONS' to create one.",
+                          duration: 6000,
+                          icon: <FolderPlus className="w-4 h-4 text-accent" />,
+                        });
+                      } else {
+                        setShowCollectionMenu(!showCollectionMenu);
+                      }
+                    }}
+                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg border text-xs font-body font-semibold transition-all ${
+                      collections.length === 0
+                        ? "border-accent/50 bg-accent/10 text-accent animate-pulse"
+                        : "border-accent/30 bg-accent/5 text-accent hover:bg-accent/10"
+                    }`}
                   >
                     <FolderPlus className="w-3.5 h-3.5" />
                     Save
                   </button>
-                  {showCollectionMenu && (
+                  {showCollectionMenu && collections.length > 0 && (
                     <div className="absolute bottom-full right-0 mb-1 bg-card border border-border rounded-lg shadow-xl z-20 p-1 min-w-[160px]">
-                      {collections.length === 0 ? (
-                        <p className="text-xs text-muted-foreground p-2 font-body">No collections yet.</p>
-                      ) : (
-                        collections.map((col) => (
-                          <button
-                            key={col.id}
-                            onClick={() => {
-                              onAddToCollection(paper.paperId, paper.title, col.id);
-                              setShowCollectionMenu(false);
-                            }}
-                            className="w-full text-left px-3 py-2 text-xs font-body text-foreground hover:bg-muted/30 rounded-md"
-                          >
-                            {col.name}
-                          </button>
-                        ))
-                      )}
+                      {collections.map((col) => (
+                        <button
+                          key={col.id}
+                          onClick={() => {
+                            onAddToCollection(paper.paperId, paper.title, col.id);
+                            setShowCollectionMenu(false);
+                          }}
+                          className="w-full text-left px-3 py-2 text-xs font-body text-foreground hover:bg-muted/30 rounded-md"
+                        >
+                          {col.name}
+                        </button>
+                      ))}
                     </div>
                   )}
                 </div>

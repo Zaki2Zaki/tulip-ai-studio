@@ -452,28 +452,6 @@ const LibraryPage = () => {
             </div>
           </div>
 
-          {/* Bulk Review Panel */}
-          <AnimatePresence>
-            {selectedPapers.size >= 1 &&
-            <div className="mt-4">
-                <BulkReviewPanel
-                papers={visiblePapers.filter((p) => selectedPapers.has(p.paperId))}
-                collections={collections}
-                onApprove={handleAddToCollection}
-                onReject={(paperId) => {
-                  handleToggleSelect(paperId);
-                  handleTrash(paperId);
-                }}
-                onOpenFull={(p) => {
-                  enterDeepDive(p);
-                  setSelectedPapers(new Set());
-                }}
-                onClose={() => {}}
-                onClearSelection={() => setSelectedPapers(new Set())} />
-              
-              </div>
-            }
-          </AnimatePresence>
 
           {/* Inline preview below grid */}
           <AnimatePresence>
