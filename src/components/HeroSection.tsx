@@ -1,11 +1,21 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { ClipboardCheck } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
+const rotatingTexts = ["0→1", "N→1"];
+
 const HeroSection = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [textIndex, setTextIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTextIndex((prev) => (prev + 1) % rotatingTexts.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -92,7 +102,22 @@ const HeroSection = () => {
               color: "rgba(255,255,255,0.9)"
             }}>
             <span className="text-3xl md:text-4xl font-display font-bold whitespace-nowrap" style={{ textShadow: "0 0 30px rgba(255,255,255,0.2)" }}>
-              AI R&amp;D That Ships 0/N →1 Breakthroughs
+              AI R&amp;D That Ships{" "}
+              <span className="inline-block overflow-hidden align-bottom" style={{ height: "1.2em", width: "3.5em", position: "relative" }}>
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={textIndex}
+                    initial={{ y: "100%", opacity: 0 }}
+                    animate={{ y: "0%", opacity: 1 }}
+                    exit={{ y: "-100%", opacity: 0 }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                    className="absolute inset-0 flex items-center"
+                  >
+                    {rotatingTexts[textIndex]}
+                  </motion.span>
+                </AnimatePresence>
+              </span>{" "}
+              Breakthroughs
             </span>
             <br />
             <span className="text-2xl font-sans font-medium">Game Studios, 3D Animation &amp; VFX Teams</span>
