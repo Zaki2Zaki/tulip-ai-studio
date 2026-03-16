@@ -9,7 +9,7 @@ import type { Collection } from "@/components/library/LibrarySidebar";
 import PapersTable from "@/components/library/PapersTable";
 import SearchResultsCount from "@/components/library/SearchResultsCount";
 import ArticlePreview from "@/components/library/ArticlePreview";
-import BulkReviewPanel from "@/components/library/BulkReviewPanel";
+
 import StatsRow from "@/components/library/StatsRow";
 import ViewToggle from "@/components/library/ViewToggle";
 import type { ViewMode } from "@/components/library/ViewToggle";
