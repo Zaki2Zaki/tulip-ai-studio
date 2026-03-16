@@ -141,7 +141,7 @@ content production pipelines - from pre-production through final output.
 
             <div className="flex flex-col md:flex-row items-start gap-4 md:gap-8">
               <span className="font-display text-5xl md:text-7xl font-bold text-gradient-gold shrink-0">45%</span>
-              <p className="text-sm md:text-base text-foreground/90 font-body leading-relaxed text-left">Teams lose average 1-hour per week on version control by troubleshooting, wasting integration time & asset creation in unoptimized, silo pipelines or teams
+              <p className="text-sm md:text-base text-foreground/90 font-body leading-relaxed text-left">Teams lose average 1-hour per week troubleshooting, wasting integration time & asset creation in unoptimized, silo pipelines or teams
                 <strong className="text-foreground font-semibold">Teams lose average 1-hour per week</strong> troubleshooting, wasting integration time &amp; asset creation in unoptimized, silo pipelines or teams
               </p>
             </div>
