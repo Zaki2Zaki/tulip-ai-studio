@@ -117,7 +117,7 @@ const HeroSection = () => {
                   </motion.span>
                 </AnimatePresence>
               </span>{" "}
-              Breakthroughs
+              <span style={{ marginLeft: "-3.5cm" }}>Breakthroughs</span>
             </span>
             <br />
             <span className="text-2xl font-sans font-medium">Game Studios, 3D Animation &amp; VFX Teams</span>
