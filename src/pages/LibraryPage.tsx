@@ -189,8 +189,38 @@ const LibraryPage = () => {
   const handleVote = (paperId: string, voteType: "up" | "down") => {
     setVotes((prev) => ({ ...prev, [paperId]: voteType }));
     if (voteType === "up") {
-      setSelectedPapers((prev) => new Set(prev).add(paperId));
-      toast.success("Marked as relevant — added to Bulk Review");
+      const paper = visiblePapers.find((p) => p.paperId === paperId);
+      if (collections.length === 0) {
+        // Nudge to create a collection
+        toast("Create a collection first to save papers", {
+          description: "Use the sidebar under 'MY COLLECTIONS' to create one.",
+          action: {
+            label: "Create Now",
+            onClick: () => {
+              const name = "My Research";
+              handleCreateCollection(name);
+              // Auto-save after creating
+              setTimeout(() => {
+                setCollections((prev) => {
+                  const col = prev[prev.length - 1];
+                  if (col && paper) {
+                    handleAddToCollection(paperId, paper.title, col.id);
+                  }
+                  return prev;
+                });
+              }, 100);
+            },
+          },
+          duration: 8000,
+        });
+      } else {
+        // Auto-save to first collection
+        const col = collections[0];
+        if (paper) {
+          handleAddToCollection(paperId, paper.title, col.id);
+          toast.success(`Saved to "${col.name}"`);
+        }
+      }
     } else {
       toast.info("Noted as not useful — preferences updated");
     }
