@@ -479,6 +479,7 @@ const LibraryPage = () => {
         </div>
       </section>
 
+      <CalendlyModal open={calendlyOpen} onClose={() => setCalendlyOpen(false)} />
       <Footer />
     </main>);
 

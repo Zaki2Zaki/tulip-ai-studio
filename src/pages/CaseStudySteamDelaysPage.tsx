@@ -504,6 +504,7 @@ const CaseStudySteamDelaysPage = () => {
         }
       </AnimatePresence>
 
+      <CalendlyModal open={calendlyOpen} onClose={() => setCalendlyOpen(false)} />
       <Footer />
       <FloatingScrollTop />
     </main>);
