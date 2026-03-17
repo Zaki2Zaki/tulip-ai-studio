@@ -127,6 +127,7 @@ const DownloadButton = ({ size = "sm" }: {size?: "sm" | "lg";}) =>
 const CaseStudySteamDelaysPage = () => {
   const [hoveredBlock, setHoveredBlock] = useState<string | null>(null);
   const [showSticky, setShowSticky] = useState(false);
+  const [calendlyOpen, setCalendlyOpen] = useState(false);
   const [lightboxFig, setLightboxFig] = useState<typeof figures[0] | null>(null);
 
   // Close lightbox on ESC

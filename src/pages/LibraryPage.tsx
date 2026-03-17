@@ -61,6 +61,7 @@ const LibraryPage = () => {
   const [activeCollectionId, setActiveCollectionId] = useState<string | null>(null);
   const [targetCollectionId, setTargetCollectionId] = useState<string>("");
   const [tourOpen, setTourOpen] = useState(false);
+  const [calendlyOpen, setCalendlyOpen] = useState(false);
   
 
   const fetchPapers = async (query: string) => {
