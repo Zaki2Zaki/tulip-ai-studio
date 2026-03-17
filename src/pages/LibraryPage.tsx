@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
+import CalendlyModal from "@/components/CalendlyModal";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, BookOpen, FolderPlus, ChevronDown, ArrowLeft, Folder, Loader2, CalendarCheck } from "lucide-react";
