@@ -213,11 +213,26 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
     if (!user.email) return;
     setSubmitting(true);
     try {
+      // Store lead in database
+      await supabase.from("leads").insert({
+        name: [user.firstName, user.lastName].filter(Boolean).join(" ") || null,
+        email: user.email,
+        industry: user.industry || null,
+        team_size: user.studioScale || null,
+        lead_type: "assessment",
+        assessment_results: {
+          scores: scores.cats.map((c) => ({ label: c.label, pct: Math.round(c.pct) })),
+          overall: Math.round(scores.overall),
+          recommendation,
+        },
+      } as any);
+
       // Send results to edge function
       await supabase.functions.invoke("send-assessment", {
         body: {
           type: "pipeline-assessment",
-          to: "youki@tuliptchnology.studio",
+          to: user.email,
+          internalTo: "youki@arimastudios.ca",
           user,
           scores: scores.cats.map((c) => ({ label: c.label, pct: Math.round(c.pct) })),
           overall: Math.round(scores.overall),

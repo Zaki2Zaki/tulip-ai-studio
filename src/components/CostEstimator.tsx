@@ -5,6 +5,8 @@ import { useRef } from "react";
 import { Calculator, ChevronDown, ChevronUp, ClipboardCheck } from "lucide-react";
 import PipelineAssessmentQuiz from "./PipelineAssessmentQuiz";
 import DiscoveryPackagesModal from "./DiscoveryPackagesModal";
+import QuoteRequestModal from "./QuoteRequestModal";
+import CalendlyModal from "./CalendlyModal";
 
 interface ServiceOption {
   id: string;
@@ -18,7 +20,6 @@ interface ServiceOption {
   maxEUR: number;
 }
 
-// Rates from OANDA (Feb 25, 2026): USD/CAD = 1.3686, USD/EUR = 0.8475
 const serviceOptions: ServiceOption[] = [
 {
   id: "research",
@@ -69,7 +70,6 @@ const serviceOptions: ServiceOption[] = [
   minEUR: 2543, maxEUR: 72038
 }];
 
-
 type ScaleLevel = "small" | "medium" | "large";
 
 const scaleMultipliers: Record<ScaleLevel, {min: number;max: number;label: string;desc: string;}> = {
@@ -95,6 +95,8 @@ const CostEstimator = () => {
   const [showBreakdown, setShowBreakdown] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
   const [discoveryOpen, setDiscoveryOpen] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
+  const [calendlyOpen, setCalendlyOpen] = useState(false);
 
   const handleQuizComplete = (recommendedServices: string[]) => {
     setSelectedServices(recommendedServices);
@@ -125,6 +127,11 @@ const CostEstimator = () => {
     return { totalMin, totalMax, breakdown };
   }, [selectedServices, scale, currency]);
 
+  const selectedServiceLabels = selectedServices.map(id => serviceOptions.find(s => s.id === id)?.label || id);
+  const estimateRangeStr = selectedServices.length > 0
+    ? `${formatCurrency(estimate.totalMin, currency)} – ${formatCurrency(estimate.totalMax, currency)} ${currency}`
+    : "";
+
   return (
     <section id="estimator" className="pt-32 pb-0 section-padding border-none border-0">
       <div ref={ref} className="max-w-5xl mx-auto">
@@ -133,7 +140,6 @@ const CostEstimator = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-16">
-
           <p className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-4">
             Cost Estimator
           </p>
@@ -148,7 +154,6 @@ const CostEstimator = () => {
             data-assessment-trigger
             onClick={() => setQuizOpen(true)}
             className="inline-flex items-center gap-2.5 btn-chrome-outline px-8 py-4 rounded-full font-display font-semibold text-base transition-all">
-            
             <ClipboardCheck size={20} />
             Take the 2-min Assessment
           </button>
@@ -195,11 +200,9 @@ const CostEstimator = () => {
                     "border-primary bg-primary/5 glow-gold" :
                     "border-border hover:border-muted-foreground/30"}`
                     }>
-
                     <div className="font-display font-semibold text-sm mb-1">{s.label}</div>
                     <div className="text-xs text-muted-foreground font-body">{s.desc}</div>
                   </button>);
-
               })}
             </div>
           </div>
@@ -220,13 +223,11 @@ const CostEstimator = () => {
                     "border-primary bg-primary/5" :
                     "border-border hover:border-muted-foreground/30"}`
                     }>
-
                     <div className="flex items-center gap-3">
                       <div
                         className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all shrink-0 ${
                         selected ? "border-primary bg-primary" : "border-muted-foreground/40"}`
                         }>
-
                         {selected &&
                         <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                             <path d="M2 6L5 9L10 3" stroke="hsl(0 0% 3%)" strokeWidth="2" strokeLinecap="round" />
@@ -255,7 +256,6 @@ const CostEstimator = () => {
                       </div>
                     </div>
                   </button>);
-
               })}
             </div>
           </div>
@@ -267,7 +267,6 @@ const CostEstimator = () => {
                 <Calculator className="w-10 h-10 mx-auto mb-3 opacity-40" />
                 Select services above to see your estimated budget range
               </div> :
-
             <div>
                 <div className="text-center mb-6">
                   <p className="mb-2 text-white text-2xl font-sans">Estimated Budget Range</p>
@@ -287,7 +286,6 @@ const CostEstimator = () => {
                 <button
                 onClick={() => setShowBreakdown(!showBreakdown)}
                 className="flex items-center gap-2 mx-auto text-sm text-muted-foreground hover:text-foreground transition-colors font-body">
-
                   {showBreakdown ? "Hide" : "Show"} breakdown
                   {showBreakdown ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
                 </button>
@@ -297,7 +295,6 @@ const CostEstimator = () => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 className="mt-6 space-y-3">
-
                     {estimate.breakdown.map((item) =>
                 <div key={item.label} className="flex justify-between items-center py-2 border-b border-border/50">
                         <span className="text-sm font-body">{item.label}</span>
@@ -310,18 +307,16 @@ const CostEstimator = () => {
               }
 
                 <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <a
-                  href="#contact"
-                  className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-full font-display font-semibold hover:opacity-90 transition-opacity">
-
+                  <button
+                    onClick={() => setQuoteOpen(true)}
+                    className="inline-block bg-primary text-primary-foreground px-8 py-4 rounded-full font-display font-semibold hover:opacity-90 transition-opacity">
                     Request Detailed Quote
-                  </a>
-                  <a
-                  href="#"
-                  className="btn-chrome-outline px-8 py-4 rounded-full font-display font-semibold transition-all">
-
+                  </button>
+                  <button
+                    onClick={() => setCalendlyOpen(true)}
+                    className="btn-chrome-outline px-8 py-4 rounded-full font-display font-semibold transition-all">
                     Book a 30-minute Discovery Meeting
-                  </a>
+                  </button>
                 </div>
               </div>
             }
@@ -334,7 +329,6 @@ const CostEstimator = () => {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.5 }}
           className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-
           {[
           { pct: "20%", label: "Initial Experiment, Report Scope, Contracts & Deposit" },
           { pct: "25%", label: "Demo Start & Prototype Reviews" },
@@ -347,9 +341,7 @@ const CostEstimator = () => {
             </div>
           )}
         </motion.div>
-        <p className="text-center text-muted-foreground font-body mt-4 text-lg">*Payment milestone structure. Finalized quotation varies depending on custom prototype requirements.
-
-        </p>
+        <p className="text-center text-muted-foreground font-body mt-4 text-lg">*Payment milestone structure. Finalized quotation varies depending on custom prototype requirements.</p>
       </div>
 
       <PipelineAssessmentQuiz
@@ -361,8 +353,18 @@ const CostEstimator = () => {
         open={discoveryOpen}
         onClose={() => setDiscoveryOpen(false)} />
 
-    </section>);
+      <QuoteRequestModal
+        open={quoteOpen}
+        onClose={() => setQuoteOpen(false)}
+        selectedServices={selectedServiceLabels}
+        estimateRange={estimateRangeStr}
+        onBookMeeting={() => setCalendlyOpen(true)} />
 
+      <CalendlyModal
+        open={calendlyOpen}
+        onClose={() => setCalendlyOpen(false)} />
+
+    </section>);
 };
 
 export default CostEstimator;
