@@ -265,12 +265,12 @@ const LibraryPage = () => {
             </h1>
             <p className="font-body max-w-3xl mx-auto mb-6 text-white text-center text-xl">Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="#contact"
+              <button
+                onClick={() => setCalendlyOpen(true)}
                 className="inline-flex items-center gap-2 px-8 py-4 rounded-full hero-btn-explore hero-btn-bloom font-body font-semibold transition-all text-xl">
                 <CalendarCheck className="w-5 h-5" />
                 Book Consultation
-              </a>
+              </button>
               <button
                 onClick={() => setTourOpen(true)}
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/30 bg-primary/5 text-sm font-body font-semibold text-primary hover:bg-primary/10 hover:border-primary/50 transition-all"
