@@ -461,13 +461,12 @@ const CaseStudySteamDelaysPage = () => {
           <p className="text-sm font-body text-muted-foreground mb-6 max-w-2xl mx-auto">
             Let Tulip Tech R&D analyze your pipelines and predict delay risks before they happen with optimization assessments and custom dev tools
           </p>
-          <a
-            href="/#contact"
+          <button
+            onClick={() => setCalendlyOpen(true)}
             className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-body font-semibold text-sm text-white transition-all hover:scale-105 hover:shadow-[0_0_24px_-4px_hsl(260_80%_65%/0.5)]"
             style={{ background: "linear-gradient(135deg, hsl(250 70% 60%), hsl(300 60% 55%), hsl(220 80% 60%))" }}>
-            
             Book Consultation <ArrowRight className="w-4 h-4" />
-          </a>
+          </button>
         </div>
       </section>
 
