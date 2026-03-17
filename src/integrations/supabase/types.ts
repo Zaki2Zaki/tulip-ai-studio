@@ -38,6 +38,48 @@ export type Database = {
         }
         Relationships: []
       }
+      leads: {
+        Row: {
+          assessment_results: Json | null
+          company: string | null
+          created_at: string
+          email: string
+          id: string
+          industry: string | null
+          lead_type: string
+          message: string | null
+          name: string | null
+          selected_services: string[] | null
+          team_size: string | null
+        }
+        Insert: {
+          assessment_results?: Json | null
+          company?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          industry?: string | null
+          lead_type?: string
+          message?: string | null
+          name?: string | null
+          selected_services?: string[] | null
+          team_size?: string | null
+        }
+        Update: {
+          assessment_results?: Json | null
+          company?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          industry?: string | null
+          lead_type?: string
+          message?: string | null
+          name?: string | null
+          selected_services?: string[] | null
+          team_size?: string | null
+        }
+        Relationships: []
+      }
       saved_papers: {
         Row: {
           abstract: string | null
