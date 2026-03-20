@@ -1,9 +1,9 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight } from "lucide-react";
 import pipelineBg from "@/assets/pipeline-bg.jpg";
-import workflowTraditional from "@/assets/workflow-traditional.jpg";
-import workflowAi from "@/assets/workflow-ai.png";
+import BeforeAfterSlider from "@/components/BeforeAfterSlider";
+import currentWorkflow from "@/assets/current-workflow.jpg";
+import genaiWorkflow from "@/assets/genai-workflow.png";
 
 const PipelineSection = () => {
   const ref = useRef(null);
@@ -41,89 +41,22 @@ content production pipelines - from pre-production through final output.
 
         </motion.p>
 
-        {/* Traditional Workflow */}
+        {/* Before/After Slider */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-0">
-
-          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground font-body mb-6 text-center">
-            The traditional 3D production workflow
+        >
+          <BeforeAfterSlider
+            beforeImage={currentWorkflow}
+            afterImage={genaiWorkflow}
+            beforeLabel="Current Workflow"
+            afterLabel="GenAI Tools + Workflow"
+          />
+          <p className="max-w-2xl mx-auto mt-8 text-sm text-foreground/90 font-body text-left font-normal md:text-lg">
+            Startup AI tools are reshaping every stage of the pipeline — we help integrate the explosion of AI tools into production pipelines for creative studios, replacing fragmented workflows with scalable systems.
           </p>
-          <div className="relative rounded-2xl overflow-hidden border border-border/50 group">
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/40 z-10 pointer-events-none" />
-            <img
-              src={workflowTraditional}
-              alt="Traditional 3D production pipeline showing Pre-Production, Production, and Post-Production stages"
-              className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
-
-          </div>
         </motion.div>
-
-        {/* Transition Arrow */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={inView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="flex flex-col items-center gap-0 my-0">
-
-          <div className="w-px h-16 relative overflow-hidden">
-            <div
-              className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/60 to-primary"
-              style={{ animation: 'flowDown 2s ease-in-out infinite' }} />
-            
-          </div>
-          <div
-            className="flex items-center gap-4 bg-card/80 backdrop-blur-sm rounded-full px-8 py-4"
-            style={{
-              border: '3px solid transparent',
-              backgroundImage: 'linear-gradient(hsl(0 0% 6% / 0.8), hsl(0 0% 6% / 0.8)), linear-gradient(var(--water-angle, 0deg), #BA55D3, #4169E1, #00CED1, #BA55D3)',
-              backgroundOrigin: 'border-box',
-              backgroundClip: 'padding-box, border-box',
-              animation: 'waterBorder 3s linear infinite'
-            }}>
-            
-            <span
-              className="text-base md:text-lg font-body font-semibold tracking-wide"
-              style={{
-                background: 'linear-gradient(to right, #BA55D3, #4169E1)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
-              }}>
-              
-              Evolving with LLMs 
-            </span>
-            <ArrowRight className="w-5 h-5" style={{ color: '#4169E1' }} />
-          </div>
-          <div className="w-px h-16 relative overflow-hidden">
-            <div
-              className="absolute inset-0 bg-gradient-to-b from-primary via-primary/60 to-transparent"
-              style={{ animation: 'flowDown 2s ease-in-out infinite 1s' }} />
-            
-          </div>
-        </motion.div>
-
-        {/* AI-Powered Workflow */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 1 }}>
-
-          <p className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-6 text-center">Evolving with LLMs or custom dev-tools
-
-          </p>
-          <div className="relative rounded-2xl overflow-hidden border border-primary/30 group glow-gold">
-            <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-background/30 z-10 pointer-events-none" />
-            <img
-
-              alt="AI-powered studio workflow pipeline with tools like Runway, Sora, Stability AI, Llama, and Claude"
-              className="w-full h-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500" src="/lovable-uploads/e42cc85d-16a1-4960-b514-8ff40e21bc77.png" />
-
-          </div>
-          <p className="max-w-2xl mx-auto mt-8 text-sm text-white font-sans text-left font-normal md:text-2xl">Startup AI tools are reshaping every stage of the pipeline
-We help the explosion of AI tools into integrated production pipelines for creative studios - replacing fragmented workflows with scalable systems.
-          </p>
 
           {/* Industry Statistics */}
           <motion.div
@@ -165,6 +98,9 @@ AAA Studios $500K–$3M+ per major rework/iteration cycle
               </div>
             </div>
           </motion.div>
-        </motion.div>
       </div>
-    </section>);};export default PipelineSection;
+    </section>
+  );
+};
+
+export default PipelineSection;
