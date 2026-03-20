@@ -1,9 +1,9 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight } from "lucide-react";
 import pipelineBg from "@/assets/pipeline-bg.jpg";
-import workflowTraditional from "@/assets/workflow-traditional.jpg";
-import workflowAi from "@/assets/workflow-ai.png";
+import BeforeAfterSlider from "@/components/BeforeAfterSlider";
+import currentWorkflow from "@/assets/current-workflow.jpg";
+import genaiWorkflow from "@/assets/genai-workflow.png";
 
 const PipelineSection = () => {
   const ref = useRef(null);
