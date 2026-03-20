@@ -98,6 +98,9 @@ AAA Studios $500K–$3M+ per major rework/iteration cycle
               </div>
             </div>
           </motion.div>
-        </motion.div>
       </div>
-    </section>);};export default PipelineSection;
+    </section>
+  );
+};
+
+export default PipelineSection;
