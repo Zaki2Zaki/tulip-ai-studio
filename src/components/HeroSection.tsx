@@ -87,7 +87,7 @@ const HeroSection = () => {
               color: "rgba(255,255,255,0.9)"
             }}>
             <span className="text-3xl md:text-4xl font-display font-bold whitespace-nowrap" style={{ textShadow: "0 0 30px rgba(255,255,255,0.2)" }}>
-              AI Labs That Ships{" "}
+              AI Labs That Ship{" "}
               <span className="inline-block overflow-hidden align-bottom" style={{ height: "1.2em", width: "3.5em", position: "relative" }}>
                 <AnimatePresence mode="wait">
                   <motion.span
@@ -102,11 +102,11 @@ const HeroSection = () => {
                   </motion.span>
                 </AnimatePresence>
               </span>{" "}
-              <span style={{ marginLeft: "-1cm" }}>System</span>
+              <span style={{ marginLeft: "-1cm" }}>Systems</span>
             </span>
             <br />
-            <span className="text-2xl font-sans font-medium">3D Workflow &amp; Tools Experiments → GenAI Production Systems</span>
-            <br /><br />
+            <span className="text-2xl font-sans font-medium">3D Workflow &amp; Tools Experiments →</span>
+            <br />
             <span className="text-2xl font-sans font-medium">Integrating GenAI tools into game engines, animation pipelines, and VFX workflows.</span>
             <br /><br />
             <span className="text-2xl font-sans font-medium">
