@@ -48,10 +48,10 @@ content production pipelines - from pre-production through final output.
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <BeforeAfterSlider
-            beforeImage={currentWorkflow}
-            afterImage={genaiWorkflow}
-            beforeLabel="Current Workflow"
-            afterLabel="GenAI Tools + Workflow"
+            beforeImage={genaiWorkflow}
+            afterImage={currentWorkflow}
+            beforeLabel="GenAI Tools + Workflow"
+            afterLabel="Current Workflow"
           />
           <p className="max-w-2xl mx-auto mt-8 text-sm text-foreground/90 font-body text-left font-normal md:text-lg">
             Startup AI tools are reshaping every stage of the pipeline — we help integrate the explosion of AI tools into production pipelines for creative studios, replacing fragmented workflows with scalable systems.
