@@ -4,7 +4,7 @@ import { ClipboardCheck } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import CalendlyModal from "./CalendlyModal";
 
-const rotatingTexts = ["0→1", "N→1"];
+const rotatingTexts = ["0→1"];
 
 const HeroSection = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
