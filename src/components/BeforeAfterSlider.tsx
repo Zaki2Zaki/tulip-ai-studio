@@ -1,10 +1,11 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
   afterImage: string;
   beforeLabel?: string;
   afterLabel?: string;
+  onPositionChange?: (position: number) => void;
 }
 
 const BeforeAfterSlider = ({
@@ -12,10 +13,15 @@ const BeforeAfterSlider = ({
   afterImage,
   beforeLabel = "Current Workflow",
   afterLabel = "GenAI Tools + Workflow",
+  onPositionChange,
 }: BeforeAfterSliderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+
+  useEffect(() => {
+    onPositionChange?.(position);
+  }, [position, onPositionChange]);
 
   const updatePosition = useCallback((clientX: number) => {
     const container = containerRef.current;
@@ -46,6 +52,9 @@ const BeforeAfterSlider = ({
   const handlePointerUp = useCallback(() => {
     setIsDragging(false);
   }, []);
+
+  /* Ombre gradient matching TECH nav logo */
+  const ombreGradient = "linear-gradient(180deg, hsl(200 40% 82%), hsl(260 30% 78%), hsl(320 25% 75%), hsl(200 35% 70%))";
 
   return (
     <div
@@ -79,7 +88,7 @@ const BeforeAfterSlider = ({
         />
       </div>
 
-      {/* Current Workflow label (right side) — hides when slider > 75% */}
+      {/* Current Workflow label (right side) */}
       <div
         className="absolute top-4 right-4 z-10 px-3 py-1.5 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 transition-opacity duration-300"
         style={{ opacity: position > 75 ? 0 : 1 }}
@@ -89,7 +98,7 @@ const BeforeAfterSlider = ({
         </span>
       </div>
 
-      {/* GenAI label (left side) — hides when slider < 25% */}
+      {/* GenAI label (left side) */}
       <div
         className="absolute top-4 left-4 z-10 px-3 py-1.5 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 transition-opacity duration-300"
         style={{ opacity: position < 25 ? 0 : 1 }}
@@ -99,16 +108,41 @@ const BeforeAfterSlider = ({
         </span>
       </div>
 
-      {/* Slider handle */}
+      {/* Slider handle — ombre rainbow line + handle */}
       <div
         className="absolute top-0 bottom-0 z-20 flex items-center justify-center"
         style={{ left: `${position}%`, transform: "translateX(-50%)" }}
       >
-        <div className="absolute top-0 bottom-0 w-0.5 bg-white/90 shadow-[0_0_8px_rgba(255,255,255,0.5)]" />
-        <div className="relative w-10 h-10 rounded-full bg-background border-2 border-primary shadow-lg flex items-center justify-center">
+        {/* Rainbow ombre line */}
+        <div
+          className="absolute top-0 bottom-0 w-[3px] rounded-full"
+          style={{
+            background: ombreGradient,
+            boxShadow: "0 0 12px hsl(260 30% 78% / 0.6), 0 0 24px hsl(320 25% 75% / 0.3)",
+          }}
+        />
+        {/* Rainbow ombre handle */}
+        <div
+          className="relative w-10 h-10 rounded-full shadow-lg flex items-center justify-center"
+          style={{
+            background: `hsl(var(--background))`,
+            border: "2.5px solid transparent",
+            backgroundImage: `linear-gradient(hsl(var(--background)), hsl(var(--background))), ${ombreGradient}`,
+            backgroundOrigin: "border-box",
+            backgroundClip: "padding-box, border-box",
+            boxShadow: "0 0 16px hsl(260 30% 78% / 0.5), 0 4px 12px hsl(0 0% 0% / 0.4)",
+          }}
+        >
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M7 4L3 10L7 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary" />
-            <path d="M13 4L17 10L13 16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary" />
+            <defs>
+              <linearGradient id="ombre-arrow" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="hsl(200 40% 82%)" />
+                <stop offset="50%" stopColor="hsl(260 30% 78%)" />
+                <stop offset="100%" stopColor="hsl(320 25% 75%)" />
+              </linearGradient>
+            </defs>
+            <path d="M7 4L3 10L7 16" stroke="url(#ombre-arrow)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M13 4L17 10L13 16" stroke="url(#ombre-arrow)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
       </div>
