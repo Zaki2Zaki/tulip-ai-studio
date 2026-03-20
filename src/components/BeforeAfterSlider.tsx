@@ -56,43 +56,43 @@ const BeforeAfterSlider = ({
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
     >
-      {/* Bottom layer — Current Workflow (visible on left) */}
+      {/* Bottom layer — GenAI workflow (visible on left) */}
       <img
-        src={beforeImage}
-        alt="Current 3D production workflow"
+        src={afterImage}
+        alt="GenAI tools workflow development"
         className="absolute inset-0 w-full h-full object-contain bg-black"
         draggable={false}
         loading="lazy"
       />
 
-      {/* Clipped top layer — GenAI workflow (revealed from right) */}
+      {/* Clipped top layer — Current Workflow (revealed from right) */}
       <div
         className="absolute inset-0"
-        style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
+        style={{ clipPath: `inset(0 0 0 ${position}%)` }}
       >
         <img
-          src={afterImage}
-          alt="GenAI tools workflow development"
+          src={beforeImage}
+          alt="Current 3D production workflow"
           className="absolute inset-0 w-full h-full object-contain bg-black"
           draggable={false}
           loading="lazy"
         />
       </div>
 
-      {/* Current Workflow label (left side) — hides when slider < 25% */}
+      {/* Current Workflow label (right side) — hides when slider > 75% */}
       <div
-        className="absolute top-4 left-4 z-10 px-3 py-1.5 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 transition-opacity duration-300"
-        style={{ opacity: position < 25 ? 0 : 1 }}
+        className="absolute top-4 right-4 z-10 px-3 py-1.5 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 transition-opacity duration-300"
+        style={{ opacity: position > 75 ? 0 : 1 }}
       >
         <span className="text-xs font-body font-semibold text-muted-foreground tracking-wide uppercase">
           {beforeLabel}
         </span>
       </div>
 
-      {/* GenAI label (right side) — hides when slider > 75% */}
+      {/* GenAI label (left side) — hides when slider < 25% */}
       <div
-        className="absolute top-4 right-4 z-10 px-3 py-1.5 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 transition-opacity duration-300"
-        style={{ opacity: position > 75 ? 0 : 1 }}
+        className="absolute top-4 left-4 z-10 px-3 py-1.5 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 transition-opacity duration-300"
+        style={{ opacity: position < 25 ? 0 : 1 }}
       >
         <span className="text-xs font-body font-semibold text-primary tracking-wide uppercase">
           {afterLabel}
