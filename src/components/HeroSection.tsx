@@ -102,14 +102,32 @@ const HeroSection = () => {
                   </motion.span>
                 </AnimatePresence>
               </span>{" "}
-              <span style={{ marginLeft: "-1cm" }}>Breakthroughs</span>
+              <span style={{ marginLeft: "-1cm" }}>System</span>
             </span>
             <br />
-            <span className="text-2xl font-sans font-medium">Game Studios, 3D Animation &amp; VFX Teams</span>
+            <span className="text-2xl font-sans font-medium">3D Workflow &amp; Tools Experiments → GenAI Production Systems</span>
             <br /><br />
-            <span className="text-2xl font-sans font-medium">Transform imaginative ideas into production-ready pipelines: Discover groundbreaking possibilities → Flow rapid prototyping → Adopt proven solutions → Integrate seamlessly</span>
-            <br />
-            <span className="text-2xl font-sans font-medium">→Collab with our experts</span>
+            <span className="text-2xl font-sans font-medium">Integrating GenAI tools into game engines, animation pipelines, and VFX workflows.</span>
+            <br /><br />
+            <span className="text-2xl font-sans font-medium">
+              We're all discovering the pain points to scale. We{" "}
+              <span className="text-gradient-tulip-ombre font-bold">love</span>{" "}
+              handling the hard part: making genAI reliable for our creatives &amp; technical leaders
+            </span>
+            <br /><br />
+            {/* Pipeline steps */}
+            <div className="flex flex-wrap items-center gap-3 text-base md:text-lg font-display font-semibold">
+              {["Discover opportunities", "Rapid prototyping", "Adopt solutions", "Integrate & collaborate with experts", "Scale"].map((step, i, arr) => (
+                <span key={step} className="flex items-center gap-3">
+                  <span className="px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-white hover:bg-white/10 transition-all hover:border-white/40 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]">
+                    {step}
+                  </span>
+                  {i < arr.length - 1 && (
+                    <span className="text-gradient-tulip-ombre text-xl">→</span>
+                  )}
+                </span>
+              ))}
+            </div>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }} className="flex gap-4 items-start max-md:flex-col max-md:items-stretch">
