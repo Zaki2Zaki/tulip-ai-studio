@@ -4,7 +4,7 @@ import { ClipboardCheck } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 import CalendlyModal from "./CalendlyModal";
 
-const rotatingTexts = ["0→1"];
+const rotatingTexts = ["0→1", "N→1"];
 
 const HeroSection = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
@@ -15,7 +15,7 @@ const HeroSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setTextIndex((prev) => (prev + 1) % rotatingTexts.length);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -73,10 +73,10 @@ const HeroSection = () => {
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={textIndex}
-                    initial={{ y: "100%", opacity: 0 }}
+                    initial={{ y: "-100%", opacity: 0 }}
                     animate={{ y: "0%", opacity: 1 }}
-                    exit={{ y: "-100%", opacity: 0 }}
-                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                    exit={{ y: "100%", opacity: 0 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
                     className="absolute inset-0 flex items-center"
                   >
                     {rotatingTexts[textIndex]}
@@ -88,13 +88,19 @@ const HeroSection = () => {
 
             {/* Description */}
             <p className="text-lg md:text-xl font-body font-medium text-white/80 leading-relaxed">
-              3D Workflow & Tools Experiments →{" "}Integrating GenAI tools into game engines, animation pipelines, and VFX workflows.
+              3D Workflow & Tools Experiments → GenAI Production Systems
+            </p>
+
+            <p className="text-base md:text-lg font-body text-white/80 leading-relaxed">
+              Integrating GenAI tools into game engines, animation pipelines, and VFX workflows.
             </p>
 
             <p className="text-base md:text-lg font-body text-white/70 leading-relaxed">
               We're all discovering the pain points to scale. We{" "}
               <span className="text-gradient-tulip-ombre font-bold">love</span>{" "}
-              handling the hard part: making genAI reliable for our creatives & technical leaders
+              handling the hard part:
+              <br />
+              making genAI reliable for our creatives & technical leaders
             </p>
 
             {/* Pipeline steps — Apple-style clean flow */}
