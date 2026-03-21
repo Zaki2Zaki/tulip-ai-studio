@@ -86,12 +86,21 @@ const PipelineSection = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3 }}
-          className="text-center max-w-2xl mx-auto mb-20 text-foreground font-sans text-lg"
+          className="text-center max-w-2xl mx-auto mb-12 text-foreground font-sans text-lg"
         >
           We identify where generative AI creates the most impact in your content production pipelines — from pre-production through final output.
         </motion.p>
 
-        {/* Before/After Slider */}
+        {/* Drag hint above slider */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 0.8 } : {}}
+          transition={{ delay: 0.5 }}
+          className="text-center mb-6 text-2xl md:text-3xl font-body font-semibold text-foreground"
+        >
+          ← Drag the slider to explore problems &amp; solutions →
+        </motion.p>
+
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -321,8 +330,8 @@ const PipelineSection = () => {
                 transition={{ duration: 0.3 }}
                 className="text-center py-12"
               >
-                <p className="text-sm text-muted-foreground font-body">
-                  ← Drag the slider to explore problems & solutions →
+                <p className="text-2xl text-foreground font-body font-semibold">
+                  ← Drag the slider to explore problems &amp; solutions →
                 </p>
               </motion.div>
             )}

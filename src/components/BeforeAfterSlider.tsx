@@ -54,13 +54,13 @@ const BeforeAfterSlider = ({
   }, []);
 
   /* Ombre gradient matching TECH nav logo */
-  const ombreGradient = "linear-gradient(180deg, hsl(200 40% 82%), hsl(260 30% 78%), hsl(320 25% 75%), hsl(200 35% 70%))";
+  const ombreGradient = "linear-gradient(180deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%), hsl(200 90% 75%))";
 
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-w-5xl mx-auto rounded-2xl overflow-hidden border border-border/50 select-none touch-none cursor-col-resize"
-      style={{ aspectRatio: "16 / 9" }}
+      className="relative w-full max-w-6xl mx-auto rounded-2xl overflow-hidden border border-border/50 select-none touch-none cursor-col-resize"
+      style={{ aspectRatio: "16 / 10" }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
@@ -115,34 +115,36 @@ const BeforeAfterSlider = ({
       >
         {/* Rainbow ombre line */}
         <div
-          className="absolute top-0 bottom-0 w-[3px] rounded-full"
+          className="absolute top-0 bottom-0 w-[4px] rounded-full"
           style={{
             background: ombreGradient,
-            boxShadow: "0 0 12px hsl(260 30% 78% / 0.6), 0 0 24px hsl(320 25% 75% / 0.3)",
+            boxShadow: "0 0 20px hsl(260 85% 75% / 0.7), 0 0 40px hsl(200 90% 75% / 0.4), 0 0 60px hsl(320 80% 72% / 0.3)",
           }}
         />
-        {/* Rainbow ombre handle */}
+        {/* Rainbow ombre handle — enlarged and glowing */}
         <div
-          className="relative w-10 h-10 rounded-full shadow-lg flex items-center justify-center"
+          className="relative w-14 h-14 rounded-full shadow-lg flex items-center justify-center"
           style={{
             background: `hsl(var(--background))`,
-            border: "2.5px solid transparent",
+            border: "3px solid transparent",
             backgroundImage: `linear-gradient(hsl(var(--background)), hsl(var(--background))), ${ombreGradient}`,
             backgroundOrigin: "border-box",
             backgroundClip: "padding-box, border-box",
-            boxShadow: "0 0 16px hsl(260 30% 78% / 0.5), 0 4px 12px hsl(0 0% 0% / 0.4)",
+            boxShadow: "0 0 24px hsl(260 85% 75% / 0.6), 0 0 48px hsl(200 90% 75% / 0.4), 0 0 72px hsl(320 80% 72% / 0.25), 0 4px 12px hsl(0 0% 0% / 0.4)",
+            animation: "slider-handle-pulse 2s ease-in-out infinite",
           }}
         >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
             <defs>
               <linearGradient id="ombre-arrow" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="hsl(200 40% 82%)" />
-                <stop offset="50%" stopColor="hsl(260 30% 78%)" />
-                <stop offset="100%" stopColor="hsl(320 25% 75%)" />
+                <stop offset="0%" stopColor="hsl(200 90% 75%)" />
+                <stop offset="33%" stopColor="hsl(260 85% 75%)" />
+                <stop offset="66%" stopColor="hsl(320 80% 72%)" />
+                <stop offset="100%" stopColor="hsl(40 95% 70%)" />
               </linearGradient>
             </defs>
-            <path d="M7 4L3 10L7 16" stroke="url(#ombre-arrow)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M13 4L17 10L13 16" stroke="url(#ombre-arrow)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M7 4L3 10L7 16" stroke="url(#ombre-arrow)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M13 4L17 10L13 16" stroke="url(#ombre-arrow)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
       </div>

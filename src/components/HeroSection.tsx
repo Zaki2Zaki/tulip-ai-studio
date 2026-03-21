@@ -59,7 +59,7 @@ const HeroSection = () => {
 
       {/* Content */}
       <div className="relative z-10 w-full section-padding">
-        <div className="max-w-[50vw] md:ml-[calc(8%+9rem)] lg:ml-[calc(12%+9rem)] ml-0 max-md:max-w-full max-md:text-center max-md:ml-0" style={{ marginTop: "calc(-5vh + 153px)" }}>
+        <div className="max-w-[60vw] md:ml-[calc(8%+9rem)] lg:ml-[calc(12%+9rem)] ml-0 max-md:max-w-full max-md:text-center max-md:ml-0" style={{ marginTop: "calc(-5vh + 153px)" }}>
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -79,14 +79,14 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="mb-10 hero-subtitle text-left whitespace-pre-line"
+            className="mb-10 text-left whitespace-pre-line"
             style={{
-              maxWidth: "680px",
+              maxWidth: "780px",
               letterSpacing: "0.01em",
               lineHeight: 1.55,
               color: "rgba(255,255,255,0.9)"
             }}>
-            <span className="text-3xl md:text-4xl font-display font-bold whitespace-nowrap" style={{ textShadow: "0 0 30px rgba(255,255,255,0.2)" }}>
+            <span className="text-4xl md:text-5xl font-display font-bold whitespace-nowrap" style={{ textShadow: "0 0 30px rgba(255,255,255,0.2)" }}>
               AI Labs That Ship{" "}
               <span className="inline-block overflow-hidden align-bottom" style={{ height: "1.2em", width: "3.5em", position: "relative" }}>
                 <AnimatePresence mode="wait">
@@ -105,25 +105,21 @@ const HeroSection = () => {
               <span style={{ marginLeft: "-1cm" }}>Systems</span>
             </span>
             <br />
-            <span className="text-2xl font-sans font-medium">3D Workflow &amp; Tools Experiments →</span>
-            <br />
-            <span className="text-2xl font-sans font-medium">Integrating GenAI tools into game engines, animation pipelines, and VFX workflows.</span>
+            <span className="text-2xl md:text-3xl font-sans font-medium">3D Workflow &amp; Tools Experiments →{" "}Integrating GenAI tools into game engines, animation pipelines, and VFX workflows.</span>
             <br /><br />
-            <span className="text-2xl font-sans font-medium">
+            <span className="text-2xl md:text-3xl font-sans font-medium">
               We're all discovering the pain points to scale. We{" "}
               <span className="text-gradient-tulip-ombre font-bold">love</span>{" "}
               handling the hard part: making genAI reliable for our creatives &amp; technical leaders
             </span>
             <br /><br />
-            {/* Pipeline steps */}
-            <div className="flex flex-wrap items-center gap-3 text-base md:text-lg font-display font-semibold">
+            {/* Pipeline steps — no boxes, clean inline text */}
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xl md:text-2xl font-display font-semibold">
               {["Discover opportunities", "Rapid prototyping", "Adopt solutions", "Integrate & collaborate with experts", "Scale"].map((step, i, arr) => (
-                <span key={step} className="flex items-center gap-3">
-                  <span className="px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm text-white hover:bg-white/10 transition-all hover:border-white/40 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]">
-                    {step}
-                  </span>
+                <span key={step} className="flex items-center gap-2">
+                  <span className="text-foreground">{step}</span>
                   {i < arr.length - 1 && (
-                    <span className="text-gradient-tulip-ombre text-xl">→</span>
+                    <span className="text-gradient-tulip-ombre text-2xl">→</span>
                   )}
                 </span>
               ))}
