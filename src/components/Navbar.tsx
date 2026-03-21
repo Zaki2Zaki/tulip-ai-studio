@@ -82,12 +82,14 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 h-12">
           {/* Logo — left aligned */}
-          <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground shrink-0">
+          <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground shrink-0 ml-[192px]">
             TULIP<span className="text-gradient-gold"> TECH</span>
           </Link>
 
           {/* Desktop nav — right aligned, Apple-style minimal */}
           <div className="hidden md:flex items-center gap-8">
+            <TextScaleControl />
+
             <div
               onMouseEnter={() => openDropdown("usecases")}
               onMouseLeave={closeDropdown}
