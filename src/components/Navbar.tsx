@@ -4,6 +4,7 @@ import { Menu, X, ChevronDown, LogIn, LogOut } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useCases } from "@/data/useCases";
 import { supabase } from "@/integrations/supabase/client";
+import TextScaleControl from "./TextScaleControl";
 
 const navLinks = [
   { label: "Services", href: "#services" },
