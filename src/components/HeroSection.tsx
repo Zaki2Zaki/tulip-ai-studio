@@ -27,68 +27,49 @@ const HeroSection = () => {
           src={heroBg}
           alt="Tulip Technology hero"
           className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-700 ${videoLoaded ? "opacity-0" : "opacity-100"}`}
-          loading="eager" />
-
+          loading="eager"
+        />
         <video
           ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
+          autoPlay muted loop playsInline
           onCanPlay={() => setVideoLoaded(true)}
           poster=""
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${videoLoaded ? "opacity-100" : "opacity-0"}`}
-          style={{ filter: "blur(2px)" }}>
+          style={{ filter: "blur(2px)" }}
+        >
           <source src="/hero-bg.mp4" type="video/mp4" />
         </video>
-
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.4) 100%)"
-          }} />
-
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.48) 50%, rgba(0,0,0,0.36) 100%)" }} />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
-
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: "radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.25) 100%)"
-          }} />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 w-full section-padding">
-        <div className="max-w-[60vw] md:ml-[calc(8%+9rem)] lg:ml-[calc(12%+9rem)] ml-0 max-md:max-w-full max-md:text-center max-md:ml-0" style={{ marginTop: "calc(-5vh + 153px)" }}>
-
+      {/* Content — Apple-style centered with generous whitespace */}
+      <div className="relative z-10 w-full section-padding pt-32 pb-24">
+        <div className="max-w-3xl">
+          {/* Main title */}
           <motion.h1
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="font-display font-bold leading-[0.95] mb-6 hero-title"
-            style={{
-              letterSpacing: "-0.02em",
-              textShadow: "0 0 40px rgba(255,255,255,0.3), 0 2px 8px rgba(0,0,0,0.4)"
-            }}>
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="font-display font-bold leading-[1.05] mb-8 hero-title"
+          >
             <span className="text-gradient-chrome-animated">Tulip Technology</span>
             <br />
             <span className="text-gradient-chrome-animated">R&D™</span>
           </motion.h1>
 
+          {/* Subheadline */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="mb-10 text-left whitespace-pre-line"
-            style={{
-              maxWidth: "780px",
-              letterSpacing: "0.01em",
-              lineHeight: 1.55,
-              color: "rgba(255,255,255,0.9)"
-            }}>
-            <span className="text-4xl md:text-5xl font-display font-bold whitespace-nowrap" style={{ textShadow: "0 0 30px rgba(255,255,255,0.2)" }}>
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="mb-12 space-y-6"
+            style={{ maxWidth: "640px" }}
+          >
+            {/* AI Labs tagline */}
+            <p className="text-2xl md:text-3xl font-display font-bold text-white/95" style={{ letterSpacing: "-0.01em" }}>
               AI Labs That Ship{" "}
-              <span className="inline-block overflow-hidden align-bottom" style={{ height: "1.2em", width: "3.5em", position: "relative" }}>
+              <span className="inline-block overflow-hidden align-bottom" style={{ height: "1.15em", width: "3em", position: "relative" }}>
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={textIndex}
@@ -102,42 +83,53 @@ const HeroSection = () => {
                   </motion.span>
                 </AnimatePresence>
               </span>{" "}
-              <span style={{ marginLeft: "-1cm" }}>Systems</span>
-            </span>
-            <br />
-            <span className="text-2xl md:text-3xl font-sans font-medium">3D Workflow &amp; Tools Experiments →{" "}Integrating GenAI tools into game engines, animation pipelines, and VFX workflows.</span>
-            <br /><br />
-            <span className="text-2xl md:text-3xl font-sans font-medium">
+              Systems
+            </p>
+
+            {/* Description */}
+            <p className="text-lg md:text-xl font-body font-medium text-white/80 leading-relaxed">
+              3D Workflow & Tools Experiments →{" "}Integrating GenAI tools into game engines, animation pipelines, and VFX workflows.
+            </p>
+
+            <p className="text-base md:text-lg font-body text-white/70 leading-relaxed">
               We're all discovering the pain points to scale. We{" "}
               <span className="text-gradient-tulip-ombre font-bold">love</span>{" "}
-              handling the hard part: making genAI reliable for our creatives &amp; technical leaders
-            </span>
-            <br /><br />
-            {/* Pipeline steps — no boxes, clean inline text */}
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xl md:text-2xl font-display font-semibold">
+              handling the hard part: making genAI reliable for our creatives & technical leaders
+            </p>
+
+            {/* Pipeline steps — Apple-style clean flow */}
+            <div className="flex flex-wrap items-center gap-x-2.5 gap-y-2 text-sm md:text-base font-display font-semibold text-white/60">
               {["Discover opportunities", "Rapid prototyping", "Adopt solutions", "Integrate & collaborate with experts", "Scale"].map((step, i, arr) => (
-                <span key={step} className="flex items-center gap-2">
-                  <span className="text-foreground">{step}</span>
+                <span key={step} className="flex items-center gap-2.5">
+                  <span className="text-white/80">{step}</span>
                   {i < arr.length - 1 && (
-                    <span className="text-gradient-tulip-ombre text-2xl">→</span>
+                    <span className="text-gradient-tulip-ombre">→</span>
                   )}
                 </span>
               ))}
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }} className="flex gap-4 items-start max-md:flex-col max-md:items-stretch">
+          {/* CTAs — Apple-style prominent buttons with 44px+ touch targets */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="flex flex-wrap gap-3 items-start"
+          >
             <a
               href="#services"
-              className="hero-btn-explore hero-btn-bloom px-8 py-4 rounded-full font-display font-semibold text-lg transition-all">
+              className="hero-btn-explore hero-btn-bloom px-7 py-3.5 rounded-full font-display font-semibold text-[15px] transition-all min-h-[48px] flex items-center"
+            >
               Explore Services
             </a>
             <a
               href="#estimator"
-              className="hero-btn-quote hero-btn-bloom px-8 py-4 rounded-full font-display font-semibold text-lg transition-all text-center">
+              className="hero-btn-quote hero-btn-bloom px-7 py-3.5 rounded-full font-display font-semibold text-[15px] transition-all min-h-[48px] flex items-center"
+            >
               Estimate Quotes
             </a>
-            <div className="flex flex-col items-center gap-1.5">
+            <div className="flex flex-col items-center gap-1">
               <a
                 href="#estimator"
                 onClick={(e) => {
@@ -151,11 +143,12 @@ const HeroSection = () => {
                     }, 600);
                   }
                 }}
-                className="hero-btn-assessment hero-btn-bloom px-8 py-4 rounded-full font-display font-semibold text-lg transition-all text-center flex items-center gap-2">
-                <ClipboardCheck className="w-5 h-5" />
+                className="hero-btn-assessment hero-btn-bloom px-7 py-3.5 rounded-full font-display font-semibold text-[15px] transition-all min-h-[48px] flex items-center gap-2"
+              >
+                <ClipboardCheck className="w-4 h-4" />
                 2-min Assessment
               </a>
-              <span className="text-xs font-body text-white/60 tracking-wide">Not Sure Where to Start?</span>
+              <span className="text-[11px] font-body text-white/50">Not Sure Where to Start?</span>
             </div>
           </motion.div>
         </div>
@@ -166,12 +159,14 @@ const HeroSection = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2">
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
         <motion.div
-          animate={{ y: [0, 8, 0] }}
+          animate={{ y: [0, 6, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="w-5 h-8 border-2 border-foreground/30 rounded-full flex justify-center pt-1">
-          <div className="w-1 h-2 bg-primary rounded-full" />
+          className="w-5 h-8 border border-foreground/20 rounded-full flex justify-center pt-1.5"
+        >
+          <div className="w-1 h-1.5 bg-primary/60 rounded-full" />
         </motion.div>
       </motion.div>
 

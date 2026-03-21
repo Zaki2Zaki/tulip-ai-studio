@@ -8,40 +8,48 @@ const ContactSection = () => {
   const [calendlyOpen, setCalendlyOpen] = useState(false);
 
   return (
-    <section id="contact" className="pt-16 pb-0 section-padding">
-      <div ref={ref} className="max-w-3xl mx-auto text-center">
+    <section id="contact" className="py-24 md:py-32 section-padding">
+      <div ref={ref} className="max-w-2xl mx-auto text-center">
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          className="text-sm tracking-[0.3em] uppercase text-primary font-body mb-4">
+          className="text-[11px] tracking-[0.2em] uppercase text-primary font-body mb-3 font-medium"
+        >
           Get in Touch
         </motion.p>
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="font-display text-4xl md:text-6xl font-bold mb-6">Let's build your
+          className="font-display text-3xl md:text-5xl font-bold mb-4"
+        >
+          Let's build your
           <span className="text-gradient-gold"> future</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2 }}
-          className="font-body mb-12 text-lg text-sky-50">
-          Ready to build systems that help you grow without the chaos. Let's collaborate on your product vision, strategy, and roadmap for intelligent tool-sets, aligning on objectives, OKRs and KPIs.
+          className="font-body mb-10 text-sm md:text-base text-foreground/80 leading-relaxed max-w-lg mx-auto"
+        >
+          Ready to build systems that help you grow without the chaos. Let's collaborate on your product vision, strategy, and roadmap for intelligent tool-sets.
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.4 }}
-          className="flex flex-col items-center gap-6">
+          className="flex flex-col items-center gap-4"
+        >
           <button
             onClick={() => setCalendlyOpen(true)}
-            className="btn-chrome-outline px-8 py-4 rounded-full font-display font-semibold text-lg transition-all">
+            className="btn-chrome-outline px-7 py-3.5 rounded-full font-display font-semibold text-[15px] transition-all min-h-[48px]"
+          >
             Book a 30-minute Discovery Meeting
           </button>
-          <p className="text-muted-foreground font-body text-sm">*Automatically receive a client-intake form and service package to review</p>
+          <p className="text-muted-foreground font-body text-xs">
+            *Automatically receive a client-intake form and service package
+          </p>
         </motion.div>
       </div>
 
