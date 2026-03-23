@@ -222,19 +222,40 @@ const WorkflowBuilderPanel = ({
         <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Prototype: Select AI Tools</span>
       </div>
       <p className="font-display text-lg font-bold text-white mb-1">Which tools will we test?</p>
-      <p className="text-xs text-muted-foreground font-body mb-4">Select tools in your pipeline or wishlist.</p>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-5">
-        {AI_TOOLS.map((t) => {
-          const on = tools.includes(t.label);
+      <p className="text-xs text-muted-foreground font-body mb-4">Select from your current pipeline or add to your wishlist.</p>
+
+      <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-primary mb-2">Current Tools</p>
+      <div className="grid grid-cols-2 gap-1.5 mb-4">
+        {CURRENT_TOOLS.map((label) => {
+          const on = tools.includes(label);
           return (
-            <button key={t.label} onClick={() => onToolsChange(toggle(tools, t.label))}
-              className={`text-left px-3 py-2.5 rounded-xl border text-xs font-body transition-all flex items-center gap-2 ${on ? "border-primary/60 bg-primary/10 text-foreground" : "border-border/40 text-muted-foreground hover:border-border/70"}`}>
-              <span className={`w-6 h-6 rounded-md flex items-center justify-center text-[9px] font-bold shrink-0 ${on ? "bg-primary text-primary-foreground" : "bg-muted-foreground/10 text-muted-foreground"}`}>{t.icon}</span>
-              {t.label}
+            <button key={label} onClick={() => onToolsChange(toggle(tools, label))}
+              className={`text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center gap-2 ${on ? "border-primary/60 bg-primary/10 text-foreground" : "border-border/30 text-muted-foreground hover:border-border/50"}`}>
+              <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 text-[9px] font-bold leading-none ${on ? "bg-primary border-primary text-primary-foreground" : "border-border/50"}`}>
+                {on ? "✓" : ""}
+              </span>
+              {label}
             </button>
           );
         })}
       </div>
+
+      <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-amber-400 mb-2">Wishlist</p>
+      <div className="grid grid-cols-2 gap-1.5 mb-5">
+        {WISHLIST_TOOLS.map((label) => {
+          const on = tools.includes(label);
+          return (
+            <button key={label} onClick={() => onToolsChange(toggle(tools, label))}
+              className={`text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center gap-2 ${on ? "border-amber-400/60 bg-amber-400/10 text-foreground" : "border-border/30 text-muted-foreground hover:border-border/50"}`}>
+              <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 text-[9px] font-bold leading-none ${on ? "bg-amber-400 border-amber-400 text-black" : "border-border/50"}`}>
+                {on ? "✓" : ""}
+              </span>
+              {label}
+            </button>
+          );
+        })}
+      </div>
+
       <div className="flex items-center gap-4">
         <button disabled={tools.length === 0} onClick={() => onStageChange(3)}
           className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
