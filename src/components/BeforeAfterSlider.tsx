@@ -207,9 +207,10 @@ const BeforeAfterSlider = ({
     "linear-gradient(180deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%), hsl(200 90% 75%))";
 
   return (
+    <div className="relative w-full max-w-6xl mx-auto">
     <div
       ref={containerRef}
-      className="relative w-full max-w-6xl mx-auto rounded-2xl overflow-hidden border border-border/50 select-none touch-none cursor-crosshair"
+      className="relative w-full rounded-2xl overflow-hidden border border-border/50 select-none touch-none cursor-crosshair"
       style={{ aspectRatio: "16 / 10" }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -256,9 +257,7 @@ const BeforeAfterSlider = ({
         </div>
       </div>
 
-      {/* ── Sketch drag-direction arrows ── */}
-      <SketchDragArrow direction="left"  visible={dragDir === "left"} />
-      <SketchDragArrow direction="right" visible={dragDir === "right"} />
+      {/* slider content only — no arrows here */}
 
       {/* ── Slider divider + handle ── */}
       <div className="absolute top-0 bottom-0 z-20 w-0" style={{ left: `${position}%` }}>
@@ -304,6 +303,11 @@ const BeforeAfterSlider = ({
           </div>
         </div>
       </div>
+    </div>
+
+    {/* ── Sketch drag arrows — outside overflow-hidden, inside wrapper ── */}
+    <SketchDragArrow direction="left"  visible={dragDir === "left"} />
+    <SketchDragArrow direction="right" visible={dragDir === "right"} />
     </div>
   );
 };
