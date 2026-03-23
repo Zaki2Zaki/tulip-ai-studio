@@ -1,6 +1,6 @@
 import { motion, useInView, AnimatePresence, useMotionValue, useTransform, animate } from "framer-motion";
 import React, { useRef, useState, useCallback, useEffect } from "react";
-import { AlertTriangle, CheckCircle2, ArrowRight, Zap, TrendingUp, Clock, DollarSign, Layers, Rocket, Target, BarChart3 } from "lucide-react";
+import { AlertTriangle, CheckCircle2, ArrowRight, Zap, TrendingUp, Clock, DollarSign, Layers, Rocket, Target, BarChart3, Compass, FlaskConical, ClipboardCheck, GitMerge } from "lucide-react";
 import pipelineBg from "@/assets/pipeline-bg.jpg";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import currentWorkflow from "@/assets/current-workflow.jpg";
@@ -21,11 +21,11 @@ const solutions = [
 ];
 
 const pipelineSteps = [
-  { num: 1, label: "Discover", desc: "Identify high-impact AI opportunities inside your existing pipeline." },
-  { num: 2, label: "Prototype", desc: "Rapidly test ideas under real-world production constraints." },
-  { num: 3, label: "Validate", desc: "Confirm what actually works (and what doesn't) before scaling." },
-  { num: 4, label: "Integrate", desc: "Embed into industry tools like Unreal, Houdini, Blender, and Unity." },
-  { num: 5, label: "Scale", desc: "Enable teams, optimize workflows, and drive long-term adoption." },
+  { icon: Compass, label: "Discover", desc: "Identify high-impact AI opportunities inside your existing pipeline." },
+  { icon: FlaskConical, label: "Prototype", desc: "Rapidly test ideas under real-world production constraints." },
+  { icon: ClipboardCheck, label: "Validate", desc: "Confirm what actually works (and what doesn't) before scaling." },
+  { icon: GitMerge, label: "Integrate", desc: "Embed into industry tools like Unreal, Houdini, Blender, and Unity." },
+  { icon: TrendingUp, label: "Scale", desc: "Enable teams, optimize workflows, and drive long-term adoption." },
 ];
 
 const ProvenStat = ({
@@ -236,8 +236,10 @@ const PipelineSection = () => {
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
                     {pipelineSteps.map((step, i) => (
-                      <motion.div key={step.num} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 + i * 0.06 }} className="flex flex-col items-center text-center gap-1.5">
-                        <div className="w-10 h-10 rounded-xl border border-border/40 bg-background/40 flex items-center justify-center text-primary font-display text-sm font-bold">{step.num}</div>
+                      <motion.div key={step.label} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 + i * 0.06 }} className="flex flex-col items-center text-center gap-1.5">
+                        <div className="w-10 h-10 rounded-xl border border-primary/30 bg-primary/8 flex items-center justify-center">
+                          <step.icon className="w-4.5 h-4.5 text-primary" size={18} />
+                        </div>
                         <p className="text-xs font-body font-semibold text-foreground">{step.label}</p>
                         <p className="text-[10px] text-muted-foreground font-body leading-snug">{step.desc}</p>
                       </motion.div>
