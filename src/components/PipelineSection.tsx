@@ -712,6 +712,10 @@ const PipelineSection = () => {
                             onSelectedChange={setWorkflowSelected}
                             tools={workflowTools}
                             onToolsChange={setWorkflowTools}
+                            deepDive={workflowDeepDive}
+                            onDeepDiveChange={setWorkflowDeepDive}
+                            workshopAdded={workshopAdded}
+                            onWorkshopAdd={() => setWorkshopAdded(true)}
                           />
                         </motion.div>
                       </AnimatePresence>
