@@ -262,6 +262,16 @@ const Navbar = () => {
             )}
 
             <a
+              href={isHome ? "#pipeline" : "/#pipeline"}
+              onClick={() => {
+                setTimeout(() => window.dispatchEvent(new CustomEvent("tulip:open-demo")), 400);
+              }}
+              className="text-[13px] font-body font-semibold border border-primary/60 text-primary px-5 py-2 rounded-full hover:bg-primary/10 transition-all min-h-[36px] flex items-center gap-1.5"
+            >
+              Build AI Pipeline
+            </a>
+
+            <a
               href={isHome ? "#estimator" : "/#estimator"}
               className="text-[13px] font-body font-semibold bg-primary text-primary-foreground px-5 py-2 rounded-full hover:opacity-90 transition-all min-h-[36px] flex items-center"
             >
