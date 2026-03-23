@@ -6,9 +6,9 @@ import servicesBg from "@/assets/services-bg.jpg";
 const services = [
   { icon: Search, title: "GenAI Research", description: "Identify pipeline pain points and align cutting-edge AI tools to your studio's specific needs.", range: "$5K – $110K" },
   { icon: Layers, title: "Tool Benchmarking", description: "Test, validate and compare gen AI tools in sandbox environments with proven use cases.", range: "$5K – $130K" },
-  { icon: Box, title: "Demos & Sandboxes", description: "Hands-on prototypes demonstrating AI capabilities tailored to your production pipeline.", range: "$3K – $120K" },
-  { icon: LayoutDashboard, title: "Architecture Blueprint", description: "Full GenAI architecture design including LLM data model design & training approach and quality assurance metrics\nDependant on OKRs", range: "$12K – $350K" },
-  { icon: Plug, title: "Adoption & Integration", description: "End-to-end integration of AI tools into your studio's workflows and production pipelines.", range: "$20K – $600K+" },
+  { icon: Box, title: "Demos & Sandboxes", description: "Hands-on prototypes demonstrating AI capabilities relevant to your production pipeline.", range: "$3K – $120K" },
+  { icon: LayoutDashboard, title: "Architecture Blueprint", description: "GenAI architecture recommendations including tool selection, data pipeline guidance, and quality criteria — scope defined collaboratively based on studio goals.", range: "$12K – $350K" },
+  { icon: Plug, title: "Adoption & Integration", description: "Guidance and support for integrating AI tools into your studio's existing workflows and production pipelines.", range: "$20K – $600K+" },
   { icon: GraduationCap, title: "Workshops & Education", description: "Certified training led by certified Unreal Educators or VFX/Game-Developers to empower your team with AI creative skills.", range: "$3K – $85K" },
 ];
 
