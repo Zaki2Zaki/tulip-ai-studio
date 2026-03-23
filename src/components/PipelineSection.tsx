@@ -71,6 +71,10 @@ const WorkflowBuilderPanel = ({
   onSelectedChange,
   tools,
   onToolsChange,
+  deepDive,
+  onDeepDiveChange,
+  workshopAdded,
+  onWorkshopAdd,
 }: {
   stage: number;
   onStageChange: (s: number) => void;
@@ -78,6 +82,10 @@ const WorkflowBuilderPanel = ({
   onSelectedChange: (v: string[]) => void;
   tools: string[];
   onToolsChange: (v: string[]) => void;
+  deepDive: string[];
+  onDeepDiveChange: (v: string[]) => void;
+  workshopAdded: boolean;
+  onWorkshopAdd: () => void;
 }) => {
   const toggle = (arr: string[], val: string) =>
     arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val];
