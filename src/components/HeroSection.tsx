@@ -44,14 +44,14 @@ const HeroSection = () => {
       </div>
 
       {/* Content — Apple-style centered with generous whitespace */}
-      <div className="relative z-10 w-full section-padding pt-32 pb-24">
-        <div className="max-w-3xl">
+      <div className="relative z-10 w-full section-padding pt-28 md:pt-32 pb-20 md:pb-24">
+        <div className="max-w-2xl">
           {/* Main title */}
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="font-display font-bold leading-[1.05] mb-8 hero-title"
+            className="font-display font-bold leading-[1.08] mb-6 text-[clamp(32px,5.5vw,64px)] tracking-[-0.03em]"
           >
             <span className="text-gradient-chrome-animated">Tulip Technology</span>
             <br />
@@ -63,13 +63,13 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="mb-12 space-y-6"
-            style={{ maxWidth: "640px" }}
+            className="mb-10 space-y-4"
+            style={{ maxWidth: "560px" }}
           >
             {/* AI Labs tagline */}
-            <p className="text-2xl md:text-3xl font-display font-bold text-white/95" style={{ letterSpacing: "-0.01em" }}>
+            <p className="text-xl md:text-2xl font-display font-bold text-white/95" style={{ letterSpacing: "-0.01em" }}>
               AI Labs That Ship{" "}
-              <span className="inline-block overflow-hidden align-bottom" style={{ height: "1.15em", width: "3em", position: "relative" }}>
+              <span className="inline-block overflow-hidden align-bottom" style={{ height: "1.15em", width: "2.6em", position: "relative" }}>
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={textIndex}
@@ -87,15 +87,15 @@ const HeroSection = () => {
             </p>
 
             {/* Description */}
-            <p className="text-lg md:text-xl font-body font-medium text-white/80 leading-relaxed">
+            <p className="text-base md:text-lg font-body font-medium text-white/80 leading-relaxed">
               3D Workflow & Tools Experiments → GenAI Production Systems
             </p>
 
-            <p className="text-base md:text-lg font-body text-white/80 leading-relaxed">
+            <p className="text-sm md:text-base font-body text-white/80 leading-relaxed">
               Integrating GenAI tools into game engines, animation pipelines, and VFX workflows.
             </p>
 
-            <p className="text-base md:text-lg font-body text-white/70 leading-relaxed">
+            <p className="text-sm md:text-base font-body text-white/70 leading-relaxed">
               We're all discovering the pain points to scale. We{" "}
               <span className="text-gradient-tulip-ombre font-bold">love</span>{" "}
               handling the hard part:
@@ -103,10 +103,10 @@ const HeroSection = () => {
               making genAI reliable for our creatives & technical leaders
             </p>
 
-            {/* Pipeline steps — Apple-style clean flow */}
-            <div className="flex flex-wrap items-center gap-x-2.5 gap-y-2 text-sm md:text-base font-display font-semibold text-white/60">
+            {/* Pipeline steps */}
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-xs md:text-sm font-display font-semibold text-white/60">
               {["Discover opportunities", "Rapid prototyping", "Adopt solutions", "Integrate & collaborate with experts", "Scale"].map((step, i, arr) => (
-                <span key={step} className="flex items-center gap-2.5">
+                <span key={step} className="flex items-center gap-2">
                   <span className="text-white/80">{step}</span>
                   {i < arr.length - 1 && (
                     <span className="text-gradient-tulip-ombre">→</span>
@@ -121,17 +121,17 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="flex flex-wrap gap-3 items-start"
+            className="flex flex-wrap gap-2.5 items-start"
           >
             <a
               href="#services"
-              className="hero-btn-explore hero-btn-bloom px-7 py-3.5 rounded-full font-display font-semibold text-[15px] transition-all min-h-[48px] flex items-center"
+              className="hero-btn-explore hero-btn-bloom px-6 py-3 rounded-full font-display font-semibold text-sm transition-all min-h-[44px] flex items-center"
             >
               Explore Services
             </a>
             <a
               href="#estimator"
-              className="hero-btn-quote hero-btn-bloom px-7 py-3.5 rounded-full font-display font-semibold text-[15px] transition-all min-h-[48px] flex items-center"
+              className="hero-btn-quote hero-btn-bloom px-6 py-3 rounded-full font-display font-semibold text-sm transition-all min-h-[44px] flex items-center"
             >
               Estimate Quotes
             </a>
@@ -149,12 +149,12 @@ const HeroSection = () => {
                     }, 600);
                   }
                 }}
-                className="hero-btn-assessment hero-btn-bloom px-7 py-3.5 rounded-full font-display font-semibold text-[15px] transition-all min-h-[48px] flex items-center gap-2"
+                className="hero-btn-assessment hero-btn-bloom px-6 py-3 rounded-full font-display font-semibold text-sm transition-all min-h-[44px] flex items-center gap-2"
               >
                 <ClipboardCheck className="w-4 h-4" />
                 2-min Assessment
               </a>
-              <span className="text-[11px] font-body text-white/50">Not Sure Where to Start?</span>
+              <span className="text-[10px] font-body text-white/50">Not Sure Where to Start?</span>
             </div>
           </motion.div>
         </div>
