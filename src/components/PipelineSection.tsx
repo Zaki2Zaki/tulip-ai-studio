@@ -259,10 +259,6 @@ const PipelineSection = () => {
                     Sources: Generative Environments for ICVFX (SP Studios) • Hunyuan3D Pipeline (Tencent) • Democratization of VFX via GenAI (UWL Research)
                   </p>
                 </motion.div>
-
-                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="mt-5 text-center">
-                  <span className="text-gradient-gold font-body text-sm font-semibold italic">"We don't add more tools. We make them work — together."</span>
-                </motion.p>
               </motion.div>
             )}
 
