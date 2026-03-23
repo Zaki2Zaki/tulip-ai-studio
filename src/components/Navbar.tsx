@@ -127,60 +127,11 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 h-12">
-          {/* Logo */}
-          <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground shrink-0 ml-72">
-            TULIP<span className="text-gradient-gold"> TECH</span>
-          </Link>
-
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
-            <div
-              onMouseEnter={() => openDropdown("usecases")}
-              onMouseLeave={closeDropdown}
-              className="relative"
-            >
-              <Link
-                to="/case-studies"
-                className="flex items-center gap-1 text-[13px] font-body font-medium text-foreground/80 hover:text-foreground transition-colors"
-              >
-                Case Studies
-                <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === "usecases" ? "rotate-180" : ""}`} />
-              </Link>
-            </div>
-
-            <Link
-              to="/library"
-              className="text-[13px] font-body font-medium text-foreground/80 hover:text-foreground transition-colors"
-            >
-              R&D Library
+          {/* Logo + text-scale button */}
+          <div className="flex items-center gap-3 ml-72">
+            <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground shrink-0">
+              TULIP<span className="text-gradient-gold"> TECH</span>
             </Link>
-
-            {navLinks.map((link) =>
-              isHome ? (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-[13px] font-body font-medium text-foreground/80 hover:text-foreground transition-colors"
-                >
-                  {link.label}
-                </a>
-              ) : (
-                <Link
-                  key={link.href}
-                  to={`/${link.href}`}
-                  className="text-[13px] font-body font-medium text-foreground/80 hover:text-foreground transition-colors"
-                >
-                  {link.label}
-                </Link>
-              )
-            )}
-
-            <a
-              href={isHome ? "#estimator" : "/#estimator"}
-              className="text-[13px] font-body font-semibold bg-primary text-primary-foreground px-5 py-2 rounded-full hover:opacity-90 transition-all min-h-[36px] flex items-center"
-            >
-              Get a Quote
-            </a>
 
             {/* ── Text Scale Button ─────────────────────────── */}
             <div ref={scaleRef} className="relative">
@@ -190,8 +141,8 @@ const Navbar = () => {
                 title="Adjust text size"
                 className={`flex items-end gap-[2px] px-2.5 py-1.5 rounded-lg border transition-all select-none ${
                   scaleOpen
-                    ? "border-primary/50 bg-primary/10 text-foreground"
-                    : "border-border/40 bg-secondary/30 hover:bg-secondary/60 hover:border-border/60 text-foreground/60 hover:text-foreground"
+                    ? "border-white bg-white/10 text-white"
+                    : "border-white/50 bg-transparent hover:bg-white/10 hover:border-white text-white/70 hover:text-white"
                 }`}
               >
                 <span style={{ fontSize: 9, lineHeight: 1, fontWeight: 600 }}>a</span>
@@ -207,7 +158,7 @@ const Navbar = () => {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -6, scale: 0.96 }}
                     transition={{ duration: 0.18, ease: "easeOut" }}
-                    className="absolute right-0 top-full mt-2.5 w-64 bg-card/95 backdrop-blur-2xl border border-border/50 rounded-2xl shadow-2xl p-5 z-[70]"
+                    className="absolute left-0 top-full mt-2.5 w-64 bg-card/95 backdrop-blur-2xl border border-border/50 rounded-2xl shadow-2xl p-5 z-[70]"
                   >
                     {/* Header row */}
                     <div className="flex items-center justify-between mb-1">
@@ -265,6 +216,57 @@ const Navbar = () => {
                 )}
               </AnimatePresence>
             </div>
+          </div>
+
+          {/* Desktop nav */}
+          <div className="hidden md:flex items-center gap-8">
+            <div
+              onMouseEnter={() => openDropdown("usecases")}
+              onMouseLeave={closeDropdown}
+              className="relative"
+            >
+              <Link
+                to="/case-studies"
+                className="flex items-center gap-1 text-[13px] font-body font-medium text-foreground/80 hover:text-foreground transition-colors"
+              >
+                Case Studies
+                <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === "usecases" ? "rotate-180" : ""}`} />
+              </Link>
+            </div>
+
+            <Link
+              to="/library"
+              className="text-[13px] font-body font-medium text-foreground/80 hover:text-foreground transition-colors"
+            >
+              R&D Library
+            </Link>
+
+            {navLinks.map((link) =>
+              isHome ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-[13px] font-body font-medium text-foreground/80 hover:text-foreground transition-colors"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  to={`/${link.href}`}
+                  className="text-[13px] font-body font-medium text-foreground/80 hover:text-foreground transition-colors"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
+
+            <a
+              href={isHome ? "#estimator" : "/#estimator"}
+              className="text-[13px] font-body font-semibold bg-primary text-primary-foreground px-5 py-2 rounded-full hover:opacity-90 transition-all min-h-[36px] flex items-center"
+            >
+              Get a Quote
+            </a>
 
             {/* Auth */}
             {user ? (
