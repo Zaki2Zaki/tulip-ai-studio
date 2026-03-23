@@ -426,6 +426,37 @@ const WorkflowBuilderPanel = ({
             <p className="text-[10px] text-white/60 font-body">Custom tool{customTools.length > 1 ? "s" : ""} added by you — included in this configuration.</p>
           </div>
         )}
+
+        {/* Option B: Deep-Dive Focus — only shown if user flagged anything */}
+        {deepDive.length > 0 && (
+          <div className="rounded-xl border border-primary/25 bg-primary/5 mb-4 overflow-hidden">
+            <div className="px-4 py-2.5 border-b border-primary/15 flex items-center justify-between">
+              <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-primary">Your Deep-Dive Focus</p>
+              <span className="text-[9px] font-body text-white/50">{deepDive.length} flagged</span>
+            </div>
+            <div className="divide-y divide-border/15">
+              {deepDive.map((pt) => {
+                const entry = DEEP_DIVE_SERVICE_MAP[pt];
+                if (!entry) return null;
+                return (
+                  <div key={pt} className="px-4 py-2.5 flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="text-xs font-body text-white font-medium">{pt}</p>
+                      <p className="text-[10px] text-white/55 font-body mt-0.5">{entry.reason}</p>
+                    </div>
+                    <span className="text-[9px] font-display font-semibold text-primary bg-primary/15 border border-primary/25 px-2 py-0.5 rounded shrink-0 whitespace-nowrap">
+                      {entry.serviceLabel}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="px-4 py-2.5 border-t border-primary/15 bg-primary/5">
+              <p className="text-[10px] text-white/60 font-body">These services will be pre-selected in your estimate when you reach the Scale stage.</p>
+            </div>
+          </div>
+        )}
+
         <div className="px-4 py-3 rounded-xl bg-black/70 border border-orange-400/25 mb-5 backdrop-blur-sm">
           <div className="flex items-start gap-2">
             <span className="text-lg shrink-0 mt-0.5">⚠️</span>
