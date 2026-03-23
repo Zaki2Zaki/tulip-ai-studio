@@ -1,4 +1,5 @@
 import { useRef, useState, useCallback, useEffect } from "react";
+import { motion } from "framer-motion";
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
@@ -16,7 +17,7 @@ const BeforeAfterSlider = ({
   beforeLabel = "Current Workflow",
   afterLabel = "GenAI Tools + Workflow",
   onPositionChange,
-  handleY = 85,
+  handleY = 90,
 }: BeforeAfterSliderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(35);
@@ -58,7 +59,7 @@ const BeforeAfterSlider = ({
     "linear-gradient(180deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%), hsl(200 90% 75%))";
 
   // Clamp handle between 10%–90% so it never clips outside the image
-  const clampedHandleY = Math.max(10, Math.min(90, handleY));
+  const clampedHandleY = Math.max(10, Math.min(93, handleY));
 
   return (
     <div
@@ -150,31 +151,38 @@ const BeforeAfterSlider = ({
           className="absolute -translate-x-1/2 -translate-y-1/2 transition-[top] duration-150 ease-out"
           style={{ top: `${clampedHandleY}%` }}
         >
+          {/* Outer glow */}
           <div
-            className="w-14 h-14 rounded-full shadow-lg flex items-center justify-center"
+            className="relative w-14 h-14"
             style={{
-              background: `hsl(var(--background))`,
-              border: "3px solid transparent",
-              backgroundImage: `linear-gradient(hsl(var(--background)), hsl(var(--background))), ${ombreGradient}`,
-              backgroundOrigin: "border-box",
-              backgroundClip: "padding-box, border-box",
-              boxShadow:
-                "0 0 24px hsl(260 85% 75% / 0.6), 0 0 48px hsl(200 90% 75% / 0.4), 0 0 72px hsl(320 80% 72% / 0.25), 0 4px 12px hsl(0 0% 0% / 0.4)",
-              animation: "slider-handle-pulse 2s ease-in-out infinite",
+              filter: "drop-shadow(0 0 12px hsl(260 85% 75% / 0.7)) drop-shadow(0 0 24px hsl(200 90% 75% / 0.4))",
             }}
           >
-            <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
-              <defs>
-                <linearGradient id="ombre-arrow" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="hsl(200 90% 75%)" />
-                  <stop offset="33%" stopColor="hsl(260 85% 75%)" />
-                  <stop offset="66%" stopColor="hsl(320 80% 72%)" />
-                  <stop offset="100%" stopColor="hsl(40 95% 70%)" />
-                </linearGradient>
-              </defs>
-              <path d="M7 4L3 10L7 16" stroke="url(#ombre-arrow)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M13 4L17 10L13 16" stroke="url(#ombre-arrow)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            {/* Rotating rainbow ring */}
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+              style={{ background: ombreGradient, padding: "3px" }}
+            >
+              <div className="w-full h-full rounded-full" style={{ background: "hsl(var(--background))" }} />
+            </motion.div>
+
+            {/* Static arrows centred over the ring */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
+                <defs>
+                  <linearGradient id="ombre-arrow" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="hsl(200 90% 75%)" />
+                    <stop offset="33%" stopColor="hsl(260 85% 75%)" />
+                    <stop offset="66%" stopColor="hsl(320 80% 72%)" />
+                    <stop offset="100%" stopColor="hsl(40 95% 70%)" />
+                  </linearGradient>
+                </defs>
+                <path d="M7 4L3 10L7 16" stroke="url(#ombre-arrow)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path d="M13 4L17 10L13 16" stroke="url(#ombre-arrow)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
           </div>
         </div>
       </div>
