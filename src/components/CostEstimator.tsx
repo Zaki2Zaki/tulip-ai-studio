@@ -81,7 +81,7 @@ const CostEstimator = () => {
     : "";
 
   return (
-    <section id="estimator" className="py-24 md:py-32 section-padding">
+    <section id="estimator" className="pt-6 pb-24 md:pb-32 section-padding">
       <div ref={ref} className="max-w-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
