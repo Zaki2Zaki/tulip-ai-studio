@@ -1,9 +1,14 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, LogIn, LogOut } from "lucide-react";
+import { Menu, X, ChevronDown, LogIn, LogOut, RotateCcw } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useCases } from "@/data/useCases";
 import { supabase } from "@/integrations/supabase/client";
+
+const SCALE_KEY = "tulip-text-scale";
+const SCALE_MIN = 1;
+const SCALE_MAX = 3;
+const SCALE_DEFAULT = 1;
 
 const navLinks = [
   { label: "Services", href: "#services" },
@@ -17,12 +22,51 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileUseCasesOpen, setMobileUseCasesOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
+
+  // ── Text scale ─────────────────────────────────────────────
+  const [textScale, setTextScale] = useState<number>(SCALE_DEFAULT);
+  const [scaleOpen, setScaleOpen] = useState(false);
+  const scaleRef = useRef<HTMLDivElement>(null);
+
   const navRef = useRef<HTMLElement>(null);
   const closeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === "/";
 
+  // Load persisted scale on mount
+  useEffect(() => {
+    const saved = parseFloat(localStorage.getItem(SCALE_KEY) ?? "");
+    if (!isNaN(saved) && saved >= SCALE_MIN && saved <= SCALE_MAX) {
+      setTextScale(saved);
+    }
+  }, []);
+
+  // Apply scale globally via root font-size
+  useEffect(() => {
+    document.documentElement.style.fontSize = `${textScale * 100}%`;
+    return () => { document.documentElement.style.fontSize = ""; };
+  }, [textScale]);
+
+  const updateScale = useCallback((val: number) => {
+    const clamped = Math.min(SCALE_MAX, Math.max(SCALE_MIN, val));
+    setTextScale(clamped);
+    localStorage.setItem(SCALE_KEY, String(clamped));
+  }, []);
+
+  // Close popover on outside click
+  useEffect(() => {
+    if (!scaleOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (scaleRef.current && !scaleRef.current.contains(e.target as Node)) {
+        setScaleOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [scaleOpen]);
+
+  // Auth
   useEffect(() => {
     supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
@@ -52,9 +96,12 @@ const Navbar = () => {
     closeTimeout.current = setTimeout(() => setActiveDropdown(null), 200);
   };
 
+  // Slider fill % (0–100)
+  const fillPct = ((textScale - SCALE_MIN) / (SCALE_MAX - SCALE_MIN)) * 100;
+
   return (
     <>
-      {/* Top promo bar — slim, Apple-style */}
+      {/* Top promo bar */}
       <div className="fixed top-0 left-0 right-0 z-[60] bg-card/80 backdrop-blur-xl border-b border-border/30">
         <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 px-4 py-1.5 text-center">
           <span className="text-[11px] font-body text-muted-foreground">📄</span>
@@ -80,12 +127,12 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 h-12">
-          {/* Logo — left aligned */}
+          {/* Logo */}
           <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground shrink-0 ml-72">
             TULIP<span className="text-gradient-gold"> TECH</span>
           </Link>
 
-          {/* Desktop nav — right aligned, Apple-style minimal */}
+          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-8">
             <div
               onMouseEnter={() => openDropdown("usecases")}
@@ -135,6 +182,91 @@ const Navbar = () => {
               Get a Quote
             </a>
 
+            {/* ── Text Scale Button ─────────────────────────── */}
+            <div ref={scaleRef} className="relative">
+              <button
+                onClick={() => setScaleOpen((o) => !o)}
+                aria-label="Adjust text size"
+                title="Adjust text size"
+                className={`flex items-end gap-[2px] px-2.5 py-1.5 rounded-lg border transition-all select-none ${
+                  scaleOpen
+                    ? "border-primary/50 bg-primary/10 text-foreground"
+                    : "border-border/40 bg-secondary/30 hover:bg-secondary/60 hover:border-border/60 text-foreground/60 hover:text-foreground"
+                }`}
+              >
+                <span style={{ fontSize: 9, lineHeight: 1, fontWeight: 600 }}>a</span>
+                <span style={{ fontSize: 12, lineHeight: 1, fontWeight: 600 }}>A</span>
+                <span style={{ fontSize: 16, lineHeight: 1, fontWeight: 700 }}>A</span>
+              </button>
+
+              {/* Popover */}
+              <AnimatePresence>
+                {scaleOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.96 }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                    className="absolute right-0 top-full mt-2.5 w-64 bg-card/95 backdrop-blur-2xl border border-border/50 rounded-2xl shadow-2xl p-5 z-[70]"
+                  >
+                    {/* Header row */}
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-[10px] font-body font-semibold text-foreground/60 tracking-[0.12em] uppercase">
+                        Text Size
+                      </span>
+                      <span className="text-base font-display font-bold text-primary tabular-nums">
+                        {textScale.toFixed(2)}×
+                      </span>
+                    </div>
+
+                    {/* aAA preview label */}
+                    <div className="flex items-end gap-1 mb-4 text-foreground/40">
+                      <span style={{ fontSize: `${9 * textScale}px`, lineHeight: 1, fontWeight: 600, transition: "font-size 0.1s" }}>a</span>
+                      <span style={{ fontSize: `${12 * textScale}px`, lineHeight: 1, fontWeight: 600, transition: "font-size 0.1s" }}>A</span>
+                      <span style={{ fontSize: `${16 * textScale}px`, lineHeight: 1, fontWeight: 700, transition: "font-size 0.1s" }}>A</span>
+                    </div>
+
+                    {/* Range slider */}
+                    <input
+                      type="range"
+                      min={SCALE_MIN}
+                      max={SCALE_MAX}
+                      step={0.05}
+                      value={textScale}
+                      onChange={(e) => updateScale(Number(e.target.value))}
+                      className="text-scale-slider mb-2"
+                      style={{
+                        background: `linear-gradient(to right, hsl(var(--primary)) ${fillPct}%, rgba(255,255,255,0.1) ${fillPct}%)`,
+                      }}
+                    />
+
+                    {/* Track labels */}
+                    <div className="flex justify-between mb-4">
+                      {["1×", "1.5×", "2×", "2.5×", "3×"].map((l) => (
+                        <span key={l} className="text-[9px] font-body text-muted-foreground/60">{l}</span>
+                      ))}
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-[10px] font-body text-muted-foreground leading-relaxed mb-3">
+                      Scales all text on the page. Your preference is saved automatically.
+                    </p>
+
+                    {/* Reset */}
+                    <button
+                      onClick={() => updateScale(SCALE_DEFAULT)}
+                      disabled={textScale === SCALE_DEFAULT}
+                      className="flex items-center justify-center gap-1.5 w-full text-[11px] font-body font-medium text-muted-foreground hover:text-foreground transition-colors py-1.5 rounded-lg hover:bg-secondary/40 disabled:opacity-30 disabled:cursor-not-allowed"
+                    >
+                      <RotateCcw className="w-3 h-3" />
+                      Reset to default
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Auth */}
             {user ? (
               <button
                 onClick={async () => { await supabase.auth.signOut(); navigate("/"); }}
@@ -152,7 +284,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile toggle — 44×44 touch target */}
+          {/* Mobile toggle */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden text-foreground min-h-[44px] min-w-[44px] flex items-center justify-center"
@@ -161,7 +293,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Case Studies dropdown panel */}
+        {/* Case Studies dropdown */}
         <AnimatePresence>
           {activeDropdown === "usecases" && (
             <motion.div
@@ -221,7 +353,7 @@ const Navbar = () => {
           )}
         </AnimatePresence>
 
-        {/* Mobile menu — Apple-style full-bleed */}
+        {/* Mobile menu */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
@@ -278,6 +410,7 @@ const Navbar = () => {
                     {link.label}
                   </a>
                 ))}
+
                 <a
                   href={isHome ? "#estimator" : "/#estimator"}
                   onClick={() => setMobileOpen(false)}
@@ -285,6 +418,37 @@ const Navbar = () => {
                 >
                   Get a Quote
                 </a>
+
+                {/* Mobile text scale */}
+                <div className="mt-4 pt-4 border-t border-border/30">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-end gap-[2px] text-foreground/60">
+                      <span style={{ fontSize: 9, lineHeight: 1, fontWeight: 600 }}>a</span>
+                      <span style={{ fontSize: 12, lineHeight: 1, fontWeight: 600 }}>A</span>
+                      <span style={{ fontSize: 16, lineHeight: 1, fontWeight: 700 }}>A</span>
+                      <span className="text-[11px] font-body text-muted-foreground ml-2">Text Size</span>
+                    </div>
+                    <span className="text-sm font-display font-bold text-primary">{textScale.toFixed(2)}×</span>
+                  </div>
+                  <input
+                    type="range"
+                    min={SCALE_MIN}
+                    max={SCALE_MAX}
+                    step={0.05}
+                    value={textScale}
+                    onChange={(e) => updateScale(Number(e.target.value))}
+                    className="text-scale-slider"
+                    style={{
+                      background: `linear-gradient(to right, hsl(var(--primary)) ${fillPct}%, rgba(255,255,255,0.1) ${fillPct}%)`,
+                    }}
+                  />
+                  <div className="flex justify-between mt-1.5">
+                    {["1×", "1.5×", "2×", "2.5×", "3×"].map((l) => (
+                      <span key={l} className="text-[9px] font-body text-muted-foreground/60">{l}</span>
+                    ))}
+                  </div>
+                </div>
+
                 {user ? (
                   <button
                     onClick={async () => { await supabase.auth.signOut(); setMobileOpen(false); navigate("/"); }}
@@ -307,7 +471,7 @@ const Navbar = () => {
         </AnimatePresence>
       </motion.nav>
 
-      {/* Backdrop overlay */}
+      {/* Backdrop */}
       <AnimatePresence>
         {activeDropdown && (
           <motion.div

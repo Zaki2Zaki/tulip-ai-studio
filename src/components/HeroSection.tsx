@@ -124,41 +124,47 @@ const HeroSection = () => {
               ))}
             </div>
 
-            {/* CTAs — all three on one row, equal width */}
-            <div className="flex gap-2 mt-2">
-              <button
-                onClick={() => setCalendlyOpen(true)}
-                className="hero-btn-explore hero-btn-bloom flex-1 px-4 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[40px] flex items-center justify-center gap-1.5"
-              >
-                Book a Call
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
+            {/* CTAs */}
+            <div className="flex flex-col gap-2 mt-2">
+              {/* Row 1 — Book a Call + Get Estimate */}
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setCalendlyOpen(true)}
+                  className="hero-btn-explore hero-btn-bloom flex-1 px-4 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[40px] flex items-center justify-center gap-1.5"
+                >
+                  Book a Call
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </button>
 
-              <a
-                href="#estimator"
-                className="hero-btn-quote hero-btn-bloom flex-1 px-4 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[40px] flex items-center justify-center"
-              >
-                Get Estimate
-              </a>
+                <a
+                  href="#estimator"
+                  className="hero-btn-quote hero-btn-bloom flex-1 px-4 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[40px] flex items-center justify-center"
+                >
+                  Get Estimate
+                </a>
+              </div>
 
-              <a
-                href="#estimator"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.getElementById("estimator");
-                  if (el) {
-                    el.scrollIntoView({ behavior: "smooth" });
-                    setTimeout(() => {
-                      const assessBtn = document.querySelector<HTMLButtonElement>('[data-assessment-trigger]');
-                      assessBtn?.click();
-                    }, 600);
-                  }
-                }}
-                className="hero-btn-assessment hero-btn-bloom flex-1 px-4 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[40px] flex items-center justify-center gap-1.5"
-              >
-                <ClipboardCheck className="w-3.5 h-3.5" />
-                2-min Assessment
-              </a>
+              {/* Row 2 — 2-min Assessment centred below */}
+              <div className="flex justify-center">
+                <a
+                  href="#estimator"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const el = document.getElementById("estimator");
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth" });
+                      setTimeout(() => {
+                        const assessBtn = document.querySelector<HTMLButtonElement>('[data-assessment-trigger]');
+                        assessBtn?.click();
+                      }, 600);
+                    }
+                  }}
+                  className="hero-btn-assessment hero-btn-bloom px-6 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[40px] flex items-center justify-center gap-1.5"
+                >
+                  <ClipboardCheck className="w-3.5 h-3.5" />
+                  2-min Assessment
+                </a>
+              </div>
             </div>
           </motion.div>
 
