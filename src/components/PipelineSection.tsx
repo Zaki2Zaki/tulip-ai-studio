@@ -134,7 +134,7 @@ const PipelineSection = () => {
         {/* Drag hint — above slider */}
         <motion.p
           initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 0.7 } : {}}
+          animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.5 }}
           className="text-center mb-4 text-sm font-body text-white"
         >
