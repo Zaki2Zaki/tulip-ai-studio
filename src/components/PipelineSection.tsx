@@ -487,6 +487,8 @@ const PipelineSection = () => {
   const workflowShownRef = useRef(false);
   const [workflowSelected, setWorkflowSelected] = useState<string[]>([]);
   const [workflowTools, setWorkflowTools] = useState<string[]>([]);
+  const [workflowDeepDive, setWorkflowDeepDive] = useState<string[]>([]);
+  const [workshopAdded, setWorkshopAdded] = useState(false);
 
   const handlePositionChange = useCallback((pos: number) => {
     setSliderPos(pos);
