@@ -53,7 +53,7 @@ const HeroSection = () => {
       </div>
 
       {/* Grid Container */}
-      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12 py-24 md:py-0">
+      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 md:px-10 lg:px-12 py-24 md:pt-36 md:pb-0">
         <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-12">
           {/* Left: Content Block */}
           <motion.div
@@ -127,7 +127,7 @@ const HeroSection = () => {
             {/* CTAs */}
             <div className="flex flex-col gap-2 mt-2">
               {/* Row 1 — Book a Call + Get Estimate */}
-              <div className="flex gap-2 justify-center">
+              <div className="flex gap-2">
                 <button
                   onClick={() => setCalendlyOpen(true)}
                   className="hero-btn-explore hero-btn-bloom px-6 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[40px] flex items-center justify-center gap-1.5"
@@ -144,8 +144,8 @@ const HeroSection = () => {
                 </a>
               </div>
 
-              {/* Row 2 — 2-min Assessment centred below */}
-              <div className="flex justify-center">
+              {/* Row 2 — 2-min Assessment left-aligned */}
+              <div className="flex">
                 <a
                   href="#estimator"
                   onClick={(e) => {
