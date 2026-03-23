@@ -349,10 +349,10 @@ const WorkflowBuilderPanel = ({
         )}
         <div className="px-4 py-3 rounded-xl bg-black/70 border border-orange-400/25 mb-5 backdrop-blur-sm">
           <div className="flex items-start gap-2">
-            <AlertTriangle className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
+            <span className="text-lg shrink-0 mt-0.5">⚠️</span>
             <div>
               <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-orange-400 mb-1">Demonstration Only</p>
-              <p className="text-xs font-body text-white/70">These are simulated benchmarks. An initial <strong className="text-white/90">1:1 Consultation</strong> is required for a deep-dive analysis and aligned expectations before any real integration begins.</p>
+              <p className="text-xs font-body text-white/70">This was a simulation. Real-world scaling requires a scoped discovery, team onboarding, and ongoing support. A <strong className="text-white/90">1:1 Consultation</strong> aligns expectations before any commitment.</p>
             </div>
           </div>
         </div>
