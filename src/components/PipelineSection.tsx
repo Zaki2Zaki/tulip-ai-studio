@@ -171,8 +171,8 @@ const WorkflowBuilderPanel = ({
         <div className="rounded-xl border border-border/30 overflow-hidden mb-4">
           {/* Header row */}
           <div className="grid grid-cols-[1fr_auto] items-center px-3 py-2 bg-white/5 border-b border-border/30">
-            <span className="text-[10px] font-display font-bold tracking-wider uppercase text-white">Friction Pain Point</span>
-            <span className="text-[10px] font-display font-bold tracking-wider uppercase text-white">Impact Level</span>
+            <span className="text-sm font-display font-bold tracking-wider uppercase text-white">Friction Pain Point</span>
+            <span className="text-sm font-display font-bold tracking-wider uppercase text-white">Impact Level</span>
           </div>
           {/* Data rows */}
           {sortedSelected.map((pt, i) => {
@@ -181,15 +181,15 @@ const WorkflowBuilderPanel = ({
             const isSel = deepDive.includes(pt);
             return (
               <button key={pt} onClick={() => onDeepDiveChange(toggle(deepDive, pt))}
-                className={`w-full text-left px-3 py-2.5 grid grid-cols-[1fr_auto] items-center gap-3 transition-all ${i < sortedSelected.length - 1 ? "border-b border-border/20" : ""} ${isSel ? "bg-primary/10" : "hover:bg-white/5"}`}>
+                className={`w-full text-left px-3 py-3 grid grid-cols-[1fr_auto] items-center gap-3 transition-all ${i < sortedSelected.length - 1 ? "border-b border-border/20" : ""} ${isSel ? "bg-primary/10" : "hover:bg-white/5"}`}>
                 <div className="flex items-center gap-2 min-w-0">
-                  <AlertTriangle className={`w-3 h-3 shrink-0 ${isSel ? "text-orange-400" : "text-white/40"}`} />
+                  <span className="text-base shrink-0">⚠️</span>
                   <div className="min-w-0">
-                    <span className="text-xs font-body text-white block">{pt}</span>
-                    <span className={`text-[9px] font-display font-semibold ${cat.color}`}>{cat.label}</span>
+                    <span className="text-sm font-body text-white block">{pt}</span>
+                    <span className={`text-xs font-display font-semibold ${cat.color}`}>{cat.label}</span>
                   </div>
                 </div>
-                <span className={`text-[9px] font-semibold px-2 py-0.5 rounded shrink-0 border ${
+                <span className={`text-xs font-semibold px-2.5 py-1 rounded shrink-0 border ${
                   meta?.impact === "High"   ? "text-red-400 bg-red-400/15 border-red-400/30" :
                   meta?.impact === "Medium" ? "text-amber-400 bg-amber-400/15 border-amber-400/30" :
                                               "text-white/70 bg-white/10 border-white/20"
