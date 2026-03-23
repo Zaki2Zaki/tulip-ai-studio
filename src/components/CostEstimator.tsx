@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import tulipLogo from "@/assets/new-logo.png";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
@@ -49,6 +49,23 @@ const CostEstimator = () => {
   const [discoveryOpen, setDiscoveryOpen] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [calendlyOpen, setCalendlyOpen] = useState(false);
+
+  useEffect(() => {
+    const selectServiceHandler = (e: Event) => {
+      const id = (e as CustomEvent<{ id: string }>).detail?.id;
+      if (id) setSelectedServices(prev => prev.includes(id) ? prev : [...prev, id]);
+    };
+    const openCalendlyHandler = () => {
+      setCalendlyOpen(true);
+    };
+
+    window.addEventListener("tulip:select-service", selectServiceHandler);
+    window.addEventListener("tulip:open-calendly", openCalendlyHandler);
+    return () => {
+      window.removeEventListener("tulip:select-service", selectServiceHandler);
+      window.removeEventListener("tulip:open-calendly", openCalendlyHandler);
+    };
+  }, []);
 
   const handleQuizComplete = (recommendedServices: string[]) => {
     setSelectedServices(recommendedServices);

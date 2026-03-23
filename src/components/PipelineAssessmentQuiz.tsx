@@ -66,6 +66,100 @@ const categoryDefs = [
 const sliderLabels = ["", "Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"];
 
 /* ──────────────────────────────────────────
+   Tools data
+   ────────────────────────────────────────── */
+
+interface Tool { id: string; label: string; abbr: string; }
+
+const currentPipelineTools: Tool[] = [
+  { id: "blender", label: "Blender Plugins", abbr: "B" },
+  { id: "davinci", label: "DaVinci Resolve AI", abbr: "DV" },
+  { id: "elevenlabs", label: "ElevenLabs", abbr: "EL" },
+  { id: "houdini", label: "Houdini + AI", abbr: "H" },
+  { id: "kling", label: "Kling AI", abbr: "K" },
+  { id: "maya", label: "Maya + AI", abbr: "M" },
+  { id: "midjourney", label: "Midjourney", abbr: "MJ" },
+  { id: "nuke", label: "Nuke (Foundry)", abbr: "N" },
+  { id: "runway", label: "Runway ML", abbr: "R" },
+  { id: "stable-diffusion", label: "Stable Diffusion", abbr: "SD" },
+  { id: "unreal", label: "Unreal Engine 5", abbr: "UE" },
+  { id: "unity", label: "Unity AI", abbr: "U" },
+];
+
+interface WishlistCategory { category: string; color: string; tools: Omit<Tool, "abbr">[]; }
+
+const wishlistCategories: WishlistCategory[] = [
+  {
+    category: "Game Development",
+    color: "hsl(200 90% 70%)",
+    tools: [
+      { id: "convai", label: "Convai" },
+      { id: "inworld", label: "Inworld AI" },
+      { id: "layer-ai", label: "Layer AI" },
+      { id: "ludo", label: "Ludo.ai" },
+      { id: "promethean", label: "Promethean AI" },
+      { id: "scenario", label: "Scenario.gg" },
+      { id: "sloyd", label: "Sloyd" },
+      { id: "unakin", label: "Unakin" },
+    ],
+  },
+  {
+    category: "3D Modeling & Scanning",
+    color: "hsl(260 85% 72%)",
+    tools: [
+      { id: "alpha3d", label: "Alpha3D" },
+      { id: "csm", label: "CSM.ai" },
+      { id: "kaedim", label: "Kaedim" },
+      { id: "luma-ai", label: "Luma AI" },
+      { id: "meshy", label: "Meshy" },
+      { id: "polycam", label: "Polycam" },
+      { id: "spline", label: "Spline" },
+      { id: "tripo3d", label: "Tripo3D" },
+    ],
+  },
+  {
+    category: "Asset Generation",
+    color: "hsl(40 95% 65%)",
+    tools: [
+      { id: "artbreeder", label: "Artbreeder" },
+      { id: "dalle", label: "DALL-E 3" },
+      { id: "freepik", label: "Freepik AI" },
+      { id: "ideogram", label: "Ideogram" },
+      { id: "leonardo", label: "Leonardo AI" },
+      { id: "midjourney-w", label: "Midjourney" },
+      { id: "stability-w", label: "Stability AI" },
+    ],
+  },
+  {
+    category: "VFX & Video",
+    color: "hsl(320 70% 68%)",
+    tools: [
+      { id: "genmo", label: "Genmo" },
+      { id: "haiper", label: "Haiper" },
+      { id: "kaiber", label: "Kaiber" },
+      { id: "pika", label: "Pika Labs" },
+      { id: "sora", label: "Sora (OpenAI)" },
+      { id: "topaz", label: "Topaz Video AI" },
+      { id: "wonder-studio", label: "Wonder Studio" },
+    ],
+  },
+  {
+    category: "3D Animation & Motion Capture",
+    color: "hsl(160 75% 55%)",
+    tools: [
+      { id: "deepmotion", label: "DeepMotion" },
+      { id: "iclone", label: "iClone (Reallusion)" },
+      { id: "kinetix", label: "Kinetix" },
+      { id: "mixamo", label: "Mixamo (Adobe)" },
+      { id: "move-ai", label: "Move.ai" },
+      { id: "plask", label: "Plask" },
+      { id: "radical", label: "RADiCAL Motion" },
+      { id: "rokoko", label: "Rokoko" },
+    ],
+  },
+];
+
+/* ──────────────────────────────────────────
    Donut chart (SVG)
    ────────────────────────────────────────── */
 
@@ -119,7 +213,6 @@ const DonutChart = ({ categories, overall, worstIndices }: { categories: { label
             {fillAngle > 0.5 && (
               <path d={describeArc(startAngle, startAngle + fillAngle, outerR, innerR)} fill={cat.color} opacity={0.9} />
             )}
-            {/* Chrome rainbow outline on worst areas */}
             {isWorst && (
               <path
                 d={describeArc(startAngle, fullEndAngle, outerR + 4, outerR)}
@@ -151,7 +244,7 @@ interface PipelineAssessmentQuizProps {
 }
 
 const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmentQuizProps) => {
-  const [step, setStep] = useState<"intake" | "quiz" | "results">("intake");
+  const [step, setStep] = useState<"intake" | "quiz" | "tools" | "results">("intake");
   const [quizPage, setQuizPage] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>(() => {
     const initial: Record<number, number> = {};
@@ -161,6 +254,8 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
   const [user, setUser] = useState({ firstName: "", lastName: "", email: "", industry: "", studioScale: "" });
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [pipelineTools, setPipelineTools] = useState<string[]>([]);
+  const [wishlistTools, setWishlistTools] = useState<string[]>([]);
 
   const totalPages = categoryDefs.length;
   const currentCategory = categoryDefs[quizPage];
@@ -173,7 +268,15 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
     questions.forEach((q) => (initial[q.id] = 3));
     setAnswers(initial);
     setEmailSubmitted(false);
+    setPipelineTools([]);
+    setWishlistTools([]);
   };
+
+  const togglePipelineTool = (id: string) =>
+    setPipelineTools(prev => prev.includes(id) ? prev.filter(t => t !== id) : [...prev, id]);
+
+  const toggleWishlistTool = (id: string) =>
+    setWishlistTools(prev => prev.includes(id) ? prev.filter(t => t !== id) : [...prev, id]);
 
   /* ── Scoring ── */
   const scores = useMemo(() => {
@@ -213,7 +316,6 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
     if (!user.email) return;
     setSubmitting(true);
     try {
-      // Store lead in database
       await supabase.from("leads").insert({
         name: [user.firstName, user.lastName].filter(Boolean).join(" ") || null,
         email: user.email,
@@ -224,10 +326,11 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
           scores: scores.cats.map((c) => ({ label: c.label, pct: Math.round(c.pct) })),
           overall: Math.round(scores.overall),
           recommendation,
+          pipelineTools,
+          wishlistTools,
         },
       } as any);
 
-      // Send results to edge function
       await supabase.functions.invoke("send-assessment", {
         body: {
           type: "pipeline-assessment",
@@ -237,10 +340,11 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
           scores: scores.cats.map((c) => ({ label: c.label, pct: Math.round(c.pct) })),
           overall: Math.round(scores.overall),
           recommendation,
+          pipelineTools,
+          wishlistTools,
         },
       });
     } catch (e) {
-      // silently continue — email is best-effort
       console.error("Failed to send assessment email:", e);
     }
     setEmailSubmitted(true);
@@ -256,7 +360,11 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
     "hsl(290 60% 55%)",
   ];
 
-  const progress = step === "quiz" ? ((quizPage + 1) / totalPages) * 100 : step === "results" ? 100 : 0;
+  const progressSteps = totalPages + 2;
+  const progress =
+    step === "quiz" ? ((quizPage + 1) / progressSteps) * 100 :
+    step === "tools" ? ((totalPages + 1) / progressSteps) * 100 :
+    step === "results" ? 100 : 0;
 
   const canProceedIntake = user.email && user.industry && user.studioScale;
 
@@ -305,6 +413,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
         {/* Content */}
         <div className="p-6 overflow-y-auto flex-1">
           <AnimatePresence mode="wait">
+
             {/* ── STEP 1: INTAKE ── */}
             {step === "intake" && (
               <motion.div key="intake" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="text-center">
@@ -367,7 +476,6 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                   <span className="text-sm text-muted-foreground font-body">{pageQuestions.length} questions</span>
                 </div>
 
-                {/* Category title */}
                 <h3 className="font-display text-xl font-bold mb-1" style={{ color: catColors[quizPage] }}>
                   {currentCategory.label}
                 </h3>
@@ -399,7 +507,6 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                   ))}
                 </div>
 
-                {/* Navigation */}
                 <div className="flex justify-between mt-8">
                   <button
                     onClick={() => quizPage > 0 ? setQuizPage(quizPage - 1) : setStep("intake")}
@@ -408,16 +515,112 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                     <ArrowLeft size={14} /> Back
                   </button>
                   <button
-                    onClick={() => quizPage < totalPages - 1 ? setQuizPage(quizPage + 1) : setStep("results")}
+                    onClick={() => quizPage < totalPages - 1 ? setQuizPage(quizPage + 1) : setStep("tools")}
                     className="bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-display font-semibold text-base hover:opacity-90 transition-opacity inline-flex items-center gap-2"
                   >
-                    {quizPage < totalPages - 1 ? <>Next <ArrowRight size={14} /></> : <>See Results <CheckCircle2 size={14} /></>}
+                    {quizPage < totalPages - 1 ? <>Next <ArrowRight size={14} /></> : <>Select Tools <ArrowRight size={14} /></>}
                   </button>
                 </div>
               </motion.div>
             )}
 
-            {/* ── RESULTS ── */}
+            {/* ── STEP 3: TOOL SELECTION ── */}
+            {step === "tools" && (
+              <motion.div key="tools" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}>
+                <h3 className="font-display text-xl font-bold mb-1">Which tools will we test?</h3>
+                <p className="text-sm text-muted-foreground font-body mb-6">Select tools across both categories to personalise your results.</p>
+
+                {/* Section 1: Already in pipeline */}
+                <div className="mb-8">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-2 h-2 rounded-full bg-green-400" />
+                    <span className="text-xs font-display font-semibold tracking-[0.1em] uppercase text-green-400">
+                      Already in your pipeline / operations
+                    </span>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {currentPipelineTools.map((tool) => {
+                      const selected = pipelineTools.includes(tool.id);
+                      return (
+                        <button
+                          key={tool.id}
+                          onClick={() => togglePipelineTool(tool.id)}
+                          className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-body font-medium transition-all ${
+                            selected
+                              ? "border-green-400/60 bg-green-400/10 text-green-300"
+                              : "border-border/50 bg-secondary/40 text-muted-foreground hover:border-green-400/30 hover:text-foreground"
+                          }`}
+                        >
+                          <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold shrink-0 ${
+                            selected ? "bg-green-400/20 text-green-300" : "bg-muted text-muted-foreground"
+                          }`}>
+                            {tool.abbr.slice(0, 2)}
+                          </span>
+                          {tool.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Section 2: Wishlist */}
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <span className="text-xs font-display font-semibold tracking-[0.1em] uppercase text-primary">
+                      Wishlist — GenAI tools to integrate
+                    </span>
+                  </div>
+
+                  <div className="space-y-5">
+                    {wishlistCategories.map((cat) => (
+                      <div key={cat.category}>
+                        <p className="text-[10px] font-display font-semibold tracking-[0.12em] uppercase mb-2" style={{ color: cat.color }}>
+                          {cat.category}
+                        </p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {cat.tools.map((tool) => {
+                            const selected = wishlistTools.includes(tool.id);
+                            return (
+                              <button
+                                key={tool.id}
+                                onClick={() => toggleWishlistTool(tool.id)}
+                                className={`px-2.5 py-1 rounded-full border text-[11px] font-body transition-all ${
+                                  selected
+                                    ? "border-primary/60 text-foreground"
+                                    : "border-border/40 text-muted-foreground hover:border-primary/30 hover:text-foreground"
+                                }`}
+                                style={selected ? { backgroundColor: `${cat.color}18`, borderColor: `${cat.color}60`, color: cat.color } : {}}
+                              >
+                                {tool.label}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Navigation */}
+                <div className="flex justify-between mt-8">
+                  <button
+                    onClick={() => { setQuizPage(totalPages - 1); setStep("quiz"); }}
+                    className="text-base text-muted-foreground hover:text-foreground transition-colors font-body flex items-center gap-1"
+                  >
+                    <ArrowLeft size={14} /> Back
+                  </button>
+                  <button
+                    onClick={() => setStep("results")}
+                    className="bg-primary text-primary-foreground px-6 py-2.5 rounded-full font-display font-semibold text-base hover:opacity-90 transition-opacity inline-flex items-center gap-2"
+                  >
+                    Validate Results <ArrowRight size={14} />
+                  </button>
+                </div>
+              </motion.div>
+            )}
+
+            {/* ── STEP 4: RESULTS ── */}
             {step === "results" && (
               <motion.div key="results" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                 <div className="text-center mb-6">
@@ -428,7 +631,6 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                 {/* Donut + Legend */}
                 <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
                   {(() => {
-                    // Find top 3 worst-scoring category indices
                     const sorted = scores.cats.map((c, i) => ({ pct: c.pct, i })).sort((a, b) => a.pct - b.pct);
                     const worstIndices = sorted.slice(0, 3).map(s => s.i);
                     return (
@@ -462,6 +664,29 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                     ))}
                   </div>
                 </div>
+
+                {/* Tool summary */}
+                {(pipelineTools.length > 0 || wishlistTools.length > 0) && (
+                  <div className="rounded-2xl border border-border/40 bg-secondary/20 p-4 mb-6">
+                    <p className="text-xs font-display font-semibold uppercase tracking-[0.1em] text-muted-foreground mb-3">Tool Profile</p>
+                    {pipelineTools.length > 0 && (
+                      <div className="mb-2">
+                        <span className="text-[10px] font-body text-green-400 uppercase tracking-wider mr-2">In Pipeline:</span>
+                        <span className="text-xs font-body text-foreground/80">
+                          {pipelineTools.map(id => currentPipelineTools.find(t => t.id === id)?.label).filter(Boolean).join(" · ")}
+                        </span>
+                      </div>
+                    )}
+                    {wishlistTools.length > 0 && (
+                      <div>
+                        <span className="text-[10px] font-body text-primary uppercase tracking-wider mr-2">Wishlist:</span>
+                        <span className="text-xs font-body text-foreground/80">
+                          {wishlistTools.map(id => wishlistCategories.flatMap(c => c.tools).find(t => t.id === id)?.label).filter(Boolean).join(" · ")}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                )}
 
                 {/* Recommendation panel */}
                 <div className={`rounded-2xl border p-6 mb-6 ${
@@ -518,7 +743,6 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                   </div>
                 )}
 
-                {/* Note + Close */}
                 <p className="text-sm text-muted-foreground font-body text-center mb-4">
                   ✓ Recommendations have been automatically added to the cost estimator below.
                 </p>
@@ -529,6 +753,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                 </div>
               </motion.div>
             )}
+
           </AnimatePresence>
         </div>
       </motion.div>

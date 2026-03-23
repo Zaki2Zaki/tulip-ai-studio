@@ -213,8 +213,12 @@ const WorkflowBuilderPanel = ({
             </div>
           ))}
         </div>
-        <div className="px-4 py-3 rounded-xl bg-green-400/5 border border-green-400/20 mb-5">
+        <div className="px-4 py-3 rounded-xl bg-green-400/5 border border-green-400/20 mb-4">
           <p className="text-xs font-body text-green-300">✓ Results confirmed for {tools.length > 0 ? tools.join(", ") : "your selected tools"}</p>
+        </div>
+        <div className="px-4 py-3 rounded-xl bg-orange-400/5 border border-orange-400/20 mb-5">
+          <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-orange-400 mb-1">Demonstration Only</p>
+          <p className="text-xs font-body text-foreground/70">These are simulated benchmarks. An initial <strong className="text-foreground/90">1:1 Consultation</strong> is required for a deep-dive analysis and aligned expectations before any real integration begins.</p>
         </div>
         <div className="flex items-center gap-4">
           <button onClick={() => onStageChange(4)}
@@ -237,12 +241,14 @@ const WorkflowBuilderPanel = ({
     ];
     return (
       <div>
-        <div className="flex items-center gap-2 mb-3">
+        <div className="flex items-center gap-2 mb-1">
           <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
           <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Integrate: Embedding Into Your Stack</span>
+          <span className="ml-1 px-2 py-0.5 rounded-full bg-orange-400/15 border border-orange-400/30 text-[9px] font-display font-bold uppercase tracking-wider text-orange-400">Demo Only</span>
         </div>
+        <p className="text-[10px] font-body text-muted-foreground mb-3">This is a simulated walkthrough — real integration requires a scoped engagement.</p>
         <p className="font-display text-lg font-bold text-white mb-4">Connecting AI into your production tools</p>
-        <div className="space-y-2 mb-6">
+        <div className="space-y-2 mb-5">
           {checks.map((c, i) => (
             <motion.div key={c} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.25 }}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-card/40 border border-border/30">
@@ -256,6 +262,24 @@ const WorkflowBuilderPanel = ({
             </motion.div>
           ))}
         </div>
+
+        {/* Workshops CTA */}
+        <div className="px-4 py-3 rounded-xl bg-primary/5 border border-primary/20 mb-5">
+          <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-primary mb-1">Empower Your Team</p>
+          <p className="text-xs font-body text-foreground/75 mb-2.5">
+            Workshops &amp; Education — certified training led by Unreal Educators &amp; VFX/Game-Developers to build AI creative skills across your team.
+          </p>
+          <a
+            href="#estimator"
+            onClick={() => {
+              window.dispatchEvent(new CustomEvent("tulip:select-service", { detail: { id: "workshops" } }));
+            }}
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-primary/40 bg-primary/10 text-xs font-display font-semibold text-primary hover:bg-primary/20 transition-colors"
+          >
+            Add Workshops to Estimate <ArrowRight className="w-3 h-3" />
+          </a>
+        </div>
+
         <div className="flex items-center gap-4">
           <button onClick={() => onStageChange(5)}
             className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
@@ -270,15 +294,16 @@ const WorkflowBuilderPanel = ({
   /* ── Stage 5: Scale / Complete ── */
   return (
     <div className="text-center">
-      <div className="flex items-center justify-center gap-2 mb-4">
+      <div className="flex items-center justify-center gap-2 mb-3">
         <span className="w-2 h-2 rounded-full bg-green-400" />
         <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-green-400">Scale: Production Ready</span>
       </div>
-      <p className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
+      <p className="font-display text-2xl md:text-3xl font-bold text-white mb-1">
         Your AI pipeline is <span className="text-gradient-gold">production‑ready.</span>
       </p>
-      <p className="text-xs text-muted-foreground font-body mb-6">You've completed the Tulip R&D Pipeline™</p>
-      <div className="grid grid-cols-3 gap-3 mb-6">
+      <p className="text-xs text-muted-foreground font-body mb-4">You've completed the Tulip R&D Pipeline™ demo.</p>
+
+      <div className="grid grid-cols-3 gap-3 mb-5">
         {[["40–60%", "Faster asset creation"], ["3×", "Faster prototyping"], ["85%", "Fewer failures"]].map(([stat, lbl]) => (
           <div key={stat} className="p-3 rounded-xl bg-primary/5 border border-primary/10">
             <div className="font-display text-xl font-bold text-gradient-gold">{stat}</div>
@@ -286,10 +311,26 @@ const WorkflowBuilderPanel = ({
           </div>
         ))}
       </div>
-      <a href="#estimator"
-        className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
-        Book Discovery Call <ArrowRight className="w-3.5 h-3.5" />
-      </a>
+
+      <div className="px-4 py-3 rounded-xl bg-orange-400/5 border border-orange-400/20 text-left mb-5">
+        <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-orange-400 mb-1">This was a simulation</p>
+        <p className="text-xs font-body text-foreground/70">
+          Real-world scaling requires a scoped discovery, team onboarding, and ongoing support.
+          A <strong className="text-foreground/90">1:1 Consultation</strong> aligns expectations before any commitment.
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-2 items-center">
+        <a href="#estimator"
+          onClick={() => window.dispatchEvent(new CustomEvent("tulip:open-calendly"))}
+          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
+          Book Discovery Call <ArrowRight className="w-3.5 h-3.5" />
+        </a>
+        <a href="#estimator"
+          className="text-xs text-muted-foreground hover:text-foreground font-body transition-colors underline underline-offset-2">
+          Or build your estimate first →
+        </a>
+      </div>
     </div>
   );
 };
