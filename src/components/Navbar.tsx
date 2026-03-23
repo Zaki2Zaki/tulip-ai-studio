@@ -81,7 +81,7 @@ const Navbar = () => {
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 h-12">
           {/* Logo — left aligned */}
-          <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground shrink-0">
+          <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground shrink-0 ml-72">
             TULIP<span className="text-gradient-gold"> TECH</span>
           </Link>
 
