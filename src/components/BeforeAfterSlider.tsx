@@ -16,10 +16,10 @@ const BeforeAfterSlider = ({
   beforeLabel = "Current Workflow",
   afterLabel = "GenAI Tools + Workflow",
   onPositionChange,
-  handleY = 50,
+  handleY = 85,
 }: BeforeAfterSliderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState(50);
+  const [position, setPosition] = useState(35);
   const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
@@ -111,30 +111,20 @@ const BeforeAfterSlider = ({
         </div>
       </div>
 
-      {/* ── "GenAI Tools + Workflow" label — left side, ombre glow ── */}
+      {/* ── "GenAI Tools + Workflow" label — left side, white text ── */}
       <div
-        className="absolute top-4 left-4 z-10 transition-opacity duration-300"
+        className="absolute top-3 left-3 z-10 transition-opacity duration-300"
         style={{ opacity: position < 25 ? 0 : 1 }}
       >
         <div
-          className="px-3 py-1.5 rounded-full backdrop-blur-md"
+          className="px-2 py-1 rounded-full backdrop-blur-md"
           style={{
-            background:
-              "linear-gradient(hsl(var(--card) / 0.8), hsl(var(--card) / 0.8)), linear-gradient(90deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%))",
-            backgroundOrigin: "border-box",
-            backgroundClip: "padding-box, border-box",
-            border: "1.5px solid transparent",
-            boxShadow: "0 0 16px hsl(260 85% 75% / 0.3)",
+            background: "rgba(0,0,0,0.65)",
+            border: "1.5px solid rgba(255,255,255,0.25)",
+            boxShadow: "0 0 12px rgba(255,255,255,0.06)",
           }}
         >
-          <span
-            className="text-[11px] font-body font-bold tracking-[0.12em] uppercase"
-            style={{
-              background: ombreGradient,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
+          <span className="text-[9px] font-body font-bold text-white/80 tracking-[0.12em] uppercase">
             {afterLabel}
           </span>
         </div>
@@ -189,26 +179,6 @@ const BeforeAfterSlider = ({
         </div>
       </div>
 
-      {/* ── Bottom hint strip ── */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 flex justify-between px-4 pb-3 pointer-events-none">
-        <span
-          className="text-[10px] font-body font-semibold tracking-[0.1em] uppercase opacity-80 transition-opacity duration-300"
-          style={{
-            background: ombreGradient,
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            opacity: position < 45 ? 1 : 0.3,
-          }}
-        >
-          ← Solutions
-        </span>
-        <span
-          className="text-[10px] font-body font-semibold tracking-[0.1em] uppercase text-orange-300/80 transition-opacity duration-300"
-          style={{ opacity: position > 55 ? 1 : 0.3 }}
-        >
-          Problems →
-        </span>
-      </div>
     </div>
   );
 };
