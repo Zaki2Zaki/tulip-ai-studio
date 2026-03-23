@@ -60,7 +60,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="flex flex-col gap-6 lg:ml-[480px]"
+            className="flex flex-col gap-6 lg:col-span-2"
           >
             {/* Title */}
             <h1 className="font-display font-bold leading-[1.08] tracking-[-0.03em] text-[clamp(30px,4.8vw,58px)]">
@@ -70,7 +70,7 @@ const HeroSection = () => {
             </h1>
 
             {/* Tagline with rotating text */}
-            <div className="space-y-3" style={{ maxWidth: 520 }}>
+            <div className="space-y-3">
               <p className="text-lg md:text-xl font-display font-bold text-foreground/95 leading-snug" style={{ letterSpacing: "-0.01em" }}>
                 AI Labs That Ship{" "}
                 <span
@@ -93,15 +93,15 @@ const HeroSection = () => {
                 Systems
               </p>
 
-              <p className="text-sm md:text-base font-body font-medium text-foreground/75 leading-relaxed">
+              <p className="text-sm md:text-base font-display font-normal text-foreground/75 leading-relaxed" style={{ letterSpacing: "-0.01em" }}>
                 3D Workflow &amp; Tools Experiments → GenAI Production Systems
               </p>
 
-              <p className="text-xs md:text-sm font-body text-foreground/70 leading-relaxed">
+              <p className="text-sm md:text-base font-display font-normal text-foreground/70 leading-relaxed" style={{ letterSpacing: "-0.01em" }}>
                 Integrating GenAI tools into game engines, animation pipelines, and VFX workflows.
               </p>
 
-              <p className="text-xs md:text-sm font-body text-foreground/60 leading-relaxed">
+              <p className="text-sm md:text-base font-display font-normal text-foreground/60 leading-relaxed" style={{ letterSpacing: "-0.01em" }}>
                 We're all discovering the pain points to scale. We{" "}
                 <span className="text-gradient-tulip-ombre font-bold">love</span>{" "}
                 handling the hard part:
