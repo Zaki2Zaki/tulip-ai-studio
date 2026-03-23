@@ -90,6 +90,9 @@ const WorkflowBuilderPanel = ({
   const toggle = (arr: string[], val: string) =>
     arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val];
 
+  const [otherTool, setOtherTool] = useState("");
+  const otherToolTrim = otherTool.trim();
+
   const BackBtn = ({ to }: { to: number }) => (
     <button onClick={() => onStageChange(to)}
       className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors font-body mt-3">
@@ -151,7 +154,8 @@ const WorkflowBuilderPanel = ({
   if (stage === 1) {
     const categorized: Record<"A" | "B" | "C", string[]> = { A: [], B: [], C: [] };
     const sortedSelected = [...selected].sort(
-      (a, b) => (PAIN_POINT_META[a]?.impactLevel ?? 1) - (PAIN_POINT_META[b]?.impactLevel ?? 1)
+      // Low -> Medium -> High (impactLevel: High=0, Medium=1, Low=2)
+      (a, b) => (PAIN_POINT_META[b]?.impactLevel ?? 1) - (PAIN_POINT_META[a]?.impactLevel ?? 1)
     );
     sortedSelected.forEach((pt) => {
       const cat = PAIN_POINT_META[pt]?.category ?? "B";
@@ -166,7 +170,7 @@ const WorkflowBuilderPanel = ({
         <p className="font-display text-lg font-bold text-white mb-1">
           AI identified <span className="text-gradient-gold">{selected.length} friction point{selected.length !== 1 ? "s" : ""}</span> in your pipeline
         </p>
-        <p className="text-xs text-muted-foreground font-body mb-4">Select which to deep-dive — ordered Low → Highest impact.</p>
+        <p className="text-xs text-white/80 font-body mb-4">Select which to deep-dive — ordered Low → Highest impact.</p>
 
         {(["A", "B", "C"] as const).map((catKey) => {
           if (categorized[catKey].length === 0) return null;
@@ -175,8 +179,12 @@ const WorkflowBuilderPanel = ({
             <div key={catKey} className="mb-3">
               <div className="flex items-center gap-1.5 mb-2">
                 <span className={`text-[9px] font-display font-bold tracking-wider uppercase px-2 py-0.5 rounded-full border ${cat.bg} ${cat.border} ${cat.color}`}>
-                  {catKey}) {cat.label}
+                  {cat.label}
                 </span>
+              </div>
+              <div className="grid grid-cols-[1fr_auto] gap-3 mb-2 text-[9px] font-display font-bold tracking-wider uppercase">
+                <span className="text-white/80">Friction Pain Points</span>
+                <span className="text-white/80 text-right">Impact level</span>
               </div>
               <div className="space-y-1.5">
                 {categorized[catKey].map((pt) => {
@@ -184,13 +192,18 @@ const WorkflowBuilderPanel = ({
                   const isSel = deepDive.includes(pt);
                   return (
                     <button key={pt} onClick={() => onDeepDiveChange(toggle(deepDive, pt))}
-                      className={`w-full text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center justify-between gap-2 ${isSel ? "border-primary/50 bg-primary/10 text-foreground" : "border-border/30 text-muted-foreground hover:border-border/60"}`}>
-                      <div className="flex items-center gap-2">
-                        <AlertTriangle className={`w-3 h-3 shrink-0 ${isSel ? "text-orange-400" : "text-muted-foreground/40"}`} />
-                        <span>{pt}</span>
+                      className={`w-full text-left px-3 py-2 rounded-lg border text-xs font-body transition-all grid grid-cols-[1fr_auto] items-center gap-3 ${isSel ? "border-primary/50 bg-primary/10 text-foreground" : "border-border/30 text-white/80 hover:border-border/60"}`}>
+                      <div className="flex items-center gap-2 min-w-0">
+                        <AlertTriangle className={`w-3 h-3 shrink-0 ${isSel ? "text-orange-400" : "text-white/40"}`} />
+                        <span className="truncate">{pt}</span>
                       </div>
-                      <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded shrink-0 ${meta?.impact === "High" ? "text-red-400 bg-red-400/10" : meta?.impact === "Medium" ? "text-amber-400 bg-amber-400/10" : "text-muted-foreground bg-muted-foreground/10"}`}>
-                        {meta?.impact ?? "Medium"} Impact
+                      <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded shrink-0 text-right ${meta?.impact === "High"
+                        ? "text-red-400 bg-red-400/10"
+                        : meta?.impact === "Medium"
+                          ? "text-amber-400 bg-amber-400/10"
+                          : "text-white/90 bg-white/10"
+                      }`}>
+                        {meta?.impact ?? "Medium"}
                       </span>
                     </button>
                   );
@@ -200,7 +213,7 @@ const WorkflowBuilderPanel = ({
           );
         })}
 
-        <p className="text-[10px] text-muted-foreground font-body mb-4 mt-1">
+        <p className="text-[10px] text-white/80 font-body mb-4 mt-1">
           {deepDive.length === 0 ? "Select friction points to deep-dive, or continue." : `${deepDive.length} selected for deep-dive`}
         </p>
         <div className="flex items-center gap-4">
@@ -222,15 +235,15 @@ const WorkflowBuilderPanel = ({
         <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Prototype: Select AI Tools</span>
       </div>
       <p className="font-display text-lg font-bold text-white mb-1">Which tools will we test?</p>
-      <p className="text-xs text-muted-foreground font-body mb-4">Select from your current pipeline or add to your wishlist.</p>
+      <p className="text-xs text-white/80 font-body mb-4">Select from your current pipeline or add to your wishlist.</p>
 
-      <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-primary mb-2">Current Tools</p>
+      <p className="text-[20px] font-display font-semibold uppercase tracking-wider text-white mb-2">Current Tools</p>
       <div className="grid grid-cols-2 gap-1.5 mb-4">
         {CURRENT_TOOLS.map((label) => {
           const on = tools.includes(label);
           return (
             <button key={label} onClick={() => onToolsChange(toggle(tools, label))}
-              className={`text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center gap-2 ${on ? "border-primary/60 bg-primary/10 text-foreground" : "border-border/30 text-muted-foreground hover:border-border/50"}`}>
+              className={`text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center gap-2 ${on ? "border-primary/60 bg-primary/10 text-foreground" : "border-border/30 text-white/80 hover:border-border/50"}`}>
               <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 text-[9px] font-bold leading-none ${on ? "bg-primary border-primary text-primary-foreground" : "border-border/50"}`}>
                 {on ? "✓" : ""}
               </span>
@@ -240,13 +253,13 @@ const WorkflowBuilderPanel = ({
         })}
       </div>
 
-      <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-amber-400 mb-2">Wishlist</p>
+      <p className="text-[20px] font-display font-semibold uppercase tracking-wider text-white mb-2">Wishlist</p>
       <div className="grid grid-cols-2 gap-1.5 mb-5">
         {WISHLIST_TOOLS.map((label) => {
           const on = tools.includes(label);
           return (
             <button key={label} onClick={() => onToolsChange(toggle(tools, label))}
-              className={`text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center gap-2 ${on ? "border-amber-400/60 bg-amber-400/10 text-foreground" : "border-border/30 text-muted-foreground hover:border-border/50"}`}>
+              className={`text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center gap-2 ${on ? "border-amber-400/60 bg-amber-400/10 text-foreground" : "border-border/30 text-white/80 hover:border-border/50"}`}>
               <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 text-[9px] font-bold leading-none ${on ? "bg-amber-400 border-amber-400 text-black" : "border-border/50"}`}>
                 {on ? "✓" : ""}
               </span>
@@ -254,6 +267,39 @@ const WorkflowBuilderPanel = ({
             </button>
           );
         })}
+      </div>
+
+      {/* Other tool name */}
+      <div className="px-4 py-3 rounded-xl bg-card/40 border border-border/30 mb-5">
+        <p className="text-[20px] font-display font-semibold uppercase tracking-wider text-white mb-2">Other</p>
+        <div className="flex items-center gap-2">
+          <input
+            value={otherTool}
+            onChange={(e) => setOtherTool(e.target.value)}
+            placeholder="Enter your tool name"
+            className="flex-1 bg-secondary border border-border/40 rounded-lg px-3 py-2 text-sm font-body text-white placeholder:text-white/60 focus:outline-none focus:border-primary"
+          />
+          {otherToolTrim && tools.includes(otherToolTrim) ? (
+            <button
+              onClick={() => onToolsChange(tools.filter((t) => t !== otherToolTrim))}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border/40 bg-secondary/40 text-xs font-display font-semibold text-white hover:bg-secondary/60 transition-colors"
+            >
+              Remove
+            </button>
+          ) : (
+            <button
+              disabled={!otherToolTrim}
+              onClick={() => {
+                if (!otherToolTrim) return;
+                onToolsChange([...tools, otherToolTrim]);
+                setOtherTool("");
+              }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/40 bg-primary/10 text-xs font-display font-semibold text-white hover:bg-primary/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              Add
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="flex items-center gap-4">
