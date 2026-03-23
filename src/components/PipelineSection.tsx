@@ -49,14 +49,27 @@ const AI_TOOLS = [
 const WorkflowBuilderPanel = ({
   stage,
   onStageChange,
+  selected,
+  onSelectedChange,
+  tools,
+  onToolsChange,
 }: {
   stage: number;
   onStageChange: (s: number) => void;
+  selected: string[];
+  onSelectedChange: (v: string[]) => void;
+  tools: string[];
+  onToolsChange: (v: string[]) => void;
 }) => {
-  const [selected, setSelected] = useState<string[]>([]);
-  const [tools, setTools] = useState<string[]>([]);
   const toggle = (arr: string[], val: string) =>
     arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val];
+
+  const BackBtn = ({ to }: { to: number }) => (
+    <button onClick={() => onStageChange(to)}
+      className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors font-body mt-3">
+      ← Back
+    </button>
+  );
 
   /* ── Stage –1: Intro ── */
   if (stage === -1) return (
@@ -90,7 +103,7 @@ const WorkflowBuilderPanel = ({
         {PAIN_POINTS.map((pt) => {
           const on = selected.includes(pt);
           return (
-            <button key={pt} onClick={() => setSelected(toggle(selected, pt))}
+            <button key={pt} onClick={() => onSelectedChange(toggle(selected, pt))}
               className={`text-left px-3 py-2.5 rounded-xl border text-xs font-body transition-all ${on ? "border-orange-400/60 bg-orange-400/10 text-orange-200" : "border-border/40 text-muted-foreground hover:border-border/70"}`}>
               <span className={`mr-1.5 ${on ? "text-orange-400" : "text-muted-foreground/30"}`}>{on ? "✕" : "○"}</span>
               {pt}
@@ -98,10 +111,13 @@ const WorkflowBuilderPanel = ({
           );
         })}
       </div>
-      <button disabled={selected.length === 0} onClick={() => onStageChange(1)}
-        className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
-        Map the Problems <ArrowRight className="w-3.5 h-3.5" />
-      </button>
+      <div className="flex items-center gap-4">
+        <button disabled={selected.length === 0} onClick={() => onStageChange(1)}
+          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
+          Map the Problems <ArrowRight className="w-3.5 h-3.5" />
+        </button>
+        <BackBtn to={-1} />
+      </div>
     </div>
   );
 
@@ -127,10 +143,13 @@ const WorkflowBuilderPanel = ({
         <p className="text-[10px] uppercase tracking-widest text-primary font-body font-semibold mb-1">Highest-Impact Fix</p>
         <p className="text-sm font-body text-white">{selected[0]} → AI-assisted pipeline handoff</p>
       </div>
-      <button onClick={() => onStageChange(2)}
-        className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
-        Start Prototyping <ArrowRight className="w-3.5 h-3.5" />
-      </button>
+      <div className="flex items-center gap-4">
+        <button onClick={() => onStageChange(2)}
+          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
+          Start Prototyping <ArrowRight className="w-3.5 h-3.5" />
+        </button>
+        <BackBtn to={0} />
+      </div>
     </div>
   );
 
@@ -147,7 +166,7 @@ const WorkflowBuilderPanel = ({
         {AI_TOOLS.map((t) => {
           const on = tools.includes(t.label);
           return (
-            <button key={t.label} onClick={() => setTools(toggle(tools, t.label))}
+            <button key={t.label} onClick={() => onToolsChange(toggle(tools, t.label))}
               className={`text-left px-3 py-2.5 rounded-xl border text-xs font-body transition-all flex items-center gap-2 ${on ? "border-primary/60 bg-primary/10 text-foreground" : "border-border/40 text-muted-foreground hover:border-border/70"}`}>
               <span className={`w-6 h-6 rounded-md flex items-center justify-center text-[9px] font-bold shrink-0 ${on ? "bg-primary text-primary-foreground" : "bg-muted-foreground/10 text-muted-foreground"}`}>{t.icon}</span>
               {t.label}
@@ -155,10 +174,13 @@ const WorkflowBuilderPanel = ({
           );
         })}
       </div>
-      <button disabled={tools.length === 0} onClick={() => onStageChange(3)}
-        className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
-        Validate Results <ArrowRight className="w-3.5 h-3.5" />
-      </button>
+      <div className="flex items-center gap-4">
+        <button disabled={tools.length === 0} onClick={() => onStageChange(3)}
+          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
+          Validate Results <ArrowRight className="w-3.5 h-3.5" />
+        </button>
+        <BackBtn to={1} />
+      </div>
     </div>
   );
 
@@ -194,10 +216,13 @@ const WorkflowBuilderPanel = ({
         <div className="px-4 py-3 rounded-xl bg-green-400/5 border border-green-400/20 mb-5">
           <p className="text-xs font-body text-green-300">✓ Results confirmed for {tools.length > 0 ? tools.join(", ") : "your selected tools"}</p>
         </div>
-        <button onClick={() => onStageChange(4)}
-          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
-          Begin Integration <ArrowRight className="w-3.5 h-3.5" />
-        </button>
+        <div className="flex items-center gap-4">
+          <button onClick={() => onStageChange(4)}
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
+            Begin Integration <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+          <BackBtn to={2} />
+        </div>
       </div>
     );
   }
@@ -231,10 +256,13 @@ const WorkflowBuilderPanel = ({
             </motion.div>
           ))}
         </div>
-        <button onClick={() => onStageChange(5)}
-          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
-          Scale Up <ArrowRight className="w-3.5 h-3.5" />
-        </button>
+        <div className="flex items-center gap-4">
+          <button onClick={() => onStageChange(5)}
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
+            Scale Up <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+          <BackBtn to={3} />
+        </div>
       </div>
     );
   }
@@ -317,6 +345,8 @@ const PipelineSection = () => {
   const [workflowStage, setWorkflowStage] = useState(-1);
   const [showWorkflow, setShowWorkflow] = useState(false);
   const workflowShownRef = useRef(false);
+  const [workflowSelected, setWorkflowSelected] = useState<string[]>([]);
+  const [workflowTools, setWorkflowTools] = useState<string[]>([]);
 
   const handlePositionChange = useCallback((pos: number) => {
     setSliderPos(pos);
@@ -528,7 +558,14 @@ const PipelineSection = () => {
                     >
                       <AnimatePresence mode="wait">
                         <motion.div key={workflowStage} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.35 }}>
-                          <WorkflowBuilderPanel stage={workflowStage} onStageChange={setWorkflowStage} />
+                          <WorkflowBuilderPanel
+                            stage={workflowStage}
+                            onStageChange={setWorkflowStage}
+                            selected={workflowSelected}
+                            onSelectedChange={setWorkflowSelected}
+                            tools={workflowTools}
+                            onToolsChange={setWorkflowTools}
+                          />
                         </motion.div>
                       </AnimatePresence>
                     </motion.div>
