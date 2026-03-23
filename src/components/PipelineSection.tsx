@@ -1,6 +1,6 @@
 import { motion, useInView, AnimatePresence, useMotionValue, useTransform, animate } from "framer-motion";
 import React, { useRef, useState, useCallback, useEffect } from "react";
-import { AlertTriangle, CheckCircle2, ArrowRight, Zap, TrendingUp, Clock, DollarSign, Layers, Rocket, Target, BarChart3, Compass, FlaskConical, ClipboardCheck, GitMerge } from "lucide-react";
+import { AlertTriangle, CheckCircle2, ArrowRight, Zap, TrendingUp, Clock, DollarSign, Layers, Rocket, Target, BarChart3, Compass, FlaskConical, ClipboardCheck, GitMerge, ChevronDown, Play } from "lucide-react";
 import pipelineBg from "@/assets/pipeline-bg.jpg";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import currentWorkflow from "@/assets/current-workflow.jpg";
@@ -27,6 +27,244 @@ const pipelineSteps = [
   { icon: GitMerge, label: "Integrate", desc: "Embed into industry tools like Unreal, Houdini, Blender, and Unity." },
   { icon: TrendingUp, label: "Scale", desc: "Enable teams, optimize workflows, and drive long-term adoption." },
 ];
+
+const PAIN_POINTS = [
+  "Version control conflicts",
+  "Tool integration failures",
+  "Slow asset iteration cycles",
+  "Manual review bottlenecks",
+  "No AI tooling in pipeline",
+  "Siloed team workflows",
+];
+
+const AI_TOOLS = [
+  { label: "Houdini + AI", icon: "H" },
+  { label: "Unreal Engine 5", icon: "UE" },
+  { label: "Blender Plugins", icon: "B" },
+  { label: "Stable Diffusion", icon: "SD" },
+  { label: "Runway ML", icon: "R" },
+  { label: "Kling AI", icon: "K" },
+];
+
+const WorkflowBuilderPanel = ({
+  stage,
+  onStageChange,
+}: {
+  stage: number;
+  onStageChange: (s: number) => void;
+}) => {
+  const [selected, setSelected] = useState<string[]>([]);
+  const [tools, setTools] = useState<string[]>([]);
+  const toggle = (arr: string[], val: string) =>
+    arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val];
+
+  /* ── Stage –1: Intro ── */
+  if (stage === -1) return (
+    <div className="text-center py-4">
+      <p className="text-[10px] tracking-[0.2em] uppercase text-primary font-body font-semibold mb-3">Interactive Demo</p>
+      <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
+        Build Production-Ready <span className="text-gradient-gold">Agentic Workflow</span>
+      </h3>
+      <p className="text-sm text-muted-foreground font-body mb-6 max-w-sm mx-auto">
+        Walk through the Tulip R&D Pipeline™ and simulate building your own AI production system.
+      </p>
+      <button
+        onClick={() => onStageChange(0)}
+        className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity"
+      >
+        <Play className="w-3.5 h-3.5" /> Start Building →
+      </button>
+    </div>
+  );
+
+  /* ── Stage 0: Current Workflow ── */
+  if (stage === 0) return (
+    <div>
+      <div className="flex items-center gap-2 mb-3">
+        <span className="w-2 h-2 rounded-full bg-orange-400 shrink-0" />
+        <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-orange-400">Your Current Workflow</span>
+      </div>
+      <p className="font-display text-lg font-bold text-white mb-1">What's slowing your production pipeline?</p>
+      <p className="text-xs text-muted-foreground font-body mb-4">Select all that apply — we'll map your bottlenecks.</p>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-5">
+        {PAIN_POINTS.map((pt) => {
+          const on = selected.includes(pt);
+          return (
+            <button key={pt} onClick={() => setSelected(toggle(selected, pt))}
+              className={`text-left px-3 py-2.5 rounded-xl border text-xs font-body transition-all ${on ? "border-orange-400/60 bg-orange-400/10 text-orange-200" : "border-border/40 text-muted-foreground hover:border-border/70"}`}>
+              <span className={`mr-1.5 ${on ? "text-orange-400" : "text-muted-foreground/30"}`}>{on ? "✕" : "○"}</span>
+              {pt}
+            </button>
+          );
+        })}
+      </div>
+      <button disabled={selected.length === 0} onClick={() => onStageChange(1)}
+        className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
+        Map the Problems <ArrowRight className="w-3.5 h-3.5" />
+      </button>
+    </div>
+  );
+
+  /* ── Stage 1: Discover ── */
+  if (stage === 1) return (
+    <div>
+      <div className="flex items-center gap-2 mb-3">
+        <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
+        <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Discovery: Pain Points Mapped</span>
+      </div>
+      <p className="font-display text-lg font-bold text-white mb-3">
+        AI identified <span className="text-gradient-gold">{selected.length} friction point{selected.length !== 1 ? "s" : ""}</span> in your pipeline
+      </p>
+      <div className="space-y-1.5 mb-4">
+        {selected.map((pt) => (
+          <div key={pt} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary/8 border border-primary/20">
+            <AlertTriangle className="w-3.5 h-3.5 text-orange-400 shrink-0" />
+            <span className="text-xs font-body text-foreground/90">{pt}</span>
+          </div>
+        ))}
+      </div>
+      <div className="px-4 py-3 rounded-xl bg-primary/5 border border-primary/15 mb-5">
+        <p className="text-[10px] uppercase tracking-widest text-primary font-body font-semibold mb-1">Highest-Impact Fix</p>
+        <p className="text-sm font-body text-white">{selected[0]} → AI-assisted pipeline handoff</p>
+      </div>
+      <button onClick={() => onStageChange(2)}
+        className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
+        Start Prototyping <ArrowRight className="w-3.5 h-3.5" />
+      </button>
+    </div>
+  );
+
+  /* ── Stage 2: Prototype ── */
+  if (stage === 2) return (
+    <div>
+      <div className="flex items-center gap-2 mb-3">
+        <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
+        <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Prototype: Select AI Tools</span>
+      </div>
+      <p className="font-display text-lg font-bold text-white mb-1">Which tools will we test?</p>
+      <p className="text-xs text-muted-foreground font-body mb-4">Select tools in your pipeline or wishlist.</p>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-5">
+        {AI_TOOLS.map((t) => {
+          const on = tools.includes(t.label);
+          return (
+            <button key={t.label} onClick={() => setTools(toggle(tools, t.label))}
+              className={`text-left px-3 py-2.5 rounded-xl border text-xs font-body transition-all flex items-center gap-2 ${on ? "border-primary/60 bg-primary/10 text-foreground" : "border-border/40 text-muted-foreground hover:border-border/70"}`}>
+              <span className={`w-6 h-6 rounded-md flex items-center justify-center text-[9px] font-bold shrink-0 ${on ? "bg-primary text-primary-foreground" : "bg-muted-foreground/10 text-muted-foreground"}`}>{t.icon}</span>
+              {t.label}
+            </button>
+          );
+        })}
+      </div>
+      <button disabled={tools.length === 0} onClick={() => onStageChange(3)}
+        className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
+        Validate Results <ArrowRight className="w-3.5 h-3.5" />
+      </button>
+    </div>
+  );
+
+  /* ── Stage 3: Validate ── */
+  if (stage === 3) {
+    const metrics = [
+      { label: "Asset creation speed", value: 60, color: "hsl(var(--primary))" },
+      { label: "Pipeline failure reduction", value: 85, color: "hsl(40 95% 70%)" },
+      { label: "Iteration speed gain", value: 75, color: "hsl(160 70% 60%)" },
+    ];
+    return (
+      <div>
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-green-400 shrink-0" />
+          <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-green-400">Validate: Benchmark Results</span>
+        </div>
+        <p className="font-display text-lg font-bold text-white mb-4">Simulated results for your configuration</p>
+        <div className="space-y-4 mb-5">
+          {metrics.map((m, i) => (
+            <div key={m.label}>
+              <div className="flex justify-between mb-1.5">
+                <span className="text-xs font-body text-foreground/80">{m.label}</span>
+                <span className="text-xs font-body font-semibold" style={{ color: m.color }}>{m.value}% improvement</span>
+              </div>
+              <div className="h-1.5 rounded-full bg-border/30 overflow-hidden">
+                <motion.div className="h-full rounded-full" style={{ background: m.color }}
+                  initial={{ width: 0 }} animate={{ width: `${m.value}%` }}
+                  transition={{ duration: 1.2, delay: i * 0.2, ease: "easeOut" }} />
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="px-4 py-3 rounded-xl bg-green-400/5 border border-green-400/20 mb-5">
+          <p className="text-xs font-body text-green-300">✓ Results confirmed for {tools.length > 0 ? tools.join(", ") : "your selected tools"}</p>
+        </div>
+        <button onClick={() => onStageChange(4)}
+          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
+          Begin Integration <ArrowRight className="w-3.5 h-3.5" />
+        </button>
+      </div>
+    );
+  }
+
+  /* ── Stage 4: Integrate ── */
+  if (stage === 4) {
+    const checks = [
+      "DCC tool connectors configured",
+      "Asset handoff pipelines active",
+      "Team access provisioned",
+      "Running integration tests...",
+    ];
+    return (
+      <div>
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
+          <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Integrate: Embedding Into Your Stack</span>
+        </div>
+        <p className="font-display text-lg font-bold text-white mb-4">Connecting AI into your production tools</p>
+        <div className="space-y-2 mb-6">
+          {checks.map((c, i) => (
+            <motion.div key={c} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.25 }}
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-card/40 border border-border/30">
+              {i < 3 ? (
+                <CheckCircle2 className="w-4 h-4 text-green-400 shrink-0" />
+              ) : (
+                <motion.div className="w-4 h-4 rounded-full border-2 border-primary border-t-transparent shrink-0"
+                  animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} />
+              )}
+              <span className={`text-xs font-body ${i < 3 ? "text-foreground/90" : "text-primary"}`}>{c}</span>
+            </motion.div>
+          ))}
+        </div>
+        <button onClick={() => onStageChange(5)}
+          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
+          Scale Up <ArrowRight className="w-3.5 h-3.5" />
+        </button>
+      </div>
+    );
+  }
+
+  /* ── Stage 5: Scale / Complete ── */
+  return (
+    <div className="text-center">
+      <div className="flex items-center justify-center gap-2 mb-4">
+        <span className="w-2 h-2 rounded-full bg-green-400" />
+        <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-green-400">Scale: Production Ready</span>
+      </div>
+      <p className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
+        Your AI pipeline is <span className="text-gradient-gold">production‑ready.</span>
+      </p>
+      <p className="text-xs text-muted-foreground font-body mb-6">You've completed the Tulip R&D Pipeline™</p>
+      <div className="grid grid-cols-3 gap-3 mb-6">
+        {[["40–60%", "Faster asset creation"], ["3×", "Faster prototyping"], ["85%", "Fewer failures"]].map(([stat, lbl]) => (
+          <div key={stat} className="p-3 rounded-xl bg-primary/5 border border-primary/10">
+            <div className="font-display text-xl font-bold text-gradient-gold">{stat}</div>
+            <div className="text-[10px] text-foreground/70 font-body mt-0.5">{lbl}</div>
+          </div>
+        ))}
+      </div>
+      <a href="#estimator"
+        className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
+        Book Discovery Call <ArrowRight className="w-3.5 h-3.5" />
+      </a>
+    </div>
+  );
+};
 
 const ProvenStat = ({
   icon: Icon,
@@ -76,6 +314,10 @@ const PipelineSection = () => {
   const [sliderPos, setSliderPos] = useState(50);
   const [handleY, setHandleY] = useState(80);
 
+  const [workflowStage, setWorkflowStage] = useState(-1);
+  const [showWorkflow, setShowWorkflow] = useState(false);
+  const workflowShownRef = useRef(false);
+
   const handlePositionChange = useCallback((pos: number) => {
     setSliderPos(pos);
   }, []);
@@ -95,6 +337,19 @@ const PipelineSection = () => {
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Show workflow builder 3s after proven results finish animating (~6s after solutions panel appears)
+  const showSolutionsRef = useRef(false);
+  useEffect(() => {
+    const showSolutions = sliderPos < 45;
+    if (!showSolutions || workflowShownRef.current) return;
+    showSolutionsRef.current = true;
+    const t = setTimeout(() => {
+      setShowWorkflow(true);
+      workflowShownRef.current = true;
+    }, 5500);
+    return () => clearTimeout(t);
+  }, [sliderPos]);
 
   const showProblems = sliderPos > 55;
   const showSolutions = sliderPos < 45;
@@ -227,25 +482,56 @@ const PipelineSection = () => {
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="p-6 rounded-2xl bg-card/30 border border-border/30 backdrop-blur-sm">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-5 gap-2">
                     <div>
-                      <h3 className="font-display text-lg md:text-xl font-bold text-foreground">The Tulip R&D Pipeline™</h3>
-                      <p className="text-xs text-muted-foreground font-body mt-0.5">
-                        From idea <ArrowRight className="inline w-3 h-3 mx-0.5" /> to working system <ArrowRight className="inline w-3 h-3 mx-0.5" /> to team adoption
+                      <h3 className="font-display text-2xl md:text-4xl font-bold text-white leading-tight">
+                        The Tulip R&D <span className="text-gradient-gold">Pipeline™</span> <ArrowRight className="inline w-5 h-5 text-primary ml-1" />
+                      </h3>
+                      <p className="text-xs text-muted-foreground font-body mt-1">
+                        From idea to working system to team adoption
                       </p>
                     </div>
-                    <span className="text-[9px] tracking-[0.15em] uppercase font-body text-muted-foreground border border-border/40 rounded-full px-2.5 py-1 self-start">v4.2</span>
+                    <span className="text-[9px] tracking-[0.15em] uppercase font-body text-muted-foreground border border-border/40 rounded-full px-2.5 py-1 self-start shrink-0">v4.2</span>
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-                    {pipelineSteps.map((step, i) => (
-                      <motion.div key={step.label} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 + i * 0.06 }} className="flex flex-col items-center text-center gap-1.5">
-                        <div className="w-10 h-10 rounded-xl border border-primary/30 bg-primary/8 flex items-center justify-center">
-                          <step.icon className="w-4.5 h-4.5 text-primary" size={18} />
-                        </div>
-                        <p className="text-xs font-body font-semibold text-foreground">{step.label}</p>
-                        <p className="text-[10px] text-muted-foreground font-body leading-snug">{step.desc}</p>
-                      </motion.div>
-                    ))}
+                    {pipelineSteps.map((step, i) => {
+                      const activeIdx = workflowStage >= 1 ? workflowStage - 1 : -1;
+                      const isActive = activeIdx === i;
+                      return (
+                        <motion.div key={step.label} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 + i * 0.06 }} className="flex flex-col items-center text-center gap-1.5">
+                          <div className={`relative w-10 h-10 rounded-xl border flex items-center justify-center transition-all duration-500 ${isActive ? "border-primary bg-primary/20 shadow-[0_0_18px_hsl(var(--primary)/0.55)]" : "border-primary/30 bg-primary/8"}`}>
+                            <step.icon className={`transition-colors duration-300 ${isActive ? "text-primary" : "text-primary/60"}`} size={18} />
+                          </div>
+                          {isActive && (
+                            <motion.div animate={{ y: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.1 }}>
+                              <ChevronDown className="w-3 h-3 text-primary -mt-1" />
+                            </motion.div>
+                          )}
+                          <p className={`text-xs font-body font-semibold transition-colors ${isActive ? "text-primary" : "text-foreground"}`}>{step.label}</p>
+                          <p className="text-[10px] text-muted-foreground font-body leading-snug">{step.desc}</p>
+                        </motion.div>
+                      );
+                    })}
                   </div>
                 </motion.div>
+
+                {/* Workflow Builder — appears 3s after Proven Results completes */}
+                <AnimatePresence>
+                  {showWorkflow && (
+                    <motion.div
+                      key="workflow-builder"
+                      initial={{ opacity: 0, y: 24 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
+                      className="mt-6 p-6 rounded-2xl bg-card/30 border border-primary/20 backdrop-blur-sm"
+                      style={{ boxShadow: "0 0 40px hsl(var(--primary) / 0.08)" }}
+                    >
+                      <AnimatePresence mode="wait">
+                        <motion.div key={workflowStage} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.35 }}>
+                          <WorkflowBuilderPanel stage={workflowStage} onStageChange={setWorkflowStage} />
+                        </motion.div>
+                      </AnimatePresence>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 {/* Quantitative proof */}
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="mt-6 p-5 rounded-2xl bg-primary/5 border border-primary/10 backdrop-blur-sm">
