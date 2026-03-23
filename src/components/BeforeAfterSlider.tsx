@@ -27,48 +27,40 @@ const SketchArrow = ({
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
       <motion.div
-        animate={active ? { x: isLeft ? [-5, 1, -5] : [5, -1, 5] } : { x: 0 }}
+        animate={active ? { x: isLeft ? [-4, 2, -4] : [4, -2, 4] } : { x: 0 }}
         transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }}
       >
-        <svg
-          width="40"
-          height="60"
-          viewBox="0 0 40 60"
-          fill="none"
-          /* Mirror the SVG for the right side */
-          style={{ transform: isLeft ? "none" : "scaleX(-1)" }}
-        >
-          {/* Curved shaft */}
+        {/* Mirror for right side */}
+        <svg width="58" height="100" viewBox="0 0 58 100" fill="none"
+          style={{ transform: isLeft ? "none" : "scaleX(-1)" }}>
+
+          {/* ── Oval loop at top ── */}
           <path
-            d="M22 5 C18 14, 24 26, 20 42"
-            stroke="white" strokeWidth="1.8" strokeLinecap="round" fill="none"
+            d="M 24 34 C 4 30, 2 6, 20 4 C 38 2, 46 22, 34 32 C 30 36, 25 35, 24 34"
+            stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"
           />
-          {/* Sketch shadow */}
+          {/* Loop sketch shadow */}
           <path
-            d="M23 6 C19 15, 25 27, 21 43"
-            stroke="white" strokeWidth="0.7" strokeLinecap="round" fill="none" opacity="0.35"
-          />
-          {/* Arrowhead — pointing left */}
-          <path
-            d="M20 42 L10 34"
-            stroke="white" strokeWidth="1.8" strokeLinecap="round" fill="none"
-          />
-          <path
-            d="M20 42 L23 53"
-            stroke="white" strokeWidth="1.8" strokeLinecap="round" fill="none"
-          />
-          {/* Sketch wobble */}
-          <path
-            d="M21 41 L11 33"
+            d="M 25 33 C 5 29, 3 7, 21 5 C 39 3, 47 23, 35 33"
             stroke="white" strokeWidth="0.7" strokeLinecap="round" fill="none" opacity="0.3"
           />
-          {/* Faint echo above */}
+
+          {/* ── Curved shaft ── */}
           <path
-            d="M26 2 C23 7, 27 13, 25 18"
-            stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.22"
+            d="M 24 34 C 19 50, 14 66, 17 83"
+            stroke="white" strokeWidth="2" strokeLinecap="round" fill="none"
           />
-          <path d="M25 18 L18 13" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.22" />
-          <path d="M25 18 L27 24" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.22" />
+          {/* Shaft shadow */}
+          <path
+            d="M 25 35 C 20 51, 15 67, 18 84"
+            stroke="white" strokeWidth="0.7" strokeLinecap="round" fill="none" opacity="0.3"
+          />
+
+          {/* ── Arrowhead ── */}
+          <path d="M 17 83 L 6 72"  stroke="white" strokeWidth="2" strokeLinecap="round" fill="none" />
+          <path d="M 17 83 L 19 95" stroke="white" strokeWidth="2" strokeLinecap="round" fill="none" />
+          {/* Arrowhead sketch wobble */}
+          <path d="M 18 82 L 7 71"  stroke="white" strokeWidth="0.7" strokeLinecap="round" fill="none" opacity="0.3" />
         </svg>
       </motion.div>
     </motion.div>
