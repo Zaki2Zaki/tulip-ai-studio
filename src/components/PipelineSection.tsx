@@ -730,8 +730,8 @@ const PipelineSection = () => {
                               <ChevronDown className="w-3 h-3 text-primary -mt-1" />
                             </motion.div>
                           )}
-                          <p className={`text-xs font-body font-semibold transition-colors ${isActive ? "text-primary" : isCompleted ? "text-green-400" : "text-foreground"}`}>{step.label}</p>
-                          <p className="text-[10px] text-muted-foreground font-body leading-snug">{step.desc}</p>
+                          <p className={`text-sm font-body font-semibold transition-colors ${isActive ? "text-primary" : isCompleted ? "text-green-400" : "text-white"}`}>{step.label}</p>
+                          <p className="text-xs text-white/80 font-body leading-snug">{step.desc}</p>
                         </motion.div>
                       );
                     })}
