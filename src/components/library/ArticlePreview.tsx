@@ -270,7 +270,7 @@ const ArticlePreview = ({
       <div className="flex items-center justify-between px-5 py-3 border-b border-border bg-muted/10">
         <div className="flex items-center gap-3">
           <FileText className="w-4 h-4 text-primary" />
-          <h3 className="text-sm font-display font-semibold text-foreground">Deep Dive</h3>
+          <h3 className="text-base font-display font-semibold text-foreground">Deep Dive</h3>
           {allPapers.length > 1 && (
             <span className="text-xs font-body text-muted-foreground">
               {currentIndex + 1} / {allPapers.length}
@@ -287,21 +287,21 @@ const ArticlePreview = ({
         <div className="flex-1 min-w-0 flex flex-col">
           {/* Paper header + actions */}
           <div className="p-5 space-y-3 border-b border-border">
-            <h4 className="font-display text-base font-bold text-foreground leading-tight">{paper.title}</h4>
-            <p className="text-sm text-foreground font-body">
+            <h4 className="font-display text-xl font-bold text-foreground leading-tight">{paper.title}</h4>
+            <p className="text-base text-foreground font-body">
               {paper.authors?.slice(0, 5).map((a) => a.name).join(", ")}
               {(paper.authors?.length || 0) > 5 && " et al."}
             </p>
             <div className="flex items-center gap-3">
-              {paper.year && <span className="text-sm text-accent font-body">{paper.year}</span>}
-              {paper.venue && <span className="text-sm text-foreground font-body">{paper.venue}</span>}
+              {paper.year && <span className="text-base text-accent font-body">{paper.year}</span>}
+              {paper.venue && <span className="text-base text-foreground font-body">{paper.venue}</span>}
               {paper.citationCount != null && (
-                <span className="text-sm text-foreground font-body">{paper.citationCount} citations</span>
+                <span className="text-base text-foreground font-body">{paper.citationCount} citations</span>
               )}
             </div>
 
             {/* Action buttons row */}
-            <div className="flex items-center gap-2 pt-2 flex-wrap">
+            <div className="flex items-center gap-2 pt-2 flex-wrap" data-tour="vote">
               <button
                 onClick={() => onVote(paper.paperId, "up")}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg border text-xs font-body font-semibold transition-all ${
@@ -362,7 +362,7 @@ const ArticlePreview = ({
                 </div>
               )}
 
-              <div className="ml-auto flex items-center gap-2">
+              <div className="ml-auto flex items-center gap-2" data-tour="export">
                 {pdfUrl && (
                   <a
                     href={pdfUrl}
@@ -387,30 +387,41 @@ const ArticlePreview = ({
                 )}
                 <div className="relative">
                   <button
-                    onClick={() => setShowCollectionMenu(!showCollectionMenu)}
-                    className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-accent/30 bg-accent/5 text-accent text-xs font-body font-semibold hover:bg-accent/10 transition-all"
+                    onClick={() => {
+                      if (collections.length === 0) {
+                        setShowCollectionMenu(false);
+                        toast("Create a collection first to save papers", {
+                          description: "Use the sidebar under 'MY COLLECTIONS' to create one.",
+                          duration: 6000,
+                          icon: <FolderPlus className="w-4 h-4 text-accent" />,
+                        });
+                      } else {
+                        setShowCollectionMenu(!showCollectionMenu);
+                      }
+                    }}
+                    className={`flex items-center gap-1.5 px-3 py-2 rounded-lg border text-xs font-body font-semibold transition-all ${
+                      collections.length === 0
+                        ? "border-accent/50 bg-accent/10 text-accent animate-pulse"
+                        : "border-accent/30 bg-accent/5 text-accent hover:bg-accent/10"
+                    }`}
                   >
                     <FolderPlus className="w-3.5 h-3.5" />
                     Save
                   </button>
-                  {showCollectionMenu && (
+                  {showCollectionMenu && collections.length > 0 && (
                     <div className="absolute bottom-full right-0 mb-1 bg-card border border-border rounded-lg shadow-xl z-20 p-1 min-w-[160px]">
-                      {collections.length === 0 ? (
-                        <p className="text-xs text-muted-foreground p-2 font-body">No collections yet.</p>
-                      ) : (
-                        collections.map((col) => (
-                          <button
-                            key={col.id}
-                            onClick={() => {
-                              onAddToCollection(paper.paperId, paper.title, col.id);
-                              setShowCollectionMenu(false);
-                            }}
-                            className="w-full text-left px-3 py-2 text-xs font-body text-foreground hover:bg-muted/30 rounded-md"
-                          >
-                            {col.name}
-                          </button>
-                        ))
-                      )}
+                      {collections.map((col) => (
+                        <button
+                          key={col.id}
+                          onClick={() => {
+                            onAddToCollection(paper.paperId, paper.title, col.id);
+                            setShowCollectionMenu(false);
+                          }}
+                          className="w-full text-left px-3 py-2 text-xs font-body text-foreground hover:bg-muted/30 rounded-md"
+                        >
+                          {col.name}
+                        </button>
+                      ))}
                     </div>
                   )}
                 </div>
@@ -421,13 +432,13 @@ const ArticlePreview = ({
           {/* Abstract — Key Takeaways */}
           {paper.abstract && (
             <div className="p-5 border-b border-border">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
-                <List className="w-3.5 h-3.5 text-primary" />
+              <h5 className="text-sm font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
+                <List className="w-4 h-4 text-primary" />
                 Key Takeaways
               </h5>
               <ul className="space-y-2">
                 {abstractTakeaways.map((point, i) => (
-                  <li key={i} className="flex gap-2.5 text-sm font-body text-foreground leading-relaxed">
+                  <li key={i} className="flex gap-2.5 text-base font-body text-foreground leading-relaxed">
                     <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary/60" />
                     <span>{point}</span>
                   </li>
@@ -438,8 +449,8 @@ const ArticlePreview = ({
 
           {/* PDF Preview — embedded viewer */}
           <div className="p-5 border-b border-border">
-            <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
-              <FileText className="w-3.5 h-3.5 text-primary" />
+            <h5 className="text-sm font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
+              <FileText className="w-4 h-4 text-primary" />
               Paper Preview
             </h5>
             {pdfViewerUrl ? (
@@ -543,8 +554,8 @@ const ArticlePreview = ({
           {/* Executive Summary — bullet points */}
           <div className="p-5">
             <div className="flex items-center justify-between mb-3">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-accent" />
+              <h5 className="text-sm font-body font-semibold uppercase tracking-wider text-foreground flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-accent" />
                 Executive Summary
               </h5>
               {!executiveSummary && !summaryLoading && (
@@ -573,8 +584,8 @@ const ArticlePreview = ({
           {/* Related Papers */}
           {relatedPapers.length > 0 && (
             <div className="p-5 border-t border-border">
-              <h5 className="text-xs font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
-                <Link2 className="w-3.5 h-3.5 text-primary" />
+              <h5 className="text-sm font-body font-semibold uppercase tracking-wider text-foreground mb-3 flex items-center gap-1.5">
+                <Link2 className="w-4 h-4 text-primary" />
                 Related Papers
               </h5>
               <div className="space-y-2">
@@ -610,7 +621,7 @@ const ArticlePreview = ({
         <div className="w-full lg:w-[380px] flex flex-col min-h-[350px] max-h-[700px] border-l border-border">
           <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/10">
             <Bot className="w-4 h-4 text-accent" />
-            <span className="text-xs font-display font-semibold text-foreground">Chat about this paper</span>
+            <span className="text-sm font-display font-semibold text-foreground">Chat about this paper</span>
             {chatMessages.length > 0 && (
               <button
                 onClick={() => setChatMessages([])}

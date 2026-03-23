@@ -34,10 +34,34 @@ interface PapersTableProps {
 }
 
 const generateTLDR = (title: string, abstract: string | null): string => {
-  if (abstract && abstract.length > 20) {
-    return abstract.length > 120 ? abstract.slice(0, 120) + "…" : abstract;
-  }
-  return title.length > 80 ? title.slice(0, 80) + "…" : title;
+  if (!abstract || abstract.length < 20) return "No summary available.";
+
+  // Split abstract into sentences
+  const sentences = abstract
+    .replace(/\s+/g, " ")
+    .split(/(?<=[.!?])\s+/)
+    .filter((s) => s.length > 15);
+
+  if (sentences.length === 0) return abstract.slice(0, 140) + "…";
+
+  // Remove sentences that heavily overlap with the title
+  const titleWords = new Set(title.toLowerCase().replace(/[^a-z0-9\s]/g, "").split(/\s+/).filter((w) => w.length > 3));
+  const scored = sentences.map((s) => {
+    const sWords = s.toLowerCase().replace(/[^a-z0-9\s]/g, "").split(/\s+/).filter((w) => w.length > 3);
+    const overlap = sWords.filter((w) => titleWords.has(w)).length / Math.max(sWords.length, 1);
+    // Prefer mid-abstract sentences (methods/results), penalize high title overlap
+    return { text: s.trim(), overlap };
+  });
+
+  // Filter out sentences too similar to the title (>60% word overlap)
+  const candidates = scored.filter((s) => s.overlap < 0.6);
+  const pool = candidates.length > 0 ? candidates : scored;
+
+  // Pick the 2nd or 3rd sentence if available (usually the "meat"), else first candidate
+  const pick = pool.length >= 3 ? pool[2] : pool.length >= 2 ? pool[1] : pool[0];
+  const result = pick.text;
+
+  return result.length > 180 ? result.slice(0, 177) + "…" : result;
 };
 
 const getAIFlag = (paper: Paper): { label: string; color: string; icon: React.ReactNode } => {
@@ -247,19 +271,19 @@ const PapersTable = ({
                   />
                 </th>
                 <th className="w-8 px-1 py-3" />
-                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider">
+                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-[22%]">
                   Title
                 </th>
-                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider min-w-[180px]">
+                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-[36%]">
                   TLDR
                 </th>
-                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider w-24">
+                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-20">
                   AI Flag
                 </th>
-                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider w-28">
+                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-24">
                   AI Label
                 </th>
-                <th className="px-3 py-3 text-center w-32">
+                <th className="px-3 py-3 text-center w-28">
                   <button
                     onClick={() => handleSort("year")}
                     className="inline-flex items-center gap-1.5 font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider hover:text-foreground transition-colors"
@@ -271,7 +295,7 @@ const PapersTable = ({
                     <YearFilter yearRange={yearRange} onChange={setYearRange} />
                   </div>
                 </th>
-                <th className="px-3 py-3 text-center w-32">
+                <th className="px-3 py-3 text-center w-28">
                   <button
                     onClick={() => handleSort("matchRate")}
                     className="inline-flex items-center gap-1.5 font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider hover:text-foreground transition-colors"
@@ -293,6 +317,7 @@ const PapersTable = ({
 
                   return (
                     <motion.tr
+                      {...(i === 0 ? { "data-tour": "paper-row" } : {})}
                       key={paper.paperId}
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -338,11 +363,11 @@ const PapersTable = ({
                       <td className="px-3 py-3">
                         <div className="min-w-0">
                           {!isLocked && paper.url ? (
-                            <span className="font-display text-sm font-semibold text-foreground line-clamp-2">
+                            <span className="font-display text-base font-semibold text-foreground line-clamp-2">
                               {paper.title}
                             </span>
                           ) : (
-                            <span className="font-display text-sm font-semibold text-foreground line-clamp-2">
+                            <span className="font-display text-base font-semibold text-foreground line-clamp-2">
                               {paper.title}
                             </span>
                           )}
@@ -353,20 +378,20 @@ const PapersTable = ({
                         </div>
                       </td>
                       <td className="px-3 py-3">
-                        <p className="text-xs text-muted-foreground font-body leading-relaxed line-clamp-2">{tldr}</p>
+                        <p className="text-sm text-muted-foreground font-body leading-relaxed line-clamp-2">{tldr}</p>
                       </td>
                       <td className="px-3 py-3 text-center">
-                        <span className={`inline-flex items-center gap-1 text-xs font-body ${aiFlag.color}`}>
+                        <span className={`inline-flex items-center gap-1 text-sm font-body ${aiFlag.color}`}>
                           {aiFlag.icon}
                           {aiFlag.label}
                         </span>
                       </td>
                       <td className="px-3 py-3 text-center">
-                        <span className="inline-block px-2 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-xs font-body text-accent">
+                        <span className="inline-block px-2.5 py-1 rounded-full bg-accent/10 border border-accent/20 text-sm font-body text-accent">
                           {aiLabel}
                         </span>
                       </td>
-                      <td className="px-3 py-3 text-center text-sm font-body text-muted-foreground">
+                      <td className="px-3 py-3 text-center text-base font-body text-muted-foreground">
                         {paper.year || "—"}
                       </td>
                       <td className="px-3 py-3 text-center">
@@ -380,7 +405,7 @@ const PapersTable = ({
                               }}
                             />
                           </div>
-                          <span className="text-sm font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
+                          <span className="text-base font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
                         </div>
                       </td>
                     </motion.tr>
@@ -392,7 +417,7 @@ const PapersTable = ({
         </div>
       </div>
 
-      <p className="text-xs text-muted-foreground font-body text-right">
+      <p className="text-sm text-muted-foreground font-body text-right">
         Showing {processedPapers.length} of {papers.length} papers
       </p>
     </div>
