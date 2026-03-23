@@ -26,14 +26,13 @@ const SketchDragArrow = ({
       {visible && (
         <motion.div
           key={direction}
-          className="pointer-events-none absolute top-1/2 z-30"
-          style={{ [isLeft ? "left" : "right"]: "12px", translateY: "-50%" }}
-          initial={{ opacity: 0, x: isLeft ? 12 : -12 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: isLeft ? -8 : 8 }}
+          className="pointer-events-none absolute bottom-3 left-3 z-30"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 8 }}
           transition={{ duration: 0.25, ease: "easeOut" }}
         >
-          {/* Oscillate the whole arrow in the drag direction */}
+          {/* Oscillate in the drag direction */}
           <motion.div
             animate={{ x: isLeft ? [-4, 2, -4] : [4, -2, 4] }}
             transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
