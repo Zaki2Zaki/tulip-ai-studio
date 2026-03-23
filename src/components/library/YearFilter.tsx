@@ -34,7 +34,7 @@ const YearFilter = ({ yearRange, onChange }: YearFilterProps) => {
     <div className="relative" ref={ref}>
       <button
         onClick={() => setOpen(!open)}
-        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-border bg-muted/20 text-xs font-body text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all"
+        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-border bg-muted/20 text-xs font-body text-white hover:text-foreground hover:border-primary/30 transition-all"
       >
         {activeLabel}
         <ChevronDown className={`w-3 h-3 transition-transform ${open ? "rotate-180" : ""}`} />
@@ -52,7 +52,7 @@ const YearFilter = ({ yearRange, onChange }: YearFilterProps) => {
               className={`w-full text-left px-3 py-2 text-xs font-body rounded-md transition-colors ${
                 yearRange[0] === preset.min && yearRange[1] === preset.max
                   ? "bg-primary/10 text-foreground"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted/30"
+                  : "text-white hover:text-foreground hover:bg-muted/30"
               }`}
             >
               {preset.label}

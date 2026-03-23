@@ -51,7 +51,7 @@ const UseCasePage = () => {
           >
             <Link
               to="/#services"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-sm text-white hover:text-primary transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" /> Back to Services
             </Link>
@@ -68,10 +68,10 @@ const UseCasePage = () => {
             <h1 className="font-display text-4xl md:text-6xl font-bold mb-4">
               {useCase.title}
             </h1>
-            <p className="text-xl text-muted-foreground font-body max-w-3xl mb-2">
+            <p className="text-xl text-white font-body max-w-3xl mb-2">
               {useCase.tagline}
             </p>
-            <p className="text-muted-foreground font-body max-w-3xl leading-relaxed">
+            <p className="text-white font-body max-w-3xl leading-relaxed">
               {useCase.description}
             </p>
           </motion.div>
@@ -106,7 +106,7 @@ const UseCasePage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4 }}
                   >
-                    <p className="text-muted-foreground font-body text-lg mb-8 leading-relaxed">
+                    <p className="text-white font-body text-lg mb-8 leading-relaxed">
                       {phase.data.description}
                     </p>
                     <div className="grid md:grid-cols-2 gap-4">
@@ -134,7 +134,7 @@ const UseCasePage = () => {
             {prev ? (
               <Link
                 to={`/use-cases/${prev.slug}`}
-                className="group flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                className="group flex items-center gap-2 text-white hover:text-foreground transition-colors"
               >
                 <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
                 <span className="font-body text-sm">{prev.shortTitle}</span>
@@ -143,7 +143,7 @@ const UseCasePage = () => {
             {next ? (
               <Link
                 to={`/use-cases/${next.slug}`}
-                className="group flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                className="group flex items-center gap-2 text-white hover:text-foreground transition-colors"
               >
                 <span className="font-body text-sm">{next.shortTitle}</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

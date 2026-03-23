@@ -30,7 +30,7 @@ const ContactSection = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2 }}
-          className="font-body mb-10 text-sm md:text-base text-foreground/80 leading-relaxed max-w-lg mx-auto"
+          className="font-body mb-10 text-sm md:text-base text-white/80 leading-relaxed max-w-lg mx-auto"
         >
           Ready to build systems that help you grow without the chaos. Let's collaborate on your product vision, strategy, and roadmap for intelligent tool-sets.
         </motion.p>
@@ -47,7 +47,7 @@ const ContactSection = () => {
           >
             Book a 30-minute Discovery Meeting
           </button>
-          <p className="text-muted-foreground font-body text-xs">
+          <p className="text-white font-body text-xs">
             *Automatically receive a client-intake form and service package
           </p>
         </motion.div>

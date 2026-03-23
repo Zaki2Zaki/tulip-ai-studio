@@ -23,7 +23,7 @@ const ViewToggle = ({ mode, onChange }: ViewToggleProps) => (
         className={`p-1.5 rounded-md transition-all ${
           mode === v.mode
             ? "bg-primary/15 text-foreground"
-            : "text-muted-foreground hover:text-foreground hover:bg-muted/20"
+            : "text-white hover:text-foreground hover:bg-muted/20"
         }`}
       >
         <v.icon className="w-3.5 h-3.5" />

@@ -154,7 +154,7 @@ const BulkReviewPanel = ({
                   <div className="w-10 h-10 rounded-full border-2 border-primary/30 flex items-center justify-center">
                     <span className="text-xs font-body font-bold text-primary">{matchScore}%</span>
                   </div>
-                  <span className="text-[9px] font-body text-muted-foreground">match</span>
+                  <span className="text-[9px] font-body text-white">match</span>
                 </div>
               </div>
 
@@ -173,7 +173,7 @@ const BulkReviewPanel = ({
 
               {/* Abstract snippet / expandable */}
               <div className="mt-2">
-                <p className="text-xs font-body text-foreground/90 leading-relaxed">
+                <p className="text-xs font-body text-white/90 leading-relaxed">
                   {isExpanded ? paper.abstract || snippet : snippet}
                 </p>
                 {paper.abstract && paper.abstract.length > 180 && (

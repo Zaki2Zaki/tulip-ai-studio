@@ -43,7 +43,7 @@ const ServicesSection = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2 }}
-          className="text-center text-muted-foreground font-body text-sm mb-12 max-w-lg mx-auto"
+          className="text-center text-white font-body text-sm mb-12 max-w-lg mx-auto"
         >
           End-to-end GenAI integration services, from research through production deployment.
         </motion.p>
@@ -59,7 +59,7 @@ const ServicesSection = () => {
             >
               <service.icon className="w-6 h-6 text-primary mb-4 group-hover:scale-105 transition-transform duration-300" />
               <h3 className="font-display text-base font-semibold mb-2">{service.title}</h3>
-              <p className="text-muted-foreground font-body text-sm leading-relaxed whitespace-pre-line">{service.description}</p>
+              <p className="text-white font-body text-sm leading-relaxed whitespace-pre-line">{service.description}</p>
             </motion.div>
           ))}
         </div>

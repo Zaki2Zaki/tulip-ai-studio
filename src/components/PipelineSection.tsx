@@ -107,7 +107,7 @@ const WorkflowBuilderPanel = ({
       <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
         Build Production-Ready <span className="text-gradient-gold">Agentic Workflow</span>
       </h3>
-      <p className="text-sm text-muted-foreground font-body mb-6 max-w-sm mx-auto">
+      <p className="text-sm text-white font-body mb-6 max-w-sm mx-auto">
         Walk through the Tulip R&D Pipeline™ and simulate building your own AI production system.
       </p>
       <button
@@ -127,14 +127,14 @@ const WorkflowBuilderPanel = ({
         <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-orange-400">Your Current Workflow</span>
       </div>
       <p className="font-display text-lg font-bold text-white mb-1">What's slowing your production pipeline?</p>
-      <p className="text-xs text-muted-foreground font-body mb-4">Select all that apply — we'll map your bottlenecks.</p>
+      <p className="text-xs text-white font-body mb-4">Select all that apply — we'll map your bottlenecks.</p>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-5">
         {PAIN_POINTS.map((pt) => {
           const on = selected.includes(pt);
           return (
             <button key={pt} onClick={() => onSelectedChange(toggle(selected, pt))}
-              className={`text-left px-3 py-2.5 rounded-xl border text-xs font-body transition-all ${on ? "border-orange-400/60 bg-orange-400/10 text-orange-200" : "border-border/40 text-muted-foreground hover:border-border/70"}`}>
-              <span className={`mr-1.5 ${on ? "text-orange-400" : "text-muted-foreground/30"}`}>{on ? "✕" : "○"}</span>
+              className={`text-left px-3 py-2.5 rounded-xl border text-xs font-body transition-all ${on ? "border-orange-400/60 bg-orange-400/10 text-orange-200" : "border-border/40 text-white hover:border-border/70"}`}>
+              <span className={`mr-1.5 ${on ? "text-orange-400" : "text-white/30"}`}>{on ? "✕" : "○"}</span>
               {pt}
             </button>
           );
@@ -330,7 +330,7 @@ const WorkflowBuilderPanel = ({
           {metrics.map((m, i) => (
             <div key={m.label}>
               <div className="flex justify-between mb-1.5">
-                <span className="text-xs font-body text-foreground/80">{m.label}</span>
+                <span className="text-xs font-body text-white/80">{m.label}</span>
                 <span className="text-xs font-body font-semibold" style={{ color: m.color }}>{m.value}% improvement</span>
               </div>
               <div className="h-1.5 rounded-full bg-border/30 overflow-hidden">
@@ -349,7 +349,7 @@ const WorkflowBuilderPanel = ({
             <AlertTriangle className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
             <div>
               <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-orange-400 mb-1">Demonstration Only</p>
-              <p className="text-xs font-body text-foreground/70">These are simulated benchmarks. An initial <strong className="text-foreground/90">1:1 Consultation</strong> is required for a deep-dive analysis and aligned expectations before any real integration begins.</p>
+              <p className="text-xs font-body text-white/70">These are simulated benchmarks. An initial <strong className="text-white/90">1:1 Consultation</strong> is required for a deep-dive analysis and aligned expectations before any real integration begins.</p>
             </div>
           </div>
         </div>
@@ -379,7 +379,7 @@ const WorkflowBuilderPanel = ({
           <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Integrate: Embedding Into Your Stack</span>
           <span className="ml-1 px-2 py-0.5 rounded-full bg-orange-400/15 border border-orange-400/30 text-[9px] font-display font-bold uppercase tracking-wider text-orange-400">Demo Only</span>
         </div>
-        <p className="text-[10px] font-body text-muted-foreground mb-3">This is a simulated walkthrough — real integration requires a scoped engagement.</p>
+        <p className="text-[10px] font-body text-white mb-3">This is a simulated walkthrough — real integration requires a scoped engagement.</p>
         <p className="font-display text-lg font-bold text-white mb-4">Connecting AI into your production tools</p>
         <div className="space-y-2 mb-5">
           {checks.map((c, i) => (
@@ -391,7 +391,7 @@ const WorkflowBuilderPanel = ({
                 <motion.div className="w-4 h-4 rounded-full border-2 border-primary border-t-transparent shrink-0"
                   animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} />
               )}
-              <span className={`text-xs font-body ${i < 3 ? "text-foreground/90" : "text-primary"}`}>{c}</span>
+              <span className={`text-xs font-body ${i < 3 ? "text-white/90" : "text-primary"}`}>{c}</span>
             </motion.div>
           ))}
         </div>
@@ -403,7 +403,7 @@ const WorkflowBuilderPanel = ({
               <CheckCircle2 className="w-4 h-4 text-green-400 shrink-0" />
               <div>
                 <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-green-400 mb-0.5">Added to Estimate</p>
-                <p className="text-xs font-body text-foreground/70">Workshops &amp; Education has been added to your estimate builder below.</p>
+                <p className="text-xs font-body text-white/70">Workshops &amp; Education has been added to your estimate builder below.</p>
               </div>
             </div>
           ) : (
@@ -446,22 +446,22 @@ const WorkflowBuilderPanel = ({
       <p className="font-display text-2xl md:text-3xl font-bold text-white mb-1">
         Your AI pipeline is <span className="text-gradient-gold">production‑ready.</span>
       </p>
-      <p className="text-xs text-muted-foreground font-body mb-4">You've completed the Tulip R&D Pipeline™ demo.</p>
+      <p className="text-xs text-white font-body mb-4">You've completed the Tulip R&D Pipeline™ demo.</p>
 
       <div className="grid grid-cols-3 gap-3 mb-5">
         {[["40–60%", "Faster asset creation"], ["3×", "Faster prototyping"], ["85%", "Fewer failures"]].map(([stat, lbl]) => (
           <div key={stat} className="p-3 rounded-xl bg-primary/5 border border-primary/10">
             <div className="font-display text-xl font-bold text-gradient-gold">{stat}</div>
-            <div className="text-[10px] text-foreground/70 font-body mt-0.5">{lbl}</div>
+            <div className="text-[10px] text-white/70 font-body mt-0.5">{lbl}</div>
           </div>
         ))}
       </div>
 
       <div className="px-4 py-3 rounded-xl bg-orange-400/5 border border-orange-400/20 text-left mb-5">
         <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-orange-400 mb-1">This was a simulation</p>
-        <p className="text-xs font-body text-foreground/70">
+        <p className="text-xs font-body text-white/70">
           Real-world scaling requires a scoped discovery, team onboarding, and ongoing support.
-          A <strong className="text-foreground/90">1:1 Consultation</strong> aligns expectations before any commitment.
+          A <strong className="text-white/90">1:1 Consultation</strong> aligns expectations before any commitment.
         </p>
       </div>
 
@@ -472,7 +472,7 @@ const WorkflowBuilderPanel = ({
           Book Discovery Call <ArrowRight className="w-3.5 h-3.5" />
         </a>
         <a href="#estimator"
-          className="text-xs text-muted-foreground hover:text-foreground font-body transition-colors underline underline-offset-2">
+          className="text-xs text-white hover:text-foreground font-body transition-colors underline underline-offset-2">
           Or build your estimate first →
         </a>
       </div>
@@ -516,7 +516,7 @@ const ProvenStat = ({
       <span className="font-display text-2xl md:text-3xl font-bold text-gradient-gold">
         {prefix}{display}{suffix}
       </span>
-      <p className="text-xs text-foreground/80 font-body leading-snug">{label}</p>
+      <p className="text-xs text-white/80 font-body leading-snug">{label}</p>
     </div>
   );
 };
@@ -601,7 +601,7 @@ const PipelineSection = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3 }}
-          className="text-center max-w-xl mx-auto mb-10 text-muted-foreground font-body text-sm"
+          className="text-center max-w-xl mx-auto mb-10 text-white font-body text-sm"
         >
           We identify where generative AI creates the most impact in your content production pipelines — from pre-production through final output.
         </motion.p>
@@ -629,7 +629,7 @@ const PipelineSection = () => {
             onPositionChange={handlePositionChange}
             handleY={handleY}
           />
-          <p className="max-w-xl mx-auto mt-6 text-sm text-muted-foreground font-body text-center leading-relaxed">
+          <p className="max-w-xl mx-auto mt-6 text-sm text-white font-body text-center leading-relaxed">
             Startup AI tools are reshaping every stage of the pipeline — we help integrate the explosion of AI tools into production pipelines for creative studios.
           </p>
         </motion.div>
@@ -651,7 +651,7 @@ const PipelineSection = () => {
                         <span className="font-display text-3xl md:text-4xl font-bold text-gradient-gold">{p.stat}</span>
                       </div>
                       <div className="space-y-1">
-                        <p className="text-sm text-foreground/90 font-body leading-relaxed">
+                        <p className="text-sm text-white/90 font-body leading-relaxed">
                           {p.text.split(p.highlight).map((part, j, arr) => (
                             <span key={j}>{part}{j < arr.length - 1 && <strong className="text-destructive font-semibold">{p.highlight}</strong>}</span>
                           ))}
@@ -661,7 +661,7 @@ const PipelineSection = () => {
                     </motion.div>
                   ))}
                 </div>
-                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-4 text-xs text-muted-foreground font-body text-center">
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-4 text-xs text-white font-body text-center">
                   Source:{" "}
                   <a href="https://arxiv.org/abs/2204.11191" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-foreground transition-colors">
                     An Empirical Study of Delayed Games on Steam, arXiv:2204.11191
@@ -682,7 +682,7 @@ const PipelineSection = () => {
                   <h3 className="font-display text-xl md:text-2xl font-bold text-foreground mb-1">
                     From Experimentation <span className="text-gradient-gold">→ Execution</span>
                   </h3>
-                  <p className="text-xs text-muted-foreground font-body mb-5">Transitioning from "AI as a toy" to "AI as a tool."</p>
+                  <p className="text-xs text-white font-body mb-5">Transitioning from "AI as a toy" to "AI as a tool."</p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {solutions.map((s, i) => (
                       <motion.div key={s.label} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 + i * 0.08 }} className="flex items-start gap-3">
@@ -691,7 +691,7 @@ const PipelineSection = () => {
                         </div>
                         <div>
                           <p className="text-sm font-body font-semibold text-foreground">{s.label}</p>
-                          <p className="text-xs text-muted-foreground font-body leading-relaxed mt-0.5">{s.desc}</p>
+                          <p className="text-xs text-white font-body leading-relaxed mt-0.5">{s.desc}</p>
                         </div>
                       </motion.div>
                     ))}
@@ -705,11 +705,11 @@ const PipelineSection = () => {
                       <h3 className="font-display text-2xl md:text-4xl font-bold text-white leading-tight">
                         The Tulip R&D <span className="text-gradient-gold">Pipeline™</span> <ArrowRight className="inline w-5 h-5 text-primary ml-1" />
                       </h3>
-                      <p className="text-xs text-muted-foreground font-body mt-1">
+                      <p className="text-xs text-white font-body mt-1">
                         From idea to working system to team adoption
                       </p>
                     </div>
-                    <span className="text-[9px] tracking-[0.15em] uppercase font-body text-muted-foreground border border-border/40 rounded-full px-2.5 py-1 self-start shrink-0">v4.2</span>
+                    <span className="text-[9px] tracking-[0.15em] uppercase font-body text-white border border-border/40 rounded-full px-2.5 py-1 self-start shrink-0">v4.2</span>
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
                     {pipelineSteps.map((step, i) => {
@@ -777,7 +777,7 @@ const PipelineSection = () => {
                     <ProvenStat icon={Rocket} target={3} suffix="×" label="Faster environment prototyping" delay={0.75} />
                     <ProvenStat icon={CheckCircle2} target={85} suffix="%" label="Fewer pipeline integration failures" delay={0.85} />
                   </div>
-                  <p className="mt-4 text-[10px] text-muted-foreground font-body text-center">
+                  <p className="mt-4 text-[10px] text-white font-body text-center">
                     Sources: Generative Environments for ICVFX (SP Studios) • Hunyuan3D Pipeline (Tencent) • Democratization of VFX via GenAI (UWL Research)
                   </p>
                 </motion.div>
@@ -786,7 +786,7 @@ const PipelineSection = () => {
 
             {!showProblems && !showSolutions && (
               <motion.div key="neutral" initial={{ opacity: 0 }} animate={{ opacity: 0.5 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="text-center py-12">
-                <p className="text-sm text-muted-foreground font-body">Drag the slider left or right to explore</p>
+                <p className="text-sm text-white font-body">Drag the slider left or right to explore</p>
               </motion.div>
             )}
           </AnimatePresence>

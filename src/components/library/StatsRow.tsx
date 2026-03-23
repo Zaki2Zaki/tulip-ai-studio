@@ -99,7 +99,7 @@ const StatsRow = ({ papersCount }: StatsRowProps) => {
           </div>
           <div className="min-w-0">
             <p className="text-xl font-display font-bold text-foreground leading-none">{s.value}</p>
-            <p className="text-xs font-body text-muted-foreground uppercase tracking-wider mt-0.5">{s.label}</p>
+            <p className="text-xs font-body text-white uppercase tracking-wider mt-0.5">{s.label}</p>
             {(s as any).subtitle && (
               <p className="text-[9px] text-destructive mt-0.5">{(s as any).subtitle}</p>
             )}

@@ -75,7 +75,7 @@ const LibrarySidebar = ({
     <aside className="w-72 shrink-0 border-r border-border bg-card/30 p-5 space-y-6 overflow-y-auto library-scroll">
       {/* Actions */}
       <div className="space-y-2">
-        <h3 className="text-sm font-body font-semibold uppercase tracking-widest text-muted-foreground mb-3">
+        <h3 className="text-sm font-body font-semibold uppercase tracking-widest text-white mb-3">
           Actions
         </h3>
         <button
@@ -124,20 +124,20 @@ const LibrarySidebar = ({
               onChange={(e) => setNewCollectionName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleCreate()}
               placeholder="Collection name…"
-              className="flex-1 bg-muted/30 border border-border rounded-md px-2 py-1.5 text-xs text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary/30"
+              className="flex-1 bg-muted/30 border border-border rounded-md px-2 py-1.5 text-xs text-foreground font-body placeholder:text-white focus:outline-none focus:ring-1 focus:ring-primary/30"
               autoFocus
             />
             <button onClick={handleCreate} className="px-2 py-1.5 bg-primary text-primary-foreground rounded-md text-xs font-body">
               Add
             </button>
-            <button onClick={() => setShowNewInput(false)} className="p-1.5 text-muted-foreground hover:text-foreground">
+            <button onClick={() => setShowNewInput(false)} className="p-1.5 text-white hover:text-foreground">
               <X className="w-3 h-3" />
             </button>
           </div>
         )}
 
         {collections.length === 0 && !showNewInput && (
-          <p className="text-xs text-muted-foreground font-body px-2">No collections yet</p>
+          <p className="text-xs text-white font-body px-2">No collections yet</p>
         )}
 
         {collections.map((col) => (
@@ -158,11 +158,11 @@ const LibrarySidebar = ({
               <div className="flex items-center gap-2 min-w-0">
                 <Folder className={`w-3.5 h-3.5 shrink-0 transition-colors ${activeCollectionId === col.id ? "text-primary" : dragOverId === col.id ? "text-accent" : "text-accent/60"}`} />
                 <span className={`text-base font-body truncate ${activeCollectionId === col.id ? "text-foreground font-semibold" : "text-foreground"}`}>{col.name}</span>
-                <span className="text-sm text-muted-foreground">{col.paperIds.length}</span>
+                <span className="text-sm text-white">{col.paperIds.length}</span>
               </div>
               <button
                 onClick={(e) => { e.stopPropagation(); onDeleteCollection(col.id); }}
-                className="p-1 rounded-md text-muted-foreground hover:text-destructive opacity-0 group-hover:opacity-100 transition-all"
+                className="p-1 rounded-md text-white hover:text-destructive opacity-0 group-hover:opacity-100 transition-all"
               >
                 <X className="w-3 h-3" />
               </button>
@@ -177,7 +177,7 @@ const LibrarySidebar = ({
                   }
                   toast.success(`Preparing ZIP of ${col.paperIds.length} paper(s)…`, { description: "Download will start shortly." });
                 }}
-                className="flex items-center gap-1 px-2 py-1 rounded text-[10px] font-body text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-all"
+                className="flex items-center gap-1 px-2 py-1 rounded text-[10px] font-body text-white hover:text-foreground hover:bg-muted/30 transition-all"
                 title="Download collection as ZIP"
               >
                 <Download className="w-3 h-3" />
@@ -192,7 +192,7 @@ const LibrarySidebar = ({
                   }
                   toast.info("Google Drive integration coming soon", { description: "Connect your Google account to save collections directly to Drive." });
                 }}
-                className="flex items-center gap-1 px-2 py-1 rounded text-[10px] font-body text-muted-foreground hover:text-foreground hover:bg-muted/30 transition-all"
+                className="flex items-center gap-1 px-2 py-1 rounded text-[10px] font-body text-white hover:text-foreground hover:bg-muted/30 transition-all"
                 title="Save to Google Drive"
               >
                 <Cloud className="w-3 h-3" />

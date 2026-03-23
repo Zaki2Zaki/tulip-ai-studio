@@ -55,7 +55,7 @@ const MotionDataSection = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.25 }}
-          className="font-body text-xs md:text-sm leading-relaxed max-w-xl mx-auto text-center mb-16 text-muted-foreground"
+          className="font-body text-xs md:text-sm leading-relaxed max-w-xl mx-auto text-center mb-16 text-white"
         >
           Structured, high-fidelity human motion data for training, analysis, and simulation across physical and digital systems.
         </motion.p>
@@ -67,7 +67,7 @@ const MotionDataSection = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mb-20"
         >
-          <h3 className="font-display text-lg md:text-xl font-semibold text-center mb-10 text-foreground/80">
+          <h3 className="font-display text-lg md:text-xl font-semibold text-center mb-10 text-white/80">
             Broad choice of <span className="text-gradient-gold">models</span>
           </h3>
 
@@ -85,10 +85,10 @@ const MotionDataSection = () => {
                   transition={{ duration: 0.4, delay: 0.4 + i * 0.06 }}
                   className="flex flex-col items-center text-center"
                 >
-                  <p className="text-[10px] font-body text-muted-foreground mb-2 tracking-wide uppercase">{item.provider}</p>
+                  <p className="text-[10px] font-body text-white mb-2 tracking-wide uppercase">{item.provider}</p>
                   <div className="w-2.5 h-2.5 rounded-full mb-2 shrink-0" style={{ backgroundColor: item.color, boxShadow: `0 0 10px ${item.color}` }} />
                   <p className="font-display text-xs font-semibold mb-0.5" style={{ color: item.color }}>{item.model}</p>
-                  <p className="text-muted-foreground leading-relaxed font-body text-[11px] whitespace-pre-line">{item.desc}</p>
+                  <p className="text-white leading-relaxed font-body text-[11px] whitespace-pre-line">{item.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -117,7 +117,7 @@ const MotionDataSection = () => {
               >
                 <eng.icon className="w-6 h-6 text-primary mb-4 mx-auto group-hover:scale-105 transition-transform duration-300" />
                 <h4 className="font-display text-base font-semibold mb-2">{eng.title}</h4>
-                <p className="text-muted-foreground font-body text-sm leading-relaxed">{eng.description}</p>
+                <p className="text-white font-body text-sm leading-relaxed">{eng.description}</p>
               </motion.div>
             ))}
           </div>

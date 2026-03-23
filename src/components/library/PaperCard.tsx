@@ -28,7 +28,7 @@ const getAIFlag = (paper: Paper): { label: string; color: string; icon: React.Re
   const hasCitations = (paper.citationCount || 0) > 5;
   if (hasAbstract && hasCitations) return { label: "Verified", color: "text-green-400", icon: <CheckCircle className="w-3 h-3" /> };
   if (hasAbstract || hasCitations) return { label: "Partial", color: "text-yellow-400", icon: <AlertTriangle className="w-3 h-3" /> };
-  return { label: "Unverified", color: "text-muted-foreground", icon: <MinusCircle className="w-3 h-3" /> };
+  return { label: "Unverified", color: "text-white", icon: <MinusCircle className="w-3 h-3" /> };
 };
 
 const getAILabel = (title: string): string => {
@@ -76,7 +76,7 @@ const PaperCard = ({ paper, isSelected, isActive, isLocked, onToggleSelect, onCl
           {aiLabel}
         </span>
         {!isLocked && (
-          <GripVertical className="w-3.5 h-3.5 text-muted-foreground/30 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab active:cursor-grabbing" />
+          <GripVertical className="w-3.5 h-3.5 text-white/30 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab active:cursor-grabbing" />
         )}
       </div>
 
@@ -86,20 +86,20 @@ const PaperCard = ({ paper, isSelected, isActive, isLocked, onToggleSelect, onCl
       </h4>
 
       {/* Authors */}
-      <p className="text-sm text-muted-foreground font-body mb-2">
+      <p className="text-sm text-white font-body mb-2">
         {paper.authors?.slice(0, 2).map((a) => a.name).join(", ")}
         {(paper.authors?.length || 0) > 2 && " et al."}
       </p>
 
       {/* Snippet */}
-      <p className="text-sm text-muted-foreground/70 font-body leading-relaxed line-clamp-3 mb-3 flex-1">
+      <p className="text-sm text-white/70 font-body leading-relaxed line-clamp-3 mb-3 flex-1">
         {snippet}
       </p>
 
       {/* Bottom row */}
       <div className="flex items-center justify-between pt-2 border-t border-border/50">
         <div className="flex items-center gap-2">
-          {paper.year && <span className="text-xs font-body text-muted-foreground">{paper.year}</span>}
+          {paper.year && <span className="text-xs font-body text-white">{paper.year}</span>}
           <span className={`inline-flex items-center gap-1 text-[11px] font-body ${aiFlag.color}`}>
             {aiFlag.icon} {aiFlag.label}
           </span>
@@ -114,7 +114,7 @@ const PaperCard = ({ paper, isSelected, isActive, isLocked, onToggleSelect, onCl
               }}
             />
           </div>
-          <span className="text-[11px] font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
+          <span className="text-[11px] font-body text-white tabular-nums">{paper.matchRate}%</span>
         </div>
       </div>
 

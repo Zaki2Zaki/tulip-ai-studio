@@ -22,7 +22,7 @@ const StageTabs = ({ active, onChange }: StageTabsProps) => (
         className={`relative px-6 py-2.5 rounded-full font-body font-medium text-sm transition-all duration-300 ${
           active === s.id
             ? "text-foreground"
-            : "text-muted-foreground hover:text-foreground bg-muted/30 hover:bg-muted/50"
+            : "text-white hover:text-foreground bg-muted/30 hover:bg-muted/50"
         }`}
       >
         {active === s.id && (

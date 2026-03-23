@@ -30,7 +30,7 @@ interface DataSourcesProps {
 
 const DataSources = ({ enabledSources, onToggleSource }: DataSourcesProps) => (
   <div className="space-y-2">
-    <h3 className="text-xs font-body font-semibold uppercase tracking-widest text-muted-foreground mb-3">
+    <h3 className="text-xs font-body font-semibold uppercase tracking-widest text-white mb-3">
       <Globe className="w-3 h-3 inline mr-1.5" />
       Data Sources
     </h3>
@@ -51,11 +51,11 @@ const DataSources = ({ enabledSources, onToggleSource }: DataSourcesProps) => (
               : "hover:bg-muted/20"
           }`}
         >
-          <span className={isEnabled && !isLocked ? "text-foreground" : "text-muted-foreground"}>
+          <span className={isEnabled && !isLocked ? "text-foreground" : "text-white"}>
             {src.name}
           </span>
           {isLocked ? (
-            <Lock className="w-3.5 h-3.5 text-muted-foreground/50" />
+            <Lock className="w-3.5 h-3.5 text-white/50" />
           ) : isEnabled ? (
             <CheckCircle className="w-3.5 h-3.5 text-green-400" />
           ) : (

@@ -110,10 +110,10 @@ const CostEstimator = () => {
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-3">
             Build your <span className="text-gradient-gold">quote</span>
           </h2>
-          <p className="max-w-md mx-auto mb-5 text-foreground/80 text-sm font-body">
+          <p className="max-w-md mx-auto mb-5 text-white/80 text-sm font-body">
             Select your services and studio scale for an instant budget range.
           </p>
-          <p className="mb-2.5 text-foreground/70 text-sm font-body">Not sure what you need?</p>
+          <p className="mb-2.5 text-white/70 text-sm font-body">Not sure what you need?</p>
           <button
             data-assessment-trigger
             onClick={() => setQuizOpen(true)}
@@ -140,7 +140,7 @@ const CostEstimator = () => {
                   key={c}
                   onClick={() => setCurrency(c)}
                   className={`px-4 py-2 rounded-full text-xs font-body font-medium transition-all min-h-[36px] ${
-                    currency === c ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground"
+                    currency === c ? "bg-primary text-primary-foreground" : "text-white hover:text-foreground"
                   }`}
                 >
                   {c}
@@ -164,7 +164,7 @@ const CostEstimator = () => {
                     }`}
                   >
                     <div className="font-display font-semibold text-xs mb-0.5">{s.label}</div>
-                    <div className="text-[11px] text-muted-foreground font-body">{s.desc}</div>
+                    <div className="text-[11px] text-white font-body">{s.desc}</div>
                   </button>
                 );
               })}
@@ -198,7 +198,7 @@ const CostEstimator = () => {
                       </div>
                       <div className="flex-1">
                         <div className="font-display font-semibold text-xs">{svc.label}</div>
-                        <div className="text-[11px] text-muted-foreground font-body whitespace-pre-line">{svc.description}</div>
+                        <div className="text-[11px] text-white font-body whitespace-pre-line">{svc.description}</div>
                         {isResearch && (
                           <span
                             onClick={(e) => { e.stopPropagation(); setDiscoveryOpen(true); }}
@@ -218,25 +218,25 @@ const CostEstimator = () => {
           {/* Result */}
           <div className="border-t border-border/30 pt-6">
             {selectedServices.length === 0 ? (
-              <div className="text-center text-muted-foreground font-body py-6">
+              <div className="text-center text-white font-body py-6">
                 <Calculator className="w-8 h-8 mx-auto mb-2 opacity-30" />
                 <p className="text-xs">Select services above to see your estimated budget range</p>
               </div>
             ) : (
               <div>
                 <div className="text-center mb-5">
-                  <p className="mb-1.5 text-foreground/80 text-sm font-body">Estimated Budget Range</p>
+                  <p className="mb-1.5 text-white/80 text-sm font-body">Estimated Budget Range</p>
                   <div className="font-display text-2xl md:text-3xl font-bold">
                     <span className="text-gradient-gold">{formatCurrency(estimate.totalMin, currency)}</span>
-                    <span className="text-muted-foreground mx-2">–</span>
+                    <span className="text-white mx-2">–</span>
                     <span className="text-gradient-gold">{formatCurrency(estimate.totalMax, currency)}</span>
                   </div>
-                  <p className="text-[10px] text-muted-foreground font-body mt-1">{currency}</p>
+                  <p className="text-[10px] text-white font-body mt-1">{currency}</p>
                 </div>
 
                 <button
                   onClick={() => setShowBreakdown(!showBreakdown)}
-                  className="flex items-center gap-1.5 mx-auto text-xs text-muted-foreground hover:text-foreground transition-colors font-body min-h-[44px]"
+                  className="flex items-center gap-1.5 mx-auto text-xs text-white hover:text-foreground transition-colors font-body min-h-[44px]"
                 >
                   {showBreakdown ? "Hide" : "Show"} breakdown
                   {showBreakdown ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
@@ -247,7 +247,7 @@ const CostEstimator = () => {
                     {estimate.breakdown.map((item) => (
                       <div key={item.label} className="flex justify-between items-center py-1.5 border-b border-border/20">
                         <span className="text-xs font-body">{item.label}</span>
-                        <span className="text-xs font-body text-muted-foreground">{formatCurrency(item.min, currency)} – {formatCurrency(item.max, currency)}</span>
+                        <span className="text-xs font-body text-white">{formatCurrency(item.min, currency)} – {formatCurrency(item.max, currency)}</span>
                       </div>
                     ))}
                   </motion.div>
@@ -287,11 +287,11 @@ const CostEstimator = () => {
           ].map((step) => (
             <div key={step.label} className="bg-card/40 border border-border/40 rounded-xl p-3.5 text-center">
               <div className="font-display text-lg font-bold text-primary mb-0.5">{step.pct}</div>
-              <div className="text-[10px] text-muted-foreground font-body leading-snug">{step.label}</div>
+              <div className="text-[10px] text-white font-body leading-snug">{step.label}</div>
             </div>
           ))}
         </motion.div>
-        <p className="text-center text-muted-foreground font-body mt-3 text-xs">
+        <p className="text-center text-white font-body mt-3 text-xs">
           *Payment milestone structure. Finalized quotation varies depending on custom prototype requirements.
         </p>
       </div>

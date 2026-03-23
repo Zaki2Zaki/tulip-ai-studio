@@ -54,7 +54,7 @@ const CaseStudyComingSoonPage = () => {
         <div className="max-w-5xl mx-auto">
           <Link
             to="/case-studies"
-            className="inline-flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-primary transition-colors mb-10"
+            className="inline-flex items-center gap-2 text-sm font-body text-white hover:text-primary transition-colors mb-10"
           >
             <ArrowLeft className="w-4 h-4" /> Back to Case Studies
           </Link>
@@ -81,7 +81,7 @@ const CaseStudyComingSoonPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-lg text-muted-foreground font-body max-w-2xl mb-16"
+            className="text-lg text-white font-body max-w-2xl mb-16"
           >
             {data.subtitle}
           </motion.p>
@@ -100,13 +100,13 @@ const CaseStudyComingSoonPage = () => {
         <div className="flex items-center justify-between border-t border-border pt-8">
           <Link
             to={data.prevLink.to}
-            className="inline-flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-primary transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-body text-white hover:text-primary transition-colors"
           >
             <ArrowLeft className="w-4 h-4" /> {data.prevLink.label}
           </Link>
           <Link
             to={data.nextLink.to}
-            className="inline-flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-primary transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-body text-white hover:text-primary transition-colors"
           >
             {data.nextLink.label} <ArrowRight className="w-4 h-4" />
           </Link>

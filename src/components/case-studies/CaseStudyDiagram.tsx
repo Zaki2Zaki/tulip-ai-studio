@@ -34,7 +34,7 @@ const CaseStudyDiagram = ({ blocks, capabilities, buildingBlocks, comingSoon }: 
         {/* Header */}
         <div className="text-center mb-8">
           <div className="inline-block px-6 py-2 rounded-lg bg-muted/50 border border-border/50">
-            <span className="text-sm font-body text-muted-foreground tracking-wide uppercase">Pipeline Visualization</span>
+            <span className="text-sm font-body text-white tracking-wide uppercase">Pipeline Visualization</span>
           </div>
         </div>
 
@@ -52,7 +52,7 @@ const CaseStudyDiagram = ({ blocks, capabilities, buildingBlocks, comingSoon }: 
                 whileHover={{ scale: 1.02 }}
               >
                 <p className="font-display font-semibold text-foreground text-sm mb-1">{block.label}</p>
-                <p className="text-xs text-muted-foreground font-body">Hover for details</p>
+                <p className="text-xs text-white font-body">Hover for details</p>
               </motion.div>
 
               {/* Hover tooltip */}
@@ -66,7 +66,7 @@ const CaseStudyDiagram = ({ blocks, capabilities, buildingBlocks, comingSoon }: 
                     className="absolute left-0 right-0 top-full mt-2 z-30 bg-card border border-border rounded-xl p-5 shadow-2xl backdrop-blur-xl"
                   >
                     <p className="font-display font-bold text-foreground text-sm mb-2">{block.hoverTitle}</p>
-                    <p className="text-xs text-muted-foreground font-body leading-relaxed mb-2">{block.hoverDescription}</p>
+                    <p className="text-xs text-white font-body leading-relaxed mb-2">{block.hoverDescription}</p>
                     {block.hoverMetric && (
                       <div className="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20">
                         <span className="text-xs font-body font-semibold text-primary">{block.hoverMetric}</span>
@@ -84,7 +84,7 @@ const CaseStudyDiagram = ({ blocks, capabilities, buildingBlocks, comingSoon }: 
           <p className="text-sm font-display font-bold text-foreground mb-3">Key Capabilities</p>
           <div className="flex flex-wrap gap-2">
             {capabilities.map((cap, i) => (
-              <span key={i} className="text-xs font-body px-3 py-1.5 rounded-full bg-muted/50 text-muted-foreground border border-border/30">
+              <span key={i} className="text-xs font-body px-3 py-1.5 rounded-full bg-muted/50 text-white border border-border/30">
                 {cap}
               </span>
             ))}
@@ -96,7 +96,7 @@ const CaseStudyDiagram = ({ blocks, capabilities, buildingBlocks, comingSoon }: 
           <p className="text-sm font-display font-bold text-foreground mb-3">Building Blocks</p>
           <div className="flex flex-wrap gap-2">
             {buildingBlocks.map((bb, i) => (
-              <span key={i} className="text-xs font-body px-3 py-1.5 rounded-full bg-muted/50 text-muted-foreground border border-border/30">
+              <span key={i} className="text-xs font-body px-3 py-1.5 rounded-full bg-muted/50 text-white border border-border/30">
                 {bb}
               </span>
             ))}

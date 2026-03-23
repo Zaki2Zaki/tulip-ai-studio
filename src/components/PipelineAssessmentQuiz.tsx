@@ -395,10 +395,10 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
               <img src={tulipLogo} alt="Tulip" className="w-10 h-10 rounded-full object-cover" />
               <div>
                 <h3 className="font-display font-bold text-xl">Pipeline Health Benchmark</h3>
-                <p className="text-sm text-muted-foreground font-body">~2 minute assessment</p>
+                <p className="text-sm text-white font-body">~2 minute assessment</p>
               </div>
             </div>
-            <button onClick={() => { onClose(); resetQuiz(); }} className="text-muted-foreground hover:text-foreground transition-colors">
+            <button onClick={() => { onClose(); resetQuiz(); }} className="text-white hover:text-foreground transition-colors">
               <X size={20} />
             </button>
           </div>
@@ -420,10 +420,10 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                 <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">
                   Pipeline Health <span className="text-gradient-gold">Benchmark</span>
                 </h2>
-                <p className="text-muted-foreground font-body text-lg mb-3">
+                <p className="text-white font-body text-lg mb-3">
                   Unlock your personalized pipeline health benchmark in under <strong className="text-foreground">2 minutes</strong>.
                 </p>
-                <p className="text-muted-foreground font-body text-base mb-8 max-w-md mx-auto">
+                <p className="text-white font-body text-base mb-8 max-w-md mx-auto">
                   With 22 targeted data points, we assess whether your VFX / animation / game production depends on
                   <span className="text-red-400"> irreplaceable talent</span> or
                   <span className="text-green-400"> robust, repeatable systems</span> – plus your true scalability potential.
@@ -431,26 +431,26 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
 
                 <div className="space-y-3 max-w-sm mx-auto text-left">
                   <div>
-                    <label className="text-sm text-muted-foreground font-body mb-1 block">First name</label>
+                    <label className="text-sm text-white font-body mb-1 block">First name</label>
                     <input type="text" value={user.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors" placeholder="First name" />
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground font-body mb-1 block">Last name</label>
+                    <label className="text-sm text-white font-body mb-1 block">Last name</label>
                     <input type="text" value={user.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors" placeholder="Last name" />
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground font-body mb-1 block">Email <span className="text-destructive">*</span></label>
+                    <label className="text-sm text-white font-body mb-1 block">Email <span className="text-destructive">*</span></label>
                     <input type="email" value={user.email} onChange={(e) => setUser({ ...user, email: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors" placeholder="you@studio.com" />
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground font-body mb-1 block">Industry <span className="text-destructive">*</span></label>
+                    <label className="text-sm text-white font-body mb-1 block">Industry <span className="text-destructive">*</span></label>
                     <select value={user.industry} onChange={(e) => setUser({ ...user, industry: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors">
                       <option value="">Select your industry</option>
                       {industries.map((ind) => <option key={ind} value={ind}>{ind}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground font-body mb-1 block">Studio Scale <span className="text-destructive">*</span></label>
+                    <label className="text-sm text-white font-body mb-1 block">Studio Scale <span className="text-destructive">*</span></label>
                     <select value={user.studioScale} onChange={(e) => setUser({ ...user, studioScale: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors">
                       <option value="">Select studio size</option>
                       {studioScales.map((s) => <option key={s} value={s}>{s}</option>)}
@@ -472,8 +472,8 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
             {step === "quiz" && (
               <motion.div key={`page-${quizPage}`} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}>
                 <div className="mb-2 flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground font-body">Page {quizPage + 1} of {totalPages}</span>
-                  <span className="text-sm text-muted-foreground font-body">{pageQuestions.length} questions</span>
+                  <span className="text-sm text-white font-body">Page {quizPage + 1} of {totalPages}</span>
+                  <span className="text-sm text-white font-body">{pageQuestions.length} questions</span>
                 </div>
 
                 <h3 className="font-display text-xl font-bold mb-1" style={{ color: catColors[quizPage] }}>
@@ -485,7 +485,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                   {pageQuestions.map((q, idx) => (
                     <div key={q.id} className="space-y-3">
                       <div className="flex items-start gap-2">
-                        <span className="text-sm text-muted-foreground font-body mt-0.5 min-w-[24px]">Q{idx + 1}</span>
+                        <span className="text-sm text-white font-body mt-0.5 min-w-[24px]">Q{idx + 1}</span>
                         <p className="font-body text-base leading-relaxed">{q.description}</p>
                       </div>
                       <div className="px-2">
@@ -498,9 +498,9 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                           className="w-full"
                         />
                         <div className="flex justify-between mt-1">
-                          <span className="text-xs text-muted-foreground font-body">Strongly Disagree</span>
+                          <span className="text-xs text-white font-body">Strongly Disagree</span>
                           <span className="text-sm font-body font-medium text-primary">{sliderLabels[answers[q.id]]}</span>
-                          <span className="text-xs text-muted-foreground font-body">Strongly Agree</span>
+                          <span className="text-xs text-white font-body">Strongly Agree</span>
                         </div>
                       </div>
                     </div>
@@ -510,7 +510,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                 <div className="flex justify-between mt-8">
                   <button
                     onClick={() => quizPage > 0 ? setQuizPage(quizPage - 1) : setStep("intake")}
-                    className="text-base text-muted-foreground hover:text-foreground transition-colors font-body flex items-center gap-1"
+                    className="text-base text-white hover:text-foreground transition-colors font-body flex items-center gap-1"
                   >
                     <ArrowLeft size={14} /> Back
                   </button>
@@ -528,7 +528,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
             {step === "tools" && (
               <motion.div key="tools" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }} transition={{ duration: 0.25 }}>
                 <h3 className="font-display text-xl font-bold mb-1">Which tools will we test?</h3>
-                <p className="text-sm text-muted-foreground font-body mb-6">Select tools across both categories to personalise your results.</p>
+                <p className="text-sm text-white font-body mb-6">Select tools across both categories to personalise your results.</p>
 
                 {/* Section 1: Already in pipeline */}
                 <div className="mb-8">
@@ -548,11 +548,11 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                           className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-body font-medium transition-all ${
                             selected
                               ? "border-green-400/60 bg-green-400/10 text-green-300"
-                              : "border-border/50 bg-secondary/40 text-muted-foreground hover:border-green-400/30 hover:text-foreground"
+                              : "border-border/50 bg-secondary/40 text-white hover:border-green-400/30 hover:text-foreground"
                           }`}
                         >
                           <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold shrink-0 ${
-                            selected ? "bg-green-400/20 text-green-300" : "bg-muted text-muted-foreground"
+                            selected ? "bg-green-400/20 text-green-300" : "bg-muted text-white"
                           }`}>
                             {tool.abbr.slice(0, 2)}
                           </span>
@@ -588,7 +588,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                                 className={`px-2.5 py-1 rounded-full border text-[11px] font-body transition-all ${
                                   selected
                                     ? "border-primary/60 text-foreground"
-                                    : "border-border/40 text-muted-foreground hover:border-primary/30 hover:text-foreground"
+                                    : "border-border/40 text-white hover:border-primary/30 hover:text-foreground"
                                 }`}
                                 style={selected ? { backgroundColor: `${cat.color}18`, borderColor: `${cat.color}60`, color: cat.color } : {}}
                               >
@@ -606,7 +606,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                 <div className="flex justify-between mt-8">
                   <button
                     onClick={() => { setQuizPage(totalPages - 1); setStep("quiz"); }}
-                    className="text-base text-muted-foreground hover:text-foreground transition-colors font-body flex items-center gap-1"
+                    className="text-base text-white hover:text-foreground transition-colors font-body flex items-center gap-1"
                   >
                     <ArrowLeft size={14} /> Back
                   </button>
@@ -625,7 +625,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
               <motion.div key="results" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                 <div className="text-center mb-6">
                   <h2 className="font-display text-3xl font-bold mb-2">Your Pipeline Report</h2>
-                  <p className="text-muted-foreground font-body text-base">Based on your {questions.length} responses</p>
+                  <p className="text-white font-body text-base">Based on your {questions.length} responses</p>
                 </div>
 
                 {/* Donut + Legend */}
@@ -648,7 +648,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                         <div className="flex-1">
                           <div className="flex justify-between items-center">
                             <span className="text-sm font-body">{cat.label}</span>
-                            <span className="text-sm font-body font-medium text-muted-foreground">{Math.round(cat.pct)}%</span>
+                            <span className="text-sm font-body font-medium text-white">{Math.round(cat.pct)}%</span>
                           </div>
                           <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden mt-0.5">
                             <motion.div
@@ -668,11 +668,11 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                 {/* Tool summary */}
                 {(pipelineTools.length > 0 || wishlistTools.length > 0) && (
                   <div className="rounded-2xl border border-border/40 bg-secondary/20 p-4 mb-6">
-                    <p className="text-xs font-display font-semibold uppercase tracking-[0.1em] text-muted-foreground mb-3">Tool Profile</p>
+                    <p className="text-xs font-display font-semibold uppercase tracking-[0.1em] text-white mb-3">Tool Profile</p>
                     {pipelineTools.length > 0 && (
                       <div className="mb-2">
                         <span className="text-[10px] font-body text-green-400 uppercase tracking-wider mr-2">In Pipeline:</span>
-                        <span className="text-xs font-body text-foreground/80">
+                        <span className="text-xs font-body text-white/80">
                           {pipelineTools.map(id => currentPipelineTools.find(t => t.id === id)?.label).filter(Boolean).join(" · ")}
                         </span>
                       </div>
@@ -680,7 +680,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                     {wishlistTools.length > 0 && (
                       <div>
                         <span className="text-[10px] font-body text-primary uppercase tracking-wider mr-2">Wishlist:</span>
-                        <span className="text-xs font-body text-foreground/80">
+                        <span className="text-xs font-body text-white/80">
                           {wishlistTools.map(id => wishlistCategories.flatMap(c => c.tools).find(t => t.id === id)?.label).filter(Boolean).join(" · ")}
                         </span>
                       </div>
@@ -702,9 +702,9 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                     }`}>
                       {recommendation.level} Package Recommended
                     </span>
-                    <span className="text-sm font-body text-muted-foreground">{recommendation.budgetRange}</span>
+                    <span className="text-sm font-body text-white">{recommendation.budgetRange}</span>
                   </div>
-                  <p className="text-base font-body text-muted-foreground mb-3">{recommendation.notes}</p>
+                  <p className="text-base font-body text-white mb-3">{recommendation.notes}</p>
                   <div className="flex flex-wrap gap-2">
                     {recommendation.services.map((svc) => (
                       <span key={svc} className="text-sm font-body bg-secondary px-3 py-1 rounded-full">{svc}</span>
@@ -715,7 +715,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                 {/* Email submit */}
                 {!emailSubmitted ? (
                   <div className="rounded-2xl border border-border bg-secondary/30 p-5 mb-6">
-                    <p className="text-base font-body text-muted-foreground mb-3">
+                    <p className="text-base font-body text-white mb-3">
                       Get a detailed report emailed to <strong className="text-foreground">{user.email || "you"}</strong>
                     </p>
                     {!user.email && (
@@ -743,7 +743,7 @@ const PipelineAssessmentQuiz = ({ open, onClose, onComplete }: PipelineAssessmen
                   </div>
                 )}
 
-                <p className="text-sm text-muted-foreground font-body text-center mb-4">
+                <p className="text-sm text-white font-body text-center mb-4">
                   ✓ Recommendations have been automatically added to the cost estimator below.
                 </p>
                 <div className="flex justify-center">

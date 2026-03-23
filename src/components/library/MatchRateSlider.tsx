@@ -8,7 +8,7 @@ interface MatchRateSliderProps {
 const MatchRateSlider = ({ range, onChange }: MatchRateSliderProps) => {
   return (
     <div className="flex items-center gap-4 px-1">
-      <span className="text-xs font-body text-muted-foreground whitespace-nowrap">Match Rate</span>
+      <span className="text-xs font-body text-white whitespace-nowrap">Match Rate</span>
       <div className="flex-1 relative">
         <Slider
           min={0}

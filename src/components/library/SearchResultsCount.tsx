@@ -14,9 +14,9 @@ const SearchResultsCount = ({ totalResults, searchQuery, sources }: SearchResult
       <div className="flex items-center gap-2">
         <Hash className="w-5 h-5 text-primary" />
         <span className="text-base font-body text-foreground font-semibold">{totalResults}</span>
-        <span className="text-sm font-body text-muted-foreground">results</span>
+        <span className="text-sm font-body text-white">results</span>
         {searchQuery && (
-          <span className="text-sm font-body text-muted-foreground">
+          <span className="text-sm font-body text-white">
             for "<span className="text-accent">{searchQuery}</span>"
           </span>
         )}
@@ -29,7 +29,7 @@ const SearchResultsCount = ({ totalResults, searchQuery, sources }: SearchResult
             ) : (
               <Globe className="w-3 h-3 text-accent" />
             )}
-            <span className="text-sm font-body text-muted-foreground">{src.name}</span>
+            <span className="text-sm font-body text-white">{src.name}</span>
             <span className="text-sm font-body text-foreground font-semibold">{src.count}</span>
           </div>
         ))}

@@ -65,7 +65,7 @@ const WhyTulipSection = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed text-foreground/90 font-body"
+          className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed text-white/90 font-body"
         >
           We're focused on{" "}
           <span
@@ -84,7 +84,7 @@ const WhyTulipSection = () => {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="mt-16"
         >
-          <p className="text-[11px] text-muted-foreground font-body mb-6 tracking-[0.15em] uppercase font-medium">
+          <p className="text-[11px] text-white font-body mb-6 tracking-[0.15em] uppercase font-medium">
             Works with the tools you already use
           </p>
           <div className="overflow-hidden relative">

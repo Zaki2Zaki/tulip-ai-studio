@@ -75,7 +75,7 @@ const QuoteRequestModal = ({ open, onClose, selectedServices, estimateRange, onB
           <h3 className="font-display font-bold text-xl">
             {submitted ? "Request Received" : "Request a Detailed Quote"}
           </h3>
-          <button onClick={reset} className="text-muted-foreground hover:text-foreground transition-colors">
+          <button onClick={reset} className="text-white hover:text-foreground transition-colors">
             <X size={20} />
           </button>
         </div>
@@ -85,32 +85,32 @@ const QuoteRequestModal = ({ open, onClose, selectedServices, estimateRange, onB
             {!submitted ? (
               <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                 <div className="mb-5 rounded-xl border border-border bg-secondary/30 p-4">
-                  <p className="text-sm text-muted-foreground font-body mb-2">Selected Services:</p>
+                  <p className="text-sm text-white font-body mb-2">Selected Services:</p>
                   <div className="flex flex-wrap gap-2">
                     {selectedServices.map((s) => (
                       <span key={s} className="text-sm font-body bg-primary/10 border border-primary/20 px-3 py-1 rounded-full">{s}</span>
                     ))}
                   </div>
                   {estimateRange && (
-                    <p className="text-sm text-muted-foreground font-body mt-2">Estimate: <strong className="text-foreground">{estimateRange}</strong></p>
+                    <p className="text-sm text-white font-body mt-2">Estimate: <strong className="text-foreground">{estimateRange}</strong></p>
                   )}
                 </div>
 
                 <div className="space-y-3">
                   <div>
-                    <label className="text-sm text-muted-foreground font-body mb-1 block">Name <span className="text-destructive">*</span></label>
+                    <label className="text-sm text-white font-body mb-1 block">Name <span className="text-destructive">*</span></label>
                     <input type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors" placeholder="Your name" />
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground font-body mb-1 block">Email <span className="text-destructive">*</span></label>
+                    <label className="text-sm text-white font-body mb-1 block">Email <span className="text-destructive">*</span></label>
                     <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors" placeholder="you@company.com" />
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground font-body mb-1 block">Company</label>
+                    <label className="text-sm text-white font-body mb-1 block">Company</label>
                     <input type="text" value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors" placeholder="Company name" />
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground font-body mb-1 block">Industry</label>
+                    <label className="text-sm text-white font-body mb-1 block">Industry</label>
                     <select value={form.industry} onChange={(e) => setForm({ ...form, industry: e.target.value })} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors">
                       <option value="">Select industry</option>
                       <option value="Game Development">Game Development</option>
@@ -121,7 +121,7 @@ const QuoteRequestModal = ({ open, onClose, selectedServices, estimateRange, onB
                     </select>
                   </div>
                   <div>
-                    <label className="text-sm text-muted-foreground font-body mb-1 block">Message / Project Description</label>
+                    <label className="text-sm text-white font-body mb-1 block">Message / Project Description</label>
                     <textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} rows={3} className="w-full bg-secondary border border-border rounded-lg px-4 py-2.5 text-base font-body focus:outline-none focus:border-primary transition-colors resize-none" placeholder="Tell us about your project..." />
                   </div>
                 </div>
@@ -139,7 +139,7 @@ const QuoteRequestModal = ({ open, onClose, selectedServices, estimateRange, onB
               <motion.div key="success" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center py-8">
                 <CheckCircle2 className="w-12 h-12 text-green-400 mx-auto mb-4" />
                 <h3 className="font-display text-2xl font-bold mb-2">Request Received</h3>
-                <p className="text-muted-foreground font-body mb-6">
+                <p className="text-white font-body mb-6">
                   We've sent a summary of your request to your email. You can also schedule your consultation now.
                 </p>
                 <button

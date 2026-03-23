@@ -91,13 +91,13 @@ const LibraryGuide = () => {
                   <h2 className="font-display text-2xl font-bold text-foreground">
                     Getting Started
                   </h2>
-                  <p className="text-sm font-body text-muted-foreground mt-1">
+                  <p className="text-sm font-body text-white mt-1">
                     Your step-by-step guide to the Library R&D tool
                   </p>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="p-2 rounded-lg hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors"
+                  className="p-2 rounded-lg hover:bg-muted/30 text-white hover:text-foreground transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -129,7 +129,7 @@ const LibraryGuide = () => {
                         <step.icon className="w-4 h-4 text-primary" />
                         <h3 className="font-display text-base font-bold text-foreground">{step.title}</h3>
                       </div>
-                      <p className="text-sm font-body text-muted-foreground leading-relaxed">{step.description}</p>
+                      <p className="text-sm font-body text-white leading-relaxed">{step.description}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -137,7 +137,7 @@ const LibraryGuide = () => {
 
               {/* Footer */}
               <div className="sticky bottom-0 px-8 py-4 border-t border-border bg-card/95 backdrop-blur-md flex items-center justify-between">
-                <p className="text-xs font-body text-muted-foreground italic">
+                <p className="text-xs font-body text-white italic">
                   *This tool is customized to each client's research needs
                 </p>
                 <button

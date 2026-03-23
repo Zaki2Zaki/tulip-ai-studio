@@ -104,7 +104,7 @@ const Navbar = () => {
       {/* Top promo bar */}
       <div className="fixed top-0 left-0 right-0 z-[60] bg-card/80 backdrop-blur-xl border-b border-border/30">
         <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 px-4 py-1.5 text-center">
-          <span className="text-[11px] font-body text-muted-foreground">📄</span>
+          <span className="text-[11px] font-body text-white">📄</span>
           <a
             href="https://substack.com/@tuliptechrnd"
             target="_blank"
@@ -113,7 +113,7 @@ const Navbar = () => {
           >
             2026 Guide to GenAI for Game Content Developers, 3D Artists & Creative Techs
           </a>
-          <span className="text-[11px] font-body text-muted-foreground hidden sm:inline">→</span>
+          <span className="text-[11px] font-body text-white hidden sm:inline">→</span>
         </div>
       </div>
 
@@ -194,12 +194,12 @@ const Navbar = () => {
                     {/* Track labels */}
                     <div className="flex justify-between mb-4">
                       {["1×", "1.5×", "2×"].map((l) => (
-                        <span key={l} className="text-[9px] font-body text-muted-foreground/60">{l}</span>
+                        <span key={l} className="text-[9px] font-body text-white/60">{l}</span>
                       ))}
                     </div>
 
                     {/* Description */}
-                    <p className="text-[10px] font-body text-muted-foreground leading-relaxed mb-3">
+                    <p className="text-[10px] font-body text-white leading-relaxed mb-3">
                       Scales all text on the page. Your preference is saved automatically.
                     </p>
 
@@ -207,7 +207,7 @@ const Navbar = () => {
                     <button
                       onClick={() => updateScale(SCALE_DEFAULT)}
                       disabled={textScale === SCALE_DEFAULT}
-                      className="flex items-center justify-center gap-1.5 w-full text-[11px] font-body font-medium text-muted-foreground hover:text-foreground transition-colors py-1.5 rounded-lg hover:bg-secondary/40 disabled:opacity-30 disabled:cursor-not-allowed"
+                      className="flex items-center justify-center gap-1.5 w-full text-[11px] font-body font-medium text-white hover:text-foreground transition-colors py-1.5 rounded-lg hover:bg-secondary/40 disabled:opacity-30 disabled:cursor-not-allowed"
                     >
                       <RotateCcw className="w-3 h-3" />
                       Reset to default
@@ -227,7 +227,7 @@ const Navbar = () => {
             >
               <Link
                 to="/case-studies"
-                className="flex items-center gap-1 text-[13px] font-body font-medium text-foreground/80 hover:text-foreground transition-colors"
+                className="flex items-center gap-1 text-[13px] font-body font-medium text-white/80 hover:text-foreground transition-colors"
               >
                 Case Studies
                 <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === "usecases" ? "rotate-180" : ""}`} />
@@ -236,7 +236,7 @@ const Navbar = () => {
 
             <Link
               to="/library"
-              className="text-[13px] font-body font-medium text-foreground/80 hover:text-foreground transition-colors"
+              className="text-[13px] font-body font-medium text-white/80 hover:text-foreground transition-colors"
             >
               R&D Library
             </Link>
@@ -246,7 +246,7 @@ const Navbar = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-[13px] font-body font-medium text-foreground/80 hover:text-foreground transition-colors"
+                  className="text-[13px] font-body font-medium text-white/80 hover:text-foreground transition-colors"
                 >
                   {link.label}
                 </a>
@@ -254,7 +254,7 @@ const Navbar = () => {
                 <Link
                   key={link.href}
                   to={`/${link.href}`}
-                  className="text-[13px] font-body font-medium text-foreground/80 hover:text-foreground transition-colors"
+                  className="text-[13px] font-body font-medium text-white/80 hover:text-foreground transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -272,14 +272,14 @@ const Navbar = () => {
             {user ? (
               <button
                 onClick={async () => { await supabase.auth.signOut(); navigate("/"); }}
-                className="flex items-center gap-1.5 text-[12px] font-body text-muted-foreground hover:text-foreground transition-colors min-h-[44px] min-w-[44px] justify-center"
+                className="flex items-center gap-1.5 text-[12px] font-body text-white hover:text-foreground transition-colors min-h-[44px] min-w-[44px] justify-center"
               >
                 <LogOut className="w-3.5 h-3.5" />
               </button>
             ) : (
               <Link
                 to="/auth"
-                className="flex items-center gap-1.5 text-[12px] font-body text-muted-foreground hover:text-foreground transition-colors min-h-[44px] min-w-[44px] justify-center"
+                className="flex items-center gap-1.5 text-[12px] font-body text-white hover:text-foreground transition-colors min-h-[44px] min-w-[44px] justify-center"
               >
                 <LogIn className="w-3.5 h-3.5" />
               </Link>
@@ -308,7 +308,7 @@ const Navbar = () => {
               className="absolute left-0 right-0 top-full bg-card/95 backdrop-blur-2xl border-b border-border/30 shadow-xl"
             >
               <div className="max-w-5xl mx-auto py-8 px-6 lg:px-8">
-                <p className="text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-body mb-4 font-medium">Case Studies</p>
+                <p className="text-[11px] tracking-[0.15em] uppercase text-white font-body mb-4 font-medium">Case Studies</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 mb-8">
                   {[
                     { label: "Pre-Production", to: "/case-studies/pre-production", desc: "AI storyboard automation & previz" },
@@ -323,12 +323,12 @@ const Navbar = () => {
                       className="iridescent-hover group p-4 rounded-xl transition-colors min-h-[44px]"
                     >
                       <p className="text-sm font-body font-semibold text-foreground mb-0.5 group-hover:text-primary transition-colors">{item.label}</p>
-                      <p className="text-xs font-body text-muted-foreground leading-snug">{item.desc}</p>
+                      <p className="text-xs font-body text-white leading-snug">{item.desc}</p>
                     </Link>
                   ))}
                 </div>
 
-                <p className="text-[11px] tracking-[0.15em] uppercase text-muted-foreground font-body mb-4 font-medium">Use Cases</p>
+                <p className="text-[11px] tracking-[0.15em] uppercase text-white font-body mb-4 font-medium">Use Cases</p>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
                   {useCases.map((uc) => {
                     const Icon = uc.icon;
@@ -344,7 +344,7 @@ const Navbar = () => {
                         </div>
                         <div>
                           <p className="text-sm font-body font-semibold text-foreground mb-0.5">{uc.shortTitle}</p>
-                          <p className="text-xs font-body text-muted-foreground leading-snug">{uc.tagline}</p>
+                          <p className="text-xs font-body text-white leading-snug">{uc.tagline}</p>
                         </div>
                       </Link>
                     );
@@ -382,18 +382,18 @@ const Navbar = () => {
                       className="overflow-hidden"
                     >
                       <div className="flex flex-col gap-0.5 pl-4 pb-2">
-                        <Link to="/case-studies" onClick={() => setMobileOpen(false)} className="text-muted-foreground font-body text-sm py-3 hover:text-primary transition-colors font-semibold min-h-[44px] flex items-center">All Case Studies</Link>
+                        <Link to="/case-studies" onClick={() => setMobileOpen(false)} className="text-white font-body text-sm py-3 hover:text-primary transition-colors font-semibold min-h-[44px] flex items-center">All Case Studies</Link>
                         {[
                           { label: "Pre-Production", to: "/case-studies/pre-production" },
                           { label: "Production", to: "/case-studies/production" },
                           { label: "Post-Production", to: "/case-studies/post-production" },
                           { label: "Steam Game Delays", to: "/case-studies/steam-delays" },
                         ].map((item) => (
-                          <Link key={item.to} to={item.to} onClick={() => setMobileOpen(false)} className="text-muted-foreground font-body text-sm py-3 hover:text-primary transition-colors min-h-[44px] flex items-center">{item.label}</Link>
+                          <Link key={item.to} to={item.to} onClick={() => setMobileOpen(false)} className="text-white font-body text-sm py-3 hover:text-primary transition-colors min-h-[44px] flex items-center">{item.label}</Link>
                         ))}
-                        <p className="text-[10px] tracking-[0.15em] uppercase text-muted-foreground/60 font-body mt-2 mb-1">Use Cases</p>
+                        <p className="text-[10px] tracking-[0.15em] uppercase text-white/60 font-body mt-2 mb-1">Use Cases</p>
                         {useCases.map((uc) => (
-                          <Link key={uc.slug} to={`/use-cases/${uc.slug}`} onClick={() => setMobileOpen(false)} className="text-muted-foreground font-body text-sm py-3 hover:text-primary transition-colors min-h-[44px] flex items-center">{uc.shortTitle}</Link>
+                          <Link key={uc.slug} to={`/use-cases/${uc.slug}`} onClick={() => setMobileOpen(false)} className="text-white font-body text-sm py-3 hover:text-primary transition-colors min-h-[44px] flex items-center">{uc.shortTitle}</Link>
                         ))}
                       </div>
                     </motion.div>
@@ -428,7 +428,7 @@ const Navbar = () => {
                       <span style={{ fontSize: 9, lineHeight: 1, fontWeight: 600 }}>a</span>
                       <span style={{ fontSize: 12, lineHeight: 1, fontWeight: 600 }}>A</span>
                       <span style={{ fontSize: 16, lineHeight: 1, fontWeight: 700 }}>A</span>
-                      <span className="text-[11px] font-body text-muted-foreground ml-2">Text Size</span>
+                      <span className="text-[11px] font-body text-white ml-2">Text Size</span>
                     </div>
                     <span className="text-sm font-display font-bold text-primary">{textScale.toFixed(2)}×</span>
                   </div>
@@ -446,7 +446,7 @@ const Navbar = () => {
                   />
                   <div className="flex justify-between mt-1.5">
                     {["1×", "1.5×", "2×"].map((l) => (
-                      <span key={l} className="text-[9px] font-body text-muted-foreground/60">{l}</span>
+                      <span key={l} className="text-[9px] font-body text-white/60">{l}</span>
                     ))}
                   </div>
                 </div>
@@ -454,7 +454,7 @@ const Navbar = () => {
                 {user ? (
                   <button
                     onClick={async () => { await supabase.auth.signOut(); setMobileOpen(false); navigate("/"); }}
-                    className="flex items-center justify-center gap-2 text-muted-foreground font-body text-sm py-3 hover:text-primary transition-colors min-h-[44px]"
+                    className="flex items-center justify-center gap-2 text-white font-body text-sm py-3 hover:text-primary transition-colors min-h-[44px]"
                   >
                     <LogOut className="w-4 h-4" /> Sign Out
                   </button>
@@ -462,7 +462,7 @@ const Navbar = () => {
                   <Link
                     to="/auth"
                     onClick={() => setMobileOpen(false)}
-                    className="flex items-center justify-center gap-2 text-muted-foreground font-body text-sm py-3 hover:text-primary transition-colors min-h-[44px]"
+                    className="flex items-center justify-center gap-2 text-white font-body text-sm py-3 hover:text-primary transition-colors min-h-[44px]"
                   >
                     <LogIn className="w-4 h-4" /> Sign In
                   </Link>

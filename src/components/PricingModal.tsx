@@ -157,7 +157,7 @@ const PricingModal = ({ open, onClose, defaultPeriod = "monthly" }: PricingModal
                   <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
                     Unlock <span className="text-gradient-lavender">Full Access</span>
                   </h2>
-                  <p className="text-sm text-muted-foreground font-body mt-1">
+                  <p className="text-sm text-white font-body mt-1">
                     Choose the plan that fits your research needs
                   </p>
                 </div>
@@ -168,7 +168,7 @@ const PricingModal = ({ open, onClose, defaultPeriod = "monthly" }: PricingModal
                       className={`px-4 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
                         period === "monthly"
                           ? "bg-primary text-primary-foreground"
-                          : "text-muted-foreground hover:text-foreground"
+                          : "text-white hover:text-foreground"
                       }`}
                     >
                       Monthly
@@ -178,13 +178,13 @@ const PricingModal = ({ open, onClose, defaultPeriod = "monthly" }: PricingModal
                       className={`px-4 py-1.5 rounded-full text-xs font-body font-semibold transition-all ${
                         period === "annual"
                           ? "bg-primary text-primary-foreground"
-                          : "text-muted-foreground hover:text-foreground"
+                          : "text-white hover:text-foreground"
                       }`}
                     >
                       Annual
                     </button>
                   </div>
-                  <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
+                  <button onClick={onClose} className="text-white hover:text-foreground transition-colors">
                     <X className="w-6 h-6" />
                   </button>
                 </div>
@@ -212,9 +212,9 @@ const PricingModal = ({ open, onClose, defaultPeriod = "monthly" }: PricingModal
                       <h3 className="font-display text-lg font-semibold text-foreground">{plan.name}</h3>
                       <div className="flex items-baseline gap-1 mt-2 mb-1">
                         <span className="font-display text-3xl font-bold text-gradient-lavender">{plan.price}</span>
-                        <span className="text-sm text-muted-foreground font-body">{plan.period}</span>
+                        <span className="text-sm text-white font-body">{plan.period}</span>
                       </div>
-                      <p className="text-xs text-muted-foreground font-body mb-5">{plan.note}</p>
+                      <p className="text-xs text-white font-body mb-5">{plan.note}</p>
                       <ul className="space-y-2 mb-6">
                         {plan.features.map((f) => (
                           <li key={f} className="flex items-center gap-2 text-sm font-body text-foreground">
@@ -249,7 +249,7 @@ const PricingModal = ({ open, onClose, defaultPeriod = "monthly" }: PricingModal
                   <CreditCard className="w-5 h-5 text-primary" />
                   <h3 className="font-display text-base font-semibold text-foreground">Pay-Per-Use</h3>
                 </div>
-                <p className="text-sm text-muted-foreground font-body mb-3">
+                <p className="text-sm text-white font-body mb-3">
                   Not ready for a subscription? Use our flexible pay-as-you-go option.
                 </p>
                 <div className="flex flex-wrap gap-3">

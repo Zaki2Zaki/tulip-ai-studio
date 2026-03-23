@@ -112,7 +112,7 @@ const HeroSection = () => {
             <div className="flex flex-wrap items-center gap-1.5 md:gap-2">
               {pipelineSteps.map((step, i) => (
                 <span key={step} className="flex items-center gap-1.5 md:gap-2">
-                  <span className="px-2.5 py-1 rounded-full border border-border/40 bg-secondary/40 text-[10px] md:text-xs font-display font-semibold text-foreground/80 whitespace-nowrap">
+                  <span className="px-2.5 py-1 rounded-full border border-border/40 bg-secondary/40 text-[10px] md:text-xs font-display font-semibold text-white/80 whitespace-nowrap">
                     {step}
                   </span>
                   {i < pipelineSteps.length - 1 && (

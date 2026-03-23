@@ -215,7 +215,7 @@ const ArticlePreview = ({
             <CheckCircle className="w-3.5 h-3.5" />
             <span className="text-xs font-body font-semibold">Yes</span>
           </div>
-          {content.length > 4 && <p className="text-xs font-body text-muted-foreground leading-relaxed">{content.slice(4).trim()}</p>}
+          {content.length > 4 && <p className="text-xs font-body text-white leading-relaxed">{content.slice(4).trim()}</p>}
         </div>
       );
     }
@@ -226,7 +226,7 @@ const ArticlePreview = ({
             <XCircle className="w-3.5 h-3.5" />
             <span className="text-xs font-body font-semibold">No</span>
           </div>
-          {content.length > 3 && <p className="text-xs font-body text-muted-foreground leading-relaxed">{content.slice(3).trim()}</p>}
+          {content.length > 3 && <p className="text-xs font-body text-white leading-relaxed">{content.slice(3).trim()}</p>}
         </div>
       );
     }
@@ -237,7 +237,7 @@ const ArticlePreview = ({
             <AlertTriangle className="w-3.5 h-3.5" />
             <span className="text-xs font-body font-semibold">Partial</span>
           </div>
-          <p className="text-xs font-body text-muted-foreground leading-relaxed">{content.slice(7).trim()}</p>
+          <p className="text-xs font-body text-white leading-relaxed">{content.slice(7).trim()}</p>
         </div>
       );
     }
@@ -272,12 +272,12 @@ const ArticlePreview = ({
           <FileText className="w-4 h-4 text-primary" />
           <h3 className="text-base font-display font-semibold text-foreground">Deep Dive</h3>
           {allPapers.length > 1 && (
-            <span className="text-xs font-body text-muted-foreground">
+            <span className="text-xs font-body text-white">
               {currentIndex + 1} / {allPapers.length}
             </span>
           )}
         </div>
-        <button onClick={onClose} className="p-1.5 rounded-md hover:bg-muted/30 text-muted-foreground hover:text-foreground transition-colors">
+        <button onClick={onClose} className="p-1.5 rounded-md hover:bg-muted/30 text-white hover:text-foreground transition-colors">
           <X className="w-4 h-4" />
         </button>
       </div>
@@ -307,7 +307,7 @@ const ArticlePreview = ({
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg border text-xs font-body font-semibold transition-all ${
                   vote === "up"
                     ? "bg-green-500/10 border-green-500/30 text-green-400"
-                    : "border-border text-muted-foreground hover:text-foreground hover:border-green-500/20"
+                    : "border-border text-white hover:text-foreground hover:border-green-500/20"
                 }`}
               >
                 <ThumbsUp className="w-3.5 h-3.5" />
@@ -318,7 +318,7 @@ const ArticlePreview = ({
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-lg border text-xs font-body font-semibold transition-all ${
                   vote === "down"
                     ? "bg-destructive/10 border-destructive/30 text-destructive"
-                    : "border-border text-muted-foreground hover:text-foreground hover:border-destructive/20"
+                    : "border-border text-white hover:text-foreground hover:border-destructive/20"
                 }`}
               >
                 <ThumbsDown className="w-3.5 h-3.5" />
@@ -326,7 +326,7 @@ const ArticlePreview = ({
               </button>
               <button
                 onClick={() => onTrash(paper.paperId)}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-body text-muted-foreground hover:text-destructive hover:border-destructive/20 transition-all"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-xs font-body text-white hover:text-destructive hover:border-destructive/20 transition-all"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -379,7 +379,7 @@ const ArticlePreview = ({
                     href={paper.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1 px-3 py-2 rounded-lg border border-border text-xs font-body text-muted-foreground hover:text-foreground transition-colors"
+                    className="flex items-center gap-1 px-3 py-2 rounded-lg border border-border text-xs font-body text-white hover:text-foreground transition-colors"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
                     Source
@@ -465,7 +465,7 @@ const ArticlePreview = ({
                   <div className="w-full h-[300px] flex flex-col items-center justify-center gap-3 bg-muted/10 p-8">
                     <FileText className="w-10 h-10 text-foreground/30" />
                     <p className="text-sm text-foreground font-body">PDF preview couldn't load</p>
-                    <p className="text-xs text-foreground/80 font-body max-w-sm text-center">
+                    <p className="text-xs text-white/80 font-body max-w-sm text-center">
                       The document may be behind a paywall or the viewer timed out.
                     </p>
                     <div className="flex items-center gap-3 mt-2">
@@ -517,7 +517,7 @@ const ArticlePreview = ({
                 />
                 {pdfStatus === "loaded" && (
                   <div className="flex items-center justify-between px-3 py-2 bg-muted/20 border-t border-border">
-                    <span className="text-[10px] text-foreground/70 font-body">Powered by Google Docs Viewer</span>
+                    <span className="text-[10px] text-white/70 font-body">Powered by Google Docs Viewer</span>
                     <a
                       href={pdfUrl!}
                       target="_blank"
@@ -533,7 +533,7 @@ const ArticlePreview = ({
               <div className="rounded-lg border border-border bg-muted/10 p-8 text-center">
                 <FileText className="w-10 h-10 text-foreground/30 mx-auto mb-3" />
                 <p className="text-sm text-foreground font-body">No PDF preview available</p>
-                <p className="text-xs text-foreground/80 font-body mt-2 max-w-sm mx-auto">
+                <p className="text-xs text-white/80 font-body mt-2 max-w-sm mx-auto">
                   This paper may not have a publicly accessible PDF. Use the links below to access it.
                 </p>
                 {paper.url && (
@@ -578,7 +578,7 @@ const ArticlePreview = ({
                 <ReactMarkdown>{executiveSummary}</ReactMarkdown>
               </div>
             ) : !summaryLoading && paper.abstract ? (
-              <p className="text-xs font-body text-foreground/80 italic">Click "Generate with AI" for a structured summary of key findings.</p>
+              <p className="text-xs font-body text-white/80 italic">Click "Generate with AI" for a structured summary of key findings.</p>
             ) : null}
           </div>
           {/* Related Papers */}
@@ -689,7 +689,7 @@ const ArticlePreview = ({
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSendChat()}
                 placeholder="What would you like to know?"
-                className="flex-1 bg-muted/20 border border-border rounded-lg px-3 py-2.5 text-xs text-foreground font-body placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-accent/30 transition-all"
+                className="flex-1 bg-muted/20 border border-border rounded-lg px-3 py-2.5 text-xs text-foreground font-body placeholder:text-white focus:outline-none focus:ring-1 focus:ring-accent/30 transition-all"
                 disabled={chatLoading}
               />
               <button

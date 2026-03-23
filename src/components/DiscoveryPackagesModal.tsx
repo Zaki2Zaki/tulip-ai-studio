@@ -74,7 +74,7 @@ const DiscoveryPackagesModal = ({ open, onClose }: DiscoveryPackagesModalProps) 
           <DialogTitle className="font-display text-2xl text-gradient-gold">
             GenAI Workflow Discovery Packages
           </DialogTitle>
-          <DialogDescription className="text-muted-foreground font-body">
+          <DialogDescription className="text-white font-body">
             Compare our discovery packages to find the right fit for your studio.
           </DialogDescription>
         </DialogHeader>

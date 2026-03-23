@@ -282,7 +282,7 @@ const LibraryTour = ({ triggerOpen, onOpenChange }: LibraryTourProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={endTour}
-            className="fixed top-6 right-6 z-[10000] flex items-center gap-2 px-4 py-2 rounded-full bg-card/80 backdrop-blur-md border border-border text-sm font-body text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all"
+            className="fixed top-6 right-6 z-[10000] flex items-center gap-2 px-4 py-2 rounded-full bg-card/80 backdrop-blur-md border border-border text-sm font-body text-white hover:text-foreground hover:border-primary/30 transition-all"
           >
             <X className="w-4 h-4" />
             Skip tour
@@ -308,7 +308,7 @@ const LibraryTour = ({ triggerOpen, onOpenChange }: LibraryTourProps) => {
                 }`}
               />
             ))}
-            <span className="ml-2 text-xs font-body text-muted-foreground">
+            <span className="ml-2 text-xs font-body text-white">
               {step + 1}/{TOUR_STEPS.length}
             </span>
           </motion.div>
@@ -334,7 +334,7 @@ const LibraryTour = ({ triggerOpen, onOpenChange }: LibraryTourProps) => {
                     <Icon className="w-4 h-4 text-[hsl(185,80%,55%)]" />
                     <span className="font-display font-bold text-sm text-foreground">{currentStep.title}</span>
                   </div>
-                  <p className="text-xs font-body text-muted-foreground leading-relaxed">{currentStep.tip}</p>
+                  <p className="text-xs font-body text-white leading-relaxed">{currentStep.tip}</p>
                 </div>
               </div>
               {/* Arrow pointing to element */}
@@ -362,7 +362,7 @@ const LibraryTour = ({ triggerOpen, onOpenChange }: LibraryTourProps) => {
                   <Sparkles className="w-12 h-12 text-[hsl(185,80%,55%)] mx-auto mb-4" />
                 </motion.div>
                 <h2 className="font-display text-2xl font-bold text-foreground mb-2">You're all set!</h2>
-                <p className="font-body text-muted-foreground mb-6">Dive into research — your library awaits.</p>
+                <p className="font-body text-white mb-6">Dive into research — your library awaits.</p>
                 <button
                   onClick={endTour}
                   className="inline-flex items-center gap-2 px-8 py-3 rounded-full hero-btn-explore hero-btn-bloom font-body font-semibold text-base transition-all"

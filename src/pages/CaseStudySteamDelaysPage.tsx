@@ -152,7 +152,7 @@ const CaseStudySteamDelaysPage = () => {
         <div className="max-w-5xl mx-auto">
           <Link
             to="/case-studies"
-            className="inline-flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-primary transition-colors mb-10">
+            className="inline-flex items-center gap-2 text-sm font-body text-white hover:text-primary transition-colors mb-10">
             
             <ArrowLeft className="w-4 h-4" /> Back to Case Studies
           </Link>
@@ -209,7 +209,7 @@ const CaseStudySteamDelaysPage = () => {
             <div key={item.label} className="rounded-xl bg-card border border-border/50 p-6 text-center">
                 <p className="font-display font-bold text-3xl text-gradient-gold mb-1">{item.stat}</p>
                 <p className="font-body font-semibold text-foreground text-sm mb-0.5">{item.label}</p>
-                <p className="font-body text-xs text-muted-foreground">{item.sub}</p>
+                <p className="font-body text-xs text-white">{item.sub}</p>
               </div>
             )}
           </div>
@@ -222,7 +222,7 @@ const CaseStudySteamDelaysPage = () => {
           <div className="flex items-center justify-between mb-8">
             <div>
               <div className="inline-block px-4 py-1.5 rounded-lg bg-muted/50 border border-border/50 mb-4">
-                <span className="text-xs font-body text-muted-foreground tracking-wide uppercase">Interactive Pipeline Visualization</span>
+                <span className="text-xs font-body text-white tracking-wide uppercase">Interactive Pipeline Visualization</span>
               </div>
               <h2 className="font-display font-bold text-2xl text-foreground">Research Architecture</h2>
             </div>
@@ -243,7 +243,7 @@ const CaseStudySteamDelaysPage = () => {
                 whileHover={{ scale: 1.02 }}>
                 
                   <p className="font-display font-semibold text-foreground text-sm mb-1">{block.label}</p>
-                  <p className="text-xs text-muted-foreground font-body">Hover for details</p>
+                  <p className="text-xs text-white font-body">Hover for details</p>
                 </motion.div>
 
                 <AnimatePresence>
@@ -256,14 +256,14 @@ const CaseStudySteamDelaysPage = () => {
                   className="absolute left-0 right-0 top-full mt-2 z-30 bg-card border border-border rounded-xl p-5 shadow-2xl backdrop-blur-xl">
                   
                       <p className="font-display font-bold text-foreground text-sm mb-2">{block.hoverTitle}</p>
-                      <p className="text-xs text-muted-foreground font-body leading-relaxed mb-3">{block.hoverDescription}</p>
+                      <p className="text-xs text-white font-body leading-relaxed mb-3">{block.hoverDescription}</p>
                       {block.hoverMetric &&
                   <div className="inline-block px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">
                           <span className="text-xs font-body font-semibold text-primary">{block.hoverMetric}</span>
                         </div>
                   }
                       <div className="flex items-center gap-3 pt-2 border-t border-border/50">
-                        <span className="text-[10px] font-body text-muted-foreground">
+                        <span className="text-[10px] font-body text-white">
                           Citation: {block.citation} (arXiv:2204.11191v1)
                         </span>
                         <a href={PDF_URL} target="_blank" rel="noopener noreferrer" className="text-[10px] font-body text-primary hover:underline flex items-center gap-1">
@@ -282,7 +282,7 @@ const CaseStudySteamDelaysPage = () => {
             <p className="text-sm font-display font-bold text-foreground mb-3">Key Capabilities</p>
             <div className="flex flex-wrap gap-2">
               {capabilities.map((cap) =>
-              <span key={cap} className="text-xs font-body px-3 py-1.5 rounded-full bg-muted/50 text-muted-foreground border border-border/30">{cap}</span>
+              <span key={cap} className="text-xs font-body px-3 py-1.5 rounded-full bg-muted/50 text-white border border-border/30">{cap}</span>
               )}
             </div>
           </div>
@@ -290,7 +290,7 @@ const CaseStudySteamDelaysPage = () => {
             <p className="text-sm font-display font-bold text-foreground mb-3">Building Blocks</p>
             <div className="flex flex-wrap gap-2">
               {buildingBlocks.map((bb) =>
-              <span key={bb} className="text-xs font-body px-3 py-1.5 rounded-full bg-muted/50 text-muted-foreground border border-border/30">{bb}</span>
+              <span key={bb} className="text-xs font-body px-3 py-1.5 rounded-full bg-muted/50 text-white border border-border/30">{bb}</span>
               )}
             </div>
           </div>
@@ -305,7 +305,7 @@ const CaseStudySteamDelaysPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
                 <h3 className="font-display font-semibold text-foreground text-lg mb-3"><h3 className="font-display font-semibold text-foreground text-lg mb-3">How Tulip Tech R&D Uses This Data</h3></h3>
-                <ul className="space-y-3 font-body text-sm text-muted-foreground">
+                <ul className="space-y-3 font-body text-sm text-white">
                   <li className="flex items-start gap-2"><span className="text-primary mt-0.5">→</span> Ingest your project milestones & compare against 23k Steam delay patterns</li>
                   <li className="flex items-start gap-2"><span className="text-primary mt-0.5">→</span> Predict delay risk by genre, team size, and early-access status</li>
                   <li className="flex items-start gap-2"><span className="text-primary mt-0.5">→</span> Recommend release window strategies backed by empirical data</li>
@@ -313,7 +313,7 @@ const CaseStudySteamDelaysPage = () => {
                 </ul>
               </div>
               <div className="rounded-xl bg-muted/30 border border-border/30 p-6">
-                <p className="text-xs font-body text-muted-foreground uppercase tracking-wider mb-3">Source Citation</p>
+                <p className="text-xs font-body text-white uppercase tracking-wider mb-3">Source Citation</p>
                 <p className="text-sm font-body text-foreground leading-relaxed mb-4">{CITATION}</p>
                 <DownloadButton size="lg" />
               </div>
@@ -355,8 +355,8 @@ const CaseStudySteamDelaysPage = () => {
 
                 <div className="p-5">
                   <h3 className="font-display font-bold text-foreground text-sm mb-2">{fig.title}</h3>
-                  <p className="text-xs font-body text-muted-foreground leading-relaxed mb-3">{fig.description}</p>
-                  <p className="text-[10px] font-body text-muted-foreground/70 mb-2">{fig.citation}</p>
+                  <p className="text-xs font-body text-white leading-relaxed mb-3">{fig.description}</p>
+                  <p className="text-[10px] font-body text-white/70 mb-2">{fig.citation}</p>
                   <a
                     href={PDF_URL}
                     target="_blank"
@@ -408,8 +408,8 @@ const CaseStudySteamDelaysPage = () => {
               {/* Caption */}
               <div className="p-6 border-t border-border/50">
                 <h3 className="font-display font-bold text-foreground text-base mb-2">{lightboxFig.title}</h3>
-                <p className="text-sm font-body text-muted-foreground leading-relaxed mb-2">{lightboxFig.description}</p>
-                <p className="text-xs font-body text-muted-foreground/70 mb-4">{lightboxFig.citation}</p>
+                <p className="text-sm font-body text-white leading-relaxed mb-2">{lightboxFig.description}</p>
+                <p className="text-xs font-body text-white/70 mb-4">{lightboxFig.citation}</p>
                 <a
                   href={PDF_URL}
                   target="_blank"
@@ -447,7 +447,7 @@ const CaseStudySteamDelaysPage = () => {
                 </div>
                 <div>
                   <p className="font-display font-semibold text-foreground text-sm mb-1">{item.insight}</p>
-                  <p className="text-xs font-body text-muted-foreground">{item.detail}</p>
+                  <p className="text-xs font-body text-white">{item.detail}</p>
                 </div>
               </motion.div>
             )}
@@ -459,7 +459,7 @@ const CaseStudySteamDelaysPage = () => {
       <section className="pb-16 section-padding">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="font-display font-bold text-2xl text-foreground mb-4">Ready to Ship On Time?</h2>
-          <p className="text-sm font-body text-muted-foreground mb-6 max-w-2xl mx-auto">
+          <p className="text-sm font-body text-white mb-6 max-w-2xl mx-auto">
             Let Tulip Tech R&D analyze your pipelines and predict delay risks before they happen with optimization assessments and custom dev tools
           </p>
           <button
@@ -474,10 +474,10 @@ const CaseStudySteamDelaysPage = () => {
       {/* Footer nav */}
       <div className="max-w-5xl mx-auto section-padding pb-12">
         <div className="flex items-center justify-between border-t border-border pt-8">
-          <Link to="/case-studies/production" className="inline-flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-primary transition-colors">
+          <Link to="/case-studies/production" className="inline-flex items-center gap-2 text-sm font-body text-white hover:text-primary transition-colors">
             <ArrowLeft className="w-4 h-4" /> Production
           </Link>
-          <Link to="/case-studies" className="inline-flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-primary transition-colors">
+          <Link to="/case-studies" className="inline-flex items-center gap-2 text-sm font-body text-white hover:text-primary transition-colors">
             All Case Studies <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -495,7 +495,7 @@ const CaseStudySteamDelaysPage = () => {
             <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
               <div className="flex items-center gap-3 min-w-0">
                 <CitationBadge small />
-                <span className="text-xs font-body text-muted-foreground truncate hidden sm:inline">
+                <span className="text-xs font-body text-white truncate hidden sm:inline">
                   An Empirical Study of Delayed Games on Steam
                 </span>
               </div>

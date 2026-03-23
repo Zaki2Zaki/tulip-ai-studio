@@ -258,7 +258,7 @@ const LibraryPage = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border bg-card/50 mb-4">
               <BookOpen className="w-4 h-4 text-primary" />
-              <span className="text-xs font-body tracking-widest uppercase text-muted-foreground">Research Library</span>
+              <span className="text-xs font-body tracking-widest uppercase text-white">Research Library</span>
             </div>
             <h1 className="font-display text-4xl md:text-6xl font-bold mb-4">
               <span className="text-gradient-lavender">Library</span>{" "}
@@ -337,16 +337,16 @@ const LibraryPage = () => {
                     <option key={cat.id} value={cat.id}>{cat.label}</option>
                     )}
                   </select>
-                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white pointer-events-none" />
                 </div>
                 <div className="flex-1 relative" data-tour="search">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white" />
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search research papers, 3D and VFX workflows, case studies, production tools, and executive management papers..."
-                    className="w-full h-full bg-transparent pl-11 pr-4 py-3 text-base text-foreground font-body placeholder:text-muted-foreground focus:outline-none" />
+                    className="w-full h-full bg-transparent pl-11 pr-4 py-3 text-base text-foreground font-body placeholder:text-white focus:outline-none" />
                   
                 </div>
                 <button
@@ -363,10 +363,10 @@ const LibraryPage = () => {
                   <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/20">
                       <Folder className="w-4 h-4 text-primary" />
                       <span className="text-sm font-body text-foreground font-semibold">{activeCollection.name}</span>
-                      <span className="text-xs font-body text-muted-foreground">{visiblePapers.length} paper(s)</span>
+                      <span className="text-xs font-body text-white">{visiblePapers.length} paper(s)</span>
                       <button
                       onClick={() => setActiveCollectionId(null)}
-                      className="ml-auto flex items-center gap-1 text-xs font-body text-muted-foreground hover:text-foreground transition-colors">
+                      className="ml-auto flex items-center gap-1 text-xs font-body text-white hover:text-foreground transition-colors">
                       
                         <ArrowLeft className="w-3 h-3" />
                         Back to results
@@ -387,7 +387,7 @@ const LibraryPage = () => {
               <div className="flex items-center gap-3 p-3 rounded-lg bg-primary/5 border border-primary/20">
                   <FolderPlus className="w-4 h-4 text-primary shrink-0" />
                   <span className="text-xs font-body text-foreground font-semibold">{selectedPapers.size}</span>
-                  <span className="text-xs font-body text-muted-foreground">paper(s) selected</span>
+                  <span className="text-xs font-body text-white">paper(s) selected</span>
 
                   {collections.length > 0 ?
                 <div className="ml-auto flex items-center gap-2">
@@ -425,10 +425,10 @@ const LibraryPage = () => {
                       </button>
                     </div> :
 
-                <span className="ml-auto text-[10px] font-body text-muted-foreground italic">Create a collection in the sidebar first</span>
+                <span className="ml-auto text-[10px] font-body text-white italic">Create a collection in the sidebar first</span>
                 }
 
-                  <button onClick={() => setSelectedPapers(new Set())} className="text-xs font-body text-muted-foreground hover:text-foreground transition-colors">
+                  <button onClick={() => setSelectedPapers(new Set())} className="text-xs font-body text-white hover:text-foreground transition-colors">
                     Clear
                   </button>
                 </div>

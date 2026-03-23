@@ -54,7 +54,7 @@ const CaseStudyProductionPage = () => {
           {/* Back link */}
           <Link
             to="/case-studies"
-            className="inline-flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-primary transition-colors mb-10"
+            className="inline-flex items-center gap-2 text-sm font-body text-white hover:text-primary transition-colors mb-10"
           >
             <ArrowLeft className="w-4 h-4" /> Back to Case Studies
           </Link>
@@ -73,12 +73,12 @@ const CaseStudyProductionPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-base text-muted-foreground font-body max-w-3xl mb-4"
+            className="text-base text-white font-body max-w-3xl mb-4"
           >
             How a team of ~25 artists used custom Unity tools and AI-assisted workflows to create a visually stunning zero-gravity salvage simulator.
           </motion.p>
 
-          <p className="text-xs text-muted-foreground/60 font-body mb-12">
+          <p className="text-xs text-white/60 font-body mb-12">
             Citation: Unity for Games Case Study "Hardspace: Shipbreaker" (2020)
           </p>
 
@@ -101,13 +101,13 @@ const CaseStudyProductionPage = () => {
         <div className="flex items-center justify-between border-t border-border pt-8">
           <Link
             to="/case-studies/pre-production"
-            className="inline-flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-primary transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-body text-white hover:text-primary transition-colors"
           >
             <ArrowLeft className="w-4 h-4" /> Pre-Production
           </Link>
           <Link
             to="/case-studies/post-production"
-            className="inline-flex items-center gap-2 text-sm font-body text-muted-foreground hover:text-primary transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-body text-white hover:text-primary transition-colors"
           >
             Post-Production <ArrowRight className="w-4 h-4" />
           </Link>

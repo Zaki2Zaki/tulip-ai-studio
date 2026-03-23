@@ -59,7 +59,7 @@ const CaseStudiesPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-lg text-muted-foreground font-body max-w-2xl mx-auto mb-16"
+            className="text-lg text-white font-body max-w-2xl mx-auto mb-16"
           >
             Detailed breakdowns of how we've helped game studios,
             VFX houses, and animation teams transform their pipelines with AI.
@@ -82,7 +82,7 @@ const CaseStudiesPage = () => {
                     <span className={`text-[10px] font-body font-semibold px-2.5 py-1 rounded-full ${
                       study.status === "Live"
                         ? "bg-[hsl(160_60%_30%/0.3)] text-[hsl(160_60%_70%)]"
-                        : "bg-muted/50 text-muted-foreground"
+                        : "bg-muted/50 text-white"
                     }`}>
                       {study.status}
                     </span>
@@ -90,7 +90,7 @@ const CaseStudiesPage = () => {
                   <h3 className="font-display font-bold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
                     {study.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground font-body mb-4">
+                  <p className="text-sm text-white font-body mb-4">
                     {study.description}
                   </p>
                   <span className="inline-flex items-center gap-1 text-xs font-body text-primary group-hover:gap-2 transition-all">

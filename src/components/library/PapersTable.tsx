@@ -69,7 +69,7 @@ const getAIFlag = (paper: Paper): { label: string; color: string; icon: React.Re
   const hasCitations = (paper.citationCount || 0) > 5;
   if (hasAbstract && hasCitations) return { label: "Verified", color: "text-green-400", icon: <CheckCircle className="w-3.5 h-3.5" /> };
   if (hasAbstract || hasCitations) return { label: "Partial", color: "text-yellow-400", icon: <AlertTriangle className="w-3.5 h-3.5" /> };
-  return { label: "Unverified", color: "text-muted-foreground", icon: <MinusCircle className="w-3.5 h-3.5" /> };
+  return { label: "Unverified", color: "text-white", icon: <MinusCircle className="w-3.5 h-3.5" /> };
 };
 
 const getAILabel = (title: string): string => {
@@ -172,7 +172,7 @@ const PapersTable = ({
 
   if (papers.length === 0) {
     return (
-      <div className="text-center py-20 text-muted-foreground font-body">
+      <div className="text-center py-20 text-white font-body">
         No papers found. Try adjusting your search or category.
       </div>
     );
@@ -203,7 +203,7 @@ const PapersTable = ({
             })}
           </div>
         </div>
-        <p className="text-xs text-muted-foreground font-body text-right">
+        <p className="text-xs text-white font-body text-right">
           Showing {processedPapers.length} of {papers.length} papers
         </p>
       </div>
@@ -233,18 +233,18 @@ const PapersTable = ({
                 } ${activePaperId === paper.paperId ? "bg-primary/8" : ""}`}
               >
                 <span className="font-display text-sm text-foreground line-clamp-1 flex-1">{paper.title}</span>
-                <span className="text-xs text-muted-foreground font-body shrink-0">{paper.year || "—"}</span>
+                <span className="text-xs text-white font-body shrink-0">{paper.year || "—"}</span>
                 <div className="flex items-center gap-1 shrink-0">
                   <div className="w-10 h-1.5 rounded-full bg-muted overflow-hidden">
                     <div className="h-full rounded-full" style={{ width: `${paper.matchRate}%`, background: `linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)))` }} />
                   </div>
-                  <span className="text-[11px] text-muted-foreground tabular-nums">{paper.matchRate}%</span>
+                  <span className="text-[11px] text-white tabular-nums">{paper.matchRate}%</span>
                 </div>
               </div>
             );
           })}
         </div>
-        <p className="text-xs text-muted-foreground font-body text-right">
+        <p className="text-xs text-white font-body text-right">
           Showing {processedPapers.length} of {papers.length} papers
         </p>
       </div>
@@ -271,22 +271,22 @@ const PapersTable = ({
                   />
                 </th>
                 <th className="w-8 px-1 py-3" />
-                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-[22%]">
+                <th className="px-3 py-3 text-left font-body font-semibold text-white text-sm uppercase tracking-wider w-[22%]">
                   Title
                 </th>
-                <th className="px-3 py-3 text-left font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-[36%]">
+                <th className="px-3 py-3 text-left font-body font-semibold text-white text-sm uppercase tracking-wider w-[36%]">
                   TLDR
                 </th>
-                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-20">
+                <th className="px-3 py-3 text-center font-body font-semibold text-white text-sm uppercase tracking-wider w-20">
                   AI Flag
                 </th>
-                <th className="px-3 py-3 text-center font-body font-semibold text-muted-foreground text-sm uppercase tracking-wider w-24">
+                <th className="px-3 py-3 text-center font-body font-semibold text-white text-sm uppercase tracking-wider w-24">
                   AI Label
                 </th>
                 <th className="px-3 py-3 text-center w-28">
                   <button
                     onClick={() => handleSort("year")}
-                    className="inline-flex items-center gap-1.5 font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider hover:text-foreground transition-colors"
+                    className="inline-flex items-center gap-1.5 font-body font-semibold text-white text-xs uppercase tracking-wider hover:text-foreground transition-colors"
                   >
                     Year
                     <SortIcon field="year" activeField={sortField} dir={sortDir} />
@@ -298,7 +298,7 @@ const PapersTable = ({
                 <th className="px-3 py-3 text-center w-28">
                   <button
                     onClick={() => handleSort("matchRate")}
-                    className="inline-flex items-center gap-1.5 font-body font-semibold text-muted-foreground text-xs uppercase tracking-wider hover:text-foreground transition-colors"
+                    className="inline-flex items-center gap-1.5 font-body font-semibold text-white text-xs uppercase tracking-wider hover:text-foreground transition-colors"
                   >
                     Match Rate
                     <SortIcon field="matchRate" activeField={sortField} dir={sortDir} />
@@ -344,7 +344,7 @@ const PapersTable = ({
                       <td className="px-3 py-3" onClick={(e) => e.stopPropagation()}>
                         {isLocked ? (
                           <button onClick={onUnlockClick}>
-                            <Lock className="w-4 h-4 text-muted-foreground" />
+                            <Lock className="w-4 h-4 text-white" />
                           </button>
                         ) : (
                           <input
@@ -357,7 +357,7 @@ const PapersTable = ({
                       </td>
                       <td className="px-1 py-3">
                         {!isLocked && (
-                          <GripVertical className="w-3.5 h-3.5 text-muted-foreground/40 cursor-grab active:cursor-grabbing" />
+                          <GripVertical className="w-3.5 h-3.5 text-white/40 cursor-grab active:cursor-grabbing" />
                         )}
                       </td>
                       <td className="px-3 py-3">
@@ -371,14 +371,14 @@ const PapersTable = ({
                               {paper.title}
                             </span>
                           )}
-                          <p className="text-sm text-muted-foreground mt-0.5">
+                          <p className="text-sm text-white mt-0.5">
                             {paper.authors?.slice(0, 2).map((a) => a.name).join(", ")}
                             {(paper.authors?.length || 0) > 2 && " et al."}
                           </p>
                         </div>
                       </td>
                       <td className="px-3 py-3">
-                        <p className="text-sm text-muted-foreground font-body leading-relaxed line-clamp-2">{tldr}</p>
+                        <p className="text-sm text-white font-body leading-relaxed line-clamp-2">{tldr}</p>
                       </td>
                       <td className="px-3 py-3 text-center">
                         <span className={`inline-flex items-center gap-1 text-sm font-body ${aiFlag.color}`}>
@@ -391,7 +391,7 @@ const PapersTable = ({
                           {aiLabel}
                         </span>
                       </td>
-                      <td className="px-3 py-3 text-center text-base font-body text-muted-foreground">
+                      <td className="px-3 py-3 text-center text-base font-body text-white">
                         {paper.year || "—"}
                       </td>
                       <td className="px-3 py-3 text-center">
@@ -405,7 +405,7 @@ const PapersTable = ({
                               }}
                             />
                           </div>
-                          <span className="text-base font-body text-muted-foreground tabular-nums">{paper.matchRate}%</span>
+                          <span className="text-base font-body text-white tabular-nums">{paper.matchRate}%</span>
                         </div>
                       </td>
                     </motion.tr>
@@ -417,7 +417,7 @@ const PapersTable = ({
         </div>
       </div>
 
-      <p className="text-sm text-muted-foreground font-body text-right">
+      <p className="text-sm text-white font-body text-right">
         Showing {processedPapers.length} of {papers.length} papers
       </p>
     </div>

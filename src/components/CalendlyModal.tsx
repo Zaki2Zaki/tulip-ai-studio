@@ -29,7 +29,7 @@ const CalendlyModal = ({ open, onClose }: CalendlyModalProps) => {
         >
           <div className="flex items-center justify-between p-4 border-b border-border">
             <h3 className="font-display font-bold text-lg">Book a 30-Minute Discovery Meeting</h3>
-            <button onClick={onClose} className="text-muted-foreground hover:text-foreground transition-colors">
+            <button onClick={onClose} className="text-white hover:text-foreground transition-colors">
               <X size={20} />
             </button>
           </div>

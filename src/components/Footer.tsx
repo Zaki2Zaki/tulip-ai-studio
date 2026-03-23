@@ -4,7 +4,7 @@ const Footer = () => (
       <div className="font-display text-sm font-bold tracking-tight">
         TULIP<span className="text-gradient-gold"> TECH</span> R&D
       </div>
-      <p className="text-[11px] text-muted-foreground font-body">
+      <p className="text-[11px] text-white font-body">
         © {new Date().getFullYear()} Tulip Technology B.V. All rights reserved.
       </p>
     </div>
