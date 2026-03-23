@@ -136,7 +136,7 @@ const PipelineSection = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 0.7 } : {}}
           transition={{ delay: 0.5 }}
-          className="text-center mb-4 text-sm font-body text-muted-foreground"
+          className="text-center mb-4 text-sm font-body text-white"
         >
           ← Drag to explore problems &amp; solutions →
         </motion.p>

@@ -17,10 +17,10 @@ const BeforeAfterSlider = ({
   beforeLabel = "Current Workflow",
   afterLabel = "GenAI Tools + Workflow",
   onPositionChange,
-  handleY = 90,
+  handleY = 40,
 }: BeforeAfterSliderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState(35);
+  const [position, setPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
 
   useEffect(() => {
