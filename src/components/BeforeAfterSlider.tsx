@@ -22,7 +22,7 @@ const SketchArrow = ({
   return (
     <motion.div
       className="pointer-events-none absolute z-10"
-      style={{ bottom: "4px", [isLeft ? "left" : "right"]: "28px" }}
+      style={{ bottom: "2px", [isLeft ? "left" : "right"]: "20px" }}
       animate={{ opacity: active ? 0.9 : 0.22 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
@@ -30,37 +30,25 @@ const SketchArrow = ({
         animate={active ? { x: isLeft ? [-4, 2, -4] : [4, -2, 4] } : { x: 0 }}
         transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }}
       >
-        {/* Mirror for right side */}
-        <svg width="58" height="100" viewBox="0 0 58 100" fill="none"
+        <svg width="65" height="120" viewBox="0 0 65 120" fill="none"
           style={{ transform: isLeft ? "none" : "scaleX(-1)" }}>
 
-          {/* ── Oval loop at top ── */}
-          <path
-            d="M 24 34 C 4 30, 2 6, 20 4 C 38 2, 46 22, 34 32 C 30 36, 25 35, 24 34"
-            stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"
-          />
-          {/* Loop sketch shadow */}
-          <path
-            d="M 25 33 C 5 29, 3 7, 21 5 C 39 3, 47 23, 35 33"
-            stroke="white" strokeWidth="0.7" strokeLinecap="round" fill="none" opacity="0.3"
-          />
+          {/* ── Circular loop at top ── */}
+          <circle cx="36" cy="26" r="20"
+            stroke="white" strokeWidth="2.5" fill="none" />
+          {/* Sketch double-stroke for hand-drawn feel */}
+          <circle cx="36" cy="26" r="21"
+            stroke="white" strokeWidth="0.8" fill="none" opacity="0.25" />
 
-          {/* ── Curved shaft ── */}
-          <path
-            d="M 24 34 C 19 50, 14 66, 17 83"
-            stroke="white" strokeWidth="2" strokeLinecap="round" fill="none"
-          />
-          {/* Shaft shadow */}
-          <path
-            d="M 25 35 C 20 51, 15 67, 18 84"
-            stroke="white" strokeWidth="0.7" strokeLinecap="round" fill="none" opacity="0.3"
-          />
+          {/* ── Curved shaft from bottom of loop ── */}
+          <path d="M 22 44 C 16 62, 12 80, 16 104"
+            stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+          <path d="M 23 45 C 17 63, 13 81, 17 105"
+            stroke="white" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.25" />
 
           {/* ── Arrowhead ── */}
-          <path d="M 17 83 L 6 72"  stroke="white" strokeWidth="2" strokeLinecap="round" fill="none" />
-          <path d="M 17 83 L 19 95" stroke="white" strokeWidth="2" strokeLinecap="round" fill="none" />
-          {/* Arrowhead sketch wobble */}
-          <path d="M 18 82 L 7 71"  stroke="white" strokeWidth="0.7" strokeLinecap="round" fill="none" opacity="0.3" />
+          <path d="M 16 104 L 4  92" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+          <path d="M 16 104 L 18 116" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none" />
         </svg>
       </motion.div>
     </motion.div>
