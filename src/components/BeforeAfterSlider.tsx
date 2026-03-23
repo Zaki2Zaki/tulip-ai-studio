@@ -1,5 +1,5 @@
 import { useRef, useState, useCallback, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface BeforeAfterSliderProps {
   beforeImage: string;
@@ -7,117 +7,72 @@ interface BeforeAfterSliderProps {
   beforeLabel?: string;
   afterLabel?: string;
   onPositionChange?: (position: number) => void;
-  /** 0–100: vertical position of the handle, driven by page scroll */
   handleY?: number;
 }
 
-/* ── Sketch directional arrow — appears on drag direction ── */
-const SketchDragArrow = ({
-  direction,
-  visible,
+/* ── Sketch arrow — always in DOM, opacity driven by drag direction ── */
+const SketchArrow = ({
+  side,
+  active,
 }: {
-  direction: "left" | "right";
-  visible: boolean;
+  side: "left" | "right";
+  active: boolean;
 }) => {
-  const isLeft = direction === "left";
-
+  const isLeft = side === "left";
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          key={direction}
-          className="pointer-events-none absolute bottom-3 left-3 z-30"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 8 }}
-          transition={{ duration: 0.25, ease: "easeOut" }}
+    <motion.div
+      className="pointer-events-none absolute z-10"
+      /* Enough inset so rounded-2xl corner doesn't clip the SVG */
+      style={{ bottom: "20px", [isLeft ? "left" : "right"]: "20px" }}
+      animate={{ opacity: active ? 0.9 : 0.22 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+    >
+      <motion.div
+        animate={active ? { x: isLeft ? [-5, 1, -5] : [5, -1, 5] } : { x: 0 }}
+        transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <svg
+          width="40"
+          height="60"
+          viewBox="0 0 40 60"
+          fill="none"
+          /* Mirror the SVG for the right side */
+          style={{ transform: isLeft ? "none" : "scaleX(-1)" }}
         >
-          {/* Oscillate in the drag direction */}
-          <motion.div
-            animate={{ x: isLeft ? [-4, 2, -4] : [4, -2, 4] }}
-            transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <svg
-              width="44"
-              height="70"
-              viewBox="0 0 44 70"
-              fill="none"
-              style={{ transform: isLeft ? "scaleX(-1)" : "none" }}
-            >
-              {/* Main curved shaft — hand-drawn feel */}
-              <path
-                d="M10 12 C14 20, 8 32, 12 44"
-                stroke="white"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                fill="none"
-                opacity="0.85"
-              />
-              {/* Shadow duplicate for sketch depth */}
-              <path
-                d="M11.5 13 C15 21, 9 33, 13 45"
-                stroke="white"
-                strokeWidth="0.7"
-                strokeLinecap="round"
-                fill="none"
-                opacity="0.3"
-              />
-              {/* Arrowhead */}
-              <path
-                d="M12 44 L22 38"
-                stroke="white"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                fill="none"
-                opacity="0.85"
-              />
-              <path
-                d="M12 44 L16 55"
-                stroke="white"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                fill="none"
-                opacity="0.85"
-              />
-              {/* Sketch wobble on arrowhead */}
-              <path
-                d="M13 43 L21.5 37.5"
-                stroke="white"
-                strokeWidth="0.6"
-                strokeLinecap="round"
-                fill="none"
-                opacity="0.3"
-              />
-              {/* Echo — faint second arrow above */}
-              <path
-                d="M18 4 C20 9, 16 15, 18 20"
-                stroke="white"
-                strokeWidth="1"
-                strokeLinecap="round"
-                fill="none"
-                opacity="0.25"
-              />
-              <path
-                d="M18 20 L24 15"
-                stroke="white"
-                strokeWidth="1"
-                strokeLinecap="round"
-                fill="none"
-                opacity="0.25"
-              />
-              <path
-                d="M18 20 L20 26"
-                stroke="white"
-                strokeWidth="1"
-                strokeLinecap="round"
-                fill="none"
-                opacity="0.25"
-              />
-            </svg>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          {/* Curved shaft */}
+          <path
+            d="M22 5 C18 14, 24 26, 20 42"
+            stroke="white" strokeWidth="1.8" strokeLinecap="round" fill="none"
+          />
+          {/* Sketch shadow */}
+          <path
+            d="M23 6 C19 15, 25 27, 21 43"
+            stroke="white" strokeWidth="0.7" strokeLinecap="round" fill="none" opacity="0.35"
+          />
+          {/* Arrowhead — pointing left */}
+          <path
+            d="M20 42 L10 34"
+            stroke="white" strokeWidth="1.8" strokeLinecap="round" fill="none"
+          />
+          <path
+            d="M20 42 L23 53"
+            stroke="white" strokeWidth="1.8" strokeLinecap="round" fill="none"
+          />
+          {/* Sketch wobble */}
+          <path
+            d="M21 41 L11 33"
+            stroke="white" strokeWidth="0.7" strokeLinecap="round" fill="none" opacity="0.3"
+          />
+          {/* Faint echo above */}
+          <path
+            d="M26 2 C23 7, 27 13, 25 18"
+            stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.22"
+          />
+          <path d="M25 18 L18 13" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.22" />
+          <path d="M25 18 L27 24" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.22" />
+        </svg>
+      </motion.div>
+    </motion.div>
   );
 };
 
@@ -137,7 +92,6 @@ const BeforeAfterSlider = ({
   const lastXRef = useRef<number | null>(null);
   const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Sync prop → internalY only when not actively dragging
   useEffect(() => {
     if (!isDragging) setInternalY(Math.max(10, Math.min(93, handleY)));
   }, [handleY, isDragging]);
@@ -146,10 +100,9 @@ const BeforeAfterSlider = ({
     onPositionChange?.(position);
   }, [position, onPositionChange]);
 
-  // Clear drag direction after idle
   const scheduleClear = useCallback(() => {
     if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-    idleTimerRef.current = setTimeout(() => setDragDir(null), 600);
+    idleTimerRef.current = setTimeout(() => setDragDir(null), 700);
   }, []);
 
   const updatePosition = useCallback(
@@ -166,7 +119,6 @@ const BeforeAfterSlider = ({
       posY = Math.max(10, Math.min(93, posY));
       setInternalY(posY);
 
-      // Determine horizontal direction
       if (lastXRef.current !== null) {
         const delta = clientX - lastXRef.current;
         if (Math.abs(delta) > 2) {
@@ -207,10 +159,9 @@ const BeforeAfterSlider = ({
     "linear-gradient(180deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%), hsl(200 90% 75%))";
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto">
     <div
       ref={containerRef}
-      className="relative w-full rounded-2xl overflow-hidden border border-border/50 select-none touch-none cursor-crosshair"
+      className="relative w-full max-w-6xl mx-auto rounded-2xl overflow-hidden border border-border/50 select-none touch-none cursor-crosshair"
       style={{ aspectRatio: "16 / 10" }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -236,7 +187,7 @@ const BeforeAfterSlider = ({
         />
       </div>
 
-      {/* ── Labels ── */}
+      {/* Labels */}
       <div
         className="absolute top-4 right-4 z-10 transition-opacity duration-300"
         style={{ opacity: position > 75 ? 0 : 1 }}
@@ -257,9 +208,11 @@ const BeforeAfterSlider = ({
         </div>
       </div>
 
-      {/* slider content only — no arrows here */}
+      {/* ── Sketch arrows — always visible, active side brightens ── */}
+      <SketchArrow side="left"  active={dragDir === "left"} />
+      <SketchArrow side="right" active={dragDir === "right"} />
 
-      {/* ── Slider divider + handle ── */}
+      {/* Slider divider + handle */}
       <div className="absolute top-0 bottom-0 z-20 w-0" style={{ left: `${position}%` }}>
         <div
           className="absolute top-0 bottom-0 w-[4px] rounded-full -translate-x-1/2"
@@ -268,7 +221,6 @@ const BeforeAfterSlider = ({
             boxShadow: "0 0 20px hsl(260 85% 75% / 0.7), 0 0 40px hsl(200 90% 75% / 0.4)",
           }}
         />
-
         <div
           className="absolute -translate-x-1/2 -translate-y-1/2 transition-[top] duration-100 ease-out"
           style={{ top: `${internalY}%` }}
@@ -285,7 +237,6 @@ const BeforeAfterSlider = ({
             >
               <div className="w-full h-full rounded-full" style={{ background: "hsl(var(--background))" }} />
             </motion.div>
-
             <div className="absolute inset-0 flex items-center justify-center">
               <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
                 <defs>
@@ -303,11 +254,6 @@ const BeforeAfterSlider = ({
           </div>
         </div>
       </div>
-    </div>
-
-    {/* ── Sketch drag arrows — outside overflow-hidden, inside wrapper ── */}
-    <SketchDragArrow direction="left"  visible={dragDir === "left"} />
-    <SketchDragArrow direction="right" visible={dragDir === "right"} />
     </div>
   );
 };
