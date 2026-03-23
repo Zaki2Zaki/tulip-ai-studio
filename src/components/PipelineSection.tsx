@@ -1,5 +1,5 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { AlertTriangle, CheckCircle2, ArrowRight, Zap, TrendingUp, Clock, DollarSign, Layers, Rocket, Target, BarChart3 } from "lucide-react";
 import pipelineBg from "@/assets/pipeline-bg.jpg";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
@@ -30,18 +30,36 @@ const pipelineSteps = [
 
 const PipelineSection = () => {
   const ref = useRef(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [sliderPos, setSliderPos] = useState(50);
+  const [handleY, setHandleY] = useState(50);
 
   const handlePositionChange = useCallback((pos: number) => {
     setSliderPos(pos);
+  }, []);
+
+  // Drive handle Y position from page scroll within this section
+  useEffect(() => {
+    const onScroll = () => {
+      const el = sectionRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const scrollable = rect.height - window.innerHeight;
+      if (scrollable <= 0) { setHandleY(50); return; }
+      const pct = Math.max(10, Math.min(90, ((-rect.top) / scrollable) * 100));
+      setHandleY(pct);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const showProblems = sliderPos > 55;
   const showSolutions = sliderPos < 45;
 
   return (
-    <section id="pipeline" className="relative pt-6 pb-24 md:pb-32 overflow-hidden">
+    <section id="pipeline" ref={sectionRef} className="relative pt-6 pb-24 md:pb-32 overflow-hidden">
       <div className="absolute inset-0">
         <img src={pipelineBg} alt="" className="w-full h-full object-cover opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
@@ -93,6 +111,7 @@ const PipelineSection = () => {
             beforeLabel="GenAI Tools + Workflow"
             afterLabel="Current Workflow"
             onPositionChange={handlePositionChange}
+            handleY={handleY}
           />
           <p className="max-w-xl mx-auto mt-6 text-sm text-muted-foreground font-body text-center leading-relaxed">
             Startup AI tools are reshaping every stage of the pipeline — we help integrate the explosion of AI tools into production pipelines for creative studios.
