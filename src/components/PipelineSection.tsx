@@ -1,5 +1,5 @@
-import { motion, useInView, AnimatePresence } from "framer-motion";
-import { useRef, useState, useCallback, useEffect } from "react";
+import { motion, useInView, AnimatePresence, useMotionValue, useTransform, animate } from "framer-motion";
+import React, { useRef, useState, useCallback, useEffect } from "react";
 import { AlertTriangle, CheckCircle2, ArrowRight, Zap, TrendingUp, Clock, DollarSign, Layers, Rocket, Target, BarChart3 } from "lucide-react";
 import pipelineBg from "@/assets/pipeline-bg.jpg";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
@@ -27,6 +27,47 @@ const pipelineSteps = [
   { num: 4, label: "Integrate", desc: "Embed into industry tools like Unreal, Houdini, Blender, and Unity." },
   { num: 5, label: "Scale", desc: "Enable teams, optimize workflows, and drive long-term adoption." },
 ];
+
+const ProvenStat = ({
+  icon: Icon,
+  target,
+  suffix = "",
+  prefix = "",
+  label,
+  delay = 0,
+}: {
+  icon: React.ElementType;
+  target: number;
+  suffix?: string;
+  prefix?: string;
+  label: string;
+  delay?: number;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true });
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (v) => Math.round(v));
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(count, target, { duration: 1.6, delay, ease: "easeOut" });
+    const unsub = rounded.on("change", (v) => setDisplay(v));
+    return () => { controls.stop(); unsub(); };
+  }, [inView, target, delay, count, rounded]);
+
+  return (
+    <div ref={ref} className="flex flex-col items-center text-center gap-2">
+      <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+        <Icon className="w-4 h-4 text-primary" />
+      </div>
+      <span className="font-display text-2xl md:text-3xl font-bold text-gradient-gold">
+        {prefix}{display}{suffix}
+      </span>
+      <p className="text-xs text-foreground/80 font-body leading-snug">{label}</p>
+    </div>
+  );
+};
 
 const PipelineSection = () => {
   const ref = useRef(null);
@@ -206,27 +247,18 @@ const PipelineSection = () => {
 
                 {/* Quantitative proof */}
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="mt-6 p-5 rounded-2xl bg-primary/5 border border-primary/10 backdrop-blur-sm">
-                  <p className="text-[10px] tracking-[0.15em] uppercase font-body font-semibold text-primary mb-3">Proven Results</p>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div className="text-center">
-                      <span className="font-display text-2xl md:text-3xl font-bold text-gradient-gold">40–60%</span>
-                      <p className="text-xs text-foreground/80 font-body mt-1">Reduction in asset creation time</p>
-                    </div>
-                    <div className="text-center">
-                      <span className="font-display text-2xl md:text-3xl font-bold text-gradient-gold">3×</span>
-                      <p className="text-xs text-foreground/80 font-body mt-1">Faster environment prototyping</p>
-                    </div>
-                    <div className="text-center">
-                      <span className="font-display text-2xl md:text-3xl font-bold text-gradient-gold">85%</span>
-                      <p className="text-xs text-foreground/80 font-body mt-1">Fewer pipeline integration failures</p>
-                    </div>
+                  <p className="text-[10px] tracking-[0.15em] uppercase font-body font-semibold text-primary mb-4">Proven Results</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <ProvenStat icon={Clock} target={60} suffix="%" prefix="Up to " label="Reduction in asset creation time" delay={0.65} />
+                    <ProvenStat icon={Rocket} target={3} suffix="×" label="Faster environment prototyping" delay={0.75} />
+                    <ProvenStat icon={CheckCircle2} target={85} suffix="%" label="Fewer pipeline integration failures" delay={0.85} />
                   </div>
-                  <p className="mt-3 text-[10px] text-muted-foreground font-body text-center">
+                  <p className="mt-4 text-[10px] text-muted-foreground font-body text-center">
                     Sources: Generative Environments for ICVFX (SP Studios) • Hunyuan3D Pipeline (Tencent) • Democratization of VFX via GenAI (UWL Research)
                   </p>
                 </motion.div>
 
-                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="mt-5 text-center">
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }} className="mt-5 text-center">
                   <span className="text-gradient-gold font-body text-sm font-semibold italic">"We don't add more tools. We make them work — together."</span>
                 </motion.p>
               </motion.div>
