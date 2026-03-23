@@ -95,7 +95,7 @@ const WorkflowBuilderPanel = ({
 
   const BackBtn = ({ to }: { to: number }) => (
     <button onClick={() => onStageChange(to)}
-      className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors font-body mt-3">
+      className="inline-flex items-center gap-1.5 text-xs text-white/80 hover:text-white transition-colors font-body mt-3">
       ← Back
     </button>
   );
