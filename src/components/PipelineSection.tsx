@@ -9,7 +9,7 @@ import genaiWorkflow from "@/assets/genai-workflow.png";
 const problems = [
   { stat: "78%", icon: AlertTriangle, highlight: "pipelines issues weekly", text: "Of Game Dev & 3D + VFX animation studios face version control & pipeline issues weekly — driving delays from tool mismatches and integration failures." },
   { stat: "45%", icon: Clock, highlight: "1-hour per week lost", text: "Teams lose an average of 1 hour per week troubleshooting, wasting integration time & asset creation in unoptimized, siloed pipelines." },
-  { stat: "$350K", icon: DollarSign, highlight: "per major rework cycle", text: "Per major rework/iteration cycle — asset pipeline fixes or build overhauls affecting 10–30 devs for 3–7 days.", sub: "AA Studios $100K–$400K  •  AAA Studios $500K–$3M+" },
+  { stat: "$350K", icon: DollarSign, highlight: "per major rework cycle", text: "Per major rework/iteration cycle — asset pipeline fixes or build overhauls affecting 10–30 devs for 3–7 days.", sub: "AA Studios $100K–$400K  •  AAA Studios $500K–$3M+ per major rework/iteration cycle" },
 ];
 
 const solutions = [
@@ -72,12 +72,12 @@ const PipelineSection = () => {
           We identify where generative AI creates the most impact in your content production pipelines — from pre-production through final output.
         </motion.p>
 
-        {/* Drag hint */}
+        {/* Drag hint — above slider */}
         <motion.p
           initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 0.9 } : {}}
+          animate={inView ? { opacity: 0.7 } : {}}
           transition={{ delay: 0.5 }}
-          className="text-center mb-6 text-lg md:text-xl font-display font-semibold text-white"
+          className="text-center mb-4 text-sm font-body text-muted-foreground"
         >
           ← Drag to explore problems &amp; solutions →
         </motion.p>
@@ -121,13 +121,16 @@ const PipelineSection = () => {
                             <span key={j}>{part}{j < arr.length - 1 && <strong className="text-destructive font-semibold">{p.highlight}</strong>}</span>
                           ))}
                         </p>
-                        {p.sub && <p className="text-xs text-muted-foreground font-body">{p.sub}</p>}
+                        {p.sub && <p className="text-base md:text-lg text-white font-body font-medium">{p.sub}</p>}
                       </div>
                     </motion.div>
                   ))}
                 </div>
-                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-4 text-[10px] text-muted-foreground font-body text-center">
-                  Source: An Empirical Study of Delayed Games on Steam, arXiv:2204.11191
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-4 text-xs text-muted-foreground font-body text-center">
+                  Source:{" "}
+                  <a href="https://arxiv.org/abs/2204.11191" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-foreground transition-colors">
+                    An Empirical Study of Delayed Games on Steam, arXiv:2204.11191
+                  </a>
                 </motion.p>
               </motion.div>
             )}
@@ -212,7 +215,7 @@ const PipelineSection = () => {
 
             {!showProblems && !showSolutions && (
               <motion.div key="neutral" initial={{ opacity: 0 }} animate={{ opacity: 0.5 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} className="text-center py-12">
-                <p className="text-base text-muted-foreground font-body">← Drag the slider to explore →</p>
+                <p className="text-sm text-muted-foreground font-body">Drag the slider left or right to explore</p>
               </motion.div>
             )}
           </AnimatePresence>
