@@ -10,51 +10,6 @@ interface BeforeAfterSliderProps {
   handleY?: number;
 }
 
-/* ── Sketch arrow — always in DOM, opacity driven by drag direction ── */
-const SketchArrow = ({
-  side,
-  active,
-}: {
-  side: "left" | "right";
-  active: boolean;
-}) => {
-  const isLeft = side === "left";
-  return (
-    <motion.div
-      className="pointer-events-none absolute z-10"
-      style={{ bottom: "2px", [isLeft ? "left" : "right"]: "20px" }}
-      animate={{ opacity: active ? 0.9 : 0.22 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
-    >
-      <motion.div
-        animate={active ? { x: isLeft ? [-4, 2, -4] : [4, -2, 4] } : { x: 0 }}
-        transition={{ duration: 1.1, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <svg width="65" height="120" viewBox="0 0 65 120" fill="none"
-          style={{ transform: isLeft ? "none" : "scaleX(-1)" }}>
-
-          {/* ── Circular loop at top ── */}
-          <circle cx="36" cy="26" r="20"
-            stroke="white" strokeWidth="2.5" fill="none" />
-          {/* Sketch double-stroke for hand-drawn feel */}
-          <circle cx="36" cy="26" r="21"
-            stroke="white" strokeWidth="0.8" fill="none" opacity="0.25" />
-
-          {/* ── Curved shaft from bottom of loop ── */}
-          <path d="M 22 44 C 16 62, 12 80, 16 104"
-            stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-          <path d="M 23 45 C 17 63, 13 81, 17 105"
-            stroke="white" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.25" />
-
-          {/* ── Arrowhead ── */}
-          <path d="M 16 104 L 4  92" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-          <path d="M 16 104 L 18 116" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-        </svg>
-      </motion.div>
-    </motion.div>
-  );
-};
-
 const BeforeAfterSlider = ({
   beforeImage,
   afterImage,
@@ -67,9 +22,7 @@ const BeforeAfterSlider = ({
   const [position, setPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
   const [internalY, setInternalY] = useState(handleY);
-  const [dragDir, setDragDir] = useState<"left" | "right" | null>(null);
   const lastXRef = useRef<number | null>(null);
-  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (!isDragging) setInternalY(Math.max(10, Math.min(93, handleY)));
@@ -78,11 +31,6 @@ const BeforeAfterSlider = ({
   useEffect(() => {
     onPositionChange?.(position);
   }, [position, onPositionChange]);
-
-  const scheduleClear = useCallback(() => {
-    if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-    idleTimerRef.current = setTimeout(() => setDragDir(null), 700);
-  }, []);
 
   const updatePosition = useCallback(
     (clientX: number, clientY: number) => {
@@ -98,16 +46,9 @@ const BeforeAfterSlider = ({
       posY = Math.max(10, Math.min(93, posY));
       setInternalY(posY);
 
-      if (lastXRef.current !== null) {
-        const delta = clientX - lastXRef.current;
-        if (Math.abs(delta) > 2) {
-          setDragDir(delta < 0 ? "left" : "right");
-          scheduleClear();
-        }
-      }
       lastXRef.current = clientX;
     },
-    [scheduleClear]
+    []
   );
 
   const handlePointerDown = useCallback(
@@ -131,17 +72,15 @@ const BeforeAfterSlider = ({
   const handlePointerUp = useCallback(() => {
     setIsDragging(false);
     lastXRef.current = null;
-    scheduleClear();
-  }, [scheduleClear]);
+  }, []);
 
   const ombreGradient =
     "linear-gradient(180deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%), hsl(200 90% 75%))";
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto" style={{ paddingBottom: "72px" }}>
     <div
       ref={containerRef}
-      className="relative w-full rounded-2xl overflow-hidden border border-border/50 select-none touch-none cursor-crosshair"
+      className="relative w-full max-w-6xl mx-auto rounded-2xl overflow-hidden border border-border/50 select-none touch-none cursor-crosshair"
       style={{ aspectRatio: "16 / 10" }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -188,7 +127,6 @@ const BeforeAfterSlider = ({
         </div>
       </div>
 
-
       {/* Slider divider + handle */}
       <div className="absolute top-0 bottom-0 z-20 w-0" style={{ left: `${position}%` }}>
         <div
@@ -231,11 +169,6 @@ const BeforeAfterSlider = ({
           </div>
         </div>
       </div>
-    </div>
-
-    {/* ── Sketch arrows outside the frame, in the padding strip below ── */}
-    <SketchArrow side="left"  active={dragDir === "left"} />
-    <SketchArrow side="right" active={dragDir === "right"} />
     </div>
   );
 };
