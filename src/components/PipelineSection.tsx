@@ -571,6 +571,17 @@ const PipelineSection = () => {
     return () => clearTimeout(t);
   }, [sliderPos]);
 
+  // Open demo instantly when triggered from navbar button
+  useEffect(() => {
+    const handler = () => {
+      setSliderPos(30);
+      setShowWorkflow(true);
+      workflowShownRef.current = true;
+    };
+    window.addEventListener("tulip:open-demo", handler);
+    return () => window.removeEventListener("tulip:open-demo", handler);
+  }, []);
+
   const showProblems = sliderPos > 55;
   const showSolutions = sliderPos < 45;
 
