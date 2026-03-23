@@ -298,9 +298,14 @@ const WorkflowBuilderPanel = ({
         <div className="px-4 py-3 rounded-xl bg-green-400/5 border border-green-400/20 mb-4">
           <p className="text-xs font-body text-green-300">✓ Results confirmed for {tools.length > 0 ? tools.join(", ") : "your selected tools"}</p>
         </div>
-        <div className="px-4 py-3 rounded-xl bg-orange-400/5 border border-orange-400/20 mb-5">
-          <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-orange-400 mb-1">Demonstration Only</p>
-          <p className="text-xs font-body text-foreground/70">These are simulated benchmarks. An initial <strong className="text-foreground/90">1:1 Consultation</strong> is required for a deep-dive analysis and aligned expectations before any real integration begins.</p>
+        <div className="px-4 py-3 rounded-xl bg-black/70 border border-orange-400/25 mb-5 backdrop-blur-sm">
+          <div className="flex items-start gap-2">
+            <AlertTriangle className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
+            <div>
+              <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-orange-400 mb-1">Demonstration Only</p>
+              <p className="text-xs font-body text-foreground/70">These are simulated benchmarks. An initial <strong className="text-foreground/90">1:1 Consultation</strong> is required for a deep-dive analysis and aligned expectations before any real integration begins.</p>
+            </div>
+          </div>
         </div>
         <div className="flex items-center gap-4">
           <button onClick={() => onStageChange(4)}
