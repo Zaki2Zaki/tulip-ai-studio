@@ -667,17 +667,22 @@ const PipelineSection = () => {
                     {pipelineSteps.map((step, i) => {
                       const activeIdx = workflowStage >= 1 ? workflowStage - 1 : -1;
                       const isActive = activeIdx === i;
+                      const isCompleted = workflowStage > 1 && i < workflowStage - 1;
                       return (
                         <motion.div key={step.label} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.4 + i * 0.06 }} className="flex flex-col items-center text-center gap-1.5">
-                          <div className={`relative w-10 h-10 rounded-xl border flex items-center justify-center transition-all duration-500 ${isActive ? "border-primary bg-primary/20 shadow-[0_0_18px_hsl(var(--primary)/0.55)]" : "border-primary/30 bg-primary/8"}`}>
-                            <step.icon className={`transition-colors duration-300 ${isActive ? "text-primary" : "text-primary/60"}`} size={18} />
+                          <div className={`relative w-10 h-10 rounded-xl border flex items-center justify-center transition-all duration-500 ${isActive ? "border-primary bg-primary/20 shadow-[0_0_18px_hsl(var(--primary)/0.55)]" : isCompleted ? "border-green-500/50 bg-green-500/10" : "border-primary/30 bg-primary/8"}`}>
+                            {isCompleted ? (
+                              <CheckCircle2 className="text-green-400" size={18} />
+                            ) : (
+                              <step.icon className={`transition-colors duration-300 ${isActive ? "text-primary" : "text-primary/60"}`} size={18} />
+                            )}
                           </div>
                           {isActive && (
                             <motion.div animate={{ y: [0, 4, 0] }} transition={{ repeat: Infinity, duration: 1.1 }}>
                               <ChevronDown className="w-3 h-3 text-primary -mt-1" />
                             </motion.div>
                           )}
-                          <p className={`text-xs font-body font-semibold transition-colors ${isActive ? "text-primary" : "text-foreground"}`}>{step.label}</p>
+                          <p className={`text-xs font-body font-semibold transition-colors ${isActive ? "text-primary" : isCompleted ? "text-green-400" : "text-foreground"}`}>{step.label}</p>
                           <p className="text-[10px] text-muted-foreground font-body leading-snug">{step.desc}</p>
                         </motion.div>
                       );
