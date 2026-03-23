@@ -37,13 +37,31 @@ const PAIN_POINTS = [
   "Siloed team workflows",
 ];
 
-const AI_TOOLS = [
-  { label: "Houdini + AI", icon: "H" },
-  { label: "Unreal Engine 5", icon: "UE" },
-  { label: "Blender Plugins", icon: "B" },
-  { label: "Stable Diffusion", icon: "SD" },
-  { label: "Runway ML", icon: "R" },
-  { label: "Kling AI", icon: "K" },
+const PAIN_POINT_META: Record<string, { category: "A" | "B" | "C"; impact: "High" | "Medium" | "Low"; impactLevel: number }> = {
+  "Version control conflicts":   { category: "B", impact: "Medium", impactLevel: 1 },
+  "Tool integration failures":   { category: "A", impact: "High",   impactLevel: 0 },
+  "Slow asset iteration cycles": { category: "B", impact: "Medium", impactLevel: 1 },
+  "Manual review bottlenecks":   { category: "B", impact: "Low",    impactLevel: 2 },
+  "No AI tooling in pipeline":   { category: "C", impact: "High",   impactLevel: 0 },
+  "Siloed team workflows":       { category: "B", impact: "Medium", impactLevel: 1 },
+};
+
+const CATEGORY_META = {
+  A: { label: "Tool Issues",          color: "text-red-400",   bg: "bg-red-400/10",   border: "border-red-400/30" },
+  B: { label: "Workflow Restructure", color: "text-amber-400", bg: "bg-amber-400/10", border: "border-amber-400/30" },
+  C: { label: "Learning Your Tools",  color: "text-blue-400",  bg: "bg-blue-400/10",  border: "border-blue-400/30" },
+};
+
+const CURRENT_TOOLS = [
+  "Blender", "DaVinci Resolve", "ElevenLabs", "Houdini",
+  "Kling AI", "Maya", "Midjourney", "Nuke",
+  "Runway ML", "Stable Diffusion", "Unity", "Unreal Engine",
+];
+
+const WISHLIST_TOOLS = [
+  "Adobe Firefly", "Claude AI", "ComfyUI", "Flux",
+  "GPT-4o", "Hunyuan3D", "Leonardo AI", "Luma Dream Machine",
+  "Meshy", "Pika", "Sora", "TripoSG",
 ];
 
 const WorkflowBuilderPanel = ({
