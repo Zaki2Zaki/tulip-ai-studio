@@ -22,8 +22,7 @@ const SketchArrow = ({
   return (
     <motion.div
       className="pointer-events-none absolute z-10"
-      /* Enough inset so rounded-2xl corner doesn't clip the SVG */
-      style={{ bottom: "20px", [isLeft ? "left" : "right"]: "20px" }}
+      style={{ bottom: "4px", [isLeft ? "left" : "right"]: "28px" }}
       animate={{ opacity: active ? 0.9 : 0.22 }}
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
@@ -159,9 +158,10 @@ const BeforeAfterSlider = ({
     "linear-gradient(180deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%), hsl(200 90% 75%))";
 
   return (
+    <div className="relative w-full max-w-6xl mx-auto" style={{ paddingBottom: "72px" }}>
     <div
       ref={containerRef}
-      className="relative w-full max-w-6xl mx-auto rounded-2xl overflow-hidden border border-border/50 select-none touch-none cursor-crosshair"
+      className="relative w-full rounded-2xl overflow-hidden border border-border/50 select-none touch-none cursor-crosshair"
       style={{ aspectRatio: "16 / 10" }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -208,9 +208,6 @@ const BeforeAfterSlider = ({
         </div>
       </div>
 
-      {/* ── Sketch arrows — always visible, active side brightens ── */}
-      <SketchArrow side="left"  active={dragDir === "left"} />
-      <SketchArrow side="right" active={dragDir === "right"} />
 
       {/* Slider divider + handle */}
       <div className="absolute top-0 bottom-0 z-20 w-0" style={{ left: `${position}%` }}>
@@ -254,6 +251,11 @@ const BeforeAfterSlider = ({
           </div>
         </div>
       </div>
+    </div>
+
+    {/* ── Sketch arrows outside the frame, in the padding strip below ── */}
+    <SketchArrow side="left"  active={dragDir === "left"} />
+    <SketchArrow side="right" active={dragDir === "right"} />
     </div>
   );
 };
