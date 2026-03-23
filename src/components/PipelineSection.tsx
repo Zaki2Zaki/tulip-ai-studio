@@ -41,7 +41,7 @@ const PipelineSection = () => {
   const showSolutions = sliderPos < 45;
 
   return (
-    <section id="pipeline" className="relative py-24 md:py-32 overflow-hidden">
+    <section id="pipeline" className="relative pt-6 pb-24 md:pb-32 overflow-hidden">
       <div className="absolute inset-0">
         <img src={pipelineBg} alt="" className="w-full h-full object-cover opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />

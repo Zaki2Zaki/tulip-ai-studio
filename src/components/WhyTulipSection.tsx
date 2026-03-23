@@ -41,7 +41,7 @@ const WhyTulipSection = () => {
   const doubledAi = [...aiLogos, ...aiLogos];
 
   return (
-    <section className="py-24 md:py-32 section-padding">
+    <section className="pt-24 md:pt-32 pb-6 section-padding">
       <div ref={ref} className="max-w-4xl mx-auto text-center">
         <motion.p
           initial={{ opacity: 0 }}
