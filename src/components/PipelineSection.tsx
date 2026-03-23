@@ -285,11 +285,14 @@ const WorkflowBuilderPanel = ({
           const on = tools.includes(label);
           return (
             <button key={label} onClick={() => onToolsChange(toggle(tools, label))}
-              className={`text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center gap-2 ${on ? "border-primary/60 bg-primary/10 text-foreground" : "border-border/30 text-white/80 hover:border-border/50"}`}>
-              <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 text-[9px] font-bold leading-none ${on ? "bg-primary border-primary text-primary-foreground" : "border-border/50"}`}>
-                {on ? "✓" : ""}
-              </span>
-              {label}
+              className={`text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center justify-between gap-2 ${on ? "border-primary/60 bg-primary/10 text-foreground" : "border-border/30 text-white/80 hover:border-border/50"}`}>
+              <div className="flex items-center gap-2 min-w-0">
+                <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 text-[9px] font-bold leading-none ${on ? "bg-primary border-primary text-primary-foreground" : "border-border/50"}`}>
+                  {on ? "✓" : ""}
+                </span>
+                <span className="truncate">{label}</span>
+              </div>
+              <ToolLogo label={label} />
             </button>
           );
         })}
@@ -301,11 +304,14 @@ const WorkflowBuilderPanel = ({
           const on = tools.includes(label);
           return (
             <button key={label} onClick={() => onToolsChange(toggle(tools, label))}
-              className={`text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center gap-2 ${on ? "border-amber-400/60 bg-amber-400/10 text-foreground" : "border-border/30 text-white/80 hover:border-border/50"}`}>
-              <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 text-[9px] font-bold leading-none ${on ? "bg-amber-400 border-amber-400 text-black" : "border-border/50"}`}>
-                {on ? "✓" : ""}
-              </span>
-              {label}
+              className={`text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center justify-between gap-2 ${on ? "border-amber-400/60 bg-amber-400/10 text-foreground" : "border-border/30 text-white/80 hover:border-border/50"}`}>
+              <div className="flex items-center gap-2 min-w-0">
+                <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 text-[9px] font-bold leading-none ${on ? "bg-amber-400 border-amber-400 text-black" : "border-border/50"}`}>
+                  {on ? "✓" : ""}
+                </span>
+                <span className="truncate">{label}</span>
+              </div>
+              <ToolLogo label={label} />
             </button>
           );
         })}
