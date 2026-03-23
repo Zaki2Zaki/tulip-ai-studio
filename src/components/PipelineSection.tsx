@@ -74,7 +74,7 @@ const PipelineSection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [sliderPos, setSliderPos] = useState(50);
-  const [handleY, setHandleY] = useState(50);
+  const [handleY, setHandleY] = useState(80);
 
   const handlePositionChange = useCallback((pos: number) => {
     setSliderPos(pos);
