@@ -148,36 +148,71 @@ const WorkflowBuilderPanel = ({
   );
 
   /* ── Stage 1: Discover ── */
-  if (stage === 1) return (
-    <div>
-      <div className="flex items-center gap-2 mb-3">
-        <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
-        <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Discovery: Pain Points Mapped</span>
+  if (stage === 1) {
+    const categorized: Record<"A" | "B" | "C", string[]> = { A: [], B: [], C: [] };
+    const sortedSelected = [...selected].sort(
+      (a, b) => (PAIN_POINT_META[a]?.impactLevel ?? 1) - (PAIN_POINT_META[b]?.impactLevel ?? 1)
+    );
+    sortedSelected.forEach((pt) => {
+      const cat = PAIN_POINT_META[pt]?.category ?? "B";
+      categorized[cat].push(pt);
+    });
+    return (
+      <div>
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
+          <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Discovery: Pain Points Mapped</span>
+        </div>
+        <p className="font-display text-lg font-bold text-white mb-1">
+          AI identified <span className="text-gradient-gold">{selected.length} friction point{selected.length !== 1 ? "s" : ""}</span> in your pipeline
+        </p>
+        <p className="text-xs text-muted-foreground font-body mb-4">Select which to deep-dive — ordered Low → Highest impact.</p>
+
+        {(["A", "B", "C"] as const).map((catKey) => {
+          if (categorized[catKey].length === 0) return null;
+          const cat = CATEGORY_META[catKey];
+          return (
+            <div key={catKey} className="mb-3">
+              <div className="flex items-center gap-1.5 mb-2">
+                <span className={`text-[9px] font-display font-bold tracking-wider uppercase px-2 py-0.5 rounded-full border ${cat.bg} ${cat.border} ${cat.color}`}>
+                  {catKey}) {cat.label}
+                </span>
+              </div>
+              <div className="space-y-1.5">
+                {categorized[catKey].map((pt) => {
+                  const meta = PAIN_POINT_META[pt];
+                  const isSel = deepDive.includes(pt);
+                  return (
+                    <button key={pt} onClick={() => onDeepDiveChange(toggle(deepDive, pt))}
+                      className={`w-full text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center justify-between gap-2 ${isSel ? "border-primary/50 bg-primary/10 text-foreground" : "border-border/30 text-muted-foreground hover:border-border/60"}`}>
+                      <div className="flex items-center gap-2">
+                        <AlertTriangle className={`w-3 h-3 shrink-0 ${isSel ? "text-orange-400" : "text-muted-foreground/40"}`} />
+                        <span>{pt}</span>
+                      </div>
+                      <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded shrink-0 ${meta?.impact === "High" ? "text-red-400 bg-red-400/10" : meta?.impact === "Medium" ? "text-amber-400 bg-amber-400/10" : "text-muted-foreground bg-muted-foreground/10"}`}>
+                        {meta?.impact ?? "Medium"} Impact
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+
+        <p className="text-[10px] text-muted-foreground font-body mb-4 mt-1">
+          {deepDive.length === 0 ? "Select friction points to deep-dive, or continue." : `${deepDive.length} selected for deep-dive`}
+        </p>
+        <div className="flex items-center gap-4">
+          <button onClick={() => onStageChange(2)}
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
+            Start Prototyping <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+          <BackBtn to={0} />
+        </div>
       </div>
-      <p className="font-display text-lg font-bold text-white mb-3">
-        AI identified <span className="text-gradient-gold">{selected.length} friction point{selected.length !== 1 ? "s" : ""}</span> in your pipeline
-      </p>
-      <div className="space-y-1.5 mb-4">
-        {selected.map((pt) => (
-          <div key={pt} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-primary/8 border border-primary/20">
-            <AlertTriangle className="w-3.5 h-3.5 text-orange-400 shrink-0" />
-            <span className="text-xs font-body text-foreground/90">{pt}</span>
-          </div>
-        ))}
-      </div>
-      <div className="px-4 py-3 rounded-xl bg-primary/5 border border-primary/15 mb-5">
-        <p className="text-[10px] uppercase tracking-widest text-primary font-body font-semibold mb-1">Highest-Impact Fix</p>
-        <p className="text-sm font-body text-white">{selected[0]} → AI-assisted pipeline handoff</p>
-      </div>
-      <div className="flex items-center gap-4">
-        <button onClick={() => onStageChange(2)}
-          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
-          Start Prototyping <ArrowRight className="w-3.5 h-3.5" />
-        </button>
-        <BackBtn to={0} />
-      </div>
-    </div>
-  );
+    );
+  }
 
   /* ── Stage 2: Prototype ── */
   if (stage === 2) return (
