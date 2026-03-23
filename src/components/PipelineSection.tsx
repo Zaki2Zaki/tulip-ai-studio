@@ -64,6 +64,60 @@ const WISHLIST_TOOLS = [
   "Meshy", "Pika", "Sora", "TripoSG",
 ];
 
+// Simple Icons CDN slugs for tools that have brand icons
+type LogoEntry = { icon: string } | { initials: string; color: string };
+const TOOL_LOGOS: Record<string, LogoEntry> = {
+  "Blender":            { icon: "blender" },
+  "DaVinci Resolve":    { icon: "davinciresolve" },
+  "ElevenLabs":         { icon: "elevenlabs" },
+  "Houdini":            { initials: "H",  color: "#FF6B35" },
+  "Kling AI":           { initials: "K",  color: "#8B5CF6" },
+  "Maya":               { icon: "autodesk" },
+  "Midjourney":         { icon: "midjourney" },
+  "Nuke":               { initials: "N",  color: "#64D2FF" },
+  "Runway ML":          { icon: "runwayml" },
+  "Stable Diffusion":   { icon: "stablediffusion" },
+  "Unity":              { icon: "unity" },
+  "Unreal Engine":      { icon: "unrealengine" },
+  "Adobe Firefly":      { icon: "adobefirefly" },
+  "Claude AI":          { icon: "anthropic" },
+  "ComfyUI":            { initials: "CU", color: "#10B981" },
+  "Flux":               { initials: "FL", color: "#A855F7" },
+  "GPT-4o":             { icon: "openai" },
+  "Hunyuan3D":          { initials: "H3", color: "#06B6D4" },
+  "Leonardo AI":        { initials: "LA", color: "#F59E0B" },
+  "Luma Dream Machine": { initials: "LU", color: "#EC4899" },
+  "Meshy":              { initials: "ME", color: "#14B8A6" },
+  "Pika":               { initials: "PK", color: "#A855F7" },
+  "Sora":               { icon: "openai" },
+  "TripoSG":            { initials: "TR", color: "#F97316" },
+};
+
+const ToolLogo = ({ label }: { label: string }) => {
+  const logo = TOOL_LOGOS[label];
+  if (!logo) return null;
+  if ("icon" in logo) {
+    return (
+      <img
+        src={`https://cdn.simpleicons.org/${logo.icon}/ffffff`}
+        alt=""
+        width={16}
+        height={16}
+        className="w-4 h-4 shrink-0 object-contain opacity-80"
+        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+      />
+    );
+  }
+  return (
+    <span
+      className="w-5 h-5 rounded text-[8px] font-bold shrink-0 flex items-center justify-center"
+      style={{ background: logo.color + "25", color: logo.color, border: `1px solid ${logo.color}50` }}
+    >
+      {logo.initials}
+    </span>
+  );
+};
+
 const WorkflowBuilderPanel = ({
   stage,
   onStageChange,
