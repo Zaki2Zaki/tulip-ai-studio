@@ -98,15 +98,13 @@ const HeroSection = () => {
               </p>
 
               <p className="text-sm md:text-base font-display font-normal text-foreground/95 leading-relaxed" style={{ letterSpacing: "-0.01em" }}>
-                Integrating GenAI tools into game engines, animation pipelines, and VFX workflows.
+                Test &amp; Validate your ideas into game engines, animation pipelines, and VFX workflows.
               </p>
 
               <p className="text-sm md:text-base font-display font-normal text-foreground/95 leading-relaxed" style={{ letterSpacing: "-0.01em" }}>
                 We're all discovering the pain points to scale. We{" "}
                 <span className="text-gradient-tulip-ombre font-bold">love</span>{" "}
-                handling the hard part:
-                <br />
-                making genAI reliable for our creatives &amp; technical leaders
+                finding solutions for our integrations issues for our creatives &amp; technical leaders
               </p>
             </div>
 
