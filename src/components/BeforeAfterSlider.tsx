@@ -11,6 +11,50 @@ interface BeforeAfterSliderProps {
   handleY?: number;
 }
 
+/* ── Sketch down-arrow hint ── */
+const SketchDownArrow = ({ side, delay = 0 }: { side: "left" | "right"; delay?: number }) => (
+  <motion.div
+    className="pointer-events-none absolute bottom-3 z-20"
+    style={{ [side]: "10px" }}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: [0, 0.65, 0.65, 0] }}
+    transition={{ duration: 2.4, delay, repeat: Infinity, repeatDelay: 0.8, ease: "easeInOut" }}
+  >
+    <motion.svg
+      width="36" height="56" viewBox="0 0 36 56" fill="none"
+      animate={{ y: [0, 7, 0] }}
+      transition={{ duration: 2.4, delay, repeat: Infinity, repeatDelay: 0.8, ease: "easeInOut" }}
+    >
+      {/* Sketch shaft — slightly wobbly */}
+      <path
+        d="M18 2 C17 10, 19 18, 18 30"
+        stroke="white" strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.9"
+      />
+      {/* Sketch double shaft for hand-drawn feel */}
+      <path
+        d="M18 2 C16.5 11, 19.5 19, 17.5 30"
+        stroke="white" strokeWidth="0.6" strokeLinecap="round" fill="none" opacity="0.35"
+      />
+      {/* Arrowhead */}
+      <path
+        d="M18 34 L11 25"
+        stroke="white" strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.9"
+      />
+      <path
+        d="M18 34 L25 25"
+        stroke="white" strokeWidth="1.6" strokeLinecap="round" fill="none" opacity="0.9"
+      />
+      {/* Small echo arrow below */}
+      <path
+        d="M18 40 C17.5 43, 18.5 46, 18 50"
+        stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.4"
+      />
+      <path d="M18 50 L14 45" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.4" />
+      <path d="M18 50 L22 45" stroke="white" strokeWidth="1" strokeLinecap="round" fill="none" opacity="0.4" />
+    </motion.svg>
+  </motion.div>
+);
+
 const BeforeAfterSlider = ({
   beforeImage,
   afterImage,
@@ -22,25 +66,34 @@ const BeforeAfterSlider = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [internalY, setInternalY] = useState(handleY);
+
+  // Sync prop → internalY only when the user isn't actively dragging
+  useEffect(() => {
+    if (!isDragging) setInternalY(Math.max(10, Math.min(93, handleY)));
+  }, [handleY, isDragging]);
 
   useEffect(() => {
     onPositionChange?.(position);
   }, [position, onPositionChange]);
 
-  const updatePosition = useCallback((clientX: number) => {
+  const updatePosition = useCallback((clientX: number, clientY: number) => {
     const container = containerRef.current;
     if (!container) return;
     const rect = container.getBoundingClientRect();
-    let pos = ((clientX - rect.left) / rect.width) * 100;
-    pos = Math.max(0, Math.min(100, pos));
-    setPosition(pos);
+    let posX = ((clientX - rect.left) / rect.width) * 100;
+    posX = Math.max(0, Math.min(100, posX));
+    setPosition(posX);
+    let posY = ((clientY - rect.top) / rect.height) * 100;
+    posY = Math.max(10, Math.min(93, posY));
+    setInternalY(posY);
   }, []);
 
   const handlePointerDown = useCallback(
     (e: React.PointerEvent) => {
       setIsDragging(true);
       (e.target as HTMLElement).setPointerCapture(e.pointerId);
-      updatePosition(e.clientX);
+      updatePosition(e.clientX, e.clientY);
     },
     [updatePosition]
   );
@@ -48,7 +101,7 @@ const BeforeAfterSlider = ({
   const handlePointerMove = useCallback(
     (e: React.PointerEvent) => {
       if (!isDragging) return;
-      updatePosition(e.clientX);
+      updatePosition(e.clientX, e.clientY);
     },
     [isDragging, updatePosition]
   );
@@ -58,13 +111,10 @@ const BeforeAfterSlider = ({
   const ombreGradient =
     "linear-gradient(180deg, hsl(200 90% 75%), hsl(260 85% 75%), hsl(320 80% 72%), hsl(40 95% 70%), hsl(160 80% 65%), hsl(200 90% 75%))";
 
-  // Clamp handle between 10%–90% so it never clips outside the image
-  const clampedHandleY = Math.max(10, Math.min(93, handleY));
-
   return (
     <div
       ref={containerRef}
-      className="relative w-full max-w-6xl mx-auto rounded-2xl overflow-hidden border border-border/50 select-none touch-none cursor-col-resize"
+      className="relative w-full max-w-6xl mx-auto rounded-2xl overflow-hidden border border-border/50 select-none touch-none cursor-crosshair"
       style={{ aspectRatio: "16 / 10" }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
@@ -80,10 +130,7 @@ const BeforeAfterSlider = ({
       />
 
       {/* Clipped top layer — Current Workflow (revealed from right) */}
-      <div
-        className="absolute inset-0"
-        style={{ clipPath: `inset(0 0 0 ${position}%)` }}
-      >
+      <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${position}%)` }}>
         <img
           src={beforeImage}
           alt="Current 3D production workflow"
@@ -93,70 +140,51 @@ const BeforeAfterSlider = ({
         />
       </div>
 
-      {/* ── "Current Workflow" label — right side, warm white ── */}
+      {/* ── "Current Workflow" label — right side ── */}
       <div
         className="absolute top-4 right-4 z-10 transition-opacity duration-300"
         style={{ opacity: position > 75 ? 0 : 1 }}
       >
-        <div
-          className="px-3 py-1.5 rounded-full backdrop-blur-md"
-          style={{
-            background: "rgba(0,0,0,0.65)",
-            border: "1.5px solid rgba(255,255,255,0.25)",
-            boxShadow: "0 0 12px rgba(255,255,255,0.06)",
-          }}
-        >
-          <span className="text-[11px] font-body font-bold text-white/90 tracking-[0.12em] uppercase">
-            {beforeLabel}
-          </span>
+        <div className="px-3 py-1.5 rounded-full backdrop-blur-md"
+          style={{ background: "rgba(0,0,0,0.65)", border: "1.5px solid rgba(255,255,255,0.25)" }}>
+          <span className="text-[11px] font-body font-bold text-white/90 tracking-[0.12em] uppercase">{beforeLabel}</span>
         </div>
       </div>
 
-      {/* ── "GenAI Tools + Workflow" label — left side, white text ── */}
+      {/* ── "GenAI Tools + Workflow" label — left side ── */}
       <div
         className="absolute top-3 left-3 z-10 transition-opacity duration-300"
         style={{ opacity: position < 25 ? 0 : 1 }}
       >
-        <div
-          className="px-2 py-1 rounded-full backdrop-blur-md"
-          style={{
-            background: "rgba(0,0,0,0.65)",
-            border: "1.5px solid rgba(255,255,255,0.25)",
-            boxShadow: "0 0 12px rgba(255,255,255,0.06)",
-          }}
-        >
-          <span className="text-[9px] font-body font-bold text-white/80 tracking-[0.12em] uppercase">
-            {afterLabel}
-          </span>
+        <div className="px-2 py-1 rounded-full backdrop-blur-md"
+          style={{ background: "rgba(0,0,0,0.65)", border: "1.5px solid rgba(255,255,255,0.25)" }}>
+          <span className="text-[9px] font-body font-bold text-white/80 tracking-[0.12em] uppercase">{afterLabel}</span>
         </div>
       </div>
 
-      {/* ── Slider divider: full-height line + scroll-linked handle ── */}
-      <div
-        className="absolute top-0 bottom-0 z-20 w-0"
-        style={{ left: `${position}%` }}
-      >
-        {/* Rainbow ombre line — always full height */}
+      {/* ── Sketch arrows — indicate content below ── */}
+      <SketchDownArrow side="left" delay={0} />
+      <SketchDownArrow side="right" delay={1.2} />
+
+      {/* ── Slider divider: full-height line + draggable handle ── */}
+      <div className="absolute top-0 bottom-0 z-20 w-0" style={{ left: `${position}%` }}>
+        {/* Rainbow ombre line */}
         <div
           className="absolute top-0 bottom-0 w-[4px] rounded-full -translate-x-1/2"
           style={{
             background: ombreGradient,
-            boxShadow:
-              "0 0 20px hsl(260 85% 75% / 0.7), 0 0 40px hsl(200 90% 75% / 0.4), 0 0 60px hsl(320 80% 72% / 0.3)",
+            boxShadow: "0 0 20px hsl(260 85% 75% / 0.7), 0 0 40px hsl(200 90% 75% / 0.4)",
           }}
         />
 
-        {/* Handle — slides vertically with page scroll */}
+        {/* Handle — draggable in X and Y */}
         <div
-          className="absolute -translate-x-1/2 -translate-y-1/2 transition-[top] duration-150 ease-out"
-          style={{ top: `${clampedHandleY}%` }}
+          className="absolute -translate-x-1/2 -translate-y-1/2 transition-[top] duration-100 ease-out"
+          style={{ top: `${internalY}%` }}
         >
-          {/* Outer glow */}
           <div
             className="relative w-14 h-14"
-            style={{
-              filter: "drop-shadow(0 0 12px hsl(260 85% 75% / 0.7)) drop-shadow(0 0 24px hsl(200 90% 75% / 0.4))",
-            }}
+            style={{ filter: "drop-shadow(0 0 12px hsl(260 85% 75% / 0.7)) drop-shadow(0 0 24px hsl(200 90% 75% / 0.4))" }}
           >
             {/* Rotating rainbow ring */}
             <motion.div
@@ -168,7 +196,7 @@ const BeforeAfterSlider = ({
               <div className="w-full h-full rounded-full" style={{ background: "hsl(var(--background))" }} />
             </motion.div>
 
-            {/* Static arrows centred over the ring */}
+            {/* Static arrows */}
             <div className="absolute inset-0 flex items-center justify-center">
               <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
                 <defs>
@@ -186,7 +214,6 @@ const BeforeAfterSlider = ({
           </div>
         </div>
       </div>
-
     </div>
   );
 };

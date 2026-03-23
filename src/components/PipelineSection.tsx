@@ -330,7 +330,9 @@ const PipelineSection = () => {
       const rect = el.getBoundingClientRect();
       const scrollable = rect.height - window.innerHeight;
       if (scrollable <= 0) { setHandleY(50); return; }
-      const pct = Math.max(10, Math.min(90, ((-rect.top) / scrollable) * 100));
+      // Only start driving handle once user has scrolled into the section
+      if (rect.top > 0) return;
+      const pct = Math.max(10, Math.min(93, ((-rect.top) / scrollable) * 100));
       setHandleY(pct);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
