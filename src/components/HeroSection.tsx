@@ -108,20 +108,6 @@ const HeroSection = () => {
               </p>
             </div>
 
-            {/* Process Flow */}
-            <div className="flex flex-wrap items-center gap-1.5 md:gap-2">
-              {pipelineSteps.map((step, i) => (
-                <span key={step} className="flex items-center gap-1.5 md:gap-2">
-                  <span className="px-2.5 py-1 rounded-full border border-border/40 bg-secondary/40 text-[10px] md:text-xs font-display font-semibold text-white/80 whitespace-nowrap">
-                    {step}
-                  </span>
-                  {i < pipelineSteps.length - 1 && (
-                    <ArrowRight className="w-3 h-3 text-primary/50 shrink-0" />
-                  )}
-                </span>
-              ))}
-            </div>
-
             {/* CTAs */}
             <div className="flex flex-col gap-2 mt-2">
               {/* Row 1 — Book a Call + Get Estimate */}
