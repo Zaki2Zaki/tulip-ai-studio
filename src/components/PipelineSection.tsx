@@ -351,20 +351,32 @@ const WorkflowBuilderPanel = ({
         </div>
 
         {/* Workshops CTA */}
-        <div className="px-4 py-3 rounded-xl bg-primary/5 border border-primary/20 mb-5">
-          <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-primary mb-1">Empower Your Team</p>
-          <p className="text-xs font-body text-foreground/75 mb-2.5">
-            Workshops &amp; Education — certified training led by Unreal Educators &amp; VFX/Game-Developers to build AI creative skills across your team.
-          </p>
-          <a
-            href="#estimator"
-            onClick={() => {
-              window.dispatchEvent(new CustomEvent("tulip:select-service", { detail: { id: "workshops" } }));
-            }}
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-primary/40 bg-primary/10 text-xs font-display font-semibold text-primary hover:bg-primary/20 transition-colors"
-          >
-            Add Workshops to Estimate <ArrowRight className="w-3 h-3" />
-          </a>
+        <div className={`px-4 py-3 rounded-xl border mb-5 transition-all duration-300 ${workshopAdded ? "bg-green-500/10 border-green-500/30" : "bg-primary/5 border-primary/20"}`}>
+          {workshopAdded ? (
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-green-400 shrink-0" />
+              <div>
+                <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-green-400 mb-0.5">Added to Estimate</p>
+                <p className="text-xs font-body text-foreground/70">Workshops &amp; Education has been added to your estimate builder below.</p>
+              </div>
+            </div>
+          ) : (
+            <>
+              <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-primary mb-1">Empower Your Team</p>
+              <p className="text-xs font-body text-foreground/75 mb-2.5">
+                Workshops &amp; Education — certified training led by Unreal Educators &amp; VFX/Game-Developers to build AI creative skills across your team.
+              </p>
+              <button
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent("tulip:select-service", { detail: { id: "workshops" } }));
+                  onWorkshopAdd();
+                }}
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-primary/40 bg-primary/10 text-xs font-display font-semibold text-primary hover:bg-primary/20 transition-colors"
+              >
+                Add Workshops to Estimate <ArrowRight className="w-3 h-3" />
+              </button>
+            </>
+          )}
         </div>
 
         <div className="flex items-center gap-4">
