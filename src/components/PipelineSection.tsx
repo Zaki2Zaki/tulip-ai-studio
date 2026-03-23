@@ -201,7 +201,7 @@ const WorkflowBuilderPanel = ({
           })}
         </div>
 
-        <p className="text-[10px] text-white/70 font-body mb-4">
+        <p className="text-sm text-white font-body mb-4">
           {deepDive.length === 0 ? "Select rows to flag for deep-dive, or continue." : `${deepDive.length} flagged for deep-dive`}
         </p>
         <div className="flex items-center gap-4">
