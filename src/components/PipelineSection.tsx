@@ -580,11 +580,19 @@ const WorkflowBuilderPanel = ({
 
       <div className="flex flex-col gap-2 items-center">
         <a href="#estimator"
-          onClick={() => window.dispatchEvent(new CustomEvent("tulip:open-calendly"))}
+          onClick={() => {
+            const ids = getRecommendedServiceIds(deepDive);
+            ids.forEach((id) => window.dispatchEvent(new CustomEvent("tulip:select-service", { detail: { id } })));
+            window.dispatchEvent(new CustomEvent("tulip:open-calendly"));
+          }}
           className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
           Book Discovery Call <ArrowRight className="w-3.5 h-3.5" />
         </a>
         <a href="#estimator"
+          onClick={() => {
+            const ids = getRecommendedServiceIds(deepDive);
+            ids.forEach((id) => window.dispatchEvent(new CustomEvent("tulip:select-service", { detail: { id } })));
+          }}
           className="text-xs text-white hover:text-foreground font-body transition-colors underline underline-offset-2">
           Or build your estimate first →
         </a>
