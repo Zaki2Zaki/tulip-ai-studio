@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 
 const SCALE_KEY = "tulip-text-scale";
 const SCALE_MIN = 1;
-const SCALE_MAX = 3;
+const SCALE_MAX = 2;
 const SCALE_DEFAULT = 1;
 
 const navLinks = [
@@ -127,14 +127,14 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 h-12">
-          {/* Logo + text-scale button */}
+          {/* Logo + text-scale button — logo always left, button to its right */}
           <div className="flex items-center gap-3 ml-72">
-            <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground shrink-0">
+            <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground shrink-0 order-first">
               TULIP<span className="text-gradient-gold"> TECH</span>
             </Link>
 
             {/* ── Text Scale Button ─────────────────────────── */}
-            <div ref={scaleRef} className="relative">
+            <div ref={scaleRef} className="relative order-last">
               <button
                 onClick={() => setScaleOpen((o) => !o)}
                 aria-label="Adjust text size"
@@ -193,7 +193,7 @@ const Navbar = () => {
 
                     {/* Track labels */}
                     <div className="flex justify-between mb-4">
-                      {["1×", "1.5×", "2×", "2.5×", "3×"].map((l) => (
+                      {["1×", "1.5×", "2×"].map((l) => (
                         <span key={l} className="text-[9px] font-body text-muted-foreground/60">{l}</span>
                       ))}
                     </div>
@@ -445,7 +445,7 @@ const Navbar = () => {
                     }}
                   />
                   <div className="flex justify-between mt-1.5">
-                    {["1×", "1.5×", "2×", "2.5×", "3×"].map((l) => (
+                    {["1×", "1.5×", "2×"].map((l) => (
                       <span key={l} className="text-[9px] font-body text-muted-foreground/60">{l}</span>
                     ))}
                   </div>
