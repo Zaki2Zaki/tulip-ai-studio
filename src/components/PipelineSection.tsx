@@ -64,6 +64,25 @@ const WISHLIST_TOOLS = [
   "Meshy", "Pika", "Sora", "TripoSG",
 ];
 
+// Maps each pain point → recommended service IDs + reason shown on Validate screen
+const DEEP_DIVE_SERVICE_MAP: Record<string, { serviceIds: string[]; serviceLabel: string; reason: string }> = {
+  "Tool integration failures":   { serviceIds: ["benchmarking"],              serviceLabel: "Tool Benchmarking",                    reason: "Test & validate the right tool connections for your stack" },
+  "Version control conflicts":   { serviceIds: ["architecture"],              serviceLabel: "Architecture Blueprint",               reason: "Design a pipeline architecture that prevents conflicts" },
+  "Slow asset iteration cycles": { serviceIds: ["integration"],               serviceLabel: "Adoption & Integration",               reason: "Automate handoffs to compress iteration loops" },
+  "Manual review bottlenecks":   { serviceIds: ["integration"],               serviceLabel: "Adoption & Integration",               reason: "AI-assisted review workflows reduce approval delays" },
+  "No AI tooling in pipeline":   { serviceIds: ["research", "workshops"],     serviceLabel: "GenAI Research + Workshops",           reason: "Identify the right tools to adopt, then train your team" },
+  "Siloed team workflows":       { serviceIds: ["architecture", "workshops"], serviceLabel: "Architecture Blueprint + Workshops",   reason: "Unified pipeline design and team-wide enablement" },
+};
+
+const getRecommendedServiceIds = (deepDive: string[]): string[] => {
+  const ids = new Set<string>();
+  deepDive.forEach((pt) => {
+    DEEP_DIVE_SERVICE_MAP[pt]?.serviceIds.forEach((id) => ids.add(id));
+  });
+  if (ids.size === 0) ids.add("research"); // sensible default
+  return Array.from(ids);
+};
+
 // Simple Icons CDN slugs for tools that have brand icons
 type LogoEntry = { icon: string } | { initials: string; color: string };
 const TOOL_LOGOS: Record<string, LogoEntry> = {
