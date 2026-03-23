@@ -93,15 +93,13 @@ const HeroSection = () => {
                 Systems
               </p>
 
-              {/* Asymmetric block — subheading right-aligned, description lifts under it */}
-              <div className="relative mt-10">
-                <p className="text-sm md:text-base font-display font-normal text-foreground/95 leading-relaxed text-right" style={{ letterSpacing: "-0.01em" }}>
-                  3D Workflow &amp; Tools Experiments → GenAI Production Systems
-                </p>
-                <p className="text-sm md:text-base font-display font-normal text-foreground/95 leading-relaxed w-1/2 mt-1" style={{ letterSpacing: "-0.01em" }}>
-                  Integrating GenAI tools into game engines, animation pipelines, and VFX workflows.
-                </p>
-              </div>
+              <p className="text-sm md:text-base font-display font-normal text-foreground/95 leading-relaxed" style={{ letterSpacing: "-0.01em" }}>
+                3D Workflow &amp; Tools Experiments → GenAI Production Systems
+              </p>
+
+              <p className="text-sm md:text-base font-display font-normal text-foreground/95 leading-relaxed" style={{ letterSpacing: "-0.01em" }}>
+                Integrating GenAI tools into game engines, animation pipelines, and VFX workflows.
+              </p>
 
               <p className="text-sm md:text-base font-display font-normal text-foreground/95 leading-relaxed" style={{ letterSpacing: "-0.01em" }}>
                 We're all discovering the pain points to scale. We{" "}
