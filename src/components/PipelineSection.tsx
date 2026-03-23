@@ -302,6 +302,9 @@ const WorkflowBuilderPanel = ({
 
   /* ── Stage 3: Validate ── */
   if (stage === 3) {
+    const allPresets = [...CURRENT_TOOLS, ...WISHLIST_TOOLS];
+    const customTools = tools.filter((t) => !allPresets.includes(t));
+    const presetTools = tools.filter((t) => allPresets.includes(t));
     const metrics = [
       { label: "Asset creation speed", value: 60, color: "hsl(var(--primary))" },
       { label: "Pipeline failure reduction", value: 85, color: "hsl(40 95% 70%)" },
@@ -330,8 +333,19 @@ const WorkflowBuilderPanel = ({
           ))}
         </div>
         <div className="px-4 py-3 rounded-xl bg-green-400/5 border border-green-400/20 mb-4">
-          <p className="text-xs font-body text-green-300">✓ Results confirmed for {tools.length > 0 ? tools.join(", ") : "your selected tools"}</p>
+          <p className="text-xs font-body text-green-300">✓ Results confirmed for {presetTools.length > 0 ? presetTools.join(", ") : "your selected tools"}</p>
         </div>
+        {customTools.length > 0 && (
+          <div className="px-4 py-3 rounded-xl bg-primary/8 border border-primary/25 mb-4">
+            <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-primary mb-2">Also Testing — Your Tools</p>
+            <div className="flex flex-wrap gap-1.5 mb-1.5">
+              {customTools.map((t) => (
+                <span key={t} className="px-2.5 py-1 rounded-full bg-primary/15 border border-primary/30 text-xs font-body text-white font-medium">{t}</span>
+              ))}
+            </div>
+            <p className="text-[10px] text-white/60 font-body">Custom tool{customTools.length > 1 ? "s" : ""} added by you — included in this configuration.</p>
+          </div>
+        )}
         <div className="px-4 py-3 rounded-xl bg-black/70 border border-orange-400/25 mb-5 backdrop-blur-sm">
           <div className="flex items-start gap-2">
             <AlertTriangle className="w-4 h-4 text-orange-400 shrink-0 mt-0.5" />
