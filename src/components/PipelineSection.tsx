@@ -315,6 +315,7 @@ const WorkflowBuilderPanel = ({
         <div className="flex items-center gap-2 mb-3">
           <span className="w-2 h-2 rounded-full bg-green-400 shrink-0" />
           <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-green-400">Validate: Benchmark Results</span>
+          <span className="ml-1 px-2 py-0.5 rounded-full bg-orange-400/15 border border-orange-400/30 text-[9px] font-display font-bold uppercase tracking-wider text-orange-400">Demo Only</span>
         </div>
         <p className="font-display text-lg font-bold text-white mb-4">Simulated results for your configuration</p>
         <div className="space-y-4 mb-5">
