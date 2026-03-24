@@ -565,12 +565,13 @@ const WorkflowBuilderPanel = ({
       <p className="text-xs text-white font-body mb-4">You've completed the Tulip R&D Pipeline™ demo.</p>
 
       <div className="grid grid-cols-3 gap-3 mb-5">
-        {[["40–60%", "Faster asset creation"], ["3×", "Faster prototyping"], ["85%", "Fewer failures"]].map(([stat, lbl]) => (
+        {[["Up to 50%", "reduction in asset pipeline time*"], ["Significantly", "faster creative iteration"], ["85%", "fewer integration failures & rework cycles"]].map(([stat, lbl]) => (
           <div key={stat} className="p-3 rounded-xl bg-primary/5 border border-primary/10">
             <div className="font-display text-xl font-bold text-gradient-gold">{stat}</div>
             <div className="text-[10px] text-white/70 font-body mt-0.5">{lbl}</div>
           </div>
         ))}
+
       </div>
 
       <div className="px-4 py-3 rounded-xl bg-orange-400/5 border border-orange-400/20 text-left mb-5">
