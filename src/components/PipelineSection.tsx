@@ -106,17 +106,18 @@ const TOOL_LOGOS: Record<string, LogoEntry> = {
   "Unity":              { icon: "unity" },
   "Unreal Engine":      { icon: "unrealengine" },
   // ── Wishlist Tools ──
-  "Adobe Firefly":      { icon: "adobe" },
+  "Adobe Firefly":      { url: "https://cdn.worldvectorlogo.com/logos/adobe-firefly-1.svg" }, // keep color — no invert
   "Claude AI":          { icon: "anthropic" },
   "ComfyUI":            { url: "https://framerusercontent.com/images/3cNQMWKzIhIrQ5KErBm7dSmbd2w.png" },
-  "Flux":               { initials: "FL", color: "#A855F7" }, // Black Forest Labs — wordmark only
+  "Flux":               { url: "https://cdn.worldvectorlogo.com/logos/flux-ai.svg", invert: true },
   "GPT-4o":             { icon: "openai" },
-  "Hunyuan3D":          { initials: "H3", color: "#06B6D4" }, // Tencent — no public icon
-  "Leonardo AI":        { icon: "leonardo" },
+  "Grok":               { url: "https://cdn.worldvectorlogo.com/logos/grok-3.svg", invert: true },
+  "Hunyuan3D":          { url: "https://cdn.worldvectorlogo.com/logos/hunyuan.svg", invert: true },
+  "Leonardo AI":        { url: "https://cdn.worldvectorlogo.com/logos/leonardo-ai-1.svg", invert: true },
   "Luma Dream Machine": { url: "https://lumalabs.ai/images/brand/luma-ai/logo-black.svg", invert: true },
   "Meshy":              { url: "https://www.meshy.ai/meshy-avatar.png" },
   "Pika":               { url: "https://pika.art/favicon.ico" },
-  "Sora":               { icon: "openai" },
+  "Sora":               { url: "https://cdn.worldvectorlogo.com/logos/sora-3.svg", invert: true },
   "TripoSG":            { url: "https://cdn-web.tripo3d.ai/tripo-web/logo/tripo-logo1.webp" },
 };
 
