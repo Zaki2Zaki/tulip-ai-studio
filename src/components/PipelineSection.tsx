@@ -634,7 +634,7 @@ const WorkflowBuilderPanel = ({
             const rows = deepDive.length > 0
               ? deepDive.map((pt) => {
                   const e = DEEP_DIVE_SERVICE_MAP[pt];
-                  return `<tr><td style="padding:8px 12px;border-bottom:1px solid #333;font-weight:600">${pt}</td><td style="padding:8px 12px;border-bottom:1px solid #333;color:#aaa">${e?.reason ?? ""}</td><td style="padding:8px 12px;border-bottom:1px solid #333;color:#c084fc">${e?.serviceLabel ?? ""}</td></tr>`;
+                  return `<tr><td style="padding:8px 12px;border-bottom:1px solid #333;font-weight:600">${pt}</td><td style="padding:8px 12px;border-bottom:1px solid #333;color:#aaa">${e?.reason ?? ""}</td><td style="padding:8px 12px;border-bottom:1px solid #333;color:#c084fc">${(e?.tags ?? []).join(", ")}</td></tr>`;
                 }).join("")
               : `<tr><td colspan="3" style="padding:12px;color:#aaa;text-align:center">No pain points flagged</td></tr>`;
             const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Tulip R&D Pipeline Report</title>
