@@ -431,8 +431,16 @@ const WorkflowBuilderPanel = ({
             </div>
           ))}
         </div>
-        <div className="px-4 py-3 rounded-xl bg-green-400/5 border border-green-400/20 mb-4">
+        <div className="px-4 py-3 rounded-xl bg-green-400/5 border border-green-400/20 mb-4 flex items-center justify-between gap-3">
           <p className="text-xs font-body text-green-300">✓ Results confirmed for {presetTools.length > 0 ? presetTools.join(", ") : "your selected tools"}</p>
+          <a
+            href="/benchmark-methodology.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] font-display font-semibold text-green-300 border border-green-400/30 bg-green-400/10 hover:bg-green-400/20 px-3 py-1.5 rounded-full whitespace-nowrap transition-colors"
+          >
+            View Methodology ↗
+          </a>
         </div>
         {customTools.length > 0 && (
           <div className="px-4 py-3 rounded-xl bg-primary/8 border border-primary/25 mb-4">
