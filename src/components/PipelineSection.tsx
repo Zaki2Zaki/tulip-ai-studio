@@ -84,35 +84,40 @@ const getRecommendedServiceIds = (deepDive: string[]): string[] => {
 };
 
 // Simple Icons CDN (cdn.simpleicons.org/{slug}/ffffff) for verified brand icons
-// Initials badge fallback for tools not covered by Simple Icons
-type LogoEntry = { icon: string } | { initials: string; color: string };
+// url: direct brand asset URL; invert: true flips black logos to white on dark bg
+// Initials badge fallback for tools not covered by any public logo source
+type LogoEntry =
+  | { icon: string }
+  | { url: string; invert?: boolean }
+  | { initials: string; color: string };
+
 const TOOL_LOGOS: Record<string, LogoEntry> = {
   // ── Current Tools ──
-  "Blender":            { icon: "blender" },          // ✓ confirmed slug
-  "DaVinci Resolve":    { icon: "davinciresolve" },   // ✓ confirmed slug
-  "ElevenLabs":         { icon: "elevenlabs" },       // ✓ confirmed slug
-  "Houdini":            { icon: "houdini" },          // ✓ confirmed slug
-  "Kling AI":           { initials: "K",  color: "#8B5CF6" }, // not on Simple Icons
-  "Maya":               { icon: "autodesk" },         // ✓ Autodesk brand
-  "Midjourney":         { initials: "MJ", color: "#FFFFFF" }, // not on Simple Icons
-  "Nuke":               { icon: "nuke" },             // ✓ confirmed slug (Foundry)
-  "Runway ML":          { icon: "runway" },           // correct slug (not "runwayml")
-  "Stable Diffusion":   { icon: "stabilityai" },      // Stability AI brand slug
-  "Unity":              { icon: "unity" },            // ✓ confirmed slug
-  "Unreal Engine":      { icon: "unrealengine" },     // ✓ confirmed slug
+  "Blender":            { icon: "blender" },
+  "DaVinci Resolve":    { icon: "davinciresolve" },
+  "ElevenLabs":         { icon: "elevenlabs" },
+  "Houdini":            { icon: "houdini" },
+  "Kling AI":           { initials: "K",  color: "#8B5CF6" }, // no stable public logo URL
+  "Maya":               { icon: "autodesk" },
+  "Midjourney":         { initials: "MJ", color: "#FFFFFF" }, // no public brand URL
+  "Nuke":               { icon: "nuke" },
+  "Runway ML":          { icon: "runway" },
+  "Stable Diffusion":   { icon: "stabilityai" },
+  "Unity":              { icon: "unity" },
+  "Unreal Engine":      { icon: "unrealengine" },
   // ── Wishlist Tools ──
-  "Adobe Firefly":      { icon: "adobe" },            // Adobe brand (Firefly not separate)
-  "Claude AI":          { icon: "anthropic" },        // ✓ confirmed slug
-  "ComfyUI":            { initials: "CU", color: "#10B981" },
-  "Flux":               { initials: "FL", color: "#A855F7" }, // Black Forest Labs, not on SI
-  "GPT-4o":             { icon: "openai" },           // ✓ confirmed slug
-  "Hunyuan3D":          { initials: "H3", color: "#06B6D4" }, // Tencent, not on SI
-  "Leonardo AI":        { icon: "leonardo" },         // ✓ confirmed slug
-  "Luma Dream Machine": { initials: "LU", color: "#EC4899" },
-  "Meshy":              { initials: "ME", color: "#14B8A6" },
-  "Pika":               { initials: "PK", color: "#A855F7" },
-  "Sora":               { icon: "openai" },           // OpenAI product
-  "TripoSG":            { initials: "TR", color: "#F97316" },
+  "Adobe Firefly":      { icon: "adobe" },
+  "Claude AI":          { icon: "anthropic" },
+  "ComfyUI":            { url: "https://framerusercontent.com/images/3cNQMWKzIhIrQ5KErBm7dSmbd2w.png" },
+  "Flux":               { initials: "FL", color: "#A855F7" }, // Black Forest Labs — wordmark only
+  "GPT-4o":             { icon: "openai" },
+  "Hunyuan3D":          { initials: "H3", color: "#06B6D4" }, // Tencent — no public icon
+  "Leonardo AI":        { icon: "leonardo" },
+  "Luma Dream Machine": { url: "https://lumalabs.ai/images/brand/luma-ai/logo-black.svg", invert: true },
+  "Meshy":              { url: "https://www.meshy.ai/meshy-avatar.png" },
+  "Pika":               { url: "https://pika.art/favicon.ico" },
+  "Sora":               { icon: "openai" },
+  "TripoSG":            { url: "https://cdn-web.tripo3d.ai/tripo-web/logo/tripo-logo1.webp" },
 };
 
 const ToolLogo = ({ label }: { label: string }) => {
@@ -126,6 +131,19 @@ const ToolLogo = ({ label }: { label: string }) => {
         width={16}
         height={16}
         className="w-4 h-4 shrink-0 object-contain opacity-80"
+        onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+      />
+    );
+  }
+  if ("url" in logo) {
+    return (
+      <img
+        src={logo.url}
+        alt=""
+        width={16}
+        height={16}
+        className="w-4 h-4 shrink-0 object-contain opacity-80"
+        style={logo.invert ? { filter: "invert(1)" } : undefined}
         onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
       />
     );
