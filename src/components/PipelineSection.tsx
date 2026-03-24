@@ -105,18 +105,16 @@ const TOOL_LOGOS: Record<string, LogoEntry> = {
   "Unity":              { icon: "unity" },                           // white
   "Unreal Engine":      { icon: "unrealengine" },                    // white — brand near-black too dark
   // ── Wishlist Tools ──
-  "Adobe Firefly":      { icon: "adobefirefly",  color: "FA531C" }, // Adobe red-orange
-  "Claude AI":          { icon: "anthropic",     color: "D97706" }, // Anthropic amber
+  "Adobe Firefly":      { url: "https://commons.wikimedia.org/w/index.php?title=Special:FilePath&file=Adobe_Firefly_wordmark.svg", invert: false },
+  "Claude AI":          { url: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Claude_AI_logo.svg" },
   "ComfyUI":            { url: "https://framerusercontent.com/images/3cNQMWKzIhIrQ5KErBm7dSmbd2w.png" },
-  "Flux":               { initials: "FL", color: "#A855F7" },
-  "GPT-4o":             { icon: "openai" },                          // white
-  "Grok":               { icon: "xai" },                             // white — xAI brand
-  "Hunyuan3D":          { initials: "H3", color: "#06B6D4" },
-  "Leonardo AI":        { icon: "leonardo",      color: "F9A03F" }, // Leonardo gold
+  "GPT-4o":             { icon: "openai" },
+  "Grok":               { icon: "xai" },                             // white
+  "Hunyuan3D":          { url: "https://cdn-avatars.huggingface.co/v1/production/uploads/5dd96eb166059660ed1ee413/Lp3m-XLpjQGwBItlvn69q.png" },
+  "Leonardo AI":        { icon: "leonardo",      color: "F9A03F" },
   "Luma Dream Machine": { url: "https://lumalabs.ai/images/brand/luma-ai/logo-black.svg", invert: true },
   "Meshy":              { url: "https://www.meshy.ai/meshy-avatar.png" },
   "Pika":               { url: "https://pika.art/favicon.ico", invert: true },
-  "Sora":               { icon: "openai" },                          // white
   "TripoSG":            { url: "https://cdn-web.tripo3d.ai/tripo-web/logo/tripo-logo1.webp", invert: true },
 };
 
