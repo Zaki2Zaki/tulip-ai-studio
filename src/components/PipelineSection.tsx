@@ -60,7 +60,7 @@ const CURRENT_TOOLS = [
 
 const WISHLIST_TOOLS = [
   "Adobe Firefly", "Claude AI", "ComfyUI", "Flux",
-  "GPT-4o", "Hunyuan3D", "Leonardo AI", "Luma Dream Machine",
+  "GPT-4o", "Grok", "Hunyuan3D", "Leonardo AI", "Luma Dream Machine",
   "Meshy", "Pika", "Sora", "TripoSG",
 ];
 
