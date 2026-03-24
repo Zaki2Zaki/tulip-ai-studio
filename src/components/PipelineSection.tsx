@@ -54,14 +54,14 @@ const CATEGORY_META = {
 
 const CURRENT_TOOLS = [
   "Blender", "DaVinci Resolve", "ElevenLabs", "Houdini",
-  "Kling AI", "Maya", "Midjourney", "Nuke",
+  "Kling AI", "Maya", "Nuke",
   "Runway ML", "Stable Diffusion", "Unity", "Unreal Engine",
 ];
 
 const WISHLIST_TOOLS = [
-  "Adobe Firefly", "Claude AI", "ComfyUI", "Flux",
+  "Adobe Firefly", "Claude AI", "ComfyUI",
   "GPT-4o", "Grok", "Hunyuan3D", "Leonardo AI", "Luma Dream Machine",
-  "Meshy", "Pika", "Sora", "TripoSG",
+  "Meshy", "Pika", "TripoSG",
 ];
 
 // Maps each pain point → recommended service IDs + reason shown on Validate screen
