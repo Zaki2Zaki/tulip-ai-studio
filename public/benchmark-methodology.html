@@ -32,6 +32,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /* ── HEADER ── */
   header {
     background: var(--navy);
     padding: 0;
@@ -116,6 +117,7 @@
     50%      { opacity: 0.5; transform: scale(0.8); }
   }
 
+  /* ── MAIN ── */
   main {
     max-width: 960px;
     margin: 0 auto;
@@ -141,6 +143,7 @@
     background: var(--border);
   }
 
+  /* ── METRIC CARDS ── */
   .metrics-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -206,6 +209,7 @@
     line-height: 1.55;
   }
 
+  /* ── DETAIL SECTIONS ── */
   .detail-section {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -220,7 +224,11 @@
     padding: 24px 28px;
     border-bottom: 1px solid var(--border);
   }
-  .detail-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .detail-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
   .dot-blue  { background: var(--royal); }
   .dot-gold  { background: var(--gold); }
   .dot-green { background: var(--mint); }
@@ -284,6 +292,7 @@
   .calc-gold  { border-left-color: var(--gold); }
   .calc-green { border-left-color: var(--mint); }
 
+  /* ── SUMMARY TABLE ── */
   .summary-section {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -312,7 +321,10 @@
     border-radius: 4px;
     border: 1px solid var(--border);
   }
-  table { width: 100%; border-collapse: collapse; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
   thead th {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
@@ -332,12 +344,20 @@
   }
   tbody tr:last-child td { border-bottom: none; }
   tbody tr:hover td { background: var(--code-bg); }
-  .td-formula { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); }
-  .td-result { font-family: 'DM Serif Display', serif; font-size: 22px; }
+  .td-formula {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .td-result {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+  }
   .result-blue  { color: var(--royal); }
   .result-gold  { color: #b8880a; }
   .result-green { color: #1aaa87; }
 
+  /* ── CAVEAT ── */
   .caveat-box {
     background: rgba(232,184,75,0.07);
     border: 1px solid rgba(232,184,75,0.3);
@@ -349,9 +369,120 @@
     align-items: flex-start;
   }
   .caveat-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
-  .caveat-box h4 { font-size: 14px; font-weight: 600; color: #9a6f06; margin-bottom: 6px; }
-  .caveat-box p { font-size: 13px; color: #b8930f; line-height: 1.65; }
+  .caveat-box h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #9a6f06;
+    margin-bottom: 6px;
+  }
+  .caveat-box p {
+    font-size: 13px;
+    color: #b8930f;
+    line-height: 1.65;
+  }
 
+  /* ── APPENDIX ── */
+  .appendix-section {
+    border-top: 2px solid var(--border);
+    padding-top: 48px;
+    margin-top: 8px;
+  }
+  .appendix-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .appendix-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+  .ref-group { margin-bottom: 36px; }
+  .ref-group-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .ref-group-title .ref-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .ref-item {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 0 12px;
+    margin-bottom: 14px;
+    align-items: baseline;
+  }
+  .ref-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: right;
+    padding-top: 1px;
+  }
+  .ref-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 2px;
+    line-height: 1.45;
+  }
+  .ref-meta {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 3px;
+  }
+  .ref-url {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--royal);
+    word-break: break-all;
+    text-decoration: none;
+    opacity: 0.85;
+    transition: opacity 0.15s;
+  }
+  .ref-url:hover { opacity: 1; text-decoration: underline; }
+  .ref-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .tag-primary { background: rgba(45,62,158,0.1); color: var(--royal); }
+  .tag-support  { background: rgba(78,207,179,0.12); color: #138a6e; }
+
+  .used-in-box {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 24px;
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .used-in-box strong { color: var(--text); }
+
+  /* ── FOOTER ── */
   footer {
     border-top: 1px solid var(--border);
     padding: 24px 32px;
@@ -363,9 +494,19 @@
     flex-wrap: wrap;
     gap: 12px;
   }
-  .footer-brand { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--muted);
+  }
   .footer-brand strong { color: var(--text); }
-  .footer-note { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
 
   @media (max-width: 600px) {
     .header-inner { grid-template-columns: 1fr; gap: 16px; }
@@ -533,6 +674,159 @@ With GenAI:         <span class="highlight">~1.25 days</span>    <span class="co
       <p>These are <strong>illustrative benchmarks</strong> based on industry data ranges documented in the Tulip Technology R&amp;D Guide — not live measurements from a specific studio. For a real client engagement, baseline values would be replaced with their actual tracked metrics (current asset hours, specific failure ticket rate, sprint velocity) and the same formula applied against post-implementation data.</p>
     </div>
   </div>
+
+  <!-- ══ APPENDIX ══ -->
+  <section class="appendix-section">
+    <div class="section-label" style="margin-top:0;">Appendix</div>
+    <h2 class="appendix-title">Citations &amp; References</h2>
+    <p class="appendix-sub">All benchmark inputs are derived from the sources below. References are grouped by the metric they inform. Where a source informs multiple metrics, it appears under its primary application.</p>
+
+    <!-- GROUP A: Asset Creation Speed -->
+    <div class="ref-group">
+      <div class="ref-group-title"><span class="ref-dot" style="background:var(--royal);"></span>Asset Creation Speed — 60% Improvement</div>
+
+      <div class="ref-item">
+        <div class="ref-num">[1]</div>
+        <div class="ref-content">
+          <div class="ref-title">Autodesk Redshift — Production Pipeline Benchmarks <span class="ref-tag tag-primary">Primary</span></div>
+          <div class="ref-meta">Autodesk, 2022. Documents AI-assisted asset creation throughput benchmarks used to establish the 100-hour baseline and GenAI compression figures.</div>
+          <a class="ref-url" href="https://www.redshift3d.com/" target="_blank">https://www.redshift3d.com/</a>
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <div class="ref-num">[2]</div>
+        <div class="ref-content">
+          <div class="ref-title">MASV — "The Ultimate Guide to VFX Pipelines" <span class="ref-tag tag-primary">Primary</span></div>
+          <div class="ref-meta">MASV, 2023. Industry pipeline guide documenting end-to-end asset creation workflows and bottlenecks in VFX production, supporting the 15–30 minute GenAI generation benchmark.</div>
+          <a class="ref-url" href="https://massive.io/vfx/vfx-pipeline/" target="_blank">https://massive.io/vfx/vfx-pipeline/</a>
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <div class="ref-num">[3]</div>
+        <div class="ref-content">
+          <div class="ref-title">Epic Games — "Virtual Production Field Guide" <span class="ref-tag tag-primary">Primary</span></div>
+          <div class="ref-meta">Epic Games, 2021. Documents real-time and AI-assisted production speeds and pipeline acceleration in virtual production environments.</div>
+          <a class="ref-url" href="https://www.unrealengine.com/en-US/virtual-production" target="_blank">https://www.unrealengine.com/en-US/virtual-production</a>
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <div class="ref-num">[4]</div>
+        <div class="ref-content">
+          <div class="ref-title">Foundry — VFX Pipeline Insights <span class="ref-tag tag-support">Supporting</span></div>
+          <div class="ref-meta">Foundry (n.d.). Industry documentation on VFX pipeline structure, stage timings, and tool integration friction used to contextualise QA and polish overhead.</div>
+          <a class="ref-url" href="https://www.foundry.com/industries/film-and-tv/vfx-pipeline" target="_blank">https://www.foundry.com/industries/film-and-tv/vfx-pipeline</a>
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <div class="ref-num">[5]</div>
+        <div class="ref-content">
+          <div class="ref-title">CG Spectrum — VFX Pipeline Guide <span class="ref-tag tag-support">Supporting</span></div>
+          <div class="ref-meta">CG Spectrum (n.d.). Educational breakdown of full pipeline stages from concept through final render, supporting the realistic mid-point throughput estimate of ~40 hours.</div>
+          <a class="ref-url" href="https://www.cgspectrum.com/blog/vfx-pipeline" target="_blank">https://www.cgspectrum.com/blog/vfx-pipeline</a>
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <div class="ref-num">[6]</div>
+        <div class="ref-content">
+          <div class="ref-title">Tulip Technology — R&amp;D Guide to GenAI for Games, 3D Animation &amp; VFX <span class="ref-tag tag-primary">Primary</span></div>
+          <div class="ref-meta">Tulip Technology, 2025. Primary proprietary research document. States the impact result: "100 Hours → 15–30 Minutes" for GenAI production pipelines across concept, modelling, animation, VFX, and final output stages.</div>
+          <span class="ref-url" style="cursor:default;">Internal R&amp;D Document — Tulip Technology (2025)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP B: Pipeline Failure Reduction -->
+    <div class="ref-group">
+      <div class="ref-group-title"><span class="ref-dot" style="background:var(--gold);"></span>Pipeline Failure Reduction — 85% Improvement</div>
+
+      <div class="ref-item">
+        <div class="ref-num">[7]</div>
+        <div class="ref-content">
+          <div class="ref-title">Grewal, B., Lin, D., Doucet, L., &amp; Bezemer, C.P. — "An Empirical Study of Delayed Games on Steam" <span class="ref-tag tag-primary">Primary</span></div>
+          <div class="ref-meta">arXiv:2204.11191v1 [cs.GT], April 2022. Large-scale empirical study of Steam release delays. Documents rising rates of pipeline failures and integration issues contributing to studio delays — underpinning the 78% weekly failure baseline.</div>
+          <a class="ref-url" href="https://arxiv.org/abs/2204.11191" target="_blank">https://arxiv.org/abs/2204.11191</a>
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <div class="ref-num">[8]</div>
+        <div class="ref-content">
+          <div class="ref-title">How to Avoid Delays in Game Art Pipeline <span class="ref-tag tag-primary">Primary</span></div>
+          <div class="ref-meta">Industry report, 2024. Examines sources of pipeline failure and version-control breakdown in game art production, used to establish the 78% weekly integration failure rate.</div>
+          <span class="ref-url" style="cursor:default;">Industry Report (2024) — cited in Tulip Technology R&amp;D Guide</span>
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <div class="ref-num">[9]</div>
+        <div class="ref-content">
+          <div class="ref-title">Diversion.dev — "Survey Results 2024: Version Control for Game Dev &amp; Creative Industries" <span class="ref-tag tag-primary">Primary</span></div>
+          <div class="ref-meta">Diversion, 2024. Developer survey documenting the frequency of version control and pipeline issues in game development studios — corroborates the 78% weekly failure rate and 45% losing 1+ hour/week to troubleshooting.</div>
+          <a class="ref-url" href="https://www.diversion.dev/blog/survey-results-2024-version-control-for-game-dev-creative-industries---virtual-production-archviz-xr" target="_blank">https://www.diversion.dev/blog/survey-results-2024-version-control...</a>
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <div class="ref-num">[10]</div>
+        <div class="ref-content">
+          <div class="ref-title">GriffIn GP — 2023 Game Development Report <span class="ref-tag tag-support">Supporting</span></div>
+          <div class="ref-meta">GriffIn GP, 2024. Annual game development industry report covering pipeline efficiency, tool fragmentation costs, and studio productivity. Supports the siloed pipeline cost analysis.</div>
+          <a class="ref-url" href="https://griffingp.com/wp-content/uploads/2024/02/2023-Game-Development-Report.pdf" target="_blank">https://griffingp.com/wp-content/uploads/2024/02/2023-Game-Development-Report.pdf</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP C: Iteration Speed -->
+    <div class="ref-group">
+      <div class="ref-group-title"><span class="ref-dot" style="background:var(--mint);"></span>Iteration Speed Gain — 75% Improvement</div>
+
+      <div class="ref-item">
+        <div class="ref-num">[11]</div>
+        <div class="ref-content">
+          <div class="ref-title">The True Cost of Rework in VFX <span class="ref-tag tag-primary">Primary</span></div>
+          <div class="ref-meta">Industry report, 2022. Quantifies the financial cost of rework cycles in VFX production, including the $350K average per major iteration cycle and the AA Studio range of $100K–$400K. Establishes the manual 3–7 day cycle baseline.</div>
+          <span class="ref-url" style="cursor:default;">Industry Report (2022) — cited in Tulip Technology R&amp;D Guide</span>
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <div class="ref-num">[12]</div>
+        <div class="ref-content">
+          <div class="ref-title">Tulip Technology — R&amp;D Guide to GenAI for Games, 3D Animation &amp; VFX (Pre-Production Section) <span class="ref-tag tag-primary">Primary</span></div>
+          <div class="ref-meta">Tulip Technology, 2025. Documents rework savings of $350K avg per major iteration cycle (AA: $100K–$400K; AAA: $500K–$3M+) and names Runway ML, Kling AI, and Stable Diffusion as tools enabling faster concept-to-review cycles.</div>
+          <span class="ref-url" style="cursor:default;">Internal R&amp;D Document — Tulip Technology (2025)</span>
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <div class="ref-num">[13]</div>
+        <div class="ref-content">
+          <div class="ref-title">Guarch Browne, H. — "To What Extent Do Generative AI Tools Democratize High-Level VFX?" <span class="ref-tag tag-support">Supporting</span></div>
+          <div class="ref-meta">Investigative Study, Student ID 33103561. Practice-based comparative analysis recreating a VFX shot with manual vs. AI workflows. Demonstrates AI workflow speed advantage, supporting the faster concept-to-review cycle estimates.</div>
+          <span class="ref-url" style="cursor:default;">InvestigativeStudy_33103561_HugoGuarchBrowne.pdf — Project Knowledge</span>
+        </div>
+      </div>
+
+      <div class="ref-item">
+        <div class="ref-num">[14]</div>
+        <div class="ref-content">
+          <div class="ref-title">JETIR — "Independent 3D Animation in the Modern Era: Tools, Techniques and Trends" (JETIR2507537) <span class="ref-tag tag-support">Supporting</span></div>
+          <div class="ref-meta">Journal of Emerging Technologies and Innovative Research, Vol. 12, Issue 7, July 2025. ISSN 2349-5162. Covers AI-assisted animation tools (DeepMotion, Rhubarb Lip Sync, RIFE) and procedural workflows that reduce iteration cycle time.</div>
+          <a class="ref-url" href="https://www.jetir.org/view?paper=JETIR2507537" target="_blank">https://www.jetir.org/view?paper=JETIR2507537</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="used-in-box">
+      <strong>Cross-reference note:</strong> References [1]–[6] inform the Asset Creation Speed metric. References [7]–[10] inform the Pipeline Failure Reduction metric. References [11]–[14] inform the Iteration Speed Gain metric. The Tulip Technology R&amp;D Guide (refs [6] &amp; [12]) is the primary synthesis document aggregating all third-party sources above into the benchmark framework.
+    </div>
+
+  </section>
 
 </main>
 
