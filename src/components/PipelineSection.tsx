@@ -104,8 +104,7 @@ const TOOL_LOGOS: Record<string, LogoEntry> = {
   "Runway ML":          { icon: "runway" },                          // white — Runway's brand
   "Stable Diffusion":   { icon: "stabilityai",   color: "A78BFA" }, // Stability purple
   "Unity":              { icon: "unity" },                           // white
-  "Unreal Engine":      { icon: "unrealengine",  color: "0E1128" }, // too dark — use white
-  "Unreal Engine":      { icon: "unrealengine" },
+  "Unreal Engine":      { icon: "unrealengine" },                    // white — brand near-black too dark
   // ── Wishlist Tools ──
   "Adobe Firefly":      { icon: "adobefirefly",  color: "FA531C" }, // Adobe red-orange
   "Claude AI":          { icon: "anthropic",     color: "D97706" }, // Anthropic amber
