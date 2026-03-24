@@ -255,7 +255,7 @@ const WorkflowBuilderPanel = ({
           <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Discovery: Pain Points Mapped</span>
         </div>
         <p className="font-display text-lg font-bold text-white mb-1">
-          AI identified <span className="text-gradient-gold">{selected.length} friction point{selected.length !== 1 ? "s" : ""}</span> in your pipeline
+          We mapped <span className="text-gradient-gold">{selected.length} friction point{selected.length !== 1 ? "s" : ""}</span> in your pipeline
         </p>
         <p className="text-xs text-white/70 font-body mb-4">Select which to deep-dive — click any row to mark it.</p>
 
