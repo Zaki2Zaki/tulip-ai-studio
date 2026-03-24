@@ -465,7 +465,7 @@ const WorkflowBuilderPanel = ({
                     </div>
                     <div className="flex flex-wrap gap-1 justify-end shrink-0 max-w-[45%]">
                       {entry.tags.map((tag) => (
-                        <span key={tag} className="text-[10px] font-display font-semibold text-white bg-primary/20 border border-primary/35 px-2 py-0.5 rounded whitespace-nowrap">
+                        <span key={tag} className="text-sm font-display font-semibold text-white bg-primary/20 border border-primary/35 px-3 py-1 rounded whitespace-nowrap">
                           {tag}
                         </span>
                       ))}
