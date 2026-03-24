@@ -1006,7 +1006,7 @@ const PipelineSection = () => {
                     <ProvenStat icon={Rocket} staticDisplay="Significantly" label="faster creative iteration" delay={0.75} />
                     <ProvenStat icon={CheckCircle2} target={85} suffix="%" label="fewer integration failures & rework cycles" delay={0.85} />
                   </div>
-                  <p className="mt-5 text-[10px] text-white/60 font-body text-center leading-relaxed">
+                  <p className="mt-5 text-xs text-white font-body text-center leading-relaxed">
                     *Based on industry benchmarks. Results vary by studio size and pipeline maturity. Our aim is to make it 1–3× better production workflow for you.
                   </p>
                   <p className="mt-3 text-xs text-white font-body text-center">
