@@ -669,7 +669,7 @@ const WorkflowBuilderPanel = ({
             const body = deepDive.length > 0
               ? deepDive.map((pt) => {
                   const e = DEEP_DIVE_SERVICE_MAP[pt];
-                  return `• ${pt}\n  → ${e?.serviceLabel ?? ""}: ${e?.reason ?? ""}`;
+                  return `• ${pt}\n  → ${(e?.tags ?? []).join(", ")}: ${e?.reason ?? ""}`;
                 }).join("\n")
               : "No pain points flagged.";
             const subject = encodeURIComponent("My Tulip R&D Pipeline Report");
