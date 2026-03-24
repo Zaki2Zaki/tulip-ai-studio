@@ -321,7 +321,7 @@
 .nav-rainbow-btn::after {
   content: '';
   position: absolute;
-  inset: 1.5px;
+  inset: 0.5px;
   border-radius: 9999px;
   background: hsl(var(--background));
   z-index: -1;
