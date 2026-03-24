@@ -609,13 +609,15 @@ const ProvenStat = ({
   target,
   suffix = "",
   prefix = "",
+  staticDisplay,
   label,
   delay = 0,
 }: {
   icon: React.ElementType;
-  target: number;
+  target?: number;
   suffix?: string;
   prefix?: string;
+  staticDisplay?: string;
   label: string;
   delay?: number;
 }) => {
@@ -626,11 +628,11 @@ const ProvenStat = ({
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (!inView) return;
+    if (!inView || staticDisplay || target === undefined) return;
     const controls = animate(count, target, { duration: 1.6, delay, ease: "easeOut" });
     const unsub = rounded.on("change", (v) => setDisplay(v));
     return () => { controls.stop(); unsub(); };
-  }, [inView, target, delay, count, rounded]);
+  }, [inView, target, delay, count, rounded, staticDisplay]);
 
   return (
     <div ref={ref} className="flex flex-col items-center text-center gap-2">
@@ -638,7 +640,7 @@ const ProvenStat = ({
         <Icon className="w-4 h-4 text-primary" />
       </div>
       <span className="font-display text-2xl md:text-3xl font-bold text-gradient-gold">
-        {prefix}{display}{suffix}
+        {staticDisplay ?? `${prefix}${display}${suffix}`}
       </span>
       <p className="text-xs text-white/80 font-body leading-snug">{label}</p>
     </div>
