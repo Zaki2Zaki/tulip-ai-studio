@@ -94,8 +94,7 @@ type LogoEntry =
 const TOOL_LOGOS: Record<string, LogoEntry> = {
   // ── Current Tools ──
   "Blender":            { icon: "blender",       color: "E87D0D" }, // Blender orange
-  "DaVinci Resolve":    { icon: "davinciresolve", color: "233A51" }, // too dark — use white
-  "DaVinci Resolve":    { icon: "davinciresolve" },
+  "DaVinci Resolve":    { icon: "davinciresolve" },                  // white — brand dark blue too dark
   "ElevenLabs":         { icon: "elevenlabs",    color: "F97316" }, // orange
   "Houdini":            { icon: "houdini",       color: "FF6B35" }, // Houdini orange
   "Kling AI":           { initials: "K",  color: "#8B5CF6" },
