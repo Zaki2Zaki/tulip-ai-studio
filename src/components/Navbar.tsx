@@ -219,7 +219,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-5">
             <div
               onMouseEnter={() => openDropdown("usecases")}
               onMouseLeave={closeDropdown}
@@ -227,7 +227,7 @@ const Navbar = () => {
             >
               <Link
                 to="/case-studies"
-                className="flex items-center gap-1 text-[13px] font-body font-medium text-white/80 hover:text-foreground transition-colors"
+                className="flex items-center gap-1 text-[12px] font-body font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap"
               >
                 Case Studies
                 <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${activeDropdown === "usecases" ? "rotate-180" : ""}`} />
@@ -236,7 +236,7 @@ const Navbar = () => {
 
             <Link
               to="/library"
-              className="text-[13px] font-body font-medium text-white/80 hover:text-foreground transition-colors"
+              className="text-[12px] font-body font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap"
             >
               R&D Library
             </Link>
@@ -246,7 +246,7 @@ const Navbar = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-[13px] font-body font-medium text-white/80 hover:text-foreground transition-colors"
+                  className="text-[12px] font-body font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap"
                 >
                   {link.label}
                 </a>
@@ -254,7 +254,7 @@ const Navbar = () => {
                 <Link
                   key={link.href}
                   to={`/${link.href}`}
-                  className="text-[13px] font-body font-medium text-white/80 hover:text-foreground transition-colors"
+                  className="text-[12px] font-body font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap"
                 >
                   {link.label}
                 </Link>
@@ -266,14 +266,14 @@ const Navbar = () => {
               onClick={() => {
                 setTimeout(() => window.dispatchEvent(new CustomEvent("tulip:open-demo")), 400);
               }}
-              className="text-[13px] font-body font-semibold border border-primary/60 text-primary px-5 py-2 rounded-full hover:bg-primary/10 transition-all min-h-[36px] flex items-center gap-1.5"
+              className="nav-rainbow-btn text-[12px] font-body font-semibold text-white px-4 py-2 rounded-full hover:opacity-90 transition-opacity min-h-[34px] flex items-center"
             >
-              Build AI Pipeline
+              Build AI Pipeline Demo
             </a>
 
             <a
               href={isHome ? "#estimator" : "/#estimator"}
-              className="text-[13px] font-body font-semibold bg-primary text-primary-foreground px-5 py-2 rounded-full hover:opacity-90 transition-all min-h-[36px] flex items-center"
+              className="text-[12px] font-body font-semibold bg-primary text-primary-foreground px-4 py-2 rounded-full hover:opacity-90 transition-all min-h-[34px] flex items-center whitespace-nowrap"
             >
               Get a Quote
             </a>
