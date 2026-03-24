@@ -83,32 +83,35 @@ const getRecommendedServiceIds = (deepDive: string[]): string[] => {
   return Array.from(ids);
 };
 
-// Simple Icons CDN slugs for tools that have brand icons
+// Simple Icons CDN (cdn.simpleicons.org/{slug}/ffffff) for verified brand icons
+// Initials badge fallback for tools not covered by Simple Icons
 type LogoEntry = { icon: string } | { initials: string; color: string };
 const TOOL_LOGOS: Record<string, LogoEntry> = {
-  "Blender":            { icon: "blender" },
-  "DaVinci Resolve":    { icon: "davinciresolve" },
-  "ElevenLabs":         { icon: "elevenlabs" },
-  "Houdini":            { initials: "H",  color: "#FF6B35" },
-  "Kling AI":           { initials: "K",  color: "#8B5CF6" },
-  "Maya":               { icon: "autodesk" },
-  "Midjourney":         { icon: "midjourney" },
-  "Nuke":               { initials: "N",  color: "#64D2FF" },
-  "Runway ML":          { icon: "runwayml" },
-  "Stable Diffusion":   { icon: "stablediffusion" },
-  "Unity":              { icon: "unity" },
-  "Unreal Engine":      { icon: "unrealengine" },
-  "Adobe Firefly":      { icon: "adobefirefly" },
-  "Claude AI":          { icon: "anthropic" },
+  // ── Current Tools ──
+  "Blender":            { icon: "blender" },          // ✓ confirmed slug
+  "DaVinci Resolve":    { icon: "davinciresolve" },   // ✓ confirmed slug
+  "ElevenLabs":         { icon: "elevenlabs" },       // ✓ confirmed slug
+  "Houdini":            { initials: "H",  color: "#FF6B35" }, // not on Simple Icons
+  "Kling AI":           { initials: "K",  color: "#8B5CF6" }, // not on Simple Icons
+  "Maya":               { icon: "autodesk" },         // ✓ Autodesk brand
+  "Midjourney":         { initials: "MJ", color: "#FFFFFF" }, // not on Simple Icons
+  "Nuke":               { initials: "N",  color: "#64D2FF" }, // not on Simple Icons
+  "Runway ML":          { icon: "runway" },           // correct slug (not "runwayml")
+  "Stable Diffusion":   { icon: "stabilityai" },      // Stability AI brand slug
+  "Unity":              { icon: "unity" },            // ✓ confirmed slug
+  "Unreal Engine":      { icon: "unrealengine" },     // ✓ confirmed slug
+  // ── Wishlist Tools ──
+  "Adobe Firefly":      { icon: "adobe" },            // Adobe brand (Firefly not separate)
+  "Claude AI":          { icon: "anthropic" },        // ✓ confirmed slug
   "ComfyUI":            { initials: "CU", color: "#10B981" },
-  "Flux":               { initials: "FL", color: "#A855F7" },
-  "GPT-4o":             { icon: "openai" },
-  "Hunyuan3D":          { initials: "H3", color: "#06B6D4" },
+  "Flux":               { initials: "FL", color: "#A855F7" }, // Black Forest Labs, not on SI
+  "GPT-4o":             { icon: "openai" },           // ✓ confirmed slug
+  "Hunyuan3D":          { initials: "H3", color: "#06B6D4" }, // Tencent, not on SI
   "Leonardo AI":        { initials: "LA", color: "#F59E0B" },
   "Luma Dream Machine": { initials: "LU", color: "#EC4899" },
   "Meshy":              { initials: "ME", color: "#14B8A6" },
   "Pika":               { initials: "PK", color: "#A855F7" },
-  "Sora":               { icon: "openai" },
+  "Sora":               { icon: "openai" },           // OpenAI product
   "TripoSG":            { initials: "TR", color: "#F97316" },
 };
 
