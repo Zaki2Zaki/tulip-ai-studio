@@ -106,18 +106,18 @@ const TOOL_LOGOS: Record<string, LogoEntry> = {
   "Unity":              { icon: "unity" },
   "Unreal Engine":      { icon: "unrealengine" },
   // ── Wishlist Tools ──
-  "Adobe Firefly":      { url: "https://cdn.worldvectorlogo.com/logos/adobe-firefly-1.svg" }, // keep color — no invert
+  "Adobe Firefly":      { icon: "adobefirefly" },   // Simple Icons slug
   "Claude AI":          { icon: "anthropic" },
   "ComfyUI":            { url: "https://framerusercontent.com/images/3cNQMWKzIhIrQ5KErBm7dSmbd2w.png" },
-  "Flux":               { url: "https://cdn.worldvectorlogo.com/logos/flux-ai.svg", invert: true },
+  "Flux":               { initials: "FL", color: "#A855F7" }, // not on Simple Icons
   "GPT-4o":             { icon: "openai" },
-  "Grok":               { url: "https://cdn.worldvectorlogo.com/logos/grok-3.svg", invert: true },
-  "Hunyuan3D":          { url: "https://cdn.worldvectorlogo.com/logos/hunyuan.svg", invert: true },
-  "Leonardo AI":        { url: "https://cdn.worldvectorlogo.com/logos/leonardo-ai-1.svg", invert: true },
+  "Grok":               { icon: "xai" },            // xAI on Simple Icons
+  "Hunyuan3D":          { initials: "H3", color: "#06B6D4" }, // not on Simple Icons
+  "Leonardo AI":        { icon: "leonardo" },
   "Luma Dream Machine": { url: "https://lumalabs.ai/images/brand/luma-ai/logo-black.svg", invert: true },
   "Meshy":              { url: "https://www.meshy.ai/meshy-avatar.png" },
   "Pika":               { url: "https://pika.art/favicon.ico" },
-  "Sora":               { url: "https://cdn.worldvectorlogo.com/logos/sora-3.svg", invert: true },
+  "Sora":               { icon: "openai" },          // OpenAI product — no separate Simple Icons slug
   "TripoSG":            { url: "https://cdn-web.tripo3d.ai/tripo-web/logo/tripo-logo1.webp" },
 };
 
