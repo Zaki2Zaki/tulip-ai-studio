@@ -98,8 +98,7 @@ const TOOL_LOGOS: Record<string, LogoEntry> = {
   "ElevenLabs":         { icon: "elevenlabs",    color: "F97316" }, // orange
   "Houdini":            { icon: "houdini",       color: "FF6B35" }, // Houdini orange
   "Kling AI":           { initials: "K",  color: "#8B5CF6" },
-  "Maya":               { icon: "autodesk",      color: "0696D7" }, // Autodesk blue
-  "Midjourney":         { initials: "MJ", color: "#FFFFFF" },
+  "Maya":               { icon: "autodeskmaya",  color: "0696D7" }, // Autodesk Maya blue
   "Nuke":               { icon: "nuke",          color: "64D2FF" }, // Nuke cyan
   "Runway ML":          { icon: "runway" },                          // white — Runway's brand
   "Stable Diffusion":   { icon: "stabilityai",   color: "A78BFA" }, // Stability purple
