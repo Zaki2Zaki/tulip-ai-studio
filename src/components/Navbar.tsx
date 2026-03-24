@@ -127,9 +127,9 @@ const Navbar = () => {
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 h-12">
-          {/* Logo + text-scale button — logo always left, button to its right */}
-          <div className="flex items-center gap-3 ml-72">
-            <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground shrink-0 order-first">
+          {/* Logo + text-scale button */}
+          <div className="flex items-center gap-2">
+            <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground shrink-0">
               TULIP<span className="text-gradient-gold"> TECH</span>
             </Link>
 
