@@ -65,13 +65,13 @@ const WISHLIST_TOOLS = [
 ];
 
 // Maps each pain point → recommended service IDs + reason shown on Validate screen
-const DEEP_DIVE_SERVICE_MAP: Record<string, { serviceIds: string[]; serviceLabel: string; reason: string }> = {
-  "Tool integration failures":   { serviceIds: ["benchmarking"],              serviceLabel: "Tool Benchmarking",                    reason: "Test & validate the right tool connections for your stack" },
-  "Version control conflicts":   { serviceIds: ["architecture"],              serviceLabel: "Architecture Blueprint",               reason: "Design a pipeline architecture that prevents conflicts" },
-  "Slow asset iteration cycles": { serviceIds: ["integration"],               serviceLabel: "Adoption & Integration",               reason: "Automate handoffs to compress iteration loops" },
-  "Manual review bottlenecks":   { serviceIds: ["integration"],               serviceLabel: "Adoption & Integration",               reason: "AI-assisted review workflows reduce approval delays" },
-  "No AI tooling in pipeline":   { serviceIds: ["research", "workshops"],     serviceLabel: "GenAI Research + Workshops",           reason: "Identify the right tools to adopt, then train your team" },
-  "Siloed team workflows":       { serviceIds: ["architecture", "workshops"], serviceLabel: "Architecture Blueprint + Workshops",   reason: "Unified pipeline design and team-wide enablement" },
+const DEEP_DIVE_SERVICE_MAP: Record<string, { serviceIds: string[]; tags: string[]; reason: string }> = {
+  "No AI tooling in pipeline":   { serviceIds: ["research", "benchmarking", "workshops"], tags: ["GenAI Research", "Tool Benchmarking", "Workshops & Education"], reason: "Identify the right tools to adopt, then train your team" },
+  "Tool integration failures":   { serviceIds: ["benchmarking", "demos"],                 tags: ["Tool Benchmarking", "Demos & Sandboxes"],                       reason: "Test & validate the right tool connections for your stack" },
+  "Manual review bottlenecks":   { serviceIds: ["research", "integration"],               tags: ["GenAI Research", "Adoption & Integration"],                    reason: "AI-assisted review workflows reduce approval delays" },
+  "Version control conflicts":   { serviceIds: ["architecture", "integration"],           tags: ["Architecture Blueprint", "Adoption & Integration"],            reason: "Design a pipeline architecture that prevents conflicts" },
+  "Slow asset iteration cycles": { serviceIds: ["integration"],                           tags: ["Adoption & Integration"],                                      reason: "Automate handoffs to compress iteration loops" },
+  "Siloed team workflows":       { serviceIds: ["architecture", "workshops", "demos"],    tags: ["Architecture Blueprint", "Workshops & Education", "Demos & Sandboxes"], reason: "Unified pipeline design and team-wide enablement" },
 };
 
 const getRecommendedServiceIds = (deepDive: string[]): string[] => {
