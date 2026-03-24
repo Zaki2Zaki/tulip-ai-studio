@@ -910,12 +910,21 @@ const PipelineSection = () => {
                 <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }} className="mt-6 p-5 rounded-2xl bg-primary/5 border border-primary/10 backdrop-blur-sm">
                   <p className="text-[10px] tracking-[0.15em] uppercase font-body font-semibold text-primary mb-4">Proven Results</p>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                    <ProvenStat icon={Clock} target={60} suffix="%" prefix="Up to " label="Reduction in asset creation time" delay={0.65} />
-                    <ProvenStat icon={Rocket} target={3} suffix="×" label="Faster environment prototyping" delay={0.75} />
-                    <ProvenStat icon={CheckCircle2} target={85} suffix="%" label="Fewer pipeline integration failures" delay={0.85} />
+                    <ProvenStat icon={Clock} target={50} suffix="%" prefix="Up to " label="reduction in asset pipeline time" delay={0.65} />
+                    <ProvenStat icon={Rocket} staticDisplay="Significantly" label="faster creative iteration" delay={0.75} />
+                    <ProvenStat icon={CheckCircle2} target={85} suffix="%" label="fewer integration failures & rework cycles" delay={0.85} />
                   </div>
-                  <p className="mt-4 text-[10px] text-white font-body text-center">
+                  <p className="mt-5 text-[10px] text-white/60 font-body text-center leading-relaxed">
+                    *Based on industry benchmarks. Results vary by studio size and pipeline maturity. Our aim is to make it 1–3× better production workflow for you.
+                  </p>
+                  <p className="mt-3 text-xs text-white font-body text-center">
                     Sources: Generative Environments for ICVFX (SP Studios) • Hunyuan3D Pipeline (Tencent) • Democratization of VFX via GenAI (UWL Research)
+                  </p>
+                  <p className="mt-3 text-xs text-white font-body text-center">
+                    Findings informed by peer-reviewed research.{" "}
+                    <a href="/library" className="text-primary underline underline-offset-2 hover:opacity-80 transition-opacity">
+                      Explore our R&D Library →
+                    </a>
                   </p>
                 </motion.div>
               </motion.div>
