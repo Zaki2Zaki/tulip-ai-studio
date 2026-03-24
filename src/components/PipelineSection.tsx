@@ -437,7 +437,7 @@ const WorkflowBuilderPanel = ({
             href="/benchmark-methodology.html"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[10px] font-display font-semibold text-green-300 border border-green-400/30 bg-green-400/10 hover:bg-green-400/20 px-3 py-1.5 rounded-full whitespace-nowrap transition-colors"
+            className="text-sm font-display font-semibold text-green-300/80 border border-green-400/20 bg-transparent hover:bg-green-400/10 px-4 py-2 rounded-full whitespace-nowrap transition-colors"
           >
             View Methodology ↗
           </a>
