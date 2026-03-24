@@ -101,8 +101,8 @@ const TOOL_LOGOS: Record<string, LogoEntry> = {
   "Maya":               { icon: "autodesk" },
   "Midjourney":         { initials: "MJ", color: "#FFFFFF" }, // no public brand URL
   "Nuke":               { icon: "nuke" },
-  "Runway ML":          { icon: "runway" },
-  "Stable Diffusion":   { icon: "stabilityai" },
+  "Runway ML":          { url: "https://cdn.worldvectorlogo.com/logos/runway-ai.svg", invert: true },
+  "Stable Diffusion":   { url: "https://cdn.worldvectorlogo.com/logos/stability-ai-1.svg", invert: true },
   "Unity":              { icon: "unity" },
   "Unreal Engine":      { icon: "unrealengine" },
   // ── Wishlist Tools ──
