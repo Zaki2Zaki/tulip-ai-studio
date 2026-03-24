@@ -107,7 +107,7 @@ const TOOL_LOGOS: Record<string, LogoEntry> = {
   "Flux":               { initials: "FL", color: "#A855F7" }, // Black Forest Labs, not on SI
   "GPT-4o":             { icon: "openai" },           // ✓ confirmed slug
   "Hunyuan3D":          { initials: "H3", color: "#06B6D4" }, // Tencent, not on SI
-  "Leonardo AI":        { initials: "LA", color: "#F59E0B" },
+  "Leonardo AI":        { icon: "leonardo" },         // ✓ confirmed slug
   "Luma Dream Machine": { initials: "LU", color: "#EC4899" },
   "Meshy":              { initials: "ME", color: "#14B8A6" },
   "Pika":               { initials: "PK", color: "#A855F7" },
