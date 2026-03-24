@@ -314,7 +314,7 @@ const WorkflowBuilderPanel = ({
         <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
         <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Prototype: Select AI Tools</span>
       </div>
-      <p className="font-display text-lg font-bold text-white mb-1">Which tools will we test?</p>
+      <p className="font-display text-lg font-bold text-white mb-1">Which tools are in your pipeline?</p>
       <p className="text-xs text-white/80 font-body mb-4">Select from your current pipeline or add to your wishlist.</p>
 
       <p className="text-[20px] font-display font-semibold uppercase tracking-wider text-white mb-2">Current Tools</p>
