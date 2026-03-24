@@ -83,42 +83,44 @@ const getRecommendedServiceIds = (deepDive: string[]): string[] => {
   return Array.from(ids);
 };
 
-// Simple Icons CDN (cdn.simpleicons.org/{slug}/ffffff) for verified brand icons
+// Simple Icons CDN: cdn.simpleicons.org/{slug}/{hex} — brand color used when specified, else white
 // url: direct brand asset URL; invert: true flips black logos to white on dark bg
 // Initials badge fallback for tools not covered by any public logo source
 type LogoEntry =
-  | { icon: string }
+  | { icon: string; color?: string }   // color overrides the default white
   | { url: string; invert?: boolean }
   | { initials: string; color: string };
 
 const TOOL_LOGOS: Record<string, LogoEntry> = {
   // ── Current Tools ──
-  "Blender":            { icon: "blender" },
+  "Blender":            { icon: "blender",       color: "E87D0D" }, // Blender orange
+  "DaVinci Resolve":    { icon: "davinciresolve", color: "233A51" }, // too dark — use white
   "DaVinci Resolve":    { icon: "davinciresolve" },
-  "ElevenLabs":         { icon: "elevenlabs" },
-  "Houdini":            { icon: "houdini" },
-  "Kling AI":           { initials: "K",  color: "#8B5CF6" }, // no stable public logo URL
-  "Maya":               { icon: "autodesk" },
-  "Midjourney":         { initials: "MJ", color: "#FFFFFF" }, // no public brand URL
-  "Nuke":               { icon: "nuke" },
-  "Runway ML":          { icon: "runway" },
-  "Stable Diffusion":   { icon: "stabilityai" },
-  "Unity":              { icon: "unity" },
+  "ElevenLabs":         { icon: "elevenlabs",    color: "F97316" }, // orange
+  "Houdini":            { icon: "houdini",       color: "FF6B35" }, // Houdini orange
+  "Kling AI":           { initials: "K",  color: "#8B5CF6" },
+  "Maya":               { icon: "autodesk",      color: "0696D7" }, // Autodesk blue
+  "Midjourney":         { initials: "MJ", color: "#FFFFFF" },
+  "Nuke":               { icon: "nuke",          color: "64D2FF" }, // Nuke cyan
+  "Runway ML":          { icon: "runway" },                          // white — Runway's brand
+  "Stable Diffusion":   { icon: "stabilityai",   color: "A78BFA" }, // Stability purple
+  "Unity":              { icon: "unity" },                           // white
+  "Unreal Engine":      { icon: "unrealengine",  color: "0E1128" }, // too dark — use white
   "Unreal Engine":      { icon: "unrealengine" },
   // ── Wishlist Tools ──
-  "Adobe Firefly":      { icon: "adobefirefly" },   // Simple Icons slug
-  "Claude AI":          { icon: "anthropic" },
+  "Adobe Firefly":      { icon: "adobefirefly",  color: "FA531C" }, // Adobe red-orange
+  "Claude AI":          { icon: "anthropic",     color: "D97706" }, // Anthropic amber
   "ComfyUI":            { url: "https://framerusercontent.com/images/3cNQMWKzIhIrQ5KErBm7dSmbd2w.png" },
-  "Flux":               { initials: "FL", color: "#A855F7" }, // not on Simple Icons
-  "GPT-4o":             { icon: "openai" },
-  "Grok":               { icon: "xai" },            // xAI on Simple Icons
-  "Hunyuan3D":          { initials: "H3", color: "#06B6D4" }, // not on Simple Icons
-  "Leonardo AI":        { icon: "leonardo" },
+  "Flux":               { initials: "FL", color: "#A855F7" },
+  "GPT-4o":             { icon: "openai" },                          // white
+  "Grok":               { icon: "xai" },                             // white — xAI brand
+  "Hunyuan3D":          { initials: "H3", color: "#06B6D4" },
+  "Leonardo AI":        { icon: "leonardo",      color: "F9A03F" }, // Leonardo gold
   "Luma Dream Machine": { url: "https://lumalabs.ai/images/brand/luma-ai/logo-black.svg", invert: true },
   "Meshy":              { url: "https://www.meshy.ai/meshy-avatar.png" },
-  "Pika":               { url: "https://pika.art/favicon.ico" },
-  "Sora":               { icon: "openai" },          // OpenAI product — no separate Simple Icons slug
-  "TripoSG":            { url: "https://cdn-web.tripo3d.ai/tripo-web/logo/tripo-logo1.webp" },
+  "Pika":               { url: "https://pika.art/favicon.ico", invert: true },
+  "Sora":               { icon: "openai" },                          // white
+  "TripoSG":            { url: "https://cdn-web.tripo3d.ai/tripo-web/logo/tripo-logo1.webp", invert: true },
 };
 
 const ToolLogo = ({ label }: { label: string }) => {
@@ -127,11 +129,11 @@ const ToolLogo = ({ label }: { label: string }) => {
   if ("icon" in logo) {
     return (
       <img
-        src={`https://cdn.simpleicons.org/${logo.icon}/ffffff`}
+        src={`https://cdn.simpleicons.org/${logo.icon}/${logo.color ?? "ffffff"}`}
         alt=""
         width={16}
         height={16}
-        className="w-4 h-4 shrink-0 object-contain opacity-80"
+        className="w-4 h-4 shrink-0 object-contain opacity-90"
         onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
       />
     );
@@ -143,8 +145,8 @@ const ToolLogo = ({ label }: { label: string }) => {
         alt=""
         width={16}
         height={16}
-        className="w-4 h-4 shrink-0 object-contain opacity-80"
-        style={logo.invert ? { filter: "invert(1)" } : undefined}
+        className="w-4 h-4 shrink-0 object-contain opacity-90"
+        style={logo.invert ? { filter: "brightness(0) invert(1)" } : undefined}
         onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
       />
     );
