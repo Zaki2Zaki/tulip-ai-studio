@@ -91,11 +91,11 @@ const TOOL_LOGOS: Record<string, LogoEntry> = {
   "Blender":            { icon: "blender" },          // ✓ confirmed slug
   "DaVinci Resolve":    { icon: "davinciresolve" },   // ✓ confirmed slug
   "ElevenLabs":         { icon: "elevenlabs" },       // ✓ confirmed slug
-  "Houdini":            { initials: "H",  color: "#FF6B35" }, // not on Simple Icons
+  "Houdini":            { icon: "houdini" },          // ✓ confirmed slug
   "Kling AI":           { initials: "K",  color: "#8B5CF6" }, // not on Simple Icons
   "Maya":               { icon: "autodesk" },         // ✓ Autodesk brand
   "Midjourney":         { initials: "MJ", color: "#FFFFFF" }, // not on Simple Icons
-  "Nuke":               { initials: "N",  color: "#64D2FF" }, // not on Simple Icons
+  "Nuke":               { icon: "nuke" },             // ✓ confirmed slug (Foundry)
   "Runway ML":          { icon: "runway" },           // correct slug (not "runwayml")
   "Stable Diffusion":   { icon: "stabilityai" },      // Stability AI brand slug
   "Unity":              { icon: "unity" },            // ✓ confirmed slug
