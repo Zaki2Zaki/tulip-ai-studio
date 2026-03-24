@@ -450,8 +450,8 @@ const WorkflowBuilderPanel = ({
         {deepDive.length > 0 && (
           <div className="rounded-xl border border-primary/25 bg-primary/5 mb-4 overflow-hidden">
             <div className="px-4 py-2.5 border-b border-primary/15 flex items-center justify-between">
-              <p className="text-xs font-display font-semibold uppercase tracking-wider text-primary">Your Deep-Dive Focus</p>
-              <span className="text-xs font-body text-white">{deepDive.length} flagged</span>
+              <p className="text-xs font-display font-semibold uppercase tracking-wider text-primary">Your {deepDive.length} Deep-Dive Focus</p>
+              <span className="text-xs font-body text-white">Service Recommendations</span>
             </div>
             <div className="divide-y divide-border/15">
               {deepDive.map((pt) => {
@@ -463,9 +463,13 @@ const WorkflowBuilderPanel = ({
                       <p className="text-sm font-body text-white font-semibold">{pt}</p>
                       <p className="text-xs text-white font-body mt-0.5">{entry.reason}</p>
                     </div>
-                    <span className="text-xs font-display font-semibold text-white bg-primary/20 border border-primary/35 px-3 py-1 rounded shrink-0 whitespace-nowrap">
-                      {entry.serviceLabel}
-                    </span>
+                    <div className="flex flex-wrap gap-1 justify-end shrink-0 max-w-[45%]">
+                      {entry.tags.map((tag) => (
+                        <span key={tag} className="text-[10px] font-display font-semibold text-white bg-primary/20 border border-primary/35 px-2 py-0.5 rounded whitespace-nowrap">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
                 );
               })}
