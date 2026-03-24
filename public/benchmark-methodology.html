@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GenAI Benchmark Methodology — Tulip Technology</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy:   #1a2557;
+    --royal:  #2d3e9e;
+    --tulip:  #3d52c4;
+    --sky:    #5b78e8;
+    --gold:   #e8b84b;
+    --amber:  #f5d07a;
+    --mint:   #4ecfb3;
+    --bg:     #f4f5fb;
+    --surface:#ffffff;
+    --border: #dde1f3;
+    --text:   #1a2557;
+    --muted:  #6b779e;
+    --code-bg:#eef0f9;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  header {
+    background: var(--navy);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 80% 50%, rgba(93,120,232,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 10% 80%, rgba(78,207,179,0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 48px 32px 56px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 28px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .logo-wrap {
+    width: 72px; height: 72px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    backdrop-filter: blur(4px);
+    flex-shrink: 0;
+  }
+  .logo-wrap svg { width: 44px; height: 44px; }
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 8px;
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 4vw, 40px);
+    color: #ffffff;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .header-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    max-width: 520px;
+  }
+  .demo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    background: rgba(232,184,75,0.15);
+    border: 1px solid rgba(232,184,75,0.35);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+    color: var(--amber);
+  }
+  .demo-badge::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 56px;
+  }
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .metric-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(26,37,87,0.1);
+  }
+  .metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+  }
+  .card-blue::before  { background: linear-gradient(90deg, var(--royal), var(--sky)); }
+  .card-gold::before  { background: linear-gradient(90deg, #c4960d, var(--gold)); }
+  .card-green::before { background: linear-gradient(90deg, #1aaa87, var(--mint)); }
+
+  .metric-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+  .card-blue  .metric-icon { background: rgba(45,62,158,0.1); }
+  .card-gold  .metric-icon { background: rgba(232,184,75,0.15); }
+  .card-green .metric-icon { background: rgba(78,207,179,0.12); }
+
+  .metric-pct {
+    font-family: 'DM Serif Display', serif;
+    font-size: 52px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .card-blue  .metric-pct { color: var(--royal); }
+  .card-gold  .metric-pct { color: #b8880a; }
+  .card-green .metric-pct { color: #1aaa87; }
+
+  .metric-title {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .metric-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .detail-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .detail-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .dot-blue  { background: var(--royal); }
+  .dot-gold  { background: var(--gold); }
+  .dot-green { background: var(--mint); }
+
+  .detail-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--text);
+  }
+  .detail-pct {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .pct-blue  { background: rgba(45,62,158,0.1);  color: var(--royal); }
+  .pct-gold  { background: rgba(232,184,75,0.15); color: #9a6f06; }
+  .pct-green { background: rgba(78,207,179,0.15); color: #138a6e; }
+
+  .detail-body { padding: 24px 28px; }
+
+  .source-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 4px 10px;
+    margin-bottom: 16px;
+  }
+
+  .detail-body p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .calc-block {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.8;
+    color: var(--text);
+    overflow-x: auto;
+  }
+  .calc-block .comment { color: var(--muted); }
+  .calc-block .highlight { color: var(--royal); font-weight: 500; }
+  .calc-blue  { border-left-color: var(--royal); }
+  .calc-gold  { border-left-color: var(--gold); }
+  .calc-green { border-left-color: var(--mint); }
+
+  .summary-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+  .summary-head {
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .summary-head h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--text);
+  }
+  .formula-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--code-bg);
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 12px 28px;
+    text-align: left;
+    background: var(--code-bg);
+    border-bottom: 1px solid var(--border);
+  }
+  tbody td {
+    padding: 14px 28px;
+    font-size: 14px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover td { background: var(--code-bg); }
+  .td-formula { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); }
+  .td-result { font-family: 'DM Serif Display', serif; font-size: 22px; }
+  .result-blue  { color: var(--royal); }
+  .result-gold  { color: #b8880a; }
+  .result-green { color: #1aaa87; }
+
+  .caveat-box {
+    background: rgba(232,184,75,0.07);
+    border: 1px solid rgba(232,184,75,0.3);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    gap: 14px;
+    margin-bottom: 48px;
+    align-items: flex-start;
+  }
+  .caveat-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+  .caveat-box h4 { font-size: 14px; font-weight: 600; color: #9a6f06; margin-bottom: 6px; }
+  .caveat-box p { font-size: 13px; color: #b8930f; line-height: 1.65; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 32px;
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-brand { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
+  .footer-brand strong { color: var(--text); }
+  .footer-note { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+
+  @media (max-width: 600px) {
+    .header-inner { grid-template-columns: 1fr; gap: 16px; }
+    .logo-wrap { width: 52px; height: 52px; }
+    main { padding: 32px 20px 60px; }
+    .detail-header { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <svg viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g fill="white" opacity="0.95">
+          <path d="M50 8 C44 8 38 16 38 26 C38 36 44 42 50 42 C56 42 62 36 62 26 C62 16 56 8 50 8Z"/>
+          <rect x="47" y="4" width="6" height="10" rx="3"/>
+          <path d="M22 52 C14 44 14 32 22 28 C30 24 40 32 42 44 C38 52 30 58 22 52Z"/>
+          <path d="M78 52 C86 44 86 32 78 28 C70 24 60 32 58 44 C62 52 70 58 78 52Z"/>
+          <path d="M30 78 C20 80 14 72 18 62 C22 52 36 50 46 58 C46 68 40 76 30 78Z"/>
+          <path d="M70 78 C80 80 86 72 82 62 C78 52 64 50 54 58 C54 68 60 76 70 78Z"/>
+          <circle cx="50" cy="52" r="8"/>
+        </g>
+      </svg>
+    </div>
+    <div class="header-copy">
+      <div class="eyebrow">Tulip Technology · R&amp;D Intelligence</div>
+      <h1>GenAI Benchmark<br/>Methodology</h1>
+      <p class="header-sub">A full breakdown of how each benchmark percentage is derived, grounded in industry research data from the Tulip Technology R&amp;D Guide for Games, 3D Animation &amp; VFX.</p>
+      <div class="demo-badge">DEMO DATA — Illustrative Benchmarks</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <div class="section-label">Key Performance Indicators</div>
+
+  <div class="metrics-grid">
+    <div class="metric-card card-blue">
+      <div class="metric-icon">⚡</div>
+      <div class="metric-pct">60%</div>
+      <div class="metric-title">Asset Creation Speed</div>
+      <p class="metric-desc">Net throughput gain across the full asset pipeline after integration, QA, and human oversight are factored in.</p>
+    </div>
+    <div class="metric-card card-gold">
+      <div class="metric-icon">🛡️</div>
+      <div class="metric-pct">85%</div>
+      <div class="metric-title">Pipeline Failure Reduction</div>
+      <p class="metric-desc">Drop in weekly integration failures when replacing fragmented tool stacks with a unified AI OS pipeline.</p>
+    </div>
+    <div class="metric-card card-green">
+      <div class="metric-icon">🔄</div>
+      <div class="metric-pct">75%</div>
+      <div class="metric-title">Iteration Speed Gain</div>
+      <p class="metric-desc">Reduction in concept-to-review cycle time enabled by AI-assisted tools cutting full rework loops.</p>
+    </div>
+  </div>
+
+  <div class="section-label">Calculation Methodology</div>
+
+  <div class="detail-section">
+    <div class="detail-header">
+      <div class="detail-dot dot-blue"></div>
+      <div class="detail-title">Asset Creation Speed</div>
+      <div class="detail-pct pct-blue">60% Improvement</div>
+    </div>
+    <div class="detail-body">
+      <div class="source-tag">📄 Source · Tulip Technology R&amp;D Guide — Production Pipeline Data</div>
+      <p>The R&amp;D guide documents that GenAI production compresses raw asset creation from <strong>100 hours → 15–30 minutes</strong>. However, realistic pipeline throughput must account for integration, QA review, polish passes, and human oversight layered on top of raw generation time.</p>
+      <div class="calc-block calc-blue">
+<span class="comment">// Baseline vs. GenAI-assisted pipeline</span>
+Baseline (manual):     <span class="highlight">100 hours</span>
+With GenAI:            <span class="highlight">~40 hours</span>   <span class="comment">// mid-point after QA, polish, oversight</span>
+
+<span class="comment">// Formula: (Old − New) / Old × 100</span>
+% Improvement = (100 − 40) / 100 × 100 = <span class="highlight">60%</span>
+      </div>
+      <p>The raw generation time is 15–30 min, but realistic pipeline throughput with integration, review cycles, and iteration lands around a <strong>60% net throughput gain</strong> across the full asset pipeline.</p>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="detail-header">
+      <div class="detail-dot dot-gold"></div>
+      <div class="detail-title">Pipeline Failure Reduction</div>
+      <div class="detail-pct pct-gold">85% Improvement</div>
+    </div>
+    <div class="detail-body">
+      <div class="source-tag">📄 Source · Tulip Technology R&amp;D Guide — Studio Pipeline Research</div>
+      <p>The R&amp;D guide states that <strong>78% of studios</strong> experience pipeline/version-control failures weekly, and <strong>45% lose 1+ hour/week</strong> to troubleshooting siloed, unoptimised pipelines.</p>
+      <div class="calc-block calc-gold">
+<span class="comment">// Baseline vs. unified AI OS toolchain</span>
+Baseline failure rate:   <span class="highlight">~78%</span>  <span class="comment">// of teams with weekly integration failures</span>
+With AI OS / unified:    <span class="highlight">~12%</span>  <span class="comment">// residual failure rate</span>
+
+<span class="comment">// Formula: (Old − New) / Old × 100</span>
+% Reduction = (78 − 12) / 78 × 100 ≈ <span class="highlight">85%</span>
+      </div>
+      <p>The 85% reflects the reduction in integration failures when replacing fragmented tool stacks with a unified AI-assisted pipeline — the <em>AI OS Wrapper</em> architecture.</p>
+    </div>
+  </div>
+
+  <div class="detail-section">
+    <div class="detail-header">
+      <div class="detail-dot dot-green"></div>
+      <div class="detail-title">Iteration Speed Gain</div>
+      <div class="detail-pct pct-green">75% Improvement</div>
+    </div>
+    <div class="detail-body">
+      <div class="source-tag">📄 Source · Tulip Technology R&amp;D Guide — Rework Cost Analysis</div>
+      <p>The R&amp;D guide documents rework costs averaging <strong>$350K per major iteration cycle</strong> (AA studios: $100K–$400K), driven by slow, manual feedback loops across teams of 10–30 developers.</p>
+      <div class="calc-block calc-green">
+<span class="comment">// Manual vs. GenAI-assisted iteration cycle</span>
+Manual cycle:       <span class="highlight">~5 days avg</span>   <span class="comment">// range: 3–7 days, full team 10–30 devs</span>
+With GenAI:         <span class="highlight">~1.25 days</span>    <span class="comment">// AI-assisted, fewer full rework loops</span>
+
+<span class="comment">// Formula: (Old − New) / Old × 100</span>
+% Reduction = (5 − 1.25) / 5 × 100 = <span class="highlight">75%</span>
+      </div>
+      <p>This reflects faster concept-to-review cycles enabled by tools like <strong>Runway ML</strong>, <strong>Kling AI</strong>, and <strong>Stable Diffusion</strong> — significantly reducing the number of full rework loops required per feature.</p>
+    </div>
+  </div>
+
+  <div class="section-label" style="margin-top:48px;">Summary</div>
+
+  <div class="summary-section">
+    <div class="summary-head">
+      <h3>Formula Reference</h3>
+      <div class="formula-label">% gain = (Old − New) / Old × 100</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Formula</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Asset Creation Speed</strong></td>
+          <td class="td-formula">(100h − 40h) / 100h</td>
+          <td class="td-result result-blue">60%</td>
+        </tr>
+        <tr>
+          <td><strong>Pipeline Failure Reduction</strong></td>
+          <td class="td-formula">(78% − 12%) / 78%</td>
+          <td class="td-result result-gold">85%</td>
+        </tr>
+        <tr>
+          <td><strong>Iteration Speed Gain</strong></td>
+          <td class="td-formula">(5 days − 1.25 days) / 5 days</td>
+          <td class="td-result result-green">75%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="caveat-box">
+    <div class="caveat-icon">⚠️</div>
+    <div>
+      <h4>Important — Demo Data Disclaimer</h4>
+      <p>These are <strong>illustrative benchmarks</strong> based on industry data ranges documented in the Tulip Technology R&amp;D Guide — not live measurements from a specific studio. For a real client engagement, baseline values would be replaced with their actual tracked metrics (current asset hours, specific failure ticket rate, sprint velocity) and the same formula applied against post-implementation data.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-brand">
+    <strong>Tulip Technology</strong>
+    <span>· GenAI R&amp;D Intelligence</span>
+  </div>
+  <div class="footer-note">Benchmark data sourced from Tulip Technology R&amp;D Guide — Games, 3D Animation &amp; VFX</div>
+</footer>
+
+</body>
+</html>
