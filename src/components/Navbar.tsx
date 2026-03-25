@@ -346,6 +346,7 @@ const Navbar = () => {
                       img: "/pipeline-diagram.jpg",
                       imgAlt: "Production pipeline",
                       imgPosition: "center 50%",
+                      bgPosition: "center 50%",
                       paper: { href: "https://dev.epicgames.com/documentation/en-us/unreal-engine/virtual-production-field-guide", label: "White Paper" },
                       repo:  { href: "https://github.com/EpicGames/UnrealEngine", label: "GitHub" },
                     },
