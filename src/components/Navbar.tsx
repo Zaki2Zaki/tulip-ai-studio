@@ -373,14 +373,21 @@ const Navbar = () => {
                   ].map((item) => (
                     <div key={item.to} className="group flex flex-col bg-[#111] hover:bg-[#1a1a1a] transition-colors">
                       {/* Image */}
-                      <Link to={item.to} onClick={() => setActiveDropdown(null)} className="block overflow-hidden" style={{ aspectRatio: "16/9" }}>
-                        <img
-                          src={item.img}
-                          alt={item.imgAlt}
-                          className="w-full h-full object-cover transition-all duration-300"
-                          style={{ filter: "brightness(0.75) saturate(0.8)", objectPosition: (item as any).imgPosition ?? "center center" }}
-                          onMouseOver={(e) => { (e.currentTarget as HTMLImageElement).style.filter = "brightness(0.9) saturate(1)"; (e.currentTarget as HTMLImageElement).style.transform = "scale(1.04)"; }}
-                          onMouseOut={(e) => { (e.currentTarget as HTMLImageElement).style.filter = "brightness(0.75) saturate(0.8)"; (e.currentTarget as HTMLImageElement).style.transform = "scale(1)"; }}
+                      <Link
+                        to={item.to}
+                        onClick={() => setActiveDropdown(null)}
+                        className="block overflow-hidden transition-all duration-300 group/img"
+                        style={{ aspectRatio: "16/9" }}
+                      >
+                        <div
+                          className="w-full h-full transition-all duration-300"
+                          style={{
+                            backgroundImage: `url(${item.img})`,
+                            backgroundSize: (item as any).bgPosition ? "auto 300%" : "cover",
+                            backgroundPosition: (item as any).bgPosition ?? "center center",
+                            backgroundRepeat: "no-repeat",
+                            filter: "brightness(0.75) saturate(0.8)",
+                          }}
                         />
                       </Link>
                       {/* Body */}
