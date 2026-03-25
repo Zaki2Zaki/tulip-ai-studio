@@ -23,8 +23,8 @@ const ContactSection = () => {
           transition={{ duration: 0.8 }}
           className="font-display text-3xl md:text-5xl font-bold mb-4"
         >
-          Let's build your
-          <span className="text-gradient-gold"> future</span>
+          Let's find your
+          <span className="text-gradient-gold"> three biggest leaks</span> in 30 minutes.
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -32,7 +32,7 @@ const ContactSection = () => {
           transition={{ delay: 0.2 }}
           className="font-body mb-10 text-sm md:text-base text-white/80 leading-relaxed max-w-lg mx-auto"
         >
-          Ready to build systems that help you grow without the chaos. Let's collaborate on your product vision, strategy, and roadmap for intelligent tool-sets.
+          You walk away knowing your top pipeline cost risks and exactly what to prioritize — whether we work together or not. No pitch. No pressure. Just clarity.
         </motion.p>
 
         <motion.div
