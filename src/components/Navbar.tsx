@@ -335,6 +335,7 @@ const Navbar = () => {
                       img: "/pipeline-diagram.jpg",
                       imgAlt: "Pre-Production storyboard",
                       imgPosition: "center 0%",
+                      bgPosition: "center 0%",
                       paper: { href: "https://www.jetir.org/papers/JETIR2507537.pdf", label: "White Paper" },
                       repo:  { href: "https://github.com/wonderunit/storyboarder", label: "GitHub" },
                     },
