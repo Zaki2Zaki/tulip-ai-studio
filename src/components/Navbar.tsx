@@ -357,6 +357,7 @@ const Navbar = () => {
                       img: "/pipeline-diagram.jpg",
                       imgAlt: "Post-production",
                       imgPosition: "center 100%",
+                      bgPosition: "center 100%",
                       paper: { href: "https://www.obukhov.ai/repainting_3d_assets", label: "White Paper" },
                       repo:  { href: "https://github.com/toshas/torch-fidelity", label: "GitHub" },
                     },
