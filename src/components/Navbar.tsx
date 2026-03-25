@@ -315,31 +315,101 @@ const Navbar = () => {
               transition={{ duration: 0.2, ease: "easeOut" }}
               onMouseEnter={() => openDropdown("usecases")}
               onMouseLeave={closeDropdown}
-              className="absolute left-0 right-0 top-full bg-card/95 backdrop-blur-2xl border-b border-border/30 shadow-xl"
+              className="absolute left-0 right-0 top-full bg-[#111]/98 backdrop-blur-2xl border-b border-border/30 shadow-2xl"
             >
-              <div className="max-w-5xl mx-auto py-8 px-6 lg:px-8">
-                <p className="text-[11px] tracking-[0.15em] uppercase text-white font-body mb-4 font-medium">Case Studies</p>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 mb-8">
+              <div className="max-w-6xl mx-auto py-9 px-6 lg:px-10">
+
+                {/* Tagline */}
+                <p className="text-lg font-display font-semibold text-white mb-8 max-w-2xl leading-snug" style={{ letterSpacing: "-0.01em" }}>
+                  Teamed by researchers and developers from the gaming industry who are unafraid to challenge the status quo.
+                </p>
+
+                {/* Case Studies */}
+                <p className="text-[10px] tracking-[0.18em] uppercase text-white/30 font-body font-medium mb-4">Case Studies</p>
+                <div className="grid grid-cols-4 mb-8" style={{ gap: "1px", background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.07)" }}>
                   {[
-                    { label: "Pre-Production", to: "/case-studies/pre-production", desc: "AI storyboard automation & previz" },
-                    { label: "Production Pipeline", to: "/case-studies/production", desc: "Unity tools for zero-G visuals" },
-                    { label: "Post-Production", to: "/case-studies/post-production", desc: "AI render polish & compositing" },
-                    { label: "Steam Game Delays", to: "/case-studies/steam-delays", desc: "48% of 23k titles delayed" },
+                    {
+                      label: "Pre-Production",
+                      to: "/case-studies/pre-production",
+                      desc: "AI storyboard automation & previz — from script to animatic in minutes.",
+                      img: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600&q=70",
+                      imgAlt: "Pre-Production storyboard",
+                      paper: { href: "https://www.jetir.org/papers/JETIR2507537.pdf", label: "White Paper" },
+                      repo:  { href: "https://github.com/wonderunit/storyboarder", label: "GitHub" },
+                    },
+                    {
+                      label: "Production Pipeline",
+                      to: "/case-studies/production",
+                      desc: "Unity tools for zero-G visuals — AI-augmented physics and motion synthesis.",
+                      img: "https://images.unsplash.com/photo-1535016120720-40c646be5580?w=600&q=70",
+                      imgAlt: "Production pipeline zero-G",
+                      paper: { href: "https://dev.epicgames.com/documentation/en-us/unreal-engine/virtual-production-field-guide", label: "White Paper" },
+                      repo:  { href: "https://github.com/EpicGames/UnrealEngine", label: "GitHub" },
+                    },
+                    {
+                      label: "Post-Production",
+                      to: "/case-studies/post-production",
+                      desc: "AI render polish & compositing — perceptual quality enhancement without full re-renders.",
+                      img: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&q=70",
+                      imgAlt: "Post-production render",
+                      paper: { href: "https://www.obukhov.ai/repainting_3d_assets", label: "White Paper" },
+                      repo:  { href: "https://github.com/toshas/torch-fidelity", label: "GitHub" },
+                    },
+                    {
+                      label: "Steam Game Delays",
+                      to: "/case-studies/steam-delays",
+                      desc: "48% of 23k titles delayed — empirical study on pipeline gaps and release failure patterns.",
+                      img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=70",
+                      imgAlt: "Steam game delays research",
+                      paper: { href: "https://arxiv.org/abs/2204.11191", label: "White Paper" },
+                      repo:  { href: "https://steamdb.info", label: "Dataset" },
+                    },
                   ].map((item) => (
-                    <Link
-                      key={item.to}
-                      to={item.to}
-                      onClick={() => setActiveDropdown(null)}
-                      className="iridescent-hover group p-4 rounded-xl transition-colors min-h-[44px]"
-                    >
-                      <p className="text-sm font-body font-semibold text-foreground mb-0.5 group-hover:text-primary transition-colors">{item.label}</p>
-                      <p className="text-xs font-body text-white leading-snug">{item.desc}</p>
-                    </Link>
+                    <div key={item.to} className="group flex flex-col bg-[#111] hover:bg-[#1a1a1a] transition-colors">
+                      {/* Image */}
+                      <Link to={item.to} onClick={() => setActiveDropdown(null)} className="block overflow-hidden" style={{ aspectRatio: "16/9" }}>
+                        <img
+                          src={item.img}
+                          alt={item.imgAlt}
+                          className="w-full h-full object-cover transition-all duration-300"
+                          style={{ filter: "brightness(0.75) saturate(0.8)" }}
+                          onMouseOver={(e) => { (e.currentTarget as HTMLImageElement).style.filter = "brightness(0.9) saturate(1)"; (e.currentTarget as HTMLImageElement).style.transform = "scale(1.04)"; }}
+                          onMouseOut={(e) => { (e.currentTarget as HTMLImageElement).style.filter = "brightness(0.75) saturate(0.8)"; (e.currentTarget as HTMLImageElement).style.transform = "scale(1)"; }}
+                        />
+                      </Link>
+                      {/* Body */}
+                      <Link to={item.to} onClick={() => setActiveDropdown(null)} className="flex-1 px-4 pt-3.5 pb-2.5 block">
+                        <p className="text-[11px] font-display font-semibold uppercase tracking-wide text-foreground mb-1.5 leading-snug">{item.label}</p>
+                        <p className="text-[11px] font-body text-white/50 leading-relaxed">{item.desc}</p>
+                      </Link>
+                      {/* Footer links */}
+                      <div className="px-4 pb-3.5 pt-2.5 flex gap-3 border-t border-white/[0.06]">
+                        <a
+                          href={item.paper.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-[11px] font-body text-white/40 hover:text-white transition-colors"
+                        >
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                          {item.paper.label}
+                        </a>
+                        <a
+                          href={item.repo.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-[11px] font-body text-white/40 hover:text-white transition-colors"
+                        >
+                          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.49.5.09.66-.22.66-.48v-1.7C6.73 19.91 6.14 18 6.14 18c-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.56 9.56 0 0112 6.8c.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.01 10.01 0 0022 12c0-5.52-4.48-10-10-10z"/></svg>
+                          {item.repo.label}
+                        </a>
+                      </div>
+                    </div>
                   ))}
                 </div>
 
-                <p className="text-[11px] tracking-[0.15em] uppercase text-white font-body mb-4 font-medium">Use Cases</p>
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+                {/* Use Cases */}
+                <p className="text-[10px] tracking-[0.18em] uppercase text-white/30 font-body font-medium mb-4">Use Cases</p>
+                <div className="grid grid-cols-4 gap-0 border-t border-white/[0.07] pt-6">
                   {useCases.map((uc) => {
                     const Icon = uc.icon;
                     return (
@@ -347,19 +417,20 @@ const Navbar = () => {
                         key={uc.slug}
                         to={`/use-cases/${uc.slug}`}
                         onClick={() => setActiveDropdown(null)}
-                        className="iridescent-hover group flex items-start gap-3 p-4 rounded-xl transition-colors min-h-[44px]"
+                        className="group flex items-start gap-3 py-2.5 pr-5 hover:opacity-75 transition-opacity"
                       >
-                        <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors mt-0.5">
-                          <Icon className="w-4 h-4 text-primary" />
+                        <div className="w-[34px] h-[34px] rounded-lg flex items-center justify-center shrink-0 mt-0.5" style={{ background: "rgba(255,255,255,0.07)" }}>
+                          <Icon className="w-4 h-4 text-white/60" />
                         </div>
                         <div>
-                          <p className="text-sm font-body font-semibold text-foreground mb-0.5">{uc.shortTitle}</p>
-                          <p className="text-xs font-body text-white leading-snug">{uc.tagline}</p>
+                          <p className="text-[13px] font-body font-medium text-foreground mb-0.5">{uc.shortTitle}</p>
+                          <p className="text-[11.5px] font-body text-white/40 leading-snug">{uc.tagline}</p>
                         </div>
                       </Link>
                     );
                   })}
                 </div>
+
               </div>
             </motion.div>
           )}
