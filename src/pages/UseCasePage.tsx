@@ -132,7 +132,7 @@ const UseCasePage = () => {
                         className="mt-10 rounded-2xl overflow-hidden border border-border/40"
                       >
                         <img
-                          src="/AI OS Wrapper dog diagram.png"
+                          src="/ai-os-wrapper-diagram.png"
                           alt="AI OS Wrapper — The Unified 3D Innovation Workflow"
                           className="w-full h-auto"
                         />
