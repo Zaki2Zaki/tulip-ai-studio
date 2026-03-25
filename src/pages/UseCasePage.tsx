@@ -123,6 +123,21 @@ const UseCasePage = () => {
                         </motion.div>
                       ))}
                     </div>
+
+                    {slug === "ai-operating-system" && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 16 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                        className="mt-10 rounded-2xl overflow-hidden border border-border/40"
+                      >
+                        <img
+                          src="/ai-os-wrapper-diagram.jpg"
+                          alt="AI OS Wrapper — The Unified 3D Innovation Workflow"
+                          className="w-full h-auto"
+                        />
+                      </motion.div>
+                    )}
                   </motion.div>
                 </TabsContent>
               ))}
