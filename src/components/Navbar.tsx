@@ -375,7 +375,7 @@ const Navbar = () => {
                           src={item.img}
                           alt={item.imgAlt}
                           className="w-full h-full object-cover transition-all duration-300"
-                          style={{ filter: "brightness(0.75) saturate(0.8)" }}
+                          style={{ filter: "brightness(0.75) saturate(0.8)", objectPosition: (item as any).imgPosition ?? "center center" }}
                           onMouseOver={(e) => { (e.currentTarget as HTMLImageElement).style.filter = "brightness(0.9) saturate(1)"; (e.currentTarget as HTMLImageElement).style.transform = "scale(1.04)"; }}
                           onMouseOut={(e) => { (e.currentTarget as HTMLImageElement).style.filter = "brightness(0.75) saturate(0.8)"; (e.currentTarget as HTMLImageElement).style.transform = "scale(1)"; }}
                         />
