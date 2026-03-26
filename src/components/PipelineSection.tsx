@@ -932,6 +932,19 @@ const PipelineSection = () => {
     return () => window.removeEventListener("tulip:open-demo", handler);
   }, []);
 
+  // Trap browser back button inside the workflow once user has started a stage
+  useEffect(() => {
+    if (workflowStage < 0) return;
+    window.history.pushState({ tulipWorkflowStage: workflowStage }, "");
+    const handlePopState = (e: PopStateEvent) => {
+      if (typeof e.state?.tulipWorkflowStage === "number") {
+        setWorkflowStage((prev) => Math.max(0, prev - 1));
+      }
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [workflowStage]);
+
   const showProblems = sliderPos > 55;
   const showSolutions = sliderPos < 45;
 
