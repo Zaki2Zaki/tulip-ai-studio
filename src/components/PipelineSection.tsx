@@ -310,7 +310,8 @@ const WorkflowBuilderPanel = ({
             const isSel = deepDive.includes(point.title);
             return (
               <button key={point.title} onClick={() => onDeepDiveChange(toggle(deepDive, point.title))}
-                className={`w-full text-left px-3 py-3 flex items-start gap-3 transition-all ${i < FRICTION_POINTS.length - 1 ? "border-b border-border/20" : ""} ${isSel ? "bg-primary/10" : "hover:bg-white/5"}`}>
+                style={isSel ? { outline: "1.5px solid hsl(var(--primary))", outlineOffset: "-1.5px" } : undefined}
+                className={`w-full text-left px-3 py-3 flex items-start gap-3 transition-all ${i < FRICTION_POINTS.length - 1 ? "border-b border-border/20" : ""} ${isSel ? "" : "hover:bg-white/5"}`}>
                 <span className="text-base shrink-0 mt-0.5">⚠️</span>
                 <div className="flex-1 min-w-0">
                   <span className="text-sm font-body text-white font-semibold block">{point.title}</span>
