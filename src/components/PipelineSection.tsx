@@ -554,9 +554,13 @@ const WorkflowBuilderPanel = ({
         {/* Deep-Dive Focus */}
         {deepDive.length > 0 && (
           <div className="rounded-xl border border-primary/25 bg-primary/5 mb-4 overflow-hidden">
-            <div className="px-4 py-2.5 border-b border-primary/15 flex items-center justify-between">
-              <p className="text-xs font-body font-semibold tracking-widest text-white uppercase">Your {deepDive.length} Deep-Dive Focus</p>
-              <span className="text-xs font-body font-semibold text-white">Service Recommendations</span>
+            <div className="px-4 py-3 border-b border-primary/15 flex items-center justify-between gap-4">
+              <p style={{ fontSize: "22px", fontWeight: 700, color: "#ffffff", letterSpacing: "-0.01em", lineHeight: 1.2 }}>
+                Your {deepDive.length} Deep-Dive Focus
+              </p>
+              <p style={{ fontSize: "22px", fontWeight: 700, color: "#ffffff", letterSpacing: "-0.01em", lineHeight: 1.2 }}>
+                Service Recommendations
+              </p>
             </div>
             <div className="divide-y divide-border/15">
               {deepDive.map((pt) => {
