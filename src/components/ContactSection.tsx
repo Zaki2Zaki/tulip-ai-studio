@@ -32,7 +32,7 @@ const ContactSection = () => {
           transition={{ delay: 0.2 }}
           className="font-body mb-10 text-sm md:text-base text-white/80 leading-relaxed max-w-lg mx-auto"
         >
-          You walk away knowing your top pipeline cost risks and exactly what to prioritize — whether we work together or not. No pitch. No pressure. Just clarity.
+          "Most studios are losing $350K per rework cycle without knowing it. In 30 minutes, we'll map exactly where your pipeline is bleeding — and what to fix first. No pitch. No pressure. Just clarity."
         </motion.p>
 
         <motion.div
