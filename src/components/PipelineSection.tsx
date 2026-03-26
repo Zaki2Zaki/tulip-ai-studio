@@ -804,11 +804,7 @@ const PipelineSection = () => {
   useEffect(() => {
     const handler = () => {
       setWorkflowStage(-1);
-      setShowWorkflow(true);
-      workflowShownRef.current = true;
-      setTimeout(() => {
-        document.getElementById("workflow-builder")?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100);
+      document.getElementById("interactive-demo")?.scrollIntoView({ behavior: "smooth", block: "start" });
     };
     window.addEventListener("tulip:open-demo", handler);
     return () => window.removeEventListener("tulip:open-demo", handler);
