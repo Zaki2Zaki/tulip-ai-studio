@@ -485,7 +485,13 @@ const WorkflowBuilderPanel = ({
           <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-green-400">Validate: Benchmark Results</span>
           <span className="ml-1 px-2 py-0.5 rounded-full bg-orange-400/15 border border-orange-400/30 text-[9px] font-display font-bold uppercase tracking-wider text-orange-400">Demo Only</span>
         </div>
-        <p className="font-display text-lg font-bold text-white mb-4">Simulated results for your configuration</p>
+        <div className="flex items-center justify-between gap-3 mb-4">
+          <p className="font-display text-lg font-bold text-white">Simulated results for your configuration</p>
+          <a href="/benchmark-methodology.html" target="_blank" rel="noopener noreferrer"
+            className="shrink-0 text-xs font-body font-medium text-green-400 border border-green-400/40 bg-green-400/8 hover:bg-green-400/15 px-3.5 py-1.5 rounded-full whitespace-nowrap transition-colors">
+            View Methodology ↗
+          </a>
+        </div>
         <div className="space-y-4 mb-5">
           {metrics.map((m, i) => (
             <div key={m.label}>
@@ -500,15 +506,6 @@ const WorkflowBuilderPanel = ({
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Confirmed tools + methodology link */}
-        <div className="px-4 py-3 rounded-xl bg-green-400/5 border border-green-400/20 mb-4 flex items-center justify-between gap-3">
-          <p className="text-xs font-body text-green-300">✓ Results confirmed for {allSelected.length > 0 ? allSelected.join(", ") : "your selected tools"}</p>
-          <a href="/benchmark-methodology.html" target="_blank" rel="noopener noreferrer"
-            className="text-sm font-display font-semibold text-green-300/80 border border-green-400/20 bg-transparent hover:bg-green-400/10 px-4 py-2 rounded-full whitespace-nowrap transition-colors">
-            View Methodology ↗
-          </a>
         </div>
 
         {/* Selected tools recap */}
