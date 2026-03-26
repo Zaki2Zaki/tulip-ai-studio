@@ -37,6 +37,7 @@ const PAIN_POINTS = [
   "Siloed teams and slow approvals",
   "GenAI adoption & team resistance",
   "High rendering & production costs",
+  "AI Style Consistency",
 ];
 
 const PAIN_POINT_META: Record<string, { category: "A" | "B" | "C" | "D" | "E"; impact: "High" | "Medium" | "Low"; impactLevel: number }> = {
