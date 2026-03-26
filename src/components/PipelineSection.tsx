@@ -512,7 +512,7 @@ const WorkflowBuilderPanel = ({
           <div className="rounded-xl border border-border/30 bg-card/30 mb-4 overflow-hidden">
             {selectedCurrentTools.length > 0 && (
               <div className="p-4">
-                <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">Current Tools</p>
+                <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">Current Tools Used</p>
                 <div className="grid grid-cols-2 gap-1.5">
                   {selectedCurrentTools.map((label) => (
                     <div key={label} className="flex items-center justify-between border border-white/20 rounded-md px-3 py-2 bg-white/5">
