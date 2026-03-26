@@ -34,7 +34,7 @@ const PAIN_POINTS = [
   "Slow asset iteration cycles",
   "Manual review bottlenecks",
   "No AI tooling in pipeline",
-  "Siloed team workflows",
+  "Siloed teams and slow approvals",
   "GenAI adoption & team resistance",
   "High rendering & production costs",
 ];
