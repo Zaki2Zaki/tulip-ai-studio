@@ -1021,6 +1021,60 @@ const PipelineSection = () => {
             )}
           </AnimatePresence>
         </div>
+
+        {/* ── Interactive Demo — always visible, no entrance animation ── */}
+        <div id="interactive-demo" className="mt-10 rounded-2xl bg-card/30 border border-primary/20 backdrop-blur-sm overflow-hidden flex" style={{ boxShadow: "0 0 40px hsl(var(--primary) / 0.08)" }}>
+          {/* Left Journey Sidebar */}
+          <div className="hidden md:flex flex-col w-48 shrink-0 border-r border-primary/15 bg-black/20 p-4 gap-1">
+            <p className="font-display font-bold text-sm text-white mb-0.5">Workflow</p>
+            <p className="text-[10px] font-body text-white/50 mb-4">Pipeline N→1</p>
+            {pipelineSteps.map((step, i) => {
+              const stageNum = i + 1;
+              const isActive = workflowStage === stageNum;
+              const isCompleted = workflowStage > stageNum;
+              return (
+                <button
+                  key={step.label}
+                  onClick={() => isCompleted || isActive ? setWorkflowStage(stageNum) : undefined}
+                  className={`flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-left transition-all duration-200 ${
+                    isActive ? "bg-primary/15 border-l-2 border-primary text-primary"
+                    : isCompleted ? "text-green-400 hover:bg-green-400/5 cursor-pointer"
+                    : "text-white/35 cursor-default"
+                  }`}
+                >
+                  {isCompleted
+                    ? <CheckCircle2 size={14} className="shrink-0 text-green-400" />
+                    : <step.icon size={14} className={`shrink-0 ${isActive ? "text-primary" : "text-white/30"}`} />
+                  }
+                  <span className={`text-xs font-display font-semibold ${isActive ? "text-primary" : isCompleted ? "text-green-400" : "text-white/35"}`}>
+                    {step.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Stage Content */}
+          <div className="flex-1 min-w-0 p-6">
+            <AnimatePresence mode="wait">
+              <motion.div key={workflowStage} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} transition={{ duration: 0.35 }}>
+                <WorkflowBuilderPanel
+                  stage={workflowStage}
+                  onStageChange={setWorkflowStage}
+                  selected={workflowSelected}
+                  onSelectedChange={setWorkflowSelected}
+                  tools={workflowTools}
+                  onToolsChange={setWorkflowTools}
+                  deepDive={workflowDeepDive}
+                  onDeepDiveChange={setWorkflowDeepDive}
+                  workshopAdded={workshopAdded}
+                  onWorkshopAdd={() => setWorkshopAdded(true)}
+                />
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
       </div>
     </section>
   );
