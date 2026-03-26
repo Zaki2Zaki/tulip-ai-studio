@@ -262,9 +262,11 @@ const Navbar = () => {
             )}
 
             <a
-              href={isHome ? "#pipeline" : "/#pipeline"}
-              onClick={() => {
-                setTimeout(() => window.dispatchEvent(new CustomEvent("tulip:open-demo")), 400);
+              href="#interactive-demo"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById("interactive-demo");
+                if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
               className="nav-rainbow-btn text-[12px] font-body font-semibold text-white px-4 py-2 rounded-full hover:opacity-90 transition-opacity min-h-[34px] flex items-center"
             >
