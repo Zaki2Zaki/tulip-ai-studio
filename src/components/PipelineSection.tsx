@@ -938,7 +938,7 @@ const PipelineSection = () => {
     window.history.pushState({ tulipWorkflowStage: workflowStage }, "");
     const handlePopState = (e: PopStateEvent) => {
       if (typeof e.state?.tulipWorkflowStage === "number") {
-        setWorkflowStage((prev) => Math.max(0, prev - 1));
+        setWorkflowStage((prev: number) => Math.max(0, prev - 1));
       }
     };
     window.addEventListener("popstate", handlePopState);
