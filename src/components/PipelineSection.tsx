@@ -869,7 +869,16 @@ const PipelineSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
+          className="relative"
+          onMouseEnter={() => setShowArrow(true)}
+          onMouseLeave={() => setShowArrow(false)}
+          onMouseMove={handleSliderMouseMove}
         >
+          <AnimatePresence>
+            {showArrow && (
+              <CurlyArrow style={{ left: arrowPos.x, top: arrowPos.y }} />
+            )}
+          </AnimatePresence>
           <BeforeAfterSlider
             beforeImage={genaiWorkflow}
             afterImage={currentWorkflow}
