@@ -45,7 +45,7 @@ const PAIN_POINT_META: Record<string, { category: "A" | "B" | "C" | "D" | "E"; i
   "Slow asset iteration cycles":        { category: "B", impact: "Medium", impactLevel: 1 },
   "Manual review bottlenecks":          { category: "B", impact: "Low",    impactLevel: 2 },
   "No AI tooling in pipeline":          { category: "C", impact: "High",   impactLevel: 0 },
-  "Siloed team workflows":              { category: "B", impact: "Medium", impactLevel: 1 },
+  "Siloed teams and slow approvals":    { category: "B", impact: "Medium", impactLevel: 1 },
   "GenAI adoption & team resistance":   { category: "D", impact: "High",   impactLevel: 0 },
   "High rendering & production costs":  { category: "E", impact: "High",   impactLevel: 0 },
 };
