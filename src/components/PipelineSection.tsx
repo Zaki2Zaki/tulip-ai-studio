@@ -345,10 +345,10 @@ const WorkflowBuilderPanel = ({
 
         {/* Sources strip */}
         <div className="rounded-xl border border-border/20 bg-white/[0.02] px-4 py-3 mb-5">
-          <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-white mb-2">Sources</p>
+          <p className="text-xs font-display font-semibold uppercase tracking-wider text-white mb-2">Sources</p>
           <div className="space-y-1">
             {DISCOVER_SOURCES.map((s) => (
-              <p key={s.id} className="text-[10px] font-body text-white leading-relaxed">
+              <p key={s.id} className="text-xs font-body text-white leading-relaxed">
                 <span className="font-semibold">[{s.id}]</span>{" "}
                 <strong>{s.label}</strong> — {s.title}, {s.year}.
                 {s.url && (
