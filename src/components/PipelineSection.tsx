@@ -211,6 +211,7 @@ const WorkflowBuilderPanel = ({
 
   const [otherTool, setOtherTool] = useState("");
   const otherToolTrim = otherTool.trim();
+  const [showValidation, setShowValidation] = useState(false);
 
   const BackBtn = ({ to }: { to: number }) => (
     <button onClick={() => onStageChange(to)}
