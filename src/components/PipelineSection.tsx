@@ -83,6 +83,24 @@ const DEEP_DIVE_SERVICE_MAP: Record<string, { serviceIds: string[]; tags: string
   "High rendering & production costs":  { serviceIds: ["architecture", "benchmarking", "research"], tags: ["Architecture Blueprint", "Tool Benchmarking", "GenAI Research"],              reason: "Identify cost-cutting AI substitutions across your render pipeline" },
 };
 
+const DISCOVER_SOURCES = [
+  { id: 1, label: "Third Point Ventures", title: "AI Impact on Gaming and Media Tooling", year: "2025", url: "https://www.thirdpointventures.com/currents/AI-impact-on-gaming-and-media-tooling/" },
+  { id: 2, label: "Diversion.dev", title: "Version Control Survey for Game Dev & Creative Industries", year: "2024", url: "https://www.diversion.dev/blog/survey-results-2024-version-control-for-game-dev-creative-industries---virtualproduction-archviz-xr" },
+  { id: 3, label: "Griffin GP", title: "2023 Game Development Report", year: "2023", url: "https://griffingp.com/wp-content/uploads/2024/02/2023-Game-Development-Report.pdf" },
+  { id: 4, label: "GameDev Reports", title: "Video Game Insights: The Big Game Engine Report of 2025", year: "February 10, 2025", url: "" },
+];
+
+const FRICTION_POINTS: { title: string; category: string; impact: "High" | "Medium" | "Low"; costStat: string | null; savingStat: string | null; cite: string }[] = [
+  { title: "Tool integration failures",       category: "Tool Issues",          impact: "High",   costStat: "AA studios lose $100K–$400K per rework cycle",                      savingStat: null,                                                   cite: "[2,3]" },
+  { title: "No AI tooling in pipeline",       category: "Learning Your Tools",  impact: "High",   costStat: "40–50% of workflow time lost to exports & manual fixes",            savingStat: "GenAI compresses asset pipeline: 100 hrs → 15–30 min*",  cite: "[1,3]" },
+  { title: "GenAI adoption & team resistance",category: "Adoption & Training",  impact: "High",   costStat: "Only 16% of studios actively using GenAI in pipelines",             savingStat: null,                                                   cite: "[1]"   },
+  { title: "High rendering & production costs",category: "Cost Optimisation",   impact: "High",   costStat: "Production stage = 40–60% of total project budget",                 savingStat: "Real-time rendering engines drastically reduce revision overhead", cite: "[1]" },
+  { title: "Version control conflicts",       category: "Workflow Restructure", impact: "Medium", costStat: "78% of studios face version control & pipeline issues weekly",       savingStat: null,                                                   cite: "[2]"   },
+  { title: "Slow asset iteration cycles",     category: "Workflow Restructure", impact: "Medium", costStat: "$350K avg per rework cycle — 10–30 devs over 3–7 days",             savingStat: "GenAI reduces iteration from 100 hrs → 15–30 min*",      cite: "[3]"   },
+  { title: "Siloed teams and slow approvals", category: "Workflow Restructure", impact: "Medium", costStat: "45% of devs lose 1+ hr/week to silo troubleshooting",               savingStat: null,                                                   cite: "[2,3]" },
+  { title: "Manual review bottlenecks",       category: "Workflow Restructure", impact: "Low",    costStat: "AAA studios: $500K–$3M+ per major pipeline overhaul",               savingStat: null,                                                   cite: "[3]"   },
+];
+
 const getRecommendedServiceIds = (deepDive: string[]): string[] => {
   const ids = new Set<string>();
   deepDive.forEach((pt) => {
