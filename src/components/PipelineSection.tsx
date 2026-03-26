@@ -248,12 +248,13 @@ const WorkflowBuilderPanel = ({
       <p className="font-display text-lg font-bold text-white mb-1">What's slowing your production pipeline?</p>
       <p className="text-xs text-white font-body mb-4">Select all that apply — we'll map your bottlenecks.</p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
-        {PAIN_POINTS.map((pt) => {
+        {PAIN_POINTS.map((pt, index) => {
           const on = selected.includes(pt);
+          const isLastItem = index === PAIN_POINTS.length - 1;
           return (
             <button key={pt} onClick={() => onSelectedChange(toggle(selected, pt))}
-              className={`text-left px-3 py-3 rounded-xl border text-xs font-body transition-all flex items-start gap-1.5 ${on ? "border-orange-400/60 bg-orange-400/10 text-orange-200" : "border-border/40 text-white hover:border-border/70"}`}>
-              <span className={`shrink-0 mt-0.5 ${on ? "text-orange-400" : "text-white/30"}`}>{on ? "✕" : "○"}</span>
+              className={`text-left px-3 py-3 rounded-xl border text-xs font-body transition-all flex items-center gap-1.5 min-h-[64px] ${isLastItem ? "md:col-start-3" : ""} ${on ? "border-orange-400/60 bg-orange-400/10 text-orange-200" : "border-border/40 text-white hover:border-border/70"}`}>
+              <span className={`shrink-0 ${on ? "text-orange-400" : "text-white/30"}`}>{on ? "✕" : "○"}</span>
               <span>{pt}</span>
             </button>
           );
