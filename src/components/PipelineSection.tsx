@@ -3,7 +3,6 @@ import React, { useRef, useState, useCallback, useEffect } from "react";
 import { AlertTriangle, CheckCircle2, ArrowRight, Zap, TrendingUp, Clock, DollarSign, Layers, Rocket, Target, BarChart3, Compass, FlaskConical, ClipboardCheck, GitMerge, ChevronDown, Play } from "lucide-react";
 import pipelineBg from "@/assets/pipeline-bg.jpg";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
-import CurlyArrow from "@/components/CurlyArrow";
 import currentWorkflow from "@/assets/current-workflow.jpg";
 import genaiWorkflow from "@/assets/genai-workflow.png";
 
