@@ -980,6 +980,7 @@ const PipelineSection = () => {
                 <AnimatePresence>
                   {showWorkflow && (
                     <motion.div
+                      id="workflow-builder"
                       key="workflow-builder"
                       initial={{ opacity: 0, y: 24 }}
                       animate={{ opacity: 1, y: 0 }}
