@@ -758,6 +758,13 @@ const PipelineSection = () => {
 
   const [workflowStage, setWorkflowStage] = useState(-1);
   const [showWorkflow, setShowWorkflow] = useState(false);
+  const [showArrow, setShowArrow] = useState(false);
+  const [arrowPos, setArrowPos] = useState({ x: 0, y: 0 });
+
+  const handleSliderMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setArrowPos({ x: e.clientX - rect.left + 20, y: e.clientY - rect.top - 70 });
+  };
   const workflowShownRef = useRef(false);
   const [workflowSelected, setWorkflowSelected] = useState<string[]>([]);
   const [workflowTools, setWorkflowTools] = useState<string[]>([]);
