@@ -262,14 +262,19 @@ const WorkflowBuilderPanel = ({
         })}
       </div>
       <div className="flex items-center gap-4">
-        <button disabled={selected.length === 0} onClick={() => {
+        <button onClick={() => {
+          if (selected.length === 0) { setShowValidation(true); return; }
+          setShowValidation(false);
           const matching = selected.filter((s) => FRICTION_POINTS.some((fp) => fp.title === s));
           onDeepDiveChange(matching);
           onStageChange(1);
         }}
-          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
+          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
           Map the Problems <ArrowRight className="w-3.5 h-3.5" />
         </button>
+        {showValidation && selected.length === 0 && (
+          <p className="text-xs text-red-400 font-body mt-2">Please select at least one issue to continue.</p>
+        )}
         <BackBtn to={-1} />
       </div>
     </div>
