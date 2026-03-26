@@ -260,7 +260,11 @@ const WorkflowBuilderPanel = ({
         })}
       </div>
       <div className="flex items-center gap-4">
-        <button disabled={selected.length === 0} onClick={() => onStageChange(1)}
+        <button disabled={selected.length === 0} onClick={() => {
+          const matching = selected.filter((s) => FRICTION_POINTS.some((fp) => fp.title === s));
+          onDeepDiveChange(matching);
+          onStageChange(1);
+        }}
           className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
           Map the Problems <ArrowRight className="w-3.5 h-3.5" />
         </button>
