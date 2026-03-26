@@ -329,12 +329,20 @@ const Navbar = () => {
                 <div className="grid grid-cols-4 mb-8" style={{ gap: "1px", background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.07)" }}>
                   {[
                     {
+                      label: "Concept & Development",
+                      to: "/case-studies/pre-production",
+                      desc: "AI-powered ideation — rapid character concepts, world building, and visual style exploration from prompt to prototype.",
+                      img: "/concept-development.jpg",
+                      imgAlt: "Concept & Development — Idea and Story",
+                      paper: { href: "#", label: "White Paper" },
+                      repo:  { href: "#", label: "GitHub" },
+                    },
+                    {
                       label: "Pre-Production",
                       to: "/case-studies/pre-production",
                       desc: "AI storyboard automation & previz — from script to animatic in minutes.",
                       img: "/pipeline-diagram.jpg",
                       imgAlt: "Pre-Production storyboard",
-                      imgPosition: "center 0%",
                       bgPosition: "center 0%",
                       paper: { href: "https://www.jetir.org/papers/JETIR2507537.pdf", label: "White Paper" },
                       repo:  { href: "https://github.com/wonderunit/storyboarder", label: "GitHub" },
@@ -345,7 +353,6 @@ const Navbar = () => {
                       desc: "Unity tools for zero-G visuals — AI-augmented physics and motion synthesis.",
                       img: "/pipeline-diagram.jpg",
                       imgAlt: "Production pipeline",
-                      imgPosition: "center 50%",
                       bgPosition: "center 50%",
                       paper: { href: "https://dev.epicgames.com/documentation/en-us/unreal-engine/virtual-production-field-guide", label: "White Paper" },
                       repo:  { href: "https://github.com/EpicGames/UnrealEngine", label: "GitHub" },
@@ -356,19 +363,9 @@ const Navbar = () => {
                       desc: "AI render polish & compositing — perceptual quality enhancement without full re-renders.",
                       img: "/pipeline-diagram.jpg",
                       imgAlt: "Post-production",
-                      imgPosition: "center 100%",
                       bgPosition: "center 100%",
                       paper: { href: "https://www.obukhov.ai/repainting_3d_assets", label: "White Paper" },
                       repo:  { href: "https://github.com/toshas/torch-fidelity", label: "GitHub" },
-                    },
-                    {
-                      label: "Steam Game Delays",
-                      to: "/case-studies/steam-delays",
-                      desc: "48% of 23k titles delayed — empirical study on pipeline gaps and release failure patterns.",
-                      img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&q=70",
-                      imgAlt: "Steam game delays research",
-                      paper: { href: "https://arxiv.org/abs/2204.11191", label: "White Paper" },
-                      repo:  { href: "https://steamdb.info", label: "Dataset" },
                     },
                   ].map((item) => (
                     <div key={item.to} className="group flex flex-col bg-[#111] hover:bg-[#1a1a1a] transition-colors">
