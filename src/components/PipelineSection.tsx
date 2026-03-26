@@ -757,7 +757,6 @@ const PipelineSection = () => {
 
   const [workflowStage, setWorkflowStage] = useState(-1);
   const [showWorkflow, setShowWorkflow] = useState(false);
-  const [showArrow, setShowArrow] = useState(false);
   const workflowShownRef = useRef(false);
   const [workflowSelected, setWorkflowSelected] = useState<string[]>([]);
   const [workflowTools, setWorkflowTools] = useState<string[]>([]);
