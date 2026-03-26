@@ -35,6 +35,8 @@ const PAIN_POINTS = [
   "Manual review bottlenecks",
   "No AI tooling in pipeline",
   "Siloed team workflows",
+  "GenAI adoption & team resistance",
+  "High rendering & production costs",
 ];
 
 const PAIN_POINT_META: Record<string, { category: "A" | "B" | "C"; impact: "High" | "Medium" | "Low"; impactLevel: number }> = {
