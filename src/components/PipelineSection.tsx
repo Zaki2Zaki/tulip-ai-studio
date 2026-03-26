@@ -305,9 +305,9 @@ const WorkflowBuilderPanel = ({
                   <span className="text-sm font-body text-white font-semibold block">{point.title}</span>
                   <span className={`text-xs font-display font-semibold ${catColor[point.category] ?? "text-amber-400"}`}>{point.category}</span>
                   {point.costStat && (
-                    <p className="text-xs text-white/60 font-body mt-1">
+                    <p className="text-sm text-white font-body mt-1">
                       {point.costStat}
-                      <span className="text-white/35 ml-1">{point.cite}</span>
+                      <span className="text-white/40 ml-1">{point.cite}</span>
                     </p>
                   )}
                   {point.savingStat && (
