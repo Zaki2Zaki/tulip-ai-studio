@@ -542,13 +542,12 @@ const WorkflowBuilderPanel = ({
         {/* Custom tools */}
         {customTools.length > 0 && (
           <div className="rounded-xl border border-white/10 bg-white/5 p-4 mb-4">
-            <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">Also Testing — Your Tools</p>
-            <div className="flex flex-wrap gap-2 mb-3">
+            <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">Custom Tools Included in This Configuration</p>
+            <div className="flex flex-wrap gap-2">
               {customTools.map((t) => (
                 <span key={t} className="rounded-full border border-white/20 px-3 py-1 text-sm font-body font-medium text-white bg-white/5">{t}</span>
               ))}
             </div>
-            <p className="text-sm text-white font-body">Custom tool{customTools.length > 1 ? "s" : ""} added by you — included in this configuration.</p>
           </div>
         )}
 
