@@ -377,8 +377,8 @@ const Navbar = () => {
                           className="w-full h-full transition-all duration-300"
                           style={{
                             backgroundImage: `url(${item.img})`,
-                            backgroundSize: (item as any).bgPosition ? "auto 300%" : "cover",
-                            backgroundPosition: (item as any).bgPosition ?? "center center",
+                            backgroundSize: "cover",
+                            backgroundPosition: "center center",
                             backgroundRepeat: "no-repeat",
                             filter: "brightness(0.75) saturate(0.8)",
                           }}
