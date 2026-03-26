@@ -282,7 +282,7 @@ const WorkflowBuilderPanel = ({
       <div>
         <div className="flex items-center gap-2 mb-3">
           <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
-          <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Discovery: Pain Points Mapped</span>
+          <span className="font-display text-lg font-bold text-white">Discovery: Pain Points Mapped</span>
         </div>
         <p className="font-display text-lg font-bold text-white mb-1">
           We mapped <span className="text-gradient-gold">{FRICTION_POINTS.length} friction points</span> in your pipeline
