@@ -298,7 +298,7 @@ const WorkflowBuilderPanel = ({
         <p className="font-display text-lg font-bold text-white mb-1">
           We mapped <span className="text-gradient-gold">{selected.length} friction point{selected.length !== 1 ? "s" : ""}</span> in your pipeline
         </p>
-        <p className="font-display text-lg font-bold text-white mb-4">Select rows to flag for deep-dive by clicking any row</p>
+        <p className="font-display text-lg font-bold text-white mb-4"><span className="text-primary">Select</span> rows to flag for deep-dive by clicking any row</p>
 
         {/* Friction points list */}
         <div className="rounded-xl border border-border/30 overflow-hidden mb-3">
