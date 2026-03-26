@@ -402,12 +402,15 @@ const WorkflowBuilderPanel = ({
   if (stage === 3) {
     const allPresets = [...CURRENT_TOOLS, ...WISHLIST_TOOLS];
     const customTools = tools.filter((t) => !allPresets.includes(t));
-    const presetTools = tools.filter((t) => allPresets.includes(t));
+    const selectedCurrentTools = tools.filter((t) => CURRENT_TOOLS.includes(t));
+    const selectedWishlistTools = tools.filter((t) => WISHLIST_TOOLS.includes(t));
+    const allSelected = [...selectedCurrentTools, ...selectedWishlistTools, ...customTools];
     const metrics = [
       { label: "Asset creation speed", value: 60, color: "hsl(var(--primary))" },
       { label: "Pipeline failure reduction", value: 85, color: "hsl(40 95% 70%)" },
       { label: "Iteration speed gain", value: 75, color: "hsl(160 70% 60%)" },
     ];
+    const recommendedIds = getRecommendedServiceIds(deepDive);
     return (
       <div>
         <div className="flex items-center gap-2 mb-3">
@@ -431,35 +434,67 @@ const WorkflowBuilderPanel = ({
             </div>
           ))}
         </div>
+
+        {/* Confirmed tools + methodology link */}
         <div className="px-4 py-3 rounded-xl bg-green-400/5 border border-green-400/20 mb-4 flex items-center justify-between gap-3">
-          <p className="text-xs font-body text-green-300">✓ Results confirmed for {presetTools.length > 0 ? presetTools.join(", ") : "your selected tools"}</p>
-          <a
-            href="/benchmark-methodology.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-display font-semibold text-green-300/80 border border-green-400/20 bg-transparent hover:bg-green-400/10 px-4 py-2 rounded-full whitespace-nowrap transition-colors"
-          >
+          <p className="text-xs font-body text-green-300">✓ Results confirmed for {allSelected.length > 0 ? allSelected.join(", ") : "your selected tools"}</p>
+          <a href="/benchmark-methodology.html" target="_blank" rel="noopener noreferrer"
+            className="text-sm font-display font-semibold text-green-300/80 border border-green-400/20 bg-transparent hover:bg-green-400/10 px-4 py-2 rounded-full whitespace-nowrap transition-colors">
             View Methodology ↗
           </a>
         </div>
-        {customTools.length > 0 && (
-          <div className="px-4 py-3 rounded-xl bg-primary/8 border border-primary/25 mb-4">
-            <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-primary mb-2">Also Testing — Your Tools</p>
-            <div className="flex flex-wrap gap-1.5 mb-1.5">
-              {customTools.map((t) => (
-                <span key={t} className="px-2.5 py-1 rounded-full bg-primary/15 border border-primary/30 text-xs font-body text-white font-medium">{t}</span>
-              ))}
-            </div>
-            <p className="text-[10px] text-white/60 font-body">Custom tool{customTools.length > 1 ? "s" : ""} added by you — included in this configuration.</p>
+
+        {/* Selected tools recap */}
+        {(selectedCurrentTools.length > 0 || selectedWishlistTools.length > 0) && (
+          <div className="rounded-xl border border-border/30 bg-card/30 mb-4 overflow-hidden">
+            {selectedCurrentTools.length > 0 && (
+              <div className="p-4">
+                <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">Current Tools</p>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {selectedCurrentTools.map((label) => (
+                    <div key={label} className="flex items-center justify-between border border-white/20 rounded-md px-3 py-2 bg-white/5">
+                      <span className="text-sm font-body text-white truncate mr-2">{label}</span>
+                      <ToolLogo label={label} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {selectedWishlistTools.length > 0 && (
+              <div className={`p-4 ${selectedCurrentTools.length > 0 ? "border-t border-border/20" : ""}`}>
+                <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">Wishlist</p>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {selectedWishlistTools.map((label) => (
+                    <div key={label} className="flex items-center justify-between border border-amber-400/40 rounded-md px-3 py-2 bg-amber-900/10">
+                      <span className="text-sm font-body text-white truncate mr-2">{label}</span>
+                      <ToolLogo label={label} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
 
-        {/* Option B: Deep-Dive Focus — only shown if user flagged anything */}
+        {/* Custom tools */}
+        {customTools.length > 0 && (
+          <div className="rounded-xl border border-white/10 bg-white/5 p-4 mb-4">
+            <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">Also Testing — Your Tools</p>
+            <div className="flex flex-wrap gap-2 mb-3">
+              {customTools.map((t) => (
+                <span key={t} className="rounded-full border border-white/20 px-3 py-1 text-sm font-body font-medium text-white bg-white/5">{t}</span>
+              ))}
+            </div>
+            <p className="text-sm text-white font-body">Custom tool{customTools.length > 1 ? "s" : ""} added by you — included in this configuration.</p>
+          </div>
+        )}
+
+        {/* Deep-Dive Focus */}
         {deepDive.length > 0 && (
           <div className="rounded-xl border border-primary/25 bg-primary/5 mb-4 overflow-hidden">
             <div className="px-4 py-2.5 border-b border-primary/15 flex items-center justify-between">
-              <p className="text-xs font-display font-semibold uppercase tracking-wider text-primary">Your {deepDive.length} Deep-Dive Focus</p>
-              <span className="text-xs font-body text-white">Service Recommendations</span>
+              <p className="text-xs font-body font-semibold tracking-widest text-white uppercase">Your {deepDive.length} Deep-Dive Focus</p>
+              <span className="text-xs font-body font-semibold text-white">Service Recommendations</span>
             </div>
             <div className="divide-y divide-border/15">
               {deepDive.map((pt) => {
@@ -483,7 +518,19 @@ const WorkflowBuilderPanel = ({
               })}
             </div>
             <div className="px-4 py-3 border-t border-primary/15 bg-primary/5">
-              <p className="text-xs text-white font-body">These services will be pre-selected in your estimate when you reach the Scale stage.</p>
+              <p className="text-sm text-white font-body">
+                These services will be pre-selected in your estimate when you reach the{" "}
+                <button
+                  onClick={() => {
+                    recommendedIds.forEach((id) => window.dispatchEvent(new CustomEvent("tulip:select-service", { detail: { id } })));
+                    onStageChange(5);
+                  }}
+                  className="text-primary underline underline-offset-2 hover:opacity-80 transition-opacity font-semibold"
+                >
+                  Cost Estimator — Build your quote
+                </button>
+                .
+              </p>
             </div>
           </div>
         )}
