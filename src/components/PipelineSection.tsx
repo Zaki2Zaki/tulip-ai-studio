@@ -39,19 +39,23 @@ const PAIN_POINTS = [
   "High rendering & production costs",
 ];
 
-const PAIN_POINT_META: Record<string, { category: "A" | "B" | "C"; impact: "High" | "Medium" | "Low"; impactLevel: number }> = {
-  "Version control conflicts":   { category: "B", impact: "Medium", impactLevel: 1 },
-  "Tool integration failures":   { category: "A", impact: "High",   impactLevel: 0 },
-  "Slow asset iteration cycles": { category: "B", impact: "Medium", impactLevel: 1 },
-  "Manual review bottlenecks":   { category: "B", impact: "Low",    impactLevel: 2 },
-  "No AI tooling in pipeline":   { category: "C", impact: "High",   impactLevel: 0 },
-  "Siloed team workflows":       { category: "B", impact: "Medium", impactLevel: 1 },
+const PAIN_POINT_META: Record<string, { category: "A" | "B" | "C" | "D" | "E"; impact: "High" | "Medium" | "Low"; impactLevel: number }> = {
+  "Version control conflicts":          { category: "B", impact: "Medium", impactLevel: 1 },
+  "Tool integration failures":          { category: "A", impact: "High",   impactLevel: 0 },
+  "Slow asset iteration cycles":        { category: "B", impact: "Medium", impactLevel: 1 },
+  "Manual review bottlenecks":          { category: "B", impact: "Low",    impactLevel: 2 },
+  "No AI tooling in pipeline":          { category: "C", impact: "High",   impactLevel: 0 },
+  "Siloed team workflows":              { category: "B", impact: "Medium", impactLevel: 1 },
+  "GenAI adoption & team resistance":   { category: "D", impact: "High",   impactLevel: 0 },
+  "High rendering & production costs":  { category: "E", impact: "High",   impactLevel: 0 },
 };
 
 const CATEGORY_META = {
-  A: { label: "Tool Issues",          color: "text-red-400",   bg: "bg-red-400/10",   border: "border-red-400/30" },
-  B: { label: "Workflow Restructure", color: "text-amber-400", bg: "bg-amber-400/10", border: "border-amber-400/30" },
-  C: { label: "Learning Your Tools",  color: "text-blue-400",  bg: "bg-blue-400/10",  border: "border-blue-400/30" },
+  A: { label: "Tool Issues",          color: "text-red-400",    bg: "bg-red-400/10",    border: "border-red-400/30"    },
+  B: { label: "Workflow Restructure", color: "text-amber-400",  bg: "bg-amber-400/10",  border: "border-amber-400/30"  },
+  C: { label: "Learning Your Tools",  color: "text-blue-400",   bg: "bg-blue-400/10",   border: "border-blue-400/30"   },
+  D: { label: "Adoption & Training",  color: "text-purple-400", bg: "bg-purple-400/10", border: "border-purple-400/30" },
+  E: { label: "Cost Optimisation",    color: "text-green-400",  bg: "bg-green-400/10",  border: "border-green-400/30"  },
 };
 
 const CURRENT_TOOLS = [
