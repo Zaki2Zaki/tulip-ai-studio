@@ -67,7 +67,7 @@ const WISHLIST_TOOLS = [
 // Maps each pain point → recommended service IDs + reason shown on Validate screen
 const DEEP_DIVE_SERVICE_MAP: Record<string, { serviceIds: string[]; tags: string[]; reason: string }> = {
   "No AI tooling in pipeline":   { serviceIds: ["research", "benchmarking", "workshops"], tags: ["GenAI Research", "Tool Benchmarking", "Workshops & Education"], reason: "Identify the right tools to adopt, then train your team" },
-  "Tool integration failures":   { serviceIds: ["benchmarking", "demos"],                 tags: ["Tool Benchmarking", "Demos & Sandboxes"],                       reason: "Test & validate the right tool connections for your stack" },
+  "Tool integration failures":   { serviceIds: ["benchmarking", "demos", "integration"],  tags: ["Tool Benchmarking", "Demos & Sandboxes", "Adoption & Integration"], reason: "Test & validate the right tool connections for your stack" },
   "Manual review bottlenecks":   { serviceIds: ["research", "integration"],               tags: ["GenAI Research", "Adoption & Integration"],                    reason: "AI-assisted review workflows reduce approval delays" },
   "Version control conflicts":   { serviceIds: ["architecture", "integration"],           tags: ["Architecture Blueprint", "Adoption & Integration"],            reason: "Design a pipeline architecture that prevents conflicts" },
   "Slow asset iteration cycles": { serviceIds: ["integration"],                           tags: ["Adoption & Integration"],                                      reason: "Automate handoffs to compress iteration loops" },
