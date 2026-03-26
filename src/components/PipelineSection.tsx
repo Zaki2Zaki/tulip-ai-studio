@@ -872,11 +872,10 @@ const PipelineSection = () => {
           className="relative"
           onMouseEnter={() => setShowArrow(true)}
           onMouseLeave={() => setShowArrow(false)}
-          onMouseMove={handleSliderMouseMove}
         >
           <AnimatePresence>
             {showArrow && (
-              <CurlyArrow style={{ left: arrowPos.x, top: arrowPos.y }} />
+              <CurlyArrow style={{ position: "absolute", bottom: 12, right: 12 }} />
             )}
           </AnimatePresence>
           <BeforeAfterSlider
