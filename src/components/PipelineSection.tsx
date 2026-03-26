@@ -228,14 +228,14 @@ const WorkflowBuilderPanel = ({
       </div>
       <p className="font-display text-lg font-bold text-white mb-1">What's slowing your production pipeline?</p>
       <p className="text-xs text-white font-body mb-4">Select all that apply — we'll map your bottlenecks.</p>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-5">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-5">
         {PAIN_POINTS.map((pt) => {
           const on = selected.includes(pt);
           return (
             <button key={pt} onClick={() => onSelectedChange(toggle(selected, pt))}
-              className={`text-left px-3 py-2.5 rounded-xl border text-xs font-body transition-all ${on ? "border-orange-400/60 bg-orange-400/10 text-orange-200" : "border-border/40 text-white hover:border-border/70"}`}>
-              <span className={`mr-1.5 ${on ? "text-orange-400" : "text-white/30"}`}>{on ? "✕" : "○"}</span>
-              {pt}
+              className={`text-left px-3 py-3 rounded-xl border text-xs font-body transition-all flex items-start gap-1.5 ${on ? "border-orange-400/60 bg-orange-400/10 text-orange-200" : "border-border/40 text-white hover:border-border/70"}`}>
+              <span className={`shrink-0 mt-0.5 ${on ? "text-orange-400" : "text-white/30"}`}>{on ? "✕" : "○"}</span>
+              <span>{pt}</span>
             </button>
           );
         })}
