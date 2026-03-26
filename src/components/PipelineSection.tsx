@@ -525,7 +525,7 @@ const WorkflowBuilderPanel = ({
             )}
             {selectedWishlistTools.length > 0 && (
               <div className={`p-4 ${selectedCurrentTools.length > 0 ? "border-t border-border/20" : ""}`}>
-                <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">Wishlist</p>
+                <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">Wishlist of Tools</p>
                 <div className="grid grid-cols-2 gap-1.5">
                   {selectedWishlistTools.map((label) => (
                     <div key={label} className="flex items-center justify-between border border-amber-400/40 rounded-md px-3 py-2 bg-amber-900/10">
