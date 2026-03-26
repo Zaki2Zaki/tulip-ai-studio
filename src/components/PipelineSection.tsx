@@ -471,7 +471,6 @@ const WorkflowBuilderPanel = ({
     const customTools = tools.filter((t) => !allPresets.includes(t));
     const selectedCurrentTools = tools.filter((t) => CURRENT_TOOLS.includes(t));
     const selectedWishlistTools = tools.filter((t) => WISHLIST_TOOLS.includes(t));
-    const allSelected = [...selectedCurrentTools, ...selectedWishlistTools, ...customTools];
     const metrics = [
       { label: "Asset creation speed", value: 60, color: "hsl(var(--primary))" },
       { label: "Pipeline failure reduction", value: 85, color: "hsl(40 95% 70%)" },
