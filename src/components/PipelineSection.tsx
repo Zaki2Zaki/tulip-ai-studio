@@ -801,9 +801,12 @@ const PipelineSection = () => {
   // Open demo instantly when triggered from navbar button
   useEffect(() => {
     const handler = () => {
-      setSliderPos(30);
+      setWorkflowStage(-1);
       setShowWorkflow(true);
       workflowShownRef.current = true;
+      setTimeout(() => {
+        document.getElementById("workflow-builder")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
     };
     window.addEventListener("tulip:open-demo", handler);
     return () => window.removeEventListener("tulip:open-demo", handler);
