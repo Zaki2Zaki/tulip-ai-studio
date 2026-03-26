@@ -12,47 +12,59 @@ export default function CurlyArrow({ style }: CurlyArrowProps) {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{
         opacity: 1,
-        scale: [1, 1.08, 1],
+        scale: [1, 1.05, 1],
         rotate: [-8, -3, -8],
+        y: [0, -4, 0],
       }}
       exit={{ opacity: 0, scale: 0.7 }}
       transition={{
         opacity: { duration: 0.2 },
-        scale: { repeat: Infinity, duration: 1.4, ease: "easeInOut" },
-        rotate: { repeat: Infinity, duration: 1.4, ease: "easeInOut" },
+        scale:  { repeat: Infinity, duration: 1.8, ease: "easeInOut" },
+        rotate: { repeat: Infinity, duration: 1.8, ease: "easeInOut" },
+        y:      { repeat: Infinity, duration: 1.8, ease: "easeInOut" },
       }}
     >
       <svg
-        width="64"
-        height="84"
-        viewBox="0 0 64 84"
+        width="90"
+        height="120"
+        viewBox="0 0 90 120"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Curly body */}
+        <defs>
+          <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stopColor="#A78BFA" />
+            <stop offset="50%"  stopColor="#C084FC" />
+            <stop offset="100%" stopColor="#F472B6" />
+          </linearGradient>
+        </defs>
+
+        {/* Main curly body */}
         <path
-          d="M32 6 C48 8, 56 22, 50 36 C46 46, 36 50, 30 58 C27 63, 28 70, 28 70"
-          stroke="white"
-          strokeWidth="2.5"
+          d="M55 6 C80 8, 85 28, 72 44 C60 58, 38 58, 30 72 C22 86, 28 100, 36 110"
+          stroke="url(#arrowGradient)"
+          strokeWidth="4.5"
           strokeLinecap="round"
           strokeLinejoin="round"
           fill="none"
-          opacity="0.9"
         />
-        {/* Arrowhead */}
+
+        {/* Arrowhead — left prong */}
         <path
-          d="M28 70 L20 61"
-          stroke="white"
-          strokeWidth="2.5"
+          d="M36 110 L24 98"
+          stroke="url(#arrowGradient)"
+          strokeWidth="4.5"
           strokeLinecap="round"
-          opacity="0.9"
+          fill="none"
         />
+
+        {/* Arrowhead — right prong */}
         <path
-          d="M28 70 L37 63"
-          stroke="white"
-          strokeWidth="2.5"
+          d="M36 110 L48 100"
+          stroke="url(#arrowGradient)"
+          strokeWidth="4.5"
           strokeLinecap="round"
-          opacity="0.9"
+          fill="none"
         />
       </svg>
     </motion.div>
