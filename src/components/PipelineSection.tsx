@@ -76,8 +76,10 @@ const DEEP_DIVE_SERVICE_MAP: Record<string, { serviceIds: string[]; tags: string
   "Tool integration failures":   { serviceIds: ["benchmarking", "demos", "integration"],  tags: ["Tool Benchmarking", "Demos & Sandboxes", "Adoption & Integration"], reason: "Test & validate the right tool connections for your stack" },
   "Manual review bottlenecks":   { serviceIds: ["research", "integration"],               tags: ["GenAI Research", "Adoption & Integration"],                    reason: "AI-assisted review workflows reduce approval delays" },
   "Version control conflicts":   { serviceIds: ["architecture", "integration"],           tags: ["Architecture Blueprint", "Adoption & Integration"],            reason: "Design a pipeline architecture that prevents conflicts" },
-  "Slow asset iteration cycles": { serviceIds: ["integration", "architecture", "demos"],  tags: ["Adoption & Integration", "Architecture Blueprint", "Demos & Sandboxes"], reason: "Automate handoffs to compress iteration loops" },
-  "Siloed team workflows":       { serviceIds: ["architecture", "workshops", "demos"],    tags: ["Architecture Blueprint", "Workshops & Education", "Demos & Sandboxes"], reason: "Unified pipeline design and team-wide enablement" },
+  "Slow asset iteration cycles":        { serviceIds: ["integration", "architecture", "demos"],    tags: ["Adoption & Integration", "Architecture Blueprint", "Demos & Sandboxes"],    reason: "Automate handoffs to compress iteration loops" },
+  "Siloed team workflows":              { serviceIds: ["architecture", "workshops", "demos"],       tags: ["Architecture Blueprint", "Workshops & Education", "Demos & Sandboxes"],       reason: "Unified pipeline design and team-wide enablement" },
+  "GenAI adoption & team resistance":   { serviceIds: ["workshops", "research", "integration"],    tags: ["Workshops & Education", "GenAI Research", "Adoption & Integration"],           reason: "Build team confidence and embed GenAI into daily practice" },
+  "High rendering & production costs":  { serviceIds: ["architecture", "benchmarking", "research"], tags: ["Architecture Blueprint", "Tool Benchmarking", "GenAI Research"],              reason: "Identify cost-cutting AI substitutions across your render pipeline" },
 };
 
 const getRecommendedServiceIds = (deepDive: string[]): string[] => {
