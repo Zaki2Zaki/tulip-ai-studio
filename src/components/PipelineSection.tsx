@@ -271,10 +271,13 @@ const WorkflowBuilderPanel = ({
 
   /* ── Stage 1: Discover ── */
   if (stage === 1) {
-    // Sort High → Medium → Low (impactLevel: High=0, Medium=1, Low=2)
-    const sortedSelected = [...selected].sort(
-      (a, b) => (PAIN_POINT_META[a]?.impactLevel ?? 1) - (PAIN_POINT_META[b]?.impactLevel ?? 1)
-    );
+    const catColor: Record<string, string> = {
+      "Tool Issues":          "text-red-400",
+      "Learning Your Tools":  "text-blue-400",
+      "Adoption & Training":  "text-purple-400",
+      "Cost Optimisation":    "text-green-400",
+      "Workflow Restructure": "text-amber-400",
+    };
     return (
       <div>
         <div className="flex items-center gap-2 mb-3">
@@ -282,42 +285,79 @@ const WorkflowBuilderPanel = ({
           <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Discovery: Pain Points Mapped</span>
         </div>
         <p className="font-display text-lg font-bold text-white mb-1">
-          We mapped <span className="text-gradient-gold">{selected.length} friction point{selected.length !== 1 ? "s" : ""}</span> in your pipeline
+          We mapped <span className="text-gradient-gold">{FRICTION_POINTS.length} friction points</span> in your pipeline
         </p>
-        <p className="text-xs text-white/70 font-body mb-4">Select which to deep-dive — click any row to mark it.</p>
+        <p className="text-xs text-white/70 font-body mb-4">Select rows to flag for deep-dive — click any row to mark it.</p>
 
-        {/* Matrix table */}
-        <div className="rounded-xl border border-border/30 overflow-hidden mb-4">
-          {/* Header row */}
+        {/* Friction points list */}
+        <div className="rounded-xl border border-border/30 overflow-hidden mb-3">
           <div className="grid grid-cols-[1fr_auto] items-center px-3 py-2 bg-white/5 border-b border-border/30">
-            <span className="text-sm font-display font-bold tracking-wider uppercase text-white">Friction Pain Point</span>
-            <span className="text-sm font-display font-bold tracking-wider uppercase text-white">Impact Level</span>
+            <span className="text-xs font-display font-bold tracking-wider uppercase text-white">Friction Pain Point</span>
+            <span className="text-xs font-display font-bold tracking-wider uppercase text-white">Impact</span>
           </div>
-          {/* Data rows */}
-          {sortedSelected.map((pt, i) => {
-            const meta = PAIN_POINT_META[pt];
-            const cat = CATEGORY_META[meta?.category ?? "B"];
-            const isSel = deepDive.includes(pt);
+          {FRICTION_POINTS.map((point, i) => {
+            const isSel = deepDive.includes(point.title);
             return (
-              <button key={pt} onClick={() => onDeepDiveChange(toggle(deepDive, pt))}
-                className={`w-full text-left px-3 py-3 grid grid-cols-[1fr_auto] items-center gap-3 transition-all ${i < sortedSelected.length - 1 ? "border-b border-border/20" : ""} ${isSel ? "bg-primary/10" : "hover:bg-white/5"}`}>
-                <div className="flex items-center gap-2 min-w-0">
-                  <span className="text-base shrink-0">⚠️</span>
-                  <div className="min-w-0">
-                    <span className="text-sm font-body text-white block">{pt}</span>
-                    <span className={`text-xs font-display font-semibold ${cat.color}`}>{cat.label}</span>
-                  </div>
+              <button key={point.title} onClick={() => onDeepDiveChange(toggle(deepDive, point.title))}
+                className={`w-full text-left px-3 py-3 flex items-start gap-3 transition-all ${i < FRICTION_POINTS.length - 1 ? "border-b border-border/20" : ""} ${isSel ? "bg-primary/10" : "hover:bg-white/5"}`}>
+                <span className="text-base shrink-0 mt-0.5">⚠️</span>
+                <div className="flex-1 min-w-0">
+                  <span className="text-sm font-body text-white font-semibold block">{point.title}</span>
+                  <span className={`text-xs font-display font-semibold ${catColor[point.category] ?? "text-amber-400"}`}>{point.category}</span>
+                  {point.costStat && (
+                    <p className="text-xs text-white/60 font-body mt-1">
+                      {point.costStat}
+                      <span className="text-white/35 ml-1">{point.cite}</span>
+                    </p>
+                  )}
+                  {point.savingStat && (
+                    <p className="text-xs text-green-400/80 font-body mt-0.5">✦ {point.savingStat}</p>
+                  )}
                 </div>
-                <span className={`text-xs font-semibold px-2.5 py-1 rounded shrink-0 border ${
-                  meta?.impact === "High"   ? "text-red-400 bg-red-400/15 border-red-400/30" :
-                  meta?.impact === "Medium" ? "text-amber-400 bg-amber-400/15 border-amber-400/30" :
+                <span className={`text-xs font-semibold px-2.5 py-1 rounded shrink-0 border mt-0.5 ${
+                  point.impact === "High"   ? "text-red-400 bg-red-400/15 border-red-400/30" :
+                  point.impact === "Medium" ? "text-amber-400 bg-amber-400/15 border-amber-400/30" :
                                               "text-white/70 bg-white/10 border-white/20"
                 }`}>
-                  {meta?.impact ?? "Medium"}
+                  {point.impact}
                 </span>
               </button>
             );
           })}
+        </div>
+
+        {/* Footnote */}
+        <p className="text-[10px] text-white/35 font-body mb-4 px-1 leading-relaxed">
+          * Based on AI-assisted production pipelines. Sources: Autodesk Redshift (2022), MASV "The Ultimate Guide to VFX Pipelines" (2023), Epic Games "Virtual Production Field Guide" (2021), Foundry VFX Pipeline Insights.
+        </p>
+
+        {/* Budget-at-risk box */}
+        <div className="rounded-xl border border-red-400/20 bg-red-400/5 px-4 py-3 mb-3">
+          <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-red-400 mb-1">Estimated Budget at Risk</p>
+          <p className="text-xs font-body text-white/80 mb-1">
+            Studios with these friction points lose{" "}
+            <span className="text-red-400 font-semibold">$350K–$3M+</span> per major rework cycle.
+          </p>
+          <p className="text-xs font-body text-green-400/80">
+            ✦ Integrating GenAI across your pipeline can recover up to 60–85% of that loss.
+          </p>
+        </div>
+
+        {/* Sources strip */}
+        <div className="rounded-xl border border-border/20 bg-white/[0.02] px-4 py-3 mb-5">
+          <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-white/35 mb-2">Sources</p>
+          <div className="space-y-1">
+            {DISCOVER_SOURCES.map((s) => (
+              <p key={s.id} className="text-[10px] font-body text-white/40 leading-relaxed">
+                <span className="text-white/55 font-semibold">[{s.id}]</span>{" "}
+                <strong className="text-white/50">{s.label}</strong> — {s.title}, {s.year}.
+                {s.url && (
+                  <a href={s.url} target="_blank" rel="noopener noreferrer"
+                    className="text-primary/60 hover:text-primary ml-1 transition-colors">↗</a>
+                )}
+              </p>
+            ))}
+          </div>
         </div>
 
         <p className="text-sm text-white font-body mb-4">
