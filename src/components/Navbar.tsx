@@ -12,7 +12,6 @@ const SCALE_DEFAULT = 1;
 
 const navLinks = [
   { label: "Services", href: "#services" },
-  { label: "Estimator", href: "#estimator" },
   { label: "Contact", href: "#contact" },
 ];
 
