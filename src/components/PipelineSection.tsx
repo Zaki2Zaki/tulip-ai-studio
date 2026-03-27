@@ -345,8 +345,8 @@ const WorkflowBuilderPanel = ({
               {suggested.length > 0 && (
                 <div className="rounded-xl overflow-hidden mb-3" style={{ border: "1px dashed rgba(255,255,255,0.12)" }}>
                   <div className="px-3 py-2 bg-white/3 border-b border-white/10">
-                    <p className="text-xs font-display font-semibold uppercase tracking-wider text-white/50">Suggested Improvement Areas</p>
-                    <p className="text-[10px] font-body text-white/35 mt-0.5">These weren't flagged but may be worth exploring.</p>
+                    <p className="text-[6px] font-display font-semibold uppercase tracking-wider text-white">Suggested Improvement Areas</p>
+                    <p className="text-sm font-body text-white mt-0.5">These weren't flagged but may be worth exploring.</p>
                   </div>
                   {suggested.map((point, i) => renderRow(point, i === suggested.length - 1, true))}
                 </div>
