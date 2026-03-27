@@ -12,6 +12,34 @@ interface ExecutiveSummaryProps {
 
 const CALENDLY = "https://calendly.com/youki-harada/30min";
 
+function buildSourcesList(studioScale: string, outputType: string): string {
+  const lines = [
+    "[1] BCG — Video Gaming Report 2026: How Platforms Are Colliding and Why This Will Spark the Next Era of Growth. December 2025. Based on a survey of 3,000 gamers globally and independent Steam metadata analysis.",
+    "[2] Bloomberg / Jason Schreier — AAA Game Development Costs, March 2026. Primary reporting from US and Canadian studio sources confirming budgets now start at $300M.",
+    "[3] ESAC / Nordicity — The Canadian Video Game Industry 2021. Government-commissioned economic impact study of 937 active Canadian video game companies.",
+    "[4] GDC — State of the Game Industry Report, 2025. Annual developer survey.",
+  ];
+
+  if (outputType === "Games (Console / PC / Mobile)") {
+    lines.push("[5] a16z Games — AI in Game Development Survey, 2024. Survey of 650 game developers on AI adoption and productivity impact.");
+    lines.push("[6] Third Point Ventures — AI Impact on Gaming and Media Tooling, 2025.");
+  } else if (outputType === "3D Animation / Film") {
+    lines.push("[5] Morgan Stanley Research — Generative AI Cost Impact in Film and Television, 2024.");
+    lines.push("[6] Vitrina AI — AI in Animation Strategic Report, 2025.");
+    lines.push("[7] Roland Berger — AI Innovations for VFX and Animation.");
+  } else if (outputType === "VFX / Virtual Production") {
+    lines.push("[5] Ynput — State of Animation and VFX Pipelines Report, 2025. Survey of 200+ studios worldwide.");
+    lines.push("[6] Roland Berger — AI Innovations for VFX and Animation.");
+    lines.push("[7] VFX Voice — Industry Outlook 2026.");
+  }
+
+  if (studioScale === "Publisher / Multi-Studio") {
+    lines.push("[+] BCG cloud gaming projection: $1.4B to $18.3B by 2030 (CAGR above 50%). BCG Video Gaming Report 2026.");
+  }
+
+  return lines.join("<br>");
+}
+
 function buildPDF(
   studioScale: string,
   outputType: string,
