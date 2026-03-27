@@ -266,8 +266,10 @@ export default function ExecutiveSummary({
           <p style={SECTION_HEADER}>Competitive Positioning</p>
           <p className="text-sm font-body text-white/80 leading-relaxed">
             Studios with integrated AI pipelines are already shipping significantly more content per release
-            cycle. The window to close that gap without a structural disadvantage is roughly 18 months.
-            After that point, the headcount and budget required to catch up increases substantially.
+            cycle. EA's own partnership with Stability AI — cited by BCG in their 2026 global gaming report
+            — signals that even the largest publishers are committing to this transformation now. The window
+            to close that gap without a structural disadvantage is roughly 18 months. After that point, the
+            headcount and budget required to catch up increases substantially.
           </p>
         </div>
 
