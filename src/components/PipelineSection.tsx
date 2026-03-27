@@ -258,7 +258,7 @@ const WorkflowBuilderPanel = ({
           const isLastItem = index === PAIN_POINTS.length - 1;
           return (
             <button key={pt} onClick={() => onSelectedChange(toggle(selected, pt))}
-              className={`text-left px-3 py-3 rounded-xl border text-xs font-body transition-all flex items-center gap-1.5 min-h-[64px] ${isLastItem ? "md:col-start-3" : ""} ${on ? "border-orange-400/60 bg-orange-400/10 text-orange-200" : "border-border/40 text-white hover:border-border/70"}`}>
+              className={`text-left px-4 py-4 rounded-xl border text-sm font-body transition-all flex items-center gap-2 min-h-[80px] ${isLastItem ? "md:col-start-3" : ""} ${on ? "border-orange-400/60 bg-orange-400/10 text-orange-200" : "border-border/40 text-white hover:border-border/70"}`}>
               <span className={`shrink-0 ${on ? "text-orange-400" : "text-white/30"}`}>{on ? "✕" : "○"}</span>
               <span>{pt}</span>
             </button>
