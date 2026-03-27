@@ -308,10 +308,31 @@ const WorkflowBuilderPanel = ({
           const renderRow = (point: typeof FRICTION_POINTS[0], isLast: boolean, dimmed: boolean) => {
             const isSel = deepDive.includes(point.title);
             return (
-              <button key={point.title} onClick={() => onDeepDiveChange(toggle(deepDive, point.title))}
-                style={isSel ? { outline: "1.5px solid hsl(var(--primary))", outlineOffset: "-1.5px" } : undefined}
-                className={`w-full text-left px-3 py-3 flex items-start gap-3 transition-all ${!isLast ? "border-b border-border/20" : ""} ${dimmed ? "opacity-60" : ""} ${isSel ? "" : "hover:bg-white/5"}`}>
-                <span className="text-base shrink-0 mt-0.5">⚠️</span>
+              <button
+                key={point.title}
+                onClick={() => onDeepDiveChange(toggle(deepDive, point.title))}
+                style={isSel ? {
+                  border: "2px solid transparent",
+                  background: "linear-gradient(hsl(var(--background)), hsl(var(--background))) padding-box, linear-gradient(to right, #a78bfa, #c4b5fd, #e9d5ff) border-box",
+                  borderRadius: "8px",
+                  margin: "3px",
+                } : undefined}
+                className={`w-full text-left px-3 py-3 flex items-start gap-3 transition-all ${!isLast && !isSel ? "border-b border-border/20" : ""} ${dimmed ? "opacity-60" : ""} ${isSel ? "" : "hover:bg-white/5"}`}
+              >
+                <span
+                  className="shrink-0 mt-0.5 flex items-center justify-center text-[11px] font-bold leading-none"
+                  style={{
+                    width: 18,
+                    height: 18,
+                    borderRadius: 4,
+                    border: isSel ? "2px solid #c084fc" : "1px solid #555",
+                    background: "transparent",
+                    color: "#a78bfa",
+                    flexShrink: 0,
+                  }}
+                >
+                  {isSel ? "✓" : ""}
+                </span>
                 <div className="flex-1 min-w-0">
                   <span className="text-sm font-body text-white font-semibold block">{point.title}</span>
                   <span className={`text-xs font-display font-semibold ${catColor[point.category] ?? "text-amber-400"}`}>{point.category}</span>
