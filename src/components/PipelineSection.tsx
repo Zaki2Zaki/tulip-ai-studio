@@ -476,7 +476,7 @@ const WorkflowBuilderPanel = ({
           {(customCurrentTools.length > 0 || customWishlistTools.length > 0) && (
             <div className="mt-3 flex flex-wrap gap-1.5">
               {customCurrentTools.map((t) => (
-                <span key={t} className="flex items-center gap-1 rounded-full border border-primary/40 px-2.5 py-1 text-xs font-body text-white bg-primary/10">
+                <span key={t} className="flex items-center gap-1 rounded-full border border-primary/40 px-2.5 py-1 text-sm font-body text-white bg-primary/10">
                   ✓ {t}
                   <button onClick={() => onToolsChange(tools.filter((x) => x !== t))} className="ml-0.5 text-white/50 hover:text-white">×</button>
                 </span>
