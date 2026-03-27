@@ -33,7 +33,7 @@ function buildPDF(
                 : "color:#fbbf24;border-color:#fbbf2440;background:#fbbf2410"
             }">${r.impact}</span>
           </td>
-          <td style="padding:8px 12px;border-bottom:1px solid #222;font-size:12px;color:#aaa">$500K – $3M+ exposure</td>
+          <td style="padding:8px 12px;border-bottom:1px solid #222;font-size:12px;color:#aaa">${r.exposure} exposure</td>
         </tr>`
     )
     .join("");
