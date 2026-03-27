@@ -468,7 +468,7 @@ const WorkflowBuilderPanel = ({
               disabled={!otherToolTrim || wishlistTools.includes(otherToolTrim)}
               onClick={() => { if (!otherToolTrim) return; onWishlistToolsChange([...wishlistTools, otherToolTrim]); setOtherTool(""); }}
               title="Add to Wishlist"
-              className="inline-flex items-center gap-1 px-3 py-2 rounded-full border border-amber-400/40 bg-amber-400/10 text-xs font-display font-semibold text-white hover:bg-amber-400/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-1 px-3 py-2 rounded-full border border-amber-400/40 bg-amber-400/10 text-sm font-display font-semibold text-white hover:bg-amber-400/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
             >
               ★ Wishlist
             </button>
