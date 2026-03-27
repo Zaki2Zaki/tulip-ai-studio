@@ -129,9 +129,10 @@ export default function ROIModel({ onNext, onBack }: ROIModelProps) {
         <div className="flex items-start gap-2">
           <span className="text-base shrink-0 mt-0.5">⚠️</span>
           <p className="text-sm font-body text-white/70 leading-relaxed">
-            These figures come from published industry benchmarks. Your actual numbers depend on your
-            pipeline, team size, and how integration is scoped. A 30-minute conversation is all it
-            takes to make these numbers specific to your studio.
+            These figures draw on published research from BCG, Bloomberg, ESAC/Nordicity, GDC, and
+            Morgan Stanley among others. Where vendor data is used, it is attributed. Your actual
+            numbers depend on your pipeline, team size, and how integration is scoped. A 30-minute
+            conversation is all it takes to make these numbers specific to your studio.
           </p>
         </div>
       </div>
