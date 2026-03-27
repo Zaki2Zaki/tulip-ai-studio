@@ -83,9 +83,18 @@ export default function PipelineLabPage() {
             })}
           </nav>
 
-          {/* Bottom note */}
-          <div className="mt-auto pt-8">
-            <p className="text-[10px] font-body text-white/20 leading-relaxed">
+          {/* Back to site */}
+          <div className="mt-auto pt-8 border-t border-border/20">
+            <a
+              href="/"
+              className="flex items-center gap-1.5 text-xs font-body text-white/40 hover:text-white transition-colors"
+            >
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="m15 18-6-6 6-6"/>
+              </svg>
+              Back to Home
+            </a>
+            <p className="text-[10px] font-body text-white/20 leading-relaxed mt-3">
               Demo session. No data stored.
             </p>
           </div>
