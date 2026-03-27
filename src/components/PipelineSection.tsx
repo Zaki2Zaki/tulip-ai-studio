@@ -366,7 +366,7 @@ const WorkflowBuilderPanel = ({
 
               {/* Section 2 — Suggested Improvement Areas */}
               {suggested.length > 0 && (
-                <div className="rounded-xl overflow-hidden mb-3" style={{ border: "1px dashed rgba(255,255,255,0.12)" }}>
+                <div className="rounded-xl mb-3" style={{ border: "1px dashed rgba(255,255,255,0.12)" }}>
                   <div className="px-3 py-2 bg-white/3 border-b border-white/10">
                     <p className="text-[6px] font-display font-semibold uppercase tracking-wider text-white">Suggested Improvement Areas</p>
                     <p className="text-sm font-body text-white mt-0.5">These weren't flagged but may be worth exploring.</p>
