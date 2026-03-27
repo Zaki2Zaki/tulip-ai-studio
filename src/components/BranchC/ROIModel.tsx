@@ -1,4 +1,5 @@
 import { ArrowRight } from "lucide-react";
+import { getScenario } from "./personalisationData";
 
 interface ROIModelProps {
   studioScale: string;
@@ -8,54 +9,26 @@ interface ROIModelProps {
   onBack: () => void;
 }
 
-const METRICS = [
-  {
-    name: "Annual rework cost exposure",
-    detail:
-      "AAA development budgets in the US and Canada now start at $300M per title, confirmed by Bloomberg reporting in March 2026. The lion's share goes to developer salaries and overhead — not executive compensation. AI integration compresses the rework triggers that drive overruns. That is not a productivity gain. That is budget recovered.",
-  },
-  {
-    name: "Developer velocity",
-    detail:
-      "Some vendors report up to 90% acceleration in development cycles through AI pipeline integration. BCG's 2026 gaming report cites this figure in the context of game-generating tools now entering production use. Asset creation time compresses substantially. Your team produces more without growing the roster.",
-  },
-  {
-    name: "Production cost structure",
-    detail:
-      "Texturing and rigging currently consume over 70% of your modeling budget. Both are compressible. Freeing that capacity redirects your senior artists toward work that actually requires them.",
-  },
-  {
-    name: "Competitive window",
-    detail:
-      "BCG projects cloud gaming revenues will grow from $1.4B in 2025 to $18.3B by 2030 — a CAGR above 50%. Studios without AI-integrated pipelines will not be able to support the content cadence that platform-agnostic, cloud-native distribution demands. There is roughly 18 months before this gap becomes structurally difficult to close.",
-  },
-];
-
-const TIERS = [
+export const TIERS = [
   {
     id: "starter",
     name: "Starter",
     price: "$15K to $45K",
     detail: "Pipeline audit and tool benchmarking. Indie to mid-size studios. Payback period: 2 to 4 months.",
-    recommended: false,
   },
   {
     id: "studio",
     name: "Studio",
     price: "$45K to $165K",
     detail: "Full adoption, integration, and workshops. Mid-size to AAA studios. Payback period: 4 to 8 months.",
-    recommended: true,
   },
   {
     id: "enterprise",
     name: "Enterprise",
     price: "$165K to $395K",
     detail: "Architecture blueprint and multi-studio rollout. AAA to publisher scale. Payback period: 6 to 12 months.",
-    recommended: false,
   },
 ];
-
-export { TIERS, METRICS };
 
 const GRADIENT_BORDER = {
   border: "2px solid transparent",
@@ -65,7 +38,10 @@ const GRADIENT_BORDER = {
   borderRadius: "12px",
 };
 
-export default function ROIModel({ onNext, onBack }: ROIModelProps) {
+export default function ROIModel({ studioScale, outputType, budgetRange, onNext, onBack }: ROIModelProps) {
+  const scenario = getScenario(studioScale, outputType);
+  const recommendedTierId = scenario.getRecommendedTierId(budgetRange);
+
   return (
     <div className="max-w-2xl">
       <div className="flex items-center gap-2 mb-3">
@@ -83,45 +59,52 @@ export default function ROIModel({ onNext, onBack }: ROIModelProps) {
         What this is worth at your scale.
       </h2>
 
-      {/* Metrics */}
-      <div className="space-y-3 mb-8">
-        {METRICS.map((m) => (
+      {/* Metrics — 2-column grid on desktop */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        {scenario.roiMetrics.map((m) => (
           <div key={m.name} className="px-4 py-4 rounded-xl bg-card/40 border border-border/30">
             <p className="text-sm font-display font-bold text-white mb-1.5">{m.name}</p>
-            <p className="text-sm font-body text-white/80 leading-relaxed">{m.detail}</p>
+            <p className="text-[15px] font-body text-white leading-relaxed">{m.detail}</p>
           </div>
         ))}
       </div>
+
+      {scenario.reworkCostNote && (
+        <p className="text-xs font-body text-white/50 italic mb-4 -mt-4">{scenario.reworkCostNote}</p>
+      )}
 
       {/* Investment Tiers */}
       <p className="text-xs font-body font-semibold uppercase tracking-wider text-white/50 mb-3">
         Investment tiers
       </p>
       <div className="grid grid-cols-3 gap-3 mb-6">
-        {TIERS.map((tier) => (
-          <div
-            key={tier.id}
-            className={`p-4 rounded-xl ${!tier.recommended ? "border border-border/30 bg-card/40" : ""}`}
-            style={tier.recommended ? GRADIENT_BORDER : undefined}
-          >
-            <div className="flex items-start justify-between gap-1 mb-2">
-              <p className="text-xs font-display font-bold text-white">{tier.name}</p>
-              {tier.recommended && (
-                <span
-                  className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0"
-                  style={{
-                    background: "linear-gradient(to right, #a78bfa, #c4b5fd)",
-                    color: "#0a0a0a",
-                  }}
-                >
-                  Rec.
-                </span>
-              )}
+        {TIERS.map((tier) => {
+          const recommended = tier.id === recommendedTierId;
+          return (
+            <div
+              key={tier.id}
+              className={`p-4 rounded-xl ${!recommended ? "border border-border/30 bg-card/40" : ""}`}
+              style={recommended ? GRADIENT_BORDER : undefined}
+            >
+              <div className="flex items-start justify-between gap-1 mb-2">
+                <p className="text-sm font-display font-bold text-white">{tier.name}</p>
+                {recommended && (
+                  <span
+                    className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shrink-0"
+                    style={{
+                      background: "linear-gradient(to right, #a78bfa, #c4b5fd)",
+                      color: "#0a0a0a",
+                    }}
+                  >
+                    Rec.
+                  </span>
+                )}
+              </div>
+              <p className="text-sm font-display font-bold text-white mb-2">{tier.price}</p>
+              <p className="text-sm font-body text-white leading-relaxed">{tier.detail}</p>
             </div>
-            <p className="text-sm font-display font-bold text-white mb-2">{tier.price}</p>
-            <p className="text-xs font-body text-white/60 leading-relaxed">{tier.detail}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Disclaimer */}
