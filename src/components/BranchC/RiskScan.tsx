@@ -14,10 +14,10 @@ export const RISKS = [
     impact: "High" as const,
     title: "Disconnected pipelines",
     exposure: "$500K to $3M+",
-    stat: "$500K to $3M per rework cycle at AAA scale. Ten to thirty engineers pulled offline for three to seven days per incident. At a $150K average fully-loaded engineer cost, a single rework event burns $85K to $350K in labour alone — before delayed shipments or missed milestones.",
+    stat: "Estimated $500K to $3M per rework cycle at AAA scale. Ten to thirty developers offline for three to seven days. Every time it happens.",
     sources: [
-      { label: "The True Cost of Rework in VFX 2022", url: "https://www.google.com/search?q=The+True+Cost+of+Rework+in+VFX+2022" },
-      { label: "Griffin GP Game Development Report 2023", url: "https://www.google.com/search?q=Griffin+GP+Game+Development+Report+2023" },
+      { label: "Bloomberg / Jason Schreier, March 2026", url: "https://www.google.com/search?q=Jason+Schreier+Bloomberg+AAA+game+development+costs+2026" },
+      { label: "BCG Video Gaming Report 2026", url: "https://www.google.com/search?q=BCG+Video+Gaming+Report+2026" },
     ],
   },
   {
