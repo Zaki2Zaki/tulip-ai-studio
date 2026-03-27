@@ -448,7 +448,7 @@ const WorkflowBuilderPanel = ({
 
         {/* Other tool */}
         <div className="px-4 py-3 rounded-xl bg-card/40 border border-border/30 mb-5">
-          <p className="text-[11px] font-display font-semibold uppercase tracking-wider text-white mb-2">Other</p>
+          <p className="text-xs font-display font-semibold uppercase tracking-wider text-white mb-2">Other</p>
           <div className="flex items-center gap-2">
             <input
               value={otherTool}
