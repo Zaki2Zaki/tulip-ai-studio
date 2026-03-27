@@ -504,10 +504,9 @@ const WorkflowBuilderPanel = ({
 
   /* ── Stage 3: Validate ── */
   if (stage === 3) {
-    const allPresets = [...CURRENT_TOOLS, ...WISHLIST_TOOLS];
-    const customTools = tools.filter((t) => !allPresets.includes(t));
-    const selectedCurrentTools = tools.filter((t) => CURRENT_TOOLS.includes(t));
-    const selectedWishlistTools = tools.filter((t) => WISHLIST_TOOLS.includes(t));
+    const allPresets = new Set([...CURRENT_TOOLS, ...WISHLIST_TOOLS]);
+    const customPipelineTools  = tools.filter((t) => !allPresets.has(t));
+    const customWishlistCustom = wishlistTools.filter((t) => !allPresets.has(t));
     const metrics = [
       { label: "Asset creation speed", value: 60, color: "hsl(var(--primary))" },
       { label: "Pipeline failure reduction", value: 85, color: "hsl(40 95% 70%)" },
