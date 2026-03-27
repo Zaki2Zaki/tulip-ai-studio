@@ -12,12 +12,12 @@ const METRICS = [
   {
     name: "Annual rework cost exposure",
     detail:
-      "Studios your size spend between $500K and $3M per rework cycle. AI integration reduces the triggers for those cycles by 60 to 85%. That is not a productivity gain. That is budget recovered.",
+      "AAA development budgets in the US and Canada now start at $300M per title, confirmed by Bloomberg reporting in March 2026. The lion's share goes to developer salaries and overhead — not executive compensation. AI integration compresses the rework triggers that drive overruns. That is not a productivity gain. That is budget recovered.",
   },
   {
     name: "Developer velocity",
     detail:
-      "Asset creation drops from 100 hours to under 30 minutes per asset type. The same artist. The same quality standard. Your team produces more without growing the roster.",
+      "Some vendors report up to 90% acceleration in development cycles through AI pipeline integration. BCG's 2026 gaming report cites this figure in the context of game-generating tools now entering production use. Asset creation time compresses substantially. Your team produces more without growing the roster.",
   },
   {
     name: "Production cost structure",
@@ -27,7 +27,7 @@ const METRICS = [
   {
     name: "Competitive window",
     detail:
-      "There is roughly 18 months before the gap between studios that have integrated AI and those that have not becomes structurally difficult to close. After that point, the investment required to catch up increases substantially.",
+      "BCG projects cloud gaming revenues will grow from $1.4B in 2025 to $18.3B by 2030 — a CAGR above 50%. Studios without AI-integrated pipelines will not be able to support the content cadence that platform-agnostic, cloud-native distribution demands. There is roughly 18 months before this gap becomes structurally difficult to close.",
   },
 ];
 
