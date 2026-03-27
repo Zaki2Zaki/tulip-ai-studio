@@ -11,17 +11,18 @@ interface StudioProfileProps {
 }
 
 const SCALE_OPTIONS = [
-  { value: "Indie / Small Studio", sub: "1 to 20 people" },
-  { value: "Mid-Size Studio", sub: "20 to 100 people" },
-  { value: "AAA / Enterprise", sub: "100+ people" },
-  { value: "Publisher / Multi-Studio", sub: "500+ people" },
+  { key: "indie", label: "Indie / Small Studio", sub: "1 to 20 people" },
+  { key: "midsize", label: "Mid-Size Studio", sub: "20 to 100 people" },
+  { key: "aaa", label: "AAA / Enterprise", sub: "100+ people" },
+  { key: "publisher", label: "Publisher / Multi-Studio", sub: "500+ people" },
 ];
 
 const OUTPUT_OPTIONS = [
-  "Games (Console / PC / Mobile)",
-  "3D Animation / Film",
-  "VFX / Virtual Production",
-  "Mixed / All of the above",
+  { key: "games", label: "Games (Console / PC / Mobile)" },
+  { key: "animation", label: "3D Animation / Film" },
+  { key: "vfx", label: "VFX / Visual Effects" },
+  { key: "virtualproduction", label: "Virtual Production" },
+  { key: "mixed", label: "Mixed / All of the above" },
 ];
 
 const BUDGET_OPTIONS = [
@@ -70,11 +71,11 @@ export default function StudioProfile({
         </p>
         <div className="space-y-2">
           {SCALE_OPTIONS.map((opt) => {
-            const active = studioScale === opt.value;
+            const active = studioScale === opt.key;
             return (
               <button
-                key={opt.value}
-                onClick={() => onStudioScaleChange(opt.value)}
+                key={opt.key}
+                onClick={() => onStudioScaleChange(opt.key)}
                 className={`w-full text-left px-4 py-3 rounded-xl border transition-all flex items-center gap-3 ${
                   active ? "" : "border-border/40 hover:border-border/60"
                 }`}
@@ -90,7 +91,7 @@ export default function StudioProfile({
                   {active && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
                 </span>
                 <span>
-                  <span className="text-sm font-body font-semibold text-white">{opt.value}</span>
+                  <span className="text-sm font-body font-semibold text-white">{opt.label}</span>
                   <span className="text-xs font-body text-white/50 ml-2">{opt.sub}</span>
                 </span>
               </button>
@@ -106,11 +107,11 @@ export default function StudioProfile({
         </p>
         <div className="space-y-2">
           {OUTPUT_OPTIONS.map((opt) => {
-            const active = outputType === opt;
+            const active = outputType === opt.key;
             return (
               <button
-                key={opt}
-                onClick={() => onOutputTypeChange(opt)}
+                key={opt.key}
+                onClick={() => onOutputTypeChange(opt.key)}
                 className={`w-full text-left px-4 py-3 rounded-xl border transition-all flex items-center gap-3 ${
                   active ? "" : "border-border/40 hover:border-border/60"
                 }`}
@@ -125,7 +126,7 @@ export default function StudioProfile({
                 >
                   {active && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
                 </span>
-                <span className="text-sm font-body font-semibold text-white">{opt}</span>
+                <span className="text-sm font-body font-semibold text-white">{opt.label}</span>
               </button>
             );
           })}
