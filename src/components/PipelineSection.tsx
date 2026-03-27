@@ -115,8 +115,8 @@ const getRecommendedServiceIds = (deepDive: string[]): string[] => {
 // url: direct brand asset URL; invert: true flips black logos to white on dark bg
 // Initials badge fallback for tools not covered by any public logo source
 type LogoEntry =
-  | { icon: string; color?: string }   // color overrides the default white
-  | { url: string; invert?: boolean }
+  | { icon: string; color?: string }           // color overrides the default white
+  | { url: string; invert?: boolean; screen?: boolean } // screen: strips dark bg via mix-blend-mode
   | { initials: string; color: string };
 
 const TOOL_LOGOS: Record<string, LogoEntry> = {
