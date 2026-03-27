@@ -269,8 +269,7 @@ const WorkflowBuilderPanel = ({
         <button onClick={() => {
           if (selected.length === 0) { setShowValidation(true); return; }
           setShowValidation(false);
-          const matching = selected.filter((s) => FRICTION_POINTS.some((fp) => fp.title === s));
-          onDeepDiveChange(matching);
+          onDeepDiveChange([]);
           onStageChange(1);
         }}
           className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
