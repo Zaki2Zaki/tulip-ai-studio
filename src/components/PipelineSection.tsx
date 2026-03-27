@@ -460,7 +460,7 @@ const WorkflowBuilderPanel = ({
               disabled={!otherToolTrim || tools.includes(otherToolTrim)}
               onClick={() => { if (!otherToolTrim) return; onToolsChange([...tools, otherToolTrim]); setOtherTool(""); }}
               title="Add to Pipeline"
-              className="inline-flex items-center gap-1 px-3 py-2 rounded-full border border-primary/40 bg-primary/10 text-xs font-display font-semibold text-white hover:bg-primary/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-1 px-3 py-2 rounded-full border border-primary/40 bg-primary/10 text-sm font-display font-semibold text-white hover:bg-primary/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
             >
               ✓ Add
             </button>
