@@ -31,6 +31,7 @@ const App = () => (
           <Route path="/case-studies/steam-delays" element={<CaseStudySteamDelaysPage />} />
           <Route path="/case-studies/:stage" element={<CaseStudyComingSoonPage />} />
           <Route path="/auth" element={<AuthPage />} />
+          <Route path="/pipeline-lab" element={<PipelineLabPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
