@@ -839,17 +839,44 @@ const WorkflowBuilderPanel = ({
         </div>
       </div>
 
-      <div className="px-4 py-3 rounded-xl bg-orange-400/5 border border-orange-400/20 text-left mb-5">
+      <div className="px-6 py-5 rounded-xl bg-orange-400/5 border border-orange-400/20 text-left mb-5">
         <div className="flex items-start gap-2">
-          <span className="text-base shrink-0 mt-0.5">⚠️</span>
+          <span className="text-lg shrink-0 mt-0.5">⚠️</span>
           <div>
-            <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-orange-400 mb-1">This was a simulation</p>
-            <p className="text-xs font-body text-white/70">
+            <p className="text-xs font-display font-semibold uppercase tracking-wider text-orange-400 mb-1.5">This was a simulation</p>
+            <p className="text-sm font-body text-white/70">
               Real-world scaling requires a scoped discovery, team onboarding, and ongoing support.
               A <strong className="text-white/90">1:1 Consultation</strong> aligns expectations before any commitment.
             </p>
           </div>
         </div>
+      </div>
+
+      {/* Summary footer box */}
+      <div className="rounded-xl border border-border/30 bg-card/30 px-5 py-4 mb-5 text-left">
+        <p className="text-sm font-display font-bold text-white mb-1">
+          Total identified pipeline risk: {deepDive.length} friction point{deepDive.length !== 1 ? "s" : ""}
+        </p>
+        <p className="text-sm font-body text-white mb-1">
+          Estimated cost exposure: based on your studio scale
+        </p>
+        <p className="text-sm font-body text-white">
+          Recommended next step:{" "}
+          <a
+            href="https://calendly.com/youki-harada/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              background: "linear-gradient(90deg, #a78bfa, #c084fc, #e879f9)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              fontWeight: 600,
+            }}
+          >
+            Book a Discovery Call →
+          </a>
+        </p>
       </div>
 
       <div className="flex flex-col gap-2 items-center">
