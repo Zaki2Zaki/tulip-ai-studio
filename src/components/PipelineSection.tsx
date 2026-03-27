@@ -355,7 +355,7 @@ const WorkflowBuilderPanel = ({
             <>
               {/* Section 1 — Your Pipeline Friction Points */}
               {userPicked.length > 0 && (
-                <div className="rounded-xl border border-border/30 overflow-hidden mb-3">
+                <div className="rounded-xl border border-border/30 mb-3">
                   <div className="grid grid-cols-[1fr_auto] items-center px-3 py-2 bg-white/5 border-b border-border/30">
                     <span className="text-xs font-display font-bold tracking-wider uppercase text-white">Your Pipeline Friction Points</span>
                     <span className="text-xs font-display font-bold tracking-wider uppercase text-white">Impact</span>
