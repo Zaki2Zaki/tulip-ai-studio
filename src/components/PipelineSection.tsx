@@ -190,6 +190,8 @@ const WorkflowBuilderPanel = ({
   onSelectedChange,
   tools,
   onToolsChange,
+  wishlistTools,
+  onWishlistToolsChange,
   deepDive,
   onDeepDiveChange,
   workshopAdded,
