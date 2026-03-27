@@ -133,10 +133,10 @@ const TOOL_LOGOS: Record<string, LogoEntry> = {
   "Unity":              { icon: "unity" },                           // white
   "Unreal Engine":      { icon: "unrealengine" },                    // white — brand near-black too dark
   // ── Wishlist Tools ──
-  "Adobe Firefly":      { url: "/Adobe%20Firefly.png" },             // local — colored on dark bg
-  "Claude AI":          { url: "/claude-color.svg" },                // local — coral SVG
+  "Adobe Firefly":      { url: "/Adobe%20Firefly.png", screen: true }, // local — dark bg → screen strips bg
+  "Claude AI":          { url: "/claude-color.svg" },                  // local — coral SVG, transparent bg
   "ComfyUI":            { url: "https://framerusercontent.com/images/3cNQMWKzIhIrQ5KErBm7dSmbd2w.png" },
-  "Grok":               { url: "/Grok%20.png" },                     // local — white on dark bg
+  "Grok":               { url: "/Grok%20.png", screen: true },         // local — white on dark bg → screen strips bg
   "Hunyuan3D":          { url: "https://cdn-avatars.huggingface.co/v1/production/uploads/5dd96eb166059660ed1ee413/Lp3m-XLpjQGwBItlvn69q.png" },
   "Leonardo AI":        { url: "/leonardo-ai.png" },                 // local — white on purple bg
   "Luma Dream Machine": { url: "https://lumalabs.ai/favicon.ico", invert: true },
