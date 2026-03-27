@@ -225,7 +225,7 @@ export default function ExecutiveSummary({
                   >
                     {risk.impact}
                   </span>
-                  <span className="text-xs font-body text-white/40">$500K–$3M+</span>
+                  <span className="text-xs font-body text-white/40">{risk.exposure}</span>
                 </div>
               </div>
             ))}
