@@ -125,11 +125,11 @@ const TOOL_LOGOS: Record<string, LogoEntry> = {
   "DaVinci Resolve":    { icon: "davinciresolve" },                  // white — brand dark blue too dark
   "ElevenLabs":         { icon: "elevenlabs",    color: "F97316" }, // orange
   "Houdini":            { icon: "houdini",       color: "FF6B35" }, // Houdini orange
-  "Kling AI":           { url: "/Kling%20AI.png" },                  // local — white on dark bg
+  "Kling AI":           { url: "/Kling%20AI.png",   screen: true }, // local — white on dark bg → screen strips bg
   "Maya":               { icon: "autodeskmaya",  color: "0696D7" }, // Autodesk Maya blue
   "Nuke":               { icon: "nuke",          color: "64D2FF" }, // Nuke cyan
-  "Runway ML":          { url: "/Runway%20ML.png" },                 // local — white on dark bg
-  "Stable Diffusion":   { url: "/Stable%20DIffusion.png", invert: true }, // local — black on light bg → invert
+  "Runway ML":          { url: "/Runway%20ML.png", screen: true }, // local — white on dark bg → screen strips bg
+  "Stable Diffusion":   { url: "/Stable%20DIffusion.png", invert: true }, // local — black on lavender → invert
   "Unity":              { icon: "unity" },                           // white
   "Unreal Engine":      { icon: "unrealengine" },                    // white — brand near-black too dark
   // ── Wishlist Tools ──
