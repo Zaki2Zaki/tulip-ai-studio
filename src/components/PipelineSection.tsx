@@ -355,40 +355,6 @@ const WorkflowBuilderPanel = ({
           );
         })()}
 
-        {/* Footnote */}
-        <p className="text-[10px] text-white/35 font-body mb-4 px-1 leading-relaxed">
-          * Based on AI-assisted production pipelines. Sources: Autodesk Redshift (2022), MASV "The Ultimate Guide to VFX Pipelines" (2023), Epic Games "Virtual Production Field Guide" (2021), Foundry VFX Pipeline Insights.
-        </p>
-
-        {/* Budget-at-risk box */}
-        <div className="rounded-xl border border-red-400/20 bg-red-400/5 px-4 py-3 mb-3">
-          <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-red-400 mb-1">Estimated Budget at Risk</p>
-          <p className="text-xs font-body text-white/80 mb-1">
-            Studios with these friction points lose{" "}
-            <span className="text-red-400 font-semibold">$350K–$3M+</span> per major rework cycle.
-          </p>
-          <p className="text-xs font-body text-green-400/80">
-            ✦ Integrating GenAI across your pipeline can recover up to 60–85% of that loss.
-          </p>
-        </div>
-
-        {/* Sources strip */}
-        <div className="rounded-xl border border-border/20 bg-white/[0.02] px-4 py-3 mb-5">
-          <p className="text-xs font-display font-semibold uppercase tracking-wider text-white mb-2">Sources</p>
-          <div className="space-y-1">
-            {DISCOVER_SOURCES.map((s) => (
-              <p key={s.id} className="text-xs font-body text-white leading-relaxed">
-                <span className="font-semibold">[{s.id}]</span>{" "}
-                <strong>{s.label}</strong> — {s.title}, {s.year}.
-                {s.url && (
-                  <a href={s.url} target="_blank" rel="noopener noreferrer"
-                    className="text-primary/60 hover:text-primary ml-1 transition-colors">↗</a>
-                )}
-              </p>
-            ))}
-          </div>
-        </div>
-
         <p className="text-sm text-white font-body mb-4">
           {deepDive.length === 0 ? "Select rows to flag for deep-dive, or continue." : `${deepDive.length} flagged for deep-dive`}
         </p>
