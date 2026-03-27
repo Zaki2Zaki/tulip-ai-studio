@@ -724,23 +724,23 @@ const WorkflowBuilderPanel = ({
                   <div className="flex items-start justify-between gap-2 mb-1">
                     <div className="min-w-0">
                       <span className="text-sm font-body text-white font-semibold">{pt}</span>
-                      {fp && <span className="text-xs font-display font-semibold ml-2" style={{ color: "hsl(var(--primary))" }}>{fp.category}</span>}
+                      {fp && <span className="text-sm font-display font-semibold ml-2 text-white">{fp.category}</span>}
                     </div>
                     {fp && (
-                      <span className={`text-xs font-semibold px-2 py-0.5 rounded border shrink-0 ${
-                        fp.impact === "High"   ? "text-red-400 bg-red-400/15 border-red-400/30" :
-                        fp.impact === "Medium" ? "text-amber-400 bg-amber-400/15 border-amber-400/30" :
-                                                 "text-white/70 bg-white/10 border-white/20"
+                      <span className={`text-sm font-semibold px-2 py-0.5 rounded border shrink-0 text-white ${
+                        fp.impact === "High"   ? "bg-red-400/15 border-red-400/30" :
+                        fp.impact === "Medium" ? "bg-amber-400/15 border-amber-400/30" :
+                                                 "bg-white/10 border-white/20"
                       }`}>{fp.impact}</span>
                     )}
                   </div>
                   {fp?.costStat && (
-                    <p className="text-xs text-white/70 font-body mb-1">
-                      {fp.costStat} <span className="text-white/30">{fp.cite}</span>
+                    <p className="text-sm text-white font-body mb-1">
+                      {fp.costStat} <span className="text-white/40">{fp.cite}</span>
                     </p>
                   )}
                   {svc?.reason && (
-                    <p className="text-xs font-body" style={{ color: "hsl(var(--primary))" }}>→ Recommended: {svc.reason}</p>
+                    <p className="text-sm font-body text-white">→ Recommended: {svc.reason}</p>
                   )}
                 </div>
               );
