@@ -301,31 +301,18 @@ const WorkflowBuilderPanel = ({
         </p>
         <p className="font-display text-lg font-bold text-white mb-4"><span className="text-primary">Select</span> rows to flag for deep-dive by clicking any row</p>
 
-        {/* Friction points list */}
-        <div className="rounded-xl border border-border/30 overflow-hidden mb-3">
-          <div className="grid grid-cols-[1fr_auto] items-center px-3 py-2 bg-white/5 border-b border-border/30">
-            <span className="text-xs font-display font-bold tracking-wider uppercase text-white">Friction Pain Point</span>
-            <span className="text-xs font-display font-bold tracking-wider uppercase text-white">Impact</span>
-          </div>
-          {FRICTION_POINTS.map((point, i) => {
+        {/* Helper to render a friction point row */}
+        {(() => {
+          const renderRow = (point: typeof FRICTION_POINTS[0], isLast: boolean, dimmed: boolean) => {
             const isSel = deepDive.includes(point.title);
             return (
               <button key={point.title} onClick={() => onDeepDiveChange(toggle(deepDive, point.title))}
                 style={isSel ? { outline: "1.5px solid hsl(var(--primary))", outlineOffset: "-1.5px" } : undefined}
-                className={`w-full text-left px-3 py-3 flex items-start gap-3 transition-all ${i < FRICTION_POINTS.length - 1 ? "border-b border-border/20" : ""} ${isSel ? "" : "hover:bg-white/5"}`}>
+                className={`w-full text-left px-3 py-3 flex items-start gap-3 transition-all ${!isLast ? "border-b border-border/20" : ""} ${dimmed ? "opacity-60" : ""} ${isSel ? "" : "hover:bg-white/5"}`}>
                 <span className="text-base shrink-0 mt-0.5">⚠️</span>
                 <div className="flex-1 min-w-0">
                   <span className="text-sm font-body text-white font-semibold block">{point.title}</span>
                   <span className={`text-xs font-display font-semibold ${catColor[point.category] ?? "text-amber-400"}`}>{point.category}</span>
-                  {point.costStat && (
-                    <p className="text-sm text-white font-body mt-1">
-                      {point.costStat}
-                      <span className="text-white/40 ml-1">{point.cite}</span>
-                    </p>
-                  )}
-                  {point.savingStat && (
-                    <p className="text-xs text-green-400/80 font-body mt-0.5">✦ {point.savingStat}</p>
-                  )}
                 </div>
                 <span className={`text-xs font-semibold px-2.5 py-1 rounded shrink-0 border mt-0.5 ${
                   point.impact === "High"   ? "text-red-400 bg-red-400/15 border-red-400/30" :
@@ -336,8 +323,37 @@ const WorkflowBuilderPanel = ({
                 </span>
               </button>
             );
-          })}
-        </div>
+          };
+
+          const userPicked  = FRICTION_POINTS.filter((fp) => selected.includes(fp.title));
+          const suggested   = FRICTION_POINTS.filter((fp) => !selected.includes(fp.title));
+
+          return (
+            <>
+              {/* Section 1 — Your Pipeline Friction Points */}
+              {userPicked.length > 0 && (
+                <div className="rounded-xl border border-border/30 overflow-hidden mb-3">
+                  <div className="grid grid-cols-[1fr_auto] items-center px-3 py-2 bg-white/5 border-b border-border/30">
+                    <span className="text-xs font-display font-bold tracking-wider uppercase text-white">Your Pipeline Friction Points</span>
+                    <span className="text-xs font-display font-bold tracking-wider uppercase text-white">Impact</span>
+                  </div>
+                  {userPicked.map((point, i) => renderRow(point, i === userPicked.length - 1, false))}
+                </div>
+              )}
+
+              {/* Section 2 — Suggested Improvement Areas */}
+              {suggested.length > 0 && (
+                <div className="rounded-xl overflow-hidden mb-3" style={{ border: "1px dashed rgba(255,255,255,0.12)" }}>
+                  <div className="px-3 py-2 bg-white/3 border-b border-white/10">
+                    <p className="text-xs font-display font-semibold uppercase tracking-wider text-white/50">Suggested Improvement Areas</p>
+                    <p className="text-[10px] font-body text-white/35 mt-0.5">These weren't flagged but may be worth exploring.</p>
+                  </div>
+                  {suggested.map((point, i) => renderRow(point, i === suggested.length - 1, true))}
+                </div>
+              )}
+            </>
+          );
+        })()}
 
         {/* Footnote */}
         <p className="text-[10px] text-white/35 font-body mb-4 px-1 leading-relaxed">
