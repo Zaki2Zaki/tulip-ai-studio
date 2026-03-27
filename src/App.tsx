@@ -11,6 +11,7 @@ import CaseStudiesPage from "./pages/CaseStudiesPage";
 import CaseStudyProductionPage from "./pages/CaseStudyProductionPage";
 import CaseStudyComingSoonPage from "./pages/CaseStudyComingSoonPage";
 import CaseStudySteamDelaysPage from "./pages/CaseStudySteamDelaysPage";
+import PipelineLabPage from "./pages/PipelineLabPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
