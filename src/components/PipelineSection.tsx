@@ -1284,6 +1284,8 @@ const PipelineSection = () => {
                   onSelectedChange={setWorkflowSelected}
                   tools={workflowTools}
                   onToolsChange={setWorkflowTools}
+                  wishlistTools={workflowWishlistTools}
+                  onWishlistToolsChange={setWorkflowWishlistTools}
                   deepDive={workflowDeepDive}
                   onDeepDiveChange={setWorkflowDeepDive}
                   workshopAdded={workshopAdded}
