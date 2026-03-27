@@ -749,6 +749,35 @@ const WorkflowBuilderPanel = ({
         </div>
       )}
 
+      {/* Budget-at-risk box */}
+      <div className="rounded-xl border border-red-400/20 bg-red-400/5 px-4 py-3 mb-3 text-left">
+        <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-red-400 mb-1">Estimated Budget at Risk</p>
+        <p className="text-xs font-body text-white/80 mb-1">
+          Studios with these friction points lose{" "}
+          <span className="text-red-400 font-semibold">$350K–$3M+</span> per major rework cycle.
+        </p>
+        <p className="text-xs font-body text-green-400/80">
+          ✦ Integrating GenAI across your pipeline can recover up to 60–85% of that loss.
+        </p>
+      </div>
+
+      {/* Sources strip */}
+      <div className="rounded-xl border border-border/20 bg-white/[0.02] px-4 py-3 mb-5 text-left">
+        <p className="text-xs font-display font-semibold uppercase tracking-wider text-white mb-2">Sources</p>
+        <div className="space-y-1">
+          {DISCOVER_SOURCES.map((s) => (
+            <p key={s.id} className="text-xs font-body text-white leading-relaxed">
+              <span className="font-semibold">[{s.id}]</span>{" "}
+              <strong>{s.label}</strong> — {s.title}, {s.year}.
+              {s.url && (
+                <a href={s.url} target="_blank" rel="noopener noreferrer"
+                  className="text-primary/60 hover:text-primary ml-1 transition-colors">↗</a>
+              )}
+            </p>
+          ))}
+        </div>
+      </div>
+
       <div className="px-4 py-3 rounded-xl bg-orange-400/5 border border-orange-400/20 text-left mb-5">
         <div className="flex items-start gap-2">
           <span className="text-base shrink-0 mt-0.5">⚠️</span>
