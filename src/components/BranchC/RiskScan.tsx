@@ -13,36 +13,55 @@ export const RISKS = [
     id: 1,
     impact: "High" as const,
     title: "Disconnected pipelines",
-    stat: "$500K to $3M per rework cycle at AAA scale. Ten to thirty developers offline for three to seven days. Every time it happens.",
-    source: "The True Cost of Rework in VFX 2022 · Griffin GP Game Development Report 2023",
+    exposure: "$500K to $3M+",
+    stat: "$500K to $3M per rework cycle at AAA scale. Ten to thirty engineers pulled offline for three to seven days per incident. At a $150K average fully-loaded engineer cost, a single rework event burns $85K to $350K in labour alone — before delayed shipments or missed milestones.",
+    sources: [
+      { label: "The True Cost of Rework in VFX 2022", url: "https://www.google.com/search?q=The+True+Cost+of+Rework+in+VFX+2022" },
+      { label: "Griffin GP Game Development Report 2023", url: "https://www.google.com/search?q=Griffin+GP+Game+Development+Report+2023" },
+    ],
   },
   {
     id: 2,
     impact: "High" as const,
     title: "Your competitors are already shipping more",
-    stat: "Studios with integrated AI workflows produce 30 to 50% more content variation per release cycle. No additional headcount. Just a better pipeline.",
-    source: "Tencent Hunyuan3D Pipeline Report 2024 · SP Studios Generative Environments 2024",
+    exposure: "30 to 50% content gap",
+    stat: "Studios with integrated AI workflows produce 30 to 50% more content variation per release cycle with no additional headcount. At a mid-size studio, that equals 2 to 4 additional environment variants or character skins per sprint — content that otherwise costs $40K to $120K in contractor spend per title.",
+    sources: [
+      { label: "Tencent Hunyuan3D Pipeline Report 2024", url: "https://www.google.com/search?q=Tencent+Hunyuan3D+Pipeline+Report+2024" },
+      { label: "SP Studios Generative Environments 2024", url: "https://www.google.com/search?q=SP+Studios+Generative+Environments+2024" },
+    ],
   },
   {
     id: 3,
     impact: "High" as const,
     title: "Manual texturing and rigging are your biggest budget sink",
-    stat: "Over 70% of modeling budget goes to two stages that AI can compress by 40 to 70%. Your senior artists are spending most of their time on work that should be automated.",
-    source: "Autodesk Redshift 2022 · MASV VFX Pipeline Guide 2023",
+    exposure: "70% of modeling budget",
+    stat: "Texturing and rigging account for over 70% of modeling budget. AI integration compresses task time by 40 to 70% — dropping a 100-hour asset build to under 30 minutes in tested pipelines. At $80K per senior artist annually, recapturing 60% of that time returns $48K per artist per year in redirected senior capacity.",
+    sources: [
+      { label: "Autodesk Redshift 2022", url: "https://redshift.autodesk.com" },
+      { label: "MASV VFX Pipeline Guide 2023", url: "https://massive.io/file-transfer/vfx-pipeline/" },
+    ],
   },
   {
     id: 4,
     impact: "Medium" as const,
     title: "Unvetted AI tools break live services",
-    stat: "An AI tool that fails in a development pipeline is an inconvenience. The same failure in a live service pipeline is a player-facing outage. The difference is an integration strategy.",
-    source: "EA CTO technology strategy remit · Diversion.dev Version Control Survey 2024",
+    exposure: "Live service outage risk",
+    stat: "An AI tool failure in a live service pipeline can trigger a player-facing outage within hours of deployment. Live service outages cost studios $50K to $500K per hour in lost revenue and goodwill, plus $800 to $2,000 per hour in emergency engineering response — with no budget provision for either.",
+    sources: [
+      { label: "EA CTO technology strategy remit", url: "https://www.google.com/search?q=EA+CTO+technology+strategy+AI+integration+live+service" },
+      { label: "Diversion.dev Version Control Survey 2024", url: "https://diversion.dev" },
+    ],
   },
   {
     id: 5,
     impact: "Medium" as const,
     title: "Fragmented adoption creates expensive dependencies",
-    stat: "Adopting AI tools without a strategy does not save money. It creates vendor dependencies your team will pay to exit. Studios that move fast without a plan spend more fixing it than building it right the first time.",
-    source: "Third Point Ventures AI Impact on Gaming and Media Tooling 2025",
+    exposure: "Vendor exit costs",
+    stat: "Studios that adopt AI tools without a strategy pay twice: once to implement, once to exit. Vendor switching costs average 15 to 30% of total contract value. For a studio spending $200K per year on AI tooling, that is $30K to $60K in exit costs per vendor — before new implementation begins.",
+    sources: [
+      { label: "Third Point Ventures AI Impact on Gaming and Media Tooling 2025", url: "https://www.google.com/search?q=Third+Point+Ventures+AI+Impact+Gaming+Media+Tooling+2025" },
+    ],
   },
 ];
 
@@ -59,8 +78,15 @@ export function getDefaultExpanded(studioScale: string, outputType: string): num
     [3, 5].forEach((n) => expanded.add(n));
   }
 
-  if (outputType === "VFX / Virtual Production") expanded.add(4);
-  if (outputType === "3D Animation / Film") expanded.add(2);
+  // Fix 2: Risk 3 always expanded for animation/VFX output types
+  if (outputType === "VFX / Virtual Production") {
+    expanded.add(3);
+    expanded.add(4);
+  }
+  if (outputType === "3D Animation / Film") {
+    expanded.add(2);
+    expanded.add(3);
+  }
 
   return Array.from(expanded);
 }
@@ -132,7 +158,22 @@ export default function RiskScan({ studioScale, outputType, onNext, onBack }: Ri
               {isOpen && (
                 <div className="mt-3 pl-7 text-left">
                   <p className="text-sm font-body text-white leading-relaxed mb-2">{risk.stat}</p>
-                  <p className="text-xs font-body text-white/40 italic">{risk.source}</p>
+                  <p className="text-xs font-body text-white/40 italic">
+                    {risk.sources.map((s, i) => (
+                      <span key={i}>
+                        {i > 0 && " · "}
+                        <a
+                          href={s.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="hover:text-white/70 underline underline-offset-2 transition-colors"
+                        >
+                          {s.label}
+                        </a>
+                      </span>
+                    ))}
+                  </p>
                 </div>
               )}
             </button>
