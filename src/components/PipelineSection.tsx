@@ -544,13 +544,13 @@ const WorkflowBuilderPanel = ({
         </div>
 
         {/* Selected tools recap */}
-        {(selectedCurrentTools.length > 0 || selectedWishlistTools.length > 0) && (
+        {(tools.length > 0 || wishlistTools.length > 0) && (
           <div className="rounded-xl border border-border/30 bg-card/30 mb-4 overflow-hidden">
-            {selectedCurrentTools.length > 0 && (
+            {tools.length > 0 && (
               <div className="p-4">
-                <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">Current Tools Used</p>
+                <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">In My Pipeline</p>
                 <div className="grid grid-cols-2 gap-1.5">
-                  {selectedCurrentTools.map((label) => (
+                  {tools.map((label: string) => (
                     <div key={label} className="flex items-center justify-between border border-white/20 rounded-md px-3 py-2 bg-white/5">
                       <span className="text-sm font-body text-white truncate mr-2">{label}</span>
                       <ToolLogo label={label} />
@@ -559,11 +559,11 @@ const WorkflowBuilderPanel = ({
                 </div>
               </div>
             )}
-            {selectedWishlistTools.length > 0 && (
-              <div className={`p-4 ${selectedCurrentTools.length > 0 ? "border-t border-border/20" : ""}`}>
-                <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">Wishlist of Tools</p>
+            {wishlistTools.length > 0 && (
+              <div className={`p-4 ${tools.length > 0 ? "border-t border-border/20" : ""}`}>
+                <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">On My Wishlist</p>
                 <div className="grid grid-cols-2 gap-1.5">
-                  {selectedWishlistTools.map((label) => (
+                  {wishlistTools.map((label: string) => (
                     <div key={label} className="flex items-center justify-between border border-amber-400/40 rounded-md px-3 py-2 bg-amber-900/10">
                       <span className="text-sm font-body text-white truncate mr-2">{label}</span>
                       <ToolLogo label={label} />
@@ -576,11 +576,11 @@ const WorkflowBuilderPanel = ({
         )}
 
         {/* Custom tools */}
-        {customTools.length > 0 && (
+        {(customPipelineTools.length > 0 || customWishlistCustom.length > 0) && (
           <div className="rounded-xl border border-white/10 bg-white/5 p-4 mb-4">
             <p className="text-xs font-body font-semibold tracking-widest text-white uppercase mb-3">Custom Tools Included in This Configuration</p>
             <div className="flex flex-wrap gap-2">
-              {customTools.map((t) => (
+              {[...customPipelineTools, ...customWishlistCustom].map((t: string) => (
                 <span key={t} className="rounded-full border border-white/20 px-3 py-1 text-sm font-body font-medium text-white bg-white/5">{t}</span>
               ))}
             </div>
