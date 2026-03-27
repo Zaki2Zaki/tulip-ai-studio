@@ -102,9 +102,9 @@ const HeroSection = () => {
               </p>
 
               <p className="text-sm md:text-base font-display font-normal text-foreground/95 leading-relaxed" style={{ letterSpacing: "-0.01em" }}>
-                We're all discovering the pain points to scale. We{" "}
+                We{" "}
                 <span className="text-gradient-tulip-ombre font-bold">love</span>{" "}
-                finding solutions for our integrations issues for our creatives &amp; technical leaders
+                discovering solutions to the integration challenges that slow down creatives and technical leaders.
               </p>
             </div>
 
