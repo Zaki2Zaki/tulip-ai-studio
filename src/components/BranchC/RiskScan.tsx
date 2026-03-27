@@ -25,10 +25,10 @@ export const RISKS = [
     impact: "High" as const,
     title: "Your competitors are already shipping more",
     exposure: "30 to 50% content gap",
-    stat: "Studios with integrated AI workflows produce 30 to 50% more content variation per release cycle with no additional headcount. At a mid-size studio, that equals 2 to 4 additional environment variants or character skins per sprint — content that otherwise costs $40K to $120K in contractor spend per title.",
+    stat: "Studios with integrated AI workflows are already shipping significantly more content per release cycle. BCG estimates approximately 50% of studios now use AI — double the adoption rate of a year ago.",
     sources: [
-      { label: "Tencent Hunyuan3D Pipeline Report 2024", url: "https://www.google.com/search?q=Tencent+Hunyuan3D+Pipeline+Report+2024" },
-      { label: "SP Studios Generative Environments 2024", url: "https://www.google.com/search?q=SP+Studios+Generative+Environments+2024" },
+      { label: "BCG Video Gaming Report 2026", url: "https://www.google.com/search?q=BCG+Video+Gaming+Report+2026" },
+      { label: "Steam metadata analysis, BCG 2025", url: "https://www.google.com/search?q=BCG+Steam+metadata+analysis+gaming+AI+2025" },
     ],
   },
   {
