@@ -125,20 +125,20 @@ const TOOL_LOGOS: Record<string, LogoEntry> = {
   "DaVinci Resolve":    { icon: "davinciresolve" },                  // white — brand dark blue too dark
   "ElevenLabs":         { icon: "elevenlabs",    color: "F97316" }, // orange
   "Houdini":            { icon: "houdini",       color: "FF6B35" }, // Houdini orange
-  "Kling AI":           { initials: "K",  color: "#8B5CF6" },
+  "Kling AI":           { url: "/Kling%20AI.png" },                  // local — white on dark bg
   "Maya":               { icon: "autodeskmaya",  color: "0696D7" }, // Autodesk Maya blue
   "Nuke":               { icon: "nuke",          color: "64D2FF" }, // Nuke cyan
-  "Runway ML":          { icon: "runway" },                          // white — Runway's brand
-  "Stable Diffusion":   { icon: "stabilityai",   color: "A78BFA" }, // Stability purple
+  "Runway ML":          { url: "/Runway%20ML.png" },                 // local — white on dark bg
+  "Stable Diffusion":   { url: "/Stable%20DIffusion.png", invert: true }, // local — black on light bg → invert
   "Unity":              { icon: "unity" },                           // white
   "Unreal Engine":      { icon: "unrealengine" },                    // white — brand near-black too dark
   // ── Wishlist Tools ──
-  "Adobe Firefly":      { icon: "adobefirefly" },
-  "Claude AI":          { icon: "anthropic" },
+  "Adobe Firefly":      { url: "/Adobe%20Firefly.png" },             // local — colored on dark bg
+  "Claude AI":          { url: "/claude-color.svg" },                // local — coral SVG
   "ComfyUI":            { url: "https://framerusercontent.com/images/3cNQMWKzIhIrQ5KErBm7dSmbd2w.png" },
-  "Grok":               { icon: "xai" },
+  "Grok":               { url: "/Grok%20.png" },                     // local — white on dark bg
   "Hunyuan3D":          { url: "https://cdn-avatars.huggingface.co/v1/production/uploads/5dd96eb166059660ed1ee413/Lp3m-XLpjQGwBItlvn69q.png" },
-  "Leonardo AI":        { icon: "leonardo",      color: "F9A03F" },
+  "Leonardo AI":        { url: "/leonardo-ai.png" },                 // local — white on purple bg
   "Luma Dream Machine": { url: "https://lumalabs.ai/favicon.ico", invert: true },
   "Meshy":              { url: "https://cdn.meshy.ai/uploads/prod/packs/meshy_logo_square_3d.png" },
   "Pika":               { url: "https://pika.art/apple-touch-icon.png" },
