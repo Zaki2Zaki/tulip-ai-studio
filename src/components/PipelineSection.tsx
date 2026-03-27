@@ -756,37 +756,57 @@ const WorkflowBuilderPanel = ({
         <div className="text-left mb-5">
           <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-primary mb-1">Based on Your Selections</p>
           <p className="font-display text-xl font-bold text-white mb-3" style={{ letterSpacing: "-0.01em" }}>Your Pipeline Diagnosis</p>
-          <div className="space-y-2">
-            {deepDive.map((pt) => {
-              const fp = FRICTION_POINTS.find((f) => f.title === pt);
-              const svc = DEEP_DIVE_SERVICE_MAP[pt];
-              return (
-                <div key={pt} className="px-4 py-3 rounded-xl bg-card/40 border border-border/30">
-                  <div className="flex items-start justify-between gap-2 mb-1">
-                    <div className="min-w-0">
-                      <span className="text-sm font-body text-white font-semibold">{pt}</span>
-                      {fp && <span className="text-sm font-display font-semibold ml-2 text-white">{fp.category}</span>}
+          {(() => {
+            const impactOrder: Record<string, number> = { High: 0, Medium: 1, Low: 2 };
+            const catColor: Record<string, string> = {
+              "Tool Issues":          "text-red-400",
+              "Learning Your Tools":  "text-blue-400",
+              "Adoption & Training":  "text-purple-400",
+              "Cost Optimisation":    "text-green-400",
+              "Workflow Restructure": "text-amber-400",
+            };
+            const sorted = [...deepDive].sort((a, b) => {
+              const fa = FRICTION_POINTS.find((f) => f.title === a);
+              const fb = FRICTION_POINTS.find((f) => f.title === b);
+              return (impactOrder[fa?.impact ?? "Low"] ?? 2) - (impactOrder[fb?.impact ?? "Low"] ?? 2);
+            });
+            return (
+              <div className="space-y-2">
+                {sorted.map((pt) => {
+                  const fp = FRICTION_POINTS.find((f) => f.title === pt);
+                  const svc = DEEP_DIVE_SERVICE_MAP[pt];
+                  return (
+                    <div key={pt} className="px-4 py-3 rounded-xl bg-card/40 border border-border/30">
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <div className="flex items-start gap-2 min-w-0">
+                          <span className="text-base shrink-0 mt-0.5">⚠️</span>
+                          <div className="min-w-0">
+                            <span className="text-sm font-body text-white font-semibold">{pt}</span>
+                            {fp && <span className={`text-xs font-display font-semibold ml-2 ${catColor[fp.category] ?? "text-amber-400"}`}>{fp.category}</span>}
+                          </div>
+                        </div>
+                        {fp && (
+                          <span className={`text-xs font-semibold px-2.5 py-1 rounded border shrink-0 mt-0.5 ${
+                            fp.impact === "High"   ? "text-red-400 bg-red-400/15 border-red-400/30" :
+                            fp.impact === "Medium" ? "text-amber-400 bg-amber-400/15 border-amber-400/30" :
+                                                     "text-white/70 bg-white/10 border-white/20"
+                          }`}>{fp.impact}</span>
+                        )}
+                      </div>
+                      {fp?.costStat && (
+                        <p className="text-sm text-white font-body mb-1">
+                          {fp.costStat} <span className="text-white/40">{fp.cite}</span>
+                        </p>
+                      )}
+                      {svc?.reason && (
+                        <p className="text-sm font-body text-primary">→ Recommended: {svc.reason}</p>
+                      )}
                     </div>
-                    {fp && (
-                      <span className={`text-sm font-semibold px-2 py-0.5 rounded border shrink-0 text-white ${
-                        fp.impact === "High"   ? "bg-red-400/15 border-red-400/30" :
-                        fp.impact === "Medium" ? "bg-amber-400/15 border-amber-400/30" :
-                                                 "bg-white/10 border-white/20"
-                      }`}>{fp.impact}</span>
-                    )}
-                  </div>
-                  {fp?.costStat && (
-                    <p className="text-sm text-white font-body mb-1">
-                      {fp.costStat} <span className="text-white/40">{fp.cite}</span>
-                    </p>
-                  )}
-                  {svc?.reason && (
-                    <p className="text-sm font-body text-white">→ Recommended: {svc.reason}</p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
         </div>
       )}
 
