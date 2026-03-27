@@ -243,20 +243,47 @@ const WorkflowBuilderPanel = ({
       >
         <Play className="w-3.5 h-3.5" /> Start Building →
       </button>
-      <div className="mt-4 pt-4 border-t border-border/20">
-        <p className="text-xs text-white/40 font-body mb-2">Looking for a deeper strategic briefing?</p>
-        <a
-          href="/pipeline-lab"
-          className="inline-flex items-center gap-1.5 text-xs font-body font-semibold transition-colors"
-          style={{
-            background: "linear-gradient(90deg, #a78bfa, #c4b5fd, #e9d5ff)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
-        >
-          Try the Pipeline Lab → Risk Scan + ROI Model
-        </a>
+
+      {/* Pipeline Lab promo card */}
+      <div className="mt-6 rounded-2xl overflow-hidden text-left"
+        style={{
+          border: "1px solid transparent",
+          background:
+            "linear-gradient(hsl(0 0% 6%), hsl(0 0% 6%)) padding-box, " +
+            "linear-gradient(135deg, #a78bfa55, #c4b5fd33, #e9d5ff22) border-box",
+        }}
+      >
+        <div className="px-5 py-4">
+          <p className="text-[9px] tracking-[0.2em] uppercase font-body font-semibold mb-2"
+            style={{
+              background: "linear-gradient(90deg, #a78bfa, #c4b5fd, #e9d5ff)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Pipeline Lab — Strategic Briefing
+          </p>
+          <p className="font-display text-sm font-bold text-white mb-1">
+            Want the numbers first?
+          </p>
+          <p className="text-xs font-body text-white/60 mb-4 leading-relaxed">
+            Risk Scan + ROI Model tailored to your studio scale. Three questions, then we show you where the money is going.
+          </p>
+          <a
+            href="/pipeline-lab"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-display font-semibold text-xs transition-all"
+            style={{
+              border: "1px solid transparent",
+              background:
+                "linear-gradient(hsl(0 0% 8%), hsl(0 0% 8%)) padding-box, " +
+                "linear-gradient(to right, #a78bfa, #c4b5fd, #e9d5ff) border-box",
+              color: "#e9d5ff",
+            }}
+          >
+            Open Pipeline Lab <ArrowRight className="w-3 h-3" />
+          </a>
+        </div>
       </div>
     </div>
   );
