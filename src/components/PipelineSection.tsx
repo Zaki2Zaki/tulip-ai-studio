@@ -161,6 +161,9 @@ const ToolLogo = ({ label }: { label: string }) => {
     );
   }
   if ("url" in logo) {
+    const style: React.CSSProperties = {};
+    if (logo.invert) style.filter = "invert(1)";
+    if (logo.screen) style.mixBlendMode = "screen";
     return (
       <img
         src={logo.url}
@@ -168,7 +171,7 @@ const ToolLogo = ({ label }: { label: string }) => {
         width={16}
         height={16}
         className="w-4 h-4 shrink-0 object-contain opacity-90"
-        style={logo.invert ? { filter: "brightness(0) invert(1)" } : undefined}
+        style={Object.keys(style).length ? style : undefined}
         onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
       />
     );
