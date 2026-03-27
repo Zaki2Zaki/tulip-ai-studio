@@ -744,6 +744,45 @@ const WorkflowBuilderPanel = ({
 
       </div>
 
+      {/* Pipeline Diagnosis */}
+      {deepDive.length > 0 && (
+        <div className="text-left mb-5">
+          <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-primary mb-1">Based on Your Selections</p>
+          <p className="font-display text-xl font-bold text-white mb-3" style={{ letterSpacing: "-0.01em" }}>Your Pipeline Diagnosis</p>
+          <div className="space-y-2">
+            {deepDive.map((pt) => {
+              const fp = FRICTION_POINTS.find((f) => f.title === pt);
+              const svc = DEEP_DIVE_SERVICE_MAP[pt];
+              return (
+                <div key={pt} className="px-4 py-3 rounded-xl bg-card/40 border border-border/30">
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <div className="min-w-0">
+                      <span className="text-sm font-body text-white font-semibold">{pt}</span>
+                      {fp && <span className="text-xs font-display font-semibold ml-2" style={{ color: "hsl(var(--primary))" }}>{fp.category}</span>}
+                    </div>
+                    {fp && (
+                      <span className={`text-xs font-semibold px-2 py-0.5 rounded border shrink-0 ${
+                        fp.impact === "High"   ? "text-red-400 bg-red-400/15 border-red-400/30" :
+                        fp.impact === "Medium" ? "text-amber-400 bg-amber-400/15 border-amber-400/30" :
+                                                 "text-white/70 bg-white/10 border-white/20"
+                      }`}>{fp.impact}</span>
+                    )}
+                  </div>
+                  {fp?.costStat && (
+                    <p className="text-xs text-white/70 font-body mb-1">
+                      {fp.costStat} <span className="text-white/30">{fp.cite}</span>
+                    </p>
+                  )}
+                  {svc?.reason && (
+                    <p className="text-xs font-body" style={{ color: "hsl(var(--primary))" }}>→ Recommended: {svc.reason}</p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <div className="px-4 py-3 rounded-xl bg-orange-400/5 border border-orange-400/20 text-left mb-5">
         <div className="flex items-start gap-2">
           <span className="text-base shrink-0 mt-0.5">⚠️</span>
