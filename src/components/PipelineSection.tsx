@@ -931,28 +931,38 @@ const WorkflowBuilderPanel = ({
                 h1{font-size:28px;margin-bottom:4px;letter-spacing:-0.02em}
                 h2{font-size:13px;color:#555;font-weight:400;margin-bottom:28px;text-transform:uppercase;letter-spacing:.1em}
                 h3{font-size:20px;font-weight:700;margin:32px 0 4px;letter-spacing:-0.01em}
-                .eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#c084fc;font-weight:600;margin-bottom:4px}
+                .eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.15em;font-weight:600;margin-bottom:4px;background:linear-gradient(90deg,#a78bfa,#c084fc,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
                 .subtitle{font-size:12px;color:#555;margin-bottom:20px}
                 table{width:100%;border-collapse:collapse;margin-bottom:32px}
-                th{text-align:left;padding:8px 12px;border-bottom:2px solid #222;color:#c084fc;font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+                th{text-align:left;padding:8px 12px;border-bottom:2px solid #222;font-size:11px;text-transform:uppercase;letter-spacing:.08em;background:linear-gradient(90deg,#a78bfa,#c084fc,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
                 .stat{display:inline-block;margin-right:32px;margin-bottom:16px}
-                .stat-val{font-size:32px;font-weight:700;color:#c084fc}
+                .stat-val{font-size:32px;font-weight:700;background:linear-gradient(90deg,#a78bfa,#c084fc,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
                 .stat-lbl{font-size:12px;color:#555}
                 .diag-card{border:1px solid #222;border-radius:8px;padding:14px 16px;margin-bottom:10px}
                 .diag-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
                 .diag-title{font-size:14px;font-weight:700}
-                .diag-cat{font-size:11px;color:#c084fc;margin-left:10px;font-weight:600}
+                .diag-cat{font-size:11px;margin-left:10px;font-weight:600;background:linear-gradient(90deg,#a78bfa,#c084fc,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
                 .diag-badge{font-size:10px;font-weight:700;border:1px solid;border-radius:4px;padding:2px 8px;white-space:nowrap}
                 .diag-stat{font-size:12px;color:#aaa;margin:0 0 4px}
-                .diag-rec{font-size:12px;color:#c084fc;margin:0;font-style:italic}
-                .summary-box{border:1px solid #333;border-radius:8px;padding:16px 20px;margin:24px 0;background:#111}
+                .diag-rec{font-size:12px;margin:0;font-style:italic;background:linear-gradient(90deg,#a78bfa,#c084fc,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+                .budget-box{border:1px solid rgba(248,113,113,0.3);border-radius:8px;padding:18px 22px;margin:20px 0;background:rgba(248,113,113,0.05)}
+                .budget-label{font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#f87171;font-weight:600;margin:0 0 8px}
+                .budget-body{font-size:13px;color:#ccc;margin:0 0 6px}
+                .budget-recovery{font-size:13px;color:#4ade80;margin:0}
+                .sim-box{border:1px solid rgba(251,146,60,0.3);border-radius:8px;padding:18px 22px;margin:20px 0;background:rgba(251,146,60,0.05)}
+                .sim-label{font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#fb923c;font-weight:600;margin:0 0 8px}
+                .sim-body{font-size:13px;color:#aaa;margin:0}
+                .summary-box{border:1px solid #333;border-radius:8px;padding:18px 22px;margin:24px 0;background:#111}
+                .summary-link{background:linear-gradient(90deg,#a78bfa,#c084fc,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:600;text-decoration:none}
                 footer{margin-top:40px;font-size:10px;color:#444;border-top:1px solid #1a1a1a;padding-top:16px}
                 @media print{
                   body{background:#fff;color:#000}
-                  h2,h3,th,.eyebrow,.diag-rec,.diag-cat,.stat-val{color:#7c3aed!important}
-                  .diag-stat,.stat-lbl{color:#555}
-                  .diag-card,.summary-box{border-color:#ddd;background:#fafafa}
+                  .diag-stat,.stat-lbl,.subtitle{color:#555}
+                  .diag-card,.summary-box,.budget-box,.sim-box{border-color:#ddd;background:#fafafa}
+                  .budget-box{background:#fff5f5}
+                  .sim-box{background:#fff8f0}
                   footer{color:#999;border-color:#ddd}
+                  h2,h3{color:#111}
                 }
               </style>
             </head><body>
@@ -965,12 +975,21 @@ const WorkflowBuilderPanel = ({
               <h3>Your Pipeline Diagnosis</h3>
               <div class="subtitle">${today}</div>
               ${diagnosisRows}
-              <div class="summary-box">
-                <p style="font-size:13px;font-weight:700;margin:0 0 6px">Total identified pipeline risk: ${deepDive.length} friction point${deepDive.length !== 1 ? "s" : ""}</p>
-                <p style="font-size:12px;color:#aaa;margin:0 0 4px">Estimated cost exposure: based on your studio scale</p>
-                <p style="font-size:12px;color:#c084fc;margin:0;font-style:italic">Recommended next step: Book a Discovery Call → tuliptechnology.ca</p>
+              <div class="budget-box">
+                <p class="budget-label">Estimated Budget at Risk</p>
+                <p class="budget-body">Studios with these friction points lose <strong style="color:#f87171">$350K–$3M+</strong> per major rework cycle.</p>
+                <p class="budget-recovery">✦ Integrating GenAI across your pipeline can recover up to 60–85% of that loss.</p>
               </div>
-              <h2 style="margin-top:32px;margin-bottom:8px;color:#c084fc;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.08em">Service Recommendations</h2>
+              <div class="sim-box">
+                <p class="sim-label">⚠ This Was a Simulation</p>
+                <p class="sim-body">Real-world scaling requires a scoped discovery, team onboarding, and ongoing support. A <strong style="color:#ccc">1:1 Consultation</strong> aligns expectations before any commitment.</p>
+              </div>
+              <div class="summary-box">
+                <p style="font-size:14px;font-weight:700;margin:0 0 6px">Total identified pipeline risk: ${deepDive.length} friction point${deepDive.length !== 1 ? "s" : ""}</p>
+                <p style="font-size:13px;color:#aaa;margin:0 0 6px">Estimated cost exposure: based on your studio scale</p>
+                <p style="font-size:13px;margin:0">Recommended next step: <a href="https://calendly.com/youki-harada/30min" class="summary-link">Book a Discovery Call → calendly.com/youki-harada/30min</a></p>
+              </div>
+              <h2 style="margin-top:32px;margin-bottom:8px;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.08em;background:linear-gradient(90deg,#a78bfa,#c084fc,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Service Recommendations</h2>
               <table><thead><tr><th>Pain Point</th><th>Recommendation</th><th>Suggested Service</th></tr></thead><tbody>${serviceRows}</tbody></table>
               <footer>*Based on industry benchmarks. Results vary by studio size and pipeline maturity.<br>Sources: Generative Environments for ICVFX (SP Studios) • Hunyuan3D Pipeline (Tencent) • Democratization of VFX via GenAI (UWL Research)<br>Generated by Tulip Technology R&D™ — tuliptechnology.ca</footer>
             </body></html>`;
