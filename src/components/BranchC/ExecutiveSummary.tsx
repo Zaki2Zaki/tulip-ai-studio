@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, X } from "lucide-react";
-import { RISKS, getTopRisks } from "./RiskScan";
-import { TIERS, METRICS } from "./ROIModel";
+import { getScenario, getTopRisks, getSources } from "./personalisationData";
+import { TIERS } from "./ROIModel";
 
 interface ExecutiveSummaryProps {
   studioScale: string;
@@ -12,33 +12,24 @@ interface ExecutiveSummaryProps {
 
 const CALENDLY = "https://calendly.com/youki-harada/30min";
 
-function buildSourcesList(studioScale: string, outputType: string): string {
-  const lines = [
-    "[1] BCG — Video Gaming Report 2026: How Platforms Are Colliding and Why This Will Spark the Next Era of Growth. December 2025. Based on a survey of 3,000 gamers globally and independent Steam metadata analysis.",
-    "[2] Bloomberg / Jason Schreier — AAA Game Development Costs, March 2026. Primary reporting from US and Canadian studio sources confirming budgets now start at $300M.",
-    "[3] ESAC / Nordicity — The Canadian Video Game Industry 2021. Government-commissioned economic impact study of 937 active Canadian video game companies.",
-    "[4] GDC — State of the Game Industry Report, 2025. Annual developer survey.",
-  ];
+const ACCENT_LINK_STYLE = {
+  background: "linear-gradient(90deg, #a78bfa, #c4b5fd, #e9d5ff)",
+  WebkitBackgroundClip: "text" as const,
+  WebkitTextFillColor: "transparent" as const,
+  backgroundClip: "text" as const,
+};
 
-  if (outputType === "Games (Console / PC / Mobile)") {
-    lines.push("[5] a16z Games — AI in Game Development Survey, 2024. Survey of 650 game developers on AI adoption and productivity impact.");
-    lines.push("[6] Third Point Ventures — AI Impact on Gaming and Media Tooling, 2025.");
-  } else if (outputType === "3D Animation / Film") {
-    lines.push("[5] Morgan Stanley Research — Generative AI Cost Impact in Film and Television, 2024.");
-    lines.push("[6] Vitrina AI — AI in Animation Strategic Report, 2025.");
-    lines.push("[7] Roland Berger — AI Innovations for VFX and Animation.");
-  } else if (outputType === "VFX / Virtual Production") {
-    lines.push("[5] Ynput — State of Animation and VFX Pipelines Report, 2025. Survey of 200+ studios worldwide.");
-    lines.push("[6] Roland Berger — AI Innovations for VFX and Animation.");
-    lines.push("[7] VFX Voice — Industry Outlook 2026.");
-  }
-
-  if (studioScale === "Publisher / Multi-Studio") {
-    lines.push("[+] BCG cloud gaming projection: $1.4B to $18.3B by 2030 (CAGR above 50%). BCG Video Gaming Report 2026.");
-  }
-
-  return lines.join("<br>");
-}
+const SECTION_HEADER = {
+  fontSize: "10px",
+  textTransform: "uppercase" as const,
+  letterSpacing: "0.12em",
+  fontWeight: 700,
+  background: "linear-gradient(90deg, #a78bfa, #c4b5fd, #e9d5ff)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  backgroundClip: "text",
+  marginBottom: "8px",
+};
 
 function buildPDF(
   studioScale: string,
@@ -46,8 +37,11 @@ function buildPDF(
   budgetRange: string,
   today: string
 ): string {
+  const scenario = getScenario(studioScale, outputType);
   const topRisks = getTopRisks(studioScale, outputType);
-  const recommendedTier = TIERS.find((t) => t.recommended)!;
+  const recommendedTierId = scenario.getRecommendedTierId(budgetRange);
+  const recommendedTier = TIERS.find((t) => t.id === recommendedTierId)!;
+  const sources = getSources(studioScale, outputType);
 
   const riskRows = topRisks
     .map(
@@ -61,18 +55,31 @@ function buildPDF(
                 : "color:#fbbf24;border-color:#fbbf2440;background:#fbbf2410"
             }">${r.impact}</span>
           </td>
-          <td style="padding:8px 12px;border-bottom:1px solid #222;font-size:12px;color:#aaa">${r.exposure} exposure</td>
+          <td style="padding:8px 12px;border-bottom:1px solid #222;font-size:12px;color:#aaa">${r.exposure}</td>
         </tr>`
     )
     .join("");
 
-  const metricRows = METRICS.map(
-    (m) =>
-      `<tr>
+  const metricRows = scenario.roiMetrics
+    .map(
+      (m) =>
+        `<tr>
         <td style="padding:8px 12px;border-bottom:1px solid #222;font-size:13px;font-weight:600">${m.name}</td>
         <td style="padding:8px 12px;border-bottom:1px solid #222;font-size:12px;color:#aaa">${m.detail.split(".")[0]}.</td>
       </tr>`
-  ).join("");
+    )
+    .join("");
+
+  const sourceRows = sources
+    .map(
+      (s) =>
+        `<div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #1a1a1a">
+          <div style="font-size:12px;font-weight:700;color:#fff">${s.num} ${s.org} — ${s.title}</div>
+          ${s.description ? `<div style="font-size:11px;color:#aaa;margin-top:2px">${s.description}</div>` : ""}
+          <a href="${s.url}" style="font-size:11px;color:#a78bfa;text-decoration:underline">→ source</a>
+        </div>`
+    )
+    .join("");
 
   return `<!DOCTYPE html><html><head><meta charset="utf-8">
     <title>Tulip Pipeline Lab — Executive Summary</title>
@@ -124,13 +131,7 @@ function buildPDF(
     </div>
 
     <h3>Competitive Positioning</h3>
-    <div class="competitive">
-      Studios with integrated AI pipelines are already shipping significantly more content per release cycle.
-      EA's own partnership with Stability AI — cited by BCG in their 2026 global gaming report — signals
-      that even the largest publishers are committing to this transformation now. The window to close that
-      gap without a structural disadvantage is roughly 18 months. After that point, the headcount and budget
-      required to catch up increases substantially.
-    </div>
+    <div class="competitive">${scenario.competitivePositioning}</div>
 
     <h3>Recommended Next Step</h3>
     <div class="next-step">
@@ -139,10 +140,11 @@ function buildPDF(
       <a href="${CALENDLY}" class="calendly-link">Book Now → calendly.com/youki-harada/30min</a>
     </div>
 
+    <h3>Research Sources</h3>
+    ${sourceRows}
+
     <footer>
-      Based on published research. Results vary by studio size and pipeline maturity.<br><br>
-      <strong style="font-size:11px;color:#666;text-transform:uppercase;letter-spacing:.06em">Sources</strong><br><br>
-      ${buildSourcesList(studioScale, outputType)}<br><br>
+      Based on published research. Results vary by studio size and pipeline maturity.<br>
       Generated by Tulip Technology R&D™ — tuliptechnology.ca
     </footer>
   </body></html>`;
@@ -164,8 +166,11 @@ export default function ExecutiveSummary({
     day: "numeric",
   });
 
+  const scenario = getScenario(studioScale, outputType);
   const topRisks = getTopRisks(studioScale, outputType);
-  const recommendedTier = TIERS.find((t) => t.recommended)!;
+  const recommendedTierId = scenario.getRecommendedTierId(budgetRange);
+  const recommendedTier = TIERS.find((t) => t.id === recommendedTierId)!;
+  const sources = getSources(studioScale, outputType);
 
   const handleDownloadPDF = () => {
     const html = buildPDF(studioScale, outputType, budgetRange, today);
@@ -198,18 +203,6 @@ export default function ExecutiveSummary({
       setEmailSent(false);
       setEmailInput("");
     }, 2000);
-  };
-
-  const SECTION_HEADER = {
-    fontSize: "10px",
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.12em",
-    fontWeight: 700,
-    background: "linear-gradient(90deg, #a78bfa, #c4b5fd, #e9d5ff)",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    backgroundClip: "text",
-    marginBottom: "8px",
   };
 
   return (
@@ -266,7 +259,7 @@ export default function ExecutiveSummary({
         <div className="px-5 py-4 border-b border-border/20">
           <p style={SECTION_HEADER}>ROI Model Summary</p>
           <div className="space-y-2">
-            {METRICS.map((m) => (
+            {scenario.roiMetrics.map((m) => (
               <div key={m.name} className="flex items-start gap-2">
                 <span className="text-white/30 shrink-0 mt-0.5">→</span>
                 <span className="text-sm font-body text-white">{m.name}</span>
@@ -283,7 +276,11 @@ export default function ExecutiveSummary({
               <span className="text-sm font-display font-bold text-white mr-2">
                 {recommendedTier.name}
               </span>
-              <span className="text-xs font-body text-white/50">{recommendedTier.detail.split("Payback")[1] ? "Payback" + recommendedTier.detail.split("Payback")[1] : ""}</span>
+              <span className="text-xs font-body text-white/50">
+                {recommendedTier.detail.split("Payback")[1]
+                  ? "Payback" + recommendedTier.detail.split("Payback")[1]
+                  : ""}
+              </span>
             </div>
             <span className="text-sm font-display font-bold text-white shrink-0">
               {recommendedTier.price}
@@ -295,11 +292,7 @@ export default function ExecutiveSummary({
         <div className="px-5 py-4 border-b border-border/20">
           <p style={SECTION_HEADER}>Competitive Positioning</p>
           <p className="text-sm font-body text-white/80 leading-relaxed">
-            Studios with integrated AI pipelines are already shipping significantly more content per release
-            cycle. EA's own partnership with Stability AI — cited by BCG in their 2026 global gaming report
-            — signals that even the largest publishers are committing to this transformation now. The window
-            to close that gap without a structural disadvantage is roughly 18 months. After that point, the
-            headcount and budget required to catch up increases substantially.
+            {scenario.competitivePositioning}
           </p>
         </div>
 
@@ -315,12 +308,7 @@ export default function ExecutiveSummary({
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm font-body font-semibold"
-            style={{
-              background: "linear-gradient(90deg, #a78bfa, #c4b5fd, #e9d5ff)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
+            style={ACCENT_LINK_STYLE}
           >
             Book Now → calendly.com/youki-harada/30min
           </a>
@@ -329,7 +317,6 @@ export default function ExecutiveSummary({
 
       {/* Three CTAs */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-6">
-        {/* CTA 1 — Primary */}
         <a
           href={CALENDLY}
           target="_blank"
@@ -338,8 +325,6 @@ export default function ExecutiveSummary({
         >
           Book a Strategic Briefing <ArrowRight className="w-3.5 h-3.5" />
         </a>
-
-        {/* CTA 2 — PDF */}
         <button
           onClick={handleDownloadPDF}
           className="inline-flex items-center gap-2 btn-chrome-outline px-5 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[44px]"
@@ -351,8 +336,6 @@ export default function ExecutiveSummary({
           </svg>
           Download PDF
         </button>
-
-        {/* CTA 3 — Email */}
         <button
           onClick={() => setEmailModalOpen(true)}
           className="inline-flex items-center gap-2 btn-chrome-outline px-5 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[44px]"
@@ -365,12 +348,61 @@ export default function ExecutiveSummary({
         </button>
       </div>
 
-      <button onClick={onBack} className="text-xs text-white/40 hover:text-white font-body transition-colors flex items-center gap-1">
+      <button
+        onClick={onBack}
+        className="text-xs text-white/40 hover:text-white font-body transition-colors flex items-center gap-1 mb-8"
+      >
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="m15 18-6-6 6-6"/>
         </svg>
         Back to ROI Model
       </button>
+
+      {/* Research Sources */}
+      <div className="rounded-2xl border border-border/30 bg-card/30 px-5 py-5">
+        <p
+          className="font-body font-semibold mb-4"
+          style={{
+            fontSize: "10px",
+            textTransform: "uppercase",
+            letterSpacing: "0.15em",
+            background: "linear-gradient(90deg, #a78bfa, #c4b5fd, #e9d5ff)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          Research Sources
+        </p>
+        <div>
+          {sources.map((s, i) => (
+            <div key={i}>
+              {i > 0 && <hr className="border-border/20 my-3" />}
+              <div>
+                <p className="text-sm font-body text-white leading-snug">
+                  <span className="font-bold">{s.num}</span>
+                  {" "}
+                  <span className="font-bold">{s.org}</span>
+                  {" — "}
+                  <span>{s.title}</span>
+                </p>
+                {s.description && (
+                  <p className="text-sm font-body text-white/80 mt-0.5 leading-snug">{s.description}</p>
+                )}
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-body underline underline-offset-2 mt-0.5 inline-block"
+                  style={ACCENT_LINK_STYLE}
+                >
+                  → source
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Email Modal */}
       {emailModalOpen && (
