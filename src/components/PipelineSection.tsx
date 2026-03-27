@@ -373,95 +373,134 @@ const WorkflowBuilderPanel = ({
   }
 
   /* ── Stage 2: Prototype ── */
-  if (stage === 2) return (
-    <div>
-      <div className="flex items-center gap-2 mb-3">
-        <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
-        <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Prototype: Select AI Tools</span>
-      </div>
-      <p className="font-display text-lg font-bold text-white mb-1">Which tools are in your pipeline?</p>
-      <p className="text-xs text-white/80 font-body mb-4">Select from your current pipeline or add to your wishlist.</p>
+  if (stage === 2) {
+    const ALL_TOOLS = [...CURRENT_TOOLS, ...WISHLIST_TOOLS];
+    const allPresetNames = new Set(ALL_TOOLS);
+    const customCurrentTools  = tools.filter((t) => !allPresetNames.has(t));
+    const customWishlistTools = wishlistTools.filter((t) => !allPresetNames.has(t));
 
-      <p className="text-[20px] font-display font-semibold uppercase tracking-wider text-white mb-2">Current Tools</p>
-      <div className="grid grid-cols-2 gap-1.5 mb-4">
-        {CURRENT_TOOLS.map((label) => {
-          const on = tools.includes(label);
-          return (
-            <button key={label} onClick={() => onToolsChange(toggle(tools, label))}
-              className={`text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center justify-between gap-2 ${on ? "border-primary/60 bg-primary/10 text-foreground" : "border-border/30 text-white/80 hover:border-border/50"}`}>
-              <div className="flex items-center gap-2 min-w-0">
-                <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 text-[9px] font-bold leading-none ${on ? "bg-primary border-primary text-primary-foreground" : "border-border/50"}`}>
-                  {on ? "✓" : ""}
-                </span>
-                <span className="truncate">{label}</span>
+    return (
+      <div>
+        <div className="flex items-center gap-2 mb-3">
+          <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
+          <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Prototype: Select AI Tools</span>
+        </div>
+        <p className="font-display text-lg font-bold text-white mb-1">Which tools are in your pipeline?</p>
+        <p className="text-xs text-white font-body mb-3">
+          Mark each tool as <span className="text-primary font-semibold">In My Pipeline</span> (✓) or <span className="text-amber-400 font-semibold">On My Wishlist</span> (★).
+        </p>
+
+        {/* Legend */}
+        <div className="flex items-center gap-4 mb-4 px-1">
+          <div className="flex items-center gap-1.5">
+            <span className="w-5 h-5 rounded border flex items-center justify-center text-[10px] font-bold bg-primary border-primary text-primary-foreground">✓</span>
+            <span className="text-xs font-body text-white/70">In My Pipeline</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="w-5 h-5 rounded border flex items-center justify-center text-[10px] font-bold bg-amber-400 border-amber-400 text-black">★</span>
+            <span className="text-xs font-body text-white/70">On My Wishlist</span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-1.5 mb-5">
+          {ALL_TOOLS.map((label) => {
+            const inPipeline = tools.includes(label);
+            const inWishlist = wishlistTools.includes(label);
+            return (
+              <div key={label}
+                className={`flex items-center gap-2 px-2.5 py-2 rounded-lg border text-xs font-body transition-all ${
+                  inPipeline ? "border-primary/50 bg-primary/8" :
+                  inWishlist ? "border-amber-400/50 bg-amber-400/8" :
+                  "border-border/30"
+                }`}>
+                {/* Pipeline toggle */}
+                <button
+                  onClick={() => onToolsChange(
+                    inPipeline
+                      ? tools.filter((t) => t !== label)
+                      : [...tools.filter((t) => t !== label), label]
+                  )}
+                  title="In My Pipeline"
+                  className={`w-5 h-5 rounded border flex items-center justify-center shrink-0 text-[10px] font-bold leading-none transition-colors ${
+                    inPipeline ? "bg-primary border-primary text-primary-foreground" : "border-border/50 text-white/30 hover:border-primary/50"
+                  }`}>
+                  ✓
+                </button>
+                {/* Wishlist toggle */}
+                <button
+                  onClick={() => onWishlistToolsChange(
+                    inWishlist
+                      ? wishlistTools.filter((t) => t !== label)
+                      : [...wishlistTools.filter((t) => t !== label), label]
+                  )}
+                  title="On My Wishlist"
+                  className={`w-5 h-5 rounded border flex items-center justify-center shrink-0 text-[10px] font-bold leading-none transition-colors ${
+                    inWishlist ? "bg-amber-400 border-amber-400 text-black" : "border-border/50 text-white/30 hover:border-amber-400/50"
+                  }`}>
+                  ★
+                </button>
+                <span className={`truncate flex-1 ${inPipeline || inWishlist ? "text-white" : "text-white/70"}`}>{label}</span>
+                <ToolLogo label={label} />
               </div>
-              <ToolLogo label={label} />
-            </button>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
 
-      <p className="text-[20px] font-display font-semibold uppercase tracking-wider text-white mb-2">Wishlist</p>
-      <div className="grid grid-cols-2 gap-1.5 mb-5">
-        {WISHLIST_TOOLS.map((label) => {
-          const on = tools.includes(label);
-          return (
-            <button key={label} onClick={() => onToolsChange(toggle(tools, label))}
-              className={`text-left px-3 py-2 rounded-lg border text-xs font-body transition-all flex items-center justify-between gap-2 ${on ? "border-amber-400/60 bg-amber-400/10 text-foreground" : "border-border/30 text-white/80 hover:border-border/50"}`}>
-              <div className="flex items-center gap-2 min-w-0">
-                <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 text-[9px] font-bold leading-none ${on ? "bg-amber-400 border-amber-400 text-black" : "border-border/50"}`}>
-                  {on ? "✓" : ""}
+        {/* Other tool */}
+        <div className="px-4 py-3 rounded-xl bg-card/40 border border-border/30 mb-5">
+          <p className="text-[11px] font-display font-semibold uppercase tracking-wider text-white mb-2">Other</p>
+          <div className="flex items-center gap-2">
+            <input
+              value={otherTool}
+              onChange={(e) => setOtherTool(e.target.value)}
+              placeholder="Enter your tool name"
+              className="flex-1 bg-secondary border border-border/40 rounded-lg px-3 py-2 text-sm font-body text-white placeholder:text-white/60 focus:outline-none focus:border-primary"
+            />
+            <button
+              disabled={!otherToolTrim || tools.includes(otherToolTrim)}
+              onClick={() => { if (!otherToolTrim) return; onToolsChange([...tools, otherToolTrim]); setOtherTool(""); }}
+              title="Add to Pipeline"
+              className="inline-flex items-center gap-1 px-3 py-2 rounded-full border border-primary/40 bg-primary/10 text-xs font-display font-semibold text-white hover:bg-primary/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              ✓ Add
+            </button>
+            <button
+              disabled={!otherToolTrim || wishlistTools.includes(otherToolTrim)}
+              onClick={() => { if (!otherToolTrim) return; onWishlistToolsChange([...wishlistTools, otherToolTrim]); setOtherTool(""); }}
+              title="Add to Wishlist"
+              className="inline-flex items-center gap-1 px-3 py-2 rounded-full border border-amber-400/40 bg-amber-400/10 text-xs font-display font-semibold text-white hover:bg-amber-400/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              ★ Wishlist
+            </button>
+          </div>
+          {(customCurrentTools.length > 0 || customWishlistTools.length > 0) && (
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {customCurrentTools.map((t) => (
+                <span key={t} className="flex items-center gap-1 rounded-full border border-primary/40 px-2.5 py-1 text-xs font-body text-white bg-primary/10">
+                  ✓ {t}
+                  <button onClick={() => onToolsChange(tools.filter((x) => x !== t))} className="ml-0.5 text-white/50 hover:text-white">×</button>
                 </span>
-                <span className="truncate">{label}</span>
-              </div>
-              <ToolLogo label={label} />
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Other tool name */}
-      <div className="px-4 py-3 rounded-xl bg-card/40 border border-border/30 mb-5">
-        <p className="text-[20px] font-display font-semibold uppercase tracking-wider text-white mb-2">Other</p>
-        <div className="flex items-center gap-2">
-          <input
-            value={otherTool}
-            onChange={(e) => setOtherTool(e.target.value)}
-            placeholder="Enter your tool name"
-            className="flex-1 bg-secondary border border-border/40 rounded-lg px-3 py-2 text-sm font-body text-white placeholder:text-white/60 focus:outline-none focus:border-primary"
-          />
-          {otherToolTrim && tools.includes(otherToolTrim) ? (
-            <button
-              onClick={() => onToolsChange(tools.filter((t) => t !== otherToolTrim))}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border/40 bg-secondary/40 text-xs font-display font-semibold text-white hover:bg-secondary/60 transition-colors"
-            >
-              Remove
-            </button>
-          ) : (
-            <button
-              disabled={!otherToolTrim}
-              onClick={() => {
-                if (!otherToolTrim) return;
-                onToolsChange([...tools, otherToolTrim]);
-                setOtherTool("");
-              }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/40 bg-primary/10 text-xs font-display font-semibold text-white hover:bg-primary/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              Add
-            </button>
+              ))}
+              {customWishlistTools.map((t) => (
+                <span key={t} className="flex items-center gap-1 rounded-full border border-amber-400/40 px-2.5 py-1 text-xs font-body text-white bg-amber-400/10">
+                  ★ {t}
+                  <button onClick={() => onWishlistToolsChange(wishlistTools.filter((x) => x !== t))} className="ml-0.5 text-white/50 hover:text-white">×</button>
+                </span>
+              ))}
+            </div>
           )}
         </div>
-      </div>
 
-      <div className="flex items-center gap-4">
-        <button disabled={tools.length === 0} onClick={() => onStageChange(3)}
-          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
-          Validate Results <ArrowRight className="w-3.5 h-3.5" />
-        </button>
-        <BackBtn to={1} />
+        <div className="flex items-center gap-4">
+          <button disabled={tools.length === 0 && wishlistTools.length === 0} onClick={() => onStageChange(3)}
+            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed">
+            Validate Results <ArrowRight className="w-3.5 h-3.5" />
+          </button>
+          <BackBtn to={1} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 
   /* ── Stage 3: Validate ── */
   if (stage === 3) {
