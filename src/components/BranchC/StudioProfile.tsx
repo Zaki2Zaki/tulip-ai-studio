@@ -164,7 +164,7 @@ export default function StudioProfile({
         </div>
       </div>
 
-      <p className="text-xs font-body text-white/30 mb-6 leading-relaxed max-w-md">
+      <p className="text-sm font-body text-white mb-6 leading-relaxed max-w-md">
         Your answers are used only to personalise this session. We do not store or share them without your permission.
       </p>
 
