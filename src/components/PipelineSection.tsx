@@ -201,6 +201,8 @@ const WorkflowBuilderPanel = ({
   onSelectedChange: (v: string[]) => void;
   tools: string[];
   onToolsChange: (v: string[]) => void;
+  wishlistTools: string[];
+  onWishlistToolsChange: (v: string[]) => void;
   deepDive: string[];
   onDeepDiveChange: (v: string[]) => void;
   workshopAdded: boolean;
