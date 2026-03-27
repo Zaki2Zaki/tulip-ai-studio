@@ -811,13 +811,13 @@ const WorkflowBuilderPanel = ({
       )}
 
       {/* Budget-at-risk box */}
-      <div className="rounded-xl border border-red-400/20 bg-red-400/5 px-4 py-3 mb-3 text-left">
-        <p className="text-[10px] font-display font-semibold uppercase tracking-wider text-red-400 mb-1">Estimated Budget at Risk</p>
-        <p className="text-xs font-body text-white/80 mb-1">
+      <div className="rounded-xl border border-red-400/20 bg-red-400/5 px-6 py-5 mb-3 text-left">
+        <p className="text-xs font-display font-semibold uppercase tracking-wider text-red-400 mb-2">Estimated Budget at Risk</p>
+        <p className="text-sm font-body text-white/80 mb-2">
           Studios with these friction points lose{" "}
           <span className="text-red-400 font-semibold">$350K–$3M+</span> per major rework cycle.
         </p>
-        <p className="text-xs font-body text-green-400/80">
+        <p className="text-sm font-body text-green-400/80">
           ✦ Integrating GenAI across your pipeline can recover up to 60–85% of that loss.
         </p>
       </div>
