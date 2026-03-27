@@ -36,10 +36,10 @@ export const RISKS = [
     impact: "High" as const,
     title: "Manual texturing and rigging are your biggest budget sink",
     exposure: "70% of modeling budget",
-    stat: "Texturing and rigging account for over 70% of modeling budget. AI integration compresses task time by 40 to 70% — dropping a 100-hour asset build to under 30 minutes in tested pipelines. At $80K per senior artist annually, recapturing 60% of that time returns $48K per artist per year in redirected senior capacity.",
+    stat: "68% of total studio expenditure is labour. The majority of that cost sits in asset creation workflows — the stages most directly compressible by AI integration. Your senior artists are spending most of their time on work that should be automated.",
     sources: [
-      { label: "Autodesk Redshift 2022", url: "https://redshift.autodesk.com" },
-      { label: "MASV VFX Pipeline Guide 2023", url: "https://massive.io/file-transfer/vfx-pipeline/" },
+      { label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://www.google.com/search?q=ESAC+Nordicity+Canadian+Video+Game+Industry+2021" },
+      { label: "BCG Video Gaming Report 2026", url: "https://www.google.com/search?q=BCG+Video+Gaming+Report+2026" },
     ],
   },
   {
