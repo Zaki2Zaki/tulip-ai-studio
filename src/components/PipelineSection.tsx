@@ -243,6 +243,21 @@ const WorkflowBuilderPanel = ({
       >
         <Play className="w-3.5 h-3.5" /> Start Building →
       </button>
+      <div className="mt-4 pt-4 border-t border-border/20">
+        <p className="text-xs text-white/40 font-body mb-2">Looking for a deeper strategic briefing?</p>
+        <a
+          href="/pipeline-lab"
+          className="inline-flex items-center gap-1.5 text-xs font-body font-semibold transition-colors"
+          style={{
+            background: "linear-gradient(90deg, #a78bfa, #c4b5fd, #e9d5ff)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
+          Try the Pipeline Lab → Risk Scan + ROI Model
+        </a>
+      </div>
     </div>
   );
 
