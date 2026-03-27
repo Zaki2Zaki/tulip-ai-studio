@@ -98,7 +98,7 @@ function buildPDF(
     <h3>Competitive Positioning</h3>
     <div class="competitive">
       Studios with integrated AI pipelines are already shipping significantly more content per release cycle.
-      The window to close that gap without a structural disadvantage is roughly 18 months. After that,
+      The window to close that gap without a structural disadvantage is roughly 18 months. After that point,
       the headcount and budget required to catch up increases substantially.
     </div>
 
@@ -267,7 +267,7 @@ export default function ExecutiveSummary({
           <p className="text-sm font-body text-white/80 leading-relaxed">
             Studios with integrated AI pipelines are already shipping significantly more content per release
             cycle. The window to close that gap without a structural disadvantage is roughly 18 months.
-            After that, the headcount and budget required to catch up increases substantially.
+            After that point, the headcount and budget required to catch up increases substantially.
           </p>
         </div>
 
