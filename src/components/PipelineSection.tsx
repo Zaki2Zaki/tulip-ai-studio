@@ -385,8 +385,8 @@ const WorkflowBuilderPanel = ({
           <span className="w-2 h-2 rounded-full bg-primary shrink-0" />
           <span className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold text-primary">Prototype: Select AI Tools</span>
         </div>
-        <p className="font-display text-lg font-bold text-white mb-1">Which tools are in your pipeline?</p>
-        <p className="text-xs text-white font-body mb-3">
+        <p className="font-display text-xl font-bold text-white mb-1">Which tools are in your pipeline?</p>
+        <p className="text-sm text-white font-body mb-3">
           Mark each tool as <span className="text-primary font-semibold">In My Pipeline</span> (✓) or <span className="text-amber-400 font-semibold">On My Wishlist</span> (★).
         </p>
 
@@ -394,11 +394,11 @@ const WorkflowBuilderPanel = ({
         <div className="flex items-center gap-4 mb-4 px-1">
           <div className="flex items-center gap-1.5">
             <span className="w-5 h-5 rounded border flex items-center justify-center text-[10px] font-bold bg-primary border-primary text-primary-foreground">✓</span>
-            <span className="text-xs font-body text-white/70">In My Pipeline</span>
+            <span className="text-sm font-body text-white/70">In My Pipeline</span>
           </div>
           <div className="flex items-center gap-1.5">
             <span className="w-5 h-5 rounded border flex items-center justify-center text-[10px] font-bold bg-amber-400 border-amber-400 text-black">★</span>
-            <span className="text-xs font-body text-white/70">On My Wishlist</span>
+            <span className="text-sm font-body text-white/70">On My Wishlist</span>
           </div>
         </div>
 
@@ -408,7 +408,7 @@ const WorkflowBuilderPanel = ({
             const inWishlist = wishlistTools.includes(label);
             return (
               <div key={label}
-                className={`flex items-center gap-2 px-2.5 py-2 rounded-lg border text-xs font-body transition-all ${
+                className={`flex items-center gap-2 px-2.5 py-2 rounded-lg border text-sm font-body transition-all ${
                   inPipeline ? "border-primary/50 bg-primary/8" :
                   inWishlist ? "border-amber-400/50 bg-amber-400/8" :
                   "border-border/30"
