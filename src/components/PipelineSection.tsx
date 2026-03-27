@@ -820,27 +820,75 @@ const WorkflowBuilderPanel = ({
       <div className="mt-6 pt-5 border-t border-border/20 flex flex-col sm:flex-row items-center justify-center gap-3">
         <button
           onClick={() => {
-            const rows = deepDive.length > 0
+            const today = new Date().toLocaleDateString("en-CA", { year: "numeric", month: "long", day: "numeric" });
+            const diagnosisRows = deepDive.length > 0
+              ? deepDive.map((pt) => {
+                  const fp = FRICTION_POINTS.find((f) => f.title === pt);
+                  const svc = DEEP_DIVE_SERVICE_MAP[pt];
+                  const impactColor = fp?.impact === "High" ? "#f87171" : fp?.impact === "Medium" ? "#fbbf24" : "#aaa";
+                  return `<div class="diag-card">
+                    <div class="diag-header">
+                      <div><span class="diag-title">${pt}</span>${fp ? `<span class="diag-cat">${fp.category}</span>` : ""}</div>
+                      ${fp ? `<span class="diag-badge" style="color:${impactColor};border-color:${impactColor}40">${fp.impact}</span>` : ""}
+                    </div>
+                    ${fp?.costStat ? `<p class="diag-stat">${fp.costStat} <span style="color:#555">${fp.cite ?? ""}</span></p>` : ""}
+                    ${svc?.reason ? `<p class="diag-rec">→ Recommended: ${svc.reason}</p>` : ""}
+                  </div>`;
+                }).join("")
+              : `<p style="color:#555;font-style:italic">No friction points flagged.</p>`;
+            const serviceRows = deepDive.length > 0
               ? deepDive.map((pt) => {
                   const e = DEEP_DIVE_SERVICE_MAP[pt];
-                  return `<tr><td style="padding:8px 12px;border-bottom:1px solid #333;font-weight:600">${pt}</td><td style="padding:8px 12px;border-bottom:1px solid #333;color:#aaa">${e?.reason ?? ""}</td><td style="padding:8px 12px;border-bottom:1px solid #333;color:#c084fc">${(e?.tags ?? []).join(", ")}</td></tr>`;
+                  return `<tr><td style="padding:8px 12px;border-bottom:1px solid #222;font-weight:600">${pt}</td><td style="padding:8px 12px;border-bottom:1px solid #222;color:#aaa">${e?.reason ?? ""}</td><td style="padding:8px 12px;border-bottom:1px solid #222;color:#c084fc">${(e?.tags ?? []).join(", ")}</td></tr>`;
                 }).join("")
-              : `<tr><td colspan="3" style="padding:12px;color:#aaa;text-align:center">No pain points flagged</td></tr>`;
+              : `<tr><td colspan="3" style="padding:12px;color:#555;text-align:center">No pain points flagged</td></tr>`;
             const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Tulip R&D Pipeline Report</title>
-              <style>body{font-family:system-ui,sans-serif;background:#0a0a0a;color:#fff;padding:40px;max-width:800px;margin:auto}
-              h1{font-size:28px;margin-bottom:4px}h2{font-size:16px;color:#aaa;font-weight:400;margin-bottom:32px}
-              table{width:100%;border-collapse:collapse;margin-bottom:32px}th{text-align:left;padding:8px 12px;border-bottom:2px solid #333;color:#c084fc;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
-              .stat{display:inline-block;margin-right:32px;margin-bottom:16px}.stat-val{font-size:32px;font-weight:700;color:#c084fc}.stat-lbl{font-size:12px;color:#aaa}
-              footer{margin-top:40px;font-size:11px;color:#555;border-top:1px solid #222;padding-top:16px}
-              @media print{body{background:#fff;color:#000}th{color:#7c3aed}.stat-val{color:#7c3aed}footer{color:#999}}</style>
+              <style>
+                body{font-family:system-ui,sans-serif;background:#0a0a0a;color:#fff;padding:40px;max-width:820px;margin:auto}
+                h1{font-size:28px;margin-bottom:4px;letter-spacing:-0.02em}
+                h2{font-size:13px;color:#555;font-weight:400;margin-bottom:28px;text-transform:uppercase;letter-spacing:.1em}
+                h3{font-size:20px;font-weight:700;margin:32px 0 4px;letter-spacing:-0.01em}
+                .eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#c084fc;font-weight:600;margin-bottom:4px}
+                .subtitle{font-size:12px;color:#555;margin-bottom:20px}
+                table{width:100%;border-collapse:collapse;margin-bottom:32px}
+                th{text-align:left;padding:8px 12px;border-bottom:2px solid #222;color:#c084fc;font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+                .stat{display:inline-block;margin-right:32px;margin-bottom:16px}
+                .stat-val{font-size:32px;font-weight:700;color:#c084fc}
+                .stat-lbl{font-size:12px;color:#555}
+                .diag-card{border:1px solid #222;border-radius:8px;padding:14px 16px;margin-bottom:10px}
+                .diag-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+                .diag-title{font-size:14px;font-weight:700}
+                .diag-cat{font-size:11px;color:#c084fc;margin-left:10px;font-weight:600}
+                .diag-badge{font-size:10px;font-weight:700;border:1px solid;border-radius:4px;padding:2px 8px;white-space:nowrap}
+                .diag-stat{font-size:12px;color:#aaa;margin:0 0 4px}
+                .diag-rec{font-size:12px;color:#c084fc;margin:0;font-style:italic}
+                .summary-box{border:1px solid #333;border-radius:8px;padding:16px 20px;margin:24px 0;background:#111}
+                footer{margin-top:40px;font-size:10px;color:#444;border-top:1px solid #1a1a1a;padding-top:16px}
+                @media print{
+                  body{background:#fff;color:#000}
+                  h2,h3,th,.eyebrow,.diag-rec,.diag-cat,.stat-val{color:#7c3aed!important}
+                  .diag-stat,.stat-lbl{color:#555}
+                  .diag-card,.summary-box{border-color:#ddd;background:#fafafa}
+                  footer{color:#999;border-color:#ddd}
+                }
+              </style>
             </head><body>
               <h1>Tulip R&D Pipeline™ Report</h1>
               <h2>AI Pipeline Demo Summary</h2>
               <div class="stat"><div class="stat-val">Up to 50%</div><div class="stat-lbl">Reduction in asset pipeline time</div></div>
               <div class="stat"><div class="stat-val">Significantly</div><div class="stat-lbl">Faster creative iteration</div></div>
               <div class="stat"><div class="stat-val">85%</div><div class="stat-lbl">Fewer integration failures</div></div>
-              <h2 style="margin-top:32px;margin-bottom:8px;color:#c084fc;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.08em">Your Deep-Dive Focus</h2>
-              <table><thead><tr><th>Pain Point</th><th>Recommendation</th><th>Suggested Service</th></tr></thead><tbody>${rows}</tbody></table>
+              <div class="eyebrow" style="margin-top:36px">Based on Your Selections</div>
+              <h3>Your Pipeline Diagnosis</h3>
+              <div class="subtitle">${today}</div>
+              ${diagnosisRows}
+              <div class="summary-box">
+                <p style="font-size:13px;font-weight:700;margin:0 0 6px">Total identified pipeline risk: ${deepDive.length} friction point${deepDive.length !== 1 ? "s" : ""}</p>
+                <p style="font-size:12px;color:#aaa;margin:0 0 4px">Estimated cost exposure: based on your studio scale</p>
+                <p style="font-size:12px;color:#c084fc;margin:0;font-style:italic">Recommended next step: Book a Discovery Call → tuliptechnology.ca</p>
+              </div>
+              <h2 style="margin-top:32px;margin-bottom:8px;color:#c084fc;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.08em">Service Recommendations</h2>
+              <table><thead><tr><th>Pain Point</th><th>Recommendation</th><th>Suggested Service</th></tr></thead><tbody>${serviceRows}</tbody></table>
               <footer>*Based on industry benchmarks. Results vary by studio size and pipeline maturity.<br>Sources: Generative Environments for ICVFX (SP Studios) • Hunyuan3D Pipeline (Tencent) • Democratization of VFX via GenAI (UWL Research)<br>Generated by Tulip Technology R&D™ — tuliptechnology.ca</footer>
             </body></html>`;
             const blob = new Blob([html], { type: "text/html" });
