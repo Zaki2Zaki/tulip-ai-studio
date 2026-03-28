@@ -444,18 +444,28 @@ const METRICS_VP: MetricEntry[] = [
   {
     name: "Pre-production environment cost",
     detail: "AI-assisted environment and background generation compresses the pre-production asset preparation phase. Specific figures depend on project scope. We will model this in your briefing.",
+    sources: [
+      { label: "VFX Voice Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
+      { label: "Autodesk Flow Studio documentation", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
+    ],
   },
   {
     name: "Reshoot elimination",
     detail: "Beeble's AI relighting converts footage into relightable assets without reshoots. Autodesk Flow Studio delivers production-grade mocap without suits or markers. Both remove cost categories from the production budget.",
+    sources: [
+      { label: "Beeble AI documentation", url: "https://beeble.ai" },
+      { label: "Autodesk Flow Studio 2025", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
+    ],
   },
   {
     name: "Turnaround time",
     detail: "Boxel Studio delivered high-end visuals for Superman and Lois with a smaller team and shorter timeline than the previous season using Autodesk Flow Studio — transforming live-action footage into editable CG scenes directly in pipeline.",
+    sources: [{ label: "Autodesk Flow Studio 2025", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" }],
   },
   {
     name: "Competitive window",
     detail: "VFX Voice 2026: studios with global reach and tech-enabled pipelines will have a structural advantage. Virtual production facilities without AI integration are carrying cost structures that AI-enabled competitors have already eliminated.",
+    sources: [{ label: "VFX Voice Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" }],
   },
 ];
 
