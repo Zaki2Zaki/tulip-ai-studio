@@ -317,18 +317,22 @@ const METRICS_MIDSIZE_GAMES: MetricEntry[] = [
   {
     name: "Rework cost exposure",
     detail: "Estimated $50K to $500K per cycle at this scale. AI integration reduces rework triggers by 40 to 60%. That is not a productivity gain. That is budget recovered.",
+    sources: [{ label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/wp-content/uploads/2022/10/esac-2021-final-report.pdf" }],
   },
   {
     name: "Developer velocity",
     detail: "40% of studios with AI report over 20% productivity gain. One developer now produces what previously required 2 to 3 for asset-heavy tasks.",
+    sources: [{ label: "a16z Games AI Developer Survey 2024", url: "https://a16z.com/games-ai-survey-2024" }],
   },
   {
     name: "Production cost",
     detail: "30 to 40% reduction in early-stage concept and texture work. Frees senior artists for hero assets and final polish.",
+    sources: [{ label: "Whimsy Games 2025" }],
   },
   {
     name: "Market positioning",
     detail: "AA games: 22% YoY growth in investment interest 2023 to 2024. 4.4x higher average revenue per title versus indie. AI pipeline efficiency is what makes AA-level output achievable at this headcount.",
+    sources: [{ label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" }],
   },
 ];
 
