@@ -546,6 +546,10 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_PUBLISHER_GAMES,
     getRecommendedTierId: ALWAYS_ENTERPRISE,
     competitivePositioning: "The question for a publisher is not whether to integrate AI. The question is whether to do it studio by studio or whether to build an architecture that standardises the advantage across every franchise simultaneously.",
+    competitivePositioningBreakdown: "BCG projects cloud gaming revenues growing from $1.4B to $18.3B by 2030 (CAGR above 50%), creating sustained release cadence pressure on publishers. The multi-studio standardisation argument is drawn from BCG's analysis that publishers standardising AI infrastructure across franchises gain compounding rather than linear advantage.",
+    competitivePositioningSources: [
+      { label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" },
+    ],
   },
   "indie_animation": {
     screen2Headline: "For an independent animation studio, 60 to 70% of your production schedule is mechanical work. That is the budget AI can give back.",
