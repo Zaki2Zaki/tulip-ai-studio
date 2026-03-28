@@ -532,6 +532,12 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_AAA_GAMES,
     getRecommendedTierId: BUDGET_ENTERPRISE,
     competitivePositioning: "EA and Stability AI have committed to reimagining how content is built. Studios that wait for the technology to mature before integrating will find that the maturation period was also the window to build competitive advantage.",
+    competitivePositioningBreakdown: "GDC State of Industry 2025 reports 52% of AAA developers actively building AI pipelines. EA's Stability AI partnership was reported by Bloomberg/Jason Schreier in March 2026. BCG projects the competitive gap becomes structurally difficult to close within 18 months.",
+    competitivePositioningSources: [
+      { label: "GDC State of Industry 2025", url: "https://gdconf.com/state-of-the-game-industry" },
+      { label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" },
+      { label: "Bloomberg / Jason Schreier, March 2026", url: "https://bsky.app/profile/jasonschreier.bsky.social/post/3mhvx2lohzs2j" },
+    ],
   },
   "publisher_games": {
     screen2Headline: "At publisher scale, pipeline inefficiency does not stay in one studio. It compounds across every franchise.",
