@@ -29,6 +29,8 @@ export interface ScenarioData {
   roiMetrics: MetricEntry[];
   getRecommendedTierId: (budgetRange: string) => TierId;
   competitivePositioning: string;
+  competitivePositioningBreakdown?: string;
+  competitivePositioningSources?: SourceEntry[];
   reworkCostNote?: string;
 }
 
