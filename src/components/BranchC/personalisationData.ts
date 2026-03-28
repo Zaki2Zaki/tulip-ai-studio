@@ -558,6 +558,8 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_ANIMATION,
     getRecommendedTierId: ALWAYS_STARTER,
     competitivePositioning: COMP_ANIMATION,
+    competitivePositioningBreakdown: COMP_ANIMATION_BREAKDOWN,
+    competitivePositioningSources: COMP_ANIMATION_SOURCES,
   },
   "midsize_animation": {
     screen2Headline: "60 to 70% of your production schedule is mechanical work AI can now automate. Studios automating this are redirecting that budget toward IP development.",
@@ -566,6 +568,8 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_ANIMATION,
     getRecommendedTierId: ALWAYS_STUDIO,
     competitivePositioning: COMP_ANIMATION,
+    competitivePositioningBreakdown: COMP_ANIMATION_BREAKDOWN,
+    competitivePositioningSources: COMP_ANIMATION_SOURCES,
   },
   "aaa_animation": {
     screen2Headline: "Netflix achieved a 10x speed improvement on El Eternauta using AI-assisted rendering. DreamWorks applied AI crowd simulation across thousands of characters in Kung Fu Panda 4. This is production-ready.",
@@ -574,6 +578,8 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_ANIMATION,
     getRecommendedTierId: BUDGET_ENTERPRISE,
     competitivePositioning: COMP_ANIMATION,
+    competitivePositioningBreakdown: COMP_ANIMATION_BREAKDOWN,
+    competitivePositioningSources: COMP_ANIMATION_SOURCES,
   },
   "publisher_animation": {
     screen2Headline: "At publisher scale, 60 to 70% of production schedule consumed by mechanical tasks compounds across every title on your slate.",
@@ -582,6 +588,8 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_ANIMATION,
     getRecommendedTierId: ALWAYS_ENTERPRISE,
     competitivePositioning: COMP_ANIMATION,
+    competitivePositioningBreakdown: COMP_ANIMATION_BREAKDOWN,
+    competitivePositioningSources: COMP_ANIMATION_SOURCES,
   },
   "indie_vfx": {
     screen2Headline: "VFX studios with AI pipelines are now quoting turnaround times that manual studios cannot match. Speed has become a procurement criterion alongside price and quality.",
@@ -590,6 +598,8 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_VFX,
     getRecommendedTierId: ALWAYS_STARTER,
     competitivePositioning: COMP_VFX,
+    competitivePositioningBreakdown: COMP_VFX_BREAKDOWN,
+    competitivePositioningSources: COMP_VFX_SOURCES,
   },
   "midsize_vfx": {
     screen2Headline: "VFX studios with AI pipelines are now quoting turnaround times that manual studios cannot match. Speed has become a procurement criterion alongside price and quality.",
@@ -598,6 +608,8 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_VFX,
     getRecommendedTierId: ALWAYS_STUDIO,
     competitivePositioning: COMP_VFX,
+    competitivePositioningBreakdown: COMP_VFX_BREAKDOWN,
+    competitivePositioningSources: COMP_VFX_SOURCES,
   },
   "aaa_vfx": {
     screen2Headline: "VFX studios with AI pipelines are now quoting turnaround times that manual studios cannot match. Speed has become a procurement criterion alongside price and quality.",
@@ -606,6 +618,8 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_VFX,
     getRecommendedTierId: BUDGET_ENTERPRISE,
     competitivePositioning: COMP_VFX,
+    competitivePositioningBreakdown: COMP_VFX_BREAKDOWN,
+    competitivePositioningSources: COMP_VFX_SOURCES,
   },
   "publisher_vfx": {
     screen2Headline: "VFX studios with AI pipelines are now quoting turnaround times that manual studios cannot match. Speed has become a procurement criterion alongside price and quality.",
