@@ -340,18 +340,22 @@ const METRICS_AAA_GAMES: MetricEntry[] = [
   {
     name: "Rework cost exposure",
     detail: "AAA development budgets in the US and Canada now start at $300M per title confirmed by Bloomberg March 2026. AI integration reduces the rework triggers that drive overruns. That is budget recovered.",
+    sources: [{ label: "Bloomberg / Jason Schreier, March 2026", url: "https://bsky.app/profile/jasonschreier.bsky.social/post/3mhvx2lohzs2j" }],
   },
   {
     name: "Developer velocity",
     detail: "Asset creation from 100 hours to under 30 minutes per type. Some vendors report up to 90% acceleration in development cycles. BCG cites this in context of AAA pipeline tools entering production.",
+    sources: [{ label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" }],
   },
   {
     name: "Production cost",
     detail: "68% of total studio spend is labour. Texturing and rigging are compressible. Freeing that capacity redirects senior artists to hero asset work only.",
+    sources: [{ label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/wp-content/uploads/2022/10/esac-2021-final-report.pdf" }],
   },
   {
     name: "Competitive window",
     detail: "Roughly 18 months before the gap between studios that have integrated AI and those that have not becomes structurally difficult to close. BCG cloud gaming projection: $1.4B to $18.3B by 2030 at 50%+ CAGR.",
+    sources: [{ label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" }],
   },
 ];
 
