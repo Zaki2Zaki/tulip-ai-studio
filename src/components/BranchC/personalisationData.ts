@@ -475,6 +475,26 @@ const COMP_ANIMATION = "The studios winning streaming commissions in 2026 are de
 const COMP_VFX = "The VFX market is repricing around AI-automated studios. MARZ is already undercutting manual pipelines on cost-per-shot. The question is not whether to integrate AI. It is whether to do it before or after your clients notice the difference.";
 const COMP_VP = "Virtual production was supposed to reduce post-production costs. For studios that have not integrated AI into the workflow, it has added a new category of pre-production cost instead. AI closes that gap.";
 
+const COMP_ANIMATION_BREAKDOWN = "Netflix's El Eternauta confirmed a 10x speed improvement delivering feature-film visuals at series budget. Morgan Stanley projects 30% production cost reduction industry-wide through AI integration. Vitrina AI reports only 8% of animation studios feel prepared for these pipeline changes.";
+const COMP_ANIMATION_SOURCES: SourceEntry[] = [
+  { label: "Morgan Stanley Research — Generative AI in Film and TV 2024" },
+  { label: "Vitrina AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" },
+];
+
+const COMP_VFX_BREAKDOWN = "MARZ's Automated Visual Effects platform confirms quotes significantly below market rate for roto, cleanup, and crowd work. Roland Berger documents 20 to 65% time savings on AI auto-rotoscoping across five film genres. Vitrina Top 10 VFX Companies 2026 documents the competitive repricing underway.";
+const COMP_VFX_SOURCES: SourceEntry[] = [
+  { label: "Roland Berger — AI Innovations for VFX and Animation", url: "https://www.rolandberger.com/en/Insights/Publications/AI-Innovations-for-VFX-and-animation.html" },
+  { label: "Vitrina Top 10 VFX Companies 2026", url: "https://vitrina.ai/blog/discover-the-best-vfx-studios-worldwide-top-10-vfx-companies" },
+  { label: "LBBOnline / Sohonet 2026", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
+];
+
+const COMP_VP_BREAKDOWN = "VFX Voice 2026 documents studios with AI-enabled pipelines gaining structural cost advantage over facilities carrying traditional pre-production budgets. Autodesk Flow Studio and Beeble AI eliminate specific cost categories — reshoot days, specialised mocap hardware, post-correction — that virtual production was supposed to reduce but often still carries without AI integration.";
+const COMP_VP_SOURCES: SourceEntry[] = [
+  { label: "VFX Voice Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
+  { label: "Beeble AI documentation", url: "https://beeble.ai" },
+  { label: "Autodesk Flow Studio 2025", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
+];
+
 // ─── Scenarios ────────────────────────────────────────────────────────────────
 
 const SCENARIOS: Record<string, ScenarioData> = {
