@@ -520,6 +520,10 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_MIDSIZE_GAMES,
     getRecommendedTierId: ALWAYS_STUDIO,
     competitivePositioning: "AA is the fastest-growing segment in games investment. The studios winning it are not the ones with the largest teams. They are the ones with the most efficient pipelines.",
+    competitivePositioningBreakdown: "BCG Video Gaming Report 2026 documents 22% YoY growth in AA investment interest 2023–2024 and 4.4x higher average revenue per title versus indie. The positioning is drawn from BCG's analysis that pipeline efficiency — not team size — is the primary differentiator enabling AA-level output at reduced headcount.",
+    competitivePositioningSources: [
+      { label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" },
+    ],
   },
   "aaa_games": {
     screen2Headline: "From custom dev startups to indie and AAA studios, this is where the money is going.",
