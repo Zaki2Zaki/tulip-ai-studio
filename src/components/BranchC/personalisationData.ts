@@ -389,18 +389,25 @@ const METRICS_ANIMATION: MetricEntry[] = [
   {
     name: "Production cost",
     detail: "Morgan Stanley projects 30% reduction in animation and film production costs through AI integration. On a series budget that compression funds additional seasons or higher production value on the same slate.",
+    sources: [{ label: "Morgan Stanley Research — Generative AI in Film and TV 2024" }],
   },
   {
     name: "Schedule compression",
     detail: "60 to 70% of production schedule is mechanical work. AI compresses that portion by 30 to 90% depending on pipeline maturity. Recovered time goes into creative development and IP.",
+    sources: [
+      { label: "Vitrina AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" },
+      { label: "Morgan Stanley Research — Generative AI in Film and TV 2024" },
+    ],
   },
   {
     name: "Asset lifecycle value",
     detail: "DreamWorks applied AI to reuse legacy animation data across thousands of background characters in Kung Fu Panda 4 with high visual diversity. Studios with catalogued assets can unlock this value immediately.",
+    sources: [{ label: "Vitrina AI in Animation 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" }],
   },
   {
     name: "Market growth",
     detail: "Generative AI in animation: 39% CAGR growing from $1.66B in 2024 to over $23B by 2032. Studios integrating now are building the pipeline advantage that scales with the market.",
+    sources: [{ label: "Vitrina AI in Animation 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" }],
   },
 ];
 
