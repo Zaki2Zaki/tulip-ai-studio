@@ -19,6 +19,7 @@ export interface RiskEntry {
 export interface MetricEntry {
   name: string;
   detail: string;
+  sources?: SourceEntry[];
 }
 
 export interface ScenarioData {
