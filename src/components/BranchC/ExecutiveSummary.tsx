@@ -159,6 +159,8 @@ export default function ExecutiveSummary({
   const [emailModalOpen, setEmailModalOpen] = useState(false);
   const [emailInput, setEmailInput] = useState("");
   const [emailSent, setEmailSent] = useState(false);
+  const [methodologyOpen, setMethodologyOpen] = useState(false);
+  const [compBreakdownOpen, setCompBreakdownOpen] = useState(false);
 
   const today = new Date().toLocaleDateString("en-CA", {
     year: "numeric",
