@@ -20,7 +20,7 @@ const ACCENT_LINK_STYLE = {
 };
 
 const SECTION_HEADER = {
-  fontSize: "10px",
+  fontSize: "12px",
   textTransform: "uppercase" as const,
   letterSpacing: "0.12em",
   fontWeight: 700,
