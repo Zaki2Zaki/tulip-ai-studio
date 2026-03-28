@@ -415,18 +415,28 @@ const METRICS_VFX: MetricEntry[] = [
   {
     name: "Rotoscoping and cleanup time",
     detail: "20 to 65% time savings on AI auto-rotoscoping confirmed by Roland Berger across five film genres. DNEG confirmed 28% labour reduction on Disney+. Amazon confirmed 40% faster first-pass editing. Production confirmed.",
+    sources: [
+      { label: "Roland Berger — AI Innovations for VFX and Animation", url: "https://www.rolandberger.com/en/Insights/Publications/AI-Innovations-for-VFX-and-animation.html" },
+      { label: "LBBOnline / Sohonet 2026", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
+    ],
   },
   {
     name: "Cost-per-shot competitiveness",
     detail: "Studios that have automated roto, cleanup, and crowd augmentation are quoting significantly below market rates. If your studio has not automated these categories, you are losing volume work bids to studios that have.",
+    sources: [
+      { label: "Vitrina Top 10 VFX Companies 2026", url: "https://vitrina.ai/blog/discover-the-best-vfx-studios-worldwide-top-10-vfx-companies" },
+      { label: "LBBOnline / Sohonet 2026", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
+    ],
   },
   {
     name: "Infrastructure cost",
     detail: "One mid-size VFX studio replaced $72,000 in annual cloud spending with three AI workstations while improving artist productivity through faster feedback loops.",
+    sources: [{ label: "LBBOnline / Sohonet 2026", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" }],
   },
   {
     name: "Competitive window",
     detail: "VFX Voice 2026 states studios with tech-enabled pipelines will have a structural advantage. AI and real-time technologies are moving from experimental to mainstream in 2026. Being unprepared now means catching up under competitive pressure later.",
+    sources: [{ label: "VFX Voice Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" }],
   },
 ];
 
