@@ -431,7 +431,7 @@ export default function ExecutiveSummary({
         <p
           className="font-body font-semibold mb-4"
           style={{
-            fontSize: "10px",
+            fontSize: "12px",
             textTransform: "uppercase",
             letterSpacing: "0.15em",
             background: "linear-gradient(90deg, #a78bfa, #c4b5fd, #e9d5ff)",
