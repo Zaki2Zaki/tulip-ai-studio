@@ -291,18 +291,25 @@ const METRICS_INDIE_GAMES: MetricEntry[] = [
   {
     name: "Asset creation speed",
     detail: "AI tooling delivers an estimated 35% reduction in asset creation time at indie scale. One developer can now produce what previously required 3 to 4. That is not a marginal gain. That is a team size advantage.",
+    sources: [
+      { label: "a16z Games AI Developer Survey 2024", url: "https://a16z.com/games-ai-survey-2024" },
+      { label: "Juego Studios Indie Game Development Cost Guide 2026", url: "https://juegostudio.com" },
+    ],
   },
   {
     name: "Concept to prototype",
     detail: "17 character concepts in under a week versus 34 business days manually. The same quality bar. A fraction of the time.",
+    sources: [{ label: "Whimsy Games / Lost Lore Bearverse production data 2024" }],
   },
   {
     name: "Production cost",
     detail: "AI concept art and texture generation delivers 30 to 40% cost reductions in early-stage work. Senior artists focus on final polish and creative direction.",
+    sources: [{ label: "Juego Studios Indie Game Development Cost Guide 2026", url: "https://juegostudio.com" }],
   },
   {
     name: "Competitive window",
     detail: "BCG estimates 50% of studios now use AI — double the rate of a year ago. Indie studios not integrating are competing against those producing significantly more content with the same team.",
+    sources: [{ label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" }],
   },
 ];
 
