@@ -328,9 +328,40 @@ export default function ExecutiveSummary({
         {/* Section 5 — Competitive Positioning */}
         <div className="px-5 py-4 border-b border-border/20">
           <p style={SECTION_HEADER}>Competitive Positioning</p>
-          <p className="text-sm font-body text-white/80 leading-relaxed">
+          <p className="text-sm font-body text-white leading-relaxed">
             {scenario.competitivePositioning}
           </p>
+          {(scenario.competitivePositioningBreakdown || scenario.competitivePositioningSources) && (
+            <div className="mt-2">
+              <button
+                onClick={() => setCompBreakdownOpen((o) => !o)}
+                className="text-[10px] font-body font-semibold px-2 py-0.5 rounded-full border border-border/30 text-white/50 hover:text-white hover:border-border/60 transition-colors"
+              >
+                {compBreakdownOpen ? "Close ↑" : "Calculation breakdown →"}
+              </button>
+              {compBreakdownOpen && (
+                <div className="mt-2 px-3 py-3 rounded-xl bg-white/5 border border-border/20">
+                  {scenario.competitivePositioningBreakdown && (
+                    <p className="text-xs font-body text-white/80 leading-relaxed mb-2">
+                      {scenario.competitivePositioningBreakdown}
+                    </p>
+                  )}
+                  {scenario.competitivePositioningSources && scenario.competitivePositioningSources.length > 0 && (
+                    <p className="text-xs font-body text-white/40 italic">
+                      {scenario.competitivePositioningSources.map((s, i) => (
+                        <span key={i}>
+                          {i > 0 && " · "}
+                          {s.url ? (
+                            <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-white/70 transition-colors">{s.label}</a>
+                          ) : s.label}
+                        </span>
+                      ))}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Section 6 — Recommended Next Step */}
