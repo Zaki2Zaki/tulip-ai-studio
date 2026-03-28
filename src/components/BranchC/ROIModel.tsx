@@ -90,6 +90,8 @@ export default function ROIModel({ studioScale, outputType, budgetRange, onNext,
                 ))}
               </p>
             )}
+          </div>
+        ))}
       </div>
 
       {scenario.reworkCostNote && (
