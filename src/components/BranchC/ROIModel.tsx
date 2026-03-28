@@ -62,11 +62,34 @@ export default function ROIModel({ studioScale, outputType, budgetRange, onNext,
       {/* Metrics — 2-column grid on desktop */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
         {scenario.roiMetrics.map((m) => (
-          <div key={m.name} className="px-4 py-4 rounded-xl bg-card/40 border border-border/30">
-            <p className="text-sm font-display font-bold text-white mb-1.5">{m.name}</p>
-            <p className="text-[15px] font-body text-white leading-relaxed">{m.detail}</p>
-          </div>
-        ))}
+          <div
+            key={m.name}
+            className="px-4 py-4 rounded-xl bg-card/40 border border-border/30"
+            style={{ boxShadow: "0 0 0 1px rgba(167,139,250,0.2), 0 0 20px rgba(167,139,250,0.1)" }}
+          >
+            <p className="text-base font-display font-bold text-white mb-1.5">{m.name}</p>
+            <p className="text-base font-body text-white leading-relaxed">{m.detail}</p>
+            {m.sources && m.sources.length > 0 && (
+              <p className="text-[11px] font-body text-white/40 italic mt-2">
+                {m.sources.map((s, i) => (
+                  <span key={i}>
+                    {i > 0 && " · "}
+                    {s.url ? (
+                      <a
+                        href={s.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-white/70 underline underline-offset-2 transition-colors"
+                      >
+                        {s.label}
+                      </a>
+                    ) : (
+                      s.label
+                    )}
+                  </span>
+                ))}
+              </p>
+            )}
       </div>
 
       {scenario.reworkCostNote && (
