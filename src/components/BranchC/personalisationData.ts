@@ -363,18 +363,25 @@ const METRICS_PUBLISHER_GAMES: MetricEntry[] = [
   {
     name: "Cross-franchise rework exposure",
     detail: "$500K to $3M per rework cycle per studio. Multiplied across a multi-studio portfolio. AI integration reduces triggers by 60 to 85% per studio.",
+    sources: [
+      { label: "Bloomberg / Jason Schreier, March 2026", url: "https://bsky.app/profile/jasonschreier.bsky.social/post/3mhvx2lohzs2j" },
+      { label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" },
+    ],
   },
   {
     name: "Developer velocity at scale",
     detail: "Standardised AI pipeline across studios multiplies productivity gains. Publishers that standardise early set the baseline their studios operate from.",
+    sources: [{ label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" }],
   },
   {
     name: "Distribution model readiness",
     detail: "Cloud gaming CAGR above 50% through 2030. Publishers without AI-ready content pipelines will not sustain the release cadence that cloud-native distribution requires.",
+    sources: [{ label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" }],
   },
   {
     name: "Competitive window",
     detail: "18 to 24 months before the structural advantage of AI-integrated studios becomes difficult to close at franchise scale. After that point the investment required to catch up increases across every title.",
+    sources: [{ label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" }],
   },
 ];
 
