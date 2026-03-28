@@ -628,6 +628,8 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_VFX,
     getRecommendedTierId: ALWAYS_ENTERPRISE,
     competitivePositioning: COMP_VFX,
+    competitivePositioningBreakdown: COMP_VFX_BREAKDOWN,
+    competitivePositioningSources: COMP_VFX_SOURCES,
   },
   "indie_virtualproduction": {
     screen2Headline: "Real-time engines changed what is possible on set. AI is changing what it costs to get there.",
@@ -636,6 +638,8 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_VP,
     getRecommendedTierId: ALWAYS_STARTER,
     competitivePositioning: COMP_VP,
+    competitivePositioningBreakdown: COMP_VP_BREAKDOWN,
+    competitivePositioningSources: COMP_VP_SOURCES,
   },
   "midsize_virtualproduction": {
     screen2Headline: "Real-time engines changed what is possible on set. AI is changing what it costs to get there.",
@@ -644,6 +648,8 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_VP,
     getRecommendedTierId: ALWAYS_STUDIO,
     competitivePositioning: COMP_VP,
+    competitivePositioningBreakdown: COMP_VP_BREAKDOWN,
+    competitivePositioningSources: COMP_VP_SOURCES,
   },
   "aaa_virtualproduction": {
     screen2Headline: "Real-time engines changed what is possible on set. AI is changing what it costs to get there.",
@@ -652,6 +658,8 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_VP,
     getRecommendedTierId: ALWAYS_ENTERPRISE,
     competitivePositioning: COMP_VP,
+    competitivePositioningBreakdown: COMP_VP_BREAKDOWN,
+    competitivePositioningSources: COMP_VP_SOURCES,
   },
   "publisher_virtualproduction": {
     screen2Headline: "Real-time engines changed what is possible on set. AI is changing what it costs to get there.",
@@ -660,6 +668,8 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_VP,
     getRecommendedTierId: ALWAYS_ENTERPRISE,
     competitivePositioning: COMP_VP,
+    competitivePositioningBreakdown: COMP_VP_BREAKDOWN,
+    competitivePositioningSources: COMP_VP_SOURCES,
   },
 };
 
