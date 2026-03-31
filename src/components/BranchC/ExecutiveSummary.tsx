@@ -447,7 +447,7 @@ export default function ExecutiveSummary({
             <div key={i}>
               {i > 0 && <hr className="border-border/20 my-3" />}
               <div>
-                <p className="text-sm font-body text-white leading-snug">
+                <p className="text-[15px] font-body text-white leading-snug">
                   <span className="font-bold">{s.num}</span>
                   {" "}
                   <span className="font-bold">{s.org}</span>
@@ -455,13 +455,13 @@ export default function ExecutiveSummary({
                   <span>{s.title}</span>
                 </p>
                 {s.description && (
-                  <p className="text-sm font-body text-white/80 mt-0.5 leading-snug">{s.description}</p>
+                  <p className="text-[15px] font-body text-white mt-0.5 leading-snug">{s.description}</p>
                 )}
                 <a
                   href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-body underline underline-offset-2 mt-0.5 inline-block"
+                  className="text-[15px] font-body underline underline-offset-2 mt-0.5 inline-block"
                   style={ACCENT_LINK_STYLE}
                 >
                   → source
