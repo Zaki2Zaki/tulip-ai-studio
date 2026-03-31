@@ -492,7 +492,7 @@ export default function ExecutiveSummary({
               Opens your email client with the brief pre-filled.
             </p>
             {emailSent ? (
-              <p className="text-sm font-body text-green-400 py-2">Sent. Check your inbox.</p>
+              <p className="text-[15px] font-body text-green-400 py-2">Sent. Check your inbox.</p>
             ) : (
               <>
                 <input
