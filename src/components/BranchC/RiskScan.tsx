@@ -104,11 +104,11 @@ export default function RiskScan({ studioScale, outputType, onNext, onBack }: Ri
         >
           See My ROI Model <ArrowRight className="w-3.5 h-3.5" />
         </button>
-        <button onClick={onBack} className="text-xs text-white/50 hover:text-white font-body transition-colors">
+        <button onClick={onBack} className="text-xs text-white hover:text-white font-body transition-colors">
           ← Back
         </button>
       </div>
-      <p className="text-xs text-white/35 font-body mt-2">Based on your studio scale and the risks above</p>
+      <p className="text-sm text-white font-body mt-2">Based on your studio scale and the risks above</p>
     </div>
   );
 }
