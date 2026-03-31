@@ -66,7 +66,7 @@ export default function StudioProfile({
 
       {/* Q1 — Studio scale */}
       <div className="mb-7">
-        <p className="text-xs font-body font-semibold uppercase tracking-wider text-white/50 mb-3">
+        <p className="text-sm font-body font-semibold uppercase tracking-wider text-white mb-3">
           Studio scale
         </p>
         <div className="space-y-2">
