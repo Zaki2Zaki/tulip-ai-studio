@@ -218,7 +218,7 @@ export default function ExecutiveSummary({
       >
         Your pipeline risk and investment brief.
       </h2>
-      <p className="text-sm text-white font-body mb-6">
+      <p className="text-[15px] text-white font-body mb-6">
         Prepared {today}. Ready to share with your leadership team.
       </p>
 
