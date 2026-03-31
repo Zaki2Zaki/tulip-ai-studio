@@ -298,8 +298,8 @@ export default function ExecutiveSummary({
           <div className="space-y-2">
             {scenario.roiMetrics.map((m) => (
               <div key={m.name} className="flex items-start gap-2">
-                <span className="text-white/30 shrink-0 mt-0.5">→</span>
-                <span className="text-sm font-body text-white">{m.name}</span>
+                <span className="text-white shrink-0 mt-0.5">→</span>
+                <span className="text-[15px] font-body text-white">{m.name}</span>
               </div>
             ))}
           </div>
