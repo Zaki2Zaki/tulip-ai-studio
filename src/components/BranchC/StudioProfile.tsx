@@ -126,7 +126,7 @@ export default function StudioProfile({
                 >
                   {active && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
                 </span>
-                <span className="text-sm font-body font-semibold text-white">{opt.label}</span>
+                <span className="text-[15px] font-body font-semibold text-white">{opt.label}</span>
               </button>
             );
           })}
