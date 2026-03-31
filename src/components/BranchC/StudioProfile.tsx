@@ -135,7 +135,7 @@ export default function StudioProfile({
 
       {/* Q3 — Budget range */}
       <div className="mb-8">
-        <p className="text-xs font-body font-semibold uppercase tracking-wider text-white/50 mb-3">
+        <p className="text-sm font-body font-semibold uppercase tracking-wider text-white mb-3">
           Annual production budget range
         </p>
         <div className="flex flex-wrap gap-2">
