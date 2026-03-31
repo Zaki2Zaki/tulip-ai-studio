@@ -145,10 +145,10 @@ export default function StudioProfile({
               <button
                 key={opt}
                 onClick={() => onBudgetRangeChange(opt)}
-                className={`px-4 py-2 rounded-full border text-sm font-body transition-all ${
+                className={`px-4 py-2 rounded-full border text-[15px] font-body transition-all ${
                   active
                     ? "text-white font-semibold"
-                    : "border-border/40 text-white/70 hover:border-border/60 hover:text-white"
+                    : "border-border/40 text-white hover:border-border/60"
                 }`}
                 style={active ? {
                   border: "2px solid transparent",
