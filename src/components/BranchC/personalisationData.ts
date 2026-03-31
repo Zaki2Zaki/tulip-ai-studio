@@ -503,9 +503,8 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_INDIE_GAMES,
     getRecommendedTierId: ALWAYS_STARTER,
     competitivePositioning: "2025 is the first year where a single-person studio can ship content pipelines that used to cost AAA budgets. The studios that recognise this early are the ones that break through.",
-    competitivePositioningBreakdown: "a16z Games 2024 survey and Whimsy Games/Lost Lore Bearverse 2024 production data show a single developer with AI tools can produce 17 character concepts in under a week — work that previously required 34 business days and a full team. BCG documents that AI studio adoption has doubled in one year.",
+    competitivePositioningBreakdown: "Whimsy Games/Lost Lore Bearverse 2024 production data show a single developer with AI tools can produce 17 character concepts in under a week — work that previously required 34 business days and a full team. BCG documents that AI studio adoption has doubled in one year.",
     competitivePositioningSources: [
-      { label: "a16z Games AI Developer Survey 2024", url: "https://a16z.com/games-ai-survey-2024" },
       { label: "Whimsy Games / Lost Lore Bearverse production data 2024" },
       { label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" },
     ],
