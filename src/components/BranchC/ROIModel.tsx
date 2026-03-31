@@ -70,7 +70,7 @@ export default function ROIModel({ studioScale, outputType, budgetRange, onNext,
             <p className="text-base font-display font-bold text-white mb-1.5">{m.name}</p>
             <p className="text-base font-body text-white leading-relaxed">{m.detail}</p>
             {m.sources && m.sources.length > 0 && (
-              <p className="text-[11px] font-body text-white/40 italic mt-2">
+              <p className="text-[13px] font-body text-white italic mt-2">
                 {m.sources.map((s, i) => (
                   <span key={i}>
                     {i > 0 && " · "}
@@ -79,7 +79,7 @@ export default function ROIModel({ studioScale, outputType, budgetRange, onNext,
                         href={s.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:text-white/70 underline underline-offset-2 transition-colors"
+                        className="hover:text-white underline underline-offset-2 transition-colors"
                       >
                         {s.label}
                       </a>
