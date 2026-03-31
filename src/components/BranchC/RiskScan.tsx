@@ -108,7 +108,7 @@ export default function RiskScan({ studioScale, outputType, onNext, onBack }: Ri
           ← Back
         </button>
       </div>
-      <p className="text-sm text-white font-body mt-2">Based on your studio scale and the risks above</p>
+      <p className="text-[15px] text-white font-body mt-2">Based on your studio scale and the risks above</p>
     </div>
   );
 }
