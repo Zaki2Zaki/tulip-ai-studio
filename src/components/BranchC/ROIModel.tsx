@@ -136,7 +136,7 @@ export default function ROIModel({ studioScale, outputType, budgetRange, onNext,
       <div className="px-4 py-4 rounded-xl bg-orange-400/5 border border-orange-400/20 mb-6">
         <div className="flex items-start gap-2">
           <span className="text-base shrink-0 mt-0.5">⚠️</span>
-          <p className="text-sm font-body text-white/70 leading-relaxed">
+          <p className="text-[15px] font-body text-white leading-relaxed">
             These figures draw on published research from BCG, Bloomberg, ESAC/Nordicity, GDC, and
             Morgan Stanley among others. Where vendor data is used, it is attributed. Your actual
             numbers depend on your pipeline, team size, and how integration is scoped. A 30-minute
