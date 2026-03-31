@@ -313,7 +313,7 @@ export default function ExecutiveSummary({
               <span className="text-sm font-display font-bold text-white mr-2">
                 {recommendedTier.name}
               </span>
-              <span className="text-xs font-body text-white">
+              <span className="text-sm font-body text-white">
                 {recommendedTier.detail.split("Payback")[1]
                   ? "Payback" + recommendedTier.detail.split("Payback")[1]
                   : ""}
