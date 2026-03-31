@@ -156,7 +156,7 @@ export default function ROIModel({ studioScale, outputType, budgetRange, onNext,
           ← Back
         </button>
       </div>
-      <p className="text-sm text-white font-body mt-2">
+      <p className="text-[15px] text-white font-body mt-2">
         A one-page brief you can share with your leadership team
       </p>
     </div>
