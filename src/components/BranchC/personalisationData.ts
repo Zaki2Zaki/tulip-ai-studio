@@ -101,7 +101,7 @@ const RISKS_MIDSIZE_GAMES: RiskEntry[] = [
     impact: "Medium",
     title: "Manual texturing and rigging are consuming your art team",
     stat: "AI concept art and texture tools deliver 30 to 40% cost reductions in early-stage work at studios your size.",
-    sources: [{ label: "Whimsy Games 2025" }],
+    sources: [{ label: "Juego Studios Indie Game Development Cost Guide 2026", url: "https://juegostudio.com" }],
     exposure: "30 to 40% budget",
   },
 ];
