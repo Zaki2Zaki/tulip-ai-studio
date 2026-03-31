@@ -36,7 +36,7 @@ export default function RiskScan({ studioScale, outputType, onNext, onBack }: Ri
       >
         {scenario.screen2Headline}
       </h2>
-      <p className="text-sm text-white/70 font-body mb-6 leading-relaxed">
+      <p className="text-[15px] text-white font-body mb-6 leading-relaxed">
         Based on published data from studios your size. Click any risk to expand it, or keep going.
       </p>
 
