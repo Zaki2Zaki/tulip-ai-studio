@@ -335,7 +335,7 @@ export default function ExecutiveSummary({
             <div className="mt-2">
               <button
                 onClick={() => setCompBreakdownOpen((o) => !o)}
-                className="text-[10px] font-body font-semibold px-2 py-0.5 rounded-full border border-border/30 text-white/50 hover:text-white hover:border-border/60 transition-colors"
+                className="text-[10px] font-body font-semibold px-2 py-0.5 rounded-full border border-border/30 text-white hover:border-border/60 transition-colors"
               >
                 {compBreakdownOpen ? "Close ↑" : "Calculation breakdown →"}
               </button>
