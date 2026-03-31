@@ -126,7 +126,7 @@ export default function ROIModel({ studioScale, outputType, budgetRange, onNext,
                 )}
               </div>
               <p className="text-sm font-display font-bold text-white mb-2">{tier.price}</p>
-              <p className="text-sm font-body text-white leading-relaxed">{tier.detail}</p>
+              <p className="text-[15px] font-body text-white leading-relaxed">{tier.detail}</p>
             </div>
           );
         })}
