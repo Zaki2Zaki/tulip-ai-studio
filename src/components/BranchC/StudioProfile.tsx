@@ -176,7 +176,7 @@ export default function StudioProfile({
       >
         Generate My Risk Scan <ArrowRight className="w-3.5 h-3.5" />
       </button>
-      <p className="text-sm text-white font-body mt-2">Takes under 10 seconds</p>
+      <p className="text-[15px] text-white font-body mt-2">Takes under 10 seconds</p>
     </div>
   );
 }
