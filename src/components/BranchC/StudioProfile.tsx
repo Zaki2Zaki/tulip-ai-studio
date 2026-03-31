@@ -92,7 +92,7 @@ export default function StudioProfile({
                 </span>
                 <span>
                   <span className="text-[15px] font-body font-semibold text-white">{opt.label}</span>
-                  <span className="text-sm font-body text-white ml-2">{opt.sub}</span>
+                  <span className="text-[15px] font-body text-white ml-2">{opt.sub}</span>
                 </span>
               </button>
             );
