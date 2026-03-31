@@ -342,17 +342,17 @@ export default function ExecutiveSummary({
               {compBreakdownOpen && (
                 <div className="mt-2 px-3 py-3 rounded-xl bg-white/5 border border-border/20">
                   {scenario.competitivePositioningBreakdown && (
-                    <p className="text-xs font-body text-white/80 leading-relaxed mb-2">
+                    <p className="text-sm font-body text-white leading-relaxed mb-2">
                       {scenario.competitivePositioningBreakdown}
                     </p>
                   )}
                   {scenario.competitivePositioningSources && scenario.competitivePositioningSources.length > 0 && (
-                    <p className="text-xs font-body text-white/40 italic">
+                    <p className="text-sm font-body text-white italic">
                       {scenario.competitivePositioningSources.map((s, i) => (
                         <span key={i}>
                           {i > 0 && " · "}
                           {s.url ? (
-                            <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-white/70 transition-colors">{s.label}</a>
+                            <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-white transition-colors">{s.label}</a>
                           ) : s.label}
                         </span>
                       ))}
