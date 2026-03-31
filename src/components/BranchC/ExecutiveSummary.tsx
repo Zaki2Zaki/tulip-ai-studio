@@ -246,15 +246,15 @@ export default function ExecutiveSummary({
           </div>
           {methodologyOpen && (
             <div className="mb-3 px-3 py-3 rounded-xl bg-white/5 border border-border/20">
-              <p className="text-xs font-body font-semibold text-white mb-1.5">How we calculated this</p>
-              <p className="text-xs font-body text-white/80 leading-relaxed mb-2">
+              <p className="text-sm font-body font-semibold text-white mb-1.5">How we calculated this</p>
+              <p className="text-sm font-body text-white leading-relaxed mb-2">
                 Exposure amounts are drawn directly from published research and are not independently modelled. Impact ratings (High / Medium) reflect the severity classification used in the source research or the magnitude of the cost figure relative to typical studio budgets at your scale.
               </p>
               <div className="space-y-1">
                 {topRisks.map((r) => (
                   <div key={r.id} className="flex items-start gap-2">
-                    <span className="text-white/30 shrink-0 mt-0.5 text-xs">→</span>
-                    <p className="text-xs font-body text-white/70 leading-relaxed">
+                    <span className="text-white shrink-0 mt-0.5 text-xs">→</span>
+                    <p className="text-sm font-body text-white leading-relaxed">
                       <span className="font-semibold text-white">{r.exposure}</span>
                       {" — "}
                       {r.sources.map((s, i) => (
