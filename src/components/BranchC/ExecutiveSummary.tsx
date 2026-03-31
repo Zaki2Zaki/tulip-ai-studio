@@ -208,7 +208,7 @@ export default function ExecutiveSummary({
   };
 
   return (
-    <div className="max-w-2xl">
+    <div className="max-w-2xl" style={{ color: "white", fontSize: "14px" }}>
       <p className="text-[10px] tracking-[0.2em] uppercase text-primary font-body font-semibold mb-3">
         Executive Summary
       </p>
