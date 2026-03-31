@@ -488,7 +488,7 @@ export default function ExecutiveSummary({
             <p className="text-sm font-display font-bold text-white mb-1">
               Send this brief to your team
             </p>
-            <p className="text-xs font-body text-white/50 mb-4">
+            <p className="text-sm font-body text-white mb-4">
               Opens your email client with the brief pre-filled.
             </p>
             {emailSent ? (
