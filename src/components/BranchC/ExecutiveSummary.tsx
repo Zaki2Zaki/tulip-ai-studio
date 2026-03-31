@@ -254,7 +254,7 @@ export default function ExecutiveSummary({
                 {topRisks.map((r) => (
                   <div key={r.id} className="flex items-start gap-2">
                     <span className="text-white shrink-0 mt-0.5 text-xs">→</span>
-                    <p className="text-sm font-body text-white leading-relaxed">
+                    <p className="text-[15px] font-body text-white leading-relaxed">
                       <span className="font-semibold text-white">{r.exposure}</span>
                       {" — "}
                       {r.sources.map((s, i) => (
