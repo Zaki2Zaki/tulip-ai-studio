@@ -99,7 +99,7 @@ export default function ROIModel({ studioScale, outputType, budgetRange, onNext,
       )}
 
       {/* Investment Tiers */}
-      <p className="text-xs font-body font-semibold uppercase tracking-wider text-white/50 mb-3">
+      <p className="text-sm font-body font-semibold uppercase tracking-wider text-white mb-3">
         Investment tiers
       </p>
       <div className="grid grid-cols-3 gap-3 mb-6">
