@@ -481,7 +481,7 @@ export default function ExecutiveSummary({
           <div className="w-full max-w-sm rounded-2xl border border-border/40 bg-card p-6 relative">
             <button
               onClick={() => { setEmailModalOpen(false); setEmailSent(false); setEmailInput(""); }}
-              className="absolute top-4 right-4 text-white/40 hover:text-white transition-colors"
+              className="absolute top-4 right-4 text-white hover:text-white transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
