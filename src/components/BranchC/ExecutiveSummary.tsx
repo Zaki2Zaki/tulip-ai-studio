@@ -228,7 +228,7 @@ export default function ExecutiveSummary({
         {/* Section 1 — Studio Snapshot */}
         <div className="px-5 py-4 border-b border-border/20">
           <p style={SECTION_HEADER}>Studio Snapshot</p>
-          <p className="text-sm font-body text-white">
+          <p className="text-[15px] font-body text-white">
             {studioScale} · {outputType} · {budgetRange}
           </p>
         </div>
