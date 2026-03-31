@@ -93,7 +93,7 @@ const RISKS_MIDSIZE_GAMES: RiskEntry[] = [
     impact: "High",
     title: "73% of studios your size already use AI. Strategy is now the differentiator.",
     stat: "Nearly 40% of studios report over 20% productivity gains. The 60% not seeing returns adopted tools without integration strategy. The gap is growing.",
-    sources: [{ label: "a16z Games AI Developer Survey 2024", url: "https://a16z.com/games-ai-survey-2024" }],
+    sources: [{ label: "GDC State of the Game Industry 2025", url: "https://gdconf.com/state-of-the-game-industry" }],
     exposure: "20%+ productivity gap",
   },
   {
