@@ -152,11 +152,11 @@ export default function ROIModel({ studioScale, outputType, budgetRange, onNext,
         >
           Build My Executive Summary <ArrowRight className="w-3.5 h-3.5" />
         </button>
-        <button onClick={onBack} className="text-xs text-white/50 hover:text-white font-body transition-colors">
+        <button onClick={onBack} className="text-xs text-white hover:text-white font-body transition-colors">
           ← Back
         </button>
       </div>
-      <p className="text-xs text-white/35 font-body mt-2">
+      <p className="text-sm text-white font-body mt-2">
         A one-page brief you can share with your leadership team
       </p>
     </div>
