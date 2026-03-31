@@ -367,7 +367,7 @@ export default function ExecutiveSummary({
         {/* Section 6 — Recommended Next Step */}
         <div className="px-5 py-4">
           <p style={SECTION_HEADER}>Recommended Next Step</p>
-          <p className="text-sm font-body text-white leading-relaxed mb-2">
+          <p className="text-[15px] font-body text-white leading-relaxed mb-2">
             Book a 30-minute strategic briefing. We will validate these numbers against your actual
             pipeline and give you a phased roadmap your team can act on.
           </p>
