@@ -500,7 +500,7 @@ export default function ExecutiveSummary({
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
                   placeholder="teammate@studio.com"
-                  className="w-full bg-secondary border border-border/40 rounded-lg px-3 py-2 text-sm font-body text-white placeholder:text-white/40 focus:outline-none focus:border-primary mb-3"
+                  className="w-full bg-secondary border border-border/40 rounded-lg px-3 py-2 text-sm font-body text-white placeholder:text-white/60 focus:outline-none focus:border-primary mb-3"
                   onKeyDown={(e) => e.key === "Enter" && handleSendEmail()}
                 />
                 <button
