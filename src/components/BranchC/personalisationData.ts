@@ -296,8 +296,8 @@ const METRICS_INDIE_GAMES: MetricEntry[] = [
   },
   {
     name: "Concept to prototype",
-    detail: "17 character concepts in under a week versus 34 business days manually. The same quality bar. A fraction of the time.",
-    sources: [{ label: "Whimsy Games / Lost Lore Bearverse production data 2024" }],
+    detail: "Structured AI pipelines cut early-stage concept art time by 30 to 50%. One developer delivers what previously required a 2 to 3 person art team across multiple sprints.",
+    sources: [{ label: "Juego Studios Indie Game Development Cost Guide 2026", url: "https://juegostudio.com" }],
   },
   {
     name: "Production cost",
