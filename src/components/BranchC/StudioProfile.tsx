@@ -60,7 +60,7 @@ export default function StudioProfile({
       >
         Three questions. Then we show you the numbers.
       </h2>
-      <p className="text-sm text-white font-body mb-8 leading-relaxed">
+      <p className="text-[15px] text-white font-body mb-8 leading-relaxed">
         Your answers personalise the risk data and ROI model to your studio size and output type.
       </p>
 
