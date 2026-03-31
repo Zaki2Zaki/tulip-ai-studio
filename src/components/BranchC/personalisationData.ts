@@ -74,7 +74,6 @@ const RISKS_INDIE_GAMES: RiskEntry[] = [
     stat: "Studios that adopt AI without an integration strategy see the same abandonment pattern as those who never adopted it. The tool is not the risk. The approach is.",
     sources: [
       { label: "Juego Studios Indie Game Development Cost Guide 2026", url: "https://juegostudio.com" },
-      { label: "a16z Games Survey 2024", url: "https://a16z.com/games-ai-survey-2024" },
     ],
     exposure: "35% time savings",
   },
