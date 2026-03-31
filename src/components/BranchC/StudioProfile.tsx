@@ -50,7 +50,7 @@ export default function StudioProfile({
   const canProceed = studioScale && outputType && budgetRange;
 
   return (
-    <div className="max-w-2xl">
+    <div className="max-w-2xl" style={{ color: "white", fontSize: "14px" }}>
       <p className="text-[10px] tracking-[0.2em] uppercase text-primary font-body font-semibold mb-3">
         Strategic Briefing
       </p>
