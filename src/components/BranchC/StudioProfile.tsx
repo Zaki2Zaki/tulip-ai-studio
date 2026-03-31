@@ -102,7 +102,7 @@ export default function StudioProfile({
 
       {/* Q2 — Output type */}
       <div className="mb-7">
-        <p className="text-xs font-body font-semibold uppercase tracking-wider text-white/50 mb-3">
+        <p className="text-sm font-body font-semibold uppercase tracking-wider text-white mb-3">
           Primary output type
         </p>
         <div className="space-y-2">
