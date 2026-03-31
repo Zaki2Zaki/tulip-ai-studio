@@ -342,7 +342,7 @@ export default function ExecutiveSummary({
               {compBreakdownOpen && (
                 <div className="mt-2 px-3 py-3 rounded-xl bg-white/5 border border-border/20">
                   {scenario.competitivePositioningBreakdown && (
-                    <p className="text-sm font-body text-white leading-relaxed mb-2">
+                    <p className="text-[15px] font-body text-white leading-relaxed mb-2">
                       {scenario.competitivePositioningBreakdown}
                     </p>
                   )}
