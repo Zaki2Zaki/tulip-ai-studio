@@ -347,7 +347,7 @@ export default function ExecutiveSummary({
                     </p>
                   )}
                   {scenario.competitivePositioningSources && scenario.competitivePositioningSources.length > 0 && (
-                    <p className="text-sm font-body text-white italic">
+                    <p className="text-[15px] font-body text-white italic">
                       {scenario.competitivePositioningSources.map((s, i) => (
                         <span key={i}>
                           {i > 0 && " · "}
