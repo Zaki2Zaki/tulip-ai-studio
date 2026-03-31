@@ -325,7 +325,7 @@ const METRICS_MIDSIZE_GAMES: MetricEntry[] = [
   {
     name: "Production cost",
     detail: "30 to 40% reduction in early-stage concept and texture work. Frees senior artists for hero assets and final polish.",
-    sources: [{ label: "Whimsy Games 2025" }],
+    sources: [{ label: "Juego Studios Indie Game Development Cost Guide 2026", url: "https://juegostudio.com" }],
   },
   {
     name: "Market positioning",
