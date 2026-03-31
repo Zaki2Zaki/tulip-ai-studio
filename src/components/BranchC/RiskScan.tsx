@@ -70,7 +70,7 @@ export default function RiskScan({ studioScale, outputType, onNext, onBack }: Ri
               {isOpen && (
                 <div className="mt-3 pl-7 text-left">
                   <p className="text-[15px] font-body text-white leading-relaxed mb-2">{risk.stat}</p>
-                  <p className="text-sm font-body text-white italic">
+                  <p className="text-[15px] font-body text-white italic">
                     {risk.sources.map((s, i) => (
                       <span key={i}>
                         {i > 0 && " · "}
