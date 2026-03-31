@@ -320,7 +320,7 @@ const METRICS_MIDSIZE_GAMES: MetricEntry[] = [
   {
     name: "Developer velocity",
     detail: "40% of studios with AI report over 20% productivity gain. One developer now produces what previously required 2 to 3 for asset-heavy tasks.",
-    sources: [{ label: "a16z Games AI Developer Survey 2024", url: "https://a16z.com/games-ai-survey-2024" }],
+    sources: [{ label: "GDC State of the Game Industry 2025", url: "https://gdconf.com/state-of-the-game-industry" }],
   },
   {
     name: "Production cost",
