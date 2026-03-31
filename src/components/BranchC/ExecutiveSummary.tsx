@@ -274,7 +274,7 @@ export default function ExecutiveSummary({
           <div className="space-y-2">
             {topRisks.map((risk) => (
               <div key={risk.id} className="flex items-start justify-between gap-3">
-                <span className="text-sm font-body text-white flex-1">{risk.title}</span>
+                <span className="text-[15px] font-body text-white flex-1">{risk.title}</span>
                 <div className="flex items-center gap-2 shrink-0">
                   <span
                     className={`text-xs font-semibold px-2 py-0.5 rounded border ${
@@ -285,7 +285,7 @@ export default function ExecutiveSummary({
                   >
                     {risk.impact}
                   </span>
-                  <span className="text-xs font-body text-white/40">{risk.exposure}</span>
+                  <span className="text-sm font-body text-white">{risk.exposure}</span>
                 </div>
               </div>
             ))}
