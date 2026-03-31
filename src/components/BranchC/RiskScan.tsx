@@ -52,7 +52,7 @@ export default function RiskScan({ studioScale, outputType, onNext, onBack }: Ri
               <div className="flex items-start justify-between gap-3">
                 <div className="flex items-start gap-3 flex-1 min-w-0">
                   <span className="text-base shrink-0 mt-0.5">⚠️</span>
-                  <span className="text-sm font-body font-semibold text-white">{risk.title}</span>
+                  <span className="text-[15px] font-body font-semibold text-white">{risk.title}</span>
                 </div>
                 <div className="flex items-center gap-2 shrink-0 mt-0.5">
                   <span
