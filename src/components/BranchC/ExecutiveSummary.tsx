@@ -328,7 +328,7 @@ export default function ExecutiveSummary({
         {/* Section 5 — Competitive Positioning */}
         <div className="px-5 py-4 border-b border-border/20">
           <p style={SECTION_HEADER}>Competitive Positioning</p>
-          <p className="text-sm font-body text-white leading-relaxed">
+          <p className="text-[15px] font-body text-white leading-relaxed">
             {scenario.competitivePositioning}
           </p>
           {(scenario.competitivePositioningBreakdown || scenario.competitivePositioningSources) && (
