@@ -503,9 +503,9 @@ const SCENARIOS: Record<string, ScenarioData> = {
     roiMetrics: METRICS_INDIE_GAMES,
     getRecommendedTierId: ALWAYS_STARTER,
     competitivePositioning: "2025 is the first year where a single-person studio can ship content pipelines that used to cost AAA budgets. The studios that recognise this early are the ones that break through.",
-    competitivePositioningBreakdown: "Whimsy Games/Lost Lore Bearverse 2024 production data show a single developer with AI tools can produce 17 character concepts in under a week — work that previously required 34 business days and a full team. BCG documents that AI studio adoption has doubled in one year.",
+    competitivePositioningBreakdown: "Juego Studios documents that indie studios adopting AI pipelines reduce asset creation time by 35%, allowing one developer to match the concept throughput of a 2 to 3 person team. BCG documents that AI studio adoption has doubled in one year — the window to build that advantage is narrowing.",
     competitivePositioningSources: [
-      { label: "Whimsy Games / Lost Lore Bearverse production data 2024" },
+      { label: "Juego Studios Indie Game Development Cost Guide 2026", url: "https://juegostudio.com" },
       { label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" },
     ],
     reworkCostNote: "Rework cost exposure scales with team and project size. We will scope this specifically in your briefing.",
