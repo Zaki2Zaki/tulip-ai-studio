@@ -247,7 +247,7 @@ export default function ExecutiveSummary({
           {methodologyOpen && (
             <div className="mb-3 px-3 py-3 rounded-xl bg-white/5 border border-border/20">
               <p className="text-sm font-body font-semibold text-white mb-1.5">How we calculated this</p>
-              <p className="text-sm font-body text-white leading-relaxed mb-2">
+              <p className="text-[15px] font-body text-white leading-relaxed mb-2">
                 Exposure amounts are drawn directly from published research and are not independently modelled. Impact ratings (High / Medium) reflect the severity classification used in the source research or the magnitude of the cost figure relative to typical studio budgets at your scale.
               </p>
               <div className="space-y-1">
