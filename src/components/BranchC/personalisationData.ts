@@ -718,20 +718,13 @@ const ALWAYS_SOURCES: SourceRef[] = [
 const SOURCES_GAMES: SourceRef[] = [
   {
     num: "[5]",
-    org: "a16z Games",
-    title: "AI in Game Development Survey 2024",
-    description: "Survey of 650 game developers on AI adoption and productivity impact.",
-    url: "https://a16z.com/games-ai-survey-2024",
-  },
-  {
-    num: "[6]",
     org: "Third Point Ventures",
     title: "AI Impact on Gaming and Media Tooling 2025",
     description: "",
     url: "https://www.thirdpointventures.com/currents/AI-impact-on-gaming-and-media-tooling",
   },
   {
-    num: "[7]",
+    num: "[6]",
     org: "StudioKrew",
     title: "Economics of Game Development 2025",
     description: "",
