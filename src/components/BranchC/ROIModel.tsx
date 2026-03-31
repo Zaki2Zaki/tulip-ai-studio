@@ -95,7 +95,7 @@ export default function ROIModel({ studioScale, outputType, budgetRange, onNext,
       </div>
 
       {scenario.reworkCostNote && (
-        <p className="text-sm font-body text-white italic mb-4 -mt-4">{scenario.reworkCostNote}</p>
+        <p className="text-[15px] font-body text-white italic mb-4 -mt-4">{scenario.reworkCostNote}</p>
       )}
 
       {/* Investment Tiers */}
