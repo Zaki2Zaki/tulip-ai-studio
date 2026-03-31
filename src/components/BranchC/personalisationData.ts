@@ -291,7 +291,6 @@ const METRICS_INDIE_GAMES: MetricEntry[] = [
     name: "Asset creation speed",
     detail: "AI tooling delivers an estimated 35% reduction in asset creation time at indie scale. One developer can now produce what previously required 3 to 4. That is not a marginal gain. That is a team size advantage.",
     sources: [
-      { label: "a16z Games AI Developer Survey 2024", url: "https://a16z.com/games-ai-survey-2024" },
       { label: "Juego Studios Indie Game Development Cost Guide 2026", url: "https://juegostudio.com" },
     ],
   },
