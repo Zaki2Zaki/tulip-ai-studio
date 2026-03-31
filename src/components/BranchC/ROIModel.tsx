@@ -43,7 +43,7 @@ export default function ROIModel({ studioScale, outputType, budgetRange, onNext,
   const recommendedTierId = scenario.getRecommendedTierId(budgetRange);
 
   return (
-    <div className="max-w-2xl">
+    <div className="max-w-2xl" style={{ color: "white", fontSize: "14px" }}>
       <div className="flex items-center gap-2 mb-3">
         <p className="text-[10px] tracking-[0.2em] uppercase text-primary font-body font-semibold">
           ROI Model
