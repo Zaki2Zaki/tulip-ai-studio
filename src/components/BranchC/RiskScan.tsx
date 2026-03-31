@@ -64,7 +64,7 @@ export default function RiskScan({ studioScale, outputType, onNext, onBack }: Ri
                   >
                     {risk.impact}
                   </span>
-                  <span className="text-white/40 text-[10px]">{isOpen ? "▲" : "▼"}</span>
+                  <span className="text-white text-[10px]">{isOpen ? "▲" : "▼"}</span>
                 </div>
               </div>
               {isOpen && (
