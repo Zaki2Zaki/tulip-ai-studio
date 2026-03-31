@@ -55,8 +55,8 @@ const RISKS_INDIE_GAMES: RiskEntry[] = [
     id: 1,
     impact: "High",
     title: "You are being out-produced by studios the same size as yours",
-    stat: "In 2025, a single developer using AI tools can generate 17 character concepts in under a week. The same work previously required a full team and 34 business days.",
-    sources: [{ label: "Whimsy Games / Lost Lore Bearverse production data 2024" }],
+    stat: "Studios adopting structured AI pipelines report completing early concept phases 30 to 50% faster than traditional workflows. At indie scale, one developer with AI tooling can match the concept throughput of a 2 to 3 person art team.",
+    sources: [{ label: "Juego Studios Indie Game Development Cost Guide 2026", url: "https://juegostudio.com" }],
     exposure: "Production advantage",
   },
   {
