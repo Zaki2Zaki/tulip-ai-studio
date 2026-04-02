@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./ROICalculatorPage.css";
 
-// ── Types ────────────────────────────────────────────────────────────────────
+// ── Types ─────────────────────────────────────────────────────────────────────
 
 interface RowData {
   label: string;
@@ -48,7 +48,7 @@ interface Results {
   rdCurrentSpend: number;
 }
 
-// ── Constants ────────────────────────────────────────────────────────────────
+// ── Constants ─────────────────────────────────────────────────────────────────
 
 type Currency = "USD" | "CAD" | "EUR";
 const RATES: Record<Currency, number> = { USD: 1, CAD: 1.36, EUR: 0.92 };
@@ -65,6 +65,10 @@ const FACTORS: Record<string, { label: string; desc: string; artReduction?: numb
   render:     { label: "Render and compute",          engRed: 0.20,      desc: "Optimised pipeline submission" },
 };
 
+const TYPE_LABELS: Record<string, string> = {
+  indie: "Indie studio", aa: "AA studio", aaa: "AAA studio",
+  animation: "3D Animation studio", vfx: "VFX studio",
+};
 const TEAM_LABELS: Record<string, string> = {
   "5": "2 to 10 people", "25": "11 to 50 people", "100": "51 to 200 people",
   "350": "201 to 500 people", "750": "500+ people",
@@ -76,50 +80,44 @@ const BUDGET_LABELS: Record<string, string> = {
 const REWORK_LABELS: Record<string, string> = {
   "2": "1 to 2 cycles", "4": "3 to 5 cycles", "8": "6 to 10 cycles", "14": "10+ cycles",
 };
-const AI_USAGE_LABELS: Record<string, string> = {
-  none: "no AI tools currently in place",
-  experimental: "AI tools used experimentally without an integration strategy",
-  partial: "AI integrated in some workflows but not governed end to end",
-  governed: "a governed AI pipeline already in place",
-};
 
-// ── Component ────────────────────────────────────────────────────────────────
+// ── Component ─────────────────────────────────────────────────────────────────
 
 export default function ROICalculatorPage() {
   // Navigation
   const [step, setStep] = useState(1);
 
   // Step 1
-  const [studioType, setStudioType] = useState("");
-  const [teamSize, setTeamSize] = useState("");
+  const [studioType, setStudioType]       = useState("");
+  const [teamSize, setTeamSize]           = useState("");
   const [budgetRangeVal, setBudgetRangeVal] = useState("");
   const [budgetExactVal, setBudgetExactVal] = useState("");
-  const [outsourcePct, setOutsourcePct] = useState("0.20");
-  const [rdBudget, setRdBudget] = useState("0.07");
+  const [outsourcePct, setOutsourcePct]   = useState("0.20");
+  const [rdBudget, setRdBudget]           = useState("0.07");
 
   // Step 2
-  const [artPct, setArtPct] = useState(35);
-  const [engPct, setEngPct] = useState(25);
-  const [qaPct, setQaPct] = useState(12);
-  const [reworkCycles, setReworkCycles] = useState("4");
-  const [deliveryTime, setDeliveryTime] = useState("12");
-  const [aiUsage, setAiUsage] = useState("experimental");
+  const [artPct, setArtPct]               = useState(35);
+  const [engPct, setEngPct]               = useState(25);
+  const [qaPct, setQaPct]                 = useState(12);
+  const [reworkCycles, setReworkCycles]   = useState("4");
+  const [deliveryTime, setDeliveryTime]   = useState("12");
+  const [aiUsage, setAiUsage]             = useState("experimental");
   const [touchedSliders, setTouchedSliders] = useState<Set<string>>(new Set());
 
   // Step 3
-  const [painPoints, setPainPoints] = useState<string[]>(["texturing", "rework"]);
-  const [biggestPain, setBiggestPain] = useState("");
+  const [painPoints, setPainPoints]       = useState<string[]>(["texturing", "rework"]);
+  const [biggestPain, setBiggestPain]     = useState("");
 
   // Currency
   const [activeCurrency, setActiveCurrency] = useState<Currency>("USD");
 
   // Results
-  const [results, setResults] = useState<Results | null>(null);
-  const [methOpen, setMethOpen] = useState(false);
+  const [results, setResults]             = useState<Results | null>(null);
+  const [methOpen, setMethOpen]           = useState(false);
 
   // Takeaway animation
   const [visibleTakeaways, setVisibleTakeaways] = useState<Set<number>>(new Set());
-  const [maturityVisible, setMaturityVisible] = useState(false);
+  const [maturityVisible, setMaturityVisible]   = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -134,15 +132,12 @@ export default function ROICalculatorPage() {
     );
     const matTimer = setTimeout(
       () => setMaturityVisible(true),
-      120 + results.takeaways.length * 140 + 300
+      120 + results.takeaways.length * 140 + 200
     );
-    return () => {
-      timers.forEach(clearTimeout);
-      clearTimeout(matTimer);
-    };
+    return () => { timers.forEach(clearTimeout); clearTimeout(matTimer); };
   }, [results]);
 
-  // ── Helpers ─────────────────────────────────────────────────────────────────
+  // ── Helpers ──────────────────────────────────────────────────────────────────
 
   const fmtC = (usdAmount: number) => {
     const v = usdAmount * RATES[activeCurrency];
@@ -166,9 +161,9 @@ export default function ROICalculatorPage() {
   };
 
   const validateStep1 = () => {
-    if (!studioType) { alert("Please select a studio type."); return false; }
-    if (!teamSize) { alert("Please select a team size."); return false; }
-    if (!getBudget()) { alert("Please select or enter your annual production budget."); return false; }
+    if (!studioType)  { alert("Please select a studio type.");                              return false; }
+    if (!teamSize)    { alert("Please select a team size.");                                return false; }
+    if (!getBudget()) { alert("Please select or enter your annual production budget.");     return false; }
     return true;
   };
 
@@ -189,22 +184,21 @@ export default function ROICalculatorPage() {
     const budget = getBudget();
     if (!budget) return;
 
-    const artPctF      = artPct / 100;
-    const engPctF      = engPct / 100;
-    const qaPctF       = qaPct / 100;
-    const reworkCyc    = Number(reworkCycles);
-    const delivMths    = Number(deliveryTime);
+    const artPctF       = artPct / 100;
+    const engPctF       = engPct / 100;
+    const qaPctF        = qaPct / 100;
+    const reworkCyc     = Number(reworkCycles);
+    const delivMths     = Number(deliveryTime);
     const outsourcePctF = Number(outsourcePct);
 
-    const artCost      = budget * artPctF;
-    const engCost      = budget * engPctF;
-    const qaCost       = budget * qaPctF;
+    const artCost       = budget * artPctF;
+    const engCost       = budget * engPctF;
+    const qaCost        = budget * qaPctF;
     const outsourceCost = budget * outsourcePctF;
-    const reworkCost   = budget * (reworkCyc / 100) * 0.6;
+    const reworkCost    = budget * (reworkCyc / 100) * 0.6;
     const rdCurrentSpend = rdBudget === "none" ? 0 : budget * Number(rdBudget);
 
-    const maturityMult =
-      ({ none: 1.0, experimental: 0.85, partial: 0.65, governed: 0.3 } as Record<string, number>)[aiUsage] ?? 0.85;
+    const maturityMult = ({ none: 1.0, experimental: 0.85, partial: 0.65, governed: 0.3 } as Record<string, number>)[aiUsage] ?? 0.85;
 
     let artSave = 0, qaSave = 0, reworkSave = 0, outsourceSave = 0, timeSavePct = 0;
     const rows: RowData[] = [];
@@ -214,17 +208,17 @@ export default function ROICalculatorPage() {
         const f = FACTORS[pid];
         if (!f) return;
         const ar  = (f.artReduction ?? 0) * maturityMult;
-        const rr  = (f.reworkRed ?? 0)    * maturityMult;
-        const er  = (f.engRed ?? 0)       * maturityMult;
-        const qr  = (f.qaRed ?? 0)        * maturityMult;
-        const tr  = (f.timeRed ?? 0)      * maturityMult;
+        const rr  = (f.reworkRed    ?? 0) * maturityMult;
+        const er  = (f.engRed       ?? 0) * maturityMult;
+        const qr  = (f.qaRed        ?? 0) * maturityMult;
+        const tr  = (f.timeRed      ?? 0) * maturityMult;
         const or_ = pid === "outsource" ? 0.35 * maturityMult : 0;
 
         const base =
-          pid === "rework"    ? reworkCost :
-          pid === "qa"        ? qaCost :
+          pid === "rework"    ? reworkCost    :
+          pid === "qa"        ? qaCost        :
           pid === "outsource" ? outsourceCost :
-          pid === "render"    ? engCost :
+          pid === "render"    ? engCost       :
           artCost;
 
         const save = Math.round(base * (ar + rr + er + qr + or_));
@@ -252,37 +246,29 @@ export default function ROICalculatorPage() {
 
     let tier: string, tierPrice: string, tierPayback: string, midInvest: number;
     if (budget < 1_000_000) {
-      tier = "Starter"; tierPrice = "$15K to $45K"; tierPayback = "2 to 4 months"; midInvest = 30000;
+      tier = "Starter";    tierPrice = "$15K to $45K";   tierPayback = "2 to 4 months";  midInvest = 30000;
     } else if (budget < 20_000_000) {
-      tier = "Studio"; tierPrice = "$45K to $165K"; tierPayback = "4 to 8 months"; midInvest = 105000;
+      tier = "Studio";     tierPrice = "$45K to $165K";  tierPayback = "4 to 8 months";  midInvest = 105000;
     } else {
       tier = "Enterprise"; tierPrice = "$165K to $395K"; tierPayback = "6 to 12 months"; midInvest = 280000;
     }
 
     const roi = Math.round((totalSave / midInvest) * 10) / 10;
 
-    // Studio summary
-    const typeLabels: Record<string, string> = {
-      indie: "Indie studio", aa: "AA studio", aaa: "AAA studio",
-      animation: "3D Animation studio", vfx: "VFX studio",
-    };
-    const typeLabel   = typeLabels[studioType] || studioType;
+    const typeLabel   = TYPE_LABELS[studioType] || studioType;
     const budgetLabel = budgetRangeVal === "custom"
       ? fmtUSD(budget)
       : (BUDGET_LABELS[budgetRangeVal] || budgetRangeVal);
     const studioSummary = `${typeLabel} · ${TEAM_LABELS[teamSize] || teamSize} · ${budgetLabel} annual budget`;
 
-    // RD offset message
     const rdOffsetMsg = rdBudget === "none"
       ? `You have no dedicated pipeline or R&D budget. The estimated efficiency opportunity of <strong>${fmtUSD(totalSave)}</strong> is approximately <strong>${Math.round(totalSave / midInvest)}× the indicative cost</strong> of a Tulip ${tier} engagement. Subject to pipeline validation, this suggests the engagement may be offset by recoverable spend rather than requiring a new budget allocation.`
-      : `Your current pipeline investment of approximately <strong>${fmtUSD(rdCurrentSpend)}</strong> is a starting point. A structured Tulip engagement is designed to return measurably more than it costs. The indicative return of <strong>${roi}×</strong> is based on benchmarks from comparable studios and would be validated against your actual pipeline before commitment.`;
+      : `Your current pipeline investment of approximately <strong>${fmtUSD(rdCurrentSpend)}</strong> is a starting point. A structured Tulip engagement is designed to return measurably more than it costs — the indicative return of <strong>${roi}×</strong> is based on benchmarks from comparable studios and would be validated before commitment.`;
 
-    // Framing strings
-    const outsourcePctF2 = Number(outsourcePct);
     const outsourceFrame =
-      outsourcePctF2 === 0    ? "minimal outsourcing" :
-      outsourcePctF2 <= 0.20  ? "a modest outsource footprint" :
-      outsourcePctF2 <= 0.40  ? "a meaningful outsource footprint" :
+      outsourcePctF === 0    ? "minimal outsourcing" :
+      outsourcePctF <= 0.20  ? "a modest outsource footprint" :
+      outsourcePctF <= 0.40  ? "a meaningful outsource footprint" :
       "a significant outsource footprint";
     const outsourceCostStr = outsourceCost > 0
       ? ` Outsource coordination accounts for approximately ${fmtUSD(outsourceCost)} of current spend.`
@@ -291,6 +277,7 @@ export default function ROICalculatorPage() {
       Number(deliveryTime) <= 6  ? "fast cycle production" :
       Number(deliveryTime) <= 18 ? "a standard production cycle" :
       "a long form production schedule";
+
     const rdFrameShort = rdBudget === "none"
       ? `No dedicated pipeline budget is allocated. Based on benchmarks, the ${fmtUSD(totalSave)} efficiency opportunity is approximately ${Math.round(totalSave / midInvest)}x the indicative cost of a Tulip ${tier} engagement, suggesting the investment may be self-offsetting subject to validation.`
       : `An existing pipeline investment of approximately ${fmtUSD(rdCurrentSpend)} is in place. A Tulip engagement is structured to return measurably more than it costs, with an indicative return of ${roi}x validated against your actual pipeline before commitment.`;
@@ -308,7 +295,7 @@ export default function ROICalculatorPage() {
       handoff:    `Slow handoffs compound throughout ${deliveryFrame}. Automated trigger workflows replacing manual notification chains have shown 15 to 25% delivery time improvements at comparable studios.`,
       qa:         `QA bottlenecks create disproportionate cost pressure near delivery dates. AI-driven test coverage has shown 30 to 40% reductions in QA cycle time, freeing the team for judgment-based quality assessment.`,
       concept:    `Slow concept iteration is typically where schedule compression becomes schedule extension. AI-assisted ideation reduces time from brief to first-pass options from days to hours.`,
-      versioning: `Version control issues create invisible rework — work completed twice because asset state was unclear. A pipeline observability layer addresses this category of cost quickly and is one of the faster wins in a Tulip engagement.`,
+      versioning: `Version control issues create invisible rework, work completed twice because asset state was unclear. A pipeline observability layer addresses this category of cost quickly and is one of the faster wins in a Tulip engagement.`,
       outsource:  `With ${outsourceFrame}${outsourceCostStr} the brief to delivery loop is likely the most variable cost. Structured briefs and automated handoff layers have shown 25 to 35% reductions in outsource coordination overhead.`,
       render:     `Render and compute costs are recoverable through pre-submission validation, catching simulation errors before farm submission rather than after a full render. This is one of the highest-return interventions for simulation-heavy pipelines.`,
     };
@@ -321,7 +308,7 @@ export default function ROICalculatorPage() {
     } as Record<string, string>)[aiUsage] ?? "";
 
     const mainPainText = painReadShort[painPoints[0]]
-      || `This ${typeLabel.toLowerCase()} with ${outsourceFrame} and ${AI_USAGE_LABELS[aiUsage]} carries an estimated ${fmtUSD(totalSave)} in recoverable efficiency opportunity across ${topPain} and ${secondPain}, based on benchmarks from comparable studios.`;
+      || `This ${typeLabel.toLowerCase()} with ${outsourceFrame} and ${aiUsage === "none" ? "no AI tools currently in place" : aiUsage === "experimental" ? "AI tools used experimentally without an integration strategy" : aiUsage === "partial" ? "AI integrated in some workflows but not governed end to end" : "a governed AI pipeline already in place"} carries an estimated ${fmtUSD(totalSave)} in recoverable efficiency opportunity across ${topPain} and ${secondPain}, based on benchmarks from comparable studios.`;
 
     const takeaways: TakeawayItem[] = [
       { label: "Largest cost",    labelClass: "red",  text: mainPainText },
@@ -343,8 +330,7 @@ export default function ROICalculatorPage() {
       date: new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" }),
       budget, budgetAfter, totalSave, savePctNum,
       tier, tierPrice, tierPayback, midInvest, roi,
-      reworkCost, reworkAfter, artCost, artAfter,
-      outsourceSave,
+      reworkCost, reworkAfter, artCost, artAfter, outsourceSave,
       timeBefore: delivMths, timeAfter: Math.round(timeAfter),
       timeSavePct: Math.round(timeSavePct * 100),
       rows: rows.length > 0 ? rows.filter((r) => r.save > 0) : defaultRows,
@@ -357,13 +343,10 @@ export default function ROICalculatorPage() {
     setStep(4);
   };
 
-  // ── PDF Download ──────────────────────────────────────────────────────────
+  // ── PDF Download ──────────────────────────────────────────────────────────────
 
   const downloadPDF = async () => {
-    if (!results) {
-      alert("Please generate your efficiency model first before downloading.");
-      return;
-    }
+    if (!results) { alert("Please generate your efficiency model first before downloading."); return; }
     let jsPDF: typeof import("jspdf")["default"];
     try {
       const mod = await import("jspdf");
@@ -373,7 +356,7 @@ export default function ROICalculatorPage() {
       return;
     }
 
-    const r = results;
+    const r   = results;
     const sym = SYMBOLS[activeCurrency];
     const rate = RATES[activeCurrency];
     const c = (n: number) => {
@@ -386,25 +369,30 @@ export default function ROICalculatorPage() {
     const W = 210, pad = 18;
     let y = 0;
 
-    const BG   = [10,10,10]   as [number,number,number];
-    const CARD = [17,17,17]   as [number,number,number];
-    const WHITE= [255,255,255] as [number,number,number];
-    const CYAN = [34,211,238]  as [number,number,number];
-    const RED  = [248,113,113] as [number,number,number];
-    const GRN  = [74,222,128]  as [number,number,number];
-    const AMB  = [251,191,36]  as [number,number,number];
-    const LAV  = [192,132,252] as [number,number,number];
-    const DIM  = [160,160,160] as [number,number,number];
+    const BG    = [10,10,10]    as [number,number,number];
+    const CARD  = [17,17,17]    as [number,number,number];
+    const WHITE = [255,255,255] as [number,number,number];
+    const CYAN  = [34,211,238]  as [number,number,number];
+    const RED   = [248,113,113] as [number,number,number];
+    const GRN   = [74,222,128]  as [number,number,number];
+    const AMB   = [251,191,36]  as [number,number,number];
+    const LAV   = [192,132,252] as [number,number,number];
+    const DIM   = [160,160,160] as [number,number,number];
+    const stops: [number,number,number][] = [[244,114,182],[192,132,252],[34,211,238],[45,212,191]];
+
+    const drawPageBase = () => {
+      doc.setFillColor(...BG); doc.rect(0,0,W,297,"F");
+      stops.forEach((clr, i) => {
+        doc.setFillColor(...clr);
+        doc.rect(pad + i*(W-pad*2)/stops.length, 0, (W-pad*2)/stops.length+1, 3, "F");
+      });
+    };
 
     const addPage = () => { doc.addPage(); y = 20; };
     const checkY  = (needed = 20) => { if (y + needed > 270) addPage(); };
 
-    const stops: [number,number,number][] = [[244,114,182],[192,132,252],[34,211,238],[45,212,191]];
-
     // PAGE 1
-    doc.setFillColor(...BG); doc.rect(0,0,W,297,"F");
-    stops.forEach((clr, i) => { doc.setFillColor(...clr); doc.rect(pad + i*(W-pad*2)/stops.length, 0, (W-pad*2)/stops.length+1, 3, "F"); });
-    y = 32;
+    drawPageBase(); y = 32;
     doc.setFont("helvetica","bold"); doc.setFontSize(10); doc.setTextColor(...CYAN);
     doc.text("TULIP TECHNOLOGY R&D", pad, y); y += 7;
     doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor(...DIM);
@@ -416,7 +404,7 @@ export default function ROICalculatorPage() {
     doc.setFillColor(...CARD); doc.roundedRect(pad, y, W-pad*2, 14, 3, 3, "F");
     doc.setFont("helvetica","normal"); doc.setFontSize(9); doc.setTextColor(...DIM);
     doc.text("STUDIO", pad+5, y+5.5);
-    doc.setFont("helvetica","bold"); doc.setTextColor(...WHITE); doc.setFontSize(10);
+    doc.setFont("helvetica","bold"); doc.setFontSize(10); doc.setTextColor(...WHITE);
     doc.text(r.studioSummary, pad+5, y+10.5); y += 22;
     doc.setFont("helvetica","bold"); doc.setFontSize(8); doc.setTextColor(...DIM);
     doc.text("ESTIMATED ANNUAL EFFICIENCY OPPORTUNITY", pad, y); y += 8;
@@ -425,13 +413,13 @@ export default function ROICalculatorPage() {
     doc.setFontSize(11); doc.setTextColor(...WHITE);
     doc.text(`${r.savePctNum}% of current production budget`, pad, y); y += 16;
     const metW = (W-pad*2-8)/2;
-    [[`${r.roi}x`, "Indicative return in year one", LAV], [r.tierPayback, "Indicative payback period", GRN]].forEach(([val,lbl,clr], i) => {
+    ([[ `${r.roi}x`, "Indicative return in year one", LAV], [r.tierPayback, "Indicative payback period", GRN]] as [string,string,[number,number,number]][]).forEach(([val,lbl,clr], i) => {
       const bx = pad + i*(metW+8);
       doc.setFillColor(...CARD); doc.roundedRect(bx, y, metW, 22, 3, 3, "F");
-      doc.setFont("helvetica","bold"); doc.setFontSize(18); doc.setTextColor(...(clr as [number,number,number]));
-      doc.text(val as string, bx+5, y+13);
+      doc.setFont("helvetica","bold"); doc.setFontSize(18); doc.setTextColor(...clr);
+      doc.text(val, bx+5, y+13);
       doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor(...DIM);
-      doc.text(lbl as string, bx+5, y+19);
+      doc.text(lbl, bx+5, y+19);
     }); y += 32;
     doc.setFillColor(...CARD); doc.roundedRect(pad, y, W-pad*2, 18, 3, 3, "F");
     doc.setFont("helvetica","bold"); doc.setFontSize(8); doc.setTextColor(...CYAN);
@@ -442,25 +430,23 @@ export default function ROICalculatorPage() {
     doc.text(doc.splitTextToSize("This is an indicative pipeline efficiency model based on verified industry benchmarks. All figures are subject to validation against your actual pipeline.", W-pad*2), pad, y);
 
     // PAGE 2
-    addPage();
-    doc.setFillColor(...BG); doc.rect(0,0,W,297,"F");
-    stops.forEach((clr, i) => { doc.setFillColor(...clr); doc.rect(pad + i*(W-pad*2)/stops.length, 0, (W-pad*2)/stops.length+1, 3, "F"); });
+    addPage(); drawPageBase();
     doc.setFont("helvetica","bold"); doc.setFontSize(8); doc.setTextColor(...CYAN);
     doc.text("PIPELINE EFFICIENCY OPPORTUNITY REPORT", pad, y); y += 10;
-    doc.setFontSize(16); doc.setTextColor(...WHITE); doc.text("Before and After", pad, y); y += 10;
+    doc.setFontSize(16); doc.setTextColor(...WHITE);
+    doc.text("Before and After", pad, y); y += 10;
     const baW = (W-pad*2-8)/2;
-    const baRows: [string,string,string][] = [
-      ["Annual spend",      c(r.budget),       c(r.budgetAfter)],
-      ["Rework cost",       c(r.reworkCost),   c(r.reworkAfter)],
-      ["Art pipeline cost", c(r.artCost),      c(r.artAfter)],
-      ["Delivery time",     r.timeBefore+"mo", r.timeAfter+"mo"],
-    ];
     doc.setFillColor(40,10,10); doc.roundedRect(pad, y, baW, 9, 2, 2, "F");
     doc.setFont("helvetica","bold"); doc.setFontSize(8); doc.setTextColor(...RED);
     doc.text("CURRENT PIPELINE", pad+4, y+6);
     doc.setFillColor(10,30,15); doc.roundedRect(pad+baW+8, y, baW, 9, 2, 2, "F");
     doc.setTextColor(...GRN); doc.text("WITH AI PIPELINE", pad+baW+12, y+6); y += 12;
-    baRows.forEach(([lbl, before, after]) => {
+    ([
+      ["Annual spend",      c(r.budget),       c(r.budgetAfter)],
+      ["Rework cost",       c(r.reworkCost),   c(r.reworkAfter)],
+      ["Art pipeline cost", c(r.artCost),      c(r.artAfter)],
+      ["Delivery time",     r.timeBefore+"mo", r.timeAfter+"mo"],
+    ] as [string,string,string][]).forEach(([lbl, before, after]) => {
       checkY(14);
       doc.setFillColor(...CARD); doc.roundedRect(pad, y, baW, 12, 2, 2, "F");
       doc.setFont("helvetica","normal"); doc.setFontSize(7.5); doc.setTextColor(...DIM);
@@ -481,8 +467,8 @@ export default function ROICalculatorPage() {
     doc.setFont("helvetica","bold"); doc.setFontSize(7.5); doc.setTextColor(...CYAN);
     doc.text("AREA", pad+3, y+5.5);
     doc.text("CURRENT EST.", pad+82, y+5.5, { align: "right" });
-    doc.text("WITH AI", pad+112, y+5.5, { align: "right" });
-    doc.text("OPPORTUNITY", W-pad-2, y+5.5, { align: "right" }); y += 10;
+    doc.text("WITH AI",       pad+112, y+5.5, { align: "right" });
+    doc.text("OPPORTUNITY",   W-pad-2, y+5.5, { align: "right" }); y += 10;
     r.rows.forEach((row, idx) => {
       checkY(12);
       if (idx%2===0) { doc.setFillColor(20,20,20); doc.rect(pad, y-3, W-pad*2, 11, "F"); }
@@ -492,31 +478,28 @@ export default function ROICalculatorPage() {
       doc.setFont("helvetica","normal"); doc.setFontSize(7.5); doc.setTextColor(...DIM);
       doc.text(row.desc, pad+3, y+8.5);
       doc.setFont("helvetica","bold"); doc.setFontSize(9);
-      doc.setTextColor(...RED); doc.text(c(row.before), pad+82, y+5, { align: "right" });
-      doc.setTextColor(...GRN); doc.text(c(after), pad+112, y+5, { align: "right" });
-      doc.setTextColor(...CYAN); doc.text("↓ "+c(row.save), W-pad-2, y+5, { align: "right" });
+      doc.setTextColor(...RED);  doc.text(c(row.before),       pad+82,  y+5, { align: "right" });
+      doc.setTextColor(...GRN);  doc.text(c(after),             pad+112, y+5, { align: "right" });
+      doc.setTextColor(...CYAN); doc.text("↓ "+c(row.save),    W-pad-2, y+5, { align: "right" });
       y += 13;
     });
 
     // PAGE 3
-    addPage();
-    doc.setFillColor(...BG); doc.rect(0,0,W,297,"F");
-    stops.forEach((clr, i) => { doc.setFillColor(...clr); doc.rect(pad + i*(W-pad*2)/stops.length, 0, (W-pad*2)/stops.length+1, 3, "F"); });
+    addPage(); drawPageBase();
     doc.setFont("helvetica","bold"); doc.setFontSize(16); doc.setTextColor(...WHITE);
     doc.text("Pipeline Areas — Key Summary", pad, y); y += 12;
-    const ktDefs: [string, [number,number,number], string][] = [
+    ([
       ["LARGEST COST",    RED,  `Art and asset production and ${r.topPain} contain the primary recoverable costs based on your inputs.`],
-      ["OPPORTUNITY",     GRN,  `Estimated annual efficiency opportunity of ${c(r.totalSave)}, representing ${r.savePctNum}% of current production budget.`],
-      ["HOW TULIP WORKS", CYAN, `A Tulip engagement starts with a workflow audit of your specific pipeline. The highest-recovery stages are restructured first within a scoped sprint using your actual assets.`],
-      ["INVESTMENT CASE", LAV,  r.rdBudgetPct === "none" ? `No dedicated pipeline budget. The ${c(r.totalSave)} opportunity is approximately ${Math.round(r.totalSave/r.midInvest)}x the indicative cost of a Tulip ${r.tier} engagement.` : `Existing pipeline investment of approximately ${c(r.rdCurrentSpend)}. Indicative return of ${r.roi}x based on benchmarks.`],
-      ["DELIVERY",        AMB,  `Indicative return of ${r.roi}x in year one, benchmarked against the ${r.tier} engagement range of ${r.tierPrice}.`],
-    ];
-    ktDefs.forEach(([lbl, clr, text]) => {
+      ["OPPORTUNITY",     GRN,  `Estimated annual efficiency opportunity of ${c(r.totalSave)}, representing ${r.savePctNum}% of current production budget. Top areas: ${r.topPain}${r.painPointLabels.length > 1 ? " and " + r.secondPain : ""}.`],
+      ["HOW TULIP WORKS", CYAN, `A Tulip engagement starts with a workflow audit of your specific pipeline, not a generic AI tool recommendation. The highest-recovery stages are restructured first within a scoped sprint using your actual assets.`],
+      ["INVESTMENT CASE", LAV,  r.rdBudgetPct === "none" ? `No dedicated pipeline budget. The ${c(r.totalSave)} opportunity is approximately ${Math.round(r.totalSave/r.midInvest)}x the indicative cost of a Tulip ${r.tier} engagement.` : `Existing pipeline investment of approximately ${c(r.rdCurrentSpend)}. Indicative return of ${r.roi}x based on benchmarks from comparable studios.`],
+      ["DELIVERY",        AMB,  `Indicative return of ${r.roi}x in year one, benchmarked against the ${r.tier} engagement range of ${r.tierPrice}. Recovered capital could fund additional production capacity, accelerate IP development, or reduce outsource dependency.`],
+    ] as [string,[number,number,number],string][]).forEach(([lbl, clr, text]) => {
       const lines = doc.splitTextToSize(text, W-pad*2-30);
-      const rowH = Math.max(16, lines.length*5+10);
+      const rowH  = Math.max(16, lines.length*5+10);
       checkY(rowH+3);
       doc.setFillColor(...CARD); doc.roundedRect(pad, y, W-pad*2, rowH, 2, 2, "F");
-      doc.setFillColor(...clr); doc.roundedRect(pad, y, 3, rowH, 1, 1, "F");
+      doc.setFillColor(...clr);  doc.roundedRect(pad, y, 3, rowH, 1, 1, "F");
       doc.setFont("helvetica","bold"); doc.setFontSize(7); doc.setTextColor(...clr);
       doc.text(lbl, pad+7, y+6);
       doc.setFont("helvetica","normal"); doc.setFontSize(8.5); doc.setTextColor(...WHITE);
@@ -524,11 +507,13 @@ export default function ROICalculatorPage() {
       y += rowH+4;
     });
     y += 4; checkY(32);
-    doc.setFillColor(...CARD); doc.roundedRect(pad, y, W-pad*2, 22, 3, 3, "F");
     doc.setFont("helvetica","bold"); doc.setFontSize(8); doc.setTextColor(...CYAN);
-    doc.text("RECOMMENDED ENGAGEMENT", pad+5, y+7);
-    doc.setFontSize(15); doc.setTextColor(...WHITE);
-    doc.text(`${r.tier}  ·  ${r.tierPrice}`, pad+5, y+16);
+    doc.text("RECOMMENDED INVESTMENT", pad, y); y += 8;
+    doc.setFillColor(...CARD); doc.roundedRect(pad, y, W-pad*2, 22, 3, 3, "F");
+    doc.setFont("helvetica","normal"); doc.setFontSize(9); doc.setTextColor(...DIM);
+    doc.text(`${r.tier} Engagement`, pad+5, y+7);
+    doc.setFont("helvetica","bold"); doc.setFontSize(15); doc.setTextColor(...WHITE);
+    doc.text(r.tierPrice, pad+5, y+16);
     doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor(...GRN);
     doc.text("Indicative payback: "+r.tierPayback, W-pad-2, y+16, { align: "right" }); y += 30;
     checkY(24);
@@ -538,26 +523,22 @@ export default function ROICalculatorPage() {
     doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor(...CYAN);
     doc.text("calendly.com/youki-harada/30min", W/2, y, { align: "center" }); y += 12;
     doc.setFont("helvetica","italic"); doc.setFontSize(7); doc.setTextColor(...DIM);
-    doc.text(doc.splitTextToSize("This report is an indicative pipeline efficiency model, not a financial projection or guarantee of return. All figures are derived from published industry benchmarks and adjusted for the studio profile provided.", W-pad*2), pad, y);
+    doc.text(doc.splitTextToSize("This report is an indicative pipeline efficiency model, not a financial projection or guarantee of return. All figures are derived from published industry benchmarks and adjusted for the studio profile provided. Actual efficiency opportunity will be determined during a structured Tulip Technology R&D engagement.", W-pad*2), pad, y);
 
     doc.save(`Tulip-Pipeline-Efficiency-${new Date().toISOString().slice(0,10)}.pdf`);
   };
 
-  // ── Render helpers ────────────────────────────────────────────────────────
+  // ── Render helpers ────────────────────────────────────────────────────────────
 
-  const stepState = (n: number) => {
-    if (n === step) return "active";
-    if (n < step) return "done";
-    return "";
-  };
+  const stepState = (n: number) => n === step ? "active" : n < step ? "done" : "";
 
   const tiers = [
-    { name: "Starter",    price: "$15K to $45K",   rec: !results || results.budget < 1_000_000,                                items: ["Pipeline audit and tool benchmarking", "Indie to mid-size studios", "Payback: 2 to 4 months"] },
+    { name: "Starter",    price: "$15K to $45K",   rec: !results || results.budget < 1_000_000,                                 items: ["Pipeline audit and tool benchmarking", "Indie to mid-size studios", "Payback: 2 to 4 months"] },
     { name: "Studio",     price: "$45K to $165K",  rec: !!results && results.budget >= 1_000_000 && results.budget < 20_000_000, items: ["Full adoption, integration, workshops", "Mid-size to AAA studios", "Payback: 4 to 8 months"] },
-    { name: "Enterprise", price: "$165K to $395K", rec: !!results && results.budget >= 20_000_000,                              items: ["Architecture blueprint and multi-studio rollout", "AAA to publisher scale", "Payback: 6 to 12 months"] },
+    { name: "Enterprise", price: "$165K to $395K", rec: !!results && results.budget >= 20_000_000,                               items: ["Architecture blueprint and multi-studio rollout", "AAA to publisher scale", "Payback: 6 to 12 months"] },
   ];
 
-  // ── Render ────────────────────────────────────────────────────────────────
+  // ── Render ────────────────────────────────────────────────────────────────────
 
   return (
     <div className="rc">
@@ -574,18 +555,18 @@ export default function ROICalculatorPage() {
 
         {/* STEP INDICATORS */}
         <div className="steps">
-          {[["Studio profile","1"],["Pipeline costs","2"],["Pain points","3"],["Efficiency opportunity","4"]].map(([lbl, n], i) => (
-            <div key={n} className="step-item">
+          {(["Studio profile","Pipeline costs","Pain points","Efficiency opportunity"] as string[]).map((lbl, i) => (
+            <div key={i} className="step-item">
               <div className={`step-num ${stepState(i+1)}`}>
-                <span className="sn-inner">{stepState(i+1) === "done" ? "✓" : n}</span>
+                <span className="sn-inner">{stepState(i+1) === "done" ? "✓" : i+1}</span>
               </div>
               <div className="step-lbl">{lbl}</div>
             </div>
           ))}
         </div>
 
-        {/* ═══ STEP 1 ═══ */}
-        <div className={`panel${step === 1 ? " active" : ""}`}>
+        {/* ═══ STEP 1 — STUDIO PROFILE ═══ */}
+        {step === 1 && (
           <div className="form-card">
             <div className="fc-title">Tell us about your studio</div>
             <div className="fc-hint">Your answers calibrate the model. All figures stay in your browser.</div>
@@ -658,133 +639,146 @@ export default function ROICalculatorPage() {
                 </select>
               </div>
               <div className="field" style={{ alignSelf: "flex-end" }}>
-                <div style={{ background: "rgba(34,211,238,0.06)", border: "1px solid rgba(34,211,238,0.18)", borderRadius: 8, padding: "10px 12px" }}>
+                <div style={{ background: "rgba(34,211,238,0.06)", border: "1px solid rgba(34,211,238,0.18)", borderRadius: "var(--r8)", padding: "10px 12px" }}>
                   <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: ".06em", textTransform: "uppercase", color: "var(--cyan)", marginBottom: 4 }}>Why this matters</div>
-                  <div style={{ fontSize: 12, lineHeight: 1.5 }}>37% of studios do not know their pipeline spend. If you have no R&amp;D budget, we model how savings fund the engagement from existing waste.</div>
+                  <div style={{ fontSize: 12, color: "var(--w)", lineHeight: 1.5 }}>37% of studios do not know their pipeline spend. If you have no R&amp;D budget, we model how savings fund the engagement from existing waste.</div>
                 </div>
               </div>
             </div>
 
             <button className="btn-primary" onClick={() => goStep(2)}>Continue → Pipeline costs</button>
           </div>
-        </div>
+        )}
 
-        {/* ═══ STEP 2 ═══ */}
-        <div className={`panel${step === 2 ? " active" : ""}`}>
-          <button className="btn-back" onClick={() => setStep(1)}>← Back</button>
-          <div className="form-card">
-            <div className="fc-title">How does your budget break down?</div>
-            <div className="fc-hint">Approximate is fine. We use industry benchmarks to fill any gaps.</div>
+        {/* ═══ STEP 2 — PIPELINE COSTS ═══ */}
+        {step === 2 && (
+          <>
+            <button className="btn-back" onClick={() => goStep(1)}>← Back</button>
+            <div className="form-card">
+              <div className="fc-title">How does your budget break down?</div>
+              <div className="fc-hint">Approximate is fine. We use industry benchmarks to fill any gaps.</div>
 
-            <div className="field-row">
-              {([["Art and asset creation", "art", artPct, setArtPct, 5, 70] as const, ["Engineering and tech", "eng", engPct, setEngPct, 5, 60] as const]).map(([lbl, id, val, setter, min, max]) => (
-                <div className="field" key={id}>
-                  <label>{lbl} (%)</label>
+              <div className="field-row">
+                <div className="field">
+                  <label>Art and asset creation (%)</label>
                   <div className="slider-wrap">
-                    <div className={`slider-hint${touchedSliders.has(id) ? " hidden" : ""}`}>
+                    <div className={`slider-hint${touchedSliders.has("artPct") ? " hidden" : ""}`}>
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 4l4 3-4 3" stroke="#22d3ee" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
                       Drag to adjust
                     </div>
-                    <div className="slider-val">{val}%</div>
-                    <input type="range" min={min} max={max} value={val}
-                      onChange={(e) => { setter(Number(e.target.value)); touchSlider(id); }} />
-                    <div className="slider-labels"><span>{min}%</span><span>{max}%</span></div>
+                    <div className="slider-val">{artPct}%</div>
+                    <input type="range" min={5} max={70} value={artPct} onChange={(e) => { setArtPct(Number(e.target.value)); touchSlider("artPct"); }} />
+                    <div className="slider-labels"><span>5%</span><span>70%</span></div>
                   </div>
                 </div>
-              ))}
-            </div>
-
-            <div className="field-row">
-              <div className="field">
-                <label>QA and testing (%)</label>
-                <div className="slider-wrap">
-                  <div className={`slider-hint${touchedSliders.has("qa") ? " hidden" : ""}`}>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 4l4 3-4 3" stroke="#22d3ee" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-                    Drag to adjust
+                <div className="field">
+                  <label>Engineering and tech (%)</label>
+                  <div className="slider-wrap">
+                    <div className={`slider-hint${touchedSliders.has("engPct") ? " hidden" : ""}`}>
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 4l4 3-4 3" stroke="#22d3ee" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                      Drag to adjust
+                    </div>
+                    <div className="slider-val">{engPct}%</div>
+                    <input type="range" min={5} max={60} value={engPct} onChange={(e) => { setEngPct(Number(e.target.value)); touchSlider("engPct"); }} />
+                    <div className="slider-labels"><span>5%</span><span>60%</span></div>
                   </div>
-                  <div className="slider-val">{qaPct}%</div>
-                  <input type="range" min={2} max={30} value={qaPct} onChange={(e) => { setQaPct(Number(e.target.value)); touchSlider("qa"); }} />
-                  <div className="slider-labels"><span>2%</span><span>30%</span></div>
                 </div>
               </div>
-              <div className="field">
-                <label>How many rework or revision cycles per project?</label>
-                <select value={reworkCycles} onChange={(e) => setReworkCycles(e.target.value)}>
-                  <option value="2">1 to 2 cycles</option>
-                  <option value="4">3 to 5 cycles</option>
-                  <option value="8">6 to 10 cycles</option>
-                  <option value="14">10+ cycles</option>
-                </select>
+
+              <div className="field-row">
+                <div className="field">
+                  <label>QA and testing (%)</label>
+                  <div className="slider-wrap">
+                    <div className={`slider-hint${touchedSliders.has("qaPct") ? " hidden" : ""}`}>
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 4l4 3-4 3" stroke="#22d3ee" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                      Drag to adjust
+                    </div>
+                    <div className="slider-val">{qaPct}%</div>
+                    <input type="range" min={2} max={30} value={qaPct} onChange={(e) => { setQaPct(Number(e.target.value)); touchSlider("qaPct"); }} />
+                    <div className="slider-labels"><span>2%</span><span>30%</span></div>
+                  </div>
+                </div>
+                <div className="field">
+                  <label>How many rework or revision cycles per project?</label>
+                  <select value={reworkCycles} onChange={(e) => setReworkCycles(e.target.value)}>
+                    <option value="2">1 to 2 cycles</option>
+                    <option value="4">3 to 5 cycles</option>
+                    <option value="8">6 to 10 cycles</option>
+                    <option value="14">10+ cycles</option>
+                  </select>
+                </div>
               </div>
-            </div>
 
-            <div className="field-row">
-              <div className="field">
-                <label>Average project delivery time</label>
-                <select value={deliveryTime} onChange={(e) => setDeliveryTime(e.target.value)}>
-                  <option value="3">Under 6 months</option>
-                  <option value="12">6 to 18 months</option>
-                  <option value="24">18 to 36 months</option>
-                  <option value="42">36+ months</option>
-                </select>
+              <div className="field-row">
+                <div className="field">
+                  <label>Average project delivery time</label>
+                  <select value={deliveryTime} onChange={(e) => setDeliveryTime(e.target.value)}>
+                    <option value="3">Under 6 months</option>
+                    <option value="12">6 to 18 months</option>
+                    <option value="24">18 to 36 months</option>
+                    <option value="42">36+ months</option>
+                  </select>
+                </div>
+                <div className="field">
+                  <label>Current AI tool usage</label>
+                  <select value={aiUsage} onChange={(e) => setAiUsage(e.target.value)}>
+                    <option value="none">No AI tools yet</option>
+                    <option value="experimental">Experimental only</option>
+                    <option value="partial">Some workflows integrated</option>
+                    <option value="governed">Governed pipeline strategy</option>
+                  </select>
+                </div>
               </div>
-              <div className="field">
-                <label>Current AI tool usage</label>
-                <select value={aiUsage} onChange={(e) => setAiUsage(e.target.value)}>
-                  <option value="none">No AI tools yet</option>
-                  <option value="experimental">Experimental only</option>
-                  <option value="partial">Some workflows integrated</option>
-                  <option value="governed">Governed pipeline strategy</option>
-                </select>
+
+              <button className="btn-primary" onClick={() => goStep(3)}>Continue → Pain points</button>
+            </div>
+          </>
+        )}
+
+        {/* ═══ STEP 3 — PAIN POINTS ═══ */}
+        {step === 3 && (
+          <>
+            <button className="btn-back" onClick={() => goStep(2)}>← Back</button>
+            <div className="form-card">
+              <div className="fc-title">Where does your pipeline lose the most time?</div>
+              <div className="fc-hint">Select all that apply. These map directly to Tulip's service recommendations.</div>
+
+              <div className="check-grid" style={{ marginBottom: 20 }}>
+                {[
+                  ["texturing",  "Manual texturing and rigging"],
+                  ["rework",     "Rework and revision cycles"],
+                  ["handoff",    "Slow team handoffs"],
+                  ["qa",         "QA bottlenecks"],
+                  ["concept",    "Slow concept iteration"],
+                  ["versioning", "Version control issues"],
+                  ["outsource",  "Outsource coordination cost"],
+                  ["render",     "Render or compute cost"],
+                ].map(([key, label]) => (
+                  <label key={key} className="check-item">
+                    <input type="checkbox" checked={painPoints.includes(key)} onChange={() => togglePainPoint(key)} />
+                    <span>{label}</span>
+                  </label>
+                ))}
               </div>
+
+              <div className="field">
+                <label>Biggest single frustration (optional)</label>
+                <input type="text" value={biggestPain} onChange={(e) => setBiggestPain(e.target.value)} placeholder="e.g. Art review rounds take 3 weeks each time" />
+              </div>
+
+              <button className="btn-primary" style={{ marginTop: 14 }} onClick={calculate}>
+                Generate my efficiency model →
+              </button>
             </div>
-
-            <button className="btn-primary" onClick={() => goStep(3)}>Continue → Pain points</button>
-          </div>
-        </div>
-
-        {/* ═══ STEP 3 ═══ */}
-        <div className={`panel${step === 3 ? " active" : ""}`}>
-          <button className="btn-back" onClick={() => setStep(2)}>← Back</button>
-          <div className="form-card">
-            <div className="fc-title">Where does your pipeline lose the most time?</div>
-            <div className="fc-hint">Select all that apply. These map directly to Tulip's service recommendations.</div>
-
-            <div className="check-grid" style={{ marginBottom: 20 }}>
-              {[
-                ["tex", "texturing",  "Manual texturing and rigging"],
-                ["rew", "rework",     "Rework and revision cycles"],
-                ["han", "handoff",    "Slow team handoffs"],
-                ["qa",  "qa",         "QA bottlenecks"],
-                ["con", "concept",    "Slow concept iteration"],
-                ["ver", "versioning", "Version control issues"],
-                ["out", "outsource",  "Outsource coordination cost"],
-                ["ren", "render",     "Render or compute cost"],
-              ].map(([, key, label]) => (
-                <label key={key} className="check-item">
-                  <input type="checkbox" checked={painPoints.includes(key)} onChange={() => togglePainPoint(key)} />
-                  <span>{label}</span>
-                </label>
-              ))}
-            </div>
-
-            <div className="field">
-              <label>Biggest single frustration (optional)</label>
-              <input type="text" value={biggestPain} onChange={(e) => setBiggestPain(e.target.value)} placeholder="e.g. Art review rounds take 3 weeks each time" />
-            </div>
-
-            <button className="btn-primary" onClick={calculate} style={{ marginTop: 14 }}>
-              Generate my efficiency model →
-            </button>
-          </div>
-        </div>
+          </>
+        )}
 
         {/* ═══ STEP 4 — RESULTS ═══ */}
         {step === 4 && results && (
-          <div className="panel active">
-            <button className="btn-back" onClick={() => setStep(3)}>← Adjust inputs</button>
+          <>
+            <button className="btn-back" onClick={() => goStep(3)}>← Adjust inputs</button>
 
-            {/* Indicative notice */}
+            {/* INDICATIVE NOTICE */}
             <div className="indicative-notice">
               <div className="in-icon">◈</div>
               <div>
@@ -793,17 +787,18 @@ export default function ROICalculatorPage() {
               </div>
             </div>
 
+            {/* RESULTS HEADER */}
             <div className="results-header">
               <div className="rh-label">Indicative pipeline efficiency opportunity</div>
               <div className="rh-studio">{results.studioSummary}</div>
             </div>
 
-            {/* Savings callout */}
+            {/* SAVINGS CALLOUT */}
             <div className="savings-bar">
               <div className="sb-inner">
-                <div>
+                <div className="sb-left">
                   <div className="sb-label">Estimated annual efficiency opportunity</div>
-                  <div className="sb-val count-anim" key={`${results.totalSave}-${activeCurrency}`}>{fmtC(results.totalSave)}</div>
+                  <div className="sb-val">{fmtC(results.totalSave)}</div>
                   <div className="sb-sub">{results.savePctNum}% of your current production budget</div>
                 </div>
                 <div className="sb-right">
@@ -813,40 +808,26 @@ export default function ROICalculatorPage() {
               </div>
             </div>
 
-            {/* Before / After */}
+            {/* BEFORE / AFTER */}
             <div className="ba-grid">
               <div className="ba-col before">
                 <div className="ba-badge before">Current pipeline</div>
-                {[
-                  ["Annual spend",      fmtC(results.budget)],
-                  ["Est. rework cost",  fmtC(results.reworkCost)],
-                  ["Art pipeline cost", fmtC(results.artCost)],
-                  ["Avg delivery time", `${results.timeBefore} months`],
-                ].map(([lbl, val]) => (
-                  <div className="ba-metric" key={lbl}>
-                    <div className="bam-label">{lbl}</div>
-                    <div className="bam-val red">{val}</div>
-                  </div>
-                ))}
+                <div className="ba-metric"><div className="bam-label">Annual spend</div><div className="bam-val red">{fmtC(results.budget)}</div></div>
+                <div className="ba-metric"><div className="bam-label">Est. rework cost</div><div className="bam-val red">{fmtC(results.reworkCost)}</div></div>
+                <div className="ba-metric"><div className="bam-label">Art pipeline cost</div><div className="bam-val red">{fmtC(results.artCost)}</div></div>
+                <div className="ba-metric"><div className="bam-label">Avg delivery time</div><div className="bam-val red">{results.timeBefore} months</div></div>
               </div>
               <div className="ba-arrow">→</div>
               <div className="ba-col after">
                 <div className="ba-badge after">With AI pipeline</div>
-                {[
-                  ["Optimised spend",   fmtC(results.budgetAfter)],
-                  ["Est. rework cost",  fmtC(results.reworkAfter)],
-                  ["Art pipeline cost", fmtC(results.artAfter)],
-                  ["Avg delivery time", `${results.timeAfter} months`],
-                ].map(([lbl, val]) => (
-                  <div className="ba-metric" key={lbl}>
-                    <div className="bam-label">{lbl}</div>
-                    <div className="bam-val grn">{val}</div>
-                  </div>
-                ))}
+                <div className="ba-metric"><div className="bam-label">Optimised spend</div><div className="bam-val grn">{fmtC(results.budgetAfter)}</div></div>
+                <div className="ba-metric"><div className="bam-label">Est. rework cost</div><div className="bam-val grn">{fmtC(results.reworkAfter)}</div></div>
+                <div className="ba-metric"><div className="bam-label">Art pipeline cost</div><div className="bam-val grn">{fmtC(results.artAfter)}</div></div>
+                <div className="ba-metric"><div className="bam-label">Avg delivery time</div><div className="bam-val grn">{results.timeAfter} months</div></div>
               </div>
             </div>
 
-            {/* Breakdown table */}
+            {/* BREAKDOWN TABLE */}
             <div className="breakdown">
               <div className="breakdown-hd">
                 <div className="breakdown-hd-top">
@@ -864,8 +845,8 @@ export default function ROICalculatorPage() {
                 <div className="br-hd">With AI</div>
                 <div className="br-hd">Opportunity</div>
               </div>
-              {results.rows.map((row) => (
-                <div className="breakdown-row" key={row.label}>
+              {results.rows.map((row, i) => (
+                <div key={i} className="breakdown-row">
                   <div className="br-area">
                     {row.label}
                     <div style={{ fontSize: 11, color: "rgba(255,255,255,0.5)", marginTop: 2 }}>{row.desc}</div>
@@ -878,66 +859,49 @@ export default function ROICalculatorPage() {
               <div className="rd-offset" dangerouslySetInnerHTML={{ __html: results.rdOffsetMsg }} />
             </div>
 
-            {/* AI analysis */}
+            {/* AI ANALYSIS — KEY TAKEAWAYS */}
             <div className="ai-analysis">
               <div className="aa-header">
                 <div className="aa-icon">✦</div>
                 <div className="aa-title">Pipeline Areas — Key Summary</div>
               </div>
-              <div className={`aa-body${visibleTakeaways.size === 0 ? " loading" : ""}`}>
-                {visibleTakeaways.size === 0 ? (
-                  <>
-                    <div className="typing-dots"><span /><span /><span /></div>
-                    <span style={{ fontSize: 13 }}>Analysing your pipeline...</span>
-                  </>
-                ) : (
-                  <>
-                    {results.takeaways.map((t, i) => (
-                      <div key={i} className={`kt-item${visibleTakeaways.has(i) ? " visible" : ""}`}>
-                        <div className={`kt-label ${t.labelClass}`}>{t.label}</div>
-                        <div className="kt-text" dangerouslySetInnerHTML={{ __html: t.text }} />
-                      </div>
-                    ))}
-                    <div className={`kt-maturity${maturityVisible ? " visible" : ""}`}>
-                      {results.maturityNote}
-                    </div>
-                  </>
+              <div className="aa-body">
+                {results.takeaways.map((t, i) => (
+                  <div key={i} className={`kt-item${visibleTakeaways.has(i) ? " visible" : ""}`}>
+                    <div className={`kt-label ${t.labelClass}`}>{t.label}</div>
+                    <div className="kt-text" dangerouslySetInnerHTML={{ __html: t.text }} />
+                  </div>
+                ))}
+                {results.maturityNote && (
+                  <div className={`kt-maturity${maturityVisible ? " visible" : ""}`}>{results.maturityNote}</div>
                 )}
               </div>
             </div>
 
-            {/* Investment tiers */}
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", marginBottom: 14 }}>Recommended Tulip engagement</div>
+            {/* INVESTMENT OPTIONS */}
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "var(--w)", marginBottom: 14 }}>Recommended Tulip engagement</div>
             <div className="invest-row">
               {tiers.map((t) => (
                 <div key={t.name} className={`inv-card${t.rec ? " selected" : ""}`}>
                   {t.rec && <div className="inv-rec-badge">Recommended</div>}
                   <div className="inv-name">{t.name}</div>
                   <div className="inv-price">{t.price}</div>
-                  <ul className="inv-items">
-                    {t.items.map((item) => <li key={item}>{item}</li>)}
-                  </ul>
+                  <ul className="inv-items">{t.items.map((item) => <li key={item}>{item}</li>)}</ul>
                 </div>
               ))}
             </div>
 
-            {/* ROI projection */}
+            {/* ROI PROJECTION */}
             <div className="roi-proj">
-              {[
-                ["Estimated annual efficiency opportunity", <span className="rp-val grn">{fmtC(results.totalSave)}</span>],
-                ["Est. outsource coordination saving",      <span className="rp-val grn">{fmtC(results.outsourceSave)}</span>],
-                [`Indicative engagement cost (${results.tier})`, <span className="rp-val">{results.tierPrice}</span>],
-                ["Indicative return multiple",              <span className="rp-val grad">{results.roi}× in year one</span>],
-                ["Estimated delivery time reduction",       <span className="rp-val grn">{results.timeSavePct}% faster</span>],
-                ["Indicative payback period",               <span className="rp-val">{results.tierPayback}</span>],
-              ].map(([label, val], i) => (
-                <div className="rp-row" key={i}>
-                  <span>{label}</span>{val}
-                </div>
-              ))}
+              <div className="rp-row"><span>Estimated annual efficiency opportunity</span><span className="rp-val grn">{fmtC(results.totalSave)}</span></div>
+              <div className="rp-row"><span>Est. outsource coordination saving</span><span className="rp-val grn">{fmtC(results.outsourceSave)}</span></div>
+              <div className="rp-row"><span>Indicative engagement cost ({results.tier})</span><span className="rp-val">{results.tierPrice}</span></div>
+              <div className="rp-row"><span>Indicative return multiple</span><span className="rp-val grad">{results.roi}× in year one</span></div>
+              <div className="rp-row"><span>Estimated delivery time reduction</span><span className="rp-val grn">{results.timeSavePct}% faster</span></div>
+              <div className="rp-row"><span>Indicative payback period</span><span className="rp-val">{results.tierPayback}</span></div>
             </div>
 
-            {/* Methodology */}
+            {/* METHODOLOGY PANEL */}
             <div className="meth-panel">
               <button className="meth-toggle" onClick={() => setMethOpen((o) => !o)}>
                 <div className="meth-toggle-left">
@@ -946,112 +910,115 @@ export default function ROICalculatorPage() {
                 </div>
                 <div className={`meth-toggle-arrow${methOpen ? " open" : ""}`}>▼</div>
               </button>
-              <div className={`meth-body${methOpen ? " open" : ""}`}>
+              {methOpen && (
+                <div className="meth-body open">
 
-                <div className="meth-section">
-                  <div className="meth-sec-title">Games — reduction factors by pipeline area</div>
-                  {[
-                    ["Concept art and visual ideation (AI-assisted generation)", "30 to 50%", "AWS Guide to GenAI for Game Developers 2025"],
-                    ["2D to 3D asset pipeline (prompt to Blender to engine)", "Significant but quality-gated", "Begemann & Hutson, Lindenwood University 2024"],
-                    ["Rework and revision cycles (structured review pipelines)", "35 to 45%", "GDC State of the Game Industry 2025"],
-                    ["QA and testing (AI-driven automated coverage)", "30 to 40%", "Google Cloud Research / Udonis 2025"],
-                    ["Outsource coordination (automated brief and handoff layer)", "25 to 35%", "StudioKrew — AI Generated Game Assets 2025"],
-                    ["Early-stage prototyping and coding assistance", "Most useful, broad agreement", "Daneels, ECAI 2025 — Belgian Game Industry Study"],
-                  ].map(([area, range, source]) => (
-                    <div className="meth-factor-row" key={area}>
-                      <div>{area}</div>
-                      <div className="mf-range">{range}</div>
-                      <div className="mf-source">{source}</div>
+                  <div className="meth-section">
+                    <div className="meth-sec-title">Games — reduction factors by pipeline area</div>
+                    {[
+                      ["Concept art and visual ideation (AI-assisted generation)", "30 to 50%", "AWS Guide to GenAI for Game Developers 2025"],
+                      ["2D to 3D asset pipeline (prompt to Blender to engine)", "Significant but quality-gated", "Begemann & Hutson, Lindenwood University 2024"],
+                      ["Rework and revision cycles (structured review pipelines)", "35 to 45%", "a16z Games AI x Game Dev Survey 2024"],
+                      ["QA and testing (AI-driven automated coverage)", "30 to 40%", "Google Cloud Research / Udonis 2025"],
+                      ["Outsource coordination (automated brief and handoff layer)", "25 to 35%", "StudioKrew — AI Generated Game Assets 2025"],
+                      ["Early-stage prototyping and coding assistance", "Most useful, broad agreement", "Daneels, ECAI 2025 — Belgian Game Industry Study"],
+                    ].map(([area, range, source]) => (
+                      <div key={area} className="meth-factor-row">
+                        <div className="mf-area">{area}</div>
+                        <div className="mf-range">{range}</div>
+                        <div className="mf-source">{source}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="meth-section">
+                    <div className="meth-sec-title">3D Animation — reduction factors by pipeline area</div>
+                    {[
+                      ["Production cost reduction through AI integration", "30%", "Morgan Stanley — GenAI's Leading Role in Entertainment"],
+                      ["Mechanical schedule work (60–70% of schedule)", "30 to 90% compression", "Vitrina AI — Animation Strategic Report 2026"],
+                      ["Asset lifecycle reuse (legacy motion data, crowd simulation)", "Case-study validated", "Vitrina AI — DreamWorks Kung Fu Panda 4 case study"],
+                      ["Client review loop (structured note ingestion to revision)", "10× speed improvement (El Eternaut)", "Vitrina AI / Netflix production data 2026"],
+                      ["Concept art to 3D asset iteration time", "Days to under 48 hours", "StudioKrew — AI Generated Game Assets 2025"],
+                      ["Studios without pipeline spend visibility", "37% do not know their spend", "Ynput — State of Animation and VFX Pipelines 2025"],
+                    ].map(([area, range, source]) => (
+                      <div key={area} className="meth-factor-row">
+                        <div className="mf-area">{area}</div>
+                        <div className="mf-range">{range}</div>
+                        <div className="mf-source">{source}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="meth-section">
+                    <div className="meth-sec-title">VFX — adoption and integration gaps (case study grounded)</div>
+                    <p className="meth-note" style={{ marginBottom: 10 }}>VFX is the sector with the largest gap between AI's theoretical efficiency potential and actual governed adoption. The following gaps are drawn from verified case studies and industry research, not projections.</p>
+                    {[
+                      ["Quality gap: AI outputs require significant artist refinement for production-quality VFX shots", "Adoption barrier", "Daneels ECAI 2025; Begemann & Hutson 2024"],
+                      ["Pipeline integration gap: AI tools not yet connected to Houdini, Nuke, or render farm submission queues in most studios", "Structural gap", "Autodesk AU Session — Innovating the Future Pipeline 2024"],
+                      ["IP and copyright risk: Studios cautious about AI training on proprietary assets without cleared rights", "Legal barrier", "Daneels ECAI 2025; Belgian Game Industry Study"],
+                      ["Pre-render validation opportunity: AI flagging simulation errors before farm submission — highest-return VFX intervention", "35 to 50% task reduction", "S3ART — Breaking Down the VFX Pipeline 2025"],
+                      ["AI in VFX market growth: $4.33B in 2024 to $25.51B by 2034", "CAGR 19.38%", "Market Research Future 2025"],
+                      ["Studios with no dedicated pipeline budget — largest adoption risk group", "37% of studios", "Ynput — State of Animation and VFX Pipelines 2025"],
+                    ].map(([area, range, source]) => (
+                      <div key={area} className="meth-factor-row">
+                        <div className="mf-area">{area}</div>
+                        <div className="mf-range">{range}</div>
+                        <div className="mf-source">{source}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="meth-section">
+                    <div className="meth-sec-title">AI maturity adjustment</div>
+                    <p className="meth-note">Reduction factors are scaled down based on your current AI usage. Studios with no AI tools in place have the largest theoretical opportunity but also the most integration work ahead — a finding consistent across the Belgian game industry study (Daneels, ECAI 2025) and the Begemann and Hutson pipeline case study. Studios with a governed pipeline have a smaller remaining opportunity.</p>
+                    <div className="meth-calc-box">
+                      No AI tools: full benchmark range applied<br />
+                      Experimental use: factors reduced by 15%<br />
+                      Partial integration: factors reduced by 35%<br />
+                      Governed pipeline: factors reduced by 70%
                     </div>
-                  ))}
-                </div>
+                  </div>
 
-                <div className="meth-section">
-                  <div className="meth-sec-title">3D Animation — reduction factors by pipeline area</div>
-                  {[
-                    ["Production cost reduction through AI integration", "30%", "Morgan Stanley — GenAI's Leading Role in Entertainment"],
-                    ["Mechanical schedule work (60–70% of schedule)", "30 to 90% compression", "Vitrina AI — Animation Strategic Report 2026"],
-                    ["Asset lifecycle reuse (legacy motion data, crowd simulation)", "Case-study validated", "Vitrina AI — DreamWorks Kung Fu Panda 4 case study"],
-                    ["Client review loop (structured note ingestion to revision)", "10× speed improvement (El Eternaut)", "Vitrina AI / Netflix production data 2026"],
-                    ["Concept art to 3D asset iteration time", "Days to under 48 hours", "StudioKrew — AI Generated Game Assets 2025"],
-                    ["Studios without pipeline spend visibility", "37% do not know their spend", "Ynput — State of Animation and VFX Pipelines 2025"],
-                  ].map(([area, range, source]) => (
-                    <div className="meth-factor-row" key={area}>
-                      <div>{area}</div>
-                      <div className="mf-range">{range}</div>
-                      <div className="mf-source">{source}</div>
+                  <div className="meth-section">
+                    <div className="meth-sec-title">Rework cost derivation</div>
+                    <p className="meth-note">Rework cost is estimated as a function of total budget and reported revision cycles. A conservative 60% weighting is applied — only 60% of rework time is treated as recoverable, accounting for legitimate creative iteration. The 2D to 3D pipeline transition identified by Begemann and Hutson as a specific rework driver is captured within the art pipeline reduction factor.</p>
+                    <div className="meth-calc-box">
+                      Rework cost estimate = budget × (revision cycles ÷ 100) × 0.6<br /><br />
+                      Example: $5M budget, 4 revision cycles<br />
+                      → $5M × 0.04 × 0.6 = $120K estimated rework exposure
                     </div>
-                  ))}
-                </div>
-
-                <div className="meth-section">
-                  <div className="meth-sec-title">VFX — adoption and integration gaps (case study grounded)</div>
-                  <div className="meth-note" style={{ marginBottom: 10 }}>VFX is the sector with the largest gap between AI's theoretical efficiency potential and actual governed adoption. The following gaps are drawn from verified case studies and industry research, not projections.</div>
-                  {[
-                    ["Quality gap: AI outputs require significant artist refinement for production-quality VFX shots", "Adoption barrier", "Daneels ECAI 2025; Begemann & Hutson 2024"],
-                    ["Pipeline integration gap: AI tools not yet connected to Houdini, Nuke, or render farm submission queues in most studios", "Structural gap", "Autodesk AU Session — Innovating the Future Pipeline 2024"],
-                    ["IP and copyright risk: Studios cautious about AI training on proprietary assets without cleared rights", "Legal barrier", "Daneels ECAI 2025; Belgian Game Industry Study"],
-                    ["Pre-render validation opportunity: AI flagging simulation errors before farm submission — highest-return VFX intervention", "35 to 50% task reduction", "S3ART — Breaking Down the VFX Pipeline 2025"],
-                    ["AI in VFX market growth: $4.33B in 2024 to $25.51B by 2034", "CAGR 19.38%", "Market Research Future 2025"],
-                    ["Studios with no dedicated pipeline budget — largest adoption risk group", "37% of studios", "Ynput — State of Animation and VFX Pipelines 2025"],
-                  ].map(([area, range, source]) => (
-                    <div className="meth-factor-row" key={area}>
-                      <div>{area}</div>
-                      <div className="mf-range">{range}</div>
-                      <div className="mf-source">{source}</div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="meth-section">
-                  <div className="meth-sec-title">AI maturity adjustment</div>
-                  <div className="meth-note">Reduction factors are scaled down based on your current AI usage. Studios with no AI tools in place have the largest theoretical opportunity but also the most integration work ahead. Studios with a governed pipeline have a smaller remaining opportunity.</div>
-                  <div className="meth-calc-box">
-                    No AI tools: full benchmark range applied<br />
-                    Experimental use: factors reduced by 15%<br />
-                    Partial integration: factors reduced by 35%<br />
-                    Governed pipeline: factors reduced by 70%
                   </div>
-                </div>
 
-                <div className="meth-section">
-                  <div className="meth-sec-title">Rework cost derivation</div>
-                  <div className="meth-note">Rework cost is estimated as a function of total budget and reported revision cycles. A conservative 60% weighting is applied — only 60% of rework time is treated as recoverable, accounting for legitimate creative iteration.</div>
-                  <div className="meth-calc-box">
-                    Rework cost estimate = budget × (revision cycles ÷ 100) × 0.6<br /><br />
-                    Example: $5M budget, 4 revision cycles<br />
-                    → $5M × 0.04 × 0.6 = $120K estimated rework exposure
+                  <div className="meth-section">
+                    <div className="meth-sec-title">What this model does not account for</div>
+                    <p className="meth-note">Team adoption time and change management cost. Tool licensing and infrastructure cost for AI systems. Creative quality risk during transition — specifically the output quality concerns consistently raised by developers in the Belgian industry study. Union and contractual constraints on AI use (SAG-AFTRA, WGA protections). IP clearance requirements for model training on proprietary assets. Film and series financing structure complexity documented in the Vitrina Film Financing Playbook 2026. These are all assessed during the Tulip scoping engagement.</p>
                   </div>
-                </div>
 
-                <div className="meth-section">
-                  <div className="meth-sec-title">What this model does not account for</div>
-                  <div className="meth-note">Team adoption time and change management cost. Tool licensing and infrastructure cost for AI systems. Creative quality risk during transition. Union and contractual constraints on AI use (SAG-AFTRA, WGA protections). IP clearance requirements for model training on proprietary assets. Film and series financing structure complexity documented in the Vitrina Film Financing Playbook 2026. These are all assessed during the Tulip scoping engagement.</div>
-                </div>
-
-                <div className="meth-section">
-                  <div className="meth-sec-title">Primary sources — verified and accessible</div>
-                  <div className="meth-note">
-                    <a href="https://d1.awsstatic.com/psc-digital/2025/gc-a4gmt/genai-game-dev/the-2025-aws-guide-to-generative-ai-for-game-developers.pdf" target="_blank" rel="noopener noreferrer">AWS Guide to Generative AI for Game Developers 2025 ↗</a><br /><br />
-                    <a href="https://digitalcommons.lindenwood.edu/cgi/viewcontent.cgi?article=1056&context=student-research-papers" target="_blank" rel="noopener noreferrer">Begemann &amp; Hutson — AI-Assisted Game Development Case Study, Lindenwood University 2024 ↗</a><br /><br />
-                    <a href="https://ai4hgi.github.io/paper7.pdf" target="_blank" rel="noopener noreferrer">Daneels — Opportunities and Risks of GenAI for Game Development, ECAI 2025 ↗</a><br /><br />
-                    <a href="https://vitrina.ai/blog/ai-in-animation-strategic-report-2026/" target="_blank" rel="noopener noreferrer">Vitrina AI — Animation Strategic Report 2026 ↗</a><br /><br />
-                    <a href="https://www.morganstanley.com/insights/articles/ai-in-media-entertainment-benefits-and-risks" target="_blank" rel="noopener noreferrer">Morgan Stanley — GenAI's Leading Role in Entertainment ↗</a><br /><br />
-                    <a href="https://ynput.io/the-state-of-animation-vfx-pipelines-report/" target="_blank" rel="noopener noreferrer">Ynput — State of Animation and VFX Pipelines 2025 ↗</a><br /><br />
-                    <a href="https://studiokrew.com/blog/ai-generated-game-assets-2025/" target="_blank" rel="noopener noreferrer">StudioKrew — AI Generated Game Assets 2025 ↗</a><br /><br />
-                    <a href="https://gdconf.com/state-of-the-game-industry" target="_blank" rel="noopener noreferrer">GDC State of the Game Industry 2025 ↗</a>
+                  <div className="meth-section">
+                    <div className="meth-sec-title">Primary sources — verified and accessible</div>
+                    <p className="meth-note">
+                      <a href="https://www.blog.udonis.co/mobile-marketing/mobile-games/ai-game-development" target="_blank" rel="noopener noreferrer">a16z Games AI x Game Dev Survey 2024 — 651 developers, productivity and cost data (via Udonis) ↗</a><br /><br />
+                      <a href="https://d1.awsstatic.com/psc-digital/2025/gc-a4gmt/genai-game-dev/the-2025-aws-guide-to-generative-ai-for-game-developers.pdf" target="_blank" rel="noopener noreferrer">AWS Guide to Generative AI for Game Developers 2025 — Saltwater Games case study, pipeline acceleration frameworks ↗</a><br /><br />
+                      <a href="https://digitalcommons.lindenwood.edu/cgi/viewcontent.cgi?article=1056&context=student-research-papers" target="_blank" rel="noopener noreferrer">Begemann &amp; Hutson — AI-Assisted Game Development Case Study, Lindenwood University 2024 — Full pipeline diary: concept art → Blender 3D → Unreal Engine 5, 2D-to-3D gap analysis ↗</a><br /><br />
+                      <a href="https://ai4hgi.github.io/paper7.pdf" target="_blank" rel="noopener noreferrer">Daneels — Opportunities and Risks of GenAI for Game Development, ECAI 2025 — 20 Belgian developers, quality concerns, VFX integration barriers, adoption patterns ↗</a><br /><br />
+                      <a href="https://vitrina.ai/blog/ai-in-animation-strategic-report-2026/" target="_blank" rel="noopener noreferrer">Vitrina AI — Animation Strategic Report 2026 — DreamWorks, Netflix El Eternaut, Disney Frozen II case studies ↗</a><br /><br />
+                      <a href="https://www.morganstanley.com/insights/articles/ai-in-media-entertainment-benefits-and-risks" target="_blank" rel="noopener noreferrer">Morgan Stanley — GenAI's Leading Role in Entertainment — 30% production cost reduction, Netflix VFX data ↗</a><br /><br />
+                      <a href="https://ynput.io/the-state-of-animation-vfx-pipelines-report/" target="_blank" rel="noopener noreferrer">Ynput — State of Animation and VFX Pipelines 2025 — 200+ studios, pipeline spend visibility data ↗</a><br /><br />
+                      <a href="https://studiokrew.com/blog/ai-generated-game-assets-2025/" target="_blank" rel="noopener noreferrer">StudioKrew — AI Generated Game Assets 2025 — Outsource cost reduction, timeline compression data ↗</a><br /><br />
+                      <a href="https://hs-20258191.f.hubspotemail.net/hubfs/20258191/Financing_Playbook_Vitrina.pdf" target="_blank" rel="noopener noreferrer">Vitrina Film Financing Playbook 2026 — Independent film and series capital structure, financier perspectives ↗</a>
+                    </p>
                   </div>
-                </div>
 
-                <div className="meth-section">
-                  <div className="meth-sec-title">Sources referenced but not directly fetchable</div>
-                  <div className="meth-note" style={{ color: "rgba(255,255,255,0.55)" }}>
-                    The following sources were provided as references. Their PDFs returned access errors during verification. They are cited where their findings are corroborated by accessible sources above, but are not used as sole evidence for any reduction factor in this model.<br /><br />
-                    Autodesk AU — Innovating the Future Pipeline · Adobe — Recenter Creativity in Your 3D Pipeline · Animation Guild / CVL Economics — Future Unscripted · arXiv 2509.11898 — Generative AI in Game Development Research Synthesis · BCG Video Gaming Report 2026 (navigation-only) · Whimsy Games — How AI Is Changing Game Art Outsourcing (server timeout)
+                  <div className="meth-section">
+                    <div className="meth-sec-title">Sources referenced but not directly fetchable</div>
+                    <p className="meth-note" style={{ color: "rgba(255,255,255,0.55)" }}>
+                      The following sources were provided as references. Their PDFs returned access errors (403, binary, or no machine-readable text) during verification. They are cited where their findings are corroborated by accessible sources above, but are not used as sole evidence for any reduction factor in this model.<br /><br />
+                      Autodesk AU — Innovating the Future Pipeline (ComfyUI + ControlNet + Stable Diffusion in Blender/Houdini/Maya) · Adobe — Recenter Creativity in Your 3D Pipeline · Animation Guild / CVL Economics — Future Unscripted (86.7% early adoption claim) · arXiv 2509.11898 — Generative AI in Game Development Research Synthesis · BCG Video Gaming Report 2026 (navigation-only, article body inaccessible) · Whimsy Games — How AI Is Changing Game Art Outsourcing (server timeout)
+                    </p>
                   </div>
-                </div>
 
-              </div>
+                </div>
+              )}
             </div>
 
             {/* CTA */}
@@ -1064,7 +1031,7 @@ export default function ROICalculatorPage() {
               <span style={{ fontSize: 13, flexShrink: 0, marginTop: 1 }}>◈</span>
               <p>This is an indicative pipeline efficiency model, not a financial projection or guarantee of return. All figures are derived from published industry benchmarks and adjusted for your reported studio profile. Your actual efficiency opportunity will be determined during a structured Tulip engagement and validated against your live pipeline data before any investment is recommended.</p>
             </div>
-          </div>
+          </>
         )}
 
       </div>
