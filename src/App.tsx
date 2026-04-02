@@ -33,6 +33,7 @@ const App = () => (
           <Route path="/case-studies/:stage" element={<CaseStudyComingSoonPage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/pipeline-lab" element={<PipelineLabPage />} />
+          <Route path="/roi-calculator" element={<ROICalculatorPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
