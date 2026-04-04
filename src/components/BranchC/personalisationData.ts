@@ -134,7 +134,7 @@ const RISKS_AAA_GAMES: RiskEntry[] = [
     impact: "High",
     title: "Manual texturing and rigging are your biggest budget sink",
     stat: "68% of total studio expenditure is labour. Asset creation workflows are the stages most directly compressible by AI integration.",
-    sources: [{ label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/wp-content/uploads/2022/10/esac-2021-final-report.pdf" }],
+    sources: [{ label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/resource/the-canadian-video-game-industry-2021/" }],
     exposure: "70% of modeling budget",
   },
   {
@@ -315,7 +315,7 @@ const METRICS_MIDSIZE_GAMES: MetricEntry[] = [
   {
     name: "Rework cost exposure",
     detail: "Estimated $50K to $500K per cycle at this scale. AI integration reduces rework triggers by 40 to 60%. That is not a productivity gain. That is budget recovered.",
-    sources: [{ label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/wp-content/uploads/2022/10/esac-2021-final-report.pdf" }],
+    sources: [{ label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/resource/the-canadian-video-game-industry-2021/" }],
   },
   {
     name: "Developer velocity",
@@ -348,7 +348,7 @@ const METRICS_AAA_GAMES: MetricEntry[] = [
   {
     name: "Production cost",
     detail: "68% of total studio spend is labour. Texturing and rigging are compressible. Freeing that capacity redirects senior artists to hero asset work only.",
-    sources: [{ label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/wp-content/uploads/2022/10/esac-2021-final-report.pdf" }],
+    sources: [{ label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/resource/the-canadian-video-game-industry-2021/" }],
   },
   {
     name: "Competitive window",
@@ -704,7 +704,7 @@ const ALWAYS_SOURCES: SourceRef[] = [
     org: "ESAC / Nordicity",
     title: "The Canadian Video Game Industry 2021",
     description: "Government-commissioned economic impact study of 937 active Canadian studios.",
-    url: "https://theesa.ca/wp-content/uploads/2022/10/esac-2021-final-report.pdf",
+    url: "https://theesa.ca/resource/the-canadian-video-game-industry-2021/",
   },
   {
     num: "[4]",
