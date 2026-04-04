@@ -736,9 +736,9 @@ const SOURCES_ANIMATION: SourceRef[] = [
   {
     num: "[5]",
     org: "Morgan Stanley Research",
-    title: "Generative AI Cost Impact in Film and Television 2024",
+    title: "Generative AI in Film and TV, 2024 (cited in Vitrina AI Report 2025)",
     description: "Projects 30% cost reduction through AI integration in post-production.",
-    url: "https://www.google.com/search?q=Morgan+Stanley+generative+AI+film+television+2024",
+    url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026",
   },
   {
     num: "[6]",
