@@ -84,8 +84,8 @@ const RISKS_MIDSIZE_GAMES: RiskEntry[] = [
     id: 1,
     impact: "High",
     title: "Rework cycles are your largest hidden cost",
-    stat: "Estimated $50K to $500K per rework cycle at mid-size scale. 5 to 15 developers offline for 1 to 3 weeks. Every revision loop that reaches the art director is a scheduling event, not just a creative note.",
-    sources: [{ label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/wp-content/uploads/2022/10/esac-2021-final-report.pdf" }],
+    stat: "68% of Canadian studio expenditure is labour — confirmed across 937 studios. At mid-size scale, a rework cycle pulling 5 to 15 developers offline for 1 to 3 weeks represents a significant unplanned cost. Every revision loop that reaches the art director is a scheduling event, not just a creative note.",
+    sources: [{ label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/resource/the-canadian-video-game-industry-2021/" }],
     exposure: "$50K to $500K",
   },
   {
