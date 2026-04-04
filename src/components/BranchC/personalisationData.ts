@@ -153,7 +153,7 @@ const RISKS_AAA_GAMES: RiskEntry[] = [
     impact: "Medium",
     title: "Fragmented adoption creates expensive dependencies",
     stat: "Adopting AI tools without a strategy creates vendor dependencies your team will pay to exit.",
-    sources: [{ label: "Third Point Ventures — AI Impact on Gaming and Media Tooling 2025", url: "https://www.google.com/search?q=Third+Point+Ventures+AI+Impact+Gaming+Media+Tooling+2025" }],
+    sources: [{ label: "Third Point Ventures — AI Impact on Gaming and Media Tooling, 2025", url: "https://www.thirdpointventures.com/currents/AI-impact-on-gaming-and-media-tooling/" }],
     exposure: "Vendor exit costs",
   },
 ];
@@ -173,7 +173,7 @@ const RISKS_PUBLISHER_GAMES: RiskEntry[] = [
     impact: "High",
     title: "Fragmented AI adoption across studios creates unmanageable vendor dependencies",
     stat: "Publishers with multiple studios each adopting AI tools independently create proprietary dependencies that are expensive to exit and impossible to standardise across franchises.",
-    sources: [{ label: "Third Point Ventures — AI Impact on Gaming and Media Tooling 2025", url: "https://www.google.com/search?q=Third+Point+Ventures+AI+Impact+Gaming+Media+Tooling+2025" }],
+    sources: [{ label: "Third Point Ventures — AI Impact on Gaming and Media Tooling, 2025", url: "https://www.thirdpointventures.com/currents/AI-impact-on-gaming-and-media-tooling/" }],
     exposure: "Vendor exit costs",
   },
   RISKS_AAA_GAMES[3],
