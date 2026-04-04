@@ -258,7 +258,7 @@ const RISKS_VP: RiskEntry[] = [
     title: "Manual asset preparation for LED volumes is your biggest pre-production cost",
     stat: "Virtual production requires environment assets ready before the shoot — not after. Studios spending weeks preparing background plates manually are losing that time to AI-assisted environment generation. The prep cost is compressible.",
     sources: [
-      { label: "VFX Voice Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
+      { label: "VFX Voice — Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
       { label: "Autodesk Flow Studio documentation", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
     ],
     exposure: "Pre-production budget",
@@ -434,7 +434,7 @@ const METRICS_VFX: MetricEntry[] = [
   {
     name: "Competitive window",
     detail: "VFX Voice 2026 states studios with tech-enabled pipelines will have a structural advantage. AI and real-time technologies are moving from experimental to mainstream in 2026. Being unprepared now means catching up under competitive pressure later.",
-    sources: [{ label: "VFX Voice Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" }],
+    sources: [{ label: "VFX Voice — Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" }],
   },
 ];
 
@@ -443,7 +443,7 @@ const METRICS_VP: MetricEntry[] = [
     name: "Pre-production environment cost",
     detail: "AI-assisted environment and background generation compresses the pre-production asset preparation phase. Specific figures depend on project scope. We will model this in your briefing.",
     sources: [
-      { label: "VFX Voice Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
+      { label: "VFX Voice — Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
       { label: "Autodesk Flow Studio documentation", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
     ],
   },
@@ -463,7 +463,7 @@ const METRICS_VP: MetricEntry[] = [
   {
     name: "Competitive window",
     detail: "VFX Voice 2026: studios with global reach and tech-enabled pipelines will have a structural advantage. Virtual production facilities without AI integration are carrying cost structures that AI-enabled competitors have already eliminated.",
-    sources: [{ label: "VFX Voice Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" }],
+    sources: [{ label: "VFX Voice — Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" }],
   },
 ];
 
@@ -488,7 +488,7 @@ const COMP_VFX_SOURCES: SourceEntry[] = [
 
 const COMP_VP_BREAKDOWN = "VFX Voice 2026 documents studios with AI-enabled pipelines gaining structural cost advantage over facilities carrying traditional pre-production budgets. Autodesk Flow Studio and Beeble AI eliminate specific cost categories — reshoot days, specialised mocap hardware, post-correction — that virtual production was supposed to reduce but often still carries without AI integration.";
 const COMP_VP_SOURCES: SourceEntry[] = [
-  { label: "VFX Voice Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
+  { label: "VFX Voice — Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
   { label: "Beeble AI documentation", url: "https://beeble.ai" },
   { label: "Autodesk Flow Studio 2025", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
 ];
