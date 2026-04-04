@@ -113,7 +113,7 @@ const RISKS_AAA_GAMES: RiskEntry[] = [
     title: "Disconnected pipelines",
     stat: "Estimated $500K to $3M per rework cycle at AAA scale. Ten to thirty developers offline for three to seven days. Every time it happens.",
     sources: [
-      { label: "Bloomberg / Jason Schreier, March 2026", url: "https://gameworldobserver.com/2026/03/26/report-budgets-for-aaa-games-in-the-us-and-canada-now-amount-to-at-least-300-million" },
+      { label: "Bloomberg / Jason Schreier — AAA Game Development Costs, March 2026", url: "https://gameworldobserver.com/2026/03/26/report-budgets-for-aaa-games-in-the-us-and-canada-now-amount-to-at-least-300-million" },
       { label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" },
     ],
     exposure: "$500K to $3M+",
@@ -338,7 +338,7 @@ const METRICS_AAA_GAMES: MetricEntry[] = [
   {
     name: "Rework cost exposure",
     detail: "AAA development budgets in the US and Canada now start at $300M per title confirmed by Bloomberg March 2026. AI integration reduces the rework triggers that drive overruns. That is budget recovered.",
-    sources: [{ label: "Bloomberg / Jason Schreier, March 2026", url: "https://gameworldobserver.com/2026/03/26/report-budgets-for-aaa-games-in-the-us-and-canada-now-amount-to-at-least-300-million" }],
+    sources: [{ label: "Bloomberg / Jason Schreier — AAA Game Development Costs, March 2026", url: "https://gameworldobserver.com/2026/03/26/report-budgets-for-aaa-games-in-the-us-and-canada-now-amount-to-at-least-300-million" }],
   },
   {
     name: "Developer velocity",
@@ -362,7 +362,7 @@ const METRICS_PUBLISHER_GAMES: MetricEntry[] = [
     name: "Cross-franchise rework exposure",
     detail: "$500K to $3M per rework cycle per studio. Multiplied across a multi-studio portfolio. AI integration reduces triggers by 60 to 85% per studio.",
     sources: [
-      { label: "Bloomberg / Jason Schreier, March 2026", url: "https://gameworldobserver.com/2026/03/26/report-budgets-for-aaa-games-in-the-us-and-canada-now-amount-to-at-least-300-million" },
+      { label: "Bloomberg / Jason Schreier — AAA Game Development Costs, March 2026", url: "https://gameworldobserver.com/2026/03/26/report-budgets-for-aaa-games-in-the-us-and-canada-now-amount-to-at-least-300-million" },
       { label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" },
     ],
   },
@@ -533,7 +533,7 @@ const SCENARIOS: Record<string, ScenarioData> = {
     competitivePositioningSources: [
       { label: "GDC State of Industry 2025", url: "https://gdconf.com/state-of-the-game-industry" },
       { label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" },
-      { label: "Bloomberg / Jason Schreier, March 2026", url: "https://gameworldobserver.com/2026/03/26/report-budgets-for-aaa-games-in-the-us-and-canada-now-amount-to-at-least-300-million" },
+      { label: "Bloomberg / Jason Schreier — AAA Game Development Costs, March 2026", url: "https://gameworldobserver.com/2026/03/26/report-budgets-for-aaa-games-in-the-us-and-canada-now-amount-to-at-least-300-million" },
     ],
   },
   "publisher_games": {
