@@ -269,7 +269,7 @@ const RISKS_VP: RiskEntry[] = [
     title: "AI relighting and rotoscoping are eliminating the need for reshoots",
     stat: "Beeble's AI relighting converts standard footage into fully relightable assets without reshoots. Autodesk Flow Studio delivers mocap without suits, markers, or green screens. Both remove cost categories that virtual production was supposed to solve but often still carries.",
     sources: [
-      { label: "Beeble AI documentation", url: "https://beeble.ai" },
+      { label: "Beeble AI — SwitchLight 3 Production Documentation (vendor source)", url: "https://beeble.ai" },
       { label: "Autodesk Flow Studio 2025", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
     ],
     exposure: "Reshoot cost elimination",
@@ -451,7 +451,7 @@ const METRICS_VP: MetricEntry[] = [
     name: "Reshoot elimination",
     detail: "Beeble's AI relighting converts footage into relightable assets without reshoots. Autodesk Flow Studio delivers production-grade mocap without suits or markers. Both remove cost categories from the production budget.",
     sources: [
-      { label: "Beeble AI documentation", url: "https://beeble.ai" },
+      { label: "Beeble AI — SwitchLight 3 Production Documentation (vendor source)", url: "https://beeble.ai" },
       { label: "Autodesk Flow Studio 2025", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
     ],
   },
@@ -489,7 +489,7 @@ const COMP_VFX_SOURCES: SourceEntry[] = [
 const COMP_VP_BREAKDOWN = "VFX Voice 2026 documents studios with AI-enabled pipelines gaining structural cost advantage over facilities carrying traditional pre-production budgets. Autodesk Flow Studio and Beeble AI eliminate specific cost categories — reshoot days, specialised mocap hardware, post-correction — that virtual production was supposed to reduce but often still carries without AI integration.";
 const COMP_VP_SOURCES: SourceEntry[] = [
   { label: "VFX Voice — Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
-  { label: "Beeble AI documentation", url: "https://beeble.ai" },
+  { label: "Beeble AI — SwitchLight 3 Production Documentation (vendor source)", url: "https://beeble.ai" },
   { label: "Autodesk Flow Studio 2025", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
 ];
 
