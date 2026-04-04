@@ -212,7 +212,7 @@ const RISKS_ANIMATION: RiskEntry[] = [
     impact: "Medium",
     title: "Only 8% of animation studios feel prepared for the pipeline changes already underway",
     stat: "Ynput's 2025 survey of 200+ studios. 37% do not know their pipeline spend at all. Studios winning new commissions in 2026 have moved from experimental adoption to governed infrastructure.",
-    sources: [{ label: "Ynput State of Animation and VFX Pipelines 2025", url: "https://ynput.io/the-state-of-animation-vfx-pipelines-report" }],
+    sources: [{ label: "Ynput — State of Animation and VFX Pipelines Report, 2025", url: "https://ynput.io/the-state-of-animation-vfx-pipelines-report" }],
     exposure: "Infrastructure gap",
   },
 ];
@@ -246,7 +246,7 @@ const RISKS_VFX: RiskEntry[] = [
     impact: "Medium",
     title: "Only 8% of VFX studios feel prepared for what is already underway",
     stat: "Ynput's 2025 survey of 200+ studios worldwide. 37% do not know their pipeline spend at all. Studios winning new commissions in 2026 have moved from experimental adoption to governed production infrastructure.",
-    sources: [{ label: "Ynput State of Animation and VFX Pipelines 2025", url: "https://ynput.io/the-state-of-animation-vfx-pipelines-report" }],
+    sources: [{ label: "Ynput — State of Animation and VFX Pipelines Report, 2025", url: "https://ynput.io/the-state-of-animation-vfx-pipelines-report" }],
     exposure: "Infrastructure gap",
   },
 ];
@@ -279,7 +279,7 @@ const RISKS_VP: RiskEntry[] = [
     impact: "Medium",
     title: "Only 8% of studios feel prepared for the pipeline changes already underway",
     stat: "Ynput's 2025 survey of 200+ studios. Virtual production workflows are among the most complex to integrate AI into — and the most valuable when done correctly.",
-    sources: [{ label: "Ynput State of Animation and VFX Pipelines 2025", url: "https://ynput.io/the-state-of-animation-vfx-pipelines-report" }],
+    sources: [{ label: "Ynput — State of Animation and VFX Pipelines Report, 2025", url: "https://ynput.io/the-state-of-animation-vfx-pipelines-report" }],
     exposure: "Infrastructure gap",
   },
 ];
