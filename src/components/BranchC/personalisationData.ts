@@ -270,7 +270,7 @@ const RISKS_VP: RiskEntry[] = [
     stat: "Beeble's AI relighting converts standard footage into fully relightable assets without reshoots. Autodesk Flow Studio delivers mocap without suits, markers, or green screens. Both remove cost categories that virtual production was supposed to solve but often still carries.",
     sources: [
       { label: "Beeble AI — SwitchLight 3 Production Documentation (vendor source)", url: "https://beeble.ai" },
-      { label: "Autodesk Flow Studio 2025", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
+      { label: "Autodesk Flow Studio — Superman and Lois Case Study, 2025 (vendor source)", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
     ],
     exposure: "Reshoot cost elimination",
   },
@@ -452,13 +452,13 @@ const METRICS_VP: MetricEntry[] = [
     detail: "Beeble's AI relighting converts footage into relightable assets without reshoots. Autodesk Flow Studio delivers production-grade mocap without suits or markers. Both remove cost categories from the production budget.",
     sources: [
       { label: "Beeble AI — SwitchLight 3 Production Documentation (vendor source)", url: "https://beeble.ai" },
-      { label: "Autodesk Flow Studio 2025", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
+      { label: "Autodesk Flow Studio — Superman and Lois Case Study, 2025 (vendor source)", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
     ],
   },
   {
     name: "Turnaround time",
     detail: "Boxel Studio delivered high-end visuals for Superman and Lois with a smaller team and shorter timeline than the previous season using Autodesk Flow Studio — transforming live-action footage into editable CG scenes directly in pipeline.",
-    sources: [{ label: "Autodesk Flow Studio 2025", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" }],
+    sources: [{ label: "Autodesk Flow Studio — Superman and Lois Case Study, 2025 (vendor source)", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" }],
   },
   {
     name: "Competitive window",
@@ -490,7 +490,7 @@ const COMP_VP_BREAKDOWN = "VFX Voice 2026 documents studios with AI-enabled pipe
 const COMP_VP_SOURCES: SourceEntry[] = [
   { label: "VFX Voice — Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
   { label: "Beeble AI — SwitchLight 3 Production Documentation (vendor source)", url: "https://beeble.ai" },
-  { label: "Autodesk Flow Studio 2025", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
+  { label: "Autodesk Flow Studio — Superman and Lois Case Study, 2025 (vendor source)", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
 ];
 
 // ─── Scenarios ────────────────────────────────────────────────────────────────
