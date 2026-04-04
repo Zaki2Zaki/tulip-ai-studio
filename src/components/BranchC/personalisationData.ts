@@ -124,7 +124,7 @@ const RISKS_AAA_GAMES: RiskEntry[] = [
     title: "52% of AAA developers are building AI pipelines right now",
     stat: "Studios not on this path are falling behind on live ops delivery cadence. EA's partnership with Stability AI signals that even the largest publishers are committing to pipeline transformation.",
     sources: [
-      { label: "GDC State of Industry 2025", url: "https://gdconf.com/state-of-the-game-industry" },
+      { label: "GDC — State of the Game Industry Report, 2025", url: "https://gdconf.com/state-of-the-game-industry" },
       { label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" },
     ],
     exposure: "Pipeline gap",
@@ -182,7 +182,7 @@ const RISKS_PUBLISHER_GAMES: RiskEntry[] = [
     impact: "Medium",
     title: "52% of AAA developers are building AI pipelines now",
     stat: "The studios not building them are your competitors' development partners. The talent and pipeline advantage is forming now.",
-    sources: [{ label: "GDC State of Industry 2025", url: "https://gdconf.com/state-of-the-game-industry" }],
+    sources: [{ label: "GDC — State of the Game Industry Report, 2025", url: "https://gdconf.com/state-of-the-game-industry" }],
     exposure: "Pipeline gap",
   },
 ];
@@ -531,7 +531,7 @@ const SCENARIOS: Record<string, ScenarioData> = {
     competitivePositioning: "EA and Stability AI have committed to reimagining how content is built. Studios that wait for the technology to mature before integrating will find that the maturation period was also the window to build competitive advantage.",
     competitivePositioningBreakdown: "GDC State of Industry 2025 reports 52% of AAA developers actively building AI pipelines. EA's Stability AI partnership was reported by Bloomberg/Jason Schreier in March 2026. BCG projects the competitive gap becomes structurally difficult to close within 18 months.",
     competitivePositioningSources: [
-      { label: "GDC State of Industry 2025", url: "https://gdconf.com/state-of-the-game-industry" },
+      { label: "GDC — State of the Game Industry Report, 2025", url: "https://gdconf.com/state-of-the-game-industry" },
       { label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" },
       { label: "Bloomberg / Jason Schreier — AAA Game Development Costs, March 2026", url: "https://gameworldobserver.com/2026/03/26/report-budgets-for-aaa-games-in-the-us-and-canada-now-amount-to-at-least-300-million" },
     ],
