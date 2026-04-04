@@ -225,7 +225,7 @@ const RISKS_VFX: RiskEntry[] = [
     stat: "MARZ's Automated Visual Effects platform turns around shots in a fraction of the time comparable manual pipelines require. Their quotes on high-volume roto, cleanup, and crowd work are significantly below market rate. This is not a future risk.",
     sources: [
       { label: "Vitrina Top 10 VFX Companies 2026", url: "https://vitrina.ai/blog/discover-the-best-vfx-studios-worldwide-top-10-vfx-companies" },
-      { label: "LBBOnline / Sohonet 2026", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
+      { label: "LBBOnline / Sohonet — Generative AI Cost Compression: Post and VFX Workflow Impact, 2026 (DNEG 28% roto reduction · Amazon 40% faster first-pass edit)", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
     ],
     exposure: "Cost-per-shot gap",
   },
@@ -236,7 +236,7 @@ const RISKS_VFX: RiskEntry[] = [
     stat: "DNEG confirmed 28% roto and layout labour reduction on a Disney+ series in a 2024 pilot. Amazon Originals confirmed 40% faster first-pass editing with AI-supported assembly editing. Production confirmed. Not projected.",
     sources: [
       { label: "Roland Berger — AI Innovations for VFX and Animation", url: "https://www.rolandberger.com/en/Insights/Publications/AI-Innovations-for-VFX-and-animation.html" },
-      { label: "LBBOnline / Sohonet 2026", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
+      { label: "LBBOnline / Sohonet — Generative AI Cost Compression: Post and VFX Workflow Impact, 2026 (DNEG 28% roto reduction · Amazon 40% faster first-pass edit)", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
       { label: "DNEG production data 2024" },
     ],
     exposure: "20 to 65% time savings",
@@ -415,7 +415,7 @@ const METRICS_VFX: MetricEntry[] = [
     detail: "20 to 65% time savings on AI auto-rotoscoping confirmed by Roland Berger across five film genres. DNEG confirmed 28% labour reduction on Disney+. Amazon confirmed 40% faster first-pass editing. Production confirmed.",
     sources: [
       { label: "Roland Berger — AI Innovations for VFX and Animation", url: "https://www.rolandberger.com/en/Insights/Publications/AI-Innovations-for-VFX-and-animation.html" },
-      { label: "LBBOnline / Sohonet 2026", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
+      { label: "LBBOnline / Sohonet — Generative AI Cost Compression: Post and VFX Workflow Impact, 2026 (DNEG 28% roto reduction · Amazon 40% faster first-pass edit)", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
     ],
   },
   {
@@ -423,13 +423,13 @@ const METRICS_VFX: MetricEntry[] = [
     detail: "Studios that have automated roto, cleanup, and crowd augmentation are quoting significantly below market rates. If your studio has not automated these categories, you are losing volume work bids to studios that have.",
     sources: [
       { label: "Vitrina Top 10 VFX Companies 2026", url: "https://vitrina.ai/blog/discover-the-best-vfx-studios-worldwide-top-10-vfx-companies" },
-      { label: "LBBOnline / Sohonet 2026", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
+      { label: "LBBOnline / Sohonet — Generative AI Cost Compression: Post and VFX Workflow Impact, 2026 (DNEG 28% roto reduction · Amazon 40% faster first-pass edit)", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
     ],
   },
   {
     name: "Infrastructure cost",
     detail: "One mid-size VFX studio replaced $72,000 in annual cloud spending with three AI workstations while improving artist productivity through faster feedback loops.",
-    sources: [{ label: "LBBOnline / Sohonet 2026", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" }],
+    sources: [{ label: "LBBOnline / Sohonet — Generative AI Cost Compression: Post and VFX Workflow Impact, 2026 (DNEG 28% roto reduction · Amazon 40% faster first-pass edit)", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" }],
   },
   {
     name: "Competitive window",
@@ -483,7 +483,7 @@ const COMP_VFX_BREAKDOWN = "MARZ's Automated Visual Effects platform confirms qu
 const COMP_VFX_SOURCES: SourceEntry[] = [
   { label: "Roland Berger — AI Innovations for VFX and Animation", url: "https://www.rolandberger.com/en/Insights/Publications/AI-Innovations-for-VFX-and-animation.html" },
   { label: "Vitrina Top 10 VFX Companies 2026", url: "https://vitrina.ai/blog/discover-the-best-vfx-studios-worldwide-top-10-vfx-companies" },
-  { label: "LBBOnline / Sohonet 2026", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
+  { label: "LBBOnline / Sohonet — Generative AI Cost Compression: Post and VFX Workflow Impact, 2026 (DNEG 28% roto reduction · Amazon 40% faster first-pass edit)", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
 ];
 
 const COMP_VP_BREAKDOWN = "VFX Voice 2026 documents studios with AI-enabled pipelines gaining structural cost advantage over facilities carrying traditional pre-production budgets. Autodesk Flow Studio and Beeble AI eliminate specific cost categories — reshoot days, specialised mocap hardware, post-correction — that virtual production was supposed to reduce but often still carries without AI integration.";
