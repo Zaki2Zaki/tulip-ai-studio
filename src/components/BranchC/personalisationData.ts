@@ -709,7 +709,7 @@ const ALWAYS_SOURCES: SourceRef[] = [
   {
     num: "[4]",
     org: "GDC",
-    title: "State of the Game Industry 2025",
+    title: "State of the Game Industry Report, 2025",
     description: "Annual developer survey.",
     url: "https://gdconf.com/state-of-the-game-industry",
   },
