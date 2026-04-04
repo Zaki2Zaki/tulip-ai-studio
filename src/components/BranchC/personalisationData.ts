@@ -787,7 +787,7 @@ const SOURCES_VFX: SourceRef[] = [
   },
   {
     num: "[8]",
-    org: "Vitrina",
+    org: "Vitrina AI",
     title: "Top 10 VFX Companies 2026: Executive Procurement Guide",
     description: "",
     url: "https://vitrina.ai/blog/discover-the-best-vfx-studios-worldwide-top-10-vfx-companies",
