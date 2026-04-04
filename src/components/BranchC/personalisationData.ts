@@ -750,7 +750,7 @@ const SOURCES_ANIMATION: SourceRef[] = [
   {
     num: "[7]",
     org: "Ynput",
-    title: "State of Animation and VFX Pipelines 2025",
+    title: "State of Animation and VFX Pipelines Report, 2025",
     description: "Survey of 200+ studios worldwide.",
     url: "https://ynput.io/the-state-of-animation-vfx-pipelines-report",
   },
