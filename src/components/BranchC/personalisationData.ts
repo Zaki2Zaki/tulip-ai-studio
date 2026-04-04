@@ -194,7 +194,7 @@ const RISKS_ANIMATION: RiskEntry[] = [
     title: "60 to 70% of your production schedule is mechanical work AI can now automate",
     stat: "Rotoscoping, crowd simulation, asset retargeting — the stages consuming most of your schedule — are compressible. Studios automating these are redirecting that budget toward IP development and creative direction.",
     sources: [
-      { label: "Vitrina AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" },
+      { label: "Vitrina AI — AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" },
       { label: "Morgan Stanley Research — Generative AI in Film and TV, 2024" },
     ],
     exposure: "60 to 70% of schedule",
@@ -393,7 +393,7 @@ const METRICS_ANIMATION: MetricEntry[] = [
     name: "Schedule compression",
     detail: "60 to 70% of production schedule is mechanical work. AI compresses that portion by 30 to 90% depending on pipeline maturity. Recovered time goes into creative development and IP.",
     sources: [
-      { label: "Vitrina AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" },
+      { label: "Vitrina AI — AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" },
       { label: "Morgan Stanley Research — Generative AI in Film and TV, 2024" },
     ],
   },
@@ -476,7 +476,7 @@ const COMP_VP = "Virtual production was supposed to reduce post-production costs
 const COMP_ANIMATION_BREAKDOWN = "Netflix's El Eternauta confirmed a 10x speed improvement delivering feature-film visuals at series budget. Morgan Stanley projects 30% production cost reduction industry-wide through AI integration. Vitrina AI reports only 8% of animation studios feel prepared for these pipeline changes.";
 const COMP_ANIMATION_SOURCES: SourceEntry[] = [
   { label: "Morgan Stanley Research — Generative AI in Film and TV, 2024" },
-  { label: "Vitrina AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" },
+  { label: "Vitrina AI — AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" },
 ];
 
 const COMP_VFX_BREAKDOWN = "MARZ's Automated Visual Effects platform confirms quotes significantly below market rate for roto, cleanup, and crowd work. Roland Berger documents 20 to 65% time savings on AI auto-rotoscoping across five film genres. Vitrina Top 10 VFX Companies 2026 documents the competitive repricing underway.";
