@@ -259,7 +259,7 @@ const RISKS_VP: RiskEntry[] = [
     stat: "Virtual production requires environment assets ready before the shoot — not after. Studios spending weeks preparing background plates manually are losing that time to AI-assisted environment generation. The prep cost is compressible.",
     sources: [
       { label: "VFX Voice — Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
-      { label: "Autodesk Flow Studio documentation", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
+      { label: "Autodesk Flow Studio — Superman and Lois Case Study, 2025 (vendor source)", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
     ],
     exposure: "Pre-production budget",
   },
@@ -444,7 +444,7 @@ const METRICS_VP: MetricEntry[] = [
     detail: "AI-assisted environment and background generation compresses the pre-production asset preparation phase. Specific figures depend on project scope. We will model this in your briefing.",
     sources: [
       { label: "VFX Voice — Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
-      { label: "Autodesk Flow Studio documentation", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
+      { label: "Autodesk Flow Studio — Superman and Lois Case Study, 2025 (vendor source)", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
     ],
   },
   {
