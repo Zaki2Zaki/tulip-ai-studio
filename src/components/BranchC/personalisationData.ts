@@ -204,7 +204,7 @@ const RISKS_ANIMATION: RiskEntry[] = [
     impact: "High",
     title: "Streaming platforms are demanding feature-level visuals on series budgets",
     stat: "Netflix's El Eternauta achieved feature-film visuals on a series budget using AI-assisted rendering — a 10x speed improvement over traditional CGI pipelines. Studios without AI cannot meet these economics.",
-    sources: [{ label: "Vitrina AI in Animation 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" }],
+    sources: [{ label: "Vitrina AI — AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" }],
     exposure: "Commission risk",
   },
   {
@@ -400,12 +400,12 @@ const METRICS_ANIMATION: MetricEntry[] = [
   {
     name: "Asset lifecycle value",
     detail: "DreamWorks applied AI to reuse legacy animation data across thousands of background characters in Kung Fu Panda 4 with high visual diversity. Studios with catalogued assets can unlock this value immediately.",
-    sources: [{ label: "Vitrina AI in Animation 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" }],
+    sources: [{ label: "Vitrina AI — AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" }],
   },
   {
     name: "Market growth",
     detail: "Generative AI in animation: 39% CAGR growing from $1.66B in 2024 to over $23B by 2032. Studios integrating now are building the pipeline advantage that scales with the market.",
-    sources: [{ label: "Vitrina AI in Animation 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" }],
+    sources: [{ label: "Vitrina AI — AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" }],
   },
 ];
 
