@@ -224,7 +224,7 @@ const RISKS_VFX: RiskEntry[] = [
     title: "AI-enabled studios are undercutting you on cost-per-shot",
     stat: "MARZ's Automated Visual Effects platform turns around shots in a fraction of the time comparable manual pipelines require. Their quotes on high-volume roto, cleanup, and crowd work are significantly below market rate. This is not a future risk.",
     sources: [
-      { label: "Vitrina Top 10 VFX Companies 2026", url: "https://vitrina.ai/blog/discover-the-best-vfx-studios-worldwide-top-10-vfx-companies" },
+      { label: "Vitrina AI — Top 10 VFX Companies 2026: Executive Procurement Guide", url: "https://vitrina.ai/blog/discover-the-best-vfx-studios-worldwide-top-10-vfx-companies" },
       { label: "LBBOnline / Sohonet — Generative AI Cost Compression: Post and VFX Workflow Impact, 2026 (DNEG 28% roto reduction · Amazon 40% faster first-pass edit)", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
     ],
     exposure: "Cost-per-shot gap",
@@ -422,7 +422,7 @@ const METRICS_VFX: MetricEntry[] = [
     name: "Cost-per-shot competitiveness",
     detail: "Studios that have automated roto, cleanup, and crowd augmentation are quoting significantly below market rates. If your studio has not automated these categories, you are losing volume work bids to studios that have.",
     sources: [
-      { label: "Vitrina Top 10 VFX Companies 2026", url: "https://vitrina.ai/blog/discover-the-best-vfx-studios-worldwide-top-10-vfx-companies" },
+      { label: "Vitrina AI — Top 10 VFX Companies 2026: Executive Procurement Guide", url: "https://vitrina.ai/blog/discover-the-best-vfx-studios-worldwide-top-10-vfx-companies" },
       { label: "LBBOnline / Sohonet — Generative AI Cost Compression: Post and VFX Workflow Impact, 2026 (DNEG 28% roto reduction · Amazon 40% faster first-pass edit)", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
     ],
   },
@@ -482,7 +482,7 @@ const COMP_ANIMATION_SOURCES: SourceEntry[] = [
 const COMP_VFX_BREAKDOWN = "MARZ's Automated Visual Effects platform confirms quotes significantly below market rate for roto, cleanup, and crowd work. Roland Berger documents 20 to 65% time savings on AI auto-rotoscoping across five film genres. Vitrina Top 10 VFX Companies 2026 documents the competitive repricing underway.";
 const COMP_VFX_SOURCES: SourceEntry[] = [
   { label: "Roland Berger — AI Innovations for VFX and Animation", url: "https://www.rolandberger.com/en/Insights/Publications/AI-Innovations-for-VFX-and-animation.html" },
-  { label: "Vitrina Top 10 VFX Companies 2026", url: "https://vitrina.ai/blog/discover-the-best-vfx-studios-worldwide-top-10-vfx-companies" },
+  { label: "Vitrina AI — Top 10 VFX Companies 2026: Executive Procurement Guide", url: "https://vitrina.ai/blog/discover-the-best-vfx-studios-worldwide-top-10-vfx-companies" },
   { label: "LBBOnline / Sohonet — Generative AI Cost Compression: Post and VFX Workflow Impact, 2026 (DNEG 28% roto reduction · Amazon 40% faster first-pass edit)", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
 ];
 
