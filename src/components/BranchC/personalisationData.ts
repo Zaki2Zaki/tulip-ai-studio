@@ -719,9 +719,9 @@ const SOURCES_GAMES: SourceRef[] = [
   {
     num: "[5]",
     org: "Third Point Ventures",
-    title: "AI Impact on Gaming and Media Tooling 2025",
+    title: "AI Impact on Gaming and Media Tooling, 2025",
     description: "",
-    url: "https://www.thirdpointventures.com/currents/AI-impact-on-gaming-and-media-tooling",
+    url: "https://www.thirdpointventures.com/currents/AI-impact-on-gaming-and-media-tooling/",
   },
   {
     num: "[6]",
