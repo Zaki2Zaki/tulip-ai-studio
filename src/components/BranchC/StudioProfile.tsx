@@ -4,9 +4,13 @@ interface StudioProfileProps {
   studioScale: string;
   outputType: string;
   budgetRange: string;
+  outsourcePct: string;
+  rdBudget: string;
   onStudioScaleChange: (v: string) => void;
   onOutputTypeChange: (v: string) => void;
   onBudgetRangeChange: (v: string) => void;
+  onOutsourcePctChange: (v: string) => void;
+  onRdBudgetChange: (v: string) => void;
   onNext: () => void;
 }
 
@@ -38,13 +42,30 @@ const SELECTED_STYLE = {
   borderRadius: "12px",
 };
 
+const SELECT_STYLE: React.CSSProperties = {
+  background: "hsl(0 0% 9%)",
+  border: "1px solid rgba(255,255,255,0.1)",
+  borderRadius: "10px",
+  color: "#fff",
+  padding: "10px 14px",
+  fontSize: "14px",
+  width: "100%",
+  appearance: "none" as const,
+  outline: "none",
+  fontFamily: "inherit",
+};
+
 export default function StudioProfile({
   studioScale,
   outputType,
   budgetRange,
+  outsourcePct,
+  rdBudget,
   onStudioScaleChange,
   onOutputTypeChange,
   onBudgetRangeChange,
+  onOutsourcePctChange,
+  onRdBudgetChange,
   onNext,
 }: StudioProfileProps) {
   const canProceed = studioScale && outputType && budgetRange;
@@ -134,7 +155,7 @@ export default function StudioProfile({
       </div>
 
       {/* Q3 — Budget range */}
-      <div className="mb-8">
+      <div className="mb-7">
         <p className="text-sm font-body font-semibold uppercase tracking-wider text-white mb-3">
           Annual production budget range
         </p>
@@ -162,6 +183,41 @@ export default function StudioProfile({
               </button>
             );
           })}
+        </div>
+      </div>
+
+      {/* Q4 — Outsource % + R&D budget */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div>
+          <p className="text-[11px] font-body font-bold uppercase tracking-wider text-white mb-2">
+            What percentage is outsourced?
+          </p>
+          <select
+            value={outsourcePct}
+            onChange={(e) => onOutsourcePctChange(e.target.value)}
+            style={SELECT_STYLE}
+          >
+            <option value="0">We do not outsource</option>
+            <option value="0.10">Under 20% outsourced</option>
+            <option value="0.20">20 to 40% outsourced</option>
+            <option value="0.40">40 to 60% outsourced</option>
+            <option value="0.60">Over 60% outsourced</option>
+          </select>
+        </div>
+        <div>
+          <p className="text-[11px] font-body font-bold uppercase tracking-wider text-white mb-2">
+            Pipeline or R&amp;D budget
+          </p>
+          <select
+            value={rdBudget}
+            onChange={(e) => onRdBudgetChange(e.target.value)}
+            style={SELECT_STYLE}
+          >
+            <option value="none">No dedicated R&amp;D budget</option>
+            <option value="0.03">Under 3% of production</option>
+            <option value="0.07">3 to 10% of production</option>
+            <option value="0.12">Over 10% of production</option>
+          </select>
         </div>
       </div>
 
