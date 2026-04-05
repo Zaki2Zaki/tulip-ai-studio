@@ -144,6 +144,20 @@ export default function ROIModel({ studioScale, outputType, budgetRange, onNext,
         })}
       </div>
 
+      {/* Pipeline ROI Calculator — inline embed */}
+      <div className="mt-10">
+        <p className="text-xs font-bold tracking-widest uppercase text-white/40 mb-4">
+          Your numbers
+        </p>
+        <iframe
+          src="/pipeline-calculator.html"
+          id="roiCalcFrame"
+          className="w-full border-none rounded-xl"
+          style={{ minHeight: 680 }}
+          scrolling="no"
+        />
+      </div>
+
       {/* Disclaimer */}
       <div className="px-4 py-4 rounded-xl bg-orange-400/5 border border-orange-400/20 mb-6">
         <div className="flex items-start gap-2">
