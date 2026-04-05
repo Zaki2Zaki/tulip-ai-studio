@@ -1,9 +1,17 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { getScenario, getTopRisks } from "./personalisationData";
-import type { BudgetBreakdown } from "@/pages/PipelineLabPage";
 
 export { getTopRisks };
+
+export interface BudgetBreakdown {
+  artPct: number;
+  engPct: number;
+  qaPct: number;
+  reworkCycles: string;
+  deliveryTime: string;
+  aiUsage: string;
+}
 
 interface RiskScanProps {
   studioScale: string;
