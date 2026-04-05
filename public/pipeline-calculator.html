@@ -1020,7 +1020,7 @@ function downloadPDF() {
   doc.setFontSize(11); doc.setTextColor(...WHITE);
   doc.text(r.savePctNum+'% of current production budget', pad, y); y+=16;
   const metW=(W-pad*2-8)/2;
-  [[r.roi+'x','Indicative return in year one',LAV],[r.tierPayback,'Indicative payback period',GRN]].forEach(([val,lbl,clr],i)=>{
+  [[r.roi+'x','Indicative return in year one',LAV],[r.tierPayback,'Time to Value',GRN]].forEach(([val,lbl,clr],i)=>{
     const bx=pad+i*(metW+8);
     doc.setFillColor(...CARD); doc.roundedRect(bx,y,metW,22,3,3,'F');
     doc.setFont('helvetica','bold'); doc.setFontSize(18); doc.setTextColor(...clr);
