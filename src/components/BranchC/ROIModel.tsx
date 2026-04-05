@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { ArrowRight } from "lucide-react";
-import type { BudgetBreakdown } from "@/pages/PipelineLabPage";
+import type { BudgetBreakdown } from "./RiskScan";
 
 interface ROIModelProps {
   studioScale: string;
