@@ -1124,6 +1124,64 @@ function reportHeight() {
 }
 new ResizeObserver(reportHeight).observe(document.body);
 reportHeight();
+
+// ── Auto-init from URL params (embedded Pipeline Lab mode) ───────────────────
+(function() {
+  const params = new URLSearchParams(location.search);
+  if (params.get('auto') !== '1') return;
+
+  // Hide full-page form UI — show only results
+  ['h1', '.acc-bar', '.h1-sub', '#steps', '#s1', '#s2', '#s3'].forEach(sel => {
+    const el = document.querySelector(sel);
+    if (el) el.style.display = 'none';
+  });
+  // Also hide stage-row (Pipeline ROI Calculator / Interactive badge)
+  const stageRow = document.querySelector('.stage-row');
+  if (stageRow) stageRow.style.display = 'none';
+
+  document.body.style.background = 'transparent';
+  const page = document.querySelector('.page');
+  if (page) page.style.paddingTop = '0';
+
+  // Pre-fill hidden form fields
+  const set = (id, val) => { const el = document.getElementById(id); if (el && val !== null) el.value = val; };
+  set('studioType',     params.get('studioType'));
+  set('teamSize',       params.get('teamSize'));
+  set('budgetRangeVal', params.get('budgetRangeVal'));
+  set('outsourcePct',   params.get('outsourcePct'));
+  set('rdBudget',       params.get('rdBudget'));
+  set('artPct',         params.get('artPct'));
+  set('engPct',         params.get('engPct'));
+  set('qaPct',          params.get('qaPct'));
+  set('reworkCycles',   params.get('reworkCycles'));
+  set('deliveryTime',   params.get('deliveryTime'));
+  set('aiUsage',        params.get('aiUsage'));
+
+  // Update slider display values
+  ['artPct','engPct','qaPct'].forEach(id => {
+    const v = params.get(id);
+    const lbl = document.getElementById('val-' + id);
+    if (v && lbl) lbl.textContent = v + '%';
+  });
+
+  // Set pain points from params
+  const pp = params.get('painPoints');
+  if (pp) {
+    painPoints = pp.split(',').filter(Boolean);
+    document.querySelectorAll('.check-grid input[type=checkbox]').forEach(cb => {
+      cb.checked = painPoints.includes(cb.value);
+    });
+  }
+
+  // Calculate and show step 4 results immediately
+  calculate();
+
+  // After render: hide back button (Pipeline Lab has its own navigation)
+  requestAnimationFrame(() => {
+    const backBtn = document.querySelector('#s4 .btn-back');
+    if (backBtn) backBtn.style.display = 'none';
+  });
+})();
 </script>
 </body>
 </html>
