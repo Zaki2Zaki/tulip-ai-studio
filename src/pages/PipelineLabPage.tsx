@@ -12,11 +12,36 @@ const STEPS = [
   { id: 4, label: "Executive Summary" },
 ];
 
+export interface BudgetBreakdown {
+  artPct: number;
+  engPct: number;
+  qaPct: number;
+  reworkCycles: string;
+  deliveryTime: string;
+  aiUsage: string;
+}
+
+const DEFAULT_BREAKDOWN: BudgetBreakdown = {
+  artPct: 35,
+  engPct: 25,
+  qaPct: 12,
+  reworkCycles: "4",
+  deliveryTime: "12",
+  aiUsage: "experimental",
+};
+
 export default function PipelineLabPage() {
   const [currentScreen, setCurrentScreen] = useState(1);
+
+  // Studio Profile
   const [studioScale, setStudioScale] = useState("");
   const [outputType, setOutputType] = useState("");
   const [budgetRange, setBudgetRange] = useState("");
+  const [outsourcePct, setOutsourcePct] = useState("0.20");
+  const [rdBudget, setRdBudget] = useState("none");
+
+  // Risk Scan (budget breakdown)
+  const [breakdown, setBreakdown] = useState<BudgetBreakdown>(DEFAULT_BREAKDOWN);
 
   const goTo = (n: number) => setCurrentScreen(n);
 
@@ -27,7 +52,6 @@ export default function PipelineLabPage() {
       <div className="pt-20 flex min-h-[calc(100vh-80px)]">
         {/* ── Sidebar ── */}
         <aside className="hidden md:flex flex-col w-56 shrink-0 border-r border-border/30 bg-card/30 px-5 py-10">
-          {/* Page identity */}
           <div className="mb-8">
             <p className="text-[9px] tracking-[0.2em] uppercase font-body font-semibold text-primary mb-1">
               Pipeline Lab
@@ -35,7 +59,6 @@ export default function PipelineLabPage() {
             <p className="text-xs font-body text-white/40">Branch C — Strategic Briefing</p>
           </div>
 
-          {/* Step list */}
           <nav className="space-y-1">
             {STEPS.map((step) => {
               const done = step.id < currentScreen;
@@ -61,7 +84,6 @@ export default function PipelineLabPage() {
                     color: "#e9d5ff",
                   } : undefined}
                 >
-                  {/* Step indicator */}
                   <span
                     className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] font-bold"
                     style={
@@ -83,7 +105,6 @@ export default function PipelineLabPage() {
             })}
           </nav>
 
-          {/* Back to site */}
           <div className="mt-auto pt-8 border-t border-border/20">
             <a
               href="/"
@@ -100,7 +121,7 @@ export default function PipelineLabPage() {
           </div>
         </aside>
 
-        {/* ── Mobile stepper (shown < md) ── */}
+        {/* ── Mobile stepper ── */}
         <div className="md:hidden fixed top-16 left-0 right-0 z-30 bg-background/95 backdrop-blur border-b border-border/20 px-4 py-3 flex items-center gap-2 overflow-x-auto">
           {STEPS.map((step, i) => {
             const done = step.id < currentScreen;
@@ -141,9 +162,13 @@ export default function PipelineLabPage() {
               studioScale={studioScale}
               outputType={outputType}
               budgetRange={budgetRange}
+              outsourcePct={outsourcePct}
+              rdBudget={rdBudget}
               onStudioScaleChange={setStudioScale}
               onOutputTypeChange={setOutputType}
               onBudgetRangeChange={setBudgetRange}
+              onOutsourcePctChange={setOutsourcePct}
+              onRdBudgetChange={setRdBudget}
               onNext={() => goTo(2)}
             />
           )}
@@ -151,6 +176,8 @@ export default function PipelineLabPage() {
             <RiskScan
               studioScale={studioScale}
               outputType={outputType}
+              breakdown={breakdown}
+              onBreakdownChange={setBreakdown}
               onNext={() => goTo(3)}
               onBack={() => goTo(1)}
             />
@@ -160,6 +187,9 @@ export default function PipelineLabPage() {
               studioScale={studioScale}
               outputType={outputType}
               budgetRange={budgetRange}
+              outsourcePct={outsourcePct}
+              rdBudget={rdBudget}
+              breakdown={breakdown}
               onNext={() => goTo(4)}
               onBack={() => goTo(2)}
             />
