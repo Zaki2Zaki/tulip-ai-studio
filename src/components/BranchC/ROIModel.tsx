@@ -43,6 +43,17 @@ export default function ROIModel({ studioScale, outputType, budgetRange, onNext,
   const scenario = getScenario(studioScale, outputType);
   const recommendedTierId = scenario.getRecommendedTierId(budgetRange);
 
+  useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      if (e.data?.type === 'roiCalcHeight') {
+        const frame = document.getElementById('roiCalcFrame') as HTMLIFrameElement;
+        if (frame) frame.style.height = e.data.height + 'px';
+      }
+    };
+    window.addEventListener('message', handler);
+    return () => window.removeEventListener('message', handler);
+  }, []);
+
   return (
     <div className="max-w-2xl" style={{ color: "white", fontSize: "14px" }}>
       <div className="flex items-center gap-2 mb-3">
