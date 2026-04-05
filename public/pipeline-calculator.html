@@ -1102,7 +1102,7 @@ function downloadPDF() {
   doc.setFont('helvetica','bold'); doc.setFontSize(15); doc.setTextColor(...WHITE);
   doc.text(r.tierPrice,pad+5,y+16);
   doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...GRN);
-  doc.text('Indicative payback: '+r.tierPayback,W-pad-2,y+16,{align:'right'}); y+=30;
+  doc.text('Time to Value: '+r.tierPayback,W-pad-2,y+16,{align:'right'}); y+=30;
   checkY(24);
   doc.setFillColor(...CYAN); doc.roundedRect(pad,y,W-pad*2,16,3,3,'F');
   doc.setFont('helvetica','bold'); doc.setFontSize(10); doc.setTextColor(...BG);
