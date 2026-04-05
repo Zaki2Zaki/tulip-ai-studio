@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import StudioProfile from "@/components/BranchC/StudioProfile";
 import RiskScan from "@/components/BranchC/RiskScan";
+import type { BudgetBreakdown } from "@/components/BranchC/RiskScan";
 import ROIModel from "@/components/BranchC/ROIModel";
 import ExecutiveSummary from "@/components/BranchC/ExecutiveSummary";
 
