@@ -13,15 +13,6 @@ const STEPS = [
   { id: 4, label: "Executive Summary" },
 ];
 
-export interface BudgetBreakdown {
-  artPct: number;
-  engPct: number;
-  qaPct: number;
-  reworkCycles: string;
-  deliveryTime: string;
-  aiUsage: string;
-}
-
 const DEFAULT_BREAKDOWN: BudgetBreakdown = {
   artPct: 35,
   engPct: 25,
