@@ -180,12 +180,17 @@ export default function ROIModel({
         style={{ padding: "20px 24px" }}
       >
         {/* Row 1 — Gross Efficiency Opportunity (accent) */}
-        <div style={ROW_STYLE}>
-          <span style={LABEL_STYLE}>Estimated annual efficiency opportunity</span>
-          <span style={ACCENT_STYLE}>
-            {calc.hasDollarFigures
-              ? formatCurrency(calc.grossOpportunity)
-              : `${Math.round(calc.efficiencyRate * 100)}% of labour base`}
+        <div style={{ ...ROW_STYLE, flexDirection: "column" as const, gap: "4px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: "16px", width: "100%" }}>
+            <span style={LABEL_STYLE}>Estimated annual efficiency opportunity</span>
+            <span style={ACCENT_STYLE}>
+              {calc.hasDollarFigures
+                ? formatCurrency(calc.grossOpportunity)
+                : `${Math.round(calc.efficiencyRate * 100)}% of labour base`}
+            </span>
+          </div>
+          <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.38)", marginTop: "4px", fontFamily: "inherit", lineHeight: 1.55 }}>
+            Modelled from 68% labour cost baseline across studios your size. Actual results depend on pipeline structure and adoption rate.
           </span>
         </div>
 
