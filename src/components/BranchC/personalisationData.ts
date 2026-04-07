@@ -310,8 +310,8 @@ const METRICS_AAA_GAMES: MetricEntry[] = [
   },
   {
     name: "Developer velocity",
-    detail: "Asset creation from 100 hours to under 30 minutes per type. Some vendors report up to 90% acceleration in development cycles. BCG cites this in context of AAA pipeline tools entering production.",
-    sources: [{ label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" }],
+    detail: "Asset creation time reduction varies by asset type and pipeline maturity. Studios using integrated AI tools report over 20% productivity gains on average — with the highest gains in concept art, texture generation, and environment layout. We scope the specific impact for your pipeline in your briefing.",
+    sources: [{ label: "a16z Games — AI x Game Dev Survey 2024", url: "https://whimsygames.co/blog/how-ai-is-changing-game-art-outsourcing" }],
   },
   {
     name: "Production cost",
