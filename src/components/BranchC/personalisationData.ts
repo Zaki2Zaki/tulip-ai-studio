@@ -334,10 +334,10 @@ const METRICS_AAA_GAMES: MetricEntry[] = [
 const METRICS_PUBLISHER_GAMES: MetricEntry[] = [
   {
     name: "Cross-franchise rework exposure",
-    detail: "$500K to $3M per rework cycle per studio. Multiplied across a multi-studio portfolio. AI integration reduces triggers by 60 to 85% per studio.",
+    detail: "68% of studio expenditure is labour — confirmed across 937 studios. At your scale, a rework cycle pulling 5 to 15 developers offline for 1 to 3 weeks is a significant unplanned budget event. Studios using AI pipelines report over 20% productivity gains on average, reducing the manual iteration cycles that trigger rework.",
     sources: [
-      { label: "Bloomberg / Jason Schreier — AAA Game Development Costs, March 2026", url: "https://gameworldobserver.com/2026/03/26/report-budgets-for-aaa-games-in-the-us-and-canada-now-amount-to-at-least-300-million" },
-      { label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" },
+      { label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/resource/the-canadian-video-game-industry-2021/" },
+      { label: "a16z Games AI Survey 2024", url: "https://whimsygames.co/blog/how-ai-is-changing-game-art-outsourcing" },
     ],
   },
   {
