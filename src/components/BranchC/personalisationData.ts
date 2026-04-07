@@ -396,8 +396,8 @@ const METRICS_VFX: MetricEntry[] = [
   },
   {
     name: "Infrastructure cost",
-    detail: "One mid-size VFX studio replaced $72,000 in annual cloud spending with three AI workstations while improving artist productivity through faster feedback loops.",
-    sources: [{ label: "LBBOnline / Sohonet — Generative AI Cost Compression: Post and VFX Workflow Impact, 2026 (DNEG 28% roto reduction · Amazon 40% faster first-pass edit)", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" }],
+    detail: "37% of VFX studios do not know their current pipeline spend. Studios that have mapped their infrastructure costs consistently find that AI tooling reduces cloud compute dependency and manual overhead simultaneously. We identify the specific infrastructure opportunities in your briefing.",
+    sources: [{ label: "Ynput — State of Animation and VFX Pipelines Report, 2025", url: "https://ynput.io/the-state-of-animation-vfx-pipelines-report" }],
   },
   {
     name: "Competitive window",
