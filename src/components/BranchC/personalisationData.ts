@@ -425,12 +425,6 @@ const COMP_VFX_SOURCES: SourceEntry[] = [
   { label: "LBBOnline / Sohonet — Generative AI Cost Compression: Post and VFX Workflow Impact, 2026 (DNEG 28% roto reduction · Amazon 40% faster first-pass edit)", url: "https://lbbonline.com/news/Generative-AI-Cost-Compression-Post-and-VFX-Workflow-Impact-2026-2030" },
 ];
 
-const COMP_VP_BREAKDOWN = "VFX Voice 2026 documents studios with AI-enabled pipelines gaining structural cost advantage over facilities carrying traditional pre-production budgets. Autodesk Flow Studio and Beeble AI eliminate specific cost categories — reshoot days, specialised mocap hardware, post-correction — that virtual production was supposed to reduce but often still carries without AI integration.";
-const COMP_VP_SOURCES: SourceEntry[] = [
-  { label: "VFX Voice — Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
-  { label: "Beeble AI — SwitchLight 3 Production Documentation (vendor source)", url: "https://beeble.ai" },
-  { label: "Autodesk Flow Studio — Superman and Lois Case Study, 2025 (vendor source)", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
-];
 
 // ─── Scenarios ────────────────────────────────────────────────────────────────
 
