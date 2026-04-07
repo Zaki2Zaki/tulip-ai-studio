@@ -694,36 +694,6 @@ const SOURCES_VFX: SourceRef[] = [
   },
 ];
 
-const SOURCES_VP: SourceRef[] = [
-  {
-    num: "[5]",
-    org: "Beeble AI",
-    title: "SwitchLight 3 Production Documentation (vendor source)",
-    description: "AI relighting and rotoscoping for virtual production workflows.",
-    url: "https://beeble.ai",
-  },
-  {
-    num: "[6]",
-    org: "Autodesk Flow Studio",
-    title: "Superman and Lois Case Study, 2025 (vendor source)",
-    description: "AI-assisted mocap and VFX without specialised hardware.",
-    url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects",
-  },
-  {
-    num: "[7]",
-    org: "VFX Voice",
-    title: "Industry Outlook 2026",
-    description: "",
-    url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity",
-  },
-  {
-    num: "[8]",
-    org: "Ynput",
-    title: "State of Animation and VFX Pipelines Report, 2025",
-    description: "",
-    url: "https://ynput.io/the-state-of-animation-vfx-pipelines-report",
-  },
-];
 
 const SOURCE_PUBLISHER_APPEND: SourceRef = {
   num: "[+]",
