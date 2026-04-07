@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 import type { BudgetBreakdown } from "./RiskScan";
 import { getScenario } from "./personalisationData";
@@ -19,6 +19,47 @@ export const TIERS = [
   { id: "studio",     name: "Studio",     price: "$45K to $165K",  detail: "Full adoption, integration, and workshops. Mid-size to AAA studios. Payback period: 4 to 8 months." },
   { id: "enterprise", name: "Enterprise", price: "$165K to $395K", detail: "Architecture blueprint and multi-studio rollout. AAA to publisher scale. Payback period: 6 to 12 months." },
 ];
+
+// ── iframe param helpers ──────────────────────────────────────────────────────
+
+function mapStudioType(studioScale: string, outputType: string): string {
+  if (outputType === "animation") return "animation";
+  if (outputType === "vfx")       return "vfx";
+  if (studioScale === "indie")    return "indie";
+  if (studioScale === "aaa" || studioScale === "publisher") return "aaa";
+  return "aa";
+}
+
+function mapTeamSize(studioScale: string): string {
+  if (studioScale === "indie")     return "25";
+  if (studioScale === "midsize")   return "100";
+  if (studioScale === "aaa")       return "350";
+  if (studioScale === "publisher") return "750";
+  return "100";
+}
+
+function mapBudgetRange(budgetRange: string): string {
+  const map: Record<string, string> = {
+    "Under $1M":         "750000",
+    "$1M to $10M":       "2500000",
+    "$10M to $50M":      "10000000",
+    "$50M to $200M":     "40000000",
+    "$200M+":            "120000000",
+    "Prefer not to say": "10000000",
+  };
+  return map[budgetRange] || "10000000";
+}
+
+function derivePainPoints(artPct: number, qaPct: number, reworkCycles: string, outsourcePct: string): string {
+  const points: string[] = [];
+  if (artPct >= 30) points.push("texturing");
+  if (Number(reworkCycles) >= 4) points.push("rework");
+  if (qaPct >= 10) points.push("qa");
+  if (parseFloat(outsourcePct) > 0.2) points.push("outsource");
+  return points.length > 0 ? points.join(",") : "texturing,rework";
+}
+
+// ── Inline calc helpers ───────────────────────────────────────────────────────
 
 const BUDGET_MIDPOINTS: Record<string, number | null> = {
   "Under $1M":         500000,
@@ -68,6 +109,8 @@ function formatTimeToValue(months: number): string {
   return `${months} month${months === 1 ? "" : "s"}`;
 }
 
+// ── Styles ────────────────────────────────────────────────────────────────────
+
 const ACCENT_STYLE: React.CSSProperties = {
   fontSize: "15px",
   fontWeight: 700,
@@ -114,18 +157,53 @@ const ROW_STYLE: React.CSSProperties = {
   borderBottom: "1px solid rgba(255,255,255,0.07)",
 };
 
+// ── Component ─────────────────────────────────────────────────────────────────
+
 export default function ROIModel({
-  studioScale, outputType, budgetRange, onNext, onBack,
+  studioScale, outputType, budgetRange, outsourcePct, rdBudget, breakdown, onNext, onBack,
 }: ROIModelProps) {
   const [methodologyOpen, setMethodologyOpen] = useState(false);
 
+  // iframe src
+  const calcSrc = useMemo(() => {
+    const params = new URLSearchParams({
+      auto:           "1",
+      studioType:     mapStudioType(studioScale, outputType),
+      teamSize:       mapTeamSize(studioScale),
+      budgetRangeVal: mapBudgetRange(budgetRange),
+      outsourcePct,
+      rdBudget,
+      artPct:         String(breakdown.artPct),
+      engPct:         String(breakdown.engPct),
+      qaPct:          String(breakdown.qaPct),
+      reworkCycles:   breakdown.reworkCycles,
+      deliveryTime:   breakdown.deliveryTime,
+      aiUsage:        breakdown.aiUsage,
+      painPoints:     derivePainPoints(breakdown.artPct, breakdown.qaPct, breakdown.reworkCycles, outsourcePct),
+    });
+    return `/pipeline-calculator.html?${params.toString()}`;
+  }, [studioScale, outputType, budgetRange, outsourcePct, rdBudget, breakdown]);
+
+  // auto-resize iframe from postMessage
+  useEffect(() => {
+    const handler = (e: MessageEvent) => {
+      if (e.data?.type === "roiCalcHeight") {
+        const frame = document.getElementById("roiCalcFrame") as HTMLIFrameElement;
+        if (frame) frame.style.height = e.data.height + "px";
+      }
+    };
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, []);
+
+  // inline calc
   const scenario = getScenario(studioScale, outputType);
   const recommendedTierId = scenario.getRecommendedTierId(budgetRange);
   const recommendedTier = TIERS.find((t) => t.id === recommendedTierId)!;
 
   const calc = useMemo(() => {
-    const budgetMidpoint = BUDGET_MIDPOINTS[budgetRange] ?? null;
-    const efficiencyRate = EFFICIENCY_RATES[outputType] ?? 0.20;
+    const budgetMidpoint    = BUDGET_MIDPOINTS[budgetRange] ?? null;
+    const efficiencyRate    = EFFICIENCY_RATES[outputType] ?? 0.20;
     const engagementMidpoint = TIER_MIDPOINTS[recommendedTierId] ?? 105000;
 
     if (budgetMidpoint === null) {
@@ -144,7 +222,6 @@ export default function ROIModel({
 
     return {
       hasDollarFigures: true as const,
-      budgetMidpoint,
       grossOpportunity,
       realisedValue,
       lowerMultiple,
@@ -174,7 +251,17 @@ export default function ROIModel({
         What this is worth at your scale.
       </h2>
 
-      {/* Calculation results card */}
+      {/* ── Pipeline calculator iframe ── */}
+      <iframe
+        key={calcSrc}
+        src={calcSrc}
+        id="roiCalcFrame"
+        className="w-full rounded-xl border-none mb-6"
+        style={{ minHeight: 600 }}
+        scrolling="no"
+      />
+
+      {/* ── Inline summary card ── */}
       <div
         className="rounded-2xl border border-border/40 bg-card/50 mb-4"
         style={{ padding: "20px 24px" }}
@@ -244,7 +331,7 @@ export default function ROIModel({
         </div>
       </div>
 
-      {/* Methodology — collapsible dropdown */}
+      {/* ── Methodology dropdown ── */}
       <div className="rounded-2xl border border-border/30 bg-card/30 mb-6 overflow-hidden">
         <button
           onClick={() => setMethodologyOpen((o) => !o)}
@@ -276,7 +363,7 @@ export default function ROIModel({
         )}
       </div>
 
-      {/* CTA buttons */}
+      {/* ── CTA buttons ── */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
         <button
           onClick={onNext}
