@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { ArrowRight } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 import type { BudgetBreakdown } from "./RiskScan";
 import { getScenario } from "./personalisationData";
 
@@ -68,21 +68,16 @@ function formatTimeToValue(months: number): string {
   return `${months} month${months === 1 ? "" : "s"}`;
 }
 
-const ROW_STYLE: React.CSSProperties = {
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "flex-start",
-  gap: "16px",
-  padding: "12px 0",
-  borderBottom: "1px solid rgba(255,255,255,0.07)",
-};
-
-const LABEL_STYLE: React.CSSProperties = {
-  fontSize: "13px",
-  color: "rgba(255,255,255,0.6)",
+const ACCENT_STYLE: React.CSSProperties = {
+  fontSize: "15px",
+  fontWeight: 700,
+  background: "linear-gradient(to right, #a78bfa, #c084fc, #e879a0)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  backgroundClip: "text",
+  textAlign: "right" as const,
   fontFamily: "inherit",
   lineHeight: 1.4,
-  maxWidth: "60%",
 };
 
 const VALUE_STYLE: React.CSSProperties = {
@@ -94,6 +89,14 @@ const VALUE_STYLE: React.CSSProperties = {
   lineHeight: 1.4,
 };
 
+const LABEL_STYLE: React.CSSProperties = {
+  fontSize: "13px",
+  color: "rgba(255,255,255,0.6)",
+  fontFamily: "inherit",
+  lineHeight: 1.4,
+  maxWidth: "60%",
+};
+
 const NOTE_STYLE: React.CSSProperties = {
   fontSize: "11px",
   color: "rgba(255,255,255,0.4)",
@@ -102,9 +105,20 @@ const NOTE_STYLE: React.CSSProperties = {
   lineHeight: 1.5,
 };
 
+const ROW_STYLE: React.CSSProperties = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  gap: "16px",
+  padding: "12px 0",
+  borderBottom: "1px solid rgba(255,255,255,0.07)",
+};
+
 export default function ROIModel({
   studioScale, outputType, budgetRange, onNext, onBack,
 }: ROIModelProps) {
+  const [methodologyOpen, setMethodologyOpen] = useState(false);
+
   const scenario = getScenario(studioScale, outputType);
   const recommendedTierId = scenario.getRecommendedTierId(budgetRange);
   const recommendedTier = TIERS.find((t) => t.id === recommendedTierId)!;
@@ -118,16 +132,13 @@ export default function ROIModel({
       return { hasDollarFigures: false as const, efficiencyRate, engagementMidpoint };
     }
 
-    const labourBase       = budgetMidpoint * 0.68;
-    const grossOpportunity = labourBase * efficiencyRate;
-    const yearOneCapture   = grossOpportunity * 0.40;
-    const realisedValue    = yearOneCapture * 0.70;
-
-    // Upper bound uses 50% capture rate instead of 40%
+    const labourBase         = budgetMidpoint * 0.68;
+    const grossOpportunity   = labourBase * efficiencyRate;
+    const yearOneCapture     = grossOpportunity * 0.40;
+    const realisedValue      = yearOneCapture * 0.70;
     const upperRealisedValue = grossOpportunity * 0.50 * 0.70;
-    const lowerMultiple = realisedValue / engagementMidpoint;
-    const upperMultiple = upperRealisedValue / engagementMidpoint;
-
+    const lowerMultiple      = realisedValue / engagementMidpoint;
+    const upperMultiple      = upperRealisedValue / engagementMidpoint;
     const monthlyValue       = realisedValue / 12;
     const timeToValueMonths  = Math.ceil(engagementMidpoint / monthlyValue);
 
@@ -163,14 +174,15 @@ export default function ROIModel({
         What this is worth at your scale.
       </h2>
 
+      {/* Calculation results card */}
       <div
-        className="rounded-2xl border border-border/40 bg-card/50 mb-6"
+        className="rounded-2xl border border-border/40 bg-card/50 mb-4"
         style={{ padding: "20px 24px" }}
       >
-        {/* Row 1 — Gross Efficiency Opportunity */}
+        {/* Row 1 — Gross Efficiency Opportunity (accent) */}
         <div style={ROW_STYLE}>
           <span style={LABEL_STYLE}>Estimated annual efficiency opportunity</span>
-          <span style={VALUE_STYLE}>
+          <span style={ACCENT_STYLE}>
             {calc.hasDollarFigures
               ? formatCurrency(calc.grossOpportunity)
               : `${Math.round(calc.efficiencyRate * 100)}% of labour base`}
@@ -198,10 +210,10 @@ export default function ROIModel({
           </span>
         </div>
 
-        {/* Row 4 — Return Multiple */}
+        {/* Row 4 — Return Multiple (accent) */}
         <div style={ROW_STYLE}>
           <span style={LABEL_STYLE}>Indicative return multiple</span>
-          <span style={VALUE_STYLE}>
+          <span style={ACCENT_STYLE}>
             {calc.hasDollarFigures
               ? formatMultiple(calc.lowerMultiple, calc.upperMultiple)
               : "—"}
@@ -227,31 +239,58 @@ export default function ROIModel({
         </div>
       </div>
 
-      {/* Methodology Note */}
-      <p
-        className="font-body mb-6 leading-relaxed"
-        style={{ fontSize: "11px", color: "rgba(255,255,255,0.38)", lineHeight: 1.6 }}
-      >
-        Estimates apply a 30% risk adjustment and 40% year-one adoption rate to published efficiency
-        benchmarks. Sources: ESAC/Nordicity 2021 (labour cost baseline) · a16z Games Survey 2024 /
-        Morgan Stanley 2024 / Roland Berger (efficiency rates) · Forrester TEI methodology (adoption
-        curve). Your actual results depend on pipeline complexity and team adoption rate.
-      </p>
+      {/* Methodology — collapsible dropdown */}
+      <div className="rounded-2xl border border-border/30 bg-card/30 mb-6 overflow-hidden">
+        <button
+          onClick={() => setMethodologyOpen((o) => !o)}
+          className="w-full flex items-center justify-between px-5 py-3 text-left hover:bg-white/5 transition-colors"
+        >
+          <span className="text-[11px] font-body font-semibold uppercase tracking-widest text-white">
+            Methodology — How these figures are calculated
+          </span>
+          {methodologyOpen
+            ? <ChevronUp className="w-4 h-4 text-white shrink-0" />
+            : <ChevronDown className="w-4 h-4 text-white shrink-0" />}
+        </button>
+        {methodologyOpen && (
+          <div className="px-5 pb-4 border-t border-border/20">
+            <p
+              className="font-body leading-relaxed pt-3"
+              style={{ fontSize: "12px", color: "rgba(255,255,255,0.5)", lineHeight: 1.7 }}
+            >
+              Estimates apply a 30% risk adjustment and 40% year-one adoption rate to published
+              efficiency benchmarks. Labour base is calculated as 68% of annual production budget
+              (ESAC/Nordicity 2021, 937-studio sample). Efficiency rates: 20% for games and VFX
+              (a16z Games Survey 2024 lower bound; Roland Berger lower bound), 30% for animation
+              (Morgan Stanley 2024). Year-one capture rate sourced from Forrester TEI methodology.
+              Return multiple range uses 40% to 50% capture bounds. Engagement cost is the midpoint
+              of your recommended tier. Your actual results depend on pipeline complexity and team
+              adoption rate.
+            </p>
+          </div>
+        )}
+      </div>
 
-      <div className="flex items-center gap-4">
+      {/* CTA buttons */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
         <button
           onClick={onNext}
           className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity"
         >
-          Build My Executive Summary <ArrowRight className="w-3.5 h-3.5" />
+          Validate in a 30-min 1:1 Brief <ArrowRight className="w-3.5 h-3.5" />
         </button>
-        <button onClick={onBack} className="text-xs text-white hover:text-white font-body transition-colors">
-          ← Back
+        <button
+          onClick={onBack}
+          className="inline-flex items-center gap-2 btn-chrome-outline px-5 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[44px]"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download report
         </button>
       </div>
-      <p className="text-[15px] text-white font-body mt-2">
-        A one-page brief you can share with your leadership team
-      </p>
     </div>
   );
 }
