@@ -251,38 +251,6 @@ const RISKS_VFX: RiskEntry[] = [
   },
 ];
 
-const RISKS_VP: RiskEntry[] = [
-  {
-    id: 1,
-    impact: "High",
-    title: "Manual asset preparation for LED volumes is your biggest pre-production cost",
-    stat: "Virtual production requires environment assets ready before the shoot — not after. Studios spending weeks preparing background plates manually are losing that time to AI-assisted environment generation. The prep cost is compressible.",
-    sources: [
-      { label: "VFX Voice — Industry Outlook 2026", url: "https://vfxvoice.com/entering-2026-vfx-animation-industry-balances-uncertainty-and-opportunity" },
-      { label: "Autodesk Flow Studio — Superman and Lois Case Study, 2025 (vendor source)", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
-    ],
-    exposure: "Pre-production budget",
-  },
-  {
-    id: 2,
-    impact: "High",
-    title: "AI relighting and rotoscoping are eliminating the need for reshoots",
-    stat: "Beeble's AI relighting converts standard footage into fully relightable assets without reshoots. Autodesk Flow Studio delivers mocap without suits, markers, or green screens. Both remove cost categories that virtual production was supposed to solve but often still carries.",
-    sources: [
-      { label: "Beeble AI — SwitchLight 3 Production Documentation (vendor source)", url: "https://beeble.ai" },
-      { label: "Autodesk Flow Studio — Superman and Lois Case Study, 2025 (vendor source)", url: "https://www.autodesk.com/solutions/media-entertainment/ai-visual-effects" },
-    ],
-    exposure: "Reshoot cost elimination",
-  },
-  {
-    id: 3,
-    impact: "Medium",
-    title: "Only 8% of studios feel prepared for the pipeline changes already underway",
-    stat: "Ynput's 2025 survey of 200+ studios. Virtual production workflows are among the most complex to integrate AI into — and the most valuable when done correctly.",
-    sources: [{ label: "Ynput — State of Animation and VFX Pipelines Report, 2025", url: "https://ynput.io/the-state-of-animation-vfx-pipelines-report" }],
-    exposure: "Infrastructure gap",
-  },
-];
 
 // ─── Shared metrics ───────────────────────────────────────────────────────────
 
