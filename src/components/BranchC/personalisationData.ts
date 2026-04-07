@@ -374,10 +374,9 @@ const METRICS_ANIMATION: MetricEntry[] = [
   },
   {
     name: "Schedule compression",
-    detail: "60 to 70% of production schedule is mechanical work. AI compresses that portion by 30 to 90% depending on pipeline maturity. Recovered time goes into creative development and IP.",
+    detail: "60 to 70% of production schedule is mechanical work. AI compresses that portion by 30% or more depending on pipeline maturity. Morgan Stanley projects 30% overall cost reduction when AI is fully integrated into post-production workflows. Recovered time goes into creative development and IP.",
     sources: [
-      { label: "Vitrina AI — AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" },
-      { label: "Morgan Stanley Research — Generative AI in Film and TV, 2024" },
+      { label: "Morgan Stanley Research 2024 cited in Vitrina AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" },
     ],
   },
   {
