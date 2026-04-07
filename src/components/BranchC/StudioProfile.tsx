@@ -78,7 +78,7 @@ export default function StudioProfile({
         className="font-display text-2xl md:text-3xl font-bold text-white mb-2"
         style={{ letterSpacing: "-0.02em" }}
       >
-        <span style={{ background: "linear-gradient(to right, #a78bfa, #c084fc, #e879a0)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Five</span> questions. Then we show you the numbers.
+        <span style={{ background: "linear-gradient(to left, #7AA1D2, #DBD4B4, #CC95C0)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Five</span> questions. Then we show you the numbers.
       </h2>
       <p className="text-[15px] text-white font-body mb-8 leading-relaxed">
         Your answers personalise the risk data and ROI model to your studio size and output type.
