@@ -411,7 +411,6 @@ const METRICS_VFX: MetricEntry[] = [
 
 const COMP_ANIMATION = "The studios winning streaming commissions in 2026 are delivering feature-level visuals on series economics. AI is the only mechanism that makes that equation work.";
 const COMP_VFX = "The VFX market is repricing around AI-automated studios. MARZ is already undercutting manual pipelines on cost-per-shot. The question is not whether to integrate AI. It is whether to do it before or after your clients notice the difference.";
-const COMP_VP = "Virtual production was supposed to reduce post-production costs. For studios that have not integrated AI into the workflow, it has added a new category of pre-production cost instead. AI closes that gap.";
 
 const COMP_ANIMATION_BREAKDOWN = "Netflix's El Eternauta confirmed a 10x speed improvement delivering feature-film visuals at series budget. Morgan Stanley projects 30% production cost reduction industry-wide through AI integration. Vitrina AI reports only 8% of animation studios feel prepared for these pipeline changes.";
 const COMP_ANIMATION_SOURCES: SourceEntry[] = [
