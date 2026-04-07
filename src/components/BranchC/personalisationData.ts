@@ -327,8 +327,11 @@ const METRICS_AAA_GAMES: MetricEntry[] = [
   },
   {
     name: "Production cost",
-    detail: "68% of total studio spend is labour. Texturing and rigging are compressible. Freeing that capacity redirects senior artists to hero asset work only.",
-    sources: [{ label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/resource/the-canadian-video-game-industry-2021/" }],
+    detail: "AI-assisted animation and rigging tools reduce labour hours by 30 to 40% while maintaining professional quality. Studios using optimised pipelines report 40% productivity gains and 30% fewer revision cycles. Freeing that capacity redirects your senior artists toward work that actually requires them.",
+    sources: [
+      { label: "Juego Studios — Game Development Costs 2026", url: "https://juegostudio.com" },
+      { label: "Juego Studios — Outsourcing Game Art 2025", url: "https://juegostudio.com" },
+    ],
   },
   {
     name: "Competitive window",
