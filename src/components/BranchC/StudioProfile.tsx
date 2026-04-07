@@ -25,7 +25,6 @@ const OUTPUT_OPTIONS = [
   { key: "games", label: "Games (Console / PC / Mobile)" },
   { key: "animation", label: "3D Animation / Film" },
   { key: "vfx", label: "VFX / Visual Effects" },
-  { key: "virtualproduction", label: "Virtual Production" },
   { key: "mixed", label: "Mixed / All of the above" },
 ];
 
