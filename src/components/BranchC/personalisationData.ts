@@ -386,7 +386,7 @@ const METRICS_ANIMATION: MetricEntry[] = [
   },
   {
     name: "Market growth",
-    detail: "Generative AI in animation: 39% CAGR growing from $1.66B in 2024 to over $23B by 2032. Studios integrating now are building the pipeline advantage that scales with the market.",
+    detail: "Generative AI in animation: 39% CAGR growing from $1.66B in 2024 to over $23B by 2032. Studios integrating now are building the pipeline advantage that scales with the market. Projected by Precedence Research, cited in Vitrina AI in Animation Strategic Report 2025.",
     sources: [{ label: "Vitrina AI — AI in Animation Strategic Report 2025", url: "https://vitrina.ai/blog/ai-in-animation-strategic-report-2026" }],
   },
 ];
