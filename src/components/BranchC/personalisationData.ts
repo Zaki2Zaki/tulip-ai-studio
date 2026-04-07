@@ -282,8 +282,11 @@ const METRICS_INDIE_GAMES: MetricEntry[] = [
 const METRICS_MIDSIZE_GAMES: MetricEntry[] = [
   {
     name: "Rework cost exposure",
-    detail: "Estimated $50K to $500K per cycle at this scale. AI integration reduces rework triggers by 40 to 60%. That is not a productivity gain. That is budget recovered.",
-    sources: [{ label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/resource/the-canadian-video-game-industry-2021/" }],
+    detail: "68% of studio expenditure is labour — confirmed across 937 studios. At your scale, a rework cycle pulling 5 to 15 developers offline for 1 to 3 weeks is a significant unplanned budget event. Studios using AI pipelines report over 20% productivity gains on average, reducing the manual iteration cycles that trigger rework.",
+    sources: [
+      { label: "ESAC / Nordicity — The Canadian Video Game Industry 2021", url: "https://theesa.ca/resource/the-canadian-video-game-industry-2021/" },
+      { label: "a16z Games AI Survey 2024", url: "https://whimsygames.co/blog/how-ai-is-changing-game-art-outsourcing" },
+    ],
   },
   {
     name: "Developer velocity",
