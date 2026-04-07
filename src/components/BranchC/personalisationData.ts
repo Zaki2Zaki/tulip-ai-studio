@@ -710,7 +710,6 @@ export function getSources(studioScale: string, outputType: string): SourceRef[]
   if (ot === "games") base.push(...SOURCES_GAMES);
   else if (ot === "animation") base.push(...SOURCES_ANIMATION);
   else if (ot === "vfx") base.push(...SOURCES_VFX);
-  else if (ot === "virtualproduction") base.push(...SOURCES_VP);
 
   if (studioScale === "publisher") base.push(SOURCE_PUBLISHER_APPEND);
 
