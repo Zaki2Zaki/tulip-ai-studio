@@ -1065,7 +1065,7 @@ function downloadPDF() {
   doc.text('AREA',pad+3,y+5.5);
   doc.text('CURRENT EST.',pad+82,y+5.5,{align:'right'});
   doc.text('WITH AI',pad+112,y+5.5,{align:'right'});
-  doc.text('OPPORTUNITY',W-pad-2,y+5.5,{align:'right'}); y+=10;
+  doc.text('RECOVERABLE SPEND',W-pad-2,y+5.5,{align:'right'}); y+=10;
   r.rows.forEach((row,idx)=>{
     checkY(12);
     if(idx%2===0){doc.setFillColor(20,20,20);doc.rect(pad,y-3,W-pad*2,11,'F');}
