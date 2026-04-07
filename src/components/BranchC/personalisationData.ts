@@ -320,7 +320,7 @@ const METRICS_AAA_GAMES: MetricEntry[] = [
   },
   {
     name: "Competitive window",
-    detail: "Roughly 18 months before the gap between studios that have integrated AI and those that have not becomes structurally difficult to close. BCG cloud gaming projection: $1.4B to $18.3B by 2030 at 50%+ CAGR.",
+    detail: "We estimate roughly 18 months before the gap between studios that have integrated AI and those that have not becomes structurally difficult to close. BCG cloud gaming projection: $1.4B to $18.3B by 2030 at 50%+ CAGR.",
     sources: [{ label: "BCG Video Gaming Report 2026", url: "https://www.bcg.com/publications/2025/video-gaming-report-2026-next-era-of-growth" }],
   },
 ];
