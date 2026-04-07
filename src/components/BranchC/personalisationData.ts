@@ -1,5 +1,5 @@
 export type StudioScale = "indie" | "midsize" | "aaa" | "publisher";
-export type OutputType = "games" | "animation" | "vfx" | "virtualproduction" | "mixed";
+export type OutputType = "games" | "animation" | "vfx" | "mixed";
 export type TierId = "starter" | "studio" | "enterprise";
 
 export interface SourceEntry {
