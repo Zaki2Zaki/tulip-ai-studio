@@ -298,8 +298,11 @@ const METRICS_MIDSIZE_GAMES: MetricEntry[] = [
   },
   {
     name: "Production cost",
-    detail: "30 to 40% reduction in early-stage concept and texture work. Frees senior artists for hero assets and final polish.",
-    sources: [{ label: "Juego Studios Indie Game Development Cost Guide 2026", url: "https://juegostudio.com" }],
+    detail: "AI-assisted animation and rigging tools reduce labour hours by 30 to 40% while maintaining professional quality. Studios using optimised pipelines report 40% productivity gains and 30% fewer revision cycles. Freeing that capacity redirects your senior artists toward work that actually requires them.",
+    sources: [
+      { label: "Juego Studios — Game Development Costs 2026", url: "https://juegostudio.com" },
+      { label: "Juego Studios — Outsourcing Game Art 2025", url: "https://juegostudio.com" },
+    ],
   },
   {
     name: "Market positioning",
