@@ -265,10 +265,16 @@ const WorkflowBuilderPanel = ({
             Pipeline Lab — Strategic Briefing
           </p>
           <p className="font-display text-sm font-bold text-white mb-1">
-            Want the numbers first?
+            See the business case before the conversation.
           </p>
-          <p className="text-xs font-body text-white/60 mb-4 leading-relaxed">
-            Risk Scan + ROI Model tailored to your studio scale. Three questions, then we show you where the money is going.
+          <p className="text-xs font-body text-white mb-1 leading-relaxed">
+            <span className="text-gradient-gold">Five questions about your studio.</span>
+          </p>
+          <p className="text-xs font-body text-white mb-1 leading-relaxed">
+            A risk scan and ROI model built from published data across studios your size — your efficiency gap, the annual cost of inaction, and what recovery looks like at your scale.
+          </p>
+          <p className="text-xs font-body text-white mb-4 leading-relaxed">
+            Built for the executive who needs the numbers first — and the team making the case to get there.
           </p>
           <a
             href="/pipeline-lab"
