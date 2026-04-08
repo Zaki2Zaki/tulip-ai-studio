@@ -46,9 +46,9 @@ export default function PipelineLabPage() {
         <aside className="hidden md:flex flex-col w-56 shrink-0 border-r border-border/30 bg-card/30 px-5 py-10">
           <div className="mb-8">
             <p className="text-[9px] tracking-[0.2em] uppercase font-body font-semibold text-primary mb-1">
-              Pipeline Lab
+              Strategic Briefing
             </p>
-            <p className="text-xs font-body text-white/40">Branch C — Strategic Briefing</p>
+            <p className="text-xs font-body text-white/40">Branch C — Executive Summary</p>
           </div>
 
           <nav className="space-y-1">
