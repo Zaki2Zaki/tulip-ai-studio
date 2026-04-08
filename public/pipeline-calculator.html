@@ -892,15 +892,6 @@ function renderResults() {
     <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;margin-bottom:14px">Recommended Tulip engagement</div>
     <div class="invest-row">${tiersHtml}</div>
 
-    <div class="roi-proj">
-      <div class="rp-row"><span>Estimated annual efficiency opportunity</span><span class="rp-val grn" id="rp-save">${fmtC(r.totalSave)}</span></div>
-      <div class="rp-row"><span>Est. outsource coordination saving</span><span class="rp-val grn" id="rp-outsource">${fmtC(r.outsourceSave)}</span></div>
-      <div class="rp-row"><span>Indicative engagement cost (${r.tier})</span><span class="rp-val">${r.tierPrice}</span></div>
-      <div class="rp-row"><span>Indicative return multiple</span><span class="rp-val grad">${r.roi}× in year one</span></div>
-      <div class="rp-row"><span>Estimated delivery time reduction</span><span class="rp-val grn">${r.timeSavePct}% faster</span></div>
-      <div class="rp-row"><span>Time to Value</span><span class="rp-val">${r.tierPayback}</span></div>
-    </div>
-
     ${methHtml}
 
     <div class="result-cta">
