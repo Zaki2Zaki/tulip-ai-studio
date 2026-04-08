@@ -237,7 +237,7 @@ const WorkflowBuilderPanel = ({
       <p className="text-sm text-white font-body mb-6 max-w-sm mx-auto">
         Walk through the Tulip R&D Pipeline™ and simulate building your own AI production system.
       </p>
-      {/* Workflow Builder card */}
+      {/* Pipeline Lab Workflow Simulation card */}
       <div className="mt-6 rounded-2xl overflow-hidden text-left"
         style={{
           border: "1px solid transparent",
@@ -250,23 +250,16 @@ const WorkflowBuilderPanel = ({
           <p className="text-[15px] tracking-[0.2em] uppercase font-body font-semibold mb-2"
             style={{ color: "#e9d5ff" }}
           >
-            Workflow Builder — Pipeline Simulation
+            Pipeline Lab — Workflow Simulation
           </p>
           <p className="font-display text-sm font-bold text-white mb-2">
             Your pipeline has friction. Here is how to remove it.
           </p>
-          <div className="mb-2 flex flex-wrap">
-            {["5 stages", "9 friction points", "Pre-production → Output"].map((pill) => (
-              <span key={pill} style={{ fontSize: "11px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(255,255,255,0.2)", color: "#fff", background: "transparent", display: "inline-flex", marginRight: "6px", marginBottom: "8px" }}>
-                {pill}
-              </span>
-            ))}
-          </div>
-          <p className="text-xs font-body text-white mb-1 leading-relaxed">
-            Select the friction points slowing your pipeline. We map the AI tools, integration sequence, and agentic architecture that eliminates them — stage by stage, from pre-production to final output.
+          <p className="text-xs font-body mb-2 leading-relaxed">
+            <span className="text-gradient-gold">For Technical Artists, Pipeline TDs, and Producers.</span>
           </p>
           <p className="text-xs font-body text-white mb-4 leading-relaxed">
-            For Technical Artists, Pipeline TDs, and Producers.
+            Select the friction points slowing your pipeline. We map the AI tools, integration sequence, and agentic architecture that eliminates them — stage by stage, from pre-production to final output.
           </p>
           <button
             onClick={() => onStageChange(0)}
@@ -284,7 +277,7 @@ const WorkflowBuilderPanel = ({
         </div>
       </div>
 
-      {/* Pipeline Lab promo card */}
+      {/* Strategic Briefing Executive Summary card */}
       <div className="mt-4 rounded-2xl overflow-hidden text-left"
         style={{
           border: "1px solid transparent",
@@ -297,22 +290,19 @@ const WorkflowBuilderPanel = ({
           <p className="text-[15px] tracking-[0.2em] uppercase font-body font-semibold mb-2"
             style={{ color: "#e9d5ff" }}
           >
-            Pipeline Lab — Strategic Briefing
+            Strategic Briefing — Executive Summary
           </p>
-          <p className="font-display text-sm font-bold text-white mb-1">
+          <p className="font-display text-sm font-bold text-white mb-2">
             See the business case before the conversation.
           </p>
-          <p className="text-xs font-body text-white mb-1 leading-relaxed">
+          <p className="text-xs font-body mb-2 leading-relaxed">
             <span className="text-gradient-gold">Five questions about your studio.</span>
-          </p>
-          <p className="text-xs font-body text-white mb-1 leading-relaxed">
-            <span className="font-bold">Built for the executive</span> who needs the numbers first.
           </p>
           <p className="text-xs font-body text-white mb-4 leading-relaxed">
             A risk scan and ROI model built from published data across studios your size — your efficiency gap, the annual cost of inaction, and what recovery looks like at your scale.
           </p>
           <a
-            href="/pipeline-lab"
+            href="/strategic-briefing"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-display font-semibold text-xs transition-all"
             style={{
               border: "1px solid transparent",
@@ -322,7 +312,7 @@ const WorkflowBuilderPanel = ({
               color: "#e9d5ff",
             }}
           >
-            Open Pipeline Lab <ArrowRight className="w-3 h-3" />
+            Open Strategic Briefing <ArrowRight className="w-3 h-3" />
           </a>
         </div>
       </div>
