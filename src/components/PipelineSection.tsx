@@ -254,7 +254,7 @@ const WorkflowBuilderPanel = ({
         }}
       >
         <div className="px-5 py-4">
-          <p className="text-[13px] tracking-[0.2em] uppercase font-body font-semibold mb-2"
+          <p className="text-[15px] tracking-[0.2em] uppercase font-body font-semibold mb-2"
             style={{ color: "#e9d5ff" }}
           >
             Pipeline Lab — Strategic Briefing
