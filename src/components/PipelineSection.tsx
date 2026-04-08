@@ -295,11 +295,11 @@ const WorkflowBuilderPanel = ({
           <p className="font-display text-sm font-bold text-white mb-2">
             See the business case before the conversation.
           </p>
+          <p className="text-xs font-body mb-1 leading-relaxed">
+            <span className="text-gradient-gold font-bold">Built for the executive who needs the numbers first.</span>
+          </p>
           <p className="text-xs font-body mb-2 leading-relaxed">
             <span className="text-gradient-gold">Five questions about your studio.</span>
-          </p>
-          <p className="text-xs font-body text-white mb-1 leading-relaxed">
-            <span className="font-bold">Built for the executive</span> who needs the numbers first.
           </p>
           <p className="text-xs font-body text-white mb-4 leading-relaxed">
             A risk scan and ROI model built from published data across studios your size — your efficiency gap, the annual cost of inaction, and what recovery looks like at your scale.
