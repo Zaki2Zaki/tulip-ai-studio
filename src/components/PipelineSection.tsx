@@ -268,8 +268,8 @@ const WorkflowBuilderPanel = ({
           <p className="text-xs font-body text-white mb-4 leading-relaxed">
             For Technical Artists, Pipeline TDs, and Producers.
           </p>
-          <a
-            href="/#interactive-demo"
+          <button
+            onClick={() => onStageChange(0)}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-display font-semibold text-xs transition-all"
             style={{
               border: "1px solid transparent",
@@ -280,7 +280,7 @@ const WorkflowBuilderPanel = ({
             }}
           >
             Start Building <ArrowRight className="w-3 h-3" />
-          </a>
+          </button>
         </div>
       </div>
 
