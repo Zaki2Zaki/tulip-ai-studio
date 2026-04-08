@@ -254,13 +254,8 @@ const WorkflowBuilderPanel = ({
         }}
       >
         <div className="px-5 py-4">
-          <p className="text-[9px] tracking-[0.2em] uppercase font-body font-semibold mb-2"
-            style={{
-              background: "linear-gradient(90deg, #a78bfa, #c4b5fd, #e9d5ff)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
+          <p className="text-[11px] tracking-[0.2em] uppercase font-body font-semibold mb-2"
+            style={{ color: "#e9d5ff" }}
           >
             Pipeline Lab — Strategic Briefing
           </p>
@@ -274,7 +269,7 @@ const WorkflowBuilderPanel = ({
             A risk scan and ROI model built from published data across studios your size — your efficiency gap, the annual cost of inaction, and what recovery looks like at your scale.
           </p>
           <p className="text-xs font-body text-white mb-4 leading-relaxed">
-            Built for the executive who needs the numbers first — and the team making the case to get there.
+            <span className="font-bold">Built for the executive</span> who needs the numbers first — and the team making the case to get there.
           </p>
           <a
             href="/pipeline-lab"
