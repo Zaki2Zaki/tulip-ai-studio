@@ -368,7 +368,7 @@ const WorkflowBuilderPanel = ({
             <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "14px" }}>
               {["VP", "CTO", "Studio Head", "Chief Strategy Officer", "Product Management", "Operations"].map((r) => (
                 <span key={r} style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(167,139,250,0.35)", background: "rgba(167,139,250,0.07)", fontFamily: "inherit", display: "inline-block" }}>
-                  <span className="text-gradient-gold">{r}</span>
+                  <span style={{ background: "linear-gradient(135deg, hsl(200 40% 82%), hsl(260 30% 78%), hsl(320 25% 75%), hsl(200 35% 70%))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>{r}</span>
                 </span>
               ))}
             </div>
