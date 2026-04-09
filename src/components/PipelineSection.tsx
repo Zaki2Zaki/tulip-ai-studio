@@ -367,7 +367,7 @@ const WorkflowBuilderPanel = ({
               ))}
             </div>
             <a
-              href="/strategic-briefing"
+              href="/strategic-briefing?screen=studioProfile"
               style={{ background: "linear-gradient(rgb(20,20,20),rgb(20,20,20)) padding-box, linear-gradient(to right, rgb(167,139,250), rgb(196,181,253), rgb(233,213,255)) border-box", border: "1px solid transparent", borderRadius: "12px", color: "rgb(233,213,255)", fontSize: "12px", fontWeight: 600, padding: "0.5rem 1rem", display: "inline-flex", alignItems: "center", gap: "6px", fontFamily: "inherit", textDecoration: "none" }}
             >
               Open Strategic Briefing <ArrowRight style={{ width: "12px", height: "12px" }} />
