@@ -1508,24 +1508,6 @@ const PipelineSection = () => {
           <div className="hidden md:flex flex-col w-48 shrink-0 border-r border-primary/15 bg-black/20 p-4 gap-1">
             <p className="font-display font-bold text-sm text-white mb-0.5">Workflow</p>
             <p className="text-[10px] font-body text-white/50 mb-4">Pipeline N→1</p>
-            {/* Select a path button */}
-            <button
-              className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left text-xs font-body transition-all font-semibold"
-              style={{
-                background: "linear-gradient(rgb(20,20,20), rgb(20,20,20)) padding-box, linear-gradient(to right, rgb(167,139,250), rgb(196,181,253), rgb(233,213,255)) border-box",
-                border: "1px solid transparent",
-                borderRadius: "12px",
-                color: "rgb(233,213,255)",
-                marginBottom: "1.25rem",
-              }}
-              onClick={() => { window.location.href = "/strategic-briefing"; }}
-            >
-              <span
-                className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] font-bold"
-                style={{ background: "linear-gradient(135deg, rgb(167,139,250), rgb(233,213,255))", color: "rgb(10,10,10)" }}
-              >·</span>
-              Select a path
-            </button>
             {pipelineSteps.map((step, i) => {
               const stageNum = i + 1;
               const isActive = workflowStage === stageNum;
