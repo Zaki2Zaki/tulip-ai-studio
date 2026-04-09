@@ -208,7 +208,7 @@ function HomepageCard2() {
           <p style={{ fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgb(167,139,250)", marginBottom: "6px", fontFamily: "inherit" }}>
             Pipeline Diagnosis — Bottleneck Finder
           </p>
-          <p style={{ fontSize: "15px", fontWeight: 700, color: "#fff", lineHeight: 1.35, marginBottom: "6px", fontFamily: "inherit" }}>
+          <p style={{ fontSize: "18px", fontWeight: 700, color: "#fff", lineHeight: 1.35, marginBottom: "6px", fontFamily: "inherit" }}>
             Find where your studio is losing time.
           </p>
           <p style={{ fontSize: "13px", color: "#fff", lineHeight: 1.65, marginBottom: "12px", fontFamily: "inherit" }}>
