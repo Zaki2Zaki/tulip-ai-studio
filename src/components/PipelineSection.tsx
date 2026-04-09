@@ -205,7 +205,7 @@ function HomepageCard2() {
           <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "rgb(167,139,250)", display: "block" }} />
         </span>
         <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{ fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgb(167,139,250)", marginBottom: "6px", fontFamily: "inherit" }}>
+          <p style={{ fontSize: "13px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgb(167,139,250)", marginBottom: "6px", fontFamily: "inherit" }}>
             Pipeline Diagnosis — Bottleneck Finder
           </p>
           <p style={{ fontSize: "18px", fontWeight: 700, color: "#fff", lineHeight: 1.35, marginBottom: "6px", fontFamily: "inherit" }}>
@@ -314,7 +314,7 @@ const WorkflowBuilderPanel = ({
           {/* Radio — empty */}
           <span style={{ width: "17px", height: "17px", borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.3)", background: "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "3px" }} />
           <div style={{ flex: 1, minWidth: 0 }}>
-            <p style={{ fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgb(167,139,250)", marginBottom: "6px", fontFamily: "inherit" }}>
+            <p style={{ fontSize: "13px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgb(167,139,250)", marginBottom: "6px", fontFamily: "inherit" }}>
               Pipeline Lab — Workflow Simulation
             </p>
             <p style={{ fontSize: "18px", fontWeight: 700, color: "#fff", lineHeight: 1.35, marginBottom: "6px", fontFamily: "inherit" }}>
@@ -353,7 +353,7 @@ const WorkflowBuilderPanel = ({
           {/* Radio — empty */}
           <span style={{ width: "17px", height: "17px", borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.3)", background: "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "3px" }} />
           <div style={{ flex: 1, minWidth: 0 }}>
-            <p style={{ fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgb(167,139,250)", marginBottom: "6px", fontFamily: "inherit" }}>
+            <p style={{ fontSize: "13px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgb(167,139,250)", marginBottom: "6px", fontFamily: "inherit" }}>
               Strategic Briefing — Executive Summary
             </p>
             <p style={{ fontSize: "18px", fontWeight: 700, color: "#fff", lineHeight: 1.35, marginBottom: "6px", fontFamily: "inherit" }}>
