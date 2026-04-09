@@ -7,17 +7,13 @@ import type { BudgetBreakdown } from "@/components/BranchC/RiskScan";
 import ROIModel from "@/components/BranchC/ROIModel";
 import ExecutiveSummary from "@/components/BranchC/ExecutiveSummary";
 
-const STEPS = [
+// Screen 0 = Entry, 1 = StudioProfile, 2 = RiskScan, 3 = ROIModel, 4 = ExecutiveSummary
+const SIDEBAR_ITEMS = [
+  { id: 0, label: "Select a path" },
   { id: 1, label: "Studio Profile" },
   { id: 2, label: "Risk Scan" },
   { id: 3, label: "ROI Model" },
   { id: 4, label: "Executive Summary" },
-];
-
-const BRANCHES = [
-  { label: "Tool Benchmarking", sub: "Branch A" },
-  { label: "Bottleneck Finder", sub: "Branch B" },
-  { label: "Executive Summary", sub: "Branch C" },
 ];
 
 const DEFAULT_BREAKDOWN: BudgetBreakdown = {
@@ -30,16 +26,17 @@ const DEFAULT_BREAKDOWN: BudgetBreakdown = {
 };
 
 export default function PipelineLabPage() {
+  // Always start on the Entry screen
   const [currentScreen, setCurrentScreen] = useState(0);
 
-  // Studio Profile
+  // Studio Profile state
   const [studioScale, setStudioScale] = useState("");
   const [outputType, setOutputType] = useState("");
   const [budgetRange, setBudgetRange] = useState("");
   const [outsourcePct, setOutsourcePct] = useState("0.20");
   const [rdBudget, setRdBudget] = useState("none");
 
-  // Risk Scan (budget breakdown)
+  // Risk Scan state
   const [breakdown, setBreakdown] = useState<BudgetBreakdown>(DEFAULT_BREAKDOWN);
 
   const goTo = (n: number) => setCurrentScreen(n);
@@ -58,85 +55,51 @@ export default function PipelineLabPage() {
             <p className="text-xs font-body text-white/40">Branch C — Executive Summary</p>
           </div>
 
-          {/* Before path selected: show three branch names */}
-          {currentScreen === 0 ? (
-            <nav className="space-y-1">
-              {BRANCHES.map((branch) => (
-                <div
-                  key={branch.sub}
-                  className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-body text-white/25"
+          <nav className="space-y-1">
+            {SIDEBAR_ITEMS.map((item) => {
+              const done = item.id > 0 && item.id < currentScreen;
+              const active = item.id === currentScreen;
+              const clickable = done || (item.id === 0 && currentScreen > 0);
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => clickable ? goTo(item.id) : undefined}
+                  disabled={!active && !clickable}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left text-xs font-body transition-all ${
+                    active
+                      ? "font-semibold text-white"
+                      : clickable
+                      ? "text-white/60 hover:text-white cursor-pointer"
+                      : "text-white/25 cursor-default"
+                  }`}
+                  style={active ? {
+                    background:
+                      "linear-gradient(hsl(0 0% 8%), hsl(0 0% 8%)) padding-box, " +
+                      "linear-gradient(to right, #a78bfa, #c4b5fd, #e9d5ff) border-box",
+                    border: "1px solid transparent",
+                    borderRadius: "12px",
+                    color: "#e9d5ff",
+                  } : undefined}
                 >
                   <span
-                    className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px]"
-                    style={{ background: "transparent", color: "#555", border: "1px solid #333" }}
+                    className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] font-bold"
+                    style={
+                      done
+                        ? { background: "#22c55e20", color: "#22c55e", border: "1px solid #22c55e40" }
+                        : active
+                        ? { background: "linear-gradient(135deg, #a78bfa, #e9d5ff)", color: "#0a0a0a" }
+                        : { background: "transparent", color: "#555", border: "1px solid #333" }
+                    }
                   >
-                    —
+                    {done ? "✓" : item.id === 0 ? "·" : item.id}
                   </span>
-                  <span>
-                    <span className="block text-[11px] font-semibold">{branch.label}</span>
-                    <span className="block text-[10px] opacity-60">{branch.sub}</span>
-                  </span>
-                </div>
-              ))}
-            </nav>
-          ) : (
-            /* After path selected: show numbered steps */
-            <nav className="space-y-1">
-              {STEPS.map((step) => {
-                const done = step.id < currentScreen;
-                const active = step.id === currentScreen;
-                return (
-                  <button
-                    key={step.id}
-                    onClick={() => done && goTo(step.id)}
-                    disabled={!done && !active}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left text-xs font-body transition-all ${
-                      active
-                        ? "font-semibold"
-                        : done
-                        ? "text-white/60 hover:text-white cursor-pointer"
-                        : "text-white/25 cursor-default"
-                    }`}
-                    style={active ? {
-                      background:
-                        "linear-gradient(hsl(0 0% 8%), hsl(0 0% 8%)) padding-box, " +
-                        "linear-gradient(to right, #a78bfa, #c4b5fd, #e9d5ff) border-box",
-                      border: "1px solid transparent",
-                      borderRadius: "12px",
-                      color: "#e9d5ff",
-                    } : undefined}
-                  >
-                    <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-[10px] font-bold"
-                      style={
-                        done
-                          ? { background: "#22c55e20", color: "#22c55e", border: "1px solid #22c55e40" }
-                          : active
-                          ? { background: "linear-gradient(135deg, #a78bfa, #e9d5ff)", color: "#0a0a0a" }
-                          : { background: "transparent", color: "#555", border: "1px solid #333" }
-                      }
-                    >
-                      {done ? "✓" : step.id}
-                    </span>
-                    {step.label}
-                  </button>
-                );
-              })}
-            </nav>
-          )}
+                  {item.label}
+                </button>
+              );
+            })}
+          </nav>
 
           <div className="mt-auto pt-8 border-t border-border/20">
-            {currentScreen > 0 && (
-              <button
-                onClick={() => goTo(0)}
-                className="flex items-center gap-1.5 text-xs font-body text-white/40 hover:text-white transition-colors mb-3"
-              >
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m15 18-6-6 6-6"/>
-                </svg>
-                Change path
-              </button>
-            )}
             <a
               href="/"
               className="flex items-center gap-1.5 text-xs font-body text-white/40 hover:text-white transition-colors"
@@ -155,11 +118,11 @@ export default function PipelineLabPage() {
         {/* ── Mobile stepper (hidden on entry screen) ── */}
         {currentScreen > 0 && (
           <div className="md:hidden fixed top-16 left-0 right-0 z-30 bg-background/95 backdrop-blur border-b border-border/20 px-4 py-3 flex items-center gap-2 overflow-x-auto">
-            {STEPS.map((step, i) => {
-              const done = step.id < currentScreen;
-              const active = step.id === currentScreen;
+            {SIDEBAR_ITEMS.filter((i) => i.id > 0).map((item, idx, arr) => {
+              const done = item.id < currentScreen;
+              const active = item.id === currentScreen;
               return (
-                <div key={step.id} className="flex items-center gap-1.5 shrink-0">
+                <div key={item.id} className="flex items-center gap-1.5 shrink-0">
                   <span
                     className="w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold shrink-0"
                     style={
@@ -170,16 +133,12 @@ export default function PipelineLabPage() {
                         : { background: "transparent", color: "#555", border: "1px solid #333" }
                     }
                   >
-                    {done ? "✓" : step.id}
+                    {done ? "✓" : item.id}
                   </span>
-                  <span
-                    className={`text-[10px] font-body whitespace-nowrap ${
-                      active ? "text-white font-semibold" : done ? "text-white/50" : "text-white/25"
-                    }`}
-                  >
-                    {step.label}
+                  <span className={`text-[10px] font-body whitespace-nowrap ${active ? "text-white font-semibold" : done ? "text-white/50" : "text-white/25"}`}>
+                    {item.label}
                   </span>
-                  {i < STEPS.length - 1 && (
+                  {idx < arr.length - 1 && (
                     <span className="text-white/20 text-[10px] ml-1">›</span>
                   )}
                 </div>
