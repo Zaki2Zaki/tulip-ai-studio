@@ -186,6 +186,75 @@ const ToolLogo = ({ label }: { label: string }) => {
   );
 };
 
+// ── Homepage Card 2 — Pipeline Diagnosis (needs email state) ──────────────────
+function HomepageCard2() {
+  const [showEmail, setShowEmail] = useState(false);
+  const [email, setEmail] = useState("");
+  const [notified, setNotified] = useState(false);
+  const handleNotify = () => {
+    if (!email.trim()) return;
+    setNotified(true);
+    setShowEmail(false);
+    setEmail("");
+  };
+  return (
+    <div className="text-left" style={{ border: "0.5px solid rgba(167,139,250,0.55)", borderRadius: "10px", padding: "1.25rem 1.375rem", background: "rgba(167,139,250,0.03)", marginBottom: "1rem" }}>
+      <div style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
+        {/* Radio — filled (selected state) */}
+        <span style={{ width: "17px", height: "17px", borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.3)", background: "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "3px" }}>
+          <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "rgb(167,139,250)", display: "block" }} />
+        </span>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p style={{ fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgb(167,139,250)", marginBottom: "6px", fontFamily: "inherit" }}>
+            Pipeline Diagnosis — Bottleneck Finder
+          </p>
+          <p style={{ fontSize: "15px", fontWeight: 700, color: "#fff", lineHeight: 1.35, marginBottom: "6px", fontFamily: "inherit" }}>
+            Find where your studio is losing time.
+          </p>
+          <p style={{ fontSize: "13px", color: "#fff", lineHeight: 1.65, marginBottom: "12px", fontFamily: "inherit" }}>
+            A structured diagnosis of your production pipeline. Seven questions about your schedule, handoffs, and revision cycles — mapped to the specific stages where AI integration delivers the fastest time recovery.
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "14px" }}>
+            <span style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.4)", fontFamily: "inherit" }}>Coming soon</span>
+            {["Producer", "Art Director", "Development Director", "Project Manager", "Program Manager"].map((r) => (
+              <span key={r} style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(167,139,250,0.35)", background: "rgba(167,139,250,0.07)", fontFamily: "inherit" }} className="text-gradient-gold">{r}</span>
+            ))}
+          </div>
+          <button
+            onClick={() => setShowEmail(true)}
+            style={{ background: "linear-gradient(rgb(20,20,20),rgb(20,20,20)) padding-box, linear-gradient(to right, rgb(167,139,250), rgb(196,181,253), rgb(233,213,255)) border-box", border: "1px solid transparent", borderRadius: "12px", color: "rgb(233,213,255)", fontSize: "12px", fontWeight: 600, padding: "0.5rem 1rem", display: "inline-flex", alignItems: "center", gap: "6px", fontFamily: "inherit", cursor: "pointer" }}
+          >
+            Notify me when ready <ArrowRight style={{ width: "12px", height: "12px" }} />
+          </button>
+          {showEmail && !notified && (
+            <div style={{ display: "flex", gap: "8px", alignItems: "center", marginTop: "12px", maxWidth: "360px" }}>
+              <input
+                type="email"
+                placeholder="Your work email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleNotify()}
+                autoFocus
+                style={{ flex: 1, padding: "8px 14px", borderRadius: "8px", border: "0.5px solid rgba(255,255,255,0.15)", background: "rgba(255,255,255,0.05)", color: "#fff", fontSize: "13px", fontFamily: "inherit", outline: "none" }}
+              />
+              <button
+                onClick={handleNotify}
+                disabled={!email.trim()}
+                style={{ display: "inline-flex", alignItems: "center", gap: "6px", padding: "8px 16px", borderRadius: "99px", border: "0.5px solid rgba(255,255,255,0.25)", background: "transparent", color: "#fff", fontSize: "12px", fontWeight: 500, fontFamily: "inherit", cursor: email.trim() ? "pointer" : "not-allowed", opacity: email.trim() ? 1 : 0.4 }}
+              >
+                Notify me <ArrowRight style={{ width: "12px", height: "12px" }} />
+              </button>
+            </div>
+          )}
+          {notified && (
+            <p style={{ fontSize: "13px", color: "#fff", fontFamily: "inherit", marginTop: "10px" }}>Got it. We will be in touch.</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const WorkflowBuilderPanel = ({
   stage,
   onStageChange,
