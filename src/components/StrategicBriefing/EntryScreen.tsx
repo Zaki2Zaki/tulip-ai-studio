@@ -185,14 +185,8 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
 
         {/* ── Card B — Pipeline Diagnosis ── */}
         <button onClick={() => { setSelected("b"); setShowEmailCapture(false); setNotified(false); }} style={cardStyle(selected === "b")}>
-          {/* Radio */}
           <span style={radioStyle(selected === "b")}>
-            {selected === "b" && (
-              <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "#a78bfa", display: "block" }} />
-            )}
-            {selected !== "b" && (
-              <span style={{ width: "17px", height: "17px", borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.3)", display: "block" }} />
-            )}
+            {selected === "b" && <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "#a78bfa", display: "block" }} />}
           </span>
           <div style={{ flex: 1, minWidth: 0 }}>
             <p style={CARD_EYEBROW}>Pipeline Diagnosis — Bottleneck Finder</p>
