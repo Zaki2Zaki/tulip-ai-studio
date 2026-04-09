@@ -317,7 +317,7 @@ const WorkflowBuilderPanel = ({
             <p style={{ fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgb(167,139,250)", marginBottom: "6px", fontFamily: "inherit" }}>
               Pipeline Lab — Workflow Simulation
             </p>
-            <p style={{ fontSize: "15px", fontWeight: 700, color: "#fff", lineHeight: 1.35, marginBottom: "6px", fontFamily: "inherit" }}>
+            <p style={{ fontSize: "18px", fontWeight: 700, color: "#fff", lineHeight: 1.35, marginBottom: "6px", fontFamily: "inherit" }}>
               Your pipeline has friction. Here is how to remove it.
             </p>
             <p style={{ fontSize: "13px", fontWeight: 500, marginBottom: "8px", fontFamily: "inherit" }}>
