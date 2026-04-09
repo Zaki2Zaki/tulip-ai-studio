@@ -165,18 +165,18 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
               }}>
                 Live
               </span>
-              {["Technical Artist", "Pipeline TD", "VFX Supervisor", "Creative Technologist"].map((role) => (
+              {["Pipeline TD", "Technical Artist", "VFX Supervisor", "Solutions Engineer"].map((role) => (
                 <span key={role} style={{
-                  fontSize: "10px",
+                  fontSize: "11px",
                   fontWeight: 500,
-                  padding: "3px 10px",
+                  padding: "4px 12px",
                   borderRadius: "99px",
                   border: "0.5px solid rgba(167,139,250,0.35)",
                   background: "rgba(167,139,250,0.07)",
                   fontFamily: "inherit",
-                  ...GRADIENT_PILL_TEXT,
+                  display: "inline-block",
                 }}>
-                  {role}
+                  <span style={GRADIENT_PILL_TEXT}>{role}</span>
                 </span>
               ))}
             </div>
