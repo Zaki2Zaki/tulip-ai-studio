@@ -142,14 +142,8 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
 
         {/* ── Card A — Pipeline Lab Workflow Simulation ── */}
         <button onClick={() => setSelected("a")} style={cardStyle(selected === "a")}>
-          {/* Radio */}
           <span style={radioStyle(selected === "a")}>
-            {selected === "a" && (
-              <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "#a78bfa", display: "block" }} />
-            )}
-            {selected !== "a" && (
-              <span style={{ width: "17px", height: "17px", borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.3)", display: "block" }} />
-            )}
+            {selected === "a" && <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "#a78bfa", display: "block" }} />}
           </span>
           <div style={{ flex: 1, minWidth: 0 }}>
             <p style={CARD_EYEBROW}>Pipeline Lab — Workflow Simulation</p>
