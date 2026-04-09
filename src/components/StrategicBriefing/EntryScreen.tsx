@@ -1,242 +1,361 @@
 import { useState } from "react";
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface EntryScreenProps {
   onNext: () => void;
 }
 
-const OPTIONS = [
-  {
-    id: "a" as const,
-    title: "Benchmark AI tools in my pipeline",
-    description:
-      "Compare tools by pipeline stage. See what integrates with your stack and what delivers the fastest return on your specific workflow.",
-    roles: ["Technical Artist", "Pipeline TD", "VFX Supervisor"],
-    comingSoon: true,
-    borderColor: "rgba(29,158,117,0.5)",
-    tagBg: "rgba(29,158,117,0.12)",
-    tagColor: "rgb(52,211,153)",
-  },
-  {
-    id: "b" as const,
-    title: "Find where my studio is losing time",
-    description:
-      "Map the bottlenecks slowing your production. Identify which pipeline stages are costing the most hours and where AI integration delivers the fastest recovery.",
-    roles: ["Producer", "Art Director", "Development Director"],
-    comingSoon: true,
-    borderColor: "rgba(186,117,23,0.5)",
-    tagBg: "rgba(186,117,23,0.12)",
-    tagColor: "rgb(251,191,36)",
-  },
-  {
-    id: "c" as const,
-    title:
-      "Understand how AI reshapes our competitive position — and what it costs to fall behind",
-    description:
-      "Five questions about your studio. A risk scan and ROI model built from published data across studios your size — your efficiency gap, the annual cost of inaction, and what recovery looks like at your scale.",
-    roles: ["VP", "CTO", "Studio Head", "CSO"],
-    comingSoon: false,
-    borderColor: "rgba(127,119,221,0.5)",
-    tagBg: "rgba(127,119,221,0.15)",
-    tagColor: "rgb(167,139,250)",
-  },
-] as const;
+// Shared gradient pill text style
+const GRADIENT_PILL_TEXT: React.CSSProperties = {
+  background: "linear-gradient(90deg, #a78bfa, #c084fc, #e879a0)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  backgroundClip: "text",
+};
 
-type OptionId = "a" | "b" | "c";
+const CARD_EYEBROW: React.CSSProperties = {
+  fontSize: "10px",
+  fontWeight: 500,
+  letterSpacing: "0.08em",
+  textTransform: "uppercase",
+  color: "#a78bfa",
+  fontFamily: "inherit",
+  marginBottom: "6px",
+};
+
+const CARD_TITLE: React.CSSProperties = {
+  fontSize: "15px",
+  fontWeight: 700,
+  color: "#fff",
+  lineHeight: 1.35,
+  fontFamily: "inherit",
+  marginBottom: "8px",
+};
+
+const CARD_BODY: React.CSSProperties = {
+  fontSize: "13px",
+  color: "#fff",
+  lineHeight: 1.65,
+  fontFamily: "inherit",
+  marginBottom: "12px",
+};
 
 export default function EntryScreen({ onNext }: EntryScreenProps) {
-  const [selected, setSelected] = useState<OptionId | null>(null);
-  const [showModal, setShowModal] = useState(false);
+  const [selected, setSelected] = useState<"a" | "b" | "c">("c");
+  const [showEmailCapture, setShowEmailCapture] = useState(false);
   const [email, setEmail] = useState("");
-  const [notified, setNotified] = useState<Set<OptionId>>(new Set());
+  const [notified, setNotified] = useState(false);
 
   const handleCTA = () => {
-    if (!selected) return;
     if (selected === "c") {
       onNext();
-    } else {
-      setShowModal(true);
+    } else if (selected === "a") {
+      window.location.href = "/#interactive-demo";
+    } else if (selected === "b") {
+      setShowEmailCapture(true);
     }
   };
 
   const handleSubmitEmail = () => {
     if (!email.trim()) return;
-    if (selected && selected !== "c") {
-      setNotified((prev) => new Set(prev).add(selected));
-    }
-    setShowModal(false);
+    setNotified(true);
+    setShowEmailCapture(false);
     setEmail("");
   };
 
   const ctaLabel =
-    !selected
-      ? "Select a path"
-      : selected === "c"
+    selected === "c"
       ? "Start Briefing"
+      : selected === "a"
+      ? "Start Building"
       : "Notify me when ready";
 
+  const radioStyle = (isActive: boolean): React.CSSProperties => ({
+    width: "17px",
+    height: "17px",
+    borderRadius: "50%",
+    border: isActive ? "none" : "0.5px solid rgba(255,255,255,0.3)",
+    background: isActive ? "transparent" : "transparent",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexShrink: 0,
+    marginTop: "2px",
+  });
+
+  const cardStyle = (isActive: boolean): React.CSSProperties => ({
+    border: isActive
+      ? "0.5px solid rgba(167,139,250,0.55)"
+      : "0.5px solid rgba(255,255,255,0.12)",
+    borderRadius: "10px",
+    padding: "1.25rem 1.375rem",
+    background: isActive ? "rgba(167,139,250,0.03)" : "rgba(255,255,255,0.02)",
+    display: "flex",
+    alignItems: "flex-start",
+    gap: "12px",
+    width: "100%",
+    textAlign: "left",
+    cursor: "pointer",
+    transition: "border-color 0.15s, background 0.15s",
+  });
+
   return (
-    <div className="max-w-2xl" style={{ color: "white", fontSize: "14px" }}>
-      <p className="text-[10px] tracking-[0.2em] uppercase text-primary font-body font-semibold mb-3">
+    <div style={{ maxWidth: "640px", color: "white", fontSize: "14px", fontFamily: "inherit" }}>
+      {/* Eyebrow */}
+      <p style={{
+        fontSize: "10px",
+        fontWeight: 500,
+        letterSpacing: "0.09em",
+        textTransform: "uppercase",
+        color: "#a78bfa",
+        marginBottom: "12px",
+        fontFamily: "inherit",
+      }}>
         Strategic Briefing
       </p>
-      <h2
-        className="font-display text-2xl md:text-3xl font-bold text-white mb-2"
-        style={{ letterSpacing: "-0.02em" }}
-      >
+
+      {/* Headline */}
+      <h2 style={{
+        fontSize: "26px",
+        fontWeight: 700,
+        color: "#fff",
+        marginBottom: "10px",
+        fontFamily: "inherit",
+        lineHeight: 1.2,
+      }}>
         Where do you want to start?
       </h2>
-      <p className="text-[15px] text-white font-body mb-8 leading-relaxed">
+
+      {/* Subheading */}
+      <p style={{
+        fontSize: "14px",
+        color: "#fff",
+        lineHeight: 1.6,
+        marginBottom: "28px",
+        fontFamily: "inherit",
+      }}>
         Three paths. Each one built for a different role and a different question.
       </p>
 
-      <div className="space-y-3 mb-8">
-        {OPTIONS.map((opt) => {
-          const active = selected === opt.id;
-          const confirmed = notified.has(opt.id as Exclude<OptionId, "c">);
+      {/* Cards */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "24px" }}>
 
-          return (
-            <button
-              key={opt.id}
-              onClick={() => setSelected(opt.id)}
-              className="w-full text-left px-4 py-4 rounded-xl transition-all"
-              style={
-                active
-                  ? {
-                      border: `2px solid ${opt.borderColor}`,
-                      background: "hsl(0 0% 6%)",
-                      borderRadius: "12px",
-                    }
-                  : {
-                      border: "1px solid rgba(255,255,255,0.1)",
-                      background: "hsl(0 0% 7%)",
-                      borderRadius: "12px",
-                    }
-              }
-            >
-              <div className="flex items-start gap-3">
-                {/* Radio */}
-                <span
-                  className="w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5"
-                  style={{
-                    borderColor: active ? opt.tagColor : "#555",
-                    background: active ? opt.tagColor : "transparent",
-                  }}
-                >
-                  {active && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-white" />
-                  )}
+        {/* ── Card A — Pipeline Lab Workflow Simulation ── */}
+        <button onClick={() => setSelected("a")} style={cardStyle(selected === "a")}>
+          {/* Radio */}
+          <span style={radioStyle(selected === "a")}>
+            {selected === "a" && (
+              <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "#a78bfa", display: "block" }} />
+            )}
+            {selected !== "a" && (
+              <span style={{ width: "17px", height: "17px", borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.3)", display: "block" }} />
+            )}
+          </span>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={CARD_EYEBROW}>Pipeline Lab — Workflow Simulation</p>
+            <p style={CARD_TITLE}>Your pipeline has friction. Here is how to remove it.</p>
+            <p style={CARD_BODY}>
+              Select the friction points slowing your pipeline — version control conflicts, tool integration failures, manual review bottlenecks, and more. We map the AI tools and integration sequence that eliminates them across your production stages.
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+              {/* Live tag */}
+              <span style={{
+                fontSize: "10px",
+                fontWeight: 500,
+                padding: "3px 10px",
+                borderRadius: "99px",
+                border: "0.5px solid rgba(29,158,117,0.35)",
+                background: "rgba(29,158,117,0.07)",
+                color: "#5DCAA5",
+                fontFamily: "inherit",
+              }}>
+                Live
+              </span>
+              {["Technical Artist", "Pipeline TD", "VFX Supervisor", "Creative Technologist"].map((role) => (
+                <span key={role} style={{
+                  fontSize: "10px",
+                  fontWeight: 500,
+                  padding: "3px 10px",
+                  borderRadius: "99px",
+                  border: "0.5px solid rgba(167,139,250,0.35)",
+                  background: "rgba(167,139,250,0.07)",
+                  fontFamily: "inherit",
+                  ...GRADIENT_PILL_TEXT,
+                }}>
+                  {role}
                 </span>
+              ))}
+            </div>
+          </div>
+        </button>
 
-                <div className="flex-1 min-w-0">
-                  <p className="text-[15px] font-body font-semibold text-white mb-1 leading-snug">
-                    {opt.title}
-                  </p>
-                  <p className="text-[13px] font-body text-white leading-relaxed mb-2">
-                    {opt.description}
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {opt.roles.map((role) => (
-                      <span
-                        key={role}
-                        style={{
-                          fontSize: "10px",
-                          fontWeight: 600,
-                          padding: "2px 8px",
-                          borderRadius: "99px",
-                          background: opt.tagBg,
-                          color: opt.tagColor,
-                          border: `1px solid ${opt.borderColor}`,
-                          fontFamily: "inherit",
-                        }}
-                      >
-                        {role}
-                      </span>
-                    ))}
-                  </div>
-                  {confirmed && (
-                    <p
-                      className="text-xs font-body mt-2"
-                      style={{ color: opt.tagColor }}
-                    >
-                      Got it. We'll be in touch.
-                    </p>
-                  )}
-                </div>
-              </div>
-            </button>
-          );
-        })}
+        {/* ── Card B — Pipeline Diagnosis ── */}
+        <button onClick={() => { setSelected("b"); setShowEmailCapture(false); setNotified(false); }} style={cardStyle(selected === "b")}>
+          {/* Radio */}
+          <span style={radioStyle(selected === "b")}>
+            {selected === "b" && (
+              <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "#a78bfa", display: "block" }} />
+            )}
+            {selected !== "b" && (
+              <span style={{ width: "17px", height: "17px", borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.3)", display: "block" }} />
+            )}
+          </span>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={CARD_EYEBROW}>Pipeline Diagnosis — Bottleneck Finder</p>
+            <p style={CARD_TITLE}>Find where your studio is losing time.</p>
+            <p style={CARD_BODY}>
+              A structured diagnosis of your production pipeline. Seven questions about your schedule, handoffs, and revision cycles — mapped to the specific stages where AI integration delivers the fastest time recovery.
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+              {/* Coming soon tag */}
+              <span style={{
+                fontSize: "10px",
+                fontWeight: 500,
+                padding: "3px 10px",
+                borderRadius: "99px",
+                border: "0.5px solid rgba(255,255,255,0.1)",
+                background: "rgba(255,255,255,0.03)",
+                color: "rgba(255,255,255,0.4)",
+                fontFamily: "inherit",
+              }}>
+                Coming soon
+              </span>
+              {["Producer", "Art Director", "Development Director", "Project Manager", "Program Manager"].map((role) => (
+                <span key={role} style={{
+                  fontSize: "10px",
+                  fontWeight: 500,
+                  padding: "3px 10px",
+                  borderRadius: "99px",
+                  border: "0.5px solid rgba(167,139,250,0.35)",
+                  background: "rgba(167,139,250,0.07)",
+                  fontFamily: "inherit",
+                  ...GRADIENT_PILL_TEXT,
+                }}>
+                  {role}
+                </span>
+              ))}
+            </div>
+          </div>
+        </button>
+
+        {/* ── Card C — Strategic Briefing ── */}
+        <button onClick={() => { setSelected("c"); setShowEmailCapture(false); }} style={cardStyle(selected === "c")}>
+          {/* Radio */}
+          <span style={radioStyle(selected === "c")}>
+            {selected === "c" && (
+              <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "#a78bfa", display: "block" }} />
+            )}
+            {selected !== "c" && (
+              <span style={{ width: "17px", height: "17px", borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.3)", display: "block" }} />
+            )}
+          </span>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={CARD_EYEBROW}>Strategic Briefing — Executive Summary</p>
+            <p style={CARD_TITLE}>See the business case before the conversation.</p>
+            {/* Gradient line */}
+            <p style={{ fontSize: "13px", fontWeight: 500, marginBottom: "8px", fontFamily: "inherit", ...GRADIENT_PILL_TEXT }}>
+              Five questions about your studio.
+            </p>
+            <p style={CARD_BODY}>
+              A risk scan and ROI model built from published data across studios your size — your efficiency gap, the annual cost of inaction, and what recovery looks like at your scale.
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+              {["VP", "CTO", "Studio Head", "CSO", "Product Manager"].map((role) => (
+                <span key={role} style={{
+                  fontSize: "10px",
+                  fontWeight: 500,
+                  padding: "3px 10px",
+                  borderRadius: "99px",
+                  border: "0.5px solid rgba(167,139,250,0.35)",
+                  background: "rgba(167,139,250,0.07)",
+                  fontFamily: "inherit",
+                  ...GRADIENT_PILL_TEXT,
+                }}>
+                  {role}
+                </span>
+              ))}
+            </div>
+          </div>
+        </button>
       </div>
 
-      {/* CTA */}
+      {/* CTA button */}
       <button
-        disabled={!selected}
         onClick={handleCTA}
-        className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed"
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "8px",
+          padding: "0.5rem 1.375rem",
+          borderRadius: "99px",
+          border: "0.5px solid rgba(255,255,255,0.25)",
+          background: "transparent",
+          color: "#fff",
+          fontSize: "13px",
+          fontWeight: 500,
+          fontFamily: "inherit",
+          cursor: "pointer",
+          transition: "opacity 0.15s",
+        }}
       >
-        {ctaLabel}
-        {selected && <ArrowRight className="w-3.5 h-3.5" />}
+        {ctaLabel} <ArrowRight style={{ width: "13px", height: "13px" }} />
       </button>
 
-      {/* Email capture modal */}
-      {showModal && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center"
-          style={{ background: "rgba(0,0,0,0.7)" }}
-          onClick={() => setShowModal(false)}
-        >
-          <div
-            className="rounded-2xl p-6 max-w-sm w-full mx-4"
-            style={{
-              background: "hsl(0 0% 8%)",
-              border: "1px solid rgba(255,255,255,0.12)",
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-start justify-between mb-4">
-              <div>
-                <p
-                  className="text-[10px] tracking-[0.2em] uppercase font-body font-semibold mb-1"
-                  style={{ color: "#e9d5ff" }}
-                >
-                  Coming Soon
-                </p>
-                <p className="font-display text-base font-bold text-white">
-                  We'll let you know when this path opens.
-                </p>
-              </div>
+      {/* Inline email capture (Card B) */}
+      {selected === "b" && showEmailCapture && (
+        <div style={{ marginTop: "16px", maxWidth: "360px" }}>
+          {notified ? (
+            <p style={{ fontSize: "13px", color: "#fff", fontFamily: "inherit" }}>
+              Got it. We will be in touch.
+            </p>
+          ) : (
+            <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+              <input
+                type="email"
+                placeholder="Your work email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSubmitEmail()}
+                autoFocus
+                style={{
+                  flex: 1,
+                  padding: "8px 14px",
+                  borderRadius: "8px",
+                  border: "0.5px solid rgba(255,255,255,0.15)",
+                  background: "rgba(255,255,255,0.05)",
+                  color: "#fff",
+                  fontSize: "13px",
+                  fontFamily: "inherit",
+                  outline: "none",
+                }}
+              />
               <button
-                onClick={() => setShowModal(false)}
-                className="text-white/40 hover:text-white transition-colors ml-3 shrink-0 mt-0.5"
+                onClick={handleSubmitEmail}
+                disabled={!email.trim()}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "8px 16px",
+                  borderRadius: "99px",
+                  border: "0.5px solid rgba(255,255,255,0.25)",
+                  background: "transparent",
+                  color: "#fff",
+                  fontSize: "12px",
+                  fontWeight: 500,
+                  fontFamily: "inherit",
+                  cursor: email.trim() ? "pointer" : "not-allowed",
+                  opacity: email.trim() ? 1 : 0.4,
+                }}
               >
-                <X className="w-4 h-4" />
+                Notify me <ArrowRight style={{ width: "12px", height: "12px" }} />
               </button>
             </div>
-            <input
-              type="email"
-              placeholder="your@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSubmitEmail()}
-              className="w-full mb-3 px-4 py-2.5 rounded-xl text-sm font-body text-white placeholder:text-white/30 outline-none"
-              style={{
-                background: "hsl(0 0% 12%)",
-                border: "1px solid rgba(255,255,255,0.1)",
-                fontSize: "14px",
-              }}
-              autoFocus
-            />
-            <button
-              onClick={handleSubmitEmail}
-              disabled={!email.trim()}
-              className="w-full inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-2.5 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              Notify me <ArrowRight className="w-3.5 h-3.5" />
-            </button>
-          </div>
+          )}
         </div>
       )}
+
+      {/* Trigger email capture when CTA clicked for B */}
     </div>
   );
 }
