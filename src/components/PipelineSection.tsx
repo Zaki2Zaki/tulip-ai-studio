@@ -327,7 +327,7 @@ const WorkflowBuilderPanel = ({
             <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "14px" }}>
               <span style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(29,158,117,0.35)", background: "rgba(29,158,117,0.07)", color: "#5DCAA5", fontFamily: "inherit" }}>Live</span>
               {["Technical Artist", "Pipeline TD", "VFX Supervisor", "Creative Technologist"].map((r) => (
-                <span key={r} style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(167,139,250,0.35)", background: "rgba(167,139,250,0.07)", fontFamily: "inherit", background2: undefined } as React.CSSProperties} className="text-gradient-gold">{r}</span>
+                <span key={r} style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(167,139,250,0.35)", background: "rgba(167,139,250,0.07)", fontFamily: "inherit" }} className="text-gradient-gold">{r}</span>
               ))}
             </div>
             <button
