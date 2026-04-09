@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import EntryScreen from "@/components/StrategicBriefing/EntryScreen";
 import StudioProfile from "@/components/BranchC/StudioProfile";
