@@ -228,14 +228,8 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
 
         {/* ── Card C — Strategic Briefing ── */}
         <button onClick={() => { setSelected("c"); setShowEmailCapture(false); }} style={cardStyle(selected === "c")}>
-          {/* Radio */}
           <span style={radioStyle(selected === "c")}>
-            {selected === "c" && (
-              <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "#a78bfa", display: "block" }} />
-            )}
-            {selected !== "c" && (
-              <span style={{ width: "17px", height: "17px", borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.3)", display: "block" }} />
-            )}
+            {selected === "c" && <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "#a78bfa", display: "block" }} />}
           </span>
           <div style={{ flex: 1, minWidth: 0 }}>
             <p style={CARD_EYEBROW}>Strategic Briefing — Executive Summary</p>
