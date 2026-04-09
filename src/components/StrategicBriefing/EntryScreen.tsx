@@ -337,7 +337,6 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
         </div>
       )}
 
-      {/* Trigger email capture when CTA clicked for B */}
     </div>
   );
 }
