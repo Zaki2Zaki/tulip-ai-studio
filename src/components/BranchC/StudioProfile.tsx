@@ -224,13 +224,21 @@ export default function StudioProfile({
         Your answers are used only to personalise this session. We do not store or share them without your permission.
       </p>
 
-      <button
-        disabled={!canProceed}
-        onClick={onNext}
-        className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed"
-      >
-        Generate My Risk Scan <ArrowRight className="w-3.5 h-3.5" />
-      </button>
+      <div className="flex items-center gap-3">
+        <a
+          href="/"
+          className="inline-flex items-center gap-2 btn-chrome-outline px-5 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[44px]"
+        >
+          ← Back to Home
+        </a>
+        <button
+          disabled={!canProceed}
+          onClick={onNext}
+          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed"
+        >
+          Generate My Risk Scan <ArrowRight className="w-3.5 h-3.5" />
+        </button>
+      </div>
       <p className="text-[15px] text-white font-body mt-2">Takes under 10 seconds</p>
     </div>
   );
