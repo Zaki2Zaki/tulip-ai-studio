@@ -366,8 +366,10 @@ const WorkflowBuilderPanel = ({
               A risk scan and ROI model built from published data across studios your size — your efficiency gap, the annual cost of inaction, and what recovery looks like at your scale.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "14px" }}>
-              {["VP", "CTO", "Studio Head", "CSO", "Product Manager"].map((r) => (
-                <span key={r} style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(167,139,250,0.35)", background: "rgba(167,139,250,0.07)", fontFamily: "inherit" }} className="text-gradient-gold">{r}</span>
+              {["VP", "CTO", "Studio Head", "Chief Strategy Officer", "Product Management", "Operations"].map((r) => (
+                <span key={r} style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(167,139,250,0.35)", background: "rgba(167,139,250,0.07)", fontFamily: "inherit", display: "inline-block" }}>
+                  <span className="text-gradient-gold">{r}</span>
+                </span>
               ))}
             </div>
             <a
