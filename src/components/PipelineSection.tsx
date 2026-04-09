@@ -320,9 +320,6 @@ const WorkflowBuilderPanel = ({
             <p style={{ fontSize: "18px", fontWeight: 700, color: "#fff", lineHeight: 1.35, marginBottom: "6px", fontFamily: "inherit" }}>
               Your pipeline has friction. Here is how to remove it.
             </p>
-            <p style={{ fontSize: "13px", fontWeight: 500, marginBottom: "8px", fontFamily: "inherit" }}>
-              <span className="text-gradient-gold">For Technical Artists, Pipeline TDs, and Producers.</span>
-            </p>
             <p style={{ fontSize: "13px", color: "#fff", lineHeight: 1.65, marginBottom: "12px", fontFamily: "inherit" }}>
               Select the friction points slowing your pipeline. We map the AI tools, integration sequence, and agentic architecture that eliminates them — stage by stage, from pre-production to final output.
             </p>
