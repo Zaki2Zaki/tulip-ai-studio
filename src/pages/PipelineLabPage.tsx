@@ -26,8 +26,16 @@ const DEFAULT_BREAKDOWN: BudgetBreakdown = {
 };
 
 export default function PipelineLabPage() {
-  // Always start on the Entry screen
+  // Always start on the Entry screen (may be overridden by ?screen= param)
   const [currentScreen, setCurrentScreen] = useState(0);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const screen = params.get("screen");
+    if (screen === "studioProfile") {
+      setCurrentScreen(1);
+    }
+  }, []);
 
   // Studio Profile state
   const [studioScale, setStudioScale] = useState("");
