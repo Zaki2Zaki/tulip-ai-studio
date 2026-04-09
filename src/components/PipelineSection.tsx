@@ -237,86 +237,73 @@ const WorkflowBuilderPanel = ({
       <p className="text-sm text-white font-body mb-6 max-w-sm mx-auto">
         Walk through the Tulip R&D Pipeline™ and simulate building your own AI production system.
       </p>
-      {/* Pipeline Lab Workflow Simulation card */}
-      <div className="mt-6 rounded-2xl overflow-hidden text-left"
-        style={{
-          border: "1px solid transparent",
-          background:
-            "linear-gradient(hsl(0 0% 6%), hsl(0 0% 6%)) padding-box, " +
-            "linear-gradient(135deg, #a78bfa55, #c4b5fd33, #e9d5ff22) border-box",
-        }}
-      >
-        <div className="px-5 py-4">
-          <p className="text-[15px] tracking-[0.2em] uppercase font-body font-semibold mb-2"
-            style={{ color: "#e9d5ff" }}
-          >
-            Pipeline Lab — Workflow Simulation
-          </p>
-          <p className="font-display text-sm font-bold text-white mb-2">
-            Your pipeline has friction. Here is how to remove it.
-          </p>
-          <p className="text-xs font-body mb-2 leading-relaxed">
-            <span className="text-gradient-gold">For Technical Artists, Pipeline TDs, and Producers.</span>
-          </p>
-          <p className="text-xs font-body text-white mb-4 leading-relaxed">
-            Select the friction points slowing your pipeline. We map the AI tools, integration sequence, and agentic architecture that eliminates them — stage by stage, from pre-production to final output.
-          </p>
-          <button
-            onClick={() => onStageChange(0)}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-display font-semibold text-xs transition-all"
-            style={{
-              border: "1px solid transparent",
-              background:
-                "linear-gradient(hsl(0 0% 8%), hsl(0 0% 8%)) padding-box, " +
-                "linear-gradient(to right, #a78bfa, #c4b5fd, #e9d5ff) border-box",
-              color: "#e9d5ff",
-            }}
-          >
-            Start Building <ArrowRight className="w-3 h-3" />
-          </button>
+      {/* ── Card 1 — Pipeline Lab Workflow Simulation ── */}
+      <div className="mt-6 text-left" style={{ border: "0.5px solid rgba(167,139,250,0.55)", borderRadius: "10px", padding: "1.25rem 1.375rem", background: "rgba(167,139,250,0.03)", marginBottom: "1rem" }}>
+        <div style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
+          {/* Radio — empty */}
+          <span style={{ width: "17px", height: "17px", borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.3)", background: "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "3px" }} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgb(167,139,250)", marginBottom: "6px", fontFamily: "inherit" }}>
+              Pipeline Lab — Workflow Simulation
+            </p>
+            <p style={{ fontSize: "15px", fontWeight: 700, color: "#fff", lineHeight: 1.35, marginBottom: "6px", fontFamily: "inherit" }}>
+              Your pipeline has friction. Here is how to remove it.
+            </p>
+            <p style={{ fontSize: "13px", fontWeight: 500, marginBottom: "8px", fontFamily: "inherit" }}>
+              <span className="text-gradient-gold">For Technical Artists, Pipeline TDs, and Producers.</span>
+            </p>
+            <p style={{ fontSize: "13px", color: "#fff", lineHeight: 1.65, marginBottom: "12px", fontFamily: "inherit" }}>
+              Select the friction points slowing your pipeline. We map the AI tools, integration sequence, and agentic architecture that eliminates them — stage by stage, from pre-production to final output.
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "14px" }}>
+              <span style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(29,158,117,0.35)", background: "rgba(29,158,117,0.07)", color: "#5DCAA5", fontFamily: "inherit" }}>Live</span>
+              {["Technical Artist", "Pipeline TD", "VFX Supervisor", "Creative Technologist"].map((r) => (
+                <span key={r} style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(167,139,250,0.35)", background: "rgba(167,139,250,0.07)", fontFamily: "inherit", background2: undefined } as React.CSSProperties} className="text-gradient-gold">{r}</span>
+              ))}
+            </div>
+            <button
+              onClick={() => onStageChange(0)}
+              style={{ background: "linear-gradient(rgb(20,20,20),rgb(20,20,20)) padding-box, linear-gradient(to right, rgb(167,139,250), rgb(196,181,253), rgb(233,213,255)) border-box", border: "1px solid transparent", borderRadius: "12px", color: "rgb(233,213,255)", fontSize: "12px", fontWeight: 600, padding: "0.5rem 1rem", display: "inline-flex", alignItems: "center", gap: "6px", fontFamily: "inherit", cursor: "pointer" }}
+            >
+              Start Building <ArrowRight style={{ width: "12px", height: "12px" }} />
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Strategic Briefing Executive Summary card */}
-      <div className="mt-4 rounded-2xl overflow-hidden text-left"
-        style={{
-          border: "1px solid transparent",
-          background:
-            "linear-gradient(hsl(0 0% 6%), hsl(0 0% 6%)) padding-box, " +
-            "linear-gradient(135deg, #a78bfa55, #c4b5fd33, #e9d5ff22) border-box",
-        }}
-      >
-        <div className="px-5 py-4">
-          <p className="text-[15px] tracking-[0.2em] uppercase font-body font-semibold mb-2"
-            style={{ color: "#e9d5ff" }}
-          >
-            Strategic Briefing — Executive Summary
-          </p>
-          <p className="font-display text-sm font-bold text-white mb-2">
-            See the business case before the conversation.
-          </p>
-          <p className="text-xs font-body mb-1 leading-relaxed">
-            <span className="text-gradient-gold font-bold">Built for the executive who needs the numbers first.</span>
-          </p>
-          <p className="text-xs font-body mb-2 leading-relaxed">
-            <span className="text-gradient-gold">Five questions about your studio.</span>
-          </p>
-          <p className="text-xs font-body text-white mb-4 leading-relaxed">
-            A risk scan and ROI model built from published data across studios your size — your efficiency gap, the annual cost of inaction, and what recovery looks like at your scale.
-          </p>
-          <a
-            href="/strategic-briefing"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-display font-semibold text-xs transition-all"
-            style={{
-              border: "1px solid transparent",
-              background:
-                "linear-gradient(hsl(0 0% 8%), hsl(0 0% 8%)) padding-box, " +
-                "linear-gradient(to right, #a78bfa, #c4b5fd, #e9d5ff) border-box",
-              color: "#e9d5ff",
-            }}
-          >
-            Open Strategic Briefing <ArrowRight className="w-3 h-3" />
-          </a>
+      {/* ── Card 2 — Pipeline Diagnosis Bottleneck Finder ── */}
+      <HomepageCard2 />
+
+      {/* ── Card 3 — Strategic Briefing Executive Summary ── */}
+      <div className="text-left" style={{ border: "0.5px solid rgba(167,139,250,0.55)", borderRadius: "10px", padding: "1.25rem 1.375rem", background: "rgba(167,139,250,0.03)" }}>
+        <div style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
+          {/* Radio — empty */}
+          <span style={{ width: "17px", height: "17px", borderRadius: "50%", border: "0.5px solid rgba(255,255,255,0.3)", background: "transparent", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, marginTop: "3px" }} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ fontSize: "10px", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgb(167,139,250)", marginBottom: "6px", fontFamily: "inherit" }}>
+              Strategic Briefing — Executive Summary
+            </p>
+            <p style={{ fontSize: "15px", fontWeight: 700, color: "#fff", lineHeight: 1.35, marginBottom: "6px", fontFamily: "inherit" }}>
+              See the business case before the conversation.
+            </p>
+            <p style={{ fontSize: "13px", fontWeight: 500, marginBottom: "8px", fontFamily: "inherit" }}>
+              <span className="text-gradient-gold">Five questions about your studio.</span>
+            </p>
+            <p style={{ fontSize: "13px", color: "#fff", lineHeight: 1.65, marginBottom: "12px", fontFamily: "inherit" }}>
+              A risk scan and ROI model built from published data across studios your size — your efficiency gap, the annual cost of inaction, and what recovery looks like at your scale.
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "14px" }}>
+              {["VP", "CTO", "Studio Head", "CSO", "Product Manager"].map((r) => (
+                <span key={r} style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(167,139,250,0.35)", background: "rgba(167,139,250,0.07)", fontFamily: "inherit" }} className="text-gradient-gold">{r}</span>
+              ))}
+            </div>
+            <a
+              href="/strategic-briefing"
+              style={{ background: "linear-gradient(rgb(20,20,20),rgb(20,20,20)) padding-box, linear-gradient(to right, rgb(167,139,250), rgb(196,181,253), rgb(233,213,255)) border-box", border: "1px solid transparent", borderRadius: "12px", color: "rgb(233,213,255)", fontSize: "12px", fontWeight: 600, padding: "0.5rem 1rem", display: "inline-flex", alignItems: "center", gap: "6px", fontFamily: "inherit", textDecoration: "none" }}
+            >
+              Open Strategic Briefing <ArrowRight style={{ width: "12px", height: "12px" }} />
+            </a>
+          </div>
         </div>
       </div>
     </div>
