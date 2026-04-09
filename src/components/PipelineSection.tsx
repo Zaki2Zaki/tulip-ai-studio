@@ -216,8 +216,10 @@ function HomepageCard2() {
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "14px" }}>
             <span style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.4)", fontFamily: "inherit" }}>Coming soon</span>
-            {["Producer", "Art Director", "Development Director", "Project Manager", "Program Manager"].map((r) => (
-              <span key={r} style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(167,139,250,0.35)", background: "rgba(167,139,250,0.07)", fontFamily: "inherit" }} className="text-gradient-gold">{r}</span>
+            {["Producer", "Art or Creative Director", "Development Director", "Studio Manager"].map((r) => (
+              <span key={r} style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(167,139,250,0.35)", background: "rgba(167,139,250,0.07)", fontFamily: "inherit", display: "inline-block" }}>
+                <span className="text-gradient-gold">{r}</span>
+              </span>
             ))}
           </div>
           <button
