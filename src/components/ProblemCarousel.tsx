@@ -125,7 +125,7 @@ export default function ProblemCarousel() {
           }}
         >
           <motion.h1
-            className="text-6xl md:text-8xl lg:text-[120px] font-black uppercase tracking-tighter leading-none mb-2"
+            className="text-6xl md:text-8xl lg:text-[120px] font-black uppercase tracking-tighter leading-none mb-2 text-white"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -133,7 +133,8 @@ export default function ProblemCarousel() {
             CHALLENGES
           </motion.h1>
           <motion.p
-            className="text-xs md:text-sm uppercase tracking-[0.15em] text-gray-500 font-medium"
+            className="text-xs md:text-sm uppercase tracking-[0.15em] font-medium"
+            style={{ color: 'rgba(255,255,255,0.45)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
