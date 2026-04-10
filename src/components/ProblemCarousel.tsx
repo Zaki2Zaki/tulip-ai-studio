@@ -47,7 +47,7 @@ const challenges: Challenge[] = [
     description: 'GenAI homogenization destroys unique art styles at 100K+ asset scale',
     citation: 'https://www.hyperstack.cloud/technical-resources/tutorials/how-to-train-generatve-ai-for-3d-models',
     gradientColors: { start: '#ede6f5', end: '#e0cce7' },
-    imageUrl: '/images/style-consistency.webp',
+
     imageText: { line1: '100,000', line2: 'ASSETS DAILY' },
     solution: 'Proprietary studio style models fine-tuned on your artwork',
     service: 'Studio Style Training',
