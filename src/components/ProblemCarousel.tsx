@@ -87,7 +87,6 @@ const challenges: Challenge[] = [
     description: 'Underestimated GPU infrastructure costs explode during AI production deployment',
     citation: 'https://d1.awsstatic.com/psc-digital/2025/gc-a4gmt/genai-game-dev/the-2025-aws-guide-to-generative-ai-for-game-developers.pdf',
     gradientColors: { start: '#b0cced', end: '#a2d5e5' },
-    imageUrl: '/images/budget-overruns.webp',
     imageText: { line1: 'RENDERING', line2: 'COST EXPLOSION' },
     solution: 'Right-size GPU infrastructure with cost optimization',
     service: 'Cost-Optimal Infrastructure Planning',
