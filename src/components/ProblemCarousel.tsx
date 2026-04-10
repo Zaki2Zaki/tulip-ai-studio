@@ -33,7 +33,7 @@ const challenges: Challenge[] = [
     accentText: 'PAIN POINT',
     description: 'Disconnected AI tools force asset redos across Blender → Unreal → Nuke workflows',
     citation: 'Third Point Ventures, AI Impact on Gaming and Media Tooling, 2025',
-    gradientColors: { start: '#ffffff', end: '#ede6f5' },  // White → Light lavender
+    gradientColors: { start: '#ffffff', end: '#ede6f5' },  // #ffffff → #f5f3fa → #ede6f5
     imageUrl: '/images/fragmented-tools.webp',
     imageText: { line1: 'FRAGMENTED', line2: 'AI TOOLING' },
     solution: 'Unified AI workflow wrappers eliminate manual handoffs',
