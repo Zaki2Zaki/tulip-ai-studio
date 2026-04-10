@@ -111,7 +111,7 @@ export default function ProblemCarousel() {
   return (
     <>
       {/* Header Section */}
-      <section className="bg-[#f0ebe5] py-20 md:py-32">
+      <section className="bg-[#f0ebe5] pt-20 pb-6 md:pt-32 md:pb-8">
         <div className="container mx-auto px-4 text-center">
           <motion.h1
             className="text-6xl md:text-8xl lg:text-[120px] font-black uppercase tracking-tighter leading-none mb-8"
