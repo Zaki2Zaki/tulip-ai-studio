@@ -5,17 +5,15 @@ import { ArrowRight } from "lucide-react";
 const CARDS = [
   {
     id: "ai-pipeline-integration",
-    image: "/images/fragmented-tools.png",
-    problem: "40% Pipeline Time Wasted",
+    problem: "40% of pipeline time is wasted",
     service: "AI Pipeline Integration",
     price: "$50K–$200K",
     cta: "/services/ai-pipeline-integration",
-    gradientColors: { start: "#ffffff", end: "#ede6f5" },
+    gradientColors: { start: "#f5f0ff", end: "#ede6f5" },
   },
   {
     id: "studio-style-training",
-    image: "/images/style-consistency.png",
-    problem: "Visual Identity Crisis",
+    problem: "Visual identity inconsistency across assets",
     service: "Studio Style Training",
     price: "$25K–$350K",
     cta: "/services/studio-style-training",
@@ -23,8 +21,7 @@ const CARDS = [
   },
   {
     id: "motion-capture-integration",
-    image: "/images/motion-capture.png",
-    problem: "$350K Per Rework Cycle",
+    problem: "$350K lost per major rework cycle",
     service: "Motion Capture Integration",
     price: "$40K–$150K",
     cta: "/services/motion-capture-integration",
@@ -32,8 +29,7 @@ const CARDS = [
   },
   {
     id: "tool-benchmarking",
-    image: "/images/tool-paralysis.png",
-    problem: "Tool Selection Paralysis",
+    problem: "Tool selection paralysis slows adoption",
     service: "GenAI Tool Benchmarking",
     price: "$15K–$50K",
     cta: "/services/tool-benchmarking",
@@ -41,8 +37,7 @@ const CARDS = [
   },
   {
     id: "infrastructure-planning",
-    image: "/images/budget-overruns.png",
-    problem: "50% Budget Overruns",
+    problem: "50% of studios exceed production budget",
     service: "Cost-Optimal Infrastructure Planning",
     price: "$20K–$75K",
     cta: "/services/infrastructure-planning",
@@ -67,142 +62,98 @@ export default function ProblemCarousel() {
   const challenge = CARDS[index];
 
   return (
-    <section className="w-full py-8 overflow-hidden bg-background">
-      <div className="max-w-4xl mx-auto px-6">
-        <div
-          className="relative"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
+    <section
+      className="w-full overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={index}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          style={{
+            background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`,
+            willChange: "transform",
+          }}
         >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="rounded-2xl overflow-hidden flex flex-col md:flex-row"
-              style={{
-                background: `linear-gradient(135deg, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`,
-                willChange: "transform",
-                // Responsive heights via min-height
-                minHeight: "clamp(200px, 30vw, 280px)",
-              }}
-            >
-              {/* Image column */}
-              <div className="relative shrink-0 w-full md:w-[42%] h-48 md:h-auto overflow-hidden">
-                <img
-                  src={challenge.image}
-                  alt={challenge.problem}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                {/* Gradient overlay */}
-                <div
-                  className="absolute inset-0 mix-blend-multiply opacity-40"
-                  style={{
-                    background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`,
-                  }}
-                />
-              </div>
+          <div className="max-w-5xl mx-auto px-6 py-7 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
+            {/* Pain point */}
+            <div className="flex-1 min-w-0">
+              <p style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(0,0,0,0.4)", marginBottom: "4px" }}>
+                Pain Point
+              </p>
+              <p className="font-display font-bold" style={{ fontSize: "clamp(17px, 2.5vw, 22px)", color: "#1a1a2e", lineHeight: 1.25 }}>
+                {challenge.problem}
+              </p>
+            </div>
 
-              {/* Content column */}
-              <div className="flex-1 px-6 py-6 md:px-8 md:py-7 flex flex-col justify-between">
-                <div>
-                  <p
-                    className="text-[10px] tracking-[0.18em] uppercase font-body font-semibold mb-2"
-                    style={{ color: "rgba(0,0,0,0.4)" }}
-                  >
-                    Pain Point
-                  </p>
-                  <p
-                    className="font-display font-bold leading-tight mb-4"
-                    style={{
-                      color: "#1a1a2e",
-                      fontSize: "clamp(20px, 3vw, 28px)",
-                    }}
-                  >
-                    {challenge.problem}
-                  </p>
-                  <p
-                    className="text-[10px] tracking-[0.18em] uppercase font-body font-semibold mb-1"
-                    style={{ color: "rgba(0,0,0,0.4)" }}
-                  >
-                    Service
-                  </p>
-                  <p
-                    className="font-display text-base font-bold"
-                    style={{ color: "#1a1a2e" }}
-                  >
-                    {challenge.service}
-                  </p>
-                  <p
-                    className="font-body text-sm mt-0.5 mb-5"
-                    style={{ color: "rgba(0,0,0,0.5)" }}
-                  >
-                    {challenge.price}
-                  </p>
-                </div>
+            {/* Divider */}
+            <div className="hidden sm:block w-px self-stretch" style={{ background: "rgba(0,0,0,0.1)" }} />
 
-                {/* CTAs */}
-                <div className="flex flex-wrap gap-3">
-                  <a
-                    href={challenge.cta}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 font-display font-bold text-xs uppercase tracking-wide transition-colors hover:opacity-80"
-                    style={{
-                      background: "#2B5BA6",
-                      color: "#fff",
-                      borderRadius: "4px",
-                    }}
-                  >
-                    Explore Solution <ArrowRight style={{ width: "13px", height: "13px" }} />
-                  </a>
-                  <a
-                    href="https://calendly.com/youki-harada/30min"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 font-display font-bold text-xs uppercase tracking-wide transition-colors hover:bg-[#2B5BA6] hover:text-white"
-                    style={{
-                      border: "2px solid #2B5BA6",
-                      color: "#2B5BA6",
-                      borderRadius: "4px",
-                      background: "transparent",
-                    }}
-                  >
-                    Book Consultation
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+            {/* Service */}
+            <div className="flex-1 min-w-0">
+              <p style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(0,0,0,0.4)", marginBottom: "4px" }}>
+                Service
+              </p>
+              <p className="font-display font-bold" style={{ fontSize: "15px", color: "#1a1a2e", lineHeight: 1.3 }}>
+                {challenge.service}
+              </p>
+              <p style={{ fontSize: "12px", color: "rgba(0,0,0,0.45)", marginTop: "2px" }}>
+                {challenge.price}
+              </p>
+            </div>
 
-          {/* Dots + progress */}
-          <div className="flex items-center gap-2 mt-4">
+            {/* CTAs */}
+            <div className="flex items-center gap-2 shrink-0">
+              <a
+                href={challenge.cta}
+                className="inline-flex items-center gap-1.5 font-display font-bold text-xs uppercase tracking-wide transition-opacity hover:opacity-80 whitespace-nowrap"
+                style={{ background: "#2B5BA6", color: "#fff", borderRadius: "6px", padding: "8px 16px" }}
+              >
+                Explore <ArrowRight style={{ width: "12px", height: "12px" }} />
+              </a>
+              <a
+                href="https://calendly.com/youki-harada/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center font-display font-bold text-xs uppercase tracking-wide transition-all hover:bg-[#2B5BA6] hover:text-white whitespace-nowrap"
+                style={{ border: "1.5px solid #2B5BA6", color: "#2B5BA6", borderRadius: "6px", padding: "8px 16px", background: "transparent" }}
+              >
+                Book a Call
+              </a>
+            </div>
+          </div>
+
+          {/* Progress bar */}
+          <div className="max-w-5xl mx-auto px-6 pb-3 flex items-center gap-2">
             {CARDS.map((_, i) => (
               <button
                 key={i}
                 onClick={() => { setIndex(i); setPaused(true); }}
                 className="rounded-full transition-all duration-300"
                 style={{
-                  width: i === index ? "20px" : "6px",
-                  height: "6px",
-                  background: i === index ? "hsl(var(--primary))" : "rgba(255,255,255,0.18)",
+                  width: i === index ? "18px" : "5px",
+                  height: "5px",
+                  background: i === index ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.15)",
                 }}
               />
             ))}
-            <div className="ml-auto w-20 h-0.5 rounded-full bg-white/10 overflow-hidden">
+            <div className="ml-auto w-16 h-0.5 rounded-full overflow-hidden" style={{ background: "rgba(0,0,0,0.1)" }}>
               <motion.div
                 key={index}
                 className="h-full rounded-full"
-                style={{ background: "hsl(var(--primary) / 0.5)", willChange: "transform" }}
+                style={{ background: "rgba(0,0,0,0.3)", willChange: "transform" }}
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: INTERVAL / 1000, ease: "linear" }}
               />
             </div>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 }
