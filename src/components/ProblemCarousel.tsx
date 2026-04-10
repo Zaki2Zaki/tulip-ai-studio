@@ -75,7 +75,7 @@ const challenges: Challenge[] = [
     accentText: 'PAIN POINT',
     description: 'Wrong GenAI tool choices trigger $100K–$400K rework cycles across the pipeline',
     citation: 'Third Point Ventures, AI Impact on Gaming and Media Tooling, 2025',
-    gradientColors: { start: '#cac1e7', end: '#b0cced' },  // Medium purple → Light blue
+    gradientColors: { start: '#cac1e7', end: '#b0cced' },  // #cac1e7 → #bcc7ec → #b0cced
     imageUrl: '/images/tool-paralysis.webp',
     imageText: { line1: '20+ TOOLS', line2: 'WHICH TO DEPLOY?' },
     solution: 'Benchmark 10–20 GenAI tools across your pipeline',
