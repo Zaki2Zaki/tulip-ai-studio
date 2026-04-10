@@ -112,17 +112,16 @@ export default function ProblemCarousel() {
     <>
       {/* Header Section */}
       {/* Ning H. Scattered Cards Section */}
-      <section className="bg-white overflow-x-hidden">
-        {/* Title block — pulled up with negative top margin */}
+      <section className="bg-black overflow-x-hidden">
+        {/* Title block */}
         <div
           className="container mx-auto px-4 text-center"
           style={{
-            marginTop: '-96px',
-            paddingTop: '32px',
+            paddingTop: '64px',
             paddingBottom: '24px',
-            background: '#ffffff',
-            borderBottom: '1px solid rgba(0,0,0,0.08)',
-            boxShadow: '0 4px 24px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04)',
+            background: '#000000',
+            borderBottom: '1px solid rgba(255,255,255,0.1)',
+            boxShadow: '0 4px 24px rgba(255,255,255,0.06), 0 1px 4px rgba(255,255,255,0.03)',
           }}
         >
           <motion.h1
