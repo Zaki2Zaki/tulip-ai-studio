@@ -73,10 +73,11 @@ export default function ProblemCarousel() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.38 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="rounded-2xl px-7 py-6 flex flex-col md:flex-row md:items-center gap-4 md:gap-8"
               style={{
                 background: `linear-gradient(135deg, ${CARDS[index].from}, ${CARDS[index].to})`,
+                willChange: "transform",
               }}
             >
               {/* Problem */}
