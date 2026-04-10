@@ -13,6 +13,9 @@ export default {
       },
     },
     extend: {
+      perspective: {
+        '2000': '2000px',
+      },
       fontFamily: {
         display: ["Outfit", "system-ui", "sans-serif"],
         body: ["Space Grotesk", "system-ui", "sans-serif"],
