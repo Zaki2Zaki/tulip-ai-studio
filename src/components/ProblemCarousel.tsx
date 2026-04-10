@@ -187,22 +187,24 @@ export default function ProblemCarousel() {
                   >
                     {/* Image Section - Top 70% */}
                     <div
-                      className="w-full h-[70%] relative overflow-hidden bg-cover bg-center"
+                      className="w-full h-[70%] relative overflow-hidden"
                       style={{
-                        background: challenge.imageUrl
-                          ? `url(${challenge.imageUrl}) center/cover no-repeat`
-                          : `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`
+                        background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`
                       }}
                     >
-                      {/* Optional: Image tag for better loading */}
                       {challenge.imageUrl && (
                         <img
                           src={challenge.imageUrl}
                           alt={challenge.headline}
-                          className="w-full h-full object-cover"
+                          className="absolute inset-0 w-full h-full object-cover"
                           loading="lazy"
                         />
                       )}
+                      {/* Subtle noise/grain texture */}
+                      <div
+                        className="absolute inset-0 opacity-5 mix-blend-overlay"
+                        style={{ backgroundImage: 'url(/images/noise-texture.png)' }}
+                      />
                     </div>
 
                     {/* Black Title Bar - Bottom 30% */}
