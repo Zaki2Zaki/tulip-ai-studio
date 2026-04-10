@@ -1,177 +1,235 @@
-import { useRef, useState } from "react";
+// ProblemCarousel_NingH_Authentic.tsx
+// Authentic Ning H. scattered card layout from ning-h.com
+// Cards rotate and transform on scroll/hover with scattered positioning
 
-const CARDS = [
+import { motion } from 'framer-motion';
+
+interface Challenge {
+  id: string;
+  number: string;
+  headline: string;
+  accentText: string;
+  description: string;
+  citation: string;
+  gradientColors: {
+    start: string;
+    end: string;
+  };
+  imageUrl?: string;  // Optional: actual image URL
+  imageText: {
+    line1: string;
+    line2: string;
+  };
+  solution: string;
+  service: string;
+  pricing: string;
+}
+
+const challenges: Challenge[] = [
   {
-    id: "ai-pipeline-integration",
-    stat: "40%",
-    headline: "Pipeline Time Wasted",
-    description: "Disconnected tools and manual handoffs eat nearly half your production time before a single frame ships.",
-    cta: "/services/ai-pipeline-integration",
-    gradient: "linear-gradient(170deg, #ffffff 0%, #f0ecfc 50%, #ddd5f8 100%)",
+    id: 'fragmented-tools',
+    number: '01',
+    headline: '40% Pipeline Time Wasted',
+    accentText: 'PAIN POINT',
+    description: 'Disconnected AI tools force asset redos across Blender → Unreal → Nuke workflows',
+    citation: 'Third Point Ventures, AI Impact on Gaming and Media Tooling, 2025',
+    gradientColors: { start: '#ffffff', end: '#ede6f5' },  // White → Light lavender
+    imageUrl: '/images/fragmented-tools.webp',
+    imageText: { line1: 'FRAGMENTED', line2: 'AI TOOLING' },
+    solution: 'Unified AI workflow wrappers eliminate manual handoffs',
+    service: 'AI Pipeline Integration',
+    pricing: '$50K–$200K'
   },
   {
-    id: "studio-style-training",
-    stat: "↓",
-    headline: "Visual Identity Crisis",
-    description: "AI-generated assets erode your studio's distinctive look, forcing expensive rework or brand dilution.",
-    cta: "/services/studio-style-training",
-    gradient: "linear-gradient(170deg, #ddd5f8 0%, #c4b5f4 50%, #a992ee 100%)",
+    id: 'style-consistency',
+    number: '02',
+    headline: 'Visual Identity Crisis',
+    accentText: 'PAIN POINT',
+    description: 'GenAI homogenization destroys unique art styles at 100K+ asset scale',
+    citation: 'Hyperstack, How to Train Generative AI for 3D Models, 2025',
+    gradientColors: { start: '#ede6f5', end: '#e0cce7' },  // Light lavender → Soft purple
+    imageText: { line1: '100,000', line2: 'ASSETS DAILY' },
+    solution: 'Proprietary studio style models fine-tuned on your artwork',
+    service: 'Studio Style Training',
+    pricing: '$25K–$350K'
   },
   {
-    id: "motion-capture-integration",
-    stat: "$350K",
-    headline: "Per Major Rework Cycle",
-    description: "Late-stage motion data errors compound into six-figure budget overruns and missed release windows.",
-    cta: "/services/motion-capture-integration",
-    gradient: "linear-gradient(170deg, #a992ee 0%, #8878d8 50%, #6b6ec4 100%)",
+    id: 'motion-capture',
+    number: '03',
+    headline: '$350K Per Rework Cycle',
+    accentText: 'PAIN POINT',
+    description: 'Manual mocap cleanup blocks real-time iteration and burns production budgets',
+    citation: 'Third Point Ventures, AI Impact on Gaming and Media Tooling, 2025',
+    gradientColors: { start: '#e0cce7', end: '#cac1e7' },  // Soft purple → Medium purple
+    imageText: { line1: 'MANUAL', line2: 'MOCAP CLEANUP' },
+    solution: 'EA-validated pipelines with Rokoko/Tato integration',
+    service: 'Motion Capture Integration',
+    pricing: '$40K–$150K'
   },
   {
-    id: "tool-benchmarking",
-    stat: "↑",
-    headline: "Tool Selection Paralysis",
-    description: "Rapidly multiplying GenAI options stall decision-making while competitors lock in production advantages.",
-    cta: "/services/tool-benchmarking",
-    gradient: "linear-gradient(170deg, #6b6ec4 0%, #5898d8 50%, #3db8e8 100%)",
+    id: 'tool-paralysis',
+    number: '04',
+    headline: 'Tool Selection Paralysis',
+    accentText: 'PAIN POINT',
+    description: 'Wrong GenAI tool choices trigger $100K–$400K rework cycles across the pipeline',
+    citation: 'Third Point Ventures, AI Impact on Gaming and Media Tooling, 2025',
+    gradientColors: { start: '#cac1e7', end: '#b0cced' },  // Medium purple → Light blue
+    imageText: { line1: '20+ TOOLS', line2: 'WHICH TO DEPLOY?' },
+    solution: 'Benchmark 10–20 GenAI tools across your pipeline',
+    service: 'GenAI Tool Benchmarking',
+    pricing: '$15K–$50K'
   },
   {
-    id: "infrastructure-planning",
-    stat: "50%",
-    headline: "Studios Exceed Budget",
-    description: "Poorly scoped GPU infrastructure and cloud costs routinely double initial estimates on AI-heavy projects.",
-    cta: "/services/infrastructure-planning",
-    gradient: "linear-gradient(170deg, #3db8e8 0%, #22cce0 50%, #00e5d4 100%)",
-  },
+    id: 'budget-overruns',
+    number: '05',
+    headline: '50% Budget Overruns',
+    accentText: 'PAIN POINT',
+    description: 'Underestimated GPU infrastructure costs explode during AI production deployment',
+    citation: 'AWS, The 2025 Guide to Generative AI for Game Developers',
+    gradientColors: { start: '#b0cced', end: '#a2d5e5' },  // Light blue → Cyan
+    imageText: { line1: 'RENDERING', line2: 'COST EXPLOSION' },
+    solution: 'Right-size GPU infrastructure with cost optimization',
+    service: 'Cost-Optimal Infrastructure Planning',
+    pricing: '$20K–$75K'
+  }
+];
+
+// Ning H. authentic scattered positions and rotations - full profile visibility
+const cardTransforms = [
+  { x: '-200%', y: '-25%', rotate: -18, zIndex: 1 },
+  { x: '-100%', y: '12%', rotate: 10, zIndex: 3 },
+  { x: '0%', y: '-10%', rotate: -5, zIndex: 5 },
+  { x: '100%', y: '8%', rotate: 12, zIndex: 2 },
+  { x: '200%', y: '-20%', rotate: -15, zIndex: 4 }
 ];
 
 export default function ProblemCarousel() {
-  const [active, setActive] = useState<number | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scrollBy = (dir: -1 | 1) => {
-    scrollRef.current?.scrollBy({ left: dir * 300, behavior: "smooth" });
-  };
-
   return (
-    <section className="w-full bg-white py-10 overflow-hidden">
-      {/* Scrollable card row */}
-      <div
-        ref={scrollRef}
-        className="flex gap-4 px-6 md:px-12 overflow-x-auto scrollbar-none snap-x snap-mandatory"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-      >
-        {CARDS.map((card, i) => (
-          <a
-            key={card.id}
-            href={card.cta}
-            className="group relative flex-shrink-0 snap-start rounded-2xl overflow-hidden"
-            style={{
-              width: "clamp(260px, 28vw, 320px)",
-              height: "clamp(340px, 40vw, 420px)",
-              textDecoration: "none",
-            }}
+    <>
+      {/* Header Section */}
+      <section className="bg-[#f0ebe5] py-20 md:py-32">
+        <div className="container mx-auto px-4 text-center">
+          <motion.h1
+            className="text-6xl md:text-8xl lg:text-[120px] font-black uppercase tracking-tighter leading-none mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
           >
-            {/* Full-height gradient */}
-            <div
-              className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-              style={{ background: card.gradient }}
-            />
+            CHALLENGES
+          </motion.h1>
+          <motion.p
+            className="text-xs md:text-sm uppercase tracking-[0.15em] text-gray-600 font-medium"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            PRODUCTION BOTTLENECKS COSTING YOUR STUDIO MILLIONS
+          </motion.p>
+        </div>
+      </section>
 
-            {/* Stat — top */}
-            <div className="absolute top-6 left-6 right-6">
-              <p
-                style={{
-                  fontSize: "9px",
-                  fontWeight: 700,
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "rgba(255,255,255,0.5)",
-                  marginBottom: "4px",
-                }}
-              >
-                Pain Point
-              </p>
-              <span
-                className="font-display font-black"
-                style={{
-                  fontSize: "clamp(44px, 6vw, 64px)",
-                  color: "rgba(255,255,255,0.88)",
-                  lineHeight: 1,
-                  display: "block",
-                }}
-              >
-                {card.stat}
-              </span>
-            </div>
+      {/* Ning H. Scattered Cards Section */}
+      <section className="bg-[#f0ebe5] py-32 relative overflow-x-hidden min-h-[1400px]">
+        <div className="container mx-auto px-4">
+          <div className="relative h-[1100px] flex items-center justify-center">
+            {challenges.map((challenge, index) => {
+              const transform = cardTransforms[index];
 
-            {/* Bottom dark bar */}
-            <div
-              className="absolute bottom-0 left-0 right-0"
-              style={{
-                background:
-                  "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.65) 55%, transparent 100%)",
-                padding: "44px 20px 20px",
-              }}
-            >
-              <p
-                className="font-display font-black text-white"
-                style={{ fontSize: "clamp(14px, 1.8vw, 17px)", lineHeight: 1.25, marginBottom: "6px" }}
-              >
-                {card.headline}
-              </p>
-              <p
-                style={{
-                  fontSize: "11.5px",
-                  color: "rgba(255,255,255,0.58)",
-                  lineHeight: 1.5,
-                  marginBottom: "14px",
-                }}
-              >
-                {card.description}
-              </p>
-
-              {/* Dual arrow SVGs */}
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollBy(-1);
-                  }}
-                  className="flex items-center justify-center rounded-full transition-colors hover:bg-white/20"
+              return (
+                <motion.a
+                  key={challenge.id}
+                  href={`/services/${challenge.id}`}
+                  className="absolute w-[520px] block"
                   style={{
-                    width: "30px",
-                    height: "30px",
-                    border: "1.5px solid rgba(255,255,255,0.3)",
-                    background: "transparent",
+                    left: '50%',
+                    top: '50%',
+                    zIndex: transform.zIndex,
                   }}
-                  aria-label="Scroll left"
+                  initial={{
+                    opacity: 0,
+                    scale: 0.8,
+                    x: transform.x,
+                    y: transform.y,
+                    rotate: transform.rotate
+                  }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    x: transform.x,
+                    y: transform.y,
+                    rotate: transform.rotate
+                  }}
+                  transition={{
+                    duration: 0.8,
+                    delay: index * 0.1,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  }}
+                  whileHover={{
+                    scale: 1.12,
+                    rotate: 0,
+                    zIndex: 100,
+                    transition: { duration: 0.4 }
+                  }}
                 >
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                    <path d="M6.5 2L3.5 5L6.5 8" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollBy(1);
-                  }}
-                  className="flex items-center justify-center rounded-full transition-colors hover:bg-white/20"
-                  style={{
-                    width: "30px",
-                    height: "30px",
-                    border: "1.5px solid rgba(255,255,255,0.3)",
-                    background: "transparent",
-                  }}
-                  aria-label="Scroll right"
-                >
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                    <path d="M3.5 2L6.5 5L3.5 8" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </a>
-        ))}
-      </div>
-    </section>
+                  {/* Card Container - Exact Ning H. Style: 4:3 Aspect Ratio */}
+                  <div
+                    className="relative aspect-[4/3] bg-black overflow-hidden transition-all duration-500 group cursor-pointer"
+                    style={{
+                      boxShadow: `
+                        0 25px 50px rgba(0, 0, 0, 0.15),
+                        0 10px 20px rgba(0, 0, 0, 0.08)
+                      `
+                    }}
+                  >
+                    {/* Image Section - Top 70% */}
+                    <div
+                      className="w-full h-[70%] relative overflow-hidden bg-cover bg-center"
+                      style={{
+                        background: challenge.imageUrl
+                          ? `url(${challenge.imageUrl}) center/cover no-repeat`
+                          : `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`
+                      }}
+                    >
+                      {/* Optional: Image tag for better loading */}
+                      {challenge.imageUrl && (
+                        <img
+                          src={challenge.imageUrl}
+                          alt={challenge.headline}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      )}
+                    </div>
+
+                    {/* Black Title Bar - Bottom 30% */}
+                    <div className="w-full h-[30%] bg-black px-8 py-6 flex flex-col justify-between">
+                      {/* Title */}
+                      <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight leading-tight">
+                        {challenge.headline}
+                      </h2>
+
+                      {/* Description + Arrow Row */}
+                      <div className="flex items-end justify-between">
+                        <p className="text-[10px] text-white uppercase tracking-wider leading-relaxed max-w-[280px]">
+                          {challenge.description}
+                        </p>
+
+                        {/* Arrow in Circle - Bottom Right */}
+                        <div className="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 28 28" fill="none">
+                            <path d="M7.39667 19.005L17.0683 9.33333L10.5583 9.33333C10.2489 9.33333 9.95217 9.21042 9.73338 8.99162C9.51458 8.77283 9.39167 8.47609 9.39167 8.16667C9.39167 7.85725 9.51458 7.5605 9.73338 7.34171C9.95217 7.12292 10.2489 7 10.5583 7L19.8333 7C20.1428 7 20.4395 7.12292 20.6583 7.34171C20.8771 7.5605 21 7.85725 21 8.16667L21 17.5C21 17.8094 20.8771 18.1062 20.6583 18.325C20.4395 18.5438 20.1428 18.6667 19.8333 18.6667H19.8917C19.5822 18.6667 19.2855 18.5438 19.0667 18.325C18.8479 18.1062 18.725 17.8094 18.725 17.5L18.725 11.025L9.08833 20.6617C8.97988 20.771 8.85084 20.8578 8.70867 20.917C8.5665 20.9763 8.41401 21.0068 8.26 21.0068C8.10599 21.0068 7.9535 20.9763 7.81133 20.917C7.66916 20.8578 7.54012 20.771 7.43167 20.6617C7.31999 20.5555 7.23045 20.4283 7.16819 20.2874C7.10594 20.1465 7.07221 19.9946 7.06896 19.8406C7.0657 19.6866 7.09299 19.5335 7.14923 19.39C7.20548 19.2466 7.28958 19.1158 7.39667 19.005Z"
+                            fill="white"/>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.a>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
