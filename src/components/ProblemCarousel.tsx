@@ -112,8 +112,8 @@ export default function ProblemCarousel() {
     <>
       {/* Header Section */}
       {/* Ning H. Scattered Cards Section */}
-      <section className="bg-[#f0ebe5] pt-16 md:pt-24 pb-16 relative overflow-x-hidden" style={{ minHeight: '600px' }}>
-        <div className="container mx-auto px-4 text-center mb-0">
+      <section className="bg-[#f0ebe5] pt-16 md:pt-24 overflow-x-hidden">
+        <div className="container mx-auto px-4 text-center">
           <motion.h1
             className="text-6xl md:text-8xl lg:text-[120px] font-black uppercase tracking-tighter leading-none mb-2"
             initial={{ opacity: 0, y: 20 }}
@@ -123,7 +123,7 @@ export default function ProblemCarousel() {
             CHALLENGES
           </motion.h1>
           <motion.p
-            className="text-xs md:text-sm uppercase tracking-[0.15em] text-gray-600 font-medium mb-0"
+            className="text-xs md:text-sm uppercase tracking-[0.15em] text-gray-600 font-medium"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -131,8 +131,9 @@ export default function ProblemCarousel() {
             PRODUCTION BOTTLENECKS COSTING YOUR STUDIO MILLIONS
           </motion.p>
         </div>
-        <div className="relative" style={{ height: '520px' }}>
-          <div className="absolute inset-0 flex items-center justify-center">
+
+        {/* Cards — tight below title */}
+        <div className="relative flex items-center justify-center" style={{ height: '460px', marginTop: '-20px' }}>
             {challenges.map((challenge, index) => {
               const transform = cardTransforms[index];
 
@@ -140,10 +141,8 @@ export default function ProblemCarousel() {
                 <motion.a
                   key={challenge.id}
                   href={`/services/${challenge.id}`}
-                  className="absolute w-[520px] block"
+                  className="absolute w-[480px] block"
                   style={{
-                    left: '50%',
-                    top: '50%',
                     zIndex: transform.zIndex,
                   }}
                   initial={{
