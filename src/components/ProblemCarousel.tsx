@@ -15,7 +15,6 @@ interface Challenge {
     start: string;
     end: string;
   };
-  imageUrl?: string;  // Optional: actual image URL
   imageText: {
     line1: string;
     line2: string;
