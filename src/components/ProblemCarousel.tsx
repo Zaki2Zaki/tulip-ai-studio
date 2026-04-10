@@ -4,6 +4,8 @@ import { ArrowRight } from "lucide-react";
 
 const CARDS = [
   {
+    id: "ai-pipeline-integration",
+    image: "/images/fragmented-tools.png",
     problem: "40% Pipeline Time Wasted",
     service: "AI Pipeline Integration",
     price: "$50K–$200K",
@@ -12,6 +14,8 @@ const CARDS = [
     to: "#ede6f5",
   },
   {
+    id: "studio-style-training",
+    image: "/images/style-consistency.png",
     problem: "Visual Identity Crisis",
     service: "Studio Style Training",
     price: "$25K–$350K",
@@ -20,6 +24,8 @@ const CARDS = [
     to: "#e0cce7",
   },
   {
+    id: "motion-capture-integration",
+    image: "/images/motion-capture.png",
     problem: "$350K Per Rework Cycle",
     service: "Motion Capture Integration",
     price: "$40K–$150K",
@@ -28,6 +34,8 @@ const CARDS = [
     to: "#cac1e7",
   },
   {
+    id: "tool-benchmarking",
+    image: "/images/tool-paralysis.png",
     problem: "Tool Selection Paralysis",
     service: "GenAI Tool Benchmarking",
     price: "$15K–$50K",
@@ -36,6 +44,8 @@ const CARDS = [
     to: "#b0cced",
   },
   {
+    id: "infrastructure-planning",
+    image: "/images/budget-overruns.png",
     problem: "50% Budget Overruns",
     service: "Cost-Optimal Infrastructure Planning",
     price: "$20K–$75K",
@@ -59,6 +69,8 @@ export default function ProblemCarousel() {
     return () => clearInterval(timer);
   }, [paused]);
 
+  const card = CARDS[index];
+
   return (
     <section className="w-full py-8 overflow-hidden bg-background">
       <div className="max-w-4xl mx-auto px-6">
@@ -74,37 +86,49 @@ export default function ProblemCarousel() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="rounded-2xl px-7 py-6 flex flex-col md:flex-row md:items-center gap-4 md:gap-8"
+              className="rounded-2xl overflow-hidden flex flex-col md:flex-row"
               style={{
-                background: `linear-gradient(135deg, ${CARDS[index].from}, ${CARDS[index].to})`,
+                background: `linear-gradient(135deg, ${card.from}, ${card.to})`,
                 willChange: "transform",
+                // Responsive heights via min-height
+                minHeight: "clamp(200px, 30vw, 280px)",
               }}
             >
-              {/* Problem */}
-              <div className="flex-1 min-w-0">
-                <p
-                  className="text-[10px] tracking-[0.18em] uppercase font-body font-semibold mb-1"
-                  style={{ color: "rgba(0,0,0,0.4)" }}
-                >
-                  Pain Point
-                </p>
-                <p
-                  className="font-display text-2xl md:text-3xl font-bold leading-tight"
-                  style={{ color: "#1a1a2e" }}
-                >
-                  {CARDS[index].problem}
-                </p>
+              {/* Image column */}
+              <div className="relative shrink-0 w-full md:w-[42%] h-48 md:h-auto overflow-hidden">
+                <img
+                  src={card.image}
+                  alt={card.problem}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                {/* Gradient overlay */}
+                <div
+                  className="absolute inset-0 mix-blend-multiply opacity-40"
+                  style={{
+                    background: `linear-gradient(to bottom, ${card.from}, ${card.to})`,
+                  }}
+                />
               </div>
 
-              {/* Arrow */}
-              <ArrowRight
-                className="hidden md:block shrink-0"
-                style={{ color: "rgba(0,0,0,0.25)", width: "20px", height: "20px" }}
-              />
-
-              {/* Service + CTA */}
-              <div className="flex-1 min-w-0 flex flex-col gap-3">
+              {/* Content column */}
+              <div className="flex-1 px-6 py-6 md:px-8 md:py-7 flex flex-col justify-between">
                 <div>
+                  <p
+                    className="text-[10px] tracking-[0.18em] uppercase font-body font-semibold mb-2"
+                    style={{ color: "rgba(0,0,0,0.4)" }}
+                  >
+                    Pain Point
+                  </p>
+                  <p
+                    className="font-display font-bold leading-tight mb-4"
+                    style={{
+                      color: "#1a1a2e",
+                      fontSize: "clamp(20px, 3vw, 28px)",
+                    }}
+                  >
+                    {card.problem}
+                  </p>
                   <p
                     className="text-[10px] tracking-[0.18em] uppercase font-body font-semibold mb-1"
                     style={{ color: "rgba(0,0,0,0.4)" }}
@@ -115,26 +139,44 @@ export default function ProblemCarousel() {
                     className="font-display text-base font-bold"
                     style={{ color: "#1a1a2e" }}
                   >
-                    {CARDS[index].service}
+                    {card.service}
                   </p>
                   <p
-                    className="font-body text-sm mt-0.5"
+                    className="font-body text-sm mt-0.5 mb-5"
                     style={{ color: "rgba(0,0,0,0.5)" }}
                   >
-                    {CARDS[index].price}
+                    {card.price}
                   </p>
                 </div>
-                <a
-                  href={CARDS[index].cta}
-                  className="inline-flex items-center gap-2 self-start px-4 py-2 rounded-full font-display font-semibold text-xs transition-all hover:opacity-80"
-                  style={{
-                    background: "rgba(0,0,0,0.08)",
-                    color: "#1a1a2e",
-                    border: "1px solid rgba(0,0,0,0.12)",
-                  }}
-                >
-                  Learn more <ArrowRight style={{ width: "12px", height: "12px" }} />
-                </a>
+
+                {/* CTAs */}
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href={card.cta}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 font-display font-bold text-xs uppercase tracking-wide transition-colors hover:opacity-80"
+                    style={{
+                      background: "#2B5BA6",
+                      color: "#fff",
+                      borderRadius: "4px",
+                    }}
+                  >
+                    Explore Solution <ArrowRight style={{ width: "13px", height: "13px" }} />
+                  </a>
+                  <a
+                    href="https://calendly.com/youki-harada/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 font-display font-bold text-xs uppercase tracking-wide transition-colors hover:bg-[#2B5BA6] hover:text-white"
+                    style={{
+                      border: "2px solid #2B5BA6",
+                      color: "#2B5BA6",
+                      borderRadius: "4px",
+                      background: "transparent",
+                    }}
+                  >
+                    Book Consultation
+                  </a>
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>
