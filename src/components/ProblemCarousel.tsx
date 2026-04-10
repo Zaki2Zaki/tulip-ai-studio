@@ -7,7 +7,7 @@ const CARDS = [
     headline: "Pipeline Time Wasted",
     description: "Disconnected tools and manual handoffs eat nearly half your production time before a single frame ships.",
     cta: "/services/ai-pipeline-integration",
-    gradient: "linear-gradient(160deg, #c4b5f4 0%, #9b8de0 45%, #6a6fc8 100%)",
+    gradient: "linear-gradient(170deg, #ffffff 0%, #f0ecfc 50%, #ddd5f8 100%)",
   },
   {
     id: "studio-style-training",
@@ -15,7 +15,7 @@ const CARDS = [
     headline: "Visual Identity Crisis",
     description: "AI-generated assets erode your studio's distinctive look, forcing expensive rework or brand dilution.",
     cta: "/services/studio-style-training",
-    gradient: "linear-gradient(160deg, #e8b4d8 0%, #c48ab8 45%, #9060a0 100%)",
+    gradient: "linear-gradient(170deg, #ddd5f8 0%, #c4b5f4 50%, #a992ee 100%)",
   },
   {
     id: "motion-capture-integration",
@@ -23,7 +23,7 @@ const CARDS = [
     headline: "Per Major Rework Cycle",
     description: "Late-stage motion data errors compound into six-figure budget overruns and missed release windows.",
     cta: "/services/motion-capture-integration",
-    gradient: "linear-gradient(160deg, #a8c8f4 0%, #7098d8 45%, #3860b8 100%)",
+    gradient: "linear-gradient(170deg, #a992ee 0%, #8878d8 50%, #6b6ec4 100%)",
   },
   {
     id: "tool-benchmarking",
@@ -31,7 +31,7 @@ const CARDS = [
     headline: "Tool Selection Paralysis",
     description: "Rapidly multiplying GenAI options stall decision-making while competitors lock in production advantages.",
     cta: "/services/tool-benchmarking",
-    gradient: "linear-gradient(160deg, #a8e4ec 0%, #60b8cc 45%, #2888a8 100%)",
+    gradient: "linear-gradient(170deg, #6b6ec4 0%, #5898d8 50%, #3db8e8 100%)",
   },
   {
     id: "infrastructure-planning",
@@ -39,7 +39,7 @@ const CARDS = [
     headline: "Studios Exceed Budget",
     description: "Poorly scoped GPU infrastructure and cloud costs routinely double initial estimates on AI-heavy projects.",
     cta: "/services/infrastructure-planning",
-    gradient: "linear-gradient(160deg, #b0e8c0 0%, #70c090 45%, #309060 100%)",
+    gradient: "linear-gradient(170deg, #3db8e8 0%, #22cce0 50%, #00e5d4 100%)",
   },
 ];
 
