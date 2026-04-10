@@ -140,53 +140,25 @@ export default function ProblemCarousel() {
               return (
                 <motion.a
                   key={challenge.id}
-                  href={`/services/${challenge.id}`}
+                  href={challenge.citation}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="absolute w-[480px] block"
-                  style={{
-                    zIndex: transform.zIndex,
-                  }}
-                  initial={{
-                    opacity: 0,
-                    scale: 0.8,
-                    x: transform.x,
-                    y: transform.y,
-                    rotate: transform.rotate
-                  }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                    x: transform.x,
-                    y: transform.y,
-                    rotate: transform.rotate
-                  }}
-                  transition={{
-                    duration: 0.8,
-                    delay: index * 0.1,
-                    ease: [0.25, 0.46, 0.45, 0.94]
-                  }}
-                  whileHover={{
-                    scale: 1.12,
-                    rotate: 0,
-                    zIndex: 100,
-                    transition: { duration: 0.4 }
-                  }}
+                  style={{ zIndex: transform.zIndex }}
+                  initial={{ opacity: 0, scale: 0.8, x: transform.x, y: transform.y, rotate: transform.rotate }}
+                  animate={{ opacity: 1, scale: 1, x: transform.x, y: transform.y, rotate: transform.rotate }}
+                  transition={{ duration: 0.8, delay: index * 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  whileHover={{ scale: 1.12, rotate: 0, zIndex: 100, transition: { duration: 0.4 } }}
                 >
-                  {/* Card Container - Exact Ning H. Style: 4:3 Aspect Ratio */}
+                  {/* Card Container - 4:3 Aspect Ratio */}
                   <div
-                    className="relative aspect-[4/3] bg-black overflow-hidden transition-all duration-500 group cursor-pointer"
-                    style={{
-                      boxShadow: `
-                        0 25px 50px rgba(0, 0, 0, 0.15),
-                        0 10px 20px rgba(0, 0, 0, 0.08)
-                      `
-                    }}
+                    className="relative aspect-[4/3] bg-black overflow-hidden group cursor-pointer"
+                    style={{ boxShadow: '0 25px 50px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.08)' }}
                   >
-                    {/* Image Section - Top 70% */}
+                    {/* Gradient/Image Area - Top 70% */}
                     <div
-                      className="w-full h-[70%] relative overflow-hidden"
-                      style={{
-                        background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`
-                      }}
+                      className="w-full h-[70%] relative overflow-hidden flex items-center justify-center"
+                      style={{ background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})` }}
                     >
                       {challenge.imageUrl && (
                         <img
@@ -196,31 +168,35 @@ export default function ProblemCarousel() {
                           loading="lazy"
                         />
                       )}
-                      {/* Subtle noise/grain texture */}
-                      <div
-                        className="absolute inset-0 opacity-5 mix-blend-overlay"
-                        style={{ backgroundImage: 'url(/images/noise-texture.png)' }}
-                      />
-                    </div>
-
-                    {/* Black Title Bar - Bottom 30% */}
-                    <div className="w-full h-[30%] bg-black px-8 py-6 flex flex-col justify-between">
-                      {/* Title */}
-                      <h2 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight leading-tight">
+                      {/* Noise texture */}
+                      <div className="absolute inset-0 opacity-5 mix-blend-overlay" style={{ backgroundImage: 'url(/images/noise-texture.png)' }} />
+                      {/* Headline centered in gradient area */}
+                      <h2
+                        className="relative z-10 font-black uppercase tracking-tight text-center px-6 leading-tight"
+                        style={{
+                          fontSize: 'clamp(22px, 3.5vw, 32px)',
+                          color: '#ffffff',
+                          textShadow: '0 2px 12px rgba(0,0,0,0.35), 0 1px 3px rgba(0,0,0,0.5)',
+                        }}
+                      >
                         {challenge.headline}
                       </h2>
+                    </div>
 
+                    {/* Black Bar - Bottom 30% */}
+                    <div className="w-full h-[30%] bg-black px-6 py-4 flex flex-col justify-between">
                       {/* Description + Arrow Row */}
-                      <div className="flex items-end justify-between">
-                        <p className="text-[10px] text-white uppercase tracking-wider leading-relaxed max-w-[280px]">
+                      <div className="flex items-end justify-between gap-3 h-full">
+                        <p className="text-xs text-white uppercase tracking-wider leading-relaxed">
                           {challenge.description}
                         </p>
-
-                        {/* Arrow in Circle - Bottom Right */}
-                        <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: '#2B5BA6' }}>
+                        {/* Arrow in Circle - fades on hover */}
+                        <div
+                          className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          style={{ background: '#2B5BA6' }}
+                        >
                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 28 28" fill="none">
-                            <path d="M7.39667 19.005L17.0683 9.33333L10.5583 9.33333C10.2489 9.33333 9.95217 9.21042 9.73338 8.99162C9.51458 8.77283 9.39167 8.47609 9.39167 8.16667C9.39167 7.85725 9.51458 7.5605 9.73338 7.34171C9.95217 7.12292 10.2489 7 10.5583 7L19.8333 7C20.1428 7 20.4395 7.12292 20.6583 7.34171C20.8771 7.5605 21 7.85725 21 8.16667L21 17.5C21 17.8094 20.8771 18.1062 20.6583 18.325C20.4395 18.5438 20.1428 18.6667 19.8333 18.6667H19.8917C19.5822 18.6667 19.2855 18.5438 19.0667 18.325C18.8479 18.1062 18.725 17.8094 18.725 17.5L18.725 11.025L9.08833 20.6617C8.97988 20.771 8.85084 20.8578 8.70867 20.917C8.5665 20.9763 8.41401 21.0068 8.26 21.0068C8.10599 21.0068 7.9535 20.9763 7.81133 20.917C7.66916 20.8578 7.54012 20.771 7.43167 20.6617C7.31999 20.5555 7.23045 20.4283 7.16819 20.2874C7.10594 20.1465 7.07221 19.9946 7.06896 19.8406C7.0657 19.6866 7.09299 19.5335 7.14923 19.39C7.20548 19.2466 7.28958 19.1158 7.39667 19.005Z"
-                            fill="white"/>
+                            <path d="M7.39667 19.005L17.0683 9.33333L10.5583 9.33333C10.2489 9.33333 9.95217 9.21042 9.73338 8.99162C9.51458 8.77283 9.39167 8.47609 9.39167 8.16667C9.39167 7.85725 9.51458 7.5605 9.73338 7.34171C9.95217 7.12292 10.2489 7 10.5583 7L19.8333 7C20.1428 7 20.4395 7.12292 20.6583 7.34171C20.8771 7.5605 21 7.85725 21 8.16667L21 17.5C21 17.8094 20.8771 18.1062 20.6583 18.325C20.4395 18.5438 20.1428 18.6667 19.8333 18.6667H19.8917C19.5822 18.6667 19.2855 18.5438 19.0667 18.325C18.8479 18.1062 18.725 17.8094 18.725 17.5L18.725 11.025L9.08833 20.6617C8.97988 20.771 8.85084 20.8578 8.70867 20.917C8.5665 20.9763 8.41401 21.0068 8.26 21.0068C8.10599 21.0068 7.9535 20.9763 7.81133 20.917C7.66916 20.8578 7.54012 20.771 7.43167 20.6617C7.31999 20.5555 7.23045 20.4283 7.16819 20.2874C7.10594 20.1465 7.07221 19.9946 7.06896 19.8406C7.0657 19.6866 7.09299 19.5335 7.14923 19.39C7.20548 19.2466 7.28958 19.1158 7.39667 19.005Z" fill="white"/>
                           </svg>
                         </div>
                       </div>
