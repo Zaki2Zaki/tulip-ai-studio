@@ -157,7 +157,7 @@ export default function ProblemCarousel() {
               <motion.div
                 key={index}
                 className="h-full rounded-full"
-                style={{ background: "hsl(var(--primary) / 0.5)" }}
+                style={{ background: "hsl(var(--primary) / 0.5)", willChange: "transform" }}
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: INTERVAL / 1000, ease: "linear" }}
