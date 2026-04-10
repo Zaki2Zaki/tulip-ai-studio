@@ -89,7 +89,7 @@ const challenges: Challenge[] = [
     accentText: 'PAIN POINT',
     description: 'Underestimated GPU infrastructure costs explode during AI production deployment',
     citation: 'AWS, The 2025 Guide to Generative AI for Game Developers',
-    gradientColors: { start: '#b0cced', end: '#a2d5e5' },  // Light blue → Cyan
+    gradientColors: { start: '#b0cced', end: '#a2d5e5' },  // #b0cced → #a7d1eb → #a2d5e5
     imageUrl: '/images/budget-overruns.webp',
     imageText: { line1: 'RENDERING', line2: 'COST EXPLOSION' },
     solution: 'Right-size GPU infrastructure with cost optimization',
