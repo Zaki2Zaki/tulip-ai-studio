@@ -111,10 +111,11 @@ export default function ProblemCarousel() {
   return (
     <>
       {/* Header Section */}
-      <section className="bg-[#f0ebe5] pt-20 pb-6 md:pt-32 md:pb-8">
-        <div className="container mx-auto px-4 text-center">
+      {/* Ning H. Scattered Cards Section */}
+      <section className="bg-[#f0ebe5] pt-20 md:pt-32 pb-32 relative overflow-x-hidden min-h-[1400px]">
+        <div className="container mx-auto px-4 text-center mb-0">
           <motion.h1
-            className="text-6xl md:text-8xl lg:text-[120px] font-black uppercase tracking-tighter leading-none mb-8"
+            className="text-6xl md:text-8xl lg:text-[120px] font-black uppercase tracking-tighter leading-none mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -130,10 +131,6 @@ export default function ProblemCarousel() {
             PRODUCTION BOTTLENECKS COSTING YOUR STUDIO MILLIONS
           </motion.p>
         </div>
-      </section>
-
-      {/* Ning H. Scattered Cards Section */}
-      <section className="bg-[#f0ebe5] pt-4 pb-32 relative overflow-x-hidden min-h-[1400px]">
         <div className="container mx-auto px-4">
           <div className="relative h-[1100px] flex items-center justify-center">
             {challenges.map((challenge, index) => {
