@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import ProblemCarousel from "@/components/ProblemCarousel";
 import WhyTulipSection from "@/components/WhyTulipSection";
 import ServicesSection from "@/components/ServicesSection";
 import PipelineSection from "@/components/PipelineSection";
