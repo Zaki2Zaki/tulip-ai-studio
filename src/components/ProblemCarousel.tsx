@@ -1,32 +1,51 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AlertTriangle, Clock, DollarSign } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-const PROBLEMS = [
+const CARDS = [
   {
-    stat: "78%",
-    icon: AlertTriangle,
-    highlight: "pipeline issues weekly",
-    text: "Of Game Dev & 3D + VFX animation studios face version control & pipeline issues weekly — driving delays from tool mismatches and integration failures.",
-    sub: null,
+    problem: "40% Pipeline Time Wasted",
+    service: "AI Pipeline Integration",
+    price: "$50K–$200K",
+    cta: "/services/ai-pipeline-integration",
+    from: "#ffffff",
+    to: "#ede6f5",
   },
   {
-    stat: "45%",
-    icon: Clock,
-    highlight: "1 hour per week lost",
-    text: "Teams lose an average of 1 hour per week troubleshooting, wasting integration time & asset creation in unoptimized, siloed pipelines.",
-    sub: null,
+    problem: "Visual Identity Crisis",
+    service: "Studio Style Training",
+    price: "$25K–$350K",
+    cta: "/services/studio-style-training",
+    from: "#ede6f5",
+    to: "#e0cce7",
   },
   {
-    stat: "$350K",
-    icon: DollarSign,
-    highlight: "per major rework cycle",
-    text: "Per major rework/iteration cycle — asset pipeline fixes or build overhauls affecting 10–30 devs for 3–7 days.",
-    sub: "AA Studios $100K–$400K  •  AAA Studios $500K–$3M+ per major rework/iteration cycle",
+    problem: "$350K Per Rework Cycle",
+    service: "Motion Capture Integration",
+    price: "$40K–$150K",
+    cta: "/services/motion-capture-integration",
+    from: "#e0cce7",
+    to: "#cac1e7",
+  },
+  {
+    problem: "Tool Selection Paralysis",
+    service: "GenAI Tool Benchmarking",
+    price: "$15K–$50K",
+    cta: "/services/tool-benchmarking",
+    from: "#cac1e7",
+    to: "#b0cced",
+  },
+  {
+    problem: "50% Budget Overruns",
+    service: "Cost-Optimal Infrastructure Planning",
+    price: "$20K–$75K",
+    cta: "/services/infrastructure-planning",
+    from: "#b0cced",
+    to: "#a2d5e5",
   },
 ];
 
-const INTERVAL = 4000;
+const INTERVAL = 4500;
 
 export default function ProblemCarousel() {
   const [index, setIndex] = useState(0);
@@ -35,86 +54,109 @@ export default function ProblemCarousel() {
   useEffect(() => {
     if (paused) return;
     const timer = setInterval(() => {
-      setIndex((i) => (i + 1) % PROBLEMS.length);
+      setIndex((i) => (i + 1) % CARDS.length);
     }, INTERVAL);
     return () => clearInterval(timer);
   }, [paused]);
 
-  const p = PROBLEMS[index];
-
   return (
-    <section className="w-full bg-background border-y border-border/20 py-10 overflow-hidden">
+    <section className="w-full py-8 overflow-hidden bg-background">
       <div className="max-w-4xl mx-auto px-6">
-        {/* Header */}
-        <div className="flex items-center gap-2.5 mb-6">
-          <AlertTriangle className="w-4 h-4 text-destructive" />
-          <span className="text-[11px] tracking-[0.2em] uppercase font-body font-semibold text-destructive">
-            The Experimentation Gap
-          </span>
-        </div>
-
-        {/* Slide */}
         <div
-          className="relative min-h-[120px]"
+          className="relative"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.4 }}
-              className="flex flex-col md:flex-row items-start gap-4 md:gap-6 p-5 rounded-2xl bg-card/30 border border-border/30 backdrop-blur-sm"
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.38 }}
+              className="rounded-2xl px-7 py-6 flex flex-col md:flex-row md:items-center gap-4 md:gap-8"
+              style={{
+                background: `linear-gradient(135deg, ${CARDS[index].from}, ${CARDS[index].to})`,
+              }}
             >
-              <div className="flex items-center gap-2.5 shrink-0">
-                <p.icon className="w-4 h-4 text-destructive/60" />
-                <span className="font-display text-3xl md:text-4xl font-bold text-gradient-gold">
-                  {p.stat}
-                </span>
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm text-white/90 font-body leading-relaxed">
-                  {p.text.split(p.highlight).map((part, j, arr) => (
-                    <span key={j}>
-                      {part}
-                      {j < arr.length - 1 && (
-                        <strong className="text-destructive font-semibold">
-                          {p.highlight}
-                        </strong>
-                      )}
-                    </span>
-                  ))}
+              {/* Problem */}
+              <div className="flex-1 min-w-0">
+                <p
+                  className="text-[10px] tracking-[0.18em] uppercase font-body font-semibold mb-1"
+                  style={{ color: "rgba(0,0,0,0.4)" }}
+                >
+                  Pain Point
                 </p>
-                {p.sub && (
-                  <p className="text-sm text-white/60 font-body">{p.sub}</p>
-                )}
+                <p
+                  className="font-display text-2xl md:text-3xl font-bold leading-tight"
+                  style={{ color: "#1a1a2e" }}
+                >
+                  {CARDS[index].problem}
+                </p>
+              </div>
+
+              {/* Arrow */}
+              <ArrowRight
+                className="hidden md:block shrink-0"
+                style={{ color: "rgba(0,0,0,0.25)", width: "20px", height: "20px" }}
+              />
+
+              {/* Service + CTA */}
+              <div className="flex-1 min-w-0 flex flex-col gap-3">
+                <div>
+                  <p
+                    className="text-[10px] tracking-[0.18em] uppercase font-body font-semibold mb-1"
+                    style={{ color: "rgba(0,0,0,0.4)" }}
+                  >
+                    Service
+                  </p>
+                  <p
+                    className="font-display text-base font-bold"
+                    style={{ color: "#1a1a2e" }}
+                  >
+                    {CARDS[index].service}
+                  </p>
+                  <p
+                    className="font-body text-sm mt-0.5"
+                    style={{ color: "rgba(0,0,0,0.5)" }}
+                  >
+                    {CARDS[index].price}
+                  </p>
+                </div>
+                <a
+                  href={CARDS[index].cta}
+                  className="inline-flex items-center gap-2 self-start px-4 py-2 rounded-full font-display font-semibold text-xs transition-all hover:opacity-80"
+                  style={{
+                    background: "rgba(0,0,0,0.08)",
+                    color: "#1a1a2e",
+                    border: "1px solid rgba(0,0,0,0.12)",
+                  }}
+                >
+                  Learn more <ArrowRight style={{ width: "12px", height: "12px" }} />
+                </a>
               </div>
             </motion.div>
           </AnimatePresence>
-        </div>
 
-        {/* Dots */}
-        <div className="flex items-center gap-2 mt-5">
-          {PROBLEMS.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => { setIndex(i); setPaused(true); }}
-              className="transition-all duration-300 rounded-full"
-              style={{
-                width: i === index ? "20px" : "6px",
-                height: "6px",
-                background: i === index ? "hsl(var(--primary))" : "rgba(255,255,255,0.2)",
-              }}
-            />
-          ))}
-          {/* Progress bar */}
-          <div className="ml-auto flex items-center gap-2">
-            <div className="w-24 h-0.5 rounded-full bg-white/10 overflow-hidden">
+          {/* Dots + progress */}
+          <div className="flex items-center gap-2 mt-4">
+            {CARDS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => { setIndex(i); setPaused(true); }}
+                className="rounded-full transition-all duration-300"
+                style={{
+                  width: i === index ? "20px" : "6px",
+                  height: "6px",
+                  background: i === index ? "hsl(var(--primary))" : "rgba(255,255,255,0.18)",
+                }}
+              />
+            ))}
+            <div className="ml-auto w-20 h-0.5 rounded-full bg-white/10 overflow-hidden">
               <motion.div
                 key={index}
-                className="h-full bg-primary/60 rounded-full"
+                className="h-full rounded-full"
+                style={{ background: "hsl(var(--primary) / 0.5)" }}
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: INTERVAL / 1000, ease: "linear" }}
