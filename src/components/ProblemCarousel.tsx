@@ -143,8 +143,8 @@ export default function ProblemCarousel() {
           </motion.p>
         </div>
 
-        {/* Cards — tight below title */}
-        <div className="relative flex items-center justify-center" style={{ height: '460px', marginTop: '-20px' }}>
+        {/* Cards */}
+        <div className="relative flex items-center justify-center" style={{ height: '460px' }}>
             {challenges.map((challenge, index) => {
               const transform = cardTransforms[index];
 
