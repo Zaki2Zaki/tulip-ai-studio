@@ -83,7 +83,7 @@ export default function ProblemCarousel() {
               transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="rounded-2xl overflow-hidden flex flex-col md:flex-row"
               style={{
-                background: `linear-gradient(135deg, ${challenge.from}, ${challenge.to})`,
+                background: `linear-gradient(135deg, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`,
                 willChange: "transform",
                 // Responsive heights via min-height
                 minHeight: "clamp(200px, 30vw, 280px)",
