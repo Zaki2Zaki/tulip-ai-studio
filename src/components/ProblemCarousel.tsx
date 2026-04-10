@@ -62,6 +62,7 @@ const challenges: Challenge[] = [
     description: 'Manual mocap cleanup blocks real-time iteration and burns production budgets',
     citation: 'Third Point Ventures, AI Impact on Gaming and Media Tooling, 2025',
     gradientColors: { start: '#e0cce7', end: '#cac1e7' },  // Soft purple → Medium purple
+    imageUrl: '/images/motion-capture.webp',
     imageText: { line1: 'MANUAL', line2: 'MOCAP CLEANUP' },
     solution: 'EA-validated pipelines with Rokoko/Tato integration',
     service: 'Motion Capture Integration',
