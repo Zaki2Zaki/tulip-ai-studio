@@ -83,7 +83,7 @@ export default function ProblemCarousel() {
               transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="rounded-2xl overflow-hidden flex flex-col md:flex-row"
               style={{
-                background: `linear-gradient(135deg, ${card.from}, ${card.to})`,
+                background: `linear-gradient(135deg, ${challenge.from}, ${challenge.to})`,
                 willChange: "transform",
                 // Responsive heights via min-height
                 minHeight: "clamp(200px, 30vw, 280px)",
@@ -92,8 +92,8 @@ export default function ProblemCarousel() {
               {/* Image column */}
               <div className="relative shrink-0 w-full md:w-[42%] h-48 md:h-auto overflow-hidden">
                 <img
-                  src={card.image}
-                  alt={card.problem}
+                  src={challenge.image}
+                  alt={challenge.problem}
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
@@ -101,7 +101,7 @@ export default function ProblemCarousel() {
                 <div
                   className="absolute inset-0 mix-blend-multiply opacity-40"
                   style={{
-                    background: `linear-gradient(to bottom, ${card.from}, ${card.to})`,
+                    background: `linear-gradient(to bottom, ${challenge.from}, ${challenge.to})`,
                   }}
                 />
               </div>
@@ -122,7 +122,7 @@ export default function ProblemCarousel() {
                       fontSize: "clamp(20px, 3vw, 28px)",
                     }}
                   >
-                    {card.problem}
+                    {challenge.problem}
                   </p>
                   <p
                     className="text-[10px] tracking-[0.18em] uppercase font-body font-semibold mb-1"
@@ -134,20 +134,20 @@ export default function ProblemCarousel() {
                     className="font-display text-base font-bold"
                     style={{ color: "#1a1a2e" }}
                   >
-                    {card.service}
+                    {challenge.service}
                   </p>
                   <p
                     className="font-body text-sm mt-0.5 mb-5"
                     style={{ color: "rgba(0,0,0,0.5)" }}
                   >
-                    {card.price}
+                    {challenge.price}
                   </p>
                 </div>
 
                 {/* CTAs */}
                 <div className="flex flex-wrap gap-3">
                   <a
-                    href={card.cta}
+                    href={challenge.cta}
                     className="inline-flex items-center gap-2 px-5 py-2.5 font-display font-bold text-xs uppercase tracking-wide transition-colors hover:opacity-80"
                     style={{
                       background: "#2B5BA6",
