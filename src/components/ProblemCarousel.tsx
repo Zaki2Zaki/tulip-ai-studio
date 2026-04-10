@@ -64,7 +64,7 @@ export default function ProblemCarousel() {
     return () => clearInterval(timer);
   }, [paused]);
 
-  const card = CARDS[index];
+  const challenge = CARDS[index];
 
   return (
     <section className="w-full py-8 overflow-hidden bg-background">
