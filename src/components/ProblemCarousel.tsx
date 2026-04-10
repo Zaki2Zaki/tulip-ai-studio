@@ -183,25 +183,35 @@ export default function ProblemCarousel() {
                 }}
               >
                 <div
-                  className="relative aspect-[4/3] bg-black overflow-hidden group cursor-pointer"
-                  style={{ boxShadow: '0 25px 50px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.08)' }}
+                  className="relative bg-black overflow-hidden group cursor-pointer"
+                  style={{
+                    boxShadow: '0 25px 50px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.08)',
+                    width: '100%',
+                    height: '340px',
+                  }}
                 >
-                  {/* Gradient area — top 70% */}
+                  {/* Gradient area — top 65% */}
                   <div
-                    className="w-full h-[70%] relative overflow-hidden flex items-center justify-center px-12"
-                    style={{ background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})` }}
+                    className="w-full relative overflow-hidden flex items-center justify-center px-6"
+                    style={{
+                      height: '65%',
+                      background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`,
+                    }}
                   >
                     <h2
-                      className="relative z-10 text-4xl md:text-5xl font-black text-white uppercase tracking-tight leading-tight text-center"
-                      style={{ textShadow: '3px 3px 6px rgba(0,0,0,0.5), -1px -1px 2px rgba(0,0,0,0.3)' }}
+                      className="relative z-10 font-black text-white uppercase tracking-tight leading-tight text-center"
+                      style={{
+                        fontSize: 'clamp(18px, 2.8vw, 26px)',
+                        textShadow: '2px 2px 6px rgba(0,0,0,0.4)',
+                      }}
                     >
                       {challenge.headline}
                     </h2>
                   </div>
 
-                  {/* Black bar — bottom 30% */}
-                  <div className="w-full h-[30%] bg-black px-8 py-6 flex flex-col justify-between">
-                    <p className="text-xs text-white uppercase tracking-wide leading-relaxed">
+                  {/* Black bar — bottom 35% */}
+                  <div className="w-full bg-black px-5 py-4 flex flex-col justify-between" style={{ height: '35%' }}>
+                    <p className="text-[10px] text-white uppercase tracking-wide leading-relaxed line-clamp-3">
                       {challenge.description}
                     </p>
                     <div className="flex items-end justify-end">
