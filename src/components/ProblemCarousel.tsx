@@ -133,7 +133,7 @@ export default function ProblemCarousel() {
       </section>
 
       {/* Ning H. Scattered Cards Section */}
-      <section className="bg-[#f0ebe5] py-32 relative overflow-x-hidden min-h-[1400px]">
+      <section className="bg-[#f0ebe5] pt-4 pb-32 relative overflow-x-hidden min-h-[1400px]">
         <div className="container mx-auto px-4">
           <div className="relative h-[1100px] flex items-center justify-center">
             {challenges.map((challenge, index) => {
