@@ -33,7 +33,7 @@ const challenges: Challenge[] = [
     description: 'Disconnected AI tools force asset redos across Blender → Unreal → Nuke workflows',
     citation: 'https://www.thirdpointventures.com/currents/AI-impact-on-gaming-and-media-tooling/',
     gradientColors: { start: '#ffffff', end: '#ede6f5' },
-    imageUrl: '/images/fragmented-tools.webp',
+
     imageText: { line1: 'FRAGMENTED', line2: 'AI TOOLING' },
     solution: 'Unified AI workflow wrappers eliminate manual handoffs',
     service: 'AI Pipeline Integration',
