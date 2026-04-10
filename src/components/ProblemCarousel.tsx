@@ -171,14 +171,6 @@ export default function ProblemCarousel() {
                       className="w-full h-[70%] relative overflow-hidden flex items-center justify-center"
                       style={{ background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})` }}
                     >
-                      {challenge.imageUrl && (
-                        <img
-                          src={challenge.imageUrl}
-                          alt={challenge.headline}
-                          className="absolute inset-0 w-full h-full object-cover"
-                          loading="lazy"
-                        />
-                      )}
                       {/* Noise texture */}
                       <div className="absolute inset-0 opacity-5 mix-blend-overlay" style={{ backgroundImage: 'url(/images/noise-texture.png)' }} />
                       {/* Headline centered in gradient area */}
