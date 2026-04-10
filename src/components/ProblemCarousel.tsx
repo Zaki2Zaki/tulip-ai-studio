@@ -101,7 +101,7 @@ export default function ProblemCarousel() {
                 <div
                   className="absolute inset-0 mix-blend-multiply opacity-40"
                   style={{
-                    background: `linear-gradient(to bottom, ${challenge.from}, ${challenge.to})`,
+                    background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`,
                   }}
                 />
               </div>
