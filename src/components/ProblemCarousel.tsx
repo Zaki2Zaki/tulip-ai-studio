@@ -10,8 +10,7 @@ const CARDS = [
     service: "AI Pipeline Integration",
     price: "$50K–$200K",
     cta: "/services/ai-pipeline-integration",
-    from: "#ffffff",
-    to: "#ede6f5",
+    gradientColors: { start: "#ffffff", end: "#ede6f5" },
   },
   {
     id: "studio-style-training",
@@ -20,8 +19,7 @@ const CARDS = [
     service: "Studio Style Training",
     price: "$25K–$350K",
     cta: "/services/studio-style-training",
-    from: "#ede6f5",
-    to: "#e0cce7",
+    gradientColors: { start: "#ede6f5", end: "#e0cce7" },
   },
   {
     id: "motion-capture-integration",
@@ -30,8 +28,7 @@ const CARDS = [
     service: "Motion Capture Integration",
     price: "$40K–$150K",
     cta: "/services/motion-capture-integration",
-    from: "#e0cce7",
-    to: "#cac1e7",
+    gradientColors: { start: "#e0cce7", end: "#cac1e7" },
   },
   {
     id: "tool-benchmarking",
@@ -40,8 +37,7 @@ const CARDS = [
     service: "GenAI Tool Benchmarking",
     price: "$15K–$50K",
     cta: "/services/tool-benchmarking",
-    from: "#cac1e7",
-    to: "#b0cced",
+    gradientColors: { start: "#cac1e7", end: "#b0cced" },
   },
   {
     id: "infrastructure-planning",
@@ -50,8 +46,7 @@ const CARDS = [
     service: "Cost-Optimal Infrastructure Planning",
     price: "$20K–$75K",
     cta: "/services/infrastructure-planning",
-    from: "#b0cced",
-    to: "#a2d5e5",
+    gradientColors: { start: "#b0cced", end: "#a2d5e5" },
   },
 ];
 
