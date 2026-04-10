@@ -5,7 +5,8 @@ import { ArrowRight } from "lucide-react";
 const CARDS = [
   {
     id: "ai-pipeline-integration",
-    problem: "40% of pipeline time is wasted",
+    stat: "40%",
+    problem: "Pipeline Time Wasted",
     service: "AI Pipeline Integration",
     price: "$50K–$200K",
     cta: "/services/ai-pipeline-integration",
@@ -13,7 +14,8 @@ const CARDS = [
   },
   {
     id: "studio-style-training",
-    problem: "Visual identity inconsistency across assets",
+    stat: "↓",
+    problem: "Visual Identity Crisis",
     service: "Studio Style Training",
     price: "$25K–$350K",
     cta: "/services/studio-style-training",
@@ -21,7 +23,8 @@ const CARDS = [
   },
   {
     id: "motion-capture-integration",
-    problem: "$350K lost per major rework cycle",
+    stat: "$350K",
+    problem: "Per Major Rework Cycle",
     service: "Motion Capture Integration",
     price: "$40K–$150K",
     cta: "/services/motion-capture-integration",
@@ -29,7 +32,8 @@ const CARDS = [
   },
   {
     id: "tool-benchmarking",
-    problem: "Tool selection paralysis slows adoption",
+    stat: "↑",
+    problem: "Tool Selection Paralysis",
     service: "GenAI Tool Benchmarking",
     price: "$15K–$50K",
     cta: "/services/tool-benchmarking",
@@ -37,7 +41,8 @@ const CARDS = [
   },
   {
     id: "infrastructure-planning",
-    problem: "50% of studios exceed production budget",
+    stat: "50%",
+    problem: "Studios Exceed Budget",
     service: "Cost-Optimal Infrastructure Planning",
     price: "$20K–$75K",
     cta: "/services/infrastructure-planning",
@@ -45,7 +50,7 @@ const CARDS = [
   },
 ];
 
-const INTERVAL = 4500;
+const INTERVAL = 5000;
 
 export default function ProblemCarousel() {
   const [index, setIndex] = useState(0);
@@ -53,9 +58,7 @@ export default function ProblemCarousel() {
 
   useEffect(() => {
     if (paused) return;
-    const timer = setInterval(() => {
-      setIndex((i) => (i + 1) % CARDS.length);
-    }, INTERVAL);
+    const timer = setInterval(() => setIndex((i) => (i + 1) % CARDS.length), INTERVAL);
     return () => clearInterval(timer);
   }, [paused]);
 
@@ -73,79 +76,88 @@ export default function ProblemCarousel() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
           style={{
-            background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`,
+            background: `linear-gradient(135deg, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`,
             willChange: "transform",
           }}
         >
-          <div className="max-w-5xl mx-auto px-6 py-7 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
-            {/* Pain point */}
-            <div className="flex-1 min-w-0">
-              <p style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(0,0,0,0.4)", marginBottom: "4px" }}>
+          <div className="max-w-5xl mx-auto px-8 py-8 flex flex-col md:flex-row md:items-center gap-6 md:gap-0">
+
+            {/* Left — stat + problem */}
+            <div className="flex-1 min-w-0 md:pr-8 md:border-r md:border-black/10">
+              <p style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(0,0,0,0.38)", marginBottom: "6px" }}>
                 Pain Point
               </p>
-              <p className="font-display font-bold" style={{ fontSize: "clamp(17px, 2.5vw, 22px)", color: "#1a1a2e", lineHeight: 1.25 }}>
-                {challenge.problem}
-              </p>
+              <div className="flex items-baseline gap-3">
+                <span
+                  className="font-display font-black shrink-0"
+                  style={{ fontSize: "clamp(36px, 5vw, 52px)", color: "#1a1a2e", lineHeight: 1 }}
+                >
+                  {challenge.stat}
+                </span>
+                <span
+                  className="font-display font-bold"
+                  style={{ fontSize: "clamp(15px, 2vw, 18px)", color: "#1a1a2e", lineHeight: 1.25 }}
+                >
+                  {challenge.problem}
+                </span>
+              </div>
             </div>
 
-            {/* Divider */}
-            <div className="hidden sm:block w-px self-stretch" style={{ background: "rgba(0,0,0,0.1)" }} />
-
-            {/* Service */}
-            <div className="flex-1 min-w-0">
-              <p style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(0,0,0,0.4)", marginBottom: "4px" }}>
+            {/* Middle — service */}
+            <div className="flex-1 min-w-0 md:px-8 md:border-r md:border-black/10">
+              <p style={{ fontSize: "10px", fontWeight: 600, letterSpacing: "0.18em", textTransform: "uppercase", color: "rgba(0,0,0,0.38)", marginBottom: "6px" }}>
                 Service
               </p>
-              <p className="font-display font-bold" style={{ fontSize: "15px", color: "#1a1a2e", lineHeight: 1.3 }}>
+              <p className="font-display font-bold" style={{ fontSize: "clamp(14px, 1.8vw, 16px)", color: "#1a1a2e", lineHeight: 1.3, marginBottom: "2px" }}>
                 {challenge.service}
               </p>
-              <p style={{ fontSize: "12px", color: "rgba(0,0,0,0.45)", marginTop: "2px" }}>
+              <p style={{ fontSize: "12px", color: "rgba(0,0,0,0.45)" }}>
                 {challenge.price}
               </p>
             </div>
 
-            {/* CTAs */}
-            <div className="flex items-center gap-2 shrink-0">
+            {/* Right — CTAs */}
+            <div className="flex items-center gap-2 md:pl-8 shrink-0">
               <a
                 href={challenge.cta}
-                className="inline-flex items-center gap-1.5 font-display font-bold text-xs uppercase tracking-wide transition-opacity hover:opacity-80 whitespace-nowrap"
-                style={{ background: "#2B5BA6", color: "#fff", borderRadius: "6px", padding: "8px 16px" }}
+                className="inline-flex items-center gap-1.5 font-display font-bold uppercase tracking-wide transition-opacity hover:opacity-80 whitespace-nowrap"
+                style={{ background: "#2B5BA6", color: "#fff", borderRadius: "6px", padding: "9px 18px", fontSize: "11px" }}
               >
-                Explore <ArrowRight style={{ width: "12px", height: "12px" }} />
+                Explore <ArrowRight style={{ width: "11px", height: "11px" }} />
               </a>
               <a
                 href="https://calendly.com/youki-harada/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center font-display font-bold text-xs uppercase tracking-wide transition-all hover:bg-[#2B5BA6] hover:text-white whitespace-nowrap"
-                style={{ border: "1.5px solid #2B5BA6", color: "#2B5BA6", borderRadius: "6px", padding: "8px 16px", background: "transparent" }}
+                className="inline-flex items-center font-display font-bold uppercase tracking-wide transition-all hover:bg-[#2B5BA6] hover:text-white whitespace-nowrap"
+                style={{ border: "1.5px solid #2B5BA6", color: "#2B5BA6", borderRadius: "6px", padding: "9px 18px", fontSize: "11px", background: "transparent" }}
               >
                 Book a Call
               </a>
             </div>
           </div>
 
-          {/* Progress bar */}
-          <div className="max-w-5xl mx-auto px-6 pb-3 flex items-center gap-2">
+          {/* Dots + progress */}
+          <div className="max-w-5xl mx-auto px-8 pb-4 flex items-center gap-1.5">
             {CARDS.map((_, i) => (
               <button
                 key={i}
                 onClick={() => { setIndex(i); setPaused(true); }}
                 className="rounded-full transition-all duration-300"
                 style={{
-                  width: i === index ? "18px" : "5px",
+                  width: i === index ? "16px" : "5px",
                   height: "5px",
-                  background: i === index ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0.15)",
+                  background: i === index ? "rgba(0,0,0,0.4)" : "rgba(0,0,0,0.15)",
                 }}
               />
             ))}
-            <div className="ml-auto w-16 h-0.5 rounded-full overflow-hidden" style={{ background: "rgba(0,0,0,0.1)" }}>
+            <div className="ml-auto w-14 h-px rounded-full overflow-hidden" style={{ background: "rgba(0,0,0,0.1)" }}>
               <motion.div
                 key={index}
-                className="h-full rounded-full"
-                style={{ background: "rgba(0,0,0,0.3)", willChange: "transform" }}
+                className="h-full"
+                style={{ background: "rgba(0,0,0,0.35)", willChange: "transform" }}
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
                 transition={{ duration: INTERVAL / 1000, ease: "linear" }}
