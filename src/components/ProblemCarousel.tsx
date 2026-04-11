@@ -124,7 +124,7 @@ export default function ProblemCarousel() {
           }}
         >
           <motion.h1
-            className="text-6xl md:text-8xl lg:text-[120px] font-black uppercase tracking-tighter leading-none mb-2 text-white"
+            className="text-5xl md:text-6xl lg:text-[90px] font-black uppercase tracking-tighter leading-none mb-2 text-white"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
