@@ -1346,7 +1346,7 @@ const PipelineSection = () => {
           transition={{ delay: 0.5 }}
           className="text-center mb-4 text-sm font-body text-white"
         >
-          ← Drag to explore problems &amp; solutions →
+          ← Drag to explore workflow change and genAI fragmentation →
         </motion.p>
 
         <motion.div
