@@ -1373,9 +1373,9 @@ const PipelineSection = () => {
           <AnimatePresence mode="wait">
             {showProblems && (
               <motion.div key="problems" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.4 }} className="max-w-4xl mx-auto">
-                <div className="flex items-center gap-2.5 mb-6">
-                  <AlertTriangle className="w-4 h-4 text-destructive" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase font-body font-semibold text-destructive">The Experimentation Gap</span>
+                <div className="flex items-center gap-4 mb-6">
+                  <AlertTriangle className="w-12 h-12 text-destructive" />
+                  <span className="text-[33px] tracking-[0.2em] uppercase font-body font-semibold text-destructive">The Experimentation Gap</span>
                 </div>
                 <div className="space-y-4">
                   {problems.map((p, i) => (
