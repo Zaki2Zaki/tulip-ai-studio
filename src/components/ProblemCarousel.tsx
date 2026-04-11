@@ -60,7 +60,7 @@ const challenges: Challenge[] = [
     number: '03',
     headline: 'Creative Style Consistency LLM Training',
     accentText: 'PAIN POINT',
-    description: 'Maintain brand integrity across millions of generated game assets',
+    description: '54% of studios demand custom models to ensure visual & design creative consistency',
     citation: 'a16z Games Survey via Udonis, 2024',
     citationUrl: 'https://www.blog.udonis.co/mobile-marketing/mobile-games/ai-game-development',
     gradientColors: { start: '#e0cce7', end: '#cac1e7' },
