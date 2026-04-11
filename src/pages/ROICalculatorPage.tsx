@@ -519,7 +519,7 @@ export default function ROICalculatorPage() {
     checkY(24);
     doc.setFillColor(...CYAN); doc.roundedRect(pad, y, W-pad*2, 16, 3, 3, "F");
     doc.setFont("helvetica","bold"); doc.setFontSize(10); doc.setTextColor(...BG);
-    doc.text("Validate in a 30-min 1:1 Brief", W/2, y+10, { align: "center" }); y += 20;
+    doc.text("30 Mins Validate Meeting", W/2, y+10, { align: "center" }); y += 20;
     doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor(...CYAN);
     doc.text("calendly.com/youki-harada/30min", W/2, y, { align: "center" }); y += 12;
     doc.setFont("helvetica","italic"); doc.setFontSize(7); doc.setTextColor(...DIM);
