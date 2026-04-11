@@ -25,7 +25,7 @@ const CaseStudyDiagram = ({ blocks, capabilities, buildingBlocks, comingSoon }: 
       {comingSoon && (
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <div className="iridescent-badge px-6 py-3 rounded-full font-display font-bold text-lg tracking-wide">
-            Q2 2026
+            Q4 2026
           </div>
         </div>
       )}
