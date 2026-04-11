@@ -192,7 +192,7 @@ export default function ProblemCarousel() {
                 >
                   {/* Gradient area — top 60% */}
                   <div
-                    className="w-full h-[60%] flex items-center justify-center px-14 py-10"
+                    className="w-full h-[60%] flex items-center justify-center px-14 py-[60px]"
                     style={{ background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})` }}
                   >
                     <h2
