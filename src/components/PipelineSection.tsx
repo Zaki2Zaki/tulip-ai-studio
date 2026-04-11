@@ -1172,6 +1172,14 @@ const WorkflowBuilderPanel = ({
         </button>
         <button
           onClick={() => {
+            submitToNotion({
+              source: 'validate',
+              ctaClicked: 'Email Results',
+              timestamp: new Date().toISOString(),
+              selectedFrictionPoints: selected,
+              deepDivePoints: deepDive,
+              workflowTools: tools,
+            });
             const body = deepDive.length > 0
               ? deepDive.map((pt) => {
                   const e = DEEP_DIVE_SERVICE_MAP[pt];
