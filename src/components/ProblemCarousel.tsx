@@ -153,7 +153,7 @@ export default function ProblemCarousel() {
           {challenges.map((challenge, index) => {
             const offset = index - currentIndex;
             const absOffset = Math.abs(offset);
-            const x = offset * 480;
+            const x = offset * 560;
             const y = absOffset * 30;
             const rotate = offset * 10;
             const scale = 1 - absOffset * 0.12;
