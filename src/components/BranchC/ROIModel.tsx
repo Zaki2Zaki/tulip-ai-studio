@@ -369,7 +369,7 @@ export default function ROIModel({
           onClick={onNext}
           className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity"
         >
-          Validate in a 30-min 1:1 Brief <ArrowRight className="w-3.5 h-3.5" />
+          30 Mins Validate Meeting <ArrowRight className="w-3.5 h-3.5" />
         </button>
         <button
           onClick={onBack}
