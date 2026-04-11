@@ -166,7 +166,7 @@ export default function ProblemCarousel() {
                 href={challenge.citationUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute w-[380px] block"
+                className="absolute w-[420px] block"
                 style={{ left: '50%', top: '50%', zIndex }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{
