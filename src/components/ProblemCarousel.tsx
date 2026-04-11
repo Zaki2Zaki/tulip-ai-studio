@@ -185,19 +185,19 @@ export default function ProblemCarousel() {
                   }
                 }}
               >
-                {/* Card — 390px total */}
+                {/* Card — 450px total */}
                 <div
                   className="relative bg-black overflow-hidden group cursor-pointer"
                   style={{
-                    height: '390px',
+                    height: '450px',
                     boxShadow: '0 25px 50px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.08)',
                   }}
                 >
-                  {/* Gradient area — 240px (80%) */}
+                  {/* Gradient area — 290px (~65%) */}
                   <div
                     className="w-full flex items-center justify-center"
                     style={{
-                      height: '240px',
+                      height: '290px',
                       padding: '6px 8px',
                       background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`,
                     }}
@@ -214,10 +214,10 @@ export default function ProblemCarousel() {
                     </h2>
                   </div>
 
-                  {/* Black bar — 150px (45%) */}
+                  {/* Black bar — 160px (~35%) */}
                   <div
                     className="w-full bg-black flex flex-col justify-center"
-                    style={{ height: '150px', padding: '5px 6px' }}
+                    style={{ height: '160px', padding: '5px 6px' }}
                   >
                     <p className="text-[11px] leading-relaxed text-white uppercase tracking-wide">
                       {challenge.description}
