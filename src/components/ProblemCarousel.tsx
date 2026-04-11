@@ -72,7 +72,7 @@ const challenges: Challenge[] = [
   {
     id: 'tool-paralysis',
     number: '04',
-    headline: 'Tool Selection Paralysis',
+    headline: 'GenAI Tool Selection Paralysis',
     accentText: 'PAIN POINT',
     description: 'Wrong GenAI tool choices trigger $100K–$400K rework cycles across the pipeline',
     citation: 'Third Point Ventures, AI Impact on Gaming and Media Tooling, 2025',
