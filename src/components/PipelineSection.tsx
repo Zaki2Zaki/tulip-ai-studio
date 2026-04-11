@@ -1406,9 +1406,9 @@ const PipelineSection = () => {
 
             {showSolutions && (
               <motion.div key="solutions" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.4 }} className="max-w-4xl mx-auto">
-                <div className="flex items-center gap-2.5 mb-6">
-                  <Rocket className="w-4 h-4 text-primary" />
-                  <span className="text-[11px] tracking-[0.2em] uppercase font-body font-semibold text-primary">The Execution Reality</span>
+                <div className="flex items-center gap-4 mb-6">
+                  <Rocket className="w-12 h-12 text-primary" />
+                  <span className="text-[33px] tracking-[0.2em] uppercase font-body font-semibold text-primary">The Execution Reality</span>
                 </div>
 
                 {/* Solutions */}
