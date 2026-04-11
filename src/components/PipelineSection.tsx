@@ -1,5 +1,6 @@
 import { motion, useInView, AnimatePresence, useMotionValue, useTransform, animate } from "framer-motion";
 import React, { useRef, useState, useCallback, useEffect } from "react";
+import { submitToNotion } from "@/services/notionService";
 import { AlertTriangle, CheckCircle2, ArrowRight, Zap, TrendingUp, Clock, DollarSign, Layers, Rocket, Target, BarChart3, Compass, FlaskConical, ClipboardCheck, GitMerge, ChevronDown, Play } from "lucide-react";
 import pipelineBg from "@/assets/pipeline-bg.jpg";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
