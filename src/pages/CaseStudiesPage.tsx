@@ -10,7 +10,7 @@ const studies = [
     title: "Pre-Production Breakthroughs",
     description: "AI storyboard automation, concept generation, and previz pipeline innovations.",
     to: "/case-studies/pre-production",
-    status: "Coming Q2 2026",
+    status: "Coming Q4 2026",
   },
   {
     title: "Production Pipeline Transformations",
@@ -22,7 +22,7 @@ const studies = [
     title: "Post-Production Polish Innovations",
     description: "AI render polish, smart compositing, and adaptive color grading breakthroughs.",
     to: "/case-studies/post-production",
-    status: "Coming Q2 2026",
+    status: "Coming Q4 2026",
   },
   {
     title: "Steam Game Delays — Empirical Insights",
