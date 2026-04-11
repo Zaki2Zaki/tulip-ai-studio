@@ -1041,6 +1041,14 @@ const WorkflowBuilderPanel = ({
       <div className="flex flex-col gap-2 items-center">
         <a href="#estimator"
           onClick={() => {
+            submitToNotion({
+              source: 'validate',
+              ctaClicked: 'Book Discovery Call',
+              timestamp: new Date().toISOString(),
+              selectedFrictionPoints: selected,
+              deepDivePoints: deepDive,
+              workflowTools: tools,
+            });
             const ids = getRecommendedServiceIds(deepDive);
             ids.forEach((id) => window.dispatchEvent(new CustomEvent("tulip:select-service", { detail: { id } })));
             window.dispatchEvent(new CustomEvent("tulip:open-calendly"));
