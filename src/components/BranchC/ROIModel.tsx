@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 import type { BudgetBreakdown } from "./RiskScan";
 import { getScenario } from "./personalisationData";
+import { submitToNotion } from "@/services/notionService";
 
 interface ROIModelProps {
   studioScale: string;
