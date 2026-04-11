@@ -138,7 +138,7 @@ export default function ProblemCarousel() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            STUDIO'S PRODUCTION CHALLENGES AND BOTTLENECK COSTS
+            STUDIO'S PRODUCTION PAIN POINTS AND BOTTLENECK COSTS
           </motion.p>
         </div>
       </section>
