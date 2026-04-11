@@ -367,7 +367,19 @@ export default function ROIModel({
       {/* ── CTA buttons ── */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
         <button
-          onClick={onNext}
+          onClick={() => {
+            submitToNotion({
+              source: 'roi-model',
+              ctaClicked: '30 Mins Validate Meeting',
+              timestamp: new Date().toISOString(),
+              studioScale,
+              outputType,
+              budgetRange,
+              outsourcePct,
+              rdBudget,
+            });
+            onNext();
+          }}
           className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity"
         >
           30 Mins Validate Meeting <ArrowRight className="w-3.5 h-3.5" />
