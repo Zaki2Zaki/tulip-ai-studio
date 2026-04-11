@@ -1023,7 +1023,7 @@ export default function ROICalculatorPage() {
 
             {/* CTA */}
             <div className="result-cta">
-              <a href="https://calendly.com/youki-harada/30min" className="btn-cta-p" target="_blank" rel="noopener noreferrer">Validate in a 30-min 1:1 Brief →</a>
+              <a href="https://calendly.com/youki-harada/30min" className="btn-cta-p" target="_blank" rel="noopener noreferrer">30 Mins Validate Meeting →</a>
               <button className="btn-cta-s" onClick={downloadPDF}>⬇ Download report</button>
             </div>
 
