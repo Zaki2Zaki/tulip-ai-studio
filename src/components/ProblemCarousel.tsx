@@ -185,26 +185,28 @@ export default function ProblemCarousel() {
                   }
                 }}
               >
-                {/* Card — fixed height, no clipping */}
+                {/* Card — 315px total, 4:3 ratio */}
                 <div
                   className="relative bg-black overflow-hidden group cursor-pointer"
                   style={{
-                    height: '320px',
+                    height: '315px',
                     boxShadow: '0 25px 50px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.08)',
                   }}
                 >
-                  {/* Gradient area — top 65% */}
+                  {/* Gradient area — 205px (65%) */}
                   <div
-                    className="w-full flex items-center justify-center px-8 py-6"
+                    className="w-full flex items-center justify-center"
                     style={{
-                      height: '65%',
+                      height: '205px',
+                      padding: '6px 8px',
                       background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`,
                     }}
                   >
                     <h2
                       className="font-black text-white uppercase tracking-tight leading-tight text-center"
                       style={{
-                        fontSize: 'clamp(20px, 2.4vw, 28px)',
+                        fontSize: '30px',
+                        lineHeight: '1.1',
                         textShadow: '2px 2px 6px rgba(0,0,0,0.4)',
                       }}
                     >
@@ -212,17 +214,17 @@ export default function ProblemCarousel() {
                     </h2>
                   </div>
 
-                  {/* Black bar — bottom 35% */}
+                  {/* Black bar — 110px (35%) */}
                   <div
-                    className="w-full bg-black px-6 py-4 flex flex-col justify-center"
-                    style={{ height: '35%' }}
+                    className="w-full bg-black flex flex-col justify-center"
+                    style={{ height: '110px', padding: '5px 6px' }}
                   >
                     <p className="text-[11px] leading-relaxed text-white uppercase tracking-wide">
                       {challenge.description}
                     </p>
 
-                    {/* Arrow — bottom right, fades on hover */}
-                    <div className="absolute bottom-4 right-4">
+                    {/* Arrow — absolute bottom-right, fades on hover */}
+                    <div className="absolute bottom-3 right-3">
                       <div
                         className="w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         style={{ background: '#2B5BA6' }}
