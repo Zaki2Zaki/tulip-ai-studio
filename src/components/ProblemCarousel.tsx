@@ -146,14 +146,14 @@ export default function ProblemCarousel() {
       {/* Cursor-Controlled Carousel */}
       <section
         className="bg-black relative overflow-hidden"
-        style={{ minHeight: '600px' }}
+        style={{ minHeight: '700px' }}
         onMouseMove={handleMouseMove}
       >
-        <div className="relative h-[600px] flex items-center justify-center">
+        <div className="relative h-[700px] flex items-center justify-center">
           {challenges.map((challenge, index) => {
             const offset = index - currentIndex;
             const absOffset = Math.abs(offset);
-            const x = offset * 320;
+            const x = offset * 480;
             const y = absOffset * 30;
             const rotate = offset * 10;
             const scale = 1 - absOffset * 0.12;
@@ -166,7 +166,7 @@ export default function ProblemCarousel() {
                 href={challenge.citationUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute w-[420px] block"
+                className="absolute w-[600px] block"
                 style={{ left: '50%', top: '50%', zIndex }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{
@@ -185,46 +185,32 @@ export default function ProblemCarousel() {
                   }
                 }}
               >
-                {/* Card — 450px total */}
+                {/* Card — 600×450px, 4:3 ratio */}
                 <div
-                  className="relative bg-black overflow-hidden group cursor-pointer"
-                  style={{
-                    height: '450px',
-                    boxShadow: '0 25px 50px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.08)',
-                  }}
+                  className="relative aspect-[4/3] bg-black overflow-hidden group cursor-pointer"
+                  style={{ boxShadow: '0 25px 50px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.08)' }}
                 >
-                  {/* Gradient area — 290px (~65%) */}
+                  {/* Gradient area — top 60% */}
                   <div
-                    className="w-full flex items-center justify-center"
-                    style={{
-                      height: '290px',
-                      padding: '6px 8px',
-                      background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`,
-                    }}
+                    className="w-full h-[60%] flex items-center justify-center px-14 py-10"
+                    style={{ background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})` }}
                   >
                     <h2
-                      className="font-black text-white uppercase tracking-tight leading-tight text-center"
-                      style={{
-                        fontSize: '30px',
-                        lineHeight: '1.1',
-                        textShadow: '2px 2px 6px rgba(0,0,0,0.4)',
-                      }}
+                      className="relative z-10 text-4xl md:text-5xl font-black text-white uppercase tracking-tight leading-tight text-center px-6"
+                      style={{ textShadow: '3px 3px 6px rgba(0,0,0,0.5), -1px -1px 2px rgba(0,0,0,0.3)' }}
                     >
                       {challenge.headline}
                     </h2>
                   </div>
 
-                  {/* Black bar — 160px (~35%) */}
-                  <div
-                    className="w-full bg-black flex flex-col justify-center"
-                    style={{ height: '160px', padding: '5px 6px' }}
-                  >
+                  {/* Black bar — bottom 40% */}
+                  <div className="w-full h-[40%] bg-black px-10 py-8 flex flex-col justify-center">
                     <p className="text-[11px] leading-relaxed text-white uppercase tracking-wide">
                       {challenge.description}
                     </p>
 
-                    {/* Arrow — absolute bottom-right, fades on hover */}
-                    <div className="absolute bottom-3 right-3">
+                    {/* Arrow — bottom right, fades on hover */}
+                    <div className="absolute bottom-4 right-4">
                       <div
                         className="w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                         style={{ background: '#2B5BA6' }}
