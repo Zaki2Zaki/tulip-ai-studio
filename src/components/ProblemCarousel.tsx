@@ -190,22 +190,33 @@ export default function ProblemCarousel() {
                   className="relative aspect-[4/3] bg-black overflow-hidden group cursor-pointer"
                   style={{ boxShadow: '0 25px 50px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.08)' }}
                 >
-                  {/* Gradient area — top 60% */}
+                  {/* Gradient area — top 55% */}
                   <div
-                    className="w-full h-[60%] flex items-center justify-center px-14 py-[60px]"
-                    style={{ background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})` }}
+                    className="w-full h-[55%] flex items-center justify-center"
+                    style={{
+                      padding: '48px 64px',
+                      background: `linear-gradient(to bottom, ${challenge.gradientColors.start}, ${challenge.gradientColors.end})`,
+                    }}
                   >
                     <h2
-                      className="relative z-10 text-4xl md:text-5xl font-black text-white uppercase tracking-tight leading-tight text-center px-6"
-                      style={{ textShadow: '3px 3px 6px rgba(0,0,0,0.5), -1px -1px 2px rgba(0,0,0,0.3)' }}
+                      className="font-black text-white uppercase text-center"
+                      style={{
+                        fontSize: '48px',
+                        letterSpacing: '-0.02em',
+                        lineHeight: 1.1,
+                        textShadow: '3px 3px 6px rgba(0,0,0,0.5), -1px -1px 2px rgba(0,0,0,0.3)',
+                      }}
                     >
                       {challenge.headline}
                     </h2>
                   </div>
 
-                  {/* Black bar — bottom 40% */}
-                  <div className="w-full h-[40%] bg-black px-10 py-8 flex flex-col justify-center">
-                    <p className="text-[11px] leading-relaxed text-white uppercase tracking-wide">
+                  {/* Black bar — bottom 45% */}
+                  <div
+                    className="w-full h-[45%] bg-black flex flex-col justify-center"
+                    style={{ padding: '40px 48px' }}
+                  >
+                    <p className="text-white uppercase" style={{ fontSize: '15px', letterSpacing: '0.05em', lineHeight: 1.6 }}>
                       {challenge.description}
                     </p>
 
