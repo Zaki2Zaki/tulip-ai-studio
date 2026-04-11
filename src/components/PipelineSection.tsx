@@ -1509,7 +1509,12 @@ const PipelineSection = () => {
         <div id="interactive-demo" className="mt-10 rounded-2xl bg-card/30 border border-primary/20 backdrop-blur-sm overflow-hidden flex" style={{ boxShadow: "0 0 40px hsl(var(--primary) / 0.08)" }}>
           {/* Left Journey Sidebar */}
           <div className="hidden md:flex flex-col w-48 shrink-0 border-r border-primary/15 bg-black/20 p-4 gap-1">
-            <p className="font-display font-bold text-sm text-white mb-0.5">Workflow</p>
+            <button
+              onClick={() => setWorkflowStage(-1)}
+              className="text-left hover:opacity-80 transition-opacity mb-0.5"
+            >
+              <p className="font-display font-bold text-sm text-white">Workflow</p>
+            </button>
             <p className="text-[10px] font-body text-white/50 mb-4">Pipeline N→1</p>
             {pipelineSteps.map((step, i) => {
               const stageNum = i + 1;
