@@ -63,15 +63,13 @@ const HeroSection = () => {
             className="flex flex-col gap-6 lg:col-span-2 pl-72"
           >
             {/* Title */}
-            <h1 className="font-display font-bold leading-[1.08] tracking-[-0.03em] text-[clamp(30px,4.8vw,58px)]">
-              <span className="text-gradient-chrome-animated">Tulip Technology</span>
-              <br />
-              <span className="text-gradient-chrome-animated">R&D™</span>
+            <h1 className="font-display font-bold leading-tight tracking-[-0.03em] text-6xl md:text-7xl">
+              <span className="text-gradient-chrome-animated">Tulip Technology R&D™</span>
             </h1>
 
             {/* Tagline + body copy */}
-            <div className="space-y-3">
-              <p className="text-lg md:text-xl font-display font-bold text-foreground/95 leading-snug" style={{ letterSpacing: "-0.01em" }}>
+            <div className="space-y-4 mt-2">
+              <p className="text-3xl md:text-4xl font-display font-semibold text-white leading-tight">
                 AI Labs That Ship{" "}
                 <span
                   className="inline-block overflow-hidden align-bottom relative"
@@ -93,15 +91,15 @@ const HeroSection = () => {
                 Systems
               </p>
 
-              <p className="text-sm md:text-base font-display font-normal text-foreground/95 leading-relaxed" style={{ letterSpacing: "-0.01em" }}>
+              <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-3xl">
                 3D Workflow &amp; Tools Experiments → GenAI Production Systems
               </p>
 
-              <p className="text-sm md:text-base font-display font-normal text-foreground/95 leading-relaxed" style={{ letterSpacing: "-0.01em" }}>
+              <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-3xl">
                 Test &amp; Validate your ideas into game engines, animation pipelines, and VFX workflows.
               </p>
 
-              <p className="text-sm md:text-base font-display font-normal text-foreground/95 leading-relaxed" style={{ letterSpacing: "-0.01em" }}>
+              <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-3xl">
                 We{" "}
                 <span className="text-gradient-tulip-ombre font-bold">love</span>{" "}
                 discovering solutions to the integration challenges that slow down creatives and technical leaders.
