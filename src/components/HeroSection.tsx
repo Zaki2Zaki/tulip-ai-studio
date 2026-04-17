@@ -131,10 +131,10 @@ const HeroSection = () => {
               {/* Row 2 — 2-min Assessment left-aligned */}
               <div className="flex">
                 <a
-                  href="#workflow-analyzer"
+                  href="#interactive-demo"
                   onClick={(e) => {
                     e.preventDefault();
-                    document.getElementById("workflow-analyzer")?.scrollIntoView({ behavior: "smooth" });
+                    document.getElementById("interactive-demo")?.scrollIntoView({ behavior: "smooth" });
                   }}
                   className="hero-btn-assessment hero-btn-bloom px-6 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[40px] flex items-center justify-center gap-1.5"
                 >
