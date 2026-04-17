@@ -55,7 +55,6 @@ const ContactSection = () => {
         </motion.div>
       </div>
 
-      <CalendlyModal open={calendlyOpen} onClose={() => setCalendlyOpen(false)} />
     </section>
   );
 };
