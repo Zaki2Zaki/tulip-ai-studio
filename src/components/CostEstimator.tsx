@@ -303,20 +303,22 @@ const CostEstimator = () => {
           </div>
 
           {/* ROI Context */}
-          <div className="mb-12 p-8 bg-[#8FD5A6]/10 border border-[#8FD5A6]/30 rounded-2xl">
-            <h3 className="text-3xl font-semibold mb-5">How does this compare to doing nothing?</h3>
-            <div className="space-y-4 text-gray-300 text-base">
-              <p>Based on your studio scale and selected services:</p>
-              <ul className="space-y-3 ml-4">
-                <li>• Current cost of inefficiency: <strong className="text-white">$350K per major rework cycle</strong></li>
-                <li>• Manual review bottlenecks: <strong className="text-white">10–30 dev days lost per iteration</strong></li>
-                <li>• Estimated annual waste: <strong className="text-white">$500K–$1.5M</strong></li>
-              </ul>
-              <div className="pt-5 mt-5 border-t border-[#8FD5A6]/30">
-                <p className="text-xl">
-                  <strong className="text-[#8FD5A6]">Typical ROI timeline:</strong> 3–6 months<br />
-                  <strong className="text-[#8FD5A6]">Average client savings:</strong> $800K+ in first year
-                </p>
+          <div className="mb-12 flex justify-center">
+            <div className="max-w-4xl w-full p-8 bg-[#8FD5A6]/10 border border-[#8FD5A6]/30 rounded-2xl">
+              <h3 className="text-3xl font-semibold mb-5">How does this compare to doing nothing?</h3>
+              <div className="space-y-4 text-gray-300 text-base">
+                <p>Based on your studio scale and selected services:</p>
+                <ul className="space-y-3 ml-4">
+                  <li>• Current cost of inefficiency: <strong className="text-white">$350K per major rework cycle</strong></li>
+                  <li>• Manual review bottlenecks: <strong className="text-white">10–30 dev days lost per iteration</strong></li>
+                  <li>• Estimated annual waste: <strong className="text-white">$500K–$1.5M</strong></li>
+                </ul>
+                <div className="pt-5 mt-5 border-t border-[#8FD5A6]/30">
+                  <p className="text-xl">
+                    <strong className="text-[#8FD5A6]">Typical ROI timeline:</strong> 3–6 months<br />
+                    <strong className="text-[#8FD5A6]">Average client savings:</strong> $800K+ in first year
+                  </p>
+                </div>
               </div>
             </div>
           </div>
