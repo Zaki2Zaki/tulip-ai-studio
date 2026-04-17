@@ -18,7 +18,6 @@ const HeroSection = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [textIndex, setTextIndex] = useState(0);
-  const [calendlyOpen, setCalendlyOpen] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
