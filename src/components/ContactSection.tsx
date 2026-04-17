@@ -51,6 +51,9 @@ const ContactSection = () => {
           <p className="text-white font-body text-xs">
             *Automatically receive a client-intake form and service package
           </p>
+          <p className="text-gray-400 font-body text-sm mt-1">
+            No Obligation. The discovery meeting is complimentary.
+          </p>
         </motion.div>
       </div>
 
