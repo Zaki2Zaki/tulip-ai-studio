@@ -252,7 +252,9 @@ const CostEstimator = () => {
             <div className="text-center mb-10">
               <div className="text-xl text-gray-400 mb-4">Typical Investment Range</div>
               <div className="text-7xl font-bold mb-3">
-                {sym}{tier.min.toLocaleString()} – {sym}{tier.max.toLocaleString()}
+                {selectedServices.length === 0
+                  ? `${sym}0`
+                  : `${sym}${tier.min.toLocaleString()} – ${sym}${tier.max.toLocaleString()}`}
               </div>
               <div className="text-base text-gray-500">{currency}</div>
             </div>
