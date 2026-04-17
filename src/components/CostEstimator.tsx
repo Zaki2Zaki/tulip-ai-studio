@@ -260,11 +260,11 @@ const CostEstimator = () => {
 
             {tier.name === "enterprise" && (
               <div className="mb-8">
-                <h3 className="text-2xl font-semibold mb-5">This tier typically includes:</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300 text-base">
+                <h3 className="text-2xl font-semibold mb-5 text-center">This tier typically includes:</h3>
+                <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300 text-base">
                   {["Multi-team deployment", "Custom model training", "Change management program", "Production monitoring"].map(item => (
-                    <div key={item} className="flex items-start gap-3">
-                      <div className="w-2 h-2 rounded-full bg-[#8FD5A6] mt-2 flex-shrink-0" />
+                    <div key={item} className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-[#8FD5A6] flex-shrink-0" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -274,11 +274,11 @@ const CostEstimator = () => {
 
             {tier.name === "integration" && (
               <div className="mb-8">
-                <h3 className="text-2xl font-semibold mb-5">This tier typically includes:</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300 text-base">
+                <h3 className="text-2xl font-semibold mb-5 text-center">This tier typically includes:</h3>
+                <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300 text-base">
                   {["Custom integration deployment", "Team training workshops", "Sandbox environments", "Initial production rollout"].map(item => (
-                    <div key={item} className="flex items-start gap-3">
-                      <div className="w-2 h-2 rounded-full bg-[#8FD5A6] mt-2 flex-shrink-0" />
+                    <div key={item} className="flex items-center gap-3">
+                      <div className="w-2 h-2 rounded-full bg-[#8FD5A6] flex-shrink-0" />
                       <span>{item}</span>
                     </div>
                   ))}
