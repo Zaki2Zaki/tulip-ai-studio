@@ -174,7 +174,7 @@ const CostEstimator = () => {
             {scaleOptions.map(s => (
               <button
                 key={s.id}
-                onClick={() => setStudioScale(s.id)}
+                onClick={() => { setStudioScale(s.id); setContextScale(s.name); }}
                 className={`p-6 rounded-2xl border-2 transition-all text-left ${
                   studioScale === s.id ? "border-[#8FD5A6] bg-[#8FD5A6]/10" : "border-white/20 hover:border-white/40"
                 }`}
