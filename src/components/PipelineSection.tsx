@@ -1402,7 +1402,7 @@ const PipelineSection = () => {
                         <span className="font-display text-3xl md:text-4xl font-bold text-gradient-gold">{p.stat}</span>
                       </div>
                       <div className="space-y-1">
-                        <p className="text-sm text-white/90 font-body leading-relaxed">
+                        <p className="text-2xl text-white/90 font-body leading-relaxed">
                           {p.text.split(p.highlight).map((part, j, arr) => (
                             <span key={j}>{part}{j < arr.length - 1 && <strong className="text-destructive font-semibold">{p.highlight}</strong>}</span>
                           ))}
