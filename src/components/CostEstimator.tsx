@@ -7,6 +7,7 @@ import DiscoveryPackagesModal from "./DiscoveryPackagesModal";
 import QuoteRequestModal from "./QuoteRequestModal";
 import CalendlyModal from "./CalendlyModal";
 import { useServiceSelection } from "@/context/ServiceSelectionContext";
+import CalendlyBookingButton from "./CalendlyBookingButton";
 
 interface ServiceOption {
   id: string;
