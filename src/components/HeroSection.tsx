@@ -131,17 +131,10 @@ const HeroSection = () => {
               {/* Row 2 — 2-min Assessment left-aligned */}
               <div className="flex">
                 <a
-                  href="#estimator"
+                  href="#workflow-analyzer"
                   onClick={(e) => {
                     e.preventDefault();
-                    const el = document.getElementById("estimator");
-                    if (el) {
-                      el.scrollIntoView({ behavior: "smooth" });
-                      setTimeout(() => {
-                        const assessBtn = document.querySelector<HTMLButtonElement>('[data-assessment-trigger]');
-                        assessBtn?.click();
-                      }, 600);
-                    }
+                    document.getElementById("workflow-analyzer")?.scrollIntoView({ behavior: "smooth" });
                   }}
                   className="hero-btn-assessment hero-btn-bloom px-6 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[40px] flex items-center justify-center gap-1.5"
                 >
