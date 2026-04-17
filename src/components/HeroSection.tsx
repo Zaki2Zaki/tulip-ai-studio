@@ -146,7 +146,7 @@ const HeroSection = () => {
                   className="hero-btn-assessment hero-btn-bloom px-6 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[40px] flex items-center justify-center gap-1.5"
                 >
                   <ClipboardCheck className="w-3.5 h-3.5" />
-                  2-min Assessment
+                  Workflow & Cost Analyzer
                 </a>
               </div>
             </div>
