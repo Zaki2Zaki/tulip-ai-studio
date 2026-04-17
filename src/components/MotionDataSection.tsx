@@ -29,7 +29,7 @@ const MotionDataSection = () => {
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          className="text-[11px] tracking-[0.2em] uppercase text-primary font-body mb-3 text-center font-medium"
+          className="text-sm tracking-[0.3em] uppercase text-gray-400 font-body mb-6 text-center"
         >
           Motion Data & LLM Foundations
         </motion.p>
@@ -37,7 +37,7 @@ const MotionDataSection = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="font-display text-3xl md:text-5xl font-bold text-center mb-4"
+          className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-10 text-gray-100"
         >
           We customize <span className="text-gradient-gold">LLM foundations</span> and{" "}
           <span className="text-gradient-chrome-animated">Motion data</span> for insight
@@ -46,7 +46,7 @@ const MotionDataSection = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.15 }}
-          className="font-body text-sm md:text-base leading-relaxed max-w-2xl mx-auto text-center mb-4 text-foreground/85"
+          className="font-body text-xl md:text-2xl lg:text-3xl leading-relaxed max-w-5xl mx-auto text-center mb-6 text-gray-300"
         >
           We capture, generate, and transform motion into structured, reusable datasets that can be used to train models,
           evaluate behavior, simulate interaction, or derive insight.
@@ -55,7 +55,7 @@ const MotionDataSection = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.25 }}
-          className="font-body text-xs md:text-sm leading-relaxed max-w-xl mx-auto text-center mb-16 text-white"
+          className="font-body text-xl md:text-2xl lg:text-3xl leading-relaxed max-w-5xl mx-auto text-center mb-16 text-gray-300"
         >
           Structured, high-fidelity human motion data for training, analysis, and simulation across physical and digital systems.
         </motion.p>
