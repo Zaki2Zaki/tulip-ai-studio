@@ -304,7 +304,7 @@ const CostEstimator = () => {
 
           {/* ROI Context */}
           <div className="mb-8 flex justify-center">
-            <div className="max-w-4xl w-full p-8 bg-[#8FD5A6]/10 border border-[#8FD5A6]/30 rounded-2xl">
+            <div className="max-w-3xl w-full p-8 bg-[#8FD5A6]/10 border border-[#8FD5A6]/30 rounded-2xl">
               <h3 className="text-3xl font-semibold mb-5">How does this compare to doing nothing?</h3>
               <div className="space-y-4 text-gray-300 text-base">
                 <p>Based on your studio scale and selected services:</p>
