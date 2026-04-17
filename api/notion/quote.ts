@@ -6,6 +6,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Client } from '@notionhq/client';
 
 const NOTION_API_VERSION = '2022-06-28';
+const FALLBACK_DATABASE_ID = '0df0901391874257847311b5676d9a24';
 
 // --- In-memory rate limiting ---
 
