@@ -112,7 +112,7 @@ const Navbar = () => {
           >
             2026 Guide to GenAI for Game Content Developers, 3D Artists & Creative Techs
           </a>
-          <span className="text-[11px] font-body text-white hidden sm:inline">→</span>
+          <span className="text-[22px] font-body text-white hidden sm:inline">→</span>
         </div>
       </div>
 
