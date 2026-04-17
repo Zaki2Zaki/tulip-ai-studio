@@ -323,19 +323,22 @@ const CostEstimator = () => {
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col md:flex-row gap-5 justify-center mb-12">
-            <button
-              onClick={() => setCalendlyOpen(true)}
-              className="px-12 py-7 text-2xl rounded-full bg-gradient-to-r from-[#D4B86A] to-[#8FD5A6] hover:opacity-90 transition-opacity text-black font-semibold"
-            >
-              Book Discovery Meeting
-            </button>
-            <button
-              onClick={() => setQuoteOpen(true)}
-              className="px-12 py-7 text-2xl rounded-full border-2 border-white/30 hover:border-white/60 transition-colors text-white font-semibold bg-transparent"
-            >
-              Request Detailed Quote
-            </button>
+          <div className="flex flex-col items-center gap-5 mb-12">
+            <div className="flex flex-col md:flex-row gap-5 justify-center">
+              <button
+                onClick={() => setCalendlyOpen(true)}
+                className="px-16 py-9 text-3xl rounded-full bg-gradient-to-r from-[#D4B86A] to-[#8FD5A6] hover:opacity-90 transition-opacity text-white font-semibold"
+              >
+                Book Discovery Meeting
+              </button>
+              <button
+                onClick={() => setQuoteOpen(true)}
+                className="px-12 py-7 text-2xl rounded-full border-2 border-white/30 hover:border-white/60 transition-colors text-white font-semibold bg-transparent"
+              >
+                Request Detailed Quote
+              </button>
+            </div>
+            <p className="text-gray-400 font-body text-sm">No Obligation. The discovery meeting is complimentary.</p>
           </div>
 
           {/* Breakdown Toggle */}
