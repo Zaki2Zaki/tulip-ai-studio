@@ -41,12 +41,11 @@ const ContactSection = () => {
           transition={{ delay: 0.4 }}
           className="flex flex-col items-center gap-4"
         >
-          <button
-            onClick={() => setCalendlyOpen(true)}
+          <CalendlyBookingButton
+            size="lg"
+            label="Book a 30-minute Discovery Meeting"
             className="btn-chrome-outline px-20 py-10 rounded-full font-display font-semibold text-[40px] transition-all min-h-[120px] text-white"
-          >
-            Book a 30-minute Discovery Meeting
-          </button>
+          />
           <p className="text-white font-body text-xs">
             *Automatically receive a client-intake form and service package
           </p>
