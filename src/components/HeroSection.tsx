@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { ClipboardCheck, ArrowRight } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
-import CalendlyModal from "./CalendlyModal";
+import CalendlyBookingButton from "./CalendlyBookingButton";
 
 const rotatingTexts = ["0→1", "N→1"];
 
