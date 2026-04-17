@@ -134,10 +134,12 @@ const HeroSection = () => {
                     e.preventDefault();
                     document.getElementById("interactive-demo")?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="hero-btn-assessment hero-btn-bloom px-6 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[40px] flex items-center justify-center gap-1.5"
+                  className="px-6 py-2.5 rounded-full border-0 transition-opacity hover:opacity-90 min-h-[40px] flex items-center justify-center"
+                  style={{ background: "linear-gradient(to right, #E5B4E2, #D4A5D4, #C8B5E8)" }}
                 >
-                  <ClipboardCheck className="w-3.5 h-3.5" />
-                  Workflow & Cost Analyzer
+                  <span className="text-[#4A1942] font-semibold flex items-center gap-2 text-sm font-display">
+                    📋 Workflow & Cost Analyzer
+                  </span>
                 </a>
               </div>
             </div>
