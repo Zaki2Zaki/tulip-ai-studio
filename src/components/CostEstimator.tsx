@@ -252,10 +252,7 @@ const CostEstimator = () => {
               <div className="text-7xl font-bold mb-3">
                 {sym}{tier.min.toLocaleString()} – {sym}{tier.max.toLocaleString()}
               </div>
-              <div className="text-base text-gray-500 mb-8">{currency}</div>
-              <div className="inline-block px-8 py-4 bg-purple-500/20 border border-purple-400/40 rounded-full">
-                <span className="text-lg text-purple-200">💡 Most studios in this tier invest {sym}{tier.avg.toLocaleString()}</span>
-              </div>
+              <div className="text-base text-gray-500">{currency}</div>
             </div>
 
             <div className="mb-8">
