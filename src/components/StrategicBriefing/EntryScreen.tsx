@@ -151,7 +151,7 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
             <p style={CARD_BODY}>
               Select the friction points slowing your pipeline — version control conflicts, tool integration failures, manual review bottlenecks, and more. We map the AI tools and integration sequence that eliminates them across your production stages.
             </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
               {/* Live tag */}
               <span style={{
                 fontSize: "20px",
@@ -194,7 +194,7 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
             <p style={CARD_BODY}>
               A structured diagnosis of your production pipeline. Seven questions about your schedule, handoffs, and revision cycles — mapped to the specific stages where AI integration delivers the fastest time recovery.
             </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
               {/* Coming soon tag */}
               <span style={{
                 fontSize: "20px",
@@ -241,7 +241,7 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
             <p style={CARD_BODY}>
               A risk scan and ROI model built from published data across studios your size — your efficiency gap, the annual cost of inaction, and what recovery looks like at your scale.
             </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
               {["VP", "CTO", "Studio Head", "Chief Strategy Officer", "General Manager"].map((role) => (
                 <span key={role} style={{
                   fontSize: "22px",
