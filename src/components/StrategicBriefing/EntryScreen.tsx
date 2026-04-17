@@ -33,7 +33,7 @@ const CARD_TITLE: React.CSSProperties = {
 };
 
 const CARD_BODY: React.CSSProperties = {
-  fontSize: "13px",
+  fontSize: "26px",
   color: "#fff",
   lineHeight: 1.65,
   fontFamily: "inherit",
