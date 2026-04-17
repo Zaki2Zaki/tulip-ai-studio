@@ -154,9 +154,9 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
             <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
               {/* Live tag */}
               <span style={{
-                fontSize: "20px",
+                fontSize: "40px",
                 fontWeight: 500,
-                padding: "6px 20px",
+                padding: "12px 40px",
                 borderRadius: "99px",
                 border: "0.5px solid rgba(29,158,117,0.35)",
                 background: "rgba(29,158,117,0.07)",
@@ -197,9 +197,9 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
             <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
               {/* Coming soon tag */}
               <span style={{
-                fontSize: "20px",
+                fontSize: "40px",
                 fontWeight: 500,
-                padding: "6px 20px",
+                padding: "12px 40px",
                 borderRadius: "99px",
                 border: "0.5px solid rgba(255,255,255,0.1)",
                 background: "rgba(255,255,255,0.03)",
