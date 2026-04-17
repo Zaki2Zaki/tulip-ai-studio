@@ -303,7 +303,7 @@ const CostEstimator = () => {
           </div>
 
           {/* ROI Context */}
-          <div className="mb-12 flex justify-center">
+          <div className="mb-8 flex justify-center">
             <div className="max-w-4xl w-full p-8 bg-[#8FD5A6]/10 border border-[#8FD5A6]/30 rounded-2xl">
               <h3 className="text-3xl font-semibold mb-5">How does this compare to doing nothing?</h3>
               <div className="space-y-4 text-gray-300 text-base">
@@ -339,36 +339,36 @@ const CostEstimator = () => {
             </button>
           </div>
 
-          {/* Breakdown Toggle - after CTAs */}
-          <div className="mb-12">
-            <button
-              onClick={() => setShowBreakdown(!showBreakdown)}
-              className="w-full flex items-center justify-center gap-2 text-xl text-gray-400 hover:text-white transition-colors"
-            >
-              {showBreakdown ? "Hide" : "Show"} what affects your investment
-              <ChevronDown className={`w-6 h-6 transition-transform ${showBreakdown ? "rotate-180" : ""}`} />
-            </button>
-
-            {showBreakdown && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                className="mt-8 p-8 bg-white/5 rounded-2xl border border-white/10 space-y-6 text-gray-300"
+          {/* Breakdown Toggle */}
+          <div className="mb-12 flex justify-center">
+            <div className="max-w-4xl w-full">
+              <button
+                onClick={() => setShowBreakdown(!showBreakdown)}
+                className="w-full flex items-center justify-center gap-2 text-xl text-gray-400 hover:text-white transition-colors mb-8"
               >
-                <div>
-                  <h4 className="font-semibold text-white mb-3 text-lg inline-flex items-center gap-2"><span>📊</span> Discovery Meeting Assessment</h4>
-                  <p className="text-base">We'll evaluate your current pipeline, team readiness, and integration requirements to scope precisely.</p>
+                {showBreakdown ? "Hide" : "Show"} what affects your investment
+                <svg className={`w-6 h-6 transition-transform ${showBreakdown ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {showBreakdown && (
+                <div className="p-8 bg-white/5 rounded-2xl border border-white/10 space-y-6">
+                  <div>
+                    <h4 className="font-semibold text-white mb-3 text-lg inline-flex items-center gap-2"><span>📊</span> Discovery Meeting Assessment</h4>
+                    <p className="text-base text-gray-300">We'll evaluate your current pipeline, team readiness, and integration requirements to scope precisely.</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-white mb-3 text-lg inline-flex items-center gap-2"><span>📋</span> Formal Proposal</h4>
+                    <p className="text-base text-gray-300">You'll receive a detailed proposal with fixed pricing, deliverables, timeline, and payment terms.</p>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-white mb-3 text-lg inline-flex items-center gap-2"><span>🔒</span> No Obligation</h4>
+                    <p className="text-base text-gray-300">The discovery meeting is complimentary and carries no commitment to proceed.</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-semibold text-white mb-3 text-lg inline-flex items-center gap-2"><span>📋</span> Formal Proposal</h4>
-                  <p className="text-base">You'll receive a detailed proposal with fixed pricing, deliverables, timeline, and payment terms.</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-white mb-3 text-lg inline-flex items-center gap-2"><span>🔒</span> No Obligation</h4>
-                  <p className="text-base">The discovery meeting is complimentary and carries no commitment to proceed.</p>
-                </div>
-              </motion.div>
-            )}
+              )}
+            </div>
           </div>
 
           <div className="text-center text-base text-gray-500">
