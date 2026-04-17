@@ -1,8 +1,7 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import tulipLogo from "@/assets/new-logo.png";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { Calculator, ChevronDown, ChevronUp, ClipboardCheck } from "lucide-react";
+import { ClipboardCheck, ChevronDown } from "lucide-react";
 import PipelineAssessmentQuiz from "./PipelineAssessmentQuiz";
 import DiscoveryPackagesModal from "./DiscoveryPackagesModal";
 import QuoteRequestModal from "./QuoteRequestModal";
@@ -18,31 +17,33 @@ interface ServiceOption {
 }
 
 const serviceOptions: ServiceOption[] = [
-  { id: "research", label: "GenAI Research", description: "Identify pipeline pain points & opportunities\nEmbed AI tools and solve vendor integration bottlenecks with our research & game engineers", minUSD: 20571, maxUSD: 75000, minCAD: 28153, maxCAD: 102645, minEUR: 17434, maxEUR: 63563 },
-  { id: "benchmarking", label: "Tool Benchmarking", description: "Test & validate AI tools in sandbox environments", minUSD: 15000, maxUSD: 130000, minCAD: 20529, maxCAD: 177918, minEUR: 12713, maxEUR: 110175 },
-  { id: "demos", label: "Demos & Sandboxes", description: "Hands-on prototypes tailored to your pipeline", minUSD: 3000, maxUSD: 120000, minCAD: 4106, maxCAD: 164232, minEUR: 2543, maxEUR: 101700 },
-  { id: "architecture", label: "Architecture Blueprint", description: "Full GenAI architecture including LLM training", minUSD: 12000, maxUSD: 350000, minCAD: 16423, maxCAD: 479010, minEUR: 10170, maxEUR: 296625 },
-  { id: "integration", label: "Adoption & Integration", description: "End-to-end AI integration into your workflows", minUSD: 20000, maxUSD: 600000, minCAD: 27372, maxCAD: 821160, minEUR: 16950, maxEUR: 508500 },
-  { id: "workshops", label: "Workshops & Education", description: "Led by certified Unreal Educators or VFX/Game-Developers", minUSD: 3000, maxUSD: 85000, minCAD: 4106, maxCAD: 116331, minEUR: 2543, maxEUR: 72038 },
+  { id: "research",      label: "GenAI Research",          description: "Identify pipeline pain points & opportunities\nEmbed AI tools and solve vendor integration bottlenecks with our research & game engineers", minUSD: 20571, maxUSD: 75000,  minCAD: 28153, maxCAD: 102645, minEUR: 17434, maxEUR: 63563  },
+  { id: "benchmarking",  label: "Tool Benchmarking",        description: "Test & validate AI tools in sandbox environments",                                                              minUSD: 15000, maxUSD: 130000, minCAD: 20529, maxCAD: 177918, minEUR: 12713, maxEUR: 110175 },
+  { id: "demos",         label: "Demos & Sandboxes",        description: "Hands-on prototypes tailored to your pipeline",                                                                minUSD: 3000,  maxUSD: 120000, minCAD: 4106,  maxCAD: 164232, minEUR: 2543,  maxEUR: 101700 },
+  { id: "architecture",  label: "Architecture Blueprint",   description: "Full GenAI architecture including LLM training",                                                               minUSD: 12000, maxUSD: 350000, minCAD: 16423, maxCAD: 479010, minEUR: 10170, maxEUR: 296625 },
+  { id: "integration",   label: "Adoption & Integration",   description: "End-to-end AI integration into your workflows",                                                               minUSD: 20000, maxUSD: 600000, minCAD: 27372, maxCAD: 821160, minEUR: 16950, maxEUR: 508500 },
+  { id: "workshops",     label: "Workshops & Education",    description: "Led by certified Unreal Educators or VFX/Game-Developers",                                                    minUSD: 3000,  maxUSD: 85000,  minCAD: 4106,  maxCAD: 116331, minEUR: 2543,  maxEUR: 72038  },
 ];
 
-type ScaleLevel = "small" | "medium" | "large";
+type ScaleKey = "indie" | "midsize" | "aaa";
 
-const scaleMultipliers: Record<ScaleLevel, { min: number; max: number; label: string; desc: string }> = {
-  small: { min: 0.0, max: 0.25, label: "Indie / Small Studio", desc: "1–20 people, focused scope" },
-  medium: { min: 0.25, max: 0.6, label: "Mid-Size Studio", desc: "20–100 people, multi-department" },
-  large: { min: 0.6, max: 1.0, label: "AAA / Enterprise", desc: "100+ people, full pipeline" },
-};
+const scaleOptions: { id: ScaleKey; name: string; desc: string; multiplier: number }[] = [
+  { id: "indie",   name: "Indie / Small Studio",  desc: "1–20 people, focused scope",        multiplier: 0.6 },
+  { id: "midsize", name: "Mid-Size Studio",        desc: "20–100 people, multi-department",   multiplier: 1.0 },
+  { id: "aaa",     name: "AAA / Enterprise",       desc: "100+ people, full pipeline",        multiplier: 1.8 },
+];
 
-const formatCurrency = (amount: number, currency: string) => {
-  return new Intl.NumberFormat("en-US", { style: "currency", currency, maximumFractionDigits: 0 }).format(amount);
-};
+const currencySymbols: Record<string, string> = { USD: "$", CAD: "C$", EUR: "€" };
+
+const formatAmt = (n: number, curr: string) =>
+  `${currencySymbols[curr]}${n.toLocaleString()}`;
 
 const CostEstimator = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  const [studioScale, setStudioScale] = useState<ScaleKey>("midsize");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
-  const [scale, setScale] = useState<ScaleLevel>("medium");
   const [currency, setCurrency] = useState<"USD" | "CAD" | "EUR">("USD");
   const [showBreakdown, setShowBreakdown] = useState(false);
   const [quizOpen, setQuizOpen] = useState(false);
@@ -55,10 +56,7 @@ const CostEstimator = () => {
       const id = (e as CustomEvent<{ id: string }>).detail?.id;
       if (id) setSelectedServices(prev => prev.includes(id) ? prev : [...prev, id]);
     };
-    const openCalendlyHandler = () => {
-      setCalendlyOpen(true);
-    };
-
+    const openCalendlyHandler = () => setCalendlyOpen(true);
     window.addEventListener("tulip:select-service", selectServiceHandler);
     window.addEventListener("tulip:open-calendly", openCalendlyHandler);
     return () => {
@@ -67,215 +65,303 @@ const CostEstimator = () => {
     };
   }, []);
 
-  const handleQuizComplete = (recommendedServices: string[]) => {
-    setSelectedServices(recommendedServices);
-  };
+  const toggleService = (id: string) =>
+    setSelectedServices(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]);
 
-  const toggleService = (id: string) => {
-    setSelectedServices((prev) => prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]);
-  };
+  const tier = useMemo(() => {
+    const serviceWeights: Record<string, number> = {
+      research: 1, benchmarking: 1, demos: 1, architecture: 2, integration: 3, workshops: 1,
+    };
+    const totalWeight = selectedServices.reduce((sum, id) => sum + (serviceWeights[id] ?? 0), 0);
+    const multiplier = scaleOptions.find(s => s.id === studioScale)?.multiplier ?? 1.0;
+    const rates: Record<string, number> = { USD: 1.0, CAD: 1.35, EUR: 0.92 };
+    const rate = rates[currency] ?? 1.0;
 
-  const estimate = useMemo(() => {
-    const mult = scaleMultipliers[scale];
-    let totalMin = 0;
-    let totalMax = 0;
-    const breakdown = selectedServices.map((id) => {
-      const svc = serviceOptions.find((s) => s.id === id)!;
-      const min = currency === "USD" ? svc.minUSD : currency === "CAD" ? svc.minCAD : svc.minEUR;
-      const max = currency === "USD" ? svc.maxUSD : currency === "CAD" ? svc.maxCAD : svc.maxEUR;
-      const scaledMin = Math.round(min + (max - min) * mult.min);
-      const scaledMax = Math.round(min + (max - min) * mult.max);
-      totalMin += scaledMin;
-      totalMax += scaledMax;
-      return { label: svc.label, min: scaledMin, max: scaledMax };
-    });
-    return { totalMin, totalMax, breakdown };
-  }, [selectedServices, scale, currency]);
+    let baseMin = 40000, baseMax = 80000;
+    let name = "discovery", label = "Discovery & Validation Tier";
+    if (totalWeight >= 6) { baseMin = 200000; baseMax = 500000; name = "enterprise"; label = "Enterprise Deployment Tier"; }
+    else if (totalWeight >= 3) { baseMin = 100000; baseMax = 250000; name = "integration"; label = "Integration Ready Tier"; }
 
-  const selectedServiceLabels = selectedServices.map(id => serviceOptions.find(s => s.id === id)?.label || id);
+    return {
+      name, label,
+      min: Math.round(baseMin * multiplier * rate),
+      max: Math.round(baseMax * multiplier * rate),
+      avg: Math.round((baseMin + baseMax) / 2 * multiplier * rate),
+    };
+  }, [selectedServices, studioScale, currency]);
+
+  const selectedServiceLabels = selectedServices.map(id => serviceOptions.find(s => s.id === id)?.label ?? id);
   const estimateRangeStr = selectedServices.length > 0
-    ? `${formatCurrency(estimate.totalMin, currency)} – ${formatCurrency(estimate.totalMax, currency)} ${currency}`
+    ? `${formatAmt(tier.min, currency)} – ${formatAmt(tier.max, currency)} ${currency}`
     : "";
 
+  const sym = currencySymbols[currency];
+
   return (
-    <section id="estimator" className="pt-6 pb-24 md:pb-32 section-padding">
-      <div ref={ref} className="max-w-3xl mx-auto">
+    <section id="estimator" className="bg-black text-white">
+      <div ref={ref}>
+
+        {/* HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center py-16 px-8"
         >
-          <p className="text-[11px] tracking-[0.2em] uppercase text-primary font-body mb-3 font-medium">Cost Estimator</p>
-          <h2 className="font-display text-3xl md:text-5xl font-bold mb-3">
+          <p className="text-sm tracking-[0.3em] text-gray-400 uppercase mb-4">Cost Estimator</p>
+          <h1 className="text-6xl md:text-7xl font-bold mb-6">
             Build your <span className="text-gradient-gold">quote</span>
-          </h2>
-          <p className="max-w-md mx-auto mb-5 text-white/80 text-sm font-body">
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-300 mb-8">
             Select your services and studio scale for an instant budget range.
           </p>
-          <p className="mb-2.5 text-white/70 text-sm font-body">Not sure what you need?</p>
+          <p className="text-xl text-gray-400 mb-6">Not sure what you need?</p>
           <button
             data-assessment-trigger
             onClick={() => setQuizOpen(true)}
-            className="inline-flex items-center gap-2 btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-sm transition-all min-h-[44px]"
+            className="px-8 py-4 text-lg rounded-full border-2 border-white/30 hover:border-white/50 transition-colors inline-flex items-center gap-3"
           >
-            <ClipboardCheck size={16} />
+            <ClipboardCheck className="w-5 h-5" />
             Take the 2-min Assessment
           </button>
         </motion.div>
 
+        {/* CURRENCY */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-card/50 border border-border/60 rounded-2xl p-6 md:p-10"
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="flex flex-col items-center mb-16 px-8"
         >
-          {/* Currency */}
-          <div className="mb-8 flex flex-col items-center gap-4">
-            <img src={tulipLogo} alt="Tulip Technology logo" className="w-12 h-12 rounded-full object-cover border border-border/40" />
-            <h3 className="font-display font-semibold text-xl">Choose Your Currency</h3>
-            <div className="bg-secondary/60 rounded-full p-0.5 flex border border-border/40 gap-0.5">
-              {(["USD", "CAD", "EUR"] as const).map((c) => (
-                <button
-                  key={c}
-                  onClick={() => setCurrency(c)}
-                  className={`px-4 py-2 rounded-full text-xs font-body font-medium transition-all min-h-[36px] ${
-                    currency === c ? "bg-primary text-primary-foreground" : "text-white hover:text-foreground"
-                  }`}
-                >
-                  {c}
-                </button>
-              ))}
+          <div className="mb-6">
+            <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center overflow-hidden">
+              <img src={tulipLogo} alt="Tulip" className="w-16 h-16 object-cover" />
             </div>
           </div>
+          <h2 className="text-3xl font-semibold mb-6">Choose Your Currency</h2>
+          <div className="flex gap-4">
+            {(["USD", "CAD", "EUR"] as const).map(curr => (
+              <button
+                key={curr}
+                onClick={() => setCurrency(curr)}
+                className={`px-8 py-3 text-lg rounded-full transition-all ${
+                  currency === curr ? "bg-white/20 text-white" : "bg-white/5 text-gray-400 hover:bg-white/10"
+                }`}
+              >
+                {curr}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* MAIN */}
+        <div className="max-w-6xl mx-auto px-8 pb-16">
 
           {/* Studio Scale */}
-          <div className="mb-8">
-            <h3 className="font-display font-semibold mb-3 text-base">Studio Scale</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-              {(Object.keys(scaleMultipliers) as ScaleLevel[]).map((key) => {
-                const s = scaleMultipliers[key];
-                return (
-                  <button
-                    key={key}
-                    onClick={() => setScale(key)}
-                    className={`text-left p-4 rounded-xl border transition-all duration-300 min-h-[44px] ${
-                      scale === key ? "border-primary bg-primary/5" : "border-border/40 hover:border-muted-foreground/25"
-                    }`}
-                  >
-                    <div className="font-display font-semibold text-xs mb-0.5">{s.label}</div>
-                    <div className="text-[11px] text-white font-body">{s.desc}</div>
-                  </button>
-                );
-              })}
-            </div>
+          <h2 className="text-3xl font-semibold mb-6">Studio Scale</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
+            {scaleOptions.map(s => (
+              <button
+                key={s.id}
+                onClick={() => setStudioScale(s.id)}
+                className={`p-6 rounded-2xl border-2 transition-all text-left ${
+                  studioScale === s.id ? "border-[#8FD5A6] bg-[#8FD5A6]/10" : "border-white/20 hover:border-white/40"
+                }`}
+              >
+                <div className="text-2xl font-semibold mb-2">{s.name}</div>
+                <div className="text-base text-gray-400">{s.desc}</div>
+              </button>
+            ))}
           </div>
 
           {/* Services */}
-          <div className="mb-8">
-            <h3 className="font-display font-semibold mb-3 text-base">Select Services</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              {serviceOptions.map((svc) => {
-                const selected = selectedServices.includes(svc.id);
-                const isResearch = svc.id === "research";
-                return (
-                  <button
-                    key={svc.id}
-                    onClick={() => toggleService(svc.id)}
-                    className={`text-left p-4 rounded-xl border transition-all duration-300 min-h-[44px] ${
-                      selected ? "border-primary bg-primary/5" : "border-border/40 hover:border-muted-foreground/25"
-                    }`}
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <div className={`w-4 h-4 rounded-md border-2 flex items-center justify-center transition-all shrink-0 ${
-                        selected ? "border-primary bg-primary" : "border-muted-foreground/30"
-                      }`}>
-                        {selected && (
-                          <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
-                            <path d="M2 6L5 9L10 3" stroke="hsl(0 0% 3%)" strokeWidth="2" strokeLinecap="round" />
-                          </svg>
-                        )}
-                      </div>
-                      <div className="flex-1">
-                        <div className="font-display font-semibold text-2xl mb-1">{svc.label}</div>
-                        <div className="text-lg text-white font-body whitespace-pre-line leading-relaxed">{svc.description}</div>
-                        {isResearch && (
-                          <span
-                            onClick={(e) => { e.stopPropagation(); setDiscoveryOpen(true); }}
-                            className="inline-flex items-center gap-1 mt-3 px-8 py-4 rounded-full text-xl font-display font-semibold text-foreground border border-white/20 hover:border-white/40 bg-transparent transition-colors cursor-pointer"
-                          >
-                            Discovery Packages
-                          </span>
-                        )}
-                      </div>
+          <h2 className="text-3xl font-semibold mb-6">Select Services</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
+            {serviceOptions.map(svc => {
+              const selected = selectedServices.includes(svc.id);
+              const isResearch = svc.id === "research";
+              return (
+                <button
+                  key={svc.id}
+                  onClick={() => toggleService(svc.id)}
+                  className={`p-8 rounded-2xl border-2 transition-all text-left ${
+                    selected ? "border-[#8FD5A6] bg-[#8FD5A6]/10" : "border-white/20 hover:border-white/40"
+                  }`}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className={`mt-1 w-7 h-7 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
+                      selected ? "border-[#8FD5A6] bg-[#8FD5A6]" : "border-white/40"
+                    }`}>
+                      {selected && (
+                        <svg className="w-5 h-5 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
+                      )}
                     </div>
-                  </button>
-                );
-              })}
+                    <div className="flex-1">
+                      <div className="text-2xl font-semibold mb-3">{svc.label}</div>
+                      <div className="text-base text-gray-400 whitespace-pre-line leading-relaxed">{svc.description}</div>
+                      {isResearch && (
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setDiscoveryOpen(true); }}
+                          className="mt-4 px-6 py-3 text-base rounded-full border-2 border-white/20 hover:border-white/40 transition-colors"
+                        >
+                          Discovery Packages
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Disclaimer */}
+          <div className="mb-12 p-8 bg-amber-500/10 border-2 border-amber-500/30 rounded-2xl">
+            <div className="flex gap-4">
+              <svg className="w-7 h-7 text-amber-400 flex-shrink-0 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <div>
+                <h3 className="text-2xl font-semibold text-amber-400 mb-4">Important Disclaimer</h3>
+                <div className="text-base text-gray-300 space-y-3 leading-relaxed">
+                  <p>The investment range shown below is an <strong>educational estimate</strong> and is <strong>NOT a binding quote or contractual commitment</strong>.</p>
+                  <p>Actual pricing depends on:</p>
+                  <ul className="list-disc list-inside space-y-2 ml-2">
+                    <li>Detailed scope definition in discovery meeting</li>
+                    <li>Your existing infrastructure and integrations</li>
+                    <li>Team size, skill levels, and readiness</li>
+                    <li>Timeline, deliverables, and support requirements</li>
+                    <li>Third-party tool licensing and hosting costs</li>
+                  </ul>
+                  <p className="pt-2"><strong>Final proposals may vary significantly from this estimate.</strong> This tool is for planning purposes only.</p>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Result */}
-          <div className="border-t border-border/30 pt-6">
-            {selectedServices.length === 0 ? (
-              <div className="text-center text-white font-body py-6">
-                <Calculator className="w-8 h-8 mx-auto mb-2 opacity-30" />
-                <p className="text-xs">Select services above to see your estimated budget range</p>
+          {/* Investment Tier */}
+          <div className="mb-12 p-10 bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl border border-white/20">
+            <div className="text-center mb-8">
+              <div className="text-base text-gray-400 mb-3">Based on your selections, your project falls within:</div>
+              <h2 className="text-4xl font-bold text-[#8FD5A6] mb-6">{tier.label}</h2>
+            </div>
+
+            <div className="text-center mb-10">
+              <div className="text-xl text-gray-400 mb-4">Typical Investment Range</div>
+              <div className="text-7xl font-bold mb-3">
+                {sym}{tier.min.toLocaleString()} – {sym}{tier.max.toLocaleString()}
               </div>
-            ) : (
-              <div>
-                <div className="text-center mb-5">
-                  <p className="mb-1.5 text-white/80 text-sm font-body">Estimated Budget Range</p>
-                  <div className="font-display text-2xl md:text-3xl font-bold">
-                    <span className="text-gradient-gold">{formatCurrency(estimate.totalMin, currency)}</span>
-                    <span className="text-white mx-2">–</span>
-                    <span className="text-gradient-gold">{formatCurrency(estimate.totalMax, currency)}</span>
-                  </div>
-                  <p className="text-[10px] text-white font-body mt-1">{currency}</p>
+              <div className="text-base text-gray-500 mb-8">{currency}</div>
+              <div className="inline-block px-8 py-4 bg-purple-500/20 border border-purple-400/40 rounded-full">
+                <span className="text-lg text-purple-200">💡 Most studios in this tier invest {sym}{tier.avg.toLocaleString()}</span>
+              </div>
+            </div>
+
+            {tier.name === "enterprise" && (
+              <div className="mb-8">
+                <h3 className="text-2xl font-semibold mb-5">This tier typically includes:</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300 text-base">
+                  {["Multi-team deployment", "Custom model training", "Change management program", "Production monitoring"].map(item => (
+                    <div key={item} className="flex items-start gap-3">
+                      <div className="w-2 h-2 rounded-full bg-[#8FD5A6] mt-2 flex-shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
                 </div>
+              </div>
+            )}
 
-                <button
-                  onClick={() => setShowBreakdown(!showBreakdown)}
-                  className="flex items-center gap-1.5 mx-auto text-xs text-white hover:text-foreground transition-colors font-body min-h-[44px]"
-                >
-                  {showBreakdown ? "Hide" : "Show"} breakdown
-                  {showBreakdown ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-                </button>
-
-                {showBreakdown && (
-                  <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="mt-4 space-y-2">
-                    {estimate.breakdown.map((item) => (
-                      <div key={item.label} className="flex justify-between items-center py-1.5 border-b border-border/20">
-                        <span className="text-xs font-body">{item.label}</span>
-                        <span className="text-xs font-body text-white">{formatCurrency(item.min, currency)} – {formatCurrency(item.max, currency)}</span>
-                      </div>
-                    ))}
-                  </motion.div>
-                )}
-
-                <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <button
-                    onClick={() => setQuoteOpen(true)}
-                    className="bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity min-h-[44px]"
-                  >
-                    Request Detailed Quote
-                  </button>
-                  <button
-                    onClick={() => setCalendlyOpen(true)}
-                    className="btn-chrome-outline px-6 py-3 rounded-full font-display font-semibold text-sm transition-all min-h-[44px]"
-                  >
-                    Book Discovery Meeting
-                  </button>
+            {tier.name === "integration" && (
+              <div className="mb-8">
+                <h3 className="text-2xl font-semibold mb-5">This tier typically includes:</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300 text-base">
+                  {["Custom integration deployment", "Team training workshops", "Sandbox environments", "Initial production rollout"].map(item => (
+                    <div key={item} className="flex items-start gap-3">
+                      <div className="w-2 h-2 rounded-full bg-[#8FD5A6] mt-2 flex-shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             )}
           </div>
-        </motion.div>
 
-        {/* Payment structure */}
+          {/* Breakdown Toggle */}
+          <div className="mb-12">
+            <button
+              onClick={() => setShowBreakdown(!showBreakdown)}
+              className="w-full flex items-center justify-center gap-2 text-xl text-gray-400 hover:text-white transition-colors"
+            >
+              {showBreakdown ? "Hide" : "Show"} what affects your investment
+              <ChevronDown className={`w-6 h-6 transition-transform ${showBreakdown ? "rotate-180" : ""}`} />
+            </button>
+
+            {showBreakdown && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                className="mt-8 p-8 bg-white/5 rounded-2xl border border-white/10 space-y-6 text-gray-300"
+              >
+                <div>
+                  <h4 className="font-semibold text-[#8FD5A6] mb-3 text-lg">📊 Discovery Meeting Assessment</h4>
+                  <p className="text-base">We'll evaluate your current pipeline, team readiness, and integration requirements to scope precisely.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-[#8FD5A6] mb-3 text-lg">📋 Formal Proposal</h4>
+                  <p className="text-base">You'll receive a detailed proposal with fixed pricing, deliverables, timeline, and payment terms.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-[#8FD5A6] mb-3 text-lg">🔒 No Obligation</h4>
+                  <p className="text-base">The discovery meeting is complimentary and carries no commitment to proceed.</p>
+                </div>
+              </motion.div>
+            )}
+          </div>
+
+          {/* ROI Context */}
+          <div className="mb-12 p-8 bg-[#8FD5A6]/10 border border-[#8FD5A6]/30 rounded-2xl">
+            <h3 className="text-3xl font-semibold mb-5">How does this compare to doing nothing?</h3>
+            <div className="space-y-4 text-gray-300 text-base">
+              <p>Based on your studio scale and selected services:</p>
+              <ul className="space-y-3 ml-4">
+                <li>• Current cost of inefficiency: <strong className="text-white">$350K per major rework cycle</strong></li>
+                <li>• Manual review bottlenecks: <strong className="text-white">10–30 dev days lost per iteration</strong></li>
+                <li>• Estimated annual waste: <strong className="text-white">$500K–$1.5M</strong></li>
+              </ul>
+              <div className="pt-5 mt-5 border-t border-[#8FD5A6]/30">
+                <p className="text-xl">
+                  <strong className="text-[#8FD5A6]">Typical ROI timeline:</strong> 3–6 months<br />
+                  <strong className="text-[#8FD5A6]">Average client savings:</strong> $800K+ in first year
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* CTAs */}
+          <div className="flex flex-col md:flex-row gap-5 justify-center mb-12">
+            <button
+              onClick={() => setCalendlyOpen(true)}
+              className="px-12 py-7 text-2xl rounded-full bg-gradient-to-r from-[#D4B86A] to-[#8FD5A6] hover:opacity-90 transition-opacity text-black font-semibold"
+            >
+              Book Discovery Meeting
+            </button>
+            <button
+              onClick={() => setQuoteOpen(true)}
+              className="px-12 py-7 text-2xl rounded-full border-2 border-white/30 hover:border-white/60 transition-colors text-white font-semibold bg-transparent"
+            >
+              Request Detailed Quote
+            </button>
+          </div>
+
+          <div className="text-center text-base text-gray-500">
+            All estimates are subject to scope confirmation. Final proposals provided after discovery meeting.
+          </div>
+
+        </div>
       </div>
 
-      <PipelineAssessmentQuiz open={quizOpen} onClose={() => setQuizOpen(false)} onComplete={handleQuizComplete} />
+      <PipelineAssessmentQuiz open={quizOpen} onClose={() => setQuizOpen(false)} onComplete={(services) => setSelectedServices(services)} />
       <DiscoveryPackagesModal open={discoveryOpen} onClose={() => setDiscoveryOpen(false)} />
       <QuoteRequestModal open={quoteOpen} onClose={() => setQuoteOpen(false)} selectedServices={selectedServiceLabels} estimateRange={estimateRangeStr} onBookMeeting={() => setCalendlyOpen(true)} />
       <CalendlyModal open={calendlyOpen} onClose={() => setCalendlyOpen(false)} />
