@@ -338,7 +338,7 @@ const CostEstimator = () => {
                 Request Detailed Quote
               </button>
             </div>
-            <p className="text-gray-400 font-body text-sm">No Obligation. The discovery meeting is complimentary.</p>
+            <p className="text-white font-body text-base">No Obligation. The discovery meeting is complimentary.</p>
           </div>
 
           {/* Breakdown Toggle */}
