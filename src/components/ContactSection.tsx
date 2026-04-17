@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import CalendlyModal from "./CalendlyModal";
+import { useRef } from "react";
+import CalendlyBookingButton from "./CalendlyBookingButton";
 
 const ContactSection = () => {
   const ref = useRef(null);
