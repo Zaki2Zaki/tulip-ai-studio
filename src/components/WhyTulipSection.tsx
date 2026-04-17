@@ -41,13 +41,13 @@ const WhyTulipSection = () => {
   const doubledAi = [...aiLogos, ...aiLogos];
 
   return (
-    <section className="pt-24 md:pt-32 pb-6 section-padding">
-      <div ref={ref} className="max-w-4xl mx-auto text-center">
+    <section className="py-20 px-8 bg-black text-white">
+      <div ref={ref} className="max-w-6xl mx-auto text-center">
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-[11px] tracking-[0.2em] uppercase text-primary font-body mb-3 font-medium"
+          className="text-sm tracking-[0.3em] uppercase text-gray-400 font-body mb-6"
         >
           Why Tulip
         </motion.p>
@@ -56,36 +56,38 @@ const WhyTulipSection = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="font-display text-3xl md:text-5xl font-bold mb-6"
+          className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-10 text-gray-100"
         >
           <span className="text-gradient-gold">Functional</span> and Explorative
         </motion.h2>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed text-white/90 font-body"
+          className="max-w-5xl mx-auto"
         >
-          We're focused on{" "}
-          <span
-            className="font-semibold bg-clip-text text-transparent animate-[illuminating_3s_ease-in-out_infinite]"
-            style={{ backgroundImage: 'linear-gradient(90deg, #C8A2C8, #ADD8E6, #C8A2C8, #ADD8E6)', backgroundSize: '200% 100%' }}
-          >
-            flow, adoption and integration
-          </span>{" "}
-          for our tools. Aiming for seamlessly into existing pipelines, delivering production-ready work via API for scalable, automated pipelines.
-        </motion.p>
+          <p className="text-xl md:text-2xl lg:text-3xl text-gray-300 leading-relaxed font-body">
+            We're focused on{" "}
+            <span
+              className="font-semibold bg-clip-text text-transparent animate-[illuminating_3s_ease-in-out_infinite]"
+              style={{ backgroundImage: 'linear-gradient(90deg, #C8A2C8, #ADD8E6, #C8A2C8, #ADD8E6)', backgroundSize: '200% 100%' }}
+            >
+              flow, adoption and integration
+            </span>{" "}
+            for our tools. Aiming for seamlessly into existing pipelines, delivering production-ready work via API for scalable, automated pipelines.
+          </p>
+        </motion.div>
 
         {/* Logo carousel */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-16"
+          className="mt-20"
         >
-          <p className="text-[11px] text-white font-body mb-6 tracking-[0.15em] uppercase font-medium">
-            Works with the tools you already use
+          <p className="text-sm tracking-[0.3em] uppercase text-gray-400 font-body mb-6">
+            Works With The Tools You Already Use
           </p>
           <div className="overflow-hidden relative">
             <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background to-transparent z-10" />
