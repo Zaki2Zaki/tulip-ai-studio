@@ -125,10 +125,10 @@ const Navbar = () => {
           scrolled ? "bg-glass" : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-8 h-12">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-12 lg:px-16 h-24">
           {/* Logo + text-scale button */}
-          <div className="flex items-center gap-2">
-            <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground shrink-0">
+          <div className="flex items-center gap-4">
+            <Link to="/" className="font-display text-4xl font-bold tracking-tight text-foreground shrink-0">
               TULIP<span className="text-gradient-gold"> TECH</span>
             </Link>
 
