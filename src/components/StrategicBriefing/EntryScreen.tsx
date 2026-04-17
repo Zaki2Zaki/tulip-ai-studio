@@ -167,9 +167,9 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
               </span>
               {["Pipeline TD", "Technical Artist", "VFX Supervisor", "Solutions Engineer"].map((role) => (
                 <span key={role} style={{
-                  fontSize: "88px",
+                  fontSize: "176px",
                   fontWeight: 500,
-                  padding: "32px 96px",
+                  padding: "64px 192px",
                   borderRadius: "99px",
                   border: "0.5px solid rgba(167,139,250,0.35)",
                   background: "rgba(167,139,250,0.07)",
@@ -210,9 +210,9 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
               </span>
               {["Producer", "Art or Creative Director", "Development Director", "Studio Manager"].map((role) => (
                 <span key={role} style={{
-                  fontSize: "88px",
+                  fontSize: "176px",
                   fontWeight: 500,
-                  padding: "32px 96px",
+                  padding: "64px 192px",
                   borderRadius: "99px",
                   border: "0.5px solid rgba(167,139,250,0.35)",
                   background: "rgba(167,139,250,0.07)",
@@ -244,9 +244,9 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
             <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
               {["VP", "CTO", "Studio Head", "Chief Strategy Officer", "General Manager"].map((role) => (
                 <span key={role} style={{
-                  fontSize: "88px",
+                  fontSize: "176px",
                   fontWeight: 500,
-                  padding: "32px 96px",
+                  padding: "64px 192px",
                   borderRadius: "99px",
                   border: "0.5px solid rgba(167,139,250,0.35)",
                   background: "rgba(167,139,250,0.07)",
