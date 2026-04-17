@@ -287,38 +287,6 @@ const CostEstimator = () => {
             )}
           </div>
 
-          {/* Breakdown Toggle */}
-          <div className="mb-12">
-            <button
-              onClick={() => setShowBreakdown(!showBreakdown)}
-              className="w-full flex items-center justify-center gap-2 text-xl text-gray-400 hover:text-white transition-colors"
-            >
-              {showBreakdown ? "Hide" : "Show"} what affects your investment
-              <ChevronDown className={`w-6 h-6 transition-transform ${showBreakdown ? "rotate-180" : ""}`} />
-            </button>
-
-            {showBreakdown && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                className="mt-8 p-8 bg-white/5 rounded-2xl border border-white/10 space-y-6 text-gray-300"
-              >
-                <div>
-                  <h4 className="font-semibold text-[#8FD5A6] mb-3 text-lg">📊 Discovery Meeting Assessment</h4>
-                  <p className="text-base">We'll evaluate your current pipeline, team readiness, and integration requirements to scope precisely.</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-[#8FD5A6] mb-3 text-lg">📋 Formal Proposal</h4>
-                  <p className="text-base">You'll receive a detailed proposal with fixed pricing, deliverables, timeline, and payment terms.</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-[#8FD5A6] mb-3 text-lg">🔒 No Obligation</h4>
-                  <p className="text-base">The discovery meeting is complimentary and carries no commitment to proceed.</p>
-                </div>
-              </motion.div>
-            )}
-          </div>
-
           {/* ROI Context */}
           <div className="mb-12 p-8 bg-[#8FD5A6]/10 border border-[#8FD5A6]/30 rounded-2xl">
             <h3 className="text-3xl font-semibold mb-5">How does this compare to doing nothing?</h3>
