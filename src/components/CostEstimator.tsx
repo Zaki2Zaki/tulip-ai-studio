@@ -6,6 +6,7 @@ import PipelineAssessmentQuiz from "./PipelineAssessmentQuiz";
 import DiscoveryPackagesModal from "./DiscoveryPackagesModal";
 import QuoteRequestModal from "./QuoteRequestModal";
 import CalendlyModal from "./CalendlyModal";
+import { useServiceSelection } from "@/context/ServiceSelectionContext";
 
 interface ServiceOption {
   id: string;
