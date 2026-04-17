@@ -258,33 +258,48 @@ const CostEstimator = () => {
               </div>
             </div>
 
-            {tier.name === "enterprise" && (
-              <div className="mb-8">
-                <h3 className="text-2xl font-semibold mb-5 text-center">This tier typically includes:</h3>
-                <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300 text-base">
-                  {["Multi-team deployment", "Custom model training", "Change management program", "Production monitoring"].map(item => (
-                    <div key={item} className="flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-[#8FD5A6] flex-shrink-0" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+            <div className="mb-8">
+              <h3 className="text-2xl font-semibold mb-5 text-center">This tier typically includes:</h3>
 
-            {tier.name === "integration" && (
-              <div className="mb-8">
-                <h3 className="text-2xl font-semibold mb-5 text-center">This tier typically includes:</h3>
-                <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300 text-base">
-                  {["Custom integration deployment", "Team training workshops", "Sandbox environments", "Initial production rollout"].map(item => (
-                    <div key={item} className="flex items-center gap-3">
-                      <div className="w-2 h-2 rounded-full bg-[#8FD5A6] flex-shrink-0" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
+              {tier.name === "enterprise" && (
+                <div className="flex flex-col items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4 text-gray-300 text-base max-w-3xl">
+                    {["Multi-team deployment", "Custom model training", "Change management program", "Production monitoring"].map(item => (
+                      <div key={item} className="flex items-center gap-3 justify-start">
+                        <div className="w-2 h-2 rounded-full bg-[#8FD5A6] flex-shrink-0" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+
+              {tier.name === "integration" && (
+                <div className="flex flex-col items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4 text-gray-300 text-base max-w-3xl">
+                    {["Custom integration deployment", "Team training workshops", "Sandbox environments", "Initial production rollout"].map(item => (
+                      <div key={item} className="flex items-center gap-3 justify-start">
+                        <div className="w-2 h-2 rounded-full bg-[#8FD5A6] flex-shrink-0" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {tier.name === "discovery" && (
+                <div className="flex flex-col items-center">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4 text-gray-300 text-base max-w-3xl">
+                    {["Pipeline pain point analysis", "Tool evaluation and recommendations", "Architecture design and planning", "Initial proof of concept"].map(item => (
+                      <div key={item} className="flex items-center gap-3 justify-start">
+                        <div className="w-2 h-2 rounded-full bg-[#8FD5A6] flex-shrink-0" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* ROI Context */}
