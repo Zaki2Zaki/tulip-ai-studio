@@ -108,7 +108,7 @@ const Navbar = () => {
             href="https://substack.com/@tuliptechrnd"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[11px] font-body font-medium text-gradient-chrome-animated hover:opacity-80 transition-opacity"
+            className="text-[22px] font-body font-medium text-gradient-chrome-animated hover:opacity-80 transition-opacity"
           >
             2026 Guide to GenAI for Game Content Developers, 3D Artists & Creative Techs
           </a>
