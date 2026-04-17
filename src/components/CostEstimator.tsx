@@ -202,7 +202,7 @@ const CostEstimator = () => {
                         {isResearch && (
                           <span
                             onClick={(e) => { e.stopPropagation(); setDiscoveryOpen(true); }}
-                            className="inline-flex items-center gap-1 mt-2 px-3 py-1.5 rounded-full text-[10px] font-display font-semibold text-foreground border border-primary/30 bg-primary/5 hover:bg-primary/10 transition-colors cursor-pointer"
+                            className="inline-flex items-center gap-1 mt-2 px-3 py-1.5 rounded-full text-[20px] font-display font-semibold text-foreground border border-primary/30 bg-primary/5 hover:bg-primary/10 transition-colors cursor-pointer"
                           >
                             Discovery Packages
                           </span>
