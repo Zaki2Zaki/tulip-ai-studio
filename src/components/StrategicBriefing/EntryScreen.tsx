@@ -267,20 +267,20 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
         style={{
           display: "inline-flex",
           alignItems: "center",
-          gap: "8px",
-          padding: "0.5rem 1.375rem",
+          gap: "16px",
+          padding: "1rem 2.75rem",
           borderRadius: "99px",
           border: "0.5px solid rgba(255,255,255,0.25)",
           background: "transparent",
           color: "#fff",
-          fontSize: "13px",
+          fontSize: "26px",
           fontWeight: 500,
           fontFamily: "inherit",
           cursor: "pointer",
           transition: "opacity 0.15s",
         }}
       >
-        {ctaLabel} <ArrowRight style={{ width: "13px", height: "13px" }} />
+        {ctaLabel} <ArrowRight style={{ width: "26px", height: "26px" }} />
       </button>
 
       {/* Inline email capture (Card B) */}
