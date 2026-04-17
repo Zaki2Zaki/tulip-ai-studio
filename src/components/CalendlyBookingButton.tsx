@@ -44,13 +44,7 @@ const CalendlyBookingButton: React.FC<CalendlyBookingButtonProps> = ({
       setLoading(false);
     }
 
-    const params = new URLSearchParams();
-    if (contactInfo.name) params.set('name', contactInfo.name);
-    if (contactInfo.email) params.set('email', contactInfo.email);
-    if (selectedServices.length) params.set('a1', selectedServices.join(', '));
-    if (studioScale) params.set('a2', studioScale);
-
-    const url = params.toString() ? `${CALENDLY_URL}?${params.toString()}` : CALENDLY_URL;
+    const url = `${CALENDLY_URL}?name=${encodeURIComponent(contactInfo.name)}&email=${encodeURIComponent(contactInfo.email)}&a1=${encodeURIComponent(selectedServices.join(', '))}`;
     window.open(url, '_blank');
   };
 
