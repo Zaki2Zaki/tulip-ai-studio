@@ -67,8 +67,15 @@ const CostEstimator = () => {
     };
   }, []);
 
-  const toggleService = (id: string) =>
-    setSelectedServices(prev => prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]);
+  const toggleService = (id: string) => {
+    setSelectedServices(prev => {
+      const next = prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id];
+      // sync label (not id) into context for Notion submission
+      const label = serviceOptions.find(s => s.id === id)?.label ?? id;
+      prev.includes(id) ? removeService(label) : addService(label);
+      return next;
+    });
+  };
 
   const tier = useMemo(() => {
     const serviceWeights: Record<string, number> = {
