@@ -119,10 +119,12 @@ const CostEstimator = () => {
           <button
             data-assessment-trigger
             onClick={() => document.getElementById("interactive-demo")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-8 py-4 text-lg rounded-full border-0 text-white hover:opacity-90 transition-opacity inline-flex items-center gap-3" style={{ background: "linear-gradient(135deg, hsl(200 40% 82%), hsl(260 30% 78%), hsl(320 25% 75%), hsl(200 35% 70%))", WebkitTextStroke: "0.5px black", textShadow: "0 0 2px rgba(0,0,0,0.4)" }}
+            className="px-8 py-4 text-lg rounded-full border-0 hover:opacity-90 transition-opacity inline-flex items-center justify-center"
+            style={{ background: "linear-gradient(to right, #E5B4E2, #D4A5D4, #C8B5E8)" }}
           >
-            <ClipboardCheck className="w-5 h-5" />
-            Workflow & Cost Analyzer
+            <span className="text-[#4A1942] font-semibold flex items-center gap-2">
+              📋 Workflow & Cost Analyzer
+            </span>
           </button>
         </motion.div>
 
