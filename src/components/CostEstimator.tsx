@@ -322,6 +322,38 @@ const CostEstimator = () => {
             </button>
           </div>
 
+          {/* Breakdown Toggle - after CTAs */}
+          <div className="mb-12">
+            <button
+              onClick={() => setShowBreakdown(!showBreakdown)}
+              className="w-full flex items-center justify-center gap-2 text-xl text-gray-400 hover:text-white transition-colors"
+            >
+              {showBreakdown ? "Hide" : "Show"} what affects your investment
+              <ChevronDown className={`w-6 h-6 transition-transform ${showBreakdown ? "rotate-180" : ""}`} />
+            </button>
+
+            {showBreakdown && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                className="mt-8 p-8 bg-white/5 rounded-2xl border border-white/10 space-y-6 text-gray-300"
+              >
+                <div>
+                  <h4 className="font-semibold text-white mb-3 text-lg inline-flex items-center gap-2"><span>📊</span> Discovery Meeting Assessment</h4>
+                  <p className="text-base">We'll evaluate your current pipeline, team readiness, and integration requirements to scope precisely.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-white mb-3 text-lg inline-flex items-center gap-2"><span>📋</span> Formal Proposal</h4>
+                  <p className="text-base">You'll receive a detailed proposal with fixed pricing, deliverables, timeline, and payment terms.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-white mb-3 text-lg inline-flex items-center gap-2"><span>🔒</span> No Obligation</h4>
+                  <p className="text-base">The discovery meeting is complimentary and carries no commitment to proceed.</p>
+                </div>
+              </motion.div>
+            )}
+          </div>
+
           <div className="text-center text-base text-gray-500">
             All estimates are subject to scope confirmation. Final proposals provided after discovery meeting.
           </div>
