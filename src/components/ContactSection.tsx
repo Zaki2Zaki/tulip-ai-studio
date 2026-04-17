@@ -9,7 +9,7 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="py-24 md:py-32 section-padding">
-      <div ref={ref} className="max-w-2xl mx-auto text-center">
+      <div ref={ref} className="max-w-6xl mx-auto text-center">
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
