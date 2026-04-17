@@ -50,9 +50,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (isRateLimited(ip)) return res.status(429).json({ error: 'Too many requests' });
 
   const apiKey = process.env.NOTION_API_KEY;
-  const databaseId = process.env.NOTION_DATABASE_ID;
+  const databaseId = process.env.NOTION_DATABASE_ID ?? FALLBACK_DATABASE_ID;
 
-  if (!apiKey || !databaseId) {
+  if (!apiKey) {
     return res.status(500).json({ error: 'Notion credentials not configured' });
   }
 
