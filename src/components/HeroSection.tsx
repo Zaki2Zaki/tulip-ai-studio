@@ -109,13 +109,10 @@ const HeroSection = () => {
             <div className="flex flex-col gap-2 mt-2">
               {/* Row 1 — Book a Call + Get Estimate */}
               <div className="flex gap-2">
-                <button
-                  onClick={() => setCalendlyOpen(true)}
+                <CalendlyBookingButton
+                  label="Book a Call"
                   className="hero-btn-explore hero-btn-bloom px-6 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[40px] flex items-center justify-center gap-1.5"
-                >
-                  Book a Call
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
+                />
 
                 <a
                   href="#estimator"
