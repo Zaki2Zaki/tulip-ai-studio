@@ -27,7 +27,7 @@ const ServicesSection = () => {
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          className="text-[11px] tracking-[0.2em] uppercase text-primary font-body mb-3 text-center font-medium"
+          className="text-sm tracking-[0.3em] uppercase text-gray-400 font-body mb-6 text-center"
         >
           Our Services
         </motion.p>
@@ -35,7 +35,7 @@ const ServicesSection = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="font-display text-3xl md:text-5xl font-bold text-center mb-4"
+          className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-10 text-gray-100"
         >
           What we <span className="text-gradient-gold">deliver</span>
         </motion.h2>
@@ -43,7 +43,7 @@ const ServicesSection = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2 }}
-          className="text-center text-white font-body text-sm mb-12 max-w-lg mx-auto"
+          className="text-center text-gray-300 font-body text-xl md:text-2xl lg:text-3xl leading-relaxed mb-12 max-w-5xl mx-auto"
         >
           End-to-end GenAI integration services, from research through production deployment.
         </motion.p>
