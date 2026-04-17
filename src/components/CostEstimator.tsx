@@ -118,11 +118,11 @@ const CostEstimator = () => {
           <p className="text-xl text-gray-400 mb-6">Not sure what you need?</p>
           <button
             data-assessment-trigger
-            onClick={() => setQuizOpen(true)}
+            onClick={() => document.getElementById("workflow-analyzer")?.scrollIntoView({ behavior: "smooth" })}
             className="px-8 py-4 text-lg rounded-full border-2 border-white/30 hover:border-white/50 transition-colors inline-flex items-center gap-3"
           >
             <ClipboardCheck className="w-5 h-5" />
-            Take the 2-min Assessment
+            Workflow & Cost Analyzer
           </button>
         </motion.div>
 
