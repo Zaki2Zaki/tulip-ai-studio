@@ -197,8 +197,8 @@ const CostEstimator = () => {
                         )}
                       </div>
                       <div className="flex-1">
-                        <div className="font-display font-semibold text-xs">{svc.label}</div>
-                        <div className="text-[11px] text-white font-body whitespace-pre-line">{svc.description}</div>
+                        <div className="font-display font-semibold text-base">{svc.label}</div>
+                        <div className="text-[22px] text-white font-body whitespace-pre-line">{svc.description}</div>
                         {isResearch && (
                           <span
                             onClick={(e) => { e.stopPropagation(); setDiscoveryOpen(true); }}
