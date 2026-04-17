@@ -42,6 +42,7 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
+  </ServiceSelectionProvider>
 );
 
 export default App;
