@@ -162,7 +162,6 @@ const HeroSection = () => {
         </motion.div>
       </motion.div>
 
-      <CalendlyModal open={calendlyOpen} onClose={() => setCalendlyOpen(false)} />
     </section>
   );
 };
