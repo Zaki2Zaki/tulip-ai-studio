@@ -325,7 +325,7 @@ const WorkflowBuilderPanel = ({
               Select the friction points slowing your pipeline. We map the AI tools, integration sequence, and agentic architecture that eliminates them — stage by stage, from pre-production to final output.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "14px" }}>
-              <span style={{ fontSize: "10px", fontWeight: 500, padding: "3px 10px", borderRadius: "99px", border: "0.5px solid rgba(29,158,117,0.35)", background: "rgba(29,158,117,0.07)", color: "#5DCAA5", fontFamily: "inherit" }}>Live</span>
+              <span style={{ fontSize: "20px", fontWeight: 500, padding: "8px 20px", borderRadius: "99px", border: "0.5px solid rgba(29,158,117,0.35)", background: "rgba(29,158,117,0.07)", color: "#5DCAA5", fontFamily: "inherit" }}>Live</span>
               {["Pipeline TD", "Technical Artist", "VFX Supervisor", "Solutions Engineer"].map((r) => (
                 <span key={r} style={{ fontSize: "20px", fontWeight: 500, padding: "8px 20px", borderRadius: "99px", border: "0.5px solid rgba(167,139,250,0.35)", background: "rgba(167,139,250,0.07)", fontFamily: "inherit", display: "inline-block" }}>
                   <span className="text-gradient-gold">{r}</span>
