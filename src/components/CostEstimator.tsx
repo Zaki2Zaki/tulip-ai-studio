@@ -43,6 +43,7 @@ const CostEstimator = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
+  const { addService, removeService, setStudioScale: setContextScale } = useServiceSelection();
   const [studioScale, setStudioScale] = useState<ScaleKey>("midsize");
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [currency, setCurrency] = useState<"USD" | "CAD" | "EUR">("USD");
