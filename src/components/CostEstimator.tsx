@@ -291,9 +291,6 @@ const CostEstimator = () => {
             </div>
           ))}
         </motion.div>
-        <p className="text-center text-white font-body mt-3 text-xs">
-          *Payment milestone structure. Finalized quotation varies depending on custom prototype requirements.
-        </p>
       </div>
 
       <PipelineAssessmentQuiz open={quizOpen} onClose={() => setQuizOpen(false)} onComplete={handleQuizComplete} />
