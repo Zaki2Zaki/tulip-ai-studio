@@ -273,24 +273,6 @@ const CostEstimator = () => {
         </motion.div>
 
         {/* Payment structure */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.5 }}
-          className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-3"
-        >
-          {[
-            { pct: "20%", label: "Initial Experiment, Report Scope, Contracts & Deposit" },
-            { pct: "25%", label: "Demo Start & Prototype Reviews" },
-            { pct: "30%", label: "Polish & 75% Completion" },
-            { pct: "25%", label: "Final Delivery, code handover, and client sign-off" },
-          ].map((step) => (
-            <div key={step.label} className="bg-card/40 border border-border/40 rounded-xl p-3.5 text-center">
-              <div className="font-display text-lg font-bold text-primary mb-0.5">{step.pct}</div>
-              <div className="text-[10px] text-white font-body leading-snug">{step.label}</div>
-            </div>
-          ))}
-        </motion.div>
       </div>
 
       <PipelineAssessmentQuiz open={quizOpen} onClose={() => setQuizOpen(false)} onComplete={handleQuizComplete} />
