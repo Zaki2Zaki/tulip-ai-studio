@@ -1335,7 +1335,7 @@ const PipelineSection = () => {
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          className="text-[11px] tracking-[0.2em] uppercase text-primary font-body mb-3 text-center font-medium"
+          className="text-sm tracking-[0.3em] uppercase text-gray-400 font-body mb-6 text-center"
         >
           3D Production Pipeline
         </motion.p>
@@ -1343,7 +1343,7 @@ const PipelineSection = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="font-display text-3xl md:text-5xl font-bold text-center mb-4"
+          className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-10 text-gray-100"
         >
           AI across <span className="text-gradient-gold">every stage</span>
         </motion.h2>
@@ -1351,7 +1351,7 @@ const PipelineSection = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3 }}
-          className="text-center max-w-xl mx-auto mb-10 text-white font-body text-sm"
+          className="text-center max-w-5xl mx-auto mb-10 text-gray-300 font-body text-xl md:text-2xl lg:text-3xl leading-relaxed"
         >
           We identify where generative AI creates the most impact in your content production pipelines — from pre-production through final output.
         </motion.p>
