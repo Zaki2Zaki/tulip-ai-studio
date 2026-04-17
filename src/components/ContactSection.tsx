@@ -13,7 +13,7 @@ const ContactSection = () => {
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          className="text-[11px] tracking-[0.2em] uppercase text-primary font-body mb-3 font-medium"
+          className="text-sm tracking-[0.3em] uppercase text-gray-400 font-body mb-6"
         >
           Get in Touch
         </motion.p>
@@ -21,16 +21,17 @@ const ContactSection = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="font-display text-3xl md:text-5xl font-bold mb-4"
+          className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-10 text-gray-100"
         >
-          Let's find your
-          <span className="text-gradient-gold"> three biggest leaks</span> in 30 minutes.
+          Let's find your{" "}
+          <span className="text-gradient-gold">three biggest leaks</span>{" "}
+          in 30 minutes.
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2 }}
-          className="font-body mb-10 text-sm md:text-base text-white/80 leading-relaxed max-w-lg mx-auto"
+          className="font-body mb-10 text-xl md:text-2xl lg:text-3xl text-gray-300 leading-relaxed max-w-5xl mx-auto"
         >
           "Most studios are losing $350K per rework cycle without knowing it. In 30 minutes, we'll map exactly where your pipeline is bleeding — and what to fix first. No pitch. No pressure. Just clarity."
         </motion.p>
