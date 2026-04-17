@@ -18,7 +18,7 @@ interface ServiceOption {
 }
 
 const serviceOptions: ServiceOption[] = [
-  { id: "research", label: "GenAI Research", description: "Identify pipeline pain points & opportunities\nAnalysis and Align AI tools seamlessly into your artist's workflows\nAnalysis of your vendor's & research tools friction points to find impactful solutions", minUSD: 20571, maxUSD: 75000, minCAD: 28153, maxCAD: 102645, minEUR: 17434, maxEUR: 63563 },
+  { id: "research", label: "GenAI Research", description: "Identify pipeline pain points & opportunities\nEmbed AI tools and solve vendor integration bottlenecks with our research & game engineers", minUSD: 20571, maxUSD: 75000, minCAD: 28153, maxCAD: 102645, minEUR: 17434, maxEUR: 63563 },
   { id: "benchmarking", label: "Tool Benchmarking", description: "Test & validate AI tools in sandbox environments", minUSD: 15000, maxUSD: 130000, minCAD: 20529, maxCAD: 177918, minEUR: 12713, maxEUR: 110175 },
   { id: "demos", label: "Demos & Sandboxes", description: "Hands-on prototypes tailored to your pipeline", minUSD: 3000, maxUSD: 120000, minCAD: 4106, maxCAD: 164232, minEUR: 2543, maxEUR: 101700 },
   { id: "architecture", label: "Architecture Blueprint", description: "Full GenAI architecture including LLM training", minUSD: 12000, maxUSD: 350000, minCAD: 16423, maxCAD: 479010, minEUR: 10170, maxEUR: 296625 },
