@@ -218,7 +218,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-6">
             <div
               onMouseEnter={() => openDropdown("usecases")}
               onMouseLeave={closeDropdown}
@@ -226,16 +226,16 @@ const Navbar = () => {
             >
               <Link
                 to="/case-studies"
-                className="flex items-center gap-2 text-[24px] font-body font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap"
+                className="flex items-center gap-1 text-[15px] font-body font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap"
               >
                 Case Studies
-                <ChevronDown className={`w-6 h-6 transition-transform duration-200 ${activeDropdown === "usecases" ? "rotate-180" : ""}`} />
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeDropdown === "usecases" ? "rotate-180" : ""}`} />
               </Link>
             </div>
 
             <Link
               to="/library"
-              className="text-[24px] font-body font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap"
+              className="text-[15px] font-body font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap"
             >
               R&D Library
             </Link>
@@ -245,7 +245,7 @@ const Navbar = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="text-[24px] font-body font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap"
+                  className="text-[15px] font-body font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap"
                 >
                   {link.label}
                 </a>
@@ -253,7 +253,7 @@ const Navbar = () => {
                 <Link
                   key={link.href}
                   to={`/${link.href}`}
-                  className="text-[24px] font-body font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap"
+                  className="text-[15px] font-body font-medium text-white/80 hover:text-white transition-colors whitespace-nowrap"
                 >
                   {link.label}
                 </Link>
@@ -267,14 +267,14 @@ const Navbar = () => {
                 const el = document.getElementById("interactive-demo");
                 if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className="nav-rainbow-btn text-[24px] font-body font-semibold text-white px-8 py-4 rounded-full hover:opacity-90 transition-opacity min-h-[68px] flex items-center"
+              className="nav-rainbow-btn text-[14px] font-body font-semibold text-white px-5 py-2.5 rounded-full hover:opacity-90 transition-opacity min-h-[40px] flex items-center"
             >
               Build AI Pipeline Demo
             </a>
 
             <a
               href={isHome ? "#estimator" : "/#estimator"}
-              className="text-[24px] font-body font-semibold bg-primary text-primary-foreground px-8 py-4 rounded-full hover:opacity-90 transition-all min-h-[68px] flex items-center whitespace-nowrap"
+              className="text-[14px] font-body font-semibold bg-primary text-primary-foreground px-5 py-2.5 rounded-full hover:opacity-90 transition-all min-h-[40px] flex items-center whitespace-nowrap"
             >
               Get a Quote
             </a>
@@ -283,16 +283,16 @@ const Navbar = () => {
             {user ? (
               <button
                 onClick={async () => { await supabase.auth.signOut(); navigate("/"); }}
-                className="flex items-center gap-3 text-[24px] font-body text-white hover:text-foreground transition-colors min-h-[88px] min-w-[88px] justify-center"
+                className="flex items-center gap-1.5 text-[14px] font-body text-white hover:text-foreground transition-colors min-h-[44px] min-w-[44px] justify-center"
               >
-                <LogOut className="w-7 h-7" />
+                <LogOut className="w-4 h-4" />
               </button>
             ) : (
               <Link
                 to="/auth"
-                className="flex items-center gap-3 text-[24px] font-body text-white hover:text-foreground transition-colors min-h-[88px] min-w-[88px] justify-center"
+                className="flex items-center gap-1.5 text-[14px] font-body text-white hover:text-foreground transition-colors min-h-[44px] min-w-[44px] justify-center"
               >
-                <LogIn className="w-7 h-7" />
+                <LogIn className="w-4 h-4" />
               </Link>
             )}
           </div>
