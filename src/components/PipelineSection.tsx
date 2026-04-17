@@ -1407,7 +1407,12 @@ const PipelineSection = () => {
                             <span key={j}>{part}{j < arr.length - 1 && <strong className="text-destructive font-semibold">{p.highlight}</strong>}</span>
                           ))}
                         </p>
-                        {p.sub && <p className="text-base md:text-lg text-white font-body font-medium">{p.sub}</p>}
+                        {p.sub && (
+                          <div className="space-y-1 text-base md:text-lg text-white font-body font-medium">
+                            <div>AA Studios $100K–$400K per major rework/iteration cycle</div>
+                            <div>AAA Studios $500K–$3M+ per major rework/iteration cycle</div>
+                          </div>
+                        )}
                       </div>
                     </motion.div>
                   ))}
