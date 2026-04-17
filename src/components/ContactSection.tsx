@@ -44,7 +44,7 @@ const ContactSection = () => {
         >
           <button
             onClick={() => setCalendlyOpen(true)}
-            className="btn-chrome-outline px-14 py-7 rounded-full font-display font-semibold text-[30px] transition-all min-h-[96px]"
+            className="btn-chrome-outline px-20 py-10 rounded-full font-display font-semibold text-[40px] transition-all min-h-[120px] text-white"
           >
             Book a 30-minute Discovery Meeting
           </button>
