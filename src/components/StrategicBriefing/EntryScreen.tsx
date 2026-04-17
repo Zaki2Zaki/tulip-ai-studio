@@ -154,9 +154,9 @@ export default function EntryScreen({ onNext }: EntryScreenProps) {
             <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
               {/* Live tag */}
               <span style={{
-                fontSize: "10px",
+                fontSize: "20px",
                 fontWeight: 500,
-                padding: "3px 10px",
+                padding: "6px 20px",
                 borderRadius: "99px",
                 border: "0.5px solid rgba(29,158,117,0.35)",
                 background: "rgba(29,158,117,0.07)",
