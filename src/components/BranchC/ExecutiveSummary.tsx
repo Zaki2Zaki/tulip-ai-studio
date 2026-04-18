@@ -10,7 +10,7 @@ interface ExecutiveSummaryProps {
   onBack: () => void;
 }
 
-const CALENDLY = "https://calendly.com/youki-harada/30min";
+const CALENDLY = "https://calendly.com/youki-youki/30min";
 
 const ACCENT_LINK_STYLE = {
   background: "linear-gradient(90deg, #a78bfa, #c4b5fd, #e9d5ff)",
@@ -137,7 +137,7 @@ function buildPDF(
     <div class="next-step">
       Book a 30-minute strategic briefing. We will validate these numbers against your actual pipeline
       and give you a phased roadmap your team can act on.<br><br>
-      <a href="${CALENDLY}" class="calendly-link">Book Now → calendly.com/youki-harada/30min</a>
+      <a href="${CALENDLY}" class="calendly-link">Book Now → calendly.com/youki-youki/30min</a>
     </div>
 
     <h3>Research Sources</h3>
@@ -378,7 +378,7 @@ export default function ExecutiveSummary({
             className="text-sm font-body font-semibold"
             style={ACCENT_LINK_STYLE}
           >
-            Book Now → calendly.com/youki-harada/30min
+            Book Now → calendly.com/youki-youki/30min
           </a>
         </div>
       </div>

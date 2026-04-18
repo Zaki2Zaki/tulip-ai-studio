@@ -5,7 +5,6 @@ import { useNotionSubmit } from '@/hooks/useNotionSubmit';
 const CALENDLY_URL = 'https://calendly.com/youki-youki/30min';
 
 interface CalendlyBookingButtonProps {
-  /** Override all Tailwind classes (default gradient style is applied when omitted) */
   className?: string;
   label?: string;
   size?: 'sm' | 'md' | 'lg';
@@ -25,21 +24,32 @@ const CalendlyBookingButton: React.FC<CalendlyBookingButtonProps> = ({
   const { selectedServices, studioScale, contactInfo } = useServiceSelection();
   const { submitToNotion, isSubmitting } = useNotionSubmit();
   const [loading, setLoading] = useState(false);
+  const [notionStatus, setNotionStatus] = useState<'idle' | 'ok' | 'fail'>('idle');
 
   const handleBookCall = async () => {
     setLoading(true);
+    setNotionStatus('idle');
+
+    const payload = {
+      selectedServices,
+      studioScale,
+      contactName: contactInfo.name || 'Website Visitor',
+      contactEmail: contactInfo.email,
+      contactCompany: contactInfo.company,
+      source: 'calendly-booking',
+    };
+
+    // Debug: log what we're sending
+    console.log('[CalendlyBookingButton] Submitting to Notion:', payload);
 
     try {
-      await submitToNotion({
-        selectedServices,
-        studioScale,
-        contactName: contactInfo.name,
-        contactEmail: contactInfo.email,
-        contactCompany: contactInfo.company,
-        source: 'calendly-booking',
-      });
-    } catch {
-      // Still open Calendly even if Notion submission fails
+      await submitToNotion(payload);
+      setNotionStatus('ok');
+      console.log('[CalendlyBookingButton] Notion submission success');
+    } catch (err) {
+      setNotionStatus('fail');
+      console.error('[CalendlyBookingButton] Notion submission failed:', err);
+      // Still open Calendly even if Notion fails
     } finally {
       setLoading(false);
     }
@@ -53,16 +63,26 @@ const CalendlyBookingButton: React.FC<CalendlyBookingButtonProps> = ({
   const defaultClass = `${sizeClasses[size]} rounded-full font-display font-semibold transition-opacity hover:opacity-90 text-white disabled:opacity-60`;
 
   return (
-    <button
-      onClick={handleBookCall}
-      disabled={busy}
-      className={className ?? defaultClass}
-      style={className ? undefined : {
-        background: 'linear-gradient(to right, #F97794, #F5A4C7, #E5B4E2)',
-      }}
-    >
-      {busy ? 'Processing...' : label}
-    </button>
+    <div className="flex flex-col items-center gap-2">
+      <button
+        onClick={handleBookCall}
+        disabled={busy}
+        className={className ?? defaultClass}
+        style={className ? undefined : {
+          background: 'linear-gradient(to right, #F97794, #F5A4C7, #E5B4E2)',
+        }}
+      >
+        {busy ? 'Processing...' : label}
+      </button>
+
+      {/* Debug status — remove once confirmed working */}
+      {notionStatus === 'ok' && (
+        <p className="text-green-400 text-xs">✓ Saved to Notion</p>
+      )}
+      {notionStatus === 'fail' && (
+        <p className="text-red-400 text-xs">⚠ Notion save failed — check console</p>
+      )}
+    </div>
   );
 };
 
