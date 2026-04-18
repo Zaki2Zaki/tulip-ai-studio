@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useServiceSelection } from '@/context/ServiceSelectionContext';
 import { useNotionSubmit } from '@/hooks/useNotionSubmit';
 
-const CALENDLY_URL = 'https://calendly.com/youki-harada/30min';
+const CALENDLY_URL = 'https://calendly.com/youki-youki/30min';
 
 interface CalendlyBookingButtonProps {
   /** Override all Tailwind classes (default gradient style is applied when omitted) */
