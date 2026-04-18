@@ -17,6 +17,8 @@ export const useNotionSubmit = () => {
     setIsSubmitting(true);
     setError(null);
 
+    console.log('[useNotionSubmit] Sending payload:', JSON.stringify(data, null, 2));
+
     try {
       const res = await fetch('/api/notion/quote', {
         method: 'POST',
@@ -24,12 +26,15 @@ export const useNotionSubmit = () => {
         body: JSON.stringify(data),
       });
 
+      const json = await res.json().catch(() => ({}));
+      console.log('[useNotionSubmit] Response status:', res.status, 'body:', json);
+
       if (!res.ok) {
-        const json = await res.json().catch(() => ({}));
         throw new Error(json.error ?? `HTTP ${res.status}`);
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
+      console.error('[useNotionSubmit] Error:', msg);
       setError(msg);
       throw err;
     } finally {
