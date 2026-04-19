@@ -11,7 +11,7 @@ const FALLBACK_DATABASE_ID = '0df0901391874257847311b5676d9a24';
 // --- In-memory rate limiting ---
 
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
-const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_MAX = 50;
 const RATE_LIMIT_WINDOW_MS = 60 * 1000;
 
 function isRateLimited(ip: string): boolean {
