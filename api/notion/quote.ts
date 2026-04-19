@@ -84,7 +84,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     Source: {
       select: { name: source || 'Website' },
     },
-    'Meeting date': {
+    Timestamp: {
       date: { start: new Date().toISOString() },
     },
     Status: {
