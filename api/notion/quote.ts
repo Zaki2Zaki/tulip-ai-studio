@@ -67,40 +67,46 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   const notion = new Client({ auth: apiKey, notionVersion: NOTION_API_VERSION });
 
+  // Build properties defensively — skip optional fields if empty
+  const properties: Record<string, unknown> = {
+    Name: {
+      title: [{ text: { content: contactName || 'Website Visitor' } }],
+    },
+    Company: {
+      rich_text: [{ text: { content: contactCompany || '' } }],
+    },
+    'Studio Scale': {
+      select: { name: studioScale || 'Not specified' },
+    },
+    'Selected Services': {
+      multi_select: (selectedServices as string[]).filter(Boolean).map((s: string) => ({ name: s })),
+    },
+    Source: {
+      select: { name: source || 'Website' },
+    },
+    Timestamp: {
+      date: { start: new Date().toISOString() },
+    },
+    Status: {
+      select: { name: 'New' },
+    },
+  };
+
+  // Only include Email if non-empty (Notion rejects null email values)
+  if (contactEmail) {
+    properties['Email'] = { email: contactEmail };
+  }
+
   try {
     const page = await notion.pages.create({
       parent: { database_id: databaseId },
-      properties: {
-        Name: {
-          title: [{ text: { content: contactName || 'Unknown' } }],
-        },
-        Email: {
-          email: contactEmail || null,
-        },
-        Company: {
-          rich_text: [{ text: { content: contactCompany } }],
-        },
-        'Studio Scale': {
-          select: { name: studioScale || 'Not specified' },
-        },
-        'Selected Services': {
-          multi_select: (selectedServices as string[]).map((s) => ({ name: s })),
-        },
-        Source: {
-          select: { name: source },
-        },
-        Timestamp: {
-          date: { start: new Date().toISOString() },
-        },
-        Status: {
-          select: { name: 'New' },
-        },
-      } as Parameters<typeof notion.pages.create>[0]['properties'],
+      properties: properties as Parameters<typeof notion.pages.create>[0]['properties'],
     });
 
     return res.status(200).json({ success: true, id: page.id });
   } catch (err: unknown) {
-    console.error('Notion quote error:', err);
-    return res.status(500).json({ success: false, error: String(err) });
+    const errStr = String(err);
+    console.error('Notion quote error:', errStr);
+    return res.status(500).json({ success: false, error: errStr });
   }
 }
