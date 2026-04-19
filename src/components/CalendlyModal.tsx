@@ -6,7 +6,7 @@ interface CalendlyModalProps {
   onClose: () => void;
 }
 
-const CALENDLY_URL = "https://calendly.com/youki-youki/30min";
+const CALENDLY_URL = "https://calendly.com/youki-tuliptechlabs/30min";
 
 const CalendlyModal = ({ open, onClose }: CalendlyModalProps) => {
   if (!open) return null;

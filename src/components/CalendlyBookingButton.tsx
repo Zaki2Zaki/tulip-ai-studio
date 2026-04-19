@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useServiceSelection } from '@/context/ServiceSelectionContext';
 import { useNotionSubmit } from '@/hooks/useNotionSubmit';
 
-const CALENDLY_URL = 'https://calendly.com/youki-youki/30min';
+const CALENDLY_URL = 'https://calendly.com/youki-tuliptechlabs/30min';
 
 interface CalendlyBookingButtonProps {
   className?: string;

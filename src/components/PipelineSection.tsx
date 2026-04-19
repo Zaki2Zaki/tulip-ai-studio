@@ -1022,7 +1022,7 @@ const WorkflowBuilderPanel = ({
         <p className="text-sm font-body text-white">
           Recommended next step:{" "}
           <a
-            href="https://calendly.com/youki-youki/30min"
+            href="https://calendly.com/youki-tuliptechlabs/30min"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -1154,7 +1154,7 @@ const WorkflowBuilderPanel = ({
               <div class="summary-box">
                 <p style="font-size:14px;font-weight:700;margin:0 0 6px">Total identified pipeline risk: ${deepDive.length} friction point${deepDive.length !== 1 ? "s" : ""}</p>
                 <p style="font-size:13px;color:#aaa;margin:0 0 6px">Estimated cost exposure: based on your studio scale</p>
-                <p style="font-size:13px;margin:0">Recommended next step: <a href="https://calendly.com/youki-youki/30min" class="summary-link">Book a Discovery Call → calendly.com/youki-youki/30min</a></p>
+                <p style="font-size:13px;margin:0">Recommended next step: <a href="https://calendly.com/youki-tuliptechlabs/30min" class="summary-link">Book a Discovery Call → calendly.com/youki-tuliptechlabs/30min</a></p>
               </div>
               <h2 style="margin-top:32px;margin-bottom:8px;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.08em;background:linear-gradient(90deg,#a78bfa,#c084fc,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Service Recommendations</h2>
               <table><thead><tr><th>Pain Point</th><th>Recommendation</th><th>Suggested Service</th></tr></thead><tbody>${serviceRows}</tbody></table>

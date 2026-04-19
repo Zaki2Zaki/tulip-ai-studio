@@ -521,7 +521,7 @@ export default function ROICalculatorPage() {
     doc.setFont("helvetica","bold"); doc.setFontSize(10); doc.setTextColor(...BG);
     doc.text("30 Mins Validate Meeting", W/2, y+10, { align: "center" }); y += 20;
     doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor(...CYAN);
-    doc.text("calendly.com/youki-youki/30min", W/2, y, { align: "center" }); y += 12;
+    doc.text("calendly.com/youki-tuliptechlabs/30min", W/2, y, { align: "center" }); y += 12;
     doc.setFont("helvetica","italic"); doc.setFontSize(7); doc.setTextColor(...DIM);
     doc.text(doc.splitTextToSize("This report is an indicative pipeline efficiency model, not a financial projection or guarantee of return. All figures are derived from published industry benchmarks and adjusted for the studio profile provided. Actual efficiency opportunity will be determined during a structured Tulip Technology R&D engagement.", W-pad*2), pad, y);
 
@@ -1023,7 +1023,7 @@ export default function ROICalculatorPage() {
 
             {/* CTA */}
             <div className="result-cta">
-              <a href="https://calendly.com/youki-youki/30min" className="btn-cta-p" target="_blank" rel="noopener noreferrer">30 Mins Validate Meeting →</a>
+              <a href="https://calendly.com/youki-tuliptechlabs/30min" className="btn-cta-p" target="_blank" rel="noopener noreferrer">30 Mins Validate Meeting →</a>
               <button className="btn-cta-s" onClick={downloadPDF}>⬇ Download report</button>
             </div>
 
