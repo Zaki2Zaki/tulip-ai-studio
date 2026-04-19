@@ -45,7 +45,7 @@ export default async function handler(req: any, res: any) {
       date: { start: new Date().toISOString() },
     },
     Status: {
-      select: { name: 'New' },
+      status: { name: 'New' },
     },
   };
 
