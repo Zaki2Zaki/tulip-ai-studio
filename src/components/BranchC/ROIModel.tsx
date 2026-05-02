@@ -369,32 +369,65 @@ export default function ROIModel({
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
         <button
           onClick={() => {
-            submitToNotion({
-              source: 'roi-model',
-              ctaClicked: '30 Mins Validate Meeting',
-              timestamp: new Date().toISOString(),
+            capture({
+              source: 'Strategic Briefing — ROI Model',
+              ctaLabel: '30 Mins Validate Meeting',
               studioScale,
               outputType,
               budgetRange,
-              outsourcePct,
-              rdBudget,
+              efficiencyOpportunity: calc.hasDollarFigures ? formatCurrency(calc.grossOpportunity) : `${Math.round(calc.efficiencyRate * 100)}% of labour base`,
+              yearOneValue: calc.hasDollarFigures ? formatCurrency(calc.realisedValue) : 'Requires budget input',
+              returnMultiple: calc.hasDollarFigures ? formatMultiple(calc.lowerMultiple, calc.upperMultiple) : '—',
+              timeToValue: calc.hasDollarFigures ? formatTimeToValue(calc.timeToValueMonths) : '—',
+              recommendedTier: recommendedTier.name,
             });
-            onNext();
+            window.open('https://calendly.com/youki-harada/30min', '_blank');
           }}
           className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity"
         >
           30 Mins Validate Meeting <ArrowRight className="w-3.5 h-3.5" />
         </button>
         <button
-          onClick={onBack}
+          onClick={() => {
+            capture({
+              source: 'Strategic Briefing — ROI Model',
+              ctaLabel: 'Book Discovery Call',
+              studioScale,
+              outputType,
+              budgetRange,
+              efficiencyOpportunity: calc.hasDollarFigures ? formatCurrency(calc.grossOpportunity) : `${Math.round(calc.efficiencyRate * 100)}% of labour base`,
+              yearOneValue: calc.hasDollarFigures ? formatCurrency(calc.realisedValue) : 'Requires budget input',
+              returnMultiple: calc.hasDollarFigures ? formatMultiple(calc.lowerMultiple, calc.upperMultiple) : '—',
+              timeToValue: calc.hasDollarFigures ? formatTimeToValue(calc.timeToValueMonths) : '—',
+              recommendedTier: recommendedTier.name,
+            });
+            window.open('https://calendly.com/youki-harada/30min', '_blank');
+          }}
           className="inline-flex items-center gap-2 btn-chrome-outline px-5 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[44px]"
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
-          Download report
+          Book Discovery Call
+        </button>
+        <button
+          onClick={() => {
+            const efficiencyOpportunity = calc.hasDollarFigures ? formatCurrency(calc.grossOpportunity) : `${Math.round(calc.efficiencyRate * 100)}% of labour base`;
+            capture({
+              source: 'Strategic Briefing — ROI Model',
+              ctaLabel: 'Email Results',
+              studioScale,
+              outputType,
+              budgetRange,
+              efficiencyOpportunity,
+              yearOneValue: calc.hasDollarFigures ? formatCurrency(calc.realisedValue) : 'Requires budget input',
+              returnMultiple: calc.hasDollarFigures ? formatMultiple(calc.lowerMultiple, calc.upperMultiple) : '—',
+              timeToValue: calc.hasDollarFigures ? formatTimeToValue(calc.timeToValueMonths) : '—',
+              recommendedTier: recommendedTier.name,
+            });
+            window.location.href = `mailto:?subject=${encodeURIComponent('Tulip Tech Pipeline Assessment Results')}&body=${encodeURIComponent('Your efficiency opportunity is ' + efficiencyOpportunity)}`;
+          }}
+          className="inline-flex items-center gap-2 btn-chrome-outline px-5 py-2.5 rounded-full font-display font-semibold text-sm transition-all min-h-[44px]"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email Results
         </button>
       </div>
     </div>
