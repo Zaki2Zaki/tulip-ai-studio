@@ -1044,6 +1044,13 @@ const WorkflowBuilderPanel = ({
       <div className="flex flex-col gap-2 items-center">
         <a href="#estimator"
           onClick={() => {
+            capture({
+              source: 'Pipeline Lab — Workflow Simulation',
+              ctaLabel: 'Book Discovery Call',
+              frictionPoints: selected,
+              stageReached: 'Validate',
+              recommendedTools: tools,
+            });
             submitToNotion({
               source: 'validate',
               ctaClicked: 'Book Discovery Call',
@@ -1052,9 +1059,7 @@ const WorkflowBuilderPanel = ({
               deepDivePoints: deepDive,
               workflowTools: tools,
             });
-            const ids = getRecommendedServiceIds(deepDive);
-            ids.forEach((id) => window.dispatchEvent(new CustomEvent("tulip:select-service", { detail: { id } })));
-            window.dispatchEvent(new CustomEvent("tulip:open-calendly"));
+            window.open('https://calendly.com/youki-harada/30min', '_blank');
           }}
           className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-full font-display font-semibold text-sm hover:opacity-90 transition-opacity">
           Book Discovery Call <ArrowRight className="w-3.5 h-3.5" />
