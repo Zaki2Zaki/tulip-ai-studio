@@ -164,6 +164,7 @@ export default function ROIModel({
   studioScale, outputType, budgetRange, outsourcePct, rdBudget, breakdown, onNext, onBack,
 }: ROIModelProps) {
   const [methodologyOpen, setMethodologyOpen] = useState(false);
+  const { capture } = useNotionCapture();
 
   // iframe src
   const calcSrc = useMemo(() => {
