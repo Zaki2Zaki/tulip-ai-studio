@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 interface EntryScreenProps {
   onNext: () => void;
+  onBranchB?: () => void;
 }
 
 // Shared gradient pill text style
