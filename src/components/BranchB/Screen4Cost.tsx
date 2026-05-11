@@ -20,7 +20,7 @@ interface Props { onNext: () => void; onBack: () => void }
 
 export default function Screen4Cost({ onNext, onBack }: Props) {
   const { capture } = useNotionCapture()
-  const { state } = useDiagnosis()
+  const { state, update } = useDiagnosis()
   const { bottlenecks, teamSize, reworkPct, slipWks, outputType, roundsLabel, currency } = state
   const [methodologyOpen, setMethodologyOpen] = useState(false)
 
