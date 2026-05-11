@@ -77,7 +77,7 @@ export default function Screen4Cost({ onNext, onBack }: Props) {
       {/* Currency toggle */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '4px', marginBottom: '10px' }}>
         {(['CAD', 'USD', 'EUR'] as const).map(c => (
-          <button key={c} onClick={() => state}
+          <button key={c} onClick={() => update({ currency: c })}
             style={{
               padding: '5px 12px', borderRadius: '99px', fontSize: '11px', fontWeight: 600, cursor: 'pointer',
               border: currency === c ? '0.5px solid rgba(167,139,250,0.55)' : '0.5px solid rgba(255,255,255,0.12)',
