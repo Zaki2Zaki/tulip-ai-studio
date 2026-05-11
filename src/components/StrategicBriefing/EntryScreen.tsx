@@ -73,6 +73,8 @@ export default function EntryScreen({ onNext, onBranchB }: EntryScreenProps) {
       ? "Start Briefing"
       : selected === "a"
       ? "Start Building"
+      : onBranchB
+      ? "Start Diagnosis"
       : "Notify me when ready";
 
   const radioStyle = (isActive: boolean): React.CSSProperties => ({
