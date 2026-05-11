@@ -202,18 +202,18 @@ export default function EntryScreen({ onNext, onBranchB }: EntryScreenProps) {
               A structured diagnosis of your production pipeline. Seven questions about your schedule, handoffs, and revision cycles — mapped to the specific stages where AI integration delivers the fastest time recovery.
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-              {/* Coming soon tag */}
+              {/* Live tag */}
               <span style={{
                 fontSize: "14px",
                 fontWeight: 500,
                 padding: "5px 14px",
                 borderRadius: "99px",
-                border: "0.5px solid rgba(255,255,255,0.1)",
-                background: "rgba(255,255,255,0.03)",
-                color: "rgba(255,255,255,0.4)",
+                border: "0.5px solid rgba(29,158,117,0.35)",
+                background: "rgba(29,158,117,0.07)",
+                color: "#5DCAA5",
                 fontFamily: "inherit",
               }}>
-                Coming soon
+                Live
               </span>
               {["Producer", "Art or Creative Director", "Development Director", "Studio Manager"].map((role) => (
                 <span key={role} style={{
