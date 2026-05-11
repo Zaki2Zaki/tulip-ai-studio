@@ -53,7 +53,11 @@ export default function EntryScreen({ onNext, onBranchB }: EntryScreenProps) {
     } else if (selected === "a") {
       window.location.href = "/#interactive-demo";
     } else if (selected === "b") {
-      setShowEmailCapture(true);
+      if (onBranchB) {
+        onBranchB();
+      } else {
+        setShowEmailCapture(true);
+      }
     }
   };
 
