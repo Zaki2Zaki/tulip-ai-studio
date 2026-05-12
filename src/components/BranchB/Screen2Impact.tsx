@@ -88,10 +88,10 @@ export default function Screen2Impact({ onNext, onBack }: Props) {
         })}
       </div>
 
-      {/* Q1 — Schedule slippage */}
+      {/* Q1. Schedule slippage */}
       <div style={{ marginBottom: '28px', padding: '20px', borderRadius: '12px', border: '0.5px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.02)' }}>
         <p style={{ fontSize: '13px', fontWeight: 600, color: '#fff', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-          Q1 — Schedule slippage
+          Q1. Schedule slippage
         </p>
         <p style={{ fontSize: '14px', color: '#fff', marginBottom: '4px' }}>
           On average, how far over schedule do your projects finish?
