@@ -132,10 +132,10 @@ export default function Screen2Impact({ onNext, onBack }: Props) {
         ))}
       </div>
 
-      {/* Q2 — Revision rounds + slider */}
+      {/* Q2. Revision rounds + slider */}
       <div style={{ marginBottom: '28px', padding: '20px', borderRadius: '12px', border: '0.5px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.02)' }}>
         <p style={{ fontSize: '13px', fontWeight: 600, color: '#fff', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-          Q2 — Revision rounds
+          Q2. Revision rounds
         </p>
         <p style={{ fontSize: '14px', color: '#fff', marginBottom: '4px' }}>
           How many revision rounds does a typical asset go through before sign-off?
