@@ -37,6 +37,7 @@ const App = () => (
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/pipeline-lab" element={<Navigate to="/strategic-briefing" replace />} />
           <Route path="/strategic-briefing" element={<PipelineLabPage />} />
+          <Route path="/pipeline-diagnosis" element={<PipelineDiagnosisPage />} />
           <Route path="/roi-calculator" element={<ROICalculatorPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
