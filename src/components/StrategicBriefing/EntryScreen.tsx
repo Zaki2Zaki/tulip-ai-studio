@@ -168,51 +168,8 @@ export default function EntryScreen({ onNext, onBranchB }: EntryScreenProps) {
           </div>
         </button>
 
-        {/* ── Card B — Pipeline Diagnosis ── */}
-        <button onClick={() => { setSelected("b"); setShowEmailCapture(false); setNotified(false); }} style={cardStyle(selected === "b")}>
-          <span style={radioStyle(selected === "b")}>
-            {selected === "b" && <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "#a78bfa", display: "block" }} />}
-          </span>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <p style={CARD_EYEBROW}>Pipeline Diagnosis — Bottleneck Finder</p>
-            <p style={CARD_TITLE}>Find where your studio is losing time.</p>
-            <p style={CARD_BODY}>
-              A structured diagnosis of your production pipeline. Seven questions about your schedule, handoffs, and revision cycles — mapped to the specific stages where AI integration delivers the fastest time recovery.
-            </p>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-              {/* Live tag */}
-              <span style={{
-                fontSize: "14px",
-                fontWeight: 500,
-                padding: "5px 14px",
-                borderRadius: "99px",
-                border: "0.5px solid rgba(29,158,117,0.35)",
-                background: "rgba(29,158,117,0.07)",
-                color: "#5DCAA5",
-                fontFamily: "inherit",
-              }}>
-                Live
-              </span>
-              {["Producer", "Art or Creative Director", "Development Director", "Studio Manager"].map((role) => (
-                <span key={role} style={{
-                  fontSize: "14px",
-                  fontWeight: 500,
-                  padding: "5px 14px",
-                  borderRadius: "99px",
-                  border: "0.5px solid rgba(167,139,250,0.35)",
-                  background: "rgba(167,139,250,0.07)",
-                  fontFamily: "inherit",
-                  display: "inline-block",
-                }}>
-                  <span style={GRADIENT_PILL_TEXT}>{role}</span>
-                </span>
-              ))}
-            </div>
-          </div>
-        </button>
-
         {/* ── Card C — Strategic Briefing ── */}
-        <button onClick={() => { setSelected("c"); setShowEmailCapture(false); }} style={cardStyle(selected === "c")}>
+        <button onClick={() => setSelected("c")} style={cardStyle(selected === "c")}>
           <span style={radioStyle(selected === "c")}>
             {selected === "c" && <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: "#a78bfa", display: "block" }} />}
           </span>
