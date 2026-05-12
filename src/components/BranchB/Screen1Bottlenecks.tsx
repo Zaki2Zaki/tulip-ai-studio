@@ -84,7 +84,7 @@ export default function Screen1Bottlenecks({ onNext }: Props) {
         </div>
       </div>
 
-      {/* Q2 — Team size */}
+      {/* Q2. Team size */}
       <div style={{ marginBottom: '28px' }}>
         <p style={{ fontSize: '13px', fontWeight: 600, color: '#fff', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
           How many people work in your studio?
