@@ -225,60 +225,6 @@ export default function EntryScreen({ onNext, onBranchB }: EntryScreenProps) {
         {ctaLabel} <ArrowRight style={{ width: "26px", height: "26px" }} />
       </button>
 
-      {/* Inline email capture (Card B) */}
-      {selected === "b" && showEmailCapture && (
-        <div style={{ marginTop: "16px", maxWidth: "360px" }}>
-          {notified ? (
-            <p style={{ fontSize: "13px", color: "#fff", fontFamily: "inherit" }}>
-              Got it. We will be in touch.
-            </p>
-          ) : (
-            <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-              <input
-                type="email"
-                placeholder="Your work email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSubmitEmail()}
-                autoFocus
-                style={{
-                  flex: 1,
-                  padding: "8px 14px",
-                  borderRadius: "8px",
-                  border: "0.5px solid rgba(255,255,255,0.15)",
-                  background: "rgba(255,255,255,0.05)",
-                  color: "#fff",
-                  fontSize: "13px",
-                  fontFamily: "inherit",
-                  outline: "none",
-                }}
-              />
-              <button
-                onClick={handleSubmitEmail}
-                disabled={!email.trim()}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  padding: "8px 16px",
-                  borderRadius: "99px",
-                  border: "0.5px solid rgba(255,255,255,0.25)",
-                  background: "transparent",
-                  color: "#fff",
-                  fontSize: "12px",
-                  fontWeight: 500,
-                  fontFamily: "inherit",
-                  cursor: email.trim() ? "pointer" : "not-allowed",
-                  opacity: email.trim() ? 1 : 0.4,
-                }}
-              >
-                Notify me <ArrowRight style={{ width: "12px", height: "12px" }} />
-              </button>
-            </div>
-          )}
-        </div>
-      )}
-
     </div>
   );
 }
