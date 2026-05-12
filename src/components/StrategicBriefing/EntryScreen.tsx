@@ -43,6 +43,7 @@ const CARD_BODY: React.CSSProperties = {
 };
 
 export default function EntryScreen({ onNext, onBranchB }: EntryScreenProps) {
+  const navigate = useNavigate();
   const [selected, setSelected] = useState<"a" | "b" | "c">("c");
   const [showEmailCapture, setShowEmailCapture] = useState(false);
   const [email, setEmail] = useState("");
