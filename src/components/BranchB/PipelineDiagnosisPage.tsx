@@ -84,7 +84,7 @@ function PipelineDiagnosisInner({ onBack }: Props) {
         <div className="mt-auto pt-8 border-t border-border/20">
           <button
             onClick={onBack}
-            className="flex items-center gap-1.5 text-xs font-body hover:text-white transition-colors"
+            className="flex items-center gap-1.5 text-xs font-body hover:text-white transition-colors mb-2"
             style={{ color: 'rgba(255,255,255,0.4)' }}
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -92,6 +92,15 @@ function PipelineDiagnosisInner({ onBack }: Props) {
             </svg>
             Back to Entry
           </button>
+          <a
+            href="/"
+            className="flex items-center gap-1.5 text-xs font-body text-white/40 hover:text-white transition-colors"
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m15 18-6-6 6-6"/>
+            </svg>
+            Back to Home
+          </a>
           <p className="text-[10px] font-body leading-relaxed mt-3" style={{ color: 'rgba(255,255,255,0.2)' }}>
             Demo session. No data stored.
           </p>
