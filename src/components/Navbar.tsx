@@ -322,7 +322,7 @@ const Navbar = () => {
 
                 {/* Tagline */}
                 <p className="text-lg font-display font-semibold text-white mb-8 max-w-2xl leading-snug" style={{ letterSpacing: "-0.01em" }}>
-                  Teamed by researchers and developers from the gaming industry who are unafraid to challenge the status quo.
+                  Built by researchers and developers from the gaming industry, shipping into live production environments.
                 </p>
 
                 {/* Case Studies */}
